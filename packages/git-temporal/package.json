@@ -1,0 +1,24 @@
+{
+  "name": "@git-temporal/git-temporal",
+  "version": "0.1.0",
+  "description": "A React component for displaying an interactive data visualization of commit history by file or directory.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/git-temporal/git-temporal.git"
+  },
+  "keywords": [
+    "git",
+    "time",
+    "react"
+  ],
+  "author": "Bee Wilkerson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/git-temporal/git-temporal/issues"
+  },
+  "homepage": "https://github.com/git-temporal/git-temporal#readme"
+}
