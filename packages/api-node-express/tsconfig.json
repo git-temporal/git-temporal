@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "alwaysStrict": true,
+    "baseUrl": "./src",
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "listFiles": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "pretty": false,
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "sourceMap": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "target": "es5",
+    "typeRoots": ["node_modules/@types", "src/types"],
+    "types": ["node", "jest", "enzyme"]
+  },
+  "exclude": ["./node_modules", "**/*.spec.ts"],
+  "include": ["./src/**/*"]
+}

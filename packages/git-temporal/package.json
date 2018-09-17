@@ -23,6 +23,12 @@
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject"
   },
+  "proxy": {
+    "/git": {
+      "target": "http://localhost:11966/",
+      "changeOrigin": true
+    }
+  },
   "dependencies": {
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
