@@ -1,0 +1,7 @@
+dist
+package.json
+package-lock.json
+jest.config.js
+test/coverage
+test/helpers
+mochawesome-report

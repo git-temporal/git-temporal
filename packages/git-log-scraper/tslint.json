@@ -1,0 +1,35 @@
+{
+  "extends": ["tslint-config-airbnb", "tslint-react", "tslint-config-prettier"],
+  "linterOptions": {
+    "exclude": [
+      "test/helpers",
+      "mochawesome-report"
+    ]
+  },
+  "rules": {
+    "import-name": [true, { "react": "React" }],
+    "jsx-boolean-value": ["never"],
+    "jsx-no-lambda": ["never"],
+    "no-this-assignment": [true, { "allow-destructuring": true }],
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-pascal-case",
+      "allow-snake-case"
+    ]
+  },
+  "globals": {
+    "after": true,
+    "afterEach": true,
+    "app": true,
+    "assert": true,
+    "before": true,
+    "beforeEach": true,
+    "describe": true,
+    "expect": true,
+    "HTMLElement": true,
+    "it": true,
+    "test": true
+  }
+}

@@ -1,0 +1,29 @@
+# OS Files
+*.swp
+*~
+._*
+.DS_Store
+*.ipr
+*.iml
+*.iws
+.idea/
+.vscode/
+
+# Build directory
+lib/
+dist/
+test/coverage
+
+# Node modules
+node_modules
+
+# NPM
+npm-debug.log
+
+# TypeScript
+.tscache
+tscommand-*
+
+# test output
+mochawesome-report/
+
