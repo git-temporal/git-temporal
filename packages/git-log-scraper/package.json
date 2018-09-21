@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "cross-env mocha --exit -r ./babel-register.js --recursive --opts ./test/mocha.opts ./test/unit",
+    "debug": "DEBUG=1 node --inspect-brk -r ./babel-register.js src/gitLogToJson.ts",
     "dev": "DEBUG=1 node -r ./babel-register.js src/gitLogToJson"
   },
   "repository": {

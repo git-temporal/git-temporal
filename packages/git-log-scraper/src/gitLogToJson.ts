@@ -20,5 +20,6 @@ if (!path || path == '--help') {
   console.log(HELP);
   process.exit(1);
 }
-
-console.log(JSON.stringify(getCommitHistory(path), null, 2));
+const commitHistory = getCommitHistory(path);
+console.warn(`parsed ${commitHistory.length} commits`);
+console.log(JSON.stringify(commitHistory, null, 2));
