@@ -13,6 +13,7 @@
 lib/
 dist/
 test/coverage
+test/repos
 
 # Node modules
 node_modules

@@ -1,4 +1,4 @@
-import getCommitHistory from './gitLogScraper';
+import { getCommitHistory } from './gitLogScraper';
 
 const HELP = `
 Dumps git log json for a file or directory.

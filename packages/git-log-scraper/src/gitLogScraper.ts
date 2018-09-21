@@ -19,7 +19,7 @@ import Fs from 'fs';
         ...
     }]
 */
-export default function getCommitHistory(fileName) {
+export function getCommitHistory(fileName) {
   const rawLog = _fetchFileHistory(fileName);
   return _parseGitLogOutput(rawLog);
 }
