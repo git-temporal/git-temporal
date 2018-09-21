@@ -2,8 +2,6 @@ import ChildProcess from 'child_process';
 import Path from 'path';
 import Fs from 'fs';
 
-import _ from 'underscore';
-
 /*
     returns an array of javascript objects representing the commits that effected the requested file
     with line stats, that looks like this:
@@ -101,7 +99,7 @@ function _parseGitLogOutput(output) {
     }
   }
 
-  if (currentCommitText) {
+  if (currentCommitText && currentCommitText.length > 0) {
     addLogItem();
   }
 
