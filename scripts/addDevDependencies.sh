@@ -30,6 +30,7 @@ eslint-config-airbnb \
 eslint-config-prettier \
 eslint-plugin-import \
 husky \
+lint-staged \
 mocha \
 prettier \
 regenerator-runtime \

@@ -8,12 +8,13 @@
 *.iws
 .idea/
 .vscode/
+lerna-debug.log
 
 # Build directory
-lib/
-dist/
-test/coverage
-test/repos
+**/lib/
+**/dist/
+**/test/coverage
+**/test/repos
 
 # Node modules
 node_modules
