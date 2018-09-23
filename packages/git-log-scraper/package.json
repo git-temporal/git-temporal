@@ -5,11 +5,11 @@
   "main": "lib/gitLogScraper.js",
   "scripts": {
     "build": "npx babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
-    "test": "cross-env mocha --exit -r ./babel-register.js --recursive --opts ./test/mocha.opts ./test/unit",
-    "test-debug": "cross-env mocha --inspect-brk --exit -r ./babel-register.js --recursive --opts ./test/mocha.opts ./test/unit",
+    "test": "cross-env mocha --exit -r ../../babel-register.js --recursive --opts ./test/mocha.opts ./test/unit",
+    "test-debug": "cross-env mocha --inspect-brk --exit -r ../../babel-register.js --recursive --opts ./test/mocha.opts ./test/unit",
     "test-update-snapshots": "test/updateSnapshots.js",
-    "debug": "DEBUG=1 node --inspect-brk -r ./babel-register.js src/gitLogToJson.ts",
-    "dev": "DEBUG=1 node -r ./babel-register.js src/gitLogToJson",
+    "debug": "DEBUG=1 node --inspect-brk -r ../../babel-register.js src/gitLogToJson.ts",
+    "dev": "DEBUG=1 node -r ../../babel-register.js src/gitLogToJson",
     "prepublishOnly": "npm run build",
     "precommit": "lint-staged"
   },
