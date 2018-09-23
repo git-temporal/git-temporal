@@ -1,0 +1,21 @@
+{
+  "name": "@git-temporal/git-temporal-vscode",
+  "version": "0.1.0",
+  "description": "git-temporal extension for Visual Studio Code (https://code.visualstudio.com/)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'needs tests'"
+  },
+  "repository": "https://github.com/git-temporal/git-temporal/tree/master/packages/git-temporal-vscode",
+  "keywords": [
+    "vscode",
+    "git-time-machine",
+    "git",
+    "history"
+  ],
+  "author": "Bee Wilkerson",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.1.0"
+  }
+}

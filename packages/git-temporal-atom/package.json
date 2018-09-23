@@ -1,0 +1,21 @@
+{
+  "name": "@git-temporal/git-temporal-atom",
+  "version": "0.1.0",
+  "description": "git-temporal for Atom (http://atom.io)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'need tests'"
+  },
+  "repository": "https://github.com/git-temporal/git-temporal/tree/master/packages/git-temporal-atom",
+  "keywords": [
+    "atom",
+    "git-time-machine",
+    "git",
+    "history"
+  ],
+  "author": "Bee Wilkerson",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.1.0"
+  }
+}

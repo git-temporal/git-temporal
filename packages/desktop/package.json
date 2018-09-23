@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/git-temporal/git-temporal/issues"
   },
-  "homepage": "https://github.com/git-temporal/git-temporal#readme"
+  "homepage": "https://github.com/git-temporal/git-temporal#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.1.0"
+  }
 }
