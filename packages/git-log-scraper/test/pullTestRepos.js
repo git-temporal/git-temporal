@@ -3,11 +3,11 @@
 fs = require('fs');
 path = require('path');
 
+const { testRepoBaseDir } = require('./helpers/testDirectories');
+
 systemCmd = require('bumble-util').systemCmd;
 
 const TEST_REPOS = ['node', 'react', 'atom', 'vscode'];
-
-const testRepoBaseDir = path.resolve(__dirname, 'repos');
 
 if (!fs.existsSync(testRepoBaseDir)) {
   fs.mkdirSync(testRepoBaseDir);

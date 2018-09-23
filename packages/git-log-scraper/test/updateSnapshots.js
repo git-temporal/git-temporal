@@ -6,8 +6,11 @@ const path = require('path');
 
 const { getCommitHistory } = require(`../src/gitLogScraper`);
 
-const testRepoBaseDir = path.resolve(__dirname, 'repos');
-const snapshotDir = path.resolve(__dirname, 'snapshots');
+const {
+  testRepoBaseDir,
+  snapshotDir,
+  getTestRepoDirectories,
+} = require('./helpers/testDirectories');
 
 if (!fs.existsSync(testRepoBaseDir)) {
   require('./pullTestRepos');
@@ -17,9 +20,7 @@ console.log(
   '\nUpdating test/repos snapshots.  This will take a few minutes...\n'
 );
 
-const isDirectory = source =>
-  fs.lstatSync(path.join(testRepoBaseDir, source)).isDirectory();
-const directories = fs.readdirSync(testRepoBaseDir).filter(isDirectory);
+const directories = getTestRepoDirectories();
 
 for (let directory of directories) {
   const fullPath = path.join(testRepoBaseDir, directory);

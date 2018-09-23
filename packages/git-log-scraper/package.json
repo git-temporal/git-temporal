@@ -53,8 +53,6 @@
     "eslint-plugin-import": "2.13.0",
     "husky": "0.14.3",
     "mocha": "5.2.0",
-    "mocha-cakes-2": "3.3.0",
-    "mochawesome": "3.0.3",
     "prettier": "1.13.5",
     "regenerator-runtime": "0.12.1",
     "ts-node": "6.1.1",
@@ -62,6 +60,7 @@
     "tslint": "5.11.0",
     "tslint-config-airbnb": "5.9.2",
     "tslint-config-prettier": "1.13.0",
-    "typescript": "^3.0.3"
+    "typescript": "^3.0.3",
+    "underscore": "^1.9.1"
   }
 }

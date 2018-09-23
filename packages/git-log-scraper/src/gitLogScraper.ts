@@ -61,7 +61,7 @@ function _parseGitLogOutput(output) {
   let totalLinesDeleted = 0;
   let files = [];
 
-  const addLogItem = () => {
+  function addLogItem() {
     const commitObj = _parseCommitObj(currentCommitText);
     if (!commitObj) {
       console.warn(`failed to parse commit Object: ${currentCommitText}`);
@@ -74,7 +74,19 @@ function _parseGitLogOutput(output) {
     totalLinesAdded = 0;
     totalLinesDeleted = 0;
     return (files = []);
-  };
+  }
+
+  function safelyParseInt(number) {
+    if (number === null || number === undefined) {
+      return 0;
+    }
+    const parsedNumber = parseInt(number);
+    if (isNaN(parsedNumber)) {
+      return 0;
+    }
+
+    return parsedNumber;
+  }
 
   for (let line of logLines) {
     var matches;
@@ -85,8 +97,8 @@ function _parseGitLogOutput(output) {
       currentCommitText = line;
     } else if ((matches = line.match(/^([\d\-]+)\s+([\d\-]+)\s+(.*)/))) {
       let [linesAdded, linesDeleted, fileName] = matches.slice(1);
-      linesAdded = parseInt(linesAdded);
-      linesDeleted = parseInt(linesDeleted);
+      linesAdded = safelyParseInt(linesAdded);
+      linesDeleted = safelyParseInt(linesDeleted);
       totalLinesAdded += linesAdded;
       totalLinesDeleted += linesDeleted;
       files.push({
