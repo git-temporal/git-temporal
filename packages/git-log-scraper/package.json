@@ -1,6 +1,6 @@
 {
   "name": "@git-temporal/git-log-scraper",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Scrapes commit data from the git cli for a file or directory in a repository and returns an array of Javascript objects representing commits with files and lines added and deleted.",
   "main": "lib/gitLogScraper.js",
   "scripts": {
@@ -9,7 +9,8 @@
     "test-debug": "cross-env mocha --inspect-brk --exit -r ./babel-register.js --recursive --opts ./test/mocha.opts ./test/unit",
     "test-update-snapshots": "test/updateSnapshots.js",
     "debug": "DEBUG=1 node --inspect-brk -r ./babel-register.js src/gitLogToJson.ts",
-    "dev": "DEBUG=1 node -r ./babel-register.js src/gitLogToJson"
+    "dev": "DEBUG=1 node -r ./babel-register.js src/gitLogToJson",
+    "prepublishOnly": "npm run build"
   },
   "bin": {
     "git-log-scraper": "lib/gitLogToJson.js"
