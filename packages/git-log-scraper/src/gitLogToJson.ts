@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { getCommitHistory } from './gitLogScraper';
 
 const HELP = `

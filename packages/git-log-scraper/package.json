@@ -1,6 +1,6 @@
 {
   "name": "@git-temporal/git-log-scraper",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Scrapes commit data from the git cli for a file or directory in a repository and returns an array of Javascript objects representing commits with files and lines added and deleted.",
   "main": "lib/gitLogScraper.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "prepublishOnly": "npm run build"
   },
   "bin": {
-    "git-log-scraper": "node lib/gitLogToJson.js"
+    "git-log-scraper": "lib/gitLogToJson.js"
   },
   "publishConfig": {
     "access": "public"
