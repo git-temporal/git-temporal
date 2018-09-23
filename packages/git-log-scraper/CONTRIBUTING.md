@@ -1,3 +1,17 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+**Table of Contents** _generated with [DocToc](https://github.com/thlorenz/doctoc)_
+
+- [Contributing to git-log-scraper](#contributing-to-git-log-scraper)
+  - [Getting started](#getting-started)
+  - [Debugging](#debugging)
+  - [Tests](#tests)
+    - [Debugging tests](#debugging-tests)
+  - [More Information](#more-information)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Contributing to git-log-scraper
 
 Thank you! We welcome your ideas and suggestions via the [git-temporal Github issues](https://github.com/git-temporal/git-temporal/issues) page. And, more importantly, your pull requests!
@@ -15,7 +29,7 @@ Clone that repo!
 ```bash
 git clone https://github.com/git-temporal/git-temporal.git
 cd git-temporal
-lerna bootstrap
+npx lerna bootstrap
 ```
 
 Test it out! This will take a while the first time as it needs to pull some large test repos:
@@ -76,7 +90,3 @@ Don't forget to remove the `debugger` statement you added. The linter will not a
 ## More Information
 
 See `scripts` in `packages/git-log-scraper/package.json` for more development commands.
-
-```
-
-```
