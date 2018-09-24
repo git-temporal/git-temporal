@@ -27,9 +27,12 @@ module.exports = {
       },
     ],
     'class-methods-use-this': 'warn',
+    'no-restricted-syntax': 'off',
+    'no-plusplus': 'off',
+    'arrow-body-style': 'off',
   },
   settings: {
-    'import/resolver': 'webpack',
+    'import/resolver': 'node',
   },
   globals: tslintJson.globals,
 };

@@ -1,11 +1,10 @@
 #!/usr/bin/env node
+/* eslint global-require: 0 */
+/* eslint no-console: 0 */
 
-fs = require('fs');
-path = require('path');
-
+const fs = require('fs');
+const { systemCmd } = require('bumble-util');
 const { testRepoBaseDir } = require('./helpers/testDirectories');
-
-systemCmd = require('bumble-util').systemCmd;
 
 const TEST_REPOS = ['node', 'react', 'atom', 'vscode'];
 
@@ -21,7 +20,7 @@ if (!fs.existsSync(testRepoBaseDir)) {
 
 process.chdir(testRepoBaseDir);
 
-for (let repo of TEST_REPOS) {
+for (const repo of TEST_REPOS) {
   // we assume since the test repos are static forks at a point in time that
   // once cloned they should not need to ever be pulled
   if (!fs.existsSync(repo)) {

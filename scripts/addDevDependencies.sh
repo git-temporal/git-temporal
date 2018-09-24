@@ -18,6 +18,7 @@ npm install --save-dev @babel/cli \
 @babel/register \
 @types/node \
 babel-eslint \
+babel-plugin-istanbul \
 babel-plugin-module-resolver \
 bumble-util \
 chai \
@@ -29,9 +30,11 @@ eslint-config-prettier \
 eslint-plugin-import \
 eslint-plugin-jsx-a11y \
 eslint-plugin-react \
+eslint-import-resolver-node \
 husky \
 lint-staged \
 mocha \
+nyc \
 prettier \
 regenerator-runtime \
 ts-node \

@@ -1,5 +1,11 @@
 #!/usr/bin/env node
-require('../../../babel-register');
+/* eslint global-require: 0 */
+/* eslint no-console: 0 */
+
+/*
+  This script updates the snapshot files in test/snapshots
+
+*/
 
 const fs = require('fs');
 const path = require('path');
@@ -22,7 +28,7 @@ console.log(
 
 const directories = getTestRepoDirectories();
 
-for (let directory of directories) {
+for (const directory of directories) {
   const fullPath = path.join(testRepoBaseDir, directory);
   console.log(`fetching git commit history for ${fullPath}`);
   const commitHistory = getCommitHistory(fullPath);

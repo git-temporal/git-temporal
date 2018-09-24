@@ -1,6 +1,6 @@
-import ChildProcess from 'child_process';
-import Path from 'path';
-import Fs from 'fs';
+import child_process from 'child_process';
+import path from 'path';
+import fs from 'fs';
 
 /*
     returns an array of javascript objects representing the commits that effected the requested file
@@ -20,40 +20,43 @@ import Fs from 'fs';
     }]
 */
 export function getCommitHistory(fileName) {
-  const rawLog = _fetchFileHistory(fileName);
-  return _parseGitLogOutput(rawLog);
+  const rawLog = fetchFileHistory(fileName);
+  return parseGitLogOutput(rawLog);
 }
 
 // Implementation
 
-function _fetchFileHistory(fileName) {
+function fetchFileHistory(fileName) {
   let directory;
+  let actualFileName = fileName;
   const format = (
     '{"id": "%H", "authorName": "%an", "relativeDate": "%cr", "authorDate": %at, ' +
     ' "message": "%s", "body": "%b", "hash": "%h"}'
   ).replace(/\"/g, '#/dquotes/');
   const flags = ` --pretty=\"format:${format}\" --topo-order --date=local --numstat --follow`;
 
-  const fstats = Fs.statSync(fileName);
+  const fstats = fs.statSync(actualFileName);
   if (fstats.isDirectory()) {
-    directory = fileName;
-    fileName = '.';
+    directory = actualFileName;
+    actualFileName = '.';
   } else {
-    directory = Path.dirname(fileName);
-    fileName = _escapeForCli(Path.basename(fileName));
+    directory = path.dirname(actualFileName);
+    actualFileName = escapeForCli(path.basename(actualFileName));
   }
 
-  const cmd = `git log${flags} ${fileName}`;
+  const cmd = `git log${flags} ${actualFileName}`;
   if (process.env.DEBUG === '1') {
     console.warn(`$ ${cmd}`);
   }
-  return ChildProcess.execSync(cmd, {
-    stdio: 'pipe',
-    cwd: directory,
-  }).toString();
+  return child_process
+    .execSync(cmd, {
+      stdio: 'pipe',
+      cwd: directory,
+    })
+    .toString();
 }
 
-function _parseGitLogOutput(output) {
+function parseGitLogOutput(output) {
   const logItems = [];
   const logLines = output.split('\n');
   let currentCommitText = null;
@@ -62,7 +65,7 @@ function _parseGitLogOutput(output) {
   let files = [];
 
   function addLogItem() {
-    const commitObj = _parseCommitObj(currentCommitText);
+    const commitObj = parseCommitObj(currentCommitText);
     if (!commitObj) {
       console.warn(`failed to parse commit Object: ${currentCommitText}`);
     } else {
@@ -76,11 +79,11 @@ function _parseGitLogOutput(output) {
     return (files = []);
   }
 
-  function safelyParseInt(number) {
-    if (number === null || number === undefined) {
+  function safelyParseInt(parseableNumber) {
+    if (parseableNumber === null || parseableNumber === undefined) {
       return 0;
     }
-    const parsedNumber = parseInt(number);
+    const parsedNumber = parseInt(parseableNumber, 10);
     if (isNaN(parsedNumber)) {
       return 0;
     }
@@ -88,8 +91,8 @@ function _parseGitLogOutput(output) {
     return parsedNumber;
   }
 
-  for (let line of logLines) {
-    var matches;
+  for (const line of logLines) {
+    let matches;
     if (line.match(/^\{\#\/dquotes\/id\#\/dquotes\/\:/)) {
       if (currentCommitText != null) {
         addLogItem();
@@ -99,12 +102,14 @@ function _parseGitLogOutput(output) {
       let [linesAdded, linesDeleted, fileName] = matches.slice(1);
       linesAdded = safelyParseInt(linesAdded);
       linesDeleted = safelyParseInt(linesDeleted);
+      fileName = fileName.trim();
+
       totalLinesAdded += linesAdded;
       totalLinesDeleted += linesDeleted;
       files.push({
-        name: fileName.trim(),
         linesAdded,
         linesDeleted,
+        name: fileName,
       });
     } else if (line != null) {
       currentCommitText += line;
@@ -118,7 +123,7 @@ function _parseGitLogOutput(output) {
   return logItems;
 }
 
-function _parseCommitObj(line) {
+function parseCommitObj(line) {
   const encLine = line
     .replace(/\t/g, '  ') // tabs mess with JSON parse
     .replace(/\"/g, "'") // sorry, can't parse with quotes in body or message
@@ -130,17 +135,17 @@ function _parseCommitObj(line) {
   try {
     return JSON.parse(encLine);
   } catch (error) {
-    console.warn(line + '\n\n');
+    console.warn(`#{line}\n\n`);
     console.warn(`failed to parse JSON ${encLine}`);
     return null;
   }
 }
 
 /*
-    See nodejs Path.normalize().  This method extends Path.normalize() to add:
+    See nodejs path.normalize().  This method extends path.normalize() to add:
     - escape of space characters 
 */
-function _escapeForCli(filePath) {
+function escapeForCli(filepath) {
   const escapePrefix = process.platform === 'win32' ? '^' : '\\';
-  return filePath.replace(/([\s\(\)\-])/g, escapePrefix + '$1');
+  return filepath.replace(/([\s\(\)\-])/g, `#{escapePrefix}#{$1}`);
 }

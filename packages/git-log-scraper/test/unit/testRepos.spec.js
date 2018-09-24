@@ -1,7 +1,11 @@
+/* eslint global-require: 0 */
+/* eslint no-console: 0 */
+
 const fs = require('fs');
 const path = require('path');
 const _ = require('underscore');
 const { expect } = require('chai');
+
 const { getCommitHistory } = require(`../../src/gitLogScraper`);
 
 const {
@@ -16,10 +20,6 @@ if (!fs.existsSync(testRepoBaseDir)) {
 
 const ignoredCommitAttributes = ['relativeDate'];
 
-describe('static test repos', async () => {
-  testRepos();
-});
-
 function timeMe(description, callback) {
   const startTime = Date.now();
   const returnValue = callback();
@@ -31,7 +31,7 @@ function timeMe(description, callback) {
 function testRepos() {
   const repoDirs = getTestRepoDirectories();
   console.log(repoDirs);
-  for (let dir of repoDirs) {
+  for (const dir of repoDirs) {
     const fullRepoPath = path.join(testRepoBaseDir, dir);
     const fullSnapshotPath = path.join(snapshotDir, `${dir}.snapshot.json`);
     const commitHistory = timeMe(`getCommitHistory for ${dir}`, () => {
@@ -58,3 +58,7 @@ function testRepos() {
     });
   }
 }
+
+describe('static test repos', async () => {
+  testRepos();
+});

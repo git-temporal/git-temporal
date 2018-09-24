@@ -17,8 +17,8 @@ examples:
 `;
 debugger;
 
-let path = process.argv[2];
-if (!path || path == '--help') {
+const path = process.argv[2];
+if (!path || path === '--help') {
   console.log(HELP);
   process.exit(1);
 }
