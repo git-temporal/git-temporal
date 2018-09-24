@@ -1,9 +1,0 @@
-dist
-!.babelrc.js
-
-config
-test/coverage
-test/functional/framework
-test/functional/PageObjects
-test/helpers
-mochawesome-report
