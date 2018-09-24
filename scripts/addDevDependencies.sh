@@ -37,6 +37,7 @@ regenerator-runtime \
 ts-node \
 tsconfig-paths \
 tslint \
+tslint-react \
 tslint-config-airbnb \
 tslint-config-prettier \
 typescript \

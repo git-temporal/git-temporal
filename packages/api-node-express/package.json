@@ -4,12 +4,21 @@
   "description": "This is an api to return git log information in JSON.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
+    "test": "cross-env mocha --exit -r ../../babel-register.js --recursive --opts ./test/mocha.opts ./test/unit",
+    "test-debug": "cross-env mocha --inspect-brk --exit -r ../../babel-register.js --recursive --opts ./test/mocha.opts ./test/unit",
+    "debug": "DEBUG=1 node --inspect-brk -r ../../babel-register.js src/server.ts",
+    "dev": "DEBUG=1 node -r ../../babel-register.js src/server.ts",
+    "prepublishOnly": "npm run build",
+    "precommit": "lint-staged"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/git-temporal/git-temporal.git"
+  "bin": {
+    "api-node-express": "lib/server.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": "https://github.com/git-temporal/git-temporal/tree/master/packages/git-log-scraper",
   "keywords": [
     "git",
     "api",
@@ -24,7 +33,10 @@
   },
   "homepage": "https://github.com/git-temporal/git-temporal#readme",
   "dependencies": {
-    "@git-temporal/git-log-scraper": "^0.1.8"
+    "@git-temporal/git-log-scraper": "^0.1.8",
+    "@types/es6-shim": "^0.31.37",
+    "@types/express": "^4.16.0",
+    "express": "^4.16.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.0",
@@ -64,6 +76,7 @@
     "tslint": "^5.11.0",
     "tslint-config-airbnb": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",
+    "tslint-react": "^3.6.0",
     "typescript": "^3.0.3",
     "underscore": "^1.9.1"
   }
