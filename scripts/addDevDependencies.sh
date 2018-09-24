@@ -18,8 +18,6 @@ npm install --save-dev @babel/cli \
 @babel/register \
 @types/node \
 babel-eslint \
-babel-jest \
-babel-loader \
 babel-plugin-module-resolver \
 bumble-util \
 chai \
@@ -29,6 +27,8 @@ eslint \
 eslint-config-airbnb \
 eslint-config-prettier \
 eslint-plugin-import \
+eslint-plugin-jsx-a11y \
+eslint-plugin-react \
 husky \
 lint-staged \
 mocha \
