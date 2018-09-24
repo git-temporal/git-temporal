@@ -3,10 +3,11 @@
     "allowSyntheticDefaultImports": true,
     "strict": false,
     "baseUrl": "./src",
+    "declaration": true,
     "downlevelIteration": true,
     "esModuleInterop": true,
     "jsx": "react",
-    "lib": ["esnext", "dom", "dom.iterable"],
+    "lib": ["es7", "dom", "dom.iterable"],
     "listFiles": true,
     "module": "commonjs",
     "moduleResolution": "node",
@@ -21,10 +22,10 @@
     "resolveJsonModule": true,
     "sourceMap": false,
     "suppressImplicitAnyIndexErrors": true,
-    "target": "ES6",
-    "typeRoots": ["node_modules/@types", "src/types"],
+    "target": "esnext",
+    "typeRoots": ["**/node_modules/@types", "src/types"],
     "types": ["node"]
   },
-  "exclude": ["./node_modules", "**/*.spec.ts"],
-  "include": ["./src/**/*"]
+  "exclude": ["**/node_modules/**/*", "**/test/**/*", "**/lib/**/*"],
+  "include": ["**/*.ts"]
 }

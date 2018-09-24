@@ -146,6 +146,8 @@ function parseCommitObj(line) {
     - escape of space characters 
 */
 function escapeForCli(filepath) {
-  const escapePrefix = process.platform === 'win32' ? '^' : '\\';
-  return filepath.replace(/([\s\(\)\-])/g, `#{escapePrefix}#{$1}`);
+  return filepath.replace(
+    /([\s\(\)\-])/g,
+    `#{process.platform === 'win32' ? '^' : '\\'}#{$1}`
+  );
 }

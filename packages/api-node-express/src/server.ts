@@ -1,13 +1,25 @@
-import path from 'path';
+import * as path from 'path';
+// @ts-ignore
 import express from 'express';
 import { getCommitHistory } from '@git-temporal/git-log-scraper';
 
-const app = express();
-const port = 11966;
+import findGitRoot from './common/findGitRoot';
 
-// @ts-ignore
+const app = express();
+const port = process.env.GT_API_PORT || 11966;
+
+const gitRoot = findGitRoot();
+console.log('git root dir: ', gitRoot);
+
 app.get('/git-temporal/history', (req, res) => {
-  res.send(getCommitHistory(path.resolve(__dirname, '../../../')));
+  const resolvedPath = path.resolve(gitRoot, req.query.path || '.');
+  console.log(
+    'getting git log for path: ',
+    resolvedPath,
+    req.params,
+    req.query
+  );
+  res.send(getCommitHistory(resolvedPath));
 });
 
 app.listen(port, () =>

@@ -30,9 +30,16 @@ module.exports = {
     'no-restricted-syntax': 'off',
     'no-plusplus': 'off',
     'arrow-body-style': 'off',
+    'import/no-unresolved': 'off',
+    'no-continue': 'off',
   },
+  // settings: {
+  //   'import/resolver': 'node',
+  // },
   settings: {
-    'import/resolver': 'node',
+    'import/resolver': {
+      'babel-module': {},
+    },
   },
   globals: tslintJson.globals,
 };
