@@ -3,7 +3,6 @@
     "allowSyntheticDefaultImports": true,
     "strict": false,
     "baseUrl": "./src",
-    "declaration": true,
     "downlevelIteration": true,
     "esModuleInterop": true,
     "jsx": "react",
