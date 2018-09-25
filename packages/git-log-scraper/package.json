@@ -10,8 +10,7 @@
     "test-update-snapshots": "test/updateSnapshots.js",
     "debug": "DEBUG=1 node --inspect-brk -r ../../babel-register.js src/gitLogToJson.ts",
     "dev": "DEBUG=1 node -r ../../babel-register.js src/gitLogToJson",
-    "prepublishOnly": "npm run build",
-    "precommit": "lint-staged"
+    "prepublishOnly": "npm run build"
   },
   "bin": {
     "git-log-scraper": "lib/gitLogToJson.js"

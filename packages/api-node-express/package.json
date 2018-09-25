@@ -9,8 +9,7 @@
     "test-debug": "cross-env mocha --inspect-brk --exit -r ../../babel-register.js --recursive --opts ./test/mocha.opts ./test/unit",
     "debug": "DEBUG=1 node --inspect-brk -r ../../babel-register.js src/server.ts",
     "dev": "DEBUG=1 node -r ../../babel-register.js src/server.ts",
-    "prepublishOnly": "npm run build",
-    "precommit": "lint-staged"
+    "prepublishOnly": "npm run build"
   },
   "bin": {
     "api-node-express": "lib/server.js"
