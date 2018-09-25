@@ -1,11 +1,7 @@
 {
   "name": "root",
   "private": true,
-  "husky": {
-    "hooks": {
-      "precommit": "lint-staged"
-    }
-  },
+
   "devDependencies": {
     "@babel/cli": "^7.1.0",
     "@babel/core": "^7.1.0",

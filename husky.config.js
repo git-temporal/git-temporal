@@ -1,7 +1,7 @@
 module.exports = {
   husky: {
     hooks: {
-      precommit: 'lint-staged',
+      'pre-commit': 'lint-staged',
     },
   },
 };
