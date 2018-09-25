@@ -2,6 +2,22 @@
   "name": "git-temporal-react",
   "version": "0.1.0",
   "main": "./index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": "https://github.com/git-temporal/git-temporal/tree/master/packages/git-temporal-react",
+  "keywords": [
+    "git",
+    "git-time-machine",
+    "react",
+    "history"
+  ],
+  "author": "Bee Wilkerson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/git-temporal/git-temporal/issues"
+  },
+  "homepage": "https://github.com/git-temporal/git-temporal/blob/master/packages/git-temporal-react/README.md",
   "dependencies": {},
   "scripts": {
     "build": "npm run build:tsc && npm run build:webpack",
