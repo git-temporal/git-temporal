@@ -23,16 +23,6 @@ babel-plugin-module-resolver \
 bumble-util \
 chai \
 cross-env \
-doctoc \
-eslint \
-eslint-config-airbnb \
-eslint-config-prettier \
-eslint-plugin-import \
-eslint-plugin-jsx-a11y \
-eslint-plugin-react \
-eslint-import-resolver-node \
-husky \
-lint-staged \
 mocha \
 nyc \
 prettier \

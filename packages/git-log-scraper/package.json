@@ -63,8 +63,6 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
-    "husky": "^1.0.0-rc.15",
-    "lint-staged": "^7.3.0",
     "mocha": "^5.2.0",
     "nyc": "^13.0.1",
     "prettier": "^1.14.3",
