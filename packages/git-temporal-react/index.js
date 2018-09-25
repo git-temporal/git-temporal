@@ -1,2 +1,2 @@
-GitTemporal = require('lib/GitTemporal');
+GitTemporal = require('./lib/GitTemporal');
 module.exports = GitTemporal;

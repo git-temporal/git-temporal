@@ -13,7 +13,7 @@ lerna-debug.log
 # Build directory
 **/lib/
 **/dist/
-**/test/coverage
+**/coverage/
 **/test/repos
 
 # Node modules

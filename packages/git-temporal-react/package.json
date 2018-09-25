@@ -4,7 +4,7 @@
   "main": "./index.js",
   "dependencies": {},
   "scripts": {
-    "build": "concurrently --kill-others-on-fail 'npm:build:tsc' 'npm:build:webpack'",
+    "build": "npm run build:tsc && npm run build:webpack",
     "build:tsc": "NODE_ENV=production tsc",
     "build:webpack": "NODE_ENV=production webpack --display-error-details --config config/webpack.config.prod.js",
     "start": "node scripts/start.js",
