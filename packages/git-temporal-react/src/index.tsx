@@ -3,10 +3,8 @@ import * as ReactDOM from 'react-dom';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 
-import GitTemporal from './app/GitTemporal';
+import Index from './app/Index';
 
-ReactDOM.render(<GitTemporal />, document.getElementById(
-  'root'
-) as HTMLElement);
+ReactDOM.render(<Index />, document.getElementById('root'));
 
 registerServiceWorker();

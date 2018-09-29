@@ -11,6 +11,15 @@ const port = process.env.GT_API_PORT || 11966;
 const gitRoot = findGitRoot();
 console.log('git root dir: ', gitRoot);
 
+app.use((_req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  next();
+});
+
 app.get('/git-temporal/history', (req, res) => {
   const resolvedPath = path.resolve(gitRoot, req.query.path || '.');
   console.log(

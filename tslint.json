@@ -1,10 +1,7 @@
 {
   "extends": ["tslint-config-airbnb", "tslint-react", "tslint-config-prettier"],
   "linterOptions": {
-    "exclude": [
-      "test/helpers",
-      "mochawesome-report"
-    ]
+    "exclude": ["test/helpers", "mochawesome-report"]
   },
   "rules": {
     "import-name": [true, { "react": "React" }],
@@ -16,7 +13,8 @@
       "ban-keywords",
       "check-format",
       "allow-pascal-case",
-      "allow-snake-case"
+      "allow-snake-case",
+      "allow-leading-underscore"
     ]
   },
   "globals": {
