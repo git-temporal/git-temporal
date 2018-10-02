@@ -23,14 +23,16 @@
     "build:tsc": "NODE_ENV=production tsc",
     "build:webpack": "NODE_ENV=production webpack --display-error-details --config config/webpack.config.prod.js",
     "start": "node scripts/start.js",
-    "test": "npm run test:coverage",
-    "test:coverage": "npm run test:watch -- --coverage",
-    "test:watch": "cross-env NODE_ENV=test jest"
+    "test": "cross-env NODE_ENV=test jest",
+    "test:coverage": "npm run test -- --coverage",
+    "test:watch": "npm run test -- --watch",
+    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand && open chrome://inspect/#devices"
   },
   "dependencies": {
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
+    "redux-mock-store": "^1.5.3",
     "redux-thunk": "^2.3.0"
   },
   "peerDependencies": {

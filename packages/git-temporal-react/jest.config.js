@@ -1,5 +1,4 @@
 module.exports = {
-  collectCoverage: true,
   collectCoverageFrom: ['src/app/**/*.{ts,tsx}'],
   coveragePathIgnorePatterns: [
     '/node_modules/',

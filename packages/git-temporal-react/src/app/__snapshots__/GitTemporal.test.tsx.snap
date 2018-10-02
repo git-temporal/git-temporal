@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/GitTemporal it should match snapshot 1`] = `
+exports[`components/GitTemporal when rendered without props it should match snapshot 1`] = `
 <div>
   <h2>
     Empty.
