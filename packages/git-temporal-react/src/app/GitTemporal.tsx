@@ -69,9 +69,9 @@ export class GitTemporal extends Component<
 
 const mapStateToProps = state => {
   const { path, commitsByPath } = state;
-  const { isFetching, items: commits } = commitsByPath[path] || {
+  const { isFetching, commits } = commitsByPath[path] || {
     isFetching: true,
-    items: [],
+    commits: [],
   };
 
   return {

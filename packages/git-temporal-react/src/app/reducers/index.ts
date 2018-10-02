@@ -19,7 +19,7 @@ const commits = (
   state = {
     isFetching: false,
     didInvalidate: false,
-    items: [],
+    commits: [],
   },
   action
 ) => {
@@ -40,7 +40,7 @@ const commits = (
         ...state,
         isFetching: false,
         didInvalidate: false,
-        items: action.commits,
+        commits: action.commits,
         lastUpdated: action.receivedAt,
       };
     default:

@@ -5,20 +5,14 @@ export interface GitTemporalProps {
 }
 
 export interface StateProps {
-  items: ICommit[];
-  isFetching: boolean;
-  isEmpty: boolean;
-  didInvalidate: boolean;
-  lastUpdated: number;
-  commits: ICommit[];
+  commits?: ICommit[];
+  isFetching?: boolean;
+  isEmpty?: boolean;
+  didInvalidate?: boolean;
+  lastUpdated?: number;
 }
 
 export interface DispatchProps {
-  selectPath: (path: string) => void;
-  invalidatePath: (path: string) => void;
-  requestCommits: (path: string) => void;
-  receiveCommits: (path: string, json: ICommit[]) => void;
-  fetchCommitsIfNeeded: (path: string) => void;
   dispatch: (action: any) => void;
 }
 
