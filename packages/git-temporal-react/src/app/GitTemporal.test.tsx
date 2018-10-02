@@ -1,9 +1,12 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import GitTemporal from './GitTemporal';
+import React from 'react';
+import { shallow } from 'enzyme';
+import { GitTemporal } from './GitTemporal';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<GitTemporal />, div);
-  ReactDOM.unmountComponentAtNode(div);
+const dispatchMock = jest.fn();
+
+describe('components/GitTemporal', () => {
+  test('it should match snapshot', () => {
+    const wrapper = shallow(<GitTemporal dispatch={dispatchMock} />);
+    expect(wrapper).toMatchSnapshot();
+  });
 });

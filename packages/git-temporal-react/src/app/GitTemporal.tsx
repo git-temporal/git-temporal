@@ -3,7 +3,7 @@ import { GitTemporalProps, DispatchProps, StateProps } from './interfaces';
 import { connect } from 'react-redux';
 import { selectPath, fetchCommitsIfNeeded, invalidatePath } from './actions';
 
-class GitTemporal extends Component<
+export class GitTemporal extends Component<
   GitTemporalProps & DispatchProps & StateProps
 > {
   componentDidMount() {
