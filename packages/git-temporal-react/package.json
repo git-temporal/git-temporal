@@ -25,7 +25,7 @@
     "start": "node scripts/start.js",
     "test": "npm run test:coverage",
     "test:coverage": "npm run test:watch -- --coverage",
-    "test:watch": "cross-env NODE_ENV=test node jest"
+    "test:watch": "cross-env NODE_ENV=test jest"
   },
   "dependencies": {
     "cross-env": "^5.2.0",
@@ -75,6 +75,7 @@
     "ts-jest": "22.0.1",
     "ts-loader": "^2.3.7",
     "tsconfig-paths-webpack-plugin": "^2.0.0",
+    "typescript": "^3.1.1",
     "uglifyjs-webpack-plugin": "^1.1.8",
     "url-loader": "0.6.2",
     "webpack": "3.8.1",

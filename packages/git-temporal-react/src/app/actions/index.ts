@@ -3,10 +3,16 @@ export const RECEIVE_COMMITS = 'RECEIVE_COMMITS';
 export const SELECT_PATH = 'SELECT_PATH';
 export const INVALIDATE_PATH = 'INVALIDATE_PATH';
 
-export const selectPath = path => ({
-  path,
-  type: SELECT_PATH,
-});
+export const selectPath = path => (dispatch, getState) => {
+  const selectedPath = getState().selectedPath;
+  if (path !== selectedPath) {
+    dispatch(fetchCommitsIfNeeded(path));
+  }
+  return {
+    selectedPath: path,
+    type: SELECT_PATH,
+  };
+};
 
 export const invalidatePath = path => ({
   path,
@@ -19,7 +25,7 @@ export const requestCommits = path => ({
 });
 
 export const receiveCommits = (path, json) => ({
-  path,
+  selectedPath: path,
   type: RECEIVE_COMMITS,
   commits: json,
   receivedAt: Date.now(),
@@ -27,7 +33,7 @@ export const receiveCommits = (path, json) => ({
 
 const fetchCommits = path => dispatch => {
   dispatch(requestCommits(path));
-  // TODO : replace this with serviceBaseUrl when it is in the path
+  // TODO : replace this with serviceBaseUrl when it is in
   return fetch(`http://localhost:11966/git-temporal/history`)
     .then(response => response.json())
     .then(json => dispatch(receiveCommits(path, json)));

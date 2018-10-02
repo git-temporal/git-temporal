@@ -1,37 +1,32 @@
 import React, { Component } from 'react';
 import { GitTemporalProps, DispatchProps, StateProps } from './interfaces';
 import { connect } from 'react-redux';
-import { selectPath, fetchCommitsIfNeeded, invalidatePath } from './actions';
+import { selectPath } from './actions';
 
 export class GitTemporal extends Component<
   GitTemporalProps & DispatchProps & StateProps
 > {
   componentDidMount() {
     const { path, dispatch } = this.props;
-    dispatch(fetchCommitsIfNeeded(path));
+    dispatch(selectPath(path));
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.path !== this.props.path) {
       const { dispatch, path } = nextProps;
-      dispatch(fetchCommitsIfNeeded(path));
+      dispatch(selectPath(path));
     }
   }
+  // handleRefreshClick = e => {
+  //   e.preventDefault();
 
-  handleChange = nextPath => {
-    this.props.dispatch(selectPath(nextPath));
-  };
-
-  handleRefreshClick = e => {
-    e.preventDefault();
-
-    const { dispatch, path } = this.props;
-    dispatch(invalidatePath(path));
-    dispatch(fetchCommitsIfNeeded(path));
-  };
+  //   const { dispatch, path } = this.props;
+  //   dispatch(invalidatePath(path));
+  //   dispatch(fetchCommitsIfNeeded(path));
+  // };
 
   render() {
-    const { path, serviceBaseUrl, isFetching, commits } = this.props;
+    const { selectedPath, serviceBaseUrl, isFetching, commits } = this.props;
 
     return (
       <div>
@@ -50,7 +45,7 @@ export class GitTemporal extends Component<
             </p>
             <div>
               <label>Path:</label>
-              {path}
+              {selectedPath}
             </div>
             <div>
               <label>baseServiceUrl:</label>
@@ -68,14 +63,14 @@ export class GitTemporal extends Component<
 }
 
 const mapStateToProps = state => {
-  const { path, commitsByPath } = state;
-  const { isFetching, commits } = commitsByPath[path] || {
+  const { selectedPath, commitsByPath } = state;
+  const { isFetching, commits } = commitsByPath[selectedPath] || {
     isFetching: true,
     commits: [],
   };
 
   return {
-    path,
+    selectedPath,
     commits,
     isFetching,
   };

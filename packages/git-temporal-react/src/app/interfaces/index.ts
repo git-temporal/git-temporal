@@ -1,10 +1,11 @@
 export interface GitTemporalProps {
   // If not provided, the whole repository is assumed
-  path?: string | null;
+  path?: string;
   serviceBaseUrl?: string;
 }
 
 export interface StateProps {
+  selectedPath?: string;
   commits?: ICommit[];
   isFetching?: boolean;
   isEmpty?: boolean;
