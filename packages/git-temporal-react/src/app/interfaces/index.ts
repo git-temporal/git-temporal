@@ -11,10 +11,11 @@ export interface StateProps {
   isEmpty?: boolean;
   didInvalidate?: boolean;
   lastUpdated?: number;
+  authorNames?: string[];
 }
 
 export interface DispatchProps {
-  dispatch: (action: any) => void;
+  dispatch?: (action: any) => void;
 }
 
 export interface ICommitFile {

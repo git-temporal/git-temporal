@@ -25,6 +25,12 @@ exports[`components/GitTemporal when changing path prop it should match snapshot
       </label>
       5
     </div>
+    <div>
+      <label>
+        0
+         Authors
+      </label>
+    </div>
   </div>
 </div>
 `;
@@ -61,6 +67,12 @@ exports[`components/GitTemporal when rendered with commits and not fetching it s
         number of commits:
       </label>
       5
+    </div>
+    <div>
+      <label>
+        0
+         Authors
+      </label>
     </div>
   </div>
 </div>

@@ -32,6 +32,7 @@ module.exports = {
     'arrow-body-style': 'off',
     'import/no-unresolved': 'off',
     'no-continue': 'off',
+    'import/prefer-default-export': 'off',
   },
   // settings: {
   //   'import/resolver': 'node',

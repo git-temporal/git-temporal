@@ -3,6 +3,8 @@ module.exports = {
   coveragePathIgnorePatterns: [
     '/node_modules/',
     '.*(test|spec)\\.(tsx|ts|js|jsx)?$',
+    // this one is a beast to test shallow because it requires a full redux store
+    'app/Index.tsx',
   ],
 
   moduleFileExtensions: ['ts', 'js', 'tsx'],

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { GitTemporalProps, DispatchProps, StateProps } from './interfaces';
 import { connect } from 'react-redux';
-import { selectPath } from './actions';
+
+import { GitTemporalProps, DispatchProps, StateProps } from 'app/interfaces';
+import { selectPath } from 'app/actions';
+import { getFilteredCommits } from 'app/selectors';
 
 export class GitTemporal extends Component<
   GitTemporalProps & DispatchProps & StateProps
@@ -26,7 +28,13 @@ export class GitTemporal extends Component<
   // };
 
   render() {
-    const { selectedPath, serviceBaseUrl, isFetching, commits } = this.props;
+    const {
+      selectedPath,
+      serviceBaseUrl,
+      isFetching,
+      commits,
+      authorNames = [],
+    } = this.props;
 
     return (
       <div>
@@ -53,25 +61,21 @@ export class GitTemporal extends Component<
               <label>number of commits:</label>
               {commits && commits.length}
             </div>
+            <div>
+              <label>{authorNames.length} Authors</label>
+              {authorNames.map(authorName => (
+                <div key={authorName}>{authorName}</div>
+              ))}
+            </div>
           </div>
         )}
       </div>
     );
   }
 }
-
+// debugger;
 export function mapStateToProps(state) {
-  const { selectedPath, commitsByPath } = state;
-  const { isFetching, commits } = commitsByPath[selectedPath] || {
-    isFetching: true,
-    commits: [],
-  };
-
-  return {
-    selectedPath,
-    commits,
-    isFetching,
-  };
+  return getFilteredCommits(state);
 }
 
 export default connect(mapStateToProps)(GitTemporal);

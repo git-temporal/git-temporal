@@ -18,6 +18,11 @@ module.exports = {
     library: 'GitTemporal',
     publicPath: '/',
   },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    // test directory isn't included in bundle but the linter config looks here for module resolution queues
+    modules: [Path.resolve(__dirname, '../src'), 'node_modules'],
+  },
   resolveLoader: {
     modules: [Path.resolve(__dirname, '../node_modules')],
   },

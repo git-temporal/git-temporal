@@ -1,4 +1,4 @@
-const globalStyles = {
+let globalStyles = {
   page: {
     margin: 20,
   },
@@ -12,9 +12,21 @@ const globalStyles = {
     _extends: 'panel',
     backgroundColor: 'whitesmoke',
   },
+  flexColumns: {
+    display: 'flex',
+    flexDirection: 'columns',
+  },
+  flexRows: {
+    display: 'flex',
+    flexDirection: 'rows',
+  },
 };
 
-export default function style(...styles) {
+export function replaceGlobalStyles(newGlobalStyles) {
+  globalStyles = newGlobalStyles;
+}
+
+export function style(...styles) {
   const styleOut = {};
   for (const specifiedStyle of styles) {
     if (specifiedStyle !== null && typeof specifiedStyle === 'object') {
@@ -34,7 +46,11 @@ function processExtends(styleObject) {
   const styleOut = {};
   for (const propertyName in styleObject) {
     if (propertyName === '_extends') {
-      for (const extendedStyle of [styleObject[propertyName]]) {
+      let extendedStyles = styleObject[propertyName];
+      if (!Array.isArray(extendedStyles)) {
+        extendedStyles = [extendedStyles];
+      }
+      for (const extendedStyle of extendedStyles) {
         Object.assign(styleOut, style(extendedStyle));
       }
     } else {

@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { selectPath } from './actions';
+import { selectPath } from 'app/actions';
 
-import fiveCommits from '../testHelpers/mocks/fiveCommits';
+import fiveCommits from 'testHelpers/mocks/fiveCommits';
 
-debugger;
+// debugger;
 
 jest.mock('./actions', () => {
   const mockedActions = {};
@@ -107,11 +107,14 @@ describe('components/GitTemporal', () => {
       wrapper = shallow(
         <GitTemporal
           dispatch={mockDispatch}
-          path=""
+          path="this/path"
           commits={fiveCommits}
           isFetching={false}
         />
       );
+      wrapper.setProps({ path: 'some/other/path' });
+      // do it twice to confirm that it shouldn't trigger dispatches etc.,
+      // unless the path actually changes
       wrapper.setProps({ path: 'some/other/path' });
     });
 
