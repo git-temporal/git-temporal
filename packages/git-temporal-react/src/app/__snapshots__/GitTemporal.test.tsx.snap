@@ -1,6 +1,72 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/GitTemporal when rendered without props it should match snapshot 1`] = `
+exports[`components/GitTemporal when changing path prop it should match snapshot (should still be showing commits) 1`] = `
+<div>
+  <div>
+    <h1>
+      I'm going to grow up to be a real app one day.
+    </h1>
+    <p>
+      Unless Bee gets sick of TS causing her extra work and throws the baby out with the bath water.
+    </p>
+    <div>
+      <label>
+        Path:
+      </label>
+    </div>
+    <div>
+      <label>
+        baseServiceUrl:
+      </label>
+    </div>
+    <div>
+      <label>
+        number of commits:
+      </label>
+      5
+    </div>
+  </div>
+</div>
+`;
+
+exports[`components/GitTemporal when rendered with commits and isFetching it should match snapshot (it should show loading indicator) 1`] = `
+<div>
+  <h2>
+     Loading...
+  </h2>
+</div>
+`;
+
+exports[`components/GitTemporal when rendered with commits and not fetching it should match snapshot (it should be showing commits) 1`] = `
+<div>
+  <div>
+    <h1>
+      I'm going to grow up to be a real app one day.
+    </h1>
+    <p>
+      Unless Bee gets sick of TS causing her extra work and throws the baby out with the bath water.
+    </p>
+    <div>
+      <label>
+        Path:
+      </label>
+    </div>
+    <div>
+      <label>
+        baseServiceUrl:
+      </label>
+    </div>
+    <div>
+      <label>
+        number of commits:
+      </label>
+      5
+    </div>
+  </div>
+</div>
+`;
+
+exports[`components/GitTemporal when rendered without props it should match snapshot (it should be showing empty indicator) 1`] = `
 <div>
   <h2>
     Empty.

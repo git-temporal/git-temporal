@@ -30,12 +30,10 @@ export class GitTemporal extends Component<
 
     return (
       <div>
-        {!commits || commits.length <= 0 ? (
-          isFetching ? (
-            <h2> Loading...</h2>
-          ) : (
-            <h2>Empty.</h2>
-          )
+        {isFetching ? (
+          <h2> Loading...</h2>
+        ) : !commits || commits.length <= 0 ? (
+          <h2>Empty.</h2>
         ) : (
           <div>
             <h1>I'm going to grow up to be a real app one day.</h1>
@@ -62,7 +60,7 @@ export class GitTemporal extends Component<
   }
 }
 
-const mapStateToProps = state => {
+export function mapStateToProps(state) {
   const { selectedPath, commitsByPath } = state;
   const { isFetching, commits } = commitsByPath[selectedPath] || {
     isFetching: true,
@@ -74,6 +72,6 @@ const mapStateToProps = state => {
     commits,
     isFetching,
   };
-};
+}
 
 export default connect(mapStateToProps)(GitTemporal);
