@@ -1,27 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { selectPath } from 'app/actions';
-
 import fiveCommits from 'testHelpers/mocks/fiveCommits';
+import basicReduxState from 'testHelpers/mocks/basicReduxState';
 
 // debugger;
 
-jest.mock('./actions', () => {
-  const mockedActions = {};
-  const actionsToMock = ['selectPath'];
-  for (const methodName of actionsToMock) {
-    mockedActions[methodName] = jest.fn(path => {
-      return jest.fn(() => {
-        return path;
-      });
-    });
-  }
-  return mockedActions;
-});
+import { GitTemporal, mapStateToProps } from './GitTemporal';
 
-import { GitTemporal } from './GitTemporal';
-
-describe('components/GitTemporal', () => {
+describe('app/GitTemporal', () => {
   describe('when rendered without props', () => {
     let wrapper;
     let mockDispatch;
@@ -127,6 +114,12 @@ describe('components/GitTemporal', () => {
       expect(mockDispatch.mock.calls.length).toBe(2);
       // @ts-ignore
       expect(selectPath.mock.calls.length).toBe(2);
+    });
+  });
+  describe('when calling mapStateToProps() with basisReduxState', () => {
+    test('it should respond with props', () => {
+      const propsOut = mapStateToProps(basicReduxState);
+      expect(propsOut).toMatchSnapshot();
     });
   });
 });

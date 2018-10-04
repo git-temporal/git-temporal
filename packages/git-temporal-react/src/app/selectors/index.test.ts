@@ -1,27 +1,15 @@
 import * as selectors from '.';
-import fiveCommits from 'testHelpers/mocks/fiveCommits';
-import tenCommits from 'testHelpers/mocks/tenCommits';
+import commitsByPath from 'testHelpers/mocks/commitsByPath';
 
-const testStateBase = {
-  commitsByPath: {
-    testPath1: {
-      isFetching: false,
-      commits: fiveCommits,
-    },
-    testPath2: {
-      isFetching: false,
-      commits: tenCommits,
-    },
-  },
+const testState1 = {
+  commitsByPath,
+  selectedPath: 'testPath1',
 };
 
-const testState1 = Object.assign({}, testStateBase, {
-  selectedPath: 'testPath1',
-});
-
-const testState2 = Object.assign({}, testStateBase, {
+const testState2 = {
+  commitsByPath,
   selectedPath: 'testPath2',
-});
+};
 
 // TODO: this will need more work and testing.  Right now, getFilteredCommits
 // hits all of the selectors up the line
@@ -78,12 +66,11 @@ describe('selectors/getFilteredCommits', () => {
   describe('when asking for non existent path', () => {
     let commitsOut;
     beforeAll(async () => {
-      const testState = Object.assign({}, testStateBase, {
-        selectedPath: 'some/bogus/path',
-      });
+      const testState = Object.assign({}, testState1);
+      testState.selectedPath = 'some/bogus/path';
       commitsOut = await selectors.getFilteredCommits(testState);
     });
-    test('it should match snapshot', () => {
+    test('it should return an empty state', () => {
       expect(commitsOut).toMatchSnapshot();
     });
   });

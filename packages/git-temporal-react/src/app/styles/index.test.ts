@@ -32,7 +32,6 @@ describe('app/styles', () => {
       let styleOutFromSingle: any;
       beforeAll(() => {
         styleOutFromSeparate = style('altPanel', 'page');
-        debugger;
         styleOutFromSingle = style('altPanelPage');
       });
       test('the two outputs should equal each other', () => {

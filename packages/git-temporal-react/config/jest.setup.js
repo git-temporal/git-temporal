@@ -1,4 +1,5 @@
 require('../../../babel-register');
+require('../src/testHelpers/mocks/actions');
 
 /* eslint-disable */
 const Enzyme = require('enzyme');

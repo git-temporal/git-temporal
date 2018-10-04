@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const getSelectedPath = state => state.selectedPath;
+export const getSelectedPath = state => state.selectedPath;
 const getCommitsByPath = state => state.commitsByPath;
 
 // returns all commits for the current path

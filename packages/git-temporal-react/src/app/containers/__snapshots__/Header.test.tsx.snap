@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/Header when rendered without props it should match snapshot (it should be showing empty indicator) 1`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "white",
+      "display": "flex",
+      "marginBottom": 10,
+      "marginRight": 10,
+      "padding": 10,
+    }
+  }
+>
+  <span
+    style={
+      Object {
+        "fontSize": 12,
+        "fontWeight": "bold",
+      }
+    }
+  >
+    Git Temporal 
+  </span>
+  <span
+    style={
+      Object {
+        "fontSize": 18,
+        "fontWeight": "bold",
+      }
+    }
+  >
+    Stats for 
+  </span>
+</div>
+`;

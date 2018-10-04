@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`selectors/getFilteredCommits when asking for non existent path it should match snapshot 1`] = `
+exports[`selectors/getFilteredCommits when asking for non existent path it should return an empty state 1`] = `
 Object {
   "authorNames": Array [],
   "commits": Array [],
