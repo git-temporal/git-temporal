@@ -6,7 +6,7 @@
   This script updates the snapshot files in test/snapshots
 
 */
-
+require('../../../babel-register');
 const fs = require('fs');
 const path = require('path');
 

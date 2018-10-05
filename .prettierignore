@@ -5,3 +5,4 @@ jest.config.js
 test/coverage
 test/helpers
 mochawesome-report
+packages/git-log-scraper/test/snapshots

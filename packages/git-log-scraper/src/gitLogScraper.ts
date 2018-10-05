@@ -30,7 +30,7 @@ function fetchFileHistory(fileName) {
   let directory;
   let actualFileName = fileName;
   const format = (
-    '{"id": "%H", "authorName": "%an", "relativeDate": "%cr", "authorDate": %at, ' +
+    '{"id": "%H", "authorName": "%an", "authorEmail": "%ae", "relativeDate": "%cr", "authorDate": %at, ' +
     ' "message": "%s", "body": "%b", "hash": "%h"}'
   ).replace(/\"/g, '#/dquotes/');
   const flags = ` --pretty=\"format:${format}\" --topo-order --date=local --numstat --follow`;
