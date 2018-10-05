@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { DispatchProps } from 'app/interfaces';
 import { getFilteredStats } from 'app/selectors';
 import { style } from 'app/styles';
-import { StackedLabelHeader } from '../components/StackedLabelHeader';
-import { CommaNumber } from '../components/CommaNumber';
+import { StackedLabelHeader } from 'app/components/StackedLabelHeader';
+import { CommaNumber } from 'app/components/CommaNumber';
+import { EpochSpan } from 'app/components/EpochSpan';
 
 interface StatsProps {
   minAuthorDate?: number;
@@ -25,7 +26,10 @@ export class Stats extends Component<StatsProps & DispatchProps> {
           <CommaNumber value={this.props.authors.toString()} />
         </StackedLabelHeader>
         <StackedLabelHeader label="Active Time Span">
-          {`${this.props.minAuthorDate} - ${this.props.maxAuthorDate}`}
+          <EpochSpan
+            firstEpochTime={this.props.minAuthorDate}
+            secondEpochTime={this.props.maxAuthorDate}
+          />
         </StackedLabelHeader>
         <StackedLabelHeader label="Lines Added">
           <CommaNumber value={this.props.linesAdded.toString()} />

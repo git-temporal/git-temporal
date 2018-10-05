@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/EpochSpan when rendered with times in order it should match snapshot (it should have rendered "3 weeks") 1`] = `
+<span
+  style={Object {}}
+>
+  3 weeks
+</span>
+`;
+
+exports[`components/EpochSpan when rendered with times in reverse order it should match snapshot (it should still have rendered "3 weeks") 1`] = `
+<span
+  style={Object {}}
+>
+  3 weeks
+</span>
+`;
