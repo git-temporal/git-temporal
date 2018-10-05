@@ -33,7 +33,10 @@ exports[`containers/Stats when rendered without props it should match snapshot (
   <Component
     label="Active Time Span"
   >
-    1536691136 - 1538663085
+    <Component
+      firstEpochTime={1536691136}
+      secondEpochTime={1538663085}
+    />
   </Component>
   <Component
     label="Lines Added"

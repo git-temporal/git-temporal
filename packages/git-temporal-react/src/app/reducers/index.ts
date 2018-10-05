@@ -6,7 +6,7 @@ import {
   RECEIVE_COMMITS,
 } from '../actions';
 
-const path = (state = '', action) => {
+export const path = (state = '', action) => {
   switch (action.type) {
     case SELECT_PATH:
       return action.path;
@@ -15,7 +15,7 @@ const path = (state = '', action) => {
   }
 };
 
-const commits = (
+export const commits = (
   state = {
     isFetching: false,
     didInvalidate: false,
@@ -48,7 +48,7 @@ const commits = (
   }
 };
 
-const commitsByPath = (state = {}, action) => {
+export const commitsByPath = (state = {}, action) => {
   switch (action.type) {
     case INVALIDATE_PATH:
     case RECEIVE_COMMITS:

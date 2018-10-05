@@ -28,7 +28,6 @@ export const receiveCommits = (path, json) => ({
   selectedPath: path,
   type: RECEIVE_COMMITS,
   commits: json,
-  receivedAt: Date.now(),
 });
 
 const fetchCommits = path => dispatch => {
