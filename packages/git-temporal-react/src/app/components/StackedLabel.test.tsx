@@ -1,14 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { StackedLabelText } from './StackedLabelText';
+import { StackedLabel } from './StackedLabel';
 
-describe('components/StackedLabelText', () => {
+describe('components/StackedLabel', () => {
   describe('when rendered with required props', () => {
     let wrapper;
     beforeAll(() => {
       wrapper = shallow(
-        <StackedLabelText label="This is the Label" text="this is the text" />
+        <StackedLabel label="This is the Label">this is the text</StackedLabel>
       );
     });
 

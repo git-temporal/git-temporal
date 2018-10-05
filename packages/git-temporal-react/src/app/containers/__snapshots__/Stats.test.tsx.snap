@@ -25,27 +25,33 @@ exports[`containers/Stats when rendered without props it should match snapshot (
 >
   <Component
     label="Contributors"
-    text="5"
-  />
+  >
+    5
+  </Component>
   <Component
     label="Active Time Span"
-    text="1536691136 - 1538663085"
-  />
+  >
+    1536691136 - 1538663085
+  </Component>
   <Component
     label="Lines Added"
-    text="700"
-  />
+  >
+    700
+  </Component>
   <Component
     label="Lines Deleted"
-    text="300"
-  />
+  >
+    300
+  </Component>
   <Component
     label="Commits"
-    text="52"
-  />
+  >
+    52
+  </Component>
   <Component
     label="Files"
-    text="110"
-  />
+  >
+    110
+  </Component>
 </div>
 `;

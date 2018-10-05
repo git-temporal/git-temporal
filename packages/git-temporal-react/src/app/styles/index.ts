@@ -75,7 +75,10 @@ export function style(...styles) {
   const flattenedStyles = styles.reduce((acc, val) => acc.concat(val), []);
 
   for (const specifiedStyle of flattenedStyles) {
-    if (specifiedStyle !== null && typeof specifiedStyle === 'object') {
+    if (!specifiedStyle) {
+      continue;
+    }
+    if (typeof specifiedStyle === 'object') {
       Object.assign(styleOut, processExtends(specifiedStyle));
     } else {
       if (!globalStyles.hasOwnProperty(specifiedStyle)) {

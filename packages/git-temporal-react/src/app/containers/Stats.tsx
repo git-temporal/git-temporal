@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { DispatchProps } from 'app/interfaces';
 import { getFilteredStats } from 'app/selectors';
 import { style } from 'app/styles';
-import { StackedHeaderText } from 'app/components/StackedHeaderText';
+import { StackedLabelHeader } from '../components/StackedLabelHeader';
+import { CommaNumber } from '../components/CommaNumber';
 
 interface StatsProps {
   minAuthorDate?: number;
@@ -20,27 +21,24 @@ export class Stats extends Component<StatsProps & DispatchProps> {
   render() {
     return (
       <div style={style('panel', 'flexRows')}>
-        <StackedHeaderText
-          label="Contributors"
-          text={this.props.authors.toString()}
-        />
-        <StackedHeaderText
-          label="Active Time Span"
-          text={`${this.props.minAuthorDate} - ${this.props.maxAuthorDate}`}
-        />
-        <StackedHeaderText
-          label="Lines Added"
-          text={this.props.linesAdded.toString()}
-        />
-        <StackedHeaderText
-          label="Lines Deleted"
-          text={this.props.linesDeleted.toString()}
-        />
-        <StackedHeaderText
-          label="Commits"
-          text={this.props.commits.toString()}
-        />
-        <StackedHeaderText label="Files" text={this.props.files.toString()} />
+        <StackedLabelHeader label="Contributors">
+          <CommaNumber value={this.props.authors.toString()} />
+        </StackedLabelHeader>
+        <StackedLabelHeader label="Active Time Span">
+          {`${this.props.minAuthorDate} - ${this.props.maxAuthorDate}`}
+        </StackedLabelHeader>
+        <StackedLabelHeader label="Lines Added">
+          <CommaNumber value={this.props.linesAdded.toString()} />
+        </StackedLabelHeader>
+        <StackedLabelHeader label="Lines Deleted">
+          <CommaNumber value={this.props.linesDeleted.toString()} />
+        </StackedLabelHeader>
+        <StackedLabelHeader label="Commits">
+          <CommaNumber value={this.props.commits.toString()} />
+        </StackedLabelHeader>
+        <StackedLabelHeader label="Files">
+          <CommaNumber value={this.props.files.toString()} />
+        </StackedLabelHeader>
       </div>
     );
   }

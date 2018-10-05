@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/CommaNumber when rendered with non numeric value as string it should match snapshot (it should have rendered 0) 1`] = `
+<span
+  style={Object {}}
+>
+  0
+</span>
+`;
+
+exports[`components/CommaNumber when rendered with value as numeric it should match snapshot (it should have rendered 100,545,007.02) 1`] = `
+<span
+  style={Object {}}
+>
+  100,545,007.02
+</span>
+`;
+
+exports[`components/CommaNumber when rendered with value as string it should match snapshot (it should have rendered 100,545,007.02) 1`] = `
+<span
+  style={Object {}}
+>
+  100,545,007.02
+</span>
+`;

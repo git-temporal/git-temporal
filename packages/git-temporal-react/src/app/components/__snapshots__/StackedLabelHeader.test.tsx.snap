@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/StackedLabelHeader when rendered with required props it should match snapshot (it should have rendered a label and a text element) 1`] = `
+<Component
+  label="This is the Label"
+  labelStyle={
+    Array [
+      Object {
+        "_extends": "h3Text",
+        "marginBottom": 5,
+      },
+      undefined,
+    ]
+  }
+>
+  <span
+    style={
+      Object {
+        "color": "#333333",
+        "fontSize": 18,
+        "fontWeight": "bold",
+        "marginBottom": 20,
+        "marginRight": 20,
+      }
+    }
+  >
+    this is the text
+  </span>
+</Component>
+`;

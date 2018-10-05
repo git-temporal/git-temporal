@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/StackedLabelText when rendered with required props it should match snapshot (it should have rendered a label and a text element) 1`] = `
+exports[`components/StackedLabel when rendered with required props it should match snapshot (it should have rendered a label and a text element) 1`] = `
 <div
   style={
     Object {
@@ -15,9 +15,7 @@ exports[`components/StackedLabelText when rendered with required props it should
   >
     This is the Label
   </div>
-  <div
-    style={Object {}}
-  >
+  <div>
     this is the text
   </div>
 </div>

@@ -1,11 +1,11 @@
 import React from 'react';
 import { style } from 'app/styles';
 
-export interface StackedLabelTextProps {
+export interface StackedLabelProps {
+  // This is the text or JSX that gets wrapped in stacked label
+  children: string | JSX.Element;
   label: string;
-  text: string;
   labelStyle?: object | string;
-  textStyle?: object | string;
   onLabelClick?: (evt) => void;
 }
 
@@ -15,13 +15,13 @@ const defaultContainerStyle = {
   marginBottom: 10,
 };
 
-export const StackedLabelText = (props: StackedLabelTextProps): JSX.Element => {
+export const StackedLabel = (props: StackedLabelProps): JSX.Element => {
   return (
     <div style={defaultContainerStyle}>
       <div style={style(props.labelStyle)} onClick={props.onLabelClick}>
         {props.label}
       </div>
-      <div style={style(props.textStyle)}>{props.text}</div>
+      <div>{props.children}</div>
     </div>
   );
 };
