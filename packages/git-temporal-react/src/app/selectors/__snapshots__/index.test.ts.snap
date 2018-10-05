@@ -2,7 +2,6 @@
 
 exports[`selectors/getFilteredCommits when asking for non existent path it should return an empty state 1`] = `
 Object {
-  "authorNames": Array [],
   "commits": Array [],
   "isFetching": true,
   "selectedPath": "some/bogus/path",
@@ -11,13 +10,6 @@ Object {
 
 exports[`selectors/getFilteredCommits when dealing with commit containing bad author name it should match snapshot 1`] = `
 Object {
-  "authorNames": Array [
-    "null",
-    "Daniel Bevenius",
-    "Tobias Nießen",
-    "Michaël Zasso",
-    "Ruben Bridgewater",
-  ],
   "commits": Array [
     Object {
       "authorDate": 1537541919,
@@ -157,13 +149,6 @@ Object {
 
 exports[`selectors/getFilteredCommits with first 5 commits from node test repo it should match snapshot 1`] = `
 Object {
-  "authorNames": Array [
-    "Bee Wilkerson",
-    "Daniel Bevenius",
-    "Tobias Nießen",
-    "Michaël Zasso",
-    "Ruben Bridgewater",
-  ],
   "commits": Array [
     Object {
       "authorDate": 1537541919,
@@ -303,14 +288,6 @@ Object {
 
 exports[`selectors/getFilteredCommits with first 10 commits from react test repo it should match snapshot 1`] = `
 Object {
-  "authorNames": Array [
-    "Dan Abramov",
-    "Brian Vaughn",
-    "Bee Wilkerson",
-    "Dan",
-    "Maksim Markelov",
-    "Heaven",
-  ],
   "commits": Array [
     Object {
       "authorDate": 1537542150,

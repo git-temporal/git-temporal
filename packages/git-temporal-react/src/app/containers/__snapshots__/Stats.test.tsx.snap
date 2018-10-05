@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/Stats when calling mapStateToProps() it should respond with props 1`] = `
+Object {
+  "authors": 5,
+  "commits": 5,
+  "files": 13,
+  "linesAdded": 96,
+  "linesDeleted": 667,
+  "maxAuthorDate": 1537541919,
+  "minAuthorDate": 1526296167,
+}
+`;
+
+exports[`containers/Stats when rendered without props it should match snapshot (it should be showing empty indicator) 1`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "white",
+      "display": "flex",
+      "flexDirection": "row",
+      "padding": 10,
+    }
+  }
+>
+  <Component
+    label="Contributors"
+    text="5"
+  />
+  <Component
+    label="Active Time Span"
+    text="1536691136 - 1538663085"
+  />
+  <Component
+    label="Lines Added"
+    text="700"
+  />
+  <Component
+    label="Lines Deleted"
+    text="300"
+  />
+  <Component
+    label="Commits"
+    text="52"
+  />
+  <Component
+    label="Files"
+    text="110"
+  />
+</div>
+`;

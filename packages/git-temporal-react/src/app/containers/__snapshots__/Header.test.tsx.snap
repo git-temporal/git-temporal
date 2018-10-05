@@ -6,8 +6,6 @@ exports[`containers/Header when rendered without props it should match snapshot 
     Object {
       "backgroundColor": "white",
       "display": "flex",
-      "marginBottom": 10,
-      "marginRight": 10,
       "padding": 10,
     }
   }
@@ -15,8 +13,11 @@ exports[`containers/Header when rendered without props it should match snapshot 
   <span
     style={
       Object {
-        "fontSize": 12,
+        "color": "#333333",
+        "fontSize": 20,
         "fontWeight": "bold",
+        "marginBottom": 20,
+        "marginRight": 20,
       }
     }
   >
@@ -25,8 +26,11 @@ exports[`containers/Header when rendered without props it should match snapshot 
   <span
     style={
       Object {
+        "color": "#333333",
         "fontSize": 18,
         "fontWeight": "bold",
+        "marginBottom": 20,
+        "marginRight": 20,
       }
     }
   >

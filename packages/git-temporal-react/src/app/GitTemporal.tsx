@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import { GitTemporalProps, DispatchProps, StateProps } from 'app/interfaces';
 import { selectPath } from 'app/actions';
 import { getFilteredCommits } from 'app/selectors';
+import { style } from 'app/styles';
+
+import Header from 'app/containers/Header';
+import Stats from 'app/containers/Stats';
 
 export class GitTemporal extends Component<
   GitTemporalProps & DispatchProps & StateProps
@@ -19,54 +23,20 @@ export class GitTemporal extends Component<
       dispatch(selectPath(path));
     }
   }
-  // handleRefreshClick = e => {
-  //   e.preventDefault();
-
-  //   const { dispatch, path } = this.props;
-  //   dispatch(invalidatePath(path));
-  //   dispatch(fetchCommitsIfNeeded(path));
-  // };
 
   render() {
-    const {
-      selectedPath,
-      serviceBaseUrl,
-      isFetching,
-      commits,
-      authorNames = [],
-    } = this.props;
+    const { isFetching, commits } = this.props;
 
     return (
-      <div>
+      <div style={style('page')}>
         {isFetching ? (
           <h2> Loading...</h2>
         ) : !commits || commits.length <= 0 ? (
           <h2>Empty.</h2>
         ) : (
-          <div>
-            <h1>I'm going to grow up to be a real app one day.</h1>
-            <p>
-              Unless Bee gets sick of TS causing her extra work and throws the
-              baby out with the bath water.
-            </p>
-            <div>
-              <label>Path:</label>
-              {selectedPath}
-            </div>
-            <div>
-              <label>baseServiceUrl:</label>
-              {serviceBaseUrl}
-            </div>
-            <div>
-              <label>number of commits:</label>
-              {commits && commits.length}
-            </div>
-            <div>
-              <label>{authorNames.length} Authors</label>
-              {authorNames.map(authorName => (
-                <div key={authorName}>{authorName}</div>
-              ))}
-            </div>
+          <div style={style('flexColumns')}>
+            <Header />
+            <Stats />
           </div>
         )}
       </div>

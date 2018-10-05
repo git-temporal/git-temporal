@@ -4,8 +4,6 @@ let globalStyles = {
   },
   panel: {
     backgroundColor: 'white',
-    marginRight: 10,
-    marginBottom: 10,
     padding: 10,
     display: 'flex',
   },
@@ -17,18 +15,21 @@ let globalStyles = {
     _extends: 'panel',
     border: '1px solid whitesmoke',
     borderRadius: 4,
+    marginRight: 10,
+    marginBottom: 10,
   },
   flexColumns: {
     display: 'flex',
-    flexDirection: 'columns',
+    flexDirection: 'column',
   },
   flexRows: {
     display: 'flex',
-    flexDirection: 'rows',
+    flexDirection: 'row',
   },
   normalText: {
     fontSize: 12,
     fontWeight: 'normal',
+    color: '#333333',
   },
   largerText: {
     _extends: 'normalText',
@@ -42,19 +43,25 @@ let globalStyles = {
     _extends: 'normalText',
     fontWeight: 'bold',
   },
-  h1Text: {
+  headerText: {
     _extends: 'boldText',
+    marginBottom: 20,
+    marginRight: 20,
+  },
+  h1Text: {
+    _extends: 'headerText',
+    fontSize: 20,
   },
   h2Text: {
-    _extends: 'boldText',
+    _extends: 'headerText',
     fontSize: 18,
   },
   h3Text: {
-    _extends: 'boldText',
+    _extends: 'headerText',
     fontSize: 14,
   },
   h4Text: {
-    _extends: 'boldText',
+    _extends: 'headerText',
     fontSize: 12,
   },
 };
@@ -65,7 +72,9 @@ export function replaceGlobalStyles(newGlobalStyles) {
 
 export function style(...styles) {
   const styleOut = {};
-  for (const specifiedStyle of styles) {
+  const flattenedStyles = styles.reduce((acc, val) => acc.concat(val), []);
+
+  for (const specifiedStyle of flattenedStyles) {
     if (specifiedStyle !== null && typeof specifiedStyle === 'object') {
       Object.assign(styleOut, processExtends(specifiedStyle));
     } else {

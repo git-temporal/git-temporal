@@ -116,6 +116,7 @@ describe('app/GitTemporal', () => {
       expect(selectPath.mock.calls.length).toBe(2);
     });
   });
+
   describe('when calling mapStateToProps() with basisReduxState', () => {
     test('it should respond with props', () => {
       const propsOut = mapStateToProps(basicReduxState);

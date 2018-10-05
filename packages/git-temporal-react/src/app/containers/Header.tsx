@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { DispatchProps, StateProps } from 'app/interfaces';
-import { selectPath } from 'app/actions';
+import { DispatchProps } from 'app/interfaces';
 import { getSelectedPath } from 'app/selectors';
 import { style } from 'app/styles';
 
@@ -11,9 +10,7 @@ interface HeaderProps {
   selectedPath?: string;
 }
 
-export class Header extends Component<
-  HeaderProps & DispatchProps & StateProps
-> {
+export class Header extends Component<HeaderProps & DispatchProps> {
   render() {
     const { selectedPath } = this.props;
 

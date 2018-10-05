@@ -62,13 +62,84 @@ export const getAuthorNames = createSelector(
 export const getFilteredCommits = createSelector(
   getSelectedPath,
   getAllCommits,
-  getAuthorNames,
-  (selectedPath, commits, authorNames) => {
+  (selectedPath, commits) => {
     return {
       selectedPath,
-      authorNames,
       commits: commits.commits,
       isFetching: commits.isFetching,
+    };
+  }
+);
+
+const getObjectValues = function(obj) {
+  const values = [];
+  for (const key in obj) {
+    values.push(obj[key]);
+  }
+  return values;
+};
+
+// returns an array of
+// {
+//   fileName: string,
+//   commits: ICommit[],
+//   linesAdded: number,
+//   linesDeleted: number
+// }
+
+export const getFilesAndCommits = createSelector(getAllCommits, commits => {
+  const commitsByFile = {};
+  for (const commit of commits.commits) {
+    if (!commit.files) {
+      continue;
+    }
+    for (const file of commit.files) {
+      const thisFile = commitsByFile[file.name] || {
+        fileName: file.name,
+        commits: [],
+        linesAdded: 0,
+        linesDeleted: 0,
+      };
+      thisFile.linesAdded += file.linesAdded;
+      thisFile.linesDeleted += file.linesDeleted;
+      thisFile.commits.push(commit);
+      commitsByFile[file.name] = thisFile;
+    }
+  }
+  return getObjectValues(commitsByFile).sort((a, b) => {
+    return b.linesAdded + b.linesDeleted - (a.linesAdded + a.linesDeleted);
+  });
+});
+
+export const getFilteredStats = createSelector(
+  getAllCommits,
+  getAuthorsAndCommits,
+  getFilesAndCommits,
+  (allCommits, authorsAndCommits, filesAndCommits) => {
+    let totalLinesAdded = 0;
+    let totalLinesDeleted = 0;
+    let minAuthorDate = Date.now();
+    let maxAuthorDate = 0;
+
+    for (const commit of allCommits.commits) {
+      totalLinesAdded += commit.linesAdded;
+      totalLinesDeleted += commit.linesDeleted;
+      if (commit.authorDate < minAuthorDate) {
+        minAuthorDate = commit.authorDate;
+      }
+      if (commit.authorDate > maxAuthorDate) {
+        maxAuthorDate = commit.authorDate;
+      }
+    }
+
+    return {
+      minAuthorDate,
+      maxAuthorDate,
+      authors: authorsAndCommits.length,
+      commits: allCommits.commits.length,
+      files: filesAndCommits.length,
+      linesAdded: totalLinesAdded,
+      linesDeleted: totalLinesDeleted,
     };
   }
 );

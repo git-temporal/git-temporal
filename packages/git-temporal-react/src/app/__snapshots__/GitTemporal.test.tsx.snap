@@ -2,13 +2,6 @@
 
 exports[`app/GitTemporal when calling mapStateToProps() with basisReduxState it should respond with props 1`] = `
 Object {
-  "authorNames": Array [
-    "Bee Wilkerson",
-    "Daniel Bevenius",
-    "Tobias Nießen",
-    "Michaël Zasso",
-    "Ruben Bridgewater",
-  ],
   "commits": Array [
     Object {
       "authorDate": 1537541919,
@@ -147,42 +140,35 @@ Object {
 `;
 
 exports[`app/GitTemporal when changing path prop it should match snapshot (should still be showing commits) 1`] = `
-<div>
-  <div>
-    <h1>
-      I'm going to grow up to be a real app one day.
-    </h1>
-    <p>
-      Unless Bee gets sick of TS causing her extra work and throws the baby out with the bath water.
-    </p>
-    <div>
-      <label>
-        Path:
-      </label>
-    </div>
-    <div>
-      <label>
-        baseServiceUrl:
-      </label>
-    </div>
-    <div>
-      <label>
-        number of commits:
-      </label>
-      5
-    </div>
-    <div>
-      <label>
-        0
-         Authors
-      </label>
-    </div>
+<div
+  style={
+    Object {
+      "margin": 20,
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "column",
+      }
+    }
+  >
+    <Connect(Header) />
+    <Connect(Stats) />
   </div>
 </div>
 `;
 
 exports[`app/GitTemporal when rendered with commits and isFetching it should match snapshot (it should show loading indicator) 1`] = `
-<div>
+<div
+  style={
+    Object {
+      "margin": 20,
+    }
+  }
+>
   <h2>
      Loading...
   </h2>
@@ -190,42 +176,35 @@ exports[`app/GitTemporal when rendered with commits and isFetching it should mat
 `;
 
 exports[`app/GitTemporal when rendered with commits and not fetching it should match snapshot (it should be showing commits) 1`] = `
-<div>
-  <div>
-    <h1>
-      I'm going to grow up to be a real app one day.
-    </h1>
-    <p>
-      Unless Bee gets sick of TS causing her extra work and throws the baby out with the bath water.
-    </p>
-    <div>
-      <label>
-        Path:
-      </label>
-    </div>
-    <div>
-      <label>
-        baseServiceUrl:
-      </label>
-    </div>
-    <div>
-      <label>
-        number of commits:
-      </label>
-      5
-    </div>
-    <div>
-      <label>
-        0
-         Authors
-      </label>
-    </div>
+<div
+  style={
+    Object {
+      "margin": 20,
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "column",
+      }
+    }
+  >
+    <Connect(Header) />
+    <Connect(Stats) />
   </div>
 </div>
 `;
 
 exports[`app/GitTemporal when rendered without props it should match snapshot (it should be showing empty indicator) 1`] = `
-<div>
+<div
+  style={
+    Object {
+      "margin": 20,
+    }
+  }
+>
   <h2>
     Empty.
   </h2>

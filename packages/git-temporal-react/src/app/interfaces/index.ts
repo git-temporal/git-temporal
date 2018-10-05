@@ -11,7 +11,6 @@ export interface StateProps {
   isEmpty?: boolean;
   didInvalidate?: boolean;
   lastUpdated?: number;
-  authorNames?: string[];
 }
 
 export interface DispatchProps {

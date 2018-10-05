@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/StackedLabelText when rendered with required props it should match snapshot (it should have rendered a label and a text element) 1`] = `
+<div
+  style={
+    Object {
+      "flexGrow": 0,
+      "marginBottom": 10,
+      "marginRight": 20,
+    }
+  }
+>
+  <div
+    style={Object {}}
+  >
+    This is the Label
+  </div>
+  <div
+    style={Object {}}
+  >
+    this is the text
+  </div>
+</div>
+`;

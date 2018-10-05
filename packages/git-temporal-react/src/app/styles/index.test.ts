@@ -48,5 +48,14 @@ describe('app/styles', () => {
       });
       expect(styleOut.backgroundColor).toBe('chartreuse');
     });
+    test("with (['altPanel', 'page', {custom}]) as array, should work the same as individual params", () => {
+      const custom = { backgroundColor: 'chartreuse' };
+      const styleOutSeparate: any = style('altPanel', 'page', custom);
+      const styleOutArray: any = style(['altPanel', 'page', custom]);
+
+      expect(styleOutSeparate.backgroundColor).toBe('chartreuse');
+      expect(styleOutArray.backgroundColor).toBe('chartreuse');
+      expect(styleOutSeparate).toEqual(styleOutArray);
+    });
   });
 });
