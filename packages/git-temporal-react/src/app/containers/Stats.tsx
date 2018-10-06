@@ -23,7 +23,7 @@ export class Stats extends Component<StatsProps & DispatchProps> {
     return (
       <div style={style('panel', 'flexRows')}>
         <StackedLabelHeader label="Contributors">
-          <CommaNumber value={this.props.authors.toString()} />
+          <CommaNumber value={this.props.authors} />
         </StackedLabelHeader>
         <StackedLabelHeader label="Active Time Span">
           <EpochSpan
@@ -32,16 +32,16 @@ export class Stats extends Component<StatsProps & DispatchProps> {
           />
         </StackedLabelHeader>
         <StackedLabelHeader label="Lines Added">
-          <CommaNumber value={this.props.linesAdded.toString()} />
+          <CommaNumber value={this.props.linesAdded} />
         </StackedLabelHeader>
         <StackedLabelHeader label="Lines Deleted">
-          <CommaNumber value={this.props.linesDeleted.toString()} />
+          <CommaNumber value={this.props.linesDeleted} />
         </StackedLabelHeader>
         <StackedLabelHeader label="Commits">
-          <CommaNumber value={this.props.commits.toString()} />
+          <CommaNumber value={this.props.commits} />
         </StackedLabelHeader>
         <StackedLabelHeader label="Files">
-          <CommaNumber value={this.props.files.toString()} />
+          <CommaNumber value={this.props.files} />
         </StackedLabelHeader>
       </div>
     );
