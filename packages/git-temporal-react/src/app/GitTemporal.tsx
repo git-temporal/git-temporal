@@ -8,6 +8,7 @@ import { style } from 'app/styles';
 
 import Header from 'app/containers/Header';
 import Stats from 'app/containers/Stats';
+import Authors from 'app/containers/Authors';
 
 export class GitTemporal extends Component<
   GitTemporalProps & DispatchProps & StateProps
@@ -37,6 +38,9 @@ export class GitTemporal extends Component<
           <div style={style('flexColumns')}>
             <Header />
             <Stats />
+            <div style={style('flexRows')}>
+              <Authors />
+            </div>
           </div>
         )}
       </div>

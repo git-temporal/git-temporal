@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/AuthorGravatarImage when rendered with times in order it should match snapshot 1`] = `
+<div
+  style={
+    Object {
+      "height": 70,
+      "overflow": "hidden",
+      "width": 70,
+    }
+  }
+>
+  <img
+    onError={[Function]}
+    src="https://www.gravatar.com/avatar/dabecaadcb5665b6ffec0712cdd3b0c5?d=404"
+    style={
+      Object {
+        "maxHeight": 70,
+        "width": 70,
+      }
+    }
+  />
+</div>
+`;
