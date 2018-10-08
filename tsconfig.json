@@ -21,7 +21,7 @@
     "resolveJsonModule": true,
     "sourceMap": false,
     "suppressImplicitAnyIndexErrors": true,
-    "target": "esnext",
+    "target": "es6",
     "typeRoots": ["**/node_modules/@types", "src/types"],
     "types": ["node"]
   },

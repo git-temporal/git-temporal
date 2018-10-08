@@ -1,16 +1,5 @@
 module.exports = {
-  presets: [
-    // [
-    //   '@babel/env',
-    //   {
-    //     targets: {
-    //       node: '8',
-    //     },
-    //   },
-    // ],
-    '@babel/env',
-    '@babel/typescript',
-  ],
+  presets: ['@babel/env', '@babel/typescript'],
   plugins: [
     '@babel/plugin-proposal-export-default-from',
     '@babel/plugin-proposal-logical-assignment-operators',

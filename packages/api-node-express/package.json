@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/git-temporal/git-temporal#readme",
   "dependencies": {
-    "@git-temporal/git-log-scraper": "^0.1.8",
+    "@git-temporal/git-log-scraper": "^0.2.0",
     "express": "^4.16.3"
   },
   "devDependencies": {
