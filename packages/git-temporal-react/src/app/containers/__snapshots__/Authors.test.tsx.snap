@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/Authors when calling mapStateToProps() it should respond with props 1`] = `
+Object {
+  "authors": Array [
+    Object {
+      "authorEmails": Array [
+        undefined,
+      ],
+      "authorName": "Bee Wilkerson",
+      "linesAdded": 2,
+      "linesDeleted": 649,
+      "totalCommits": 1,
+    },
+    Object {
+      "authorEmails": Array [
+        undefined,
+      ],
+      "authorName": "Daniel Bevenius",
+      "linesAdded": 51,
+      "linesDeleted": 1,
+      "totalCommits": 1,
+    },
+    Object {
+      "authorEmails": Array [
+        undefined,
+      ],
+      "authorName": "Tobias Nießen",
+      "linesAdded": 29,
+      "linesDeleted": 6,
+      "totalCommits": 1,
+    },
+    Object {
+      "authorEmails": Array [
+        undefined,
+      ],
+      "authorName": "Michaël Zasso",
+      "linesAdded": 8,
+      "linesDeleted": 8,
+      "totalCommits": 1,
+    },
+    Object {
+      "authorEmails": Array [
+        undefined,
+      ],
+      "authorName": "Ruben Bridgewater",
+      "linesAdded": 6,
+      "linesDeleted": 3,
+      "totalCommits": 1,
+    },
+  ],
+  "maxCommits": 1,
+  "maxImpact": 651,
+  "totalCommits": 5,
+  "totalLinesAdded": 96,
+  "totalLinesDeleted": 667,
+}
+`;
+
+exports[`containers/Authors when rendered without props it should match snapshot (it should be showing empty indicator) 1`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "white",
+      "display": "flex",
+      "flexGrow": 1,
+      "maxWidth": 300,
+      "padding": 10,
+      "position": "relative",
+    }
+  }
+>
+  <AutoSizer
+    disableHeight={false}
+    disableWidth={false}
+    onResize={[Function]}
+    style={Object {}}
+  >
+    <Component />
+  </AutoSizer>
+</div>
+`;

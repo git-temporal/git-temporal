@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/AuthorCard when rendered with required props it should match snapshot (bars should be at 50%) 1`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "whitesmoke",
+      "borderRadius": 7,
+      "display": "flex",
+      "flexDirection": "row",
+      "marginBottom": 10,
+      "marginRight": 10,
+      "padding": 10,
+    }
+  }
+>
+  <AuthorGravatarImage
+    emails={
+      Array [
+        "president@galaxy.gov",
+      ]
+    }
+  />
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "column",
+        "marginLeft": 10,
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      title="president@galaxy.gov"
+    >
+      Zaphod Beeblebrox
+    </div>
+    <div
+      style={
+        Object {
+          "color": "#333333",
+          "fontSize": 11,
+          "fontWeight": "normal",
+          "textAlign": "right",
+        }
+      }
+    >
+      <span
+        style={
+          Object {
+            "color": "green",
+          }
+        }
+      >
+        +
+        <Component
+          value={100}
+        />
+      </span>
+      <span>
+         / 
+      </span>
+      <span
+        style={
+          Object {
+            "color": "red",
+          }
+        }
+      >
+        -
+        <Component
+          value={30}
+        />
+      </span>
+    </div>
+    <Component
+      denominator={260}
+      numerator={130}
+    />
+    <div
+      style={
+        Object {
+          "color": "#333333",
+          "fontSize": 11,
+          "fontWeight": "normal",
+          "textAlign": "right",
+        }
+      }
+    >
+      70
+       Commits
+    </div>
+    <Component
+      denominator={140}
+      numerator={70}
+    />
+  </div>
+</div>
+`;

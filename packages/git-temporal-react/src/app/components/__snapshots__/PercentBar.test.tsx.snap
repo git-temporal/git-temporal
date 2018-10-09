@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/PercentBar when rendered with required props it should match snapshot (it should have rendered a 70% width div within a 100% width div) 1`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "grey",
+      "height": 10,
+      "marginBottom": 5,
+      "width": "100%",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "backgroundColor": "blue",
+        "height": 10,
+        "width": "70%",
+      }
+    }
+  />
+</div>
+`;

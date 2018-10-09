@@ -26,7 +26,7 @@ export class Authors extends Component<AuthorsProps & DispatchProps> {
     display: 'flex',
     flexGrow: 1,
     position: 'relative',
-    maxWidth: 270,
+    maxWidth: 300,
   });
 
   render() {
