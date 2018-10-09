@@ -9,13 +9,19 @@ let globalStyles = {
     backgroundColor: 'white',
     padding: 10,
     display: 'flex',
+    borderRadius: 3,
+    marginRight: 10,
   },
   altPanel: {
     _extends: 'panel',
     backgroundColor: 'whitesmoke',
   },
+  borderedPanel: {
+    _extends: 'panel',
+    border: '1px solid whitesmoke',
+  },
   card: {
-    _extends: 'altPanel',
+    _extends: 'panel',
     borderRadius: 7,
     marginBottom: 10,
     marginRight: 10,
@@ -36,13 +42,13 @@ let globalStyles = {
     flexDirection: 'row',
   },
   normalText: {
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: 'normal',
     color: '#333333',
   },
   largerText: {
     _extends: 'normalText',
-    fontSize: 13,
+    fontSize: 16,
   },
   smallerText: {
     _extends: 'normalText',

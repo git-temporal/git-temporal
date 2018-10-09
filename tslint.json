@@ -7,6 +7,7 @@
     "import-name": [true, { "react": "React" }],
     "jsx-boolean-value": ["never"],
     "jsx-no-lambda": ["never"],
+    "no-increment-decrement": ["never"],
     "no-this-assignment": [true, { "allow-destructuring": true }],
     "variable-name": [
       true,

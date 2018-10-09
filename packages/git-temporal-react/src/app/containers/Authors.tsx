@@ -2,27 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { List, AutoSizer } from 'react-virtualized';
 
-import { DispatchProps } from 'app/interfaces';
+import { DispatchProps, IAuthorsAndStats } from 'app/interfaces';
 import { getAuthorsAndStats } from 'app/selectors';
 import { style } from 'app/styles';
 import { AuthorCard } from 'app/components/AuthorCard';
 
-interface AuthorsProps {
-  authors?: any[];
-  totalLinesAdded: number;
-  totalLinesDeleted: number;
-  totalCommits: number;
-  maxImpact: number;
-  maxCommits: number;
-}
-
-export class Authors extends Component<AuthorsProps & DispatchProps> {
+export class Authors extends Component<IAuthorsAndStats & DispatchProps> {
   constructor(props) {
     super(props);
     this.renderRow = this.renderRow.bind(this);
   }
 
-  readonly outerStyle = style('panel', {
+  readonly outerStyle = style('altPanel', {
     display: 'flex',
     flexGrow: 1,
     position: 'relative',
@@ -34,9 +25,10 @@ export class Authors extends Component<AuthorsProps & DispatchProps> {
       <div style={this.outerStyle}>
         <AutoSizer>
           {({ height, width }) => (
+            // width and height below need minimums for testing
             <List
-              width={width}
-              height={height}
+              width={width || 100}
+              height={height || 100}
               rowHeight={100}
               rowRenderer={this.renderRow}
               rowCount={this.props.authors.length}

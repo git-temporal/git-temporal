@@ -1,17 +1,17 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { Authors, mapStateToProps } from './Authors';
+import { Files, mapStateToProps } from './Files';
 import basicReduxState from 'testHelpers/mocks/basicReduxState';
-import authorsAndStats from 'testHelpers/mocks/authorsAndStats';
+import filesAndStats from 'testHelpers/mocks/filesAndStats';
 
-describe('containers/Authors', () => {
+describe('containers/Files', () => {
   describe('when rendered without props', () => {
     let wrapper;
     let mockDispatch;
     beforeAll(() => {
       mockDispatch = jest.fn();
-      wrapper = mount(<Authors dispatch={mockDispatch} {...authorsAndStats} />);
+      wrapper = mount(<Files dispatch={mockDispatch} {...filesAndStats} />);
     });
 
     test('it should match snapshot (it should be showing empty indicator)', () => {

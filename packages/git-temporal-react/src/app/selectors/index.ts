@@ -123,35 +123,52 @@ const getObjectValues = function(obj) {
 //   linesDeleted: number
 // }
 
-export const getFilesAndCommits = createSelector(getAllCommits, commits => {
-  const commitsByFile = {};
-  for (const commit of commits.commits) {
-    if (!commit.files) {
-      continue;
+export const getFilteredFilesAndStats = createSelector(
+  getAllCommits,
+  commits => {
+    const commitsByFile = {};
+    for (const commit of commits.commits) {
+      if (!commit.files) {
+        continue;
+      }
+      for (const file of commit.files) {
+        const thisFile = commitsByFile[file.name] || {
+          fileName: file.name,
+          authorNames: [],
+          commits: 0,
+          linesAdded: 0,
+          linesDeleted: 0,
+          firstCommitOn: commit.authorDate,
+          lastCommitOn: commit.authorDate,
+        };
+        if (thisFile.authorNames.indexOf(commit.authorName) === -1) {
+          thisFile.authorNames.push(commit.authorName);
+        }
+        if (commit.authorDate < thisFile.firstCommitOn) {
+          thisFile.firstCommitOn = commit.authorDate;
+        }
+        if (commit.authorDate > thisFile.lastCommitOn) {
+          thisFile.lastCommitOn = commit.authorDate;
+        }
+        thisFile.linesAdded += file.linesAdded;
+        thisFile.linesDeleted += file.linesDeleted;
+        thisFile.commits += 1;
+        commitsByFile[file.name] = thisFile;
+      }
     }
-    for (const file of commit.files) {
-      const thisFile = commitsByFile[file.name] || {
-        fileName: file.name,
-        commits: [],
-        linesAdded: 0,
-        linesDeleted: 0,
-      };
-      thisFile.linesAdded += file.linesAdded;
-      thisFile.linesDeleted += file.linesDeleted;
-      thisFile.commits.push(commit);
-      commitsByFile[file.name] = thisFile;
-    }
+    return {
+      files: getObjectValues(commitsByFile).sort((a, b) => {
+        return b.linesAdded + b.linesDeleted - (a.linesAdded + a.linesDeleted);
+      }),
+    };
   }
-  return getObjectValues(commitsByFile).sort((a, b) => {
-    return b.linesAdded + b.linesDeleted - (a.linesAdded + a.linesDeleted);
-  });
-});
+);
 
 export const getFilteredStats = createSelector(
   getAllCommits,
   getAuthorsAndCommits,
-  getFilesAndCommits,
-  (allCommits, authorsAndCommits, filesAndCommits) => {
+  getFilteredFilesAndStats,
+  (allCommits, authorsAndCommits, filesAndStats) => {
     let totalLinesAdded = 0;
     let totalLinesDeleted = 0;
     let minAuthorDate = Date.now();
@@ -173,7 +190,7 @@ export const getFilteredStats = createSelector(
       maxAuthorDate,
       authors: authorsAndCommits.length,
       commits: allCommits.commits.length,
-      files: filesAndCommits.length,
+      files: filesAndStats.files.length,
       linesAdded: totalLinesAdded,
       linesDeleted: totalLinesDeleted,
     };

@@ -1,0 +1,347 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/Files when calling mapStateToProps() it should respond with props 1`] = `
+Object {
+  "files": Array [
+    Object {
+      "authorNames": Array [
+        "Bee Wilkerson",
+      ],
+      "commits": 1,
+      "fileName": "README.md",
+      "firstCommitOn": 1537541919,
+      "lastCommitOn": 1537541919,
+      "linesAdded": 2,
+      "linesDeleted": 649,
+    },
+    Object {
+      "authorNames": Array [
+        "Tobias Nießen",
+      ],
+      "commits": 1,
+      "fileName": "test/parallel/test-crypto-authenticated.js",
+      "firstCommitOn": 1537272890,
+      "lastCommitOn": 1537272890,
+      "linesAdded": 26,
+      "linesDeleted": 0,
+    },
+    Object {
+      "authorNames": Array [
+        "Daniel Bevenius",
+      ],
+      "commits": 1,
+      "fileName": "lib/internal/bash_completion.js",
+      "firstCommitOn": 1526296167,
+      "lastCommitOn": 1526296167,
+      "linesAdded": 25,
+      "linesDeleted": 0,
+    },
+    Object {
+      "authorNames": Array [
+        "Michaël Zasso",
+      ],
+      "commits": 1,
+      "fileName": "doc/guides/maintaining-V8.md",
+      "firstCommitOn": 1537212012,
+      "lastCommitOn": 1537212012,
+      "linesAdded": 8,
+      "linesDeleted": 8,
+    },
+    Object {
+      "authorNames": Array [
+        "Daniel Bevenius",
+      ],
+      "commits": 1,
+      "fileName": "doc/api/cli.md",
+      "firstCommitOn": 1526296167,
+      "lastCommitOn": 1526296167,
+      "linesAdded": 11,
+      "linesDeleted": 0,
+    },
+    Object {
+      "authorNames": Array [
+        "Ruben Bridgewater",
+      ],
+      "commits": 1,
+      "fileName": "COLLABORATOR_GUIDE.md",
+      "firstCommitOn": 1537269982,
+      "lastCommitOn": 1537269982,
+      "linesAdded": 6,
+      "linesDeleted": 3,
+    },
+    Object {
+      "authorNames": Array [
+        "Daniel Bevenius",
+      ],
+      "commits": 1,
+      "fileName": "lib/internal/bootstrap/node.js",
+      "firstCommitOn": 1526296167,
+      "lastCommitOn": 1526296167,
+      "linesAdded": 7,
+      "linesDeleted": 1,
+    },
+    Object {
+      "authorNames": Array [
+        "Tobias Nießen",
+      ],
+      "commits": 1,
+      "fileName": "src/node_crypto.cc",
+      "firstCommitOn": 1537272890,
+      "lastCommitOn": 1537272890,
+      "linesAdded": 2,
+      "linesDeleted": 5,
+    },
+    Object {
+      "authorNames": Array [
+        "Daniel Bevenius",
+      ],
+      "commits": 1,
+      "fileName": "doc/node.1",
+      "firstCommitOn": 1526296167,
+      "lastCommitOn": 1526296167,
+      "linesAdded": 3,
+      "linesDeleted": 0,
+    },
+    Object {
+      "authorNames": Array [
+        "Daniel Bevenius",
+      ],
+      "commits": 1,
+      "fileName": "src/node_options.cc",
+      "firstCommitOn": 1526296167,
+      "lastCommitOn": 1526296167,
+      "linesAdded": 3,
+      "linesDeleted": 0,
+    },
+    Object {
+      "authorNames": Array [
+        "Tobias Nießen",
+      ],
+      "commits": 1,
+      "fileName": "doc/api/crypto.md",
+      "firstCommitOn": 1537272890,
+      "lastCommitOn": 1537272890,
+      "linesAdded": 1,
+      "linesDeleted": 1,
+    },
+    Object {
+      "authorNames": Array [
+        "Daniel Bevenius",
+      ],
+      "commits": 1,
+      "fileName": "node.gyp",
+      "firstCommitOn": 1526296167,
+      "lastCommitOn": 1526296167,
+      "linesAdded": 1,
+      "linesDeleted": 0,
+    },
+    Object {
+      "authorNames": Array [
+        "Daniel Bevenius",
+      ],
+      "commits": 1,
+      "fileName": "src/node_options.h",
+      "firstCommitOn": 1526296167,
+      "lastCommitOn": 1526296167,
+      "linesAdded": 1,
+      "linesDeleted": 0,
+    },
+  ],
+}
+`;
+
+exports[`containers/Files when rendered without props it should match snapshot (it should be showing empty indicator) 1`] = `
+<Files
+  dispatch={[MockFunction]}
+  files={
+    Array [
+      Object {
+        "authorNames": Array [
+          "Daniel Lo Nigro",
+          "Dan Abramov",
+          "Linus Unnebäck",
+          "tomocchino",
+          "Paul O’Shannessy",
+          "Scott Feeney",
+          "Ben Alpert",
+          "Jim",
+          "Marjan",
+        ],
+        "commits": 27,
+        "fileName": "docs/js/react.js",
+        "firstCommitOn": 1427579814,
+        "lastCommitOn": 1493211770,
+        "linesAdded": 41962,
+        "linesDeleted": 41962,
+      },
+      Object {
+        "authorNames": Array [
+          "Andrew Clark",
+        ],
+        "commits": 2,
+        "fileName": "fixtures/attribute-behavior/public/react-dom.development.js",
+        "firstCommitOn": 1503701077,
+        "lastCommitOn": 1503706651,
+        "linesAdded": 22296,
+        "linesDeleted": 22296,
+      },
+      Object {
+        "authorNames": Array [
+          "Brandon Dail",
+          "Nathan Hunzaker",
+        ],
+        "commits": 2,
+        "fileName": "fixtures/dom/public/react-dom.js",
+        "firstCommitOn": 1482155031,
+        "lastCommitOn": 1483741679,
+        "linesAdded": 18938,
+        "linesDeleted": 18938,
+      },
+      Object {
+        "authorNames": Array [
+          "Daniel Lo Nigro",
+          "tomocchino",
+          "Paul O’Shannessy",
+          "Scott Feeney",
+          "Nate Lee",
+          "Ben Alpert",
+          "Jim",
+        ],
+        "commits": 22,
+        "fileName": "docs/js/react-dom.js",
+        "firstCommitOn": 1444082554,
+        "lastCommitOn": 1493211770,
+        "linesAdded": 18265,
+        "linesDeleted": 18265,
+      },
+      Object {
+        "authorNames": Array [
+          "Vipul A M",
+          "Paul O’Shannessy",
+          "Ben Alpert",
+        ],
+        "commits": 4,
+        "fileName": "docs/js/JSXTransformer.js",
+        "firstCommitOn": 1427579814,
+        "lastCommitOn": 1434369377,
+        "linesAdded": 15939,
+        "linesDeleted": 15939,
+      },
+    ]
+  }
+>
+  <div
+    style={
+      Object {
+        "backgroundColor": "white",
+        "border": "1px solid whitesmoke",
+        "borderRadius": 3,
+        "display": "flex",
+        "flexGrow": 1,
+        "marginRight": 10,
+        "maxWidth": 400,
+        "padding": 10,
+        "position": "relative",
+      }
+    }
+  >
+    <AutoSizer
+      disableHeight={false}
+      disableWidth={false}
+      onResize={[Function]}
+      style={Object {}}
+    >
+      <div
+        style={
+          Object {
+            "height": 0,
+            "overflow": "visible",
+            "width": 0,
+          }
+        }
+      >
+        <List
+          autoHeight={false}
+          estimatedRowSize={30}
+          height={-20}
+          noRowsRenderer={[Function]}
+          onRowsRendered={[Function]}
+          onScroll={[Function]}
+          overscanIndicesGetter={[Function]}
+          overscanRowCount={10}
+          rowCount={5}
+          rowHeight={70}
+          rowRenderer={[Function]}
+          scrollToAlignment="auto"
+          scrollToIndex={-1}
+          style={Object {}}
+          width={-20}
+        >
+          <Grid
+            aria-label="grid"
+            aria-readonly={true}
+            autoContainerWidth={true}
+            autoHeight={false}
+            autoWidth={false}
+            cellRangeRenderer={[Function]}
+            cellRenderer={[Function]}
+            className="ReactVirtualized__List"
+            columnCount={1}
+            columnWidth={-20}
+            containerRole="rowgroup"
+            containerStyle={Object {}}
+            estimatedColumnSize={100}
+            estimatedRowSize={30}
+            getScrollbarSize={[Function]}
+            height={-20}
+            isScrollingOptOut={false}
+            noContentRenderer={[Function]}
+            noRowsRenderer={[Function]}
+            onRowsRendered={[Function]}
+            onScroll={[Function]}
+            onScrollbarPresenceChange={[Function]}
+            onSectionRendered={[Function]}
+            overscanColumnCount={0}
+            overscanIndicesGetter={[Function]}
+            overscanRowCount={10}
+            role="grid"
+            rowCount={5}
+            rowHeight={70}
+            rowRenderer={[Function]}
+            scrollToAlignment="auto"
+            scrollToColumn={-1}
+            scrollToIndex={-1}
+            scrollToRow={-1}
+            scrollingResetTimeInterval={150}
+            style={Object {}}
+            tabIndex={0}
+            width={-20}
+          >
+            <div
+              aria-label="grid"
+              aria-readonly={true}
+              className="ReactVirtualized__Grid ReactVirtualized__List"
+              onScroll={[Function]}
+              role="grid"
+              style={
+                Object {
+                  "WebkitOverflowScrolling": "touch",
+                  "boxSizing": "border-box",
+                  "direction": "ltr",
+                  "height": -20,
+                  "overflowX": "hidden",
+                  "overflowY": "auto",
+                  "position": "relative",
+                  "width": -20,
+                  "willChange": "transform",
+                }
+              }
+              tabIndex={0}
+            />
+          </Grid>
+        </List>
+      </div>
+    </AutoSizer>
+  </div>
+</Files>
+`;

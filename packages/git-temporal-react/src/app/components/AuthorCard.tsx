@@ -4,9 +4,10 @@ import { style } from 'app/styles';
 import { AuthorGravatarImage } from 'app/components/AuthorGravatarImage';
 import { CommaNumber } from 'app/components/CommaNumber';
 import { PercentBar } from 'app/components/PercentBar';
+import { IAuthorStats } from 'app/interfaces';
 
 export interface AuthorCardProps {
-  author: any;
+  author: IAuthorStats;
   totalLinesAdded: number;
   totalLinesDeleted: number;
   totalCommits: number;
@@ -30,7 +31,7 @@ export const AuthorCard = (props: AuthorCardProps): JSX.Element => {
   const { author, maxImpact, maxCommits } = props;
 
   return (
-    <div style={style('card', 'flexRows', props.style)}>
+    <div style={style('altCard', 'flexRows', props.style)}>
       <AuthorGravatarImage emails={author.authorEmails} />
       <div style={style(identifiersStyle)}>
         <div title={author.authorEmails.join(', ')}>{author.authorName}</div>

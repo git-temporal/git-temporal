@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/FileCard when rendered with required props it should match snapshot (bars should be at 50%) 1`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "white",
+      "borderRadius": 7,
+      "display": "block",
+      "marginBottom": 10,
+      "marginRight": 10,
+      "padding": 10,
+    }
+  }
+>
+  <Component
+    fileName="docs/js/react.js"
+    maxCharacters={47}
+    style={
+      Object {
+        "color": "#333333",
+        "display": "block",
+        "fontSize": 16,
+        "fontWeight": "normal",
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "color": "#333333",
+        "float": "right",
+        "fontSize": 11,
+        "fontWeight": "normal",
+      }
+    }
+  >
+    <span
+      style={
+        Object {
+          "color": "green",
+        }
+      }
+    >
+      +
+      <Component
+        value={41962}
+      />
+    </span>
+    <span>
+       / 
+    </span>
+    <span
+      style={
+        Object {
+          "color": "red",
+        }
+      }
+    >
+      -
+      <Component
+        value={41962}
+      />
+    </span>
+  </div>
+  <div
+    style={
+      Object {
+        "color": "#333333",
+        "fontSize": 13,
+        "fontWeight": "normal",
+      }
+    }
+  >
+    <span>
+      27
+       commits by 
+      9
+       authors spanning
+       
+    </span>
+    <Component
+      firstEpochTime={1427579814}
+      secondEpochTime={1493211770}
+    />
+  </div>
+</div>
+`;

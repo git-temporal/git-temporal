@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/EllipsizedFileName when rendered with required props it should have shortened the fileName without removing first and last parts) 1`] = `
+<span
+  style={Object {}}
+  title="some/really/long/path/and/fileName.txt"
+>
+  some/.../fileName.txt
+</span>
+`;

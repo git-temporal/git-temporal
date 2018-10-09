@@ -58,25 +58,179 @@ Object {
 `;
 
 exports[`containers/Authors when rendered without props it should match snapshot (it should be showing empty indicator) 1`] = `
-<div
-  style={
-    Object {
-      "backgroundColor": "white",
-      "display": "flex",
-      "flexGrow": 1,
-      "maxWidth": 300,
-      "padding": 10,
-      "position": "relative",
-    }
+<Authors
+  authors={
+    Array [
+      Object {
+        "authorEmails": Array [
+          "dan.abramov@gmail.com",
+          "gaearon@fb.com",
+        ],
+        "authorName": "Dan Abramov",
+        "linesAdded": 129276,
+        "linesDeleted": 104642,
+        "totalCommits": 919,
+      },
+      Object {
+        "authorEmails": Array [
+          "paul@oshannessy.com",
+        ],
+        "authorName": "Paul O’Shannessy",
+        "linesAdded": 80522,
+        "linesDeleted": 125411,
+        "totalCommits": 784,
+      },
+      Object {
+        "authorEmails": Array [
+          "bvaughn@fb.com",
+          "brian.david.vaughn@gmail.com",
+        ],
+        "authorName": "Brian Vaughn",
+        "linesAdded": 70314,
+        "linesDeleted": 74382,
+        "totalCommits": 304,
+      },
+      Object {
+        "authorEmails": Array [
+          "acdlite@me.com",
+          "acdlite@fb.com",
+        ],
+        "authorName": "Andrew Clark",
+        "linesAdded": 82409,
+        "linesDeleted": 51329,
+        "totalCommits": 387,
+      },
+      Object {
+        "authorEmails": Array [
+          "ben@benalpert.com",
+          "balpert@fb.com",
+          "spicyjalapeno@gmail.com",
+        ],
+        "authorName": "Ben Alpert",
+        "linesAdded": 79669,
+        "linesDeleted": 32243,
+        "totalCommits": 817,
+      },
+    ]
   }
+  dispatch={[MockFunction]}
+  maxCommits={919}
+  maxImpact={233918}
+  totalCommits={3211}
+  totalLinesAdded={442190}
+  totalLinesDeleted={388007}
 >
-  <AutoSizer
-    disableHeight={false}
-    disableWidth={false}
-    onResize={[Function]}
-    style={Object {}}
+  <div
+    style={
+      Object {
+        "backgroundColor": "whitesmoke",
+        "borderRadius": 3,
+        "display": "flex",
+        "flexGrow": 1,
+        "marginRight": 10,
+        "maxWidth": 300,
+        "padding": 10,
+        "position": "relative",
+      }
+    }
   >
-    <Component />
-  </AutoSizer>
-</div>
+    <AutoSizer
+      disableHeight={false}
+      disableWidth={false}
+      onResize={[Function]}
+      style={Object {}}
+    >
+      <div
+        style={
+          Object {
+            "height": 0,
+            "overflow": "visible",
+            "width": 0,
+          }
+        }
+      >
+        <List
+          autoHeight={false}
+          estimatedRowSize={30}
+          height={-20}
+          noRowsRenderer={[Function]}
+          onRowsRendered={[Function]}
+          onScroll={[Function]}
+          overscanIndicesGetter={[Function]}
+          overscanRowCount={10}
+          rowCount={5}
+          rowHeight={100}
+          rowRenderer={[Function]}
+          scrollToAlignment="auto"
+          scrollToIndex={-1}
+          style={Object {}}
+          width={-20}
+        >
+          <Grid
+            aria-label="grid"
+            aria-readonly={true}
+            autoContainerWidth={true}
+            autoHeight={false}
+            autoWidth={false}
+            cellRangeRenderer={[Function]}
+            cellRenderer={[Function]}
+            className="ReactVirtualized__List"
+            columnCount={1}
+            columnWidth={-20}
+            containerRole="rowgroup"
+            containerStyle={Object {}}
+            estimatedColumnSize={100}
+            estimatedRowSize={30}
+            getScrollbarSize={[Function]}
+            height={-20}
+            isScrollingOptOut={false}
+            noContentRenderer={[Function]}
+            noRowsRenderer={[Function]}
+            onRowsRendered={[Function]}
+            onScroll={[Function]}
+            onScrollbarPresenceChange={[Function]}
+            onSectionRendered={[Function]}
+            overscanColumnCount={0}
+            overscanIndicesGetter={[Function]}
+            overscanRowCount={10}
+            role="grid"
+            rowCount={5}
+            rowHeight={100}
+            rowRenderer={[Function]}
+            scrollToAlignment="auto"
+            scrollToColumn={-1}
+            scrollToIndex={-1}
+            scrollToRow={-1}
+            scrollingResetTimeInterval={150}
+            style={Object {}}
+            tabIndex={0}
+            width={-20}
+          >
+            <div
+              aria-label="grid"
+              aria-readonly={true}
+              className="ReactVirtualized__Grid ReactVirtualized__List"
+              onScroll={[Function]}
+              role="grid"
+              style={
+                Object {
+                  "WebkitOverflowScrolling": "touch",
+                  "boxSizing": "border-box",
+                  "direction": "ltr",
+                  "height": -20,
+                  "overflowX": "hidden",
+                  "overflowY": "auto",
+                  "position": "relative",
+                  "width": -20,
+                  "willChange": "transform",
+                }
+              }
+              tabIndex={0}
+            />
+          </Grid>
+        </List>
+      </div>
+    </AutoSizer>
+  </div>
+</Authors>
 `;

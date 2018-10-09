@@ -35,3 +35,32 @@ export interface ICommit {
   linesDeleted: number;
   files: ICommitFile[];
 }
+
+export interface IAuthorStats {
+  authorName: string;
+  authorEmails: string[];
+  linesAdded: number;
+  linesDeleted: number;
+  totalCommits: number;
+}
+export interface IAuthorsAndStats {
+  authors?: any[];
+  totalLinesAdded: number;
+  totalLinesDeleted: number;
+  totalCommits: number;
+  maxImpact: number;
+  maxCommits: number;
+}
+
+export interface IFileStats {
+  fileName: string;
+  authorNames: string[];
+  linesAdded: number;
+  linesDeleted: number;
+  commits: number;
+  firstCommitOn: number;
+  lastCommitOn: number;
+}
+export interface IFilesAndStats {
+  files?: IFileStats[];
+}

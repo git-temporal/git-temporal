@@ -5,7 +5,9 @@ exports[`containers/Header when rendered without props it should match snapshot 
   style={
     Object {
       "backgroundColor": "white",
+      "borderRadius": 3,
       "display": "flex",
+      "marginRight": 10,
       "padding": 10,
     }
   }

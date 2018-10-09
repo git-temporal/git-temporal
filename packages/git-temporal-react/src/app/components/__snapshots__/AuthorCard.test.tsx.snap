@@ -4,13 +4,8 @@ exports[`components/AuthorCard when rendered with required props it should match
 <div
   style={
     Object {
-      "backgroundColor": "whitesmoke",
-      "borderRadius": 7,
       "display": "flex",
       "flexDirection": "row",
-      "marginBottom": 10,
-      "marginRight": 10,
-      "padding": 10,
     }
   }
 >

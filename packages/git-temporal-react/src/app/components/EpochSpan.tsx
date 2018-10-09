@@ -2,7 +2,6 @@ import React from 'react';
 import { style } from 'app/styles';
 
 export interface EpochSpanProps {
-  // This is the text or JSX that gets wrapped in stacked label
   firstEpochTime: number;
   secondEpochTime: number;
   style?: object | string;

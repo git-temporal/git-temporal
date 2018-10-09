@@ -17,8 +17,10 @@ exports[`containers/Stats when rendered without props it should match snapshot (
   style={
     Object {
       "backgroundColor": "white",
+      "borderRadius": 3,
       "display": "flex",
       "flexDirection": "row",
+      "marginRight": 10,
       "padding": 10,
     }
   }
