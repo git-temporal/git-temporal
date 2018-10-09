@@ -14,6 +14,16 @@ if (process.env.NODE_ENV !== 'production') {
 
 const store = createStore(reducers, applyMiddleware(...middleware));
 
+// @ts-ignore
+if (module.hot) {
+  // Enable Webpack hot module replacement for reducers
+  // @ts-ignore
+  module.hot.accept('./reducers', () => {
+    const nextReducer = require('./reducers/index').default;
+    store.replaceReducer(nextReducer);
+  });
+}
+
 export default class GitTemporalIndex extends React.Component<
   GitTemporalProps
 > {

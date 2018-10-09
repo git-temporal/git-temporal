@@ -7,8 +7,9 @@ import findGitRoot from './common/findGitRoot';
 
 const app = express();
 const port = process.env.GT_API_PORT || 11966;
+const gitRepoPath = process.env.GT_GIT_REPO_PATH || process.cwd();
 
-const gitRoot = findGitRoot();
+const gitRoot = findGitRoot(gitRepoPath);
 console.log('git root dir: ', gitRoot);
 
 app.use((_req, res, next) => {

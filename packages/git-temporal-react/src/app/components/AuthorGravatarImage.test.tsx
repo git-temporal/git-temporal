@@ -8,7 +8,7 @@ describe('components/AuthorGravatarImage', () => {
     let wrapper;
     beforeAll(() => {
       wrapper = shallow(
-        <AuthorGravatarImage email="bee.wilkerson@ymail.com" />
+        <AuthorGravatarImage emails={['bee.wilkerson@ymail.com']} />
       );
     });
 

@@ -1,6 +1,9 @@
 let globalStyles = {
   page: {
-    margin: 20,
+    padding: 20,
+    width: 'calc(100% - 40px)',
+    height: 'calc(100% - 40px)',
+    position: 'absolute',
   },
   panel: {
     backgroundColor: 'white',
@@ -10,6 +13,12 @@ let globalStyles = {
   altPanel: {
     _extends: 'panel',
     backgroundColor: 'whitesmoke',
+  },
+  card: {
+    _extends: 'altPanel',
+    borderRadius: 7,
+    marginBottom: 10,
+    marginRight: 10,
   },
   borderPanel: {
     _extends: 'panel',
@@ -63,6 +72,12 @@ let globalStyles = {
   h4Text: {
     _extends: 'headerText',
     fontSize: 12,
+  },
+  linesAdded: {
+    color: 'green',
+  },
+  linesDeleted: {
+    color: 'red',
   },
 };
 

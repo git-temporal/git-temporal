@@ -27,7 +27,7 @@ exports[`containers/Stats when rendered without props it should match snapshot (
     label="Contributors"
   >
     <Component
-      value="5"
+      value={5}
     />
   </Component>
   <Component
@@ -42,28 +42,28 @@ exports[`containers/Stats when rendered without props it should match snapshot (
     label="Lines Added"
   >
     <Component
-      value="700"
+      value={700}
     />
   </Component>
   <Component
     label="Lines Deleted"
   >
     <Component
-      value="300"
+      value={300}
     />
   </Component>
   <Component
     label="Commits"
   >
     <Component
-      value="52"
+      value={52}
     />
   </Component>
   <Component
     label="Files"
   >
     <Component
-      value="110"
+      value={110}
     />
   </Component>
 </div>

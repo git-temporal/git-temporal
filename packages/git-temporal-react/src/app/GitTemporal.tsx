@@ -35,10 +35,10 @@ export class GitTemporal extends Component<
         ) : !commits || commits.length <= 0 ? (
           <h2>Empty.</h2>
         ) : (
-          <div style={style('flexColumns')}>
+          <div style={style('flexColumns', { height: '100%' })}>
             <Header />
             <Stats />
-            <div style={style('flexRows')}>
+            <div style={style('flexRows', { flexGrow: 1 })}>
               <Authors />
             </div>
           </div>

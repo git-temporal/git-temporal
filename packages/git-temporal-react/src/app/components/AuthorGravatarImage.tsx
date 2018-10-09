@@ -6,12 +6,12 @@ import { style } from 'app/styles';
 export interface AuthorGravatarImageProps {
   width?: number;
   height?: number;
-  email?: string;
+  emails?: string[];
   style?: object | string;
 }
 
 const initialState = {
-  notFound: false,
+  emailsIndex: 0,
 };
 type AuthorGravatarImageState = Readonly<typeof initialState>;
 
@@ -22,14 +22,23 @@ export class AuthorGravatarImage extends React.Component<
   readonly state: AuthorGravatarImageState = initialState;
   readonly defaultOuterStyle = { overflow: 'hidden' };
 
+  constructor(props) {
+    super(props);
+
+    this.onImageNotFound = this.onImageNotFound.bind(this);
+  }
+
   render() {
-    const { width = 70, height = 70, email } = this.props;
-    const { notFound } = this.state;
+    const { width = 70, height = 70, emails } = this.props;
+    const { emailsIndex } = this.state;
+    const notFound = emailsIndex >= emails.length;
     const outerStyle = style(this.defaultOuterStyle, this.props.style, {
       width,
       height,
     });
-    const gravatarEmail = (email || '').toLocaleLowerCase().replace(/\s/g, '');
+    const gravatarEmail = (emails[emailsIndex] || '')
+      .toLocaleLowerCase()
+      .replace(/\s/g, '');
     const gravatarUrl = `https://www.gravatar.com/avatar/${md5(
       gravatarEmail
     )}?d=404`;
@@ -37,10 +46,11 @@ export class AuthorGravatarImage extends React.Component<
     const imageStyle = style({ width, maxHeight: height });
     return (
       <div style={outerStyle}>
-        {notFound || gravatarEmail.length === 0 ? (
-          <AuthorPlaceholderImage />
+        {notFound ? (
+          <AuthorPlaceholderImage holderForEmails={emails} />
         ) : (
           <img
+            data-for={emails[emailsIndex]}
             style={imageStyle}
             src={gravatarUrl}
             onError={this.onImageNotFound}
@@ -50,7 +60,7 @@ export class AuthorGravatarImage extends React.Component<
     );
   }
 
-  onImageNotFound = () => {
-    this.setState({ notFound: true });
-  };
+  onImageNotFound() {
+    this.setState({ emailsIndex: this.state.emailsIndex + 1 });
+  }
 }

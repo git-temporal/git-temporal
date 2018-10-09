@@ -30,30 +30,66 @@ const sumImpact = commits => {
 export const getAuthorsAndCommits = createSelector(getAllCommits, commits => {
   const commitsByAuthor = {};
   commits.commits.forEach(commit => {
-    const commitsForThisAuthor = commitsByAuthor[commit.authorName] || [];
-    commitsForThisAuthor.push(commit);
+    const commitsForThisAuthor = commitsByAuthor[commit.authorName] || {
+      authorName: commit.authorName,
+      authorEmails: [],
+      commits: [],
+    };
+    if (commitsForThisAuthor.authorEmails.indexOf(commit.authorEmail) === -1) {
+      commitsForThisAuthor.authorEmails.push(commit.authorEmail);
+    }
+    commitsForThisAuthor.commits.push(commit);
     commitsByAuthor[commit.authorName] = commitsForThisAuthor;
   });
   const authorsAndCommits = [];
-  for (const authorName in commitsByAuthor) {
-    const authorsCommits = commitsByAuthor[authorName];
-    const { linesAdded, linesDeleted } = sumImpact(authorsCommits);
-    authorsAndCommits.push({
-      authorName,
-      linesAdded,
-      linesDeleted,
-      commits: authorsCommits,
-    });
+  for (const key in commitsByAuthor) {
+    const authorAndCommits = commitsByAuthor[key];
+    const { linesAdded, linesDeleted } = sumImpact(authorAndCommits.commits);
+    authorAndCommits.linesAdded = linesAdded;
+    authorAndCommits.linesDeleted = linesDeleted;
+    authorsAndCommits.push(authorAndCommits);
   }
   return authorsAndCommits.sort((a, b) => {
     return b.linesAdded + b.linesDeleted - (a.linesAdded + a.linesDeleted);
   });
 });
 
-export const getAuthorNames = createSelector(
+export const getAuthorsAndStats = createSelector(
   getAuthorsAndCommits,
   authorsAndCommits => {
-    return authorsAndCommits.map(ac => ac.authorName);
+    let totalLinesAdded = 0;
+    let totalLinesDeleted = 0;
+    let totalCommits = 0;
+    let maxImpact = 0;
+    let maxCommits = 0;
+
+    const authorsArray = authorsAndCommits.map(ac => {
+      totalCommits += ac.commits.length;
+      totalLinesDeleted += ac.linesDeleted;
+      totalLinesAdded += ac.linesAdded;
+      const impact = ac.linesAdded + ac.linesDeleted;
+      if (impact > maxImpact) {
+        maxImpact = impact;
+      }
+      if (ac.commits.length > maxCommits) {
+        maxCommits = ac.commits.length;
+      }
+      return {
+        authorName: ac.authorName,
+        authorEmails: ac.authorEmails,
+        linesAdded: ac.linesAdded,
+        linesDeleted: ac.linesDeleted,
+        totalCommits: ac.commits.length,
+      };
+    });
+    return {
+      totalLinesAdded,
+      totalLinesDeleted,
+      totalCommits,
+      maxImpact,
+      maxCommits,
+      authors: authorsArray,
+    };
   }
 );
 

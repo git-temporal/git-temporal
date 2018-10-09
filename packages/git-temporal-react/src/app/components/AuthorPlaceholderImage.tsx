@@ -4,17 +4,19 @@ export interface AuthorPlaceholderImageProps {
   // Style of the div the SVG is rendered in
   width?: number;
   height?: number;
+  holderForEmails?: string[];
 }
 
 export const AuthorPlaceholderImage = (
   props: AuthorPlaceholderImageProps
 ): JSX.Element => {
-  const { width = 70, height = 70 } = props;
+  const { width = 70, height = 70, holderForEmails = [] } = props;
 
   /* tslint:disable */
   return (
     // @ts-ignore
     <svg
+      data-for={holderForEmails.join(', ')}
       version="1.1"
       width={width}
       height={height}
