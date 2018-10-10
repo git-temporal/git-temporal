@@ -10,7 +10,7 @@ export interface AuthorPlaceholderImageProps {
 export const AuthorPlaceholderImage = (
   props: AuthorPlaceholderImageProps
 ): JSX.Element => {
-  const { width = 70, height = 70, holderForEmails = [] } = props;
+  const { width = 75, height = 75, holderForEmails = [] } = props;
 
   /* tslint:disable */
   return (

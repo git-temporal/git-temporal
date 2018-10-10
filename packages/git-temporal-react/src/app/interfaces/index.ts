@@ -42,6 +42,8 @@ export interface IAuthorStats {
   linesAdded: number;
   linesDeleted: number;
   totalCommits: number;
+  firstCommitOn: number;
+  lastCommitOn: number;
 }
 export interface IAuthorsAndStats {
   authors?: any[];

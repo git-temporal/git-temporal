@@ -17,7 +17,7 @@ export class Authors extends Component<IAuthorsAndStats & DispatchProps> {
     display: 'flex',
     flexGrow: 1,
     position: 'relative',
-    maxWidth: 300,
+    maxWidth: 280,
   });
 
   render() {
@@ -29,7 +29,7 @@ export class Authors extends Component<IAuthorsAndStats & DispatchProps> {
             <List
               width={width || 100}
               height={height || 100}
-              rowHeight={100}
+              rowHeight={110}
               rowRenderer={this.renderRow}
               rowCount={this.props.authors.length}
             />

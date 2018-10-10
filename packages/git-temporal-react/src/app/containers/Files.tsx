@@ -29,7 +29,7 @@ export class Files extends Component<IFilesAndStats & DispatchProps> {
             <List
               width={width || 100}
               height={height || 100}
-              rowHeight={70}
+              rowHeight={60}
               rowRenderer={this.renderRow}
               rowCount={this.props.files.length}
             />

@@ -34,9 +34,17 @@ export const getAuthorsAndCommits = createSelector(getAllCommits, commits => {
       authorName: commit.authorName,
       authorEmails: [],
       commits: [],
+      firstCommitOn: commit.authorDate,
+      lastCommitOn: commit.authorDate,
     };
     if (commitsForThisAuthor.authorEmails.indexOf(commit.authorEmail) === -1) {
       commitsForThisAuthor.authorEmails.push(commit.authorEmail);
+    }
+    if (commit.authorDate < commitsForThisAuthor.firstCommitOn) {
+      commitsForThisAuthor.firstCommitOn = commit.authorDate;
+    }
+    if (commit.authorDate > commitsForThisAuthor.lastCommitOn) {
+      commitsForThisAuthor.lastCommitOn = commit.authorDate;
     }
     commitsForThisAuthor.commits.push(commit);
     commitsByAuthor[commit.authorName] = commitsForThisAuthor;
@@ -80,6 +88,8 @@ export const getAuthorsAndStats = createSelector(
         linesAdded: ac.linesAdded,
         linesDeleted: ac.linesDeleted,
         totalCommits: ac.commits.length,
+        firstCommitOn: ac.firstCommitOn,
+        lastCommitOn: ac.lastCommitOn,
       };
     });
     return {

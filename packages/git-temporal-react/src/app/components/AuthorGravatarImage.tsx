@@ -20,7 +20,6 @@ export class AuthorGravatarImage extends React.Component<
   AuthorGravatarImageState
 > {
   readonly state: AuthorGravatarImageState = initialState;
-  readonly defaultOuterStyle = { overflow: 'hidden' };
 
   constructor(props) {
     super(props);
@@ -29,19 +28,20 @@ export class AuthorGravatarImage extends React.Component<
   }
 
   render() {
-    const { width = 70, height = 70, emails } = this.props;
+    const { width = 75, height = 75, emails } = this.props;
     const { emailsIndex } = this.state;
     const notFound = emailsIndex >= emails.length;
-    const outerStyle = style(this.defaultOuterStyle, this.props.style, {
+    const outerStyle = style(this.props.style, {
       width,
       height,
+      display: 'inline-block',
     });
     const gravatarEmail = (emails[emailsIndex] || '')
       .toLocaleLowerCase()
       .replace(/\s/g, '');
     const gravatarUrl = `https://www.gravatar.com/avatar/${md5(
       gravatarEmail
-    )}?d=404`;
+    )}?s=${width}&d=404`;
 
     const imageStyle = style({ width, maxHeight: height });
     return (

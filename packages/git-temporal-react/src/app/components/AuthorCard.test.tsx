@@ -10,6 +10,8 @@ const testProps = {
     linesAdded: 100,
     linesDeleted: 30,
     totalCommits: 70,
+    firstCommitOn: 132344525,
+    lastCommitOn: 132344555,
   },
   totalLinesAdded: 200,
   totalLinesDeleted: 60,
