@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/CommitBody when rendered epoch time 1539369263 (Fri, 12 Oct 2018 18:34:23 GMT) it should match snapshot (it should have rendered a block element for each line with <br><br>") 1`] = `
+<div
+  style={
+    Object {
+      "color": "#333333",
+      "display": "block",
+      "fontSize": 13,
+      "fontWeight": "normal",
+      "marginBottom": 10,
+      "marginLeft": 10,
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "display": "block",
+        "marginBottom": 5,
+      }
+    }
+  >
+    each
+  </div>
+  <div
+    style={
+      Object {
+        "display": "block",
+        "marginBottom": 5,
+      }
+    }
+  >
+    line
+  </div>
+  <div
+    style={
+      Object {
+        "display": "block",
+        "marginBottom": 5,
+      }
+    }
+  >
+    should
+  </div>
+  <div
+    style={
+      Object {
+        "display": "block",
+        "marginBottom": 5,
+      }
+    }
+  >
+    be
+  </div>
+  <div
+    style={
+      Object {
+        "display": "block",
+        "marginBottom": 5,
+      }
+    }
+  >
+    in a span
+  </div>
+</div>
+`;

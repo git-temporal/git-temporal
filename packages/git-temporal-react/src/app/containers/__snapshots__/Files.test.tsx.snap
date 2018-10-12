@@ -270,7 +270,7 @@ exports[`containers/Files when rendered without props it should match snapshot (
           overscanIndicesGetter={[Function]}
           overscanRowCount={10}
           rowCount={5}
-          rowHeight={70}
+          rowHeight={60}
           rowRenderer={[Function]}
           scrollToAlignment="auto"
           scrollToIndex={-1}
@@ -306,7 +306,7 @@ exports[`containers/Files when rendered without props it should match snapshot (
             overscanRowCount={10}
             role="grid"
             rowCount={5}
-            rowHeight={70}
+            rowHeight={60}
             rowRenderer={[Function]}
             scrollToAlignment="auto"
             scrollToColumn={-1}

@@ -8,6 +8,8 @@ Object {
         undefined,
       ],
       "authorName": "Bee Wilkerson",
+      "firstCommitOn": 1537541919,
+      "lastCommitOn": 1537541919,
       "linesAdded": 2,
       "linesDeleted": 649,
       "totalCommits": 1,
@@ -17,6 +19,8 @@ Object {
         undefined,
       ],
       "authorName": "Daniel Bevenius",
+      "firstCommitOn": 1526296167,
+      "lastCommitOn": 1526296167,
       "linesAdded": 51,
       "linesDeleted": 1,
       "totalCommits": 1,
@@ -26,6 +30,8 @@ Object {
         undefined,
       ],
       "authorName": "Tobias Nießen",
+      "firstCommitOn": 1537272890,
+      "lastCommitOn": 1537272890,
       "linesAdded": 29,
       "linesDeleted": 6,
       "totalCommits": 1,
@@ -35,6 +41,8 @@ Object {
         undefined,
       ],
       "authorName": "Michaël Zasso",
+      "firstCommitOn": 1537212012,
+      "lastCommitOn": 1537212012,
       "linesAdded": 8,
       "linesDeleted": 8,
       "totalCommits": 1,
@@ -44,6 +52,8 @@ Object {
         undefined,
       ],
       "authorName": "Ruben Bridgewater",
+      "firstCommitOn": 1537269982,
+      "lastCommitOn": 1537269982,
       "linesAdded": 6,
       "linesDeleted": 3,
       "totalCommits": 1,
@@ -128,7 +138,7 @@ exports[`containers/Authors when rendered without props it should match snapshot
         "display": "flex",
         "flexGrow": 1,
         "marginRight": 10,
-        "maxWidth": 300,
+        "maxWidth": 280,
         "padding": 10,
         "position": "relative",
       }
@@ -159,7 +169,7 @@ exports[`containers/Authors when rendered without props it should match snapshot
           overscanIndicesGetter={[Function]}
           overscanRowCount={10}
           rowCount={5}
-          rowHeight={100}
+          rowHeight={110}
           rowRenderer={[Function]}
           scrollToAlignment="auto"
           scrollToIndex={-1}
@@ -195,7 +205,7 @@ exports[`containers/Authors when rendered without props it should match snapshot
             overscanRowCount={10}
             role="grid"
             rowCount={5}
-            rowHeight={100}
+            rowHeight={110}
             rowRenderer={[Function]}
             scrollToAlignment="auto"
             scrollToColumn={-1}

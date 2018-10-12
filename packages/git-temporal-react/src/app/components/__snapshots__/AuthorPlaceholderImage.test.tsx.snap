@@ -3,10 +3,10 @@
 exports[`components/AuthorPlaceholderImage when rendered with times in order it should match snapshot 1`] = `
 <svg
   data-for=""
-  height={70}
+  height={75}
   version="1.1"
   viewBox="0 0 400 387.45387453874537"
-  width={70}
+  width={75}
   xmlns="http://www.w3.org/2000/svg"
 >
   <g>

@@ -20,6 +20,10 @@ let globalStyles = {
     _extends: 'panel',
     border: '1px solid whitesmoke',
   },
+  block: {
+    display: 'block',
+    marginBottom: 10,
+  },
   card: {
     _extends: 'panel',
     borderRadius: 7,

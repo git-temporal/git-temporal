@@ -4,20 +4,20 @@ exports[`components/AuthorGravatarImage when rendered with times in order it sho
 <div
   style={
     Object {
-      "height": 70,
-      "overflow": "hidden",
-      "width": 70,
+      "display": "inline-block",
+      "height": 75,
+      "width": 75,
     }
   }
 >
   <img
     data-for="bee.wilkerson@ymail.com"
     onError={[Function]}
-    src="https://www.gravatar.com/avatar/dabecaadcb5665b6ffec0712cdd3b0c5?d=404"
+    src="https://www.gravatar.com/avatar/dabecaadcb5665b6ffec0712cdd3b0c5?s=75&d=404"
     style={
       Object {
-        "maxHeight": 70,
-        "width": 70,
+        "maxHeight": 75,
+        "width": 75,
       }
     }
   />

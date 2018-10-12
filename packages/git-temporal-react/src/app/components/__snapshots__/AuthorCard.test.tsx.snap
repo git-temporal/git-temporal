@@ -27,6 +27,11 @@ exports[`components/AuthorCard when rendered with required props it should match
     }
   >
     <div
+      style={
+        Object {
+          "marginBottom": 5,
+        }
+      }
       title="president@galaxy.gov"
     >
       Zaphod Beeblebrox
@@ -79,12 +84,17 @@ exports[`components/AuthorCard when rendered with required props it should match
           "color": "#333333",
           "fontSize": 11,
           "fontWeight": "normal",
-          "textAlign": "right",
         }
       }
     >
       70
-       Commits
+      <span>
+         commits spanning 
+      </span>
+      <Component
+        firstEpochTime={132344525}
+        secondEpochTime={132344555}
+      />
     </div>
     <Component
       denominator={140}

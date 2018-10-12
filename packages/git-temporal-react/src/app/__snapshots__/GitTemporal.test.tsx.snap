@@ -172,6 +172,7 @@ exports[`app/GitTemporal when changing path prop it should match snapshot (shoul
     >
       <Connect(Authors) />
       <Connect(Files) />
+      <Connect(Commits) />
     </div>
   </div>
 </div>
@@ -227,6 +228,7 @@ exports[`app/GitTemporal when rendered with commits and not fetching it should m
     >
       <Connect(Authors) />
       <Connect(Files) />
+      <Connect(Commits) />
     </div>
   </div>
 </div>
