@@ -36,6 +36,12 @@ export interface ICommit {
   files: ICommitFile[];
 }
 
+export interface IFilteredCommits {
+  selectedPath: string;
+  commits: ICommit[];
+  isFetching: boolean;
+}
+
 export interface IAuthorStats {
   authorName: string;
   authorEmails: string[];
