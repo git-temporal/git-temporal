@@ -3,7 +3,7 @@ import { style } from 'app/styles';
 
 import { IFileStats } from 'app/interfaces';
 
-import { CommaNumber } from 'app/components/CommaNumber';
+import { AddedDeleted } from 'app/components/AddedDeleted';
 import { EpochSpan } from 'app/components/EpochSpan';
 import { EllipsizedFileName } from 'app/components/EllipsizedFileName';
 
@@ -26,15 +26,10 @@ export const FileCard = (props: FileCardProps): JSX.Element => {
         maxCharacters={47}
         style={style('largerText', { display: 'block' })}
       />
-      <div style={style('smallerText', { float: 'right' })}>
-        <span style={style('linesAdded')}>
-          +<CommaNumber value={file.linesAdded} />
-        </span>
-        <span> / </span>
-        <span style={style('linesDeleted')}>
-          -<CommaNumber value={file.linesDeleted} />
-        </span>
-      </div>
+      <AddedDeleted
+        linesAdded={file.linesAdded}
+        linesDeleted={file.linesDeleted}
+      />{' '}
       <div style={style('normalText')}>
         <span>
           {file.commits} commits by {file.authorNames.length} authors spanning{' '}

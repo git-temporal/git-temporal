@@ -10,6 +10,7 @@ const filteredCommitsMock = {
   selectedPath: 'some/path',
   commits: fiveCommits,
   isFetching: false,
+  highlightedCommitId: '56493bf1ebfab3ec102fe017f30fa4f81ba6a256',
 };
 
 describe('containers/Commits', () => {

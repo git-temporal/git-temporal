@@ -2,6 +2,7 @@ export const REQUEST_COMMITS = 'REQUEST_COMMITS';
 export const RECEIVE_COMMITS = 'RECEIVE_COMMITS';
 export const SELECT_PATH = 'SELECT_PATH';
 export const INVALIDATE_PATH = 'INVALIDATE_PATH';
+export const HIGHLIGHT_COMMIT = 'HIGHLIGHT_COMMIT';
 
 export const selectPath = path => (dispatch, getState) => {
   const selectedPath = getState().selectedPath;
@@ -17,6 +18,11 @@ export const selectPath = path => (dispatch, getState) => {
 export const invalidatePath = path => ({
   path,
   type: INVALIDATE_PATH,
+});
+
+export const highlightCommit = commitId => ({
+  commitId,
+  type: HIGHLIGHT_COMMIT,
 });
 
 export const requestCommits = path => ({

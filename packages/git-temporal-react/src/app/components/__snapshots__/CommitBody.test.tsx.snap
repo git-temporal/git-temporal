@@ -63,5 +63,13 @@ exports[`components/CommitBody when rendered epoch time 1539369263 (Fri, 12 Oct 
   >
     in a span
   </div>
+  <div
+    style={
+      Object {
+        "display": "block",
+        "marginBottom": 5,
+      }
+    }
+  />
 </div>
 `;

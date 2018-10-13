@@ -134,6 +134,7 @@ Object {
       "relativeDate": "3 days ago",
     },
   ],
+  "highlightedCommitId": undefined,
   "isFetching": false,
   "selectedPath": "testPath1",
 }
@@ -581,6 +582,7 @@ exports[`containers/Commits when rendered without props and then changing commit
     ]
   }
   dispatch={[MockFunction]}
+  highlightedCommitId="56493bf1ebfab3ec102fe017f30fa4f81ba6a256"
   isFetching={false}
   selectedPath="some/path"
 >
@@ -621,34 +623,32 @@ exports[`containers/Commits when rendered without props and then changing commit
               "_cellHeightCache": Object {
                 "0-0": 0,
                 "1-0": 0,
-                "2-0": 0,
                 "3-0": 0,
                 "4-0": 0,
               },
               "_cellWidthCache": Object {
                 "0-0": 0,
                 "1-0": 0,
-                "2-0": 0,
                 "3-0": 0,
                 "4-0": 0,
               },
               "_columnCount": 1,
               "_columnWidthCache": Object {},
-              "_defaultHeight": 40,
+              "_defaultHeight": 30,
               "_defaultWidth": 100,
               "_hasFixedHeight": false,
               "_hasFixedWidth": true,
               "_keyMapper": [Function],
-              "_minHeight": 40,
+              "_minHeight": 0,
               "_minWidth": 0,
               "_rowCount": 5,
               "_rowHeightCache": Object {
-                "0-0": 40,
-                "1-0": 40,
-                "2-0": 40,
-                "3-0": 40,
-                "4-0": 40,
-                "5-0": 40,
+                "0-0": 0,
+                "1-0": 0,
+                "2-0": 30,
+                "3-0": 0,
+                "4-0": 0,
+                "5-0": 30,
               },
               "columnWidth": [Function],
               "rowHeight": [Function],
@@ -665,7 +665,7 @@ exports[`containers/Commits when rendered without props and then changing commit
           rowHeight={[Function]}
           rowRenderer={[Function]}
           scrollToAlignment="auto"
-          scrollToIndex={-1}
+          scrollToIndex={null}
           style={Object {}}
           width={400}
         >
@@ -687,34 +687,32 @@ exports[`containers/Commits when rendered without props and then changing commit
                 "_cellHeightCache": Object {
                   "0-0": 0,
                   "1-0": 0,
-                  "2-0": 0,
                   "3-0": 0,
                   "4-0": 0,
                 },
                 "_cellWidthCache": Object {
                   "0-0": 0,
                   "1-0": 0,
-                  "2-0": 0,
                   "3-0": 0,
                   "4-0": 0,
                 },
                 "_columnCount": 1,
                 "_columnWidthCache": Object {},
-                "_defaultHeight": 40,
+                "_defaultHeight": 30,
                 "_defaultWidth": 100,
                 "_hasFixedHeight": false,
                 "_hasFixedWidth": true,
                 "_keyMapper": [Function],
-                "_minHeight": 40,
+                "_minHeight": 0,
                 "_minWidth": 0,
                 "_rowCount": 5,
                 "_rowHeightCache": Object {
-                  "0-0": 40,
-                  "1-0": 40,
-                  "2-0": 40,
-                  "3-0": 40,
-                  "4-0": 40,
-                  "5-0": 40,
+                  "0-0": 0,
+                  "1-0": 0,
+                  "2-0": 30,
+                  "3-0": 0,
+                  "4-0": 0,
+                  "5-0": 30,
                 },
                 "columnWidth": [Function],
                 "rowHeight": [Function],
@@ -740,8 +738,8 @@ exports[`containers/Commits when rendered without props and then changing commit
             rowRenderer={[Function]}
             scrollToAlignment="auto"
             scrollToColumn={-1}
-            scrollToIndex={-1}
-            scrollToRow={-1}
+            scrollToIndex={null}
+            scrollToRow={null}
             scrollingResetTimeInterval={150}
             style={Object {}}
             tabIndex={0}
@@ -913,6 +911,7 @@ exports[`containers/Commits when rendered without props it should match snapshot
     ]
   }
   dispatch={[MockFunction]}
+  highlightedCommitId="56493bf1ebfab3ec102fe017f30fa4f81ba6a256"
   isFetching={false}
   selectedPath="some/path"
 >
@@ -966,20 +965,20 @@ exports[`containers/Commits when rendered without props it should match snapshot
               },
               "_columnCount": 1,
               "_columnWidthCache": Object {},
-              "_defaultHeight": 40,
+              "_defaultHeight": 30,
               "_defaultWidth": 100,
               "_hasFixedHeight": false,
               "_hasFixedWidth": true,
               "_keyMapper": [Function],
-              "_minHeight": 40,
+              "_minHeight": 0,
               "_minWidth": 0,
               "_rowCount": 5,
               "_rowHeightCache": Object {
-                "0-0": 40,
-                "1-0": 40,
-                "2-0": 40,
-                "3-0": 40,
-                "4-0": 40,
+                "0-0": 0,
+                "1-0": 0,
+                "2-0": 0,
+                "3-0": 0,
+                "4-0": 0,
               },
               "columnWidth": [Function],
               "rowHeight": [Function],
@@ -996,7 +995,7 @@ exports[`containers/Commits when rendered without props it should match snapshot
           rowHeight={[Function]}
           rowRenderer={[Function]}
           scrollToAlignment="auto"
-          scrollToIndex={-1}
+          scrollToIndex={null}
           style={Object {}}
           width={400}
         >
@@ -1031,20 +1030,20 @@ exports[`containers/Commits when rendered without props it should match snapshot
                 },
                 "_columnCount": 1,
                 "_columnWidthCache": Object {},
-                "_defaultHeight": 40,
+                "_defaultHeight": 30,
                 "_defaultWidth": 100,
                 "_hasFixedHeight": false,
                 "_hasFixedWidth": true,
                 "_keyMapper": [Function],
-                "_minHeight": 40,
+                "_minHeight": 0,
                 "_minWidth": 0,
                 "_rowCount": 5,
                 "_rowHeightCache": Object {
-                  "0-0": 40,
-                  "1-0": 40,
-                  "2-0": 40,
-                  "3-0": 40,
-                  "4-0": 40,
+                  "0-0": 0,
+                  "1-0": 0,
+                  "2-0": 0,
+                  "3-0": 0,
+                  "4-0": 0,
                 },
                 "columnWidth": [Function],
                 "rowHeight": [Function],
@@ -1070,8 +1069,8 @@ exports[`containers/Commits when rendered without props it should match snapshot
             rowRenderer={[Function]}
             scrollToAlignment="auto"
             scrollToColumn={-1}
-            scrollToIndex={-1}
-            scrollToRow={-1}
+            scrollToIndex={null}
+            scrollToRow={null}
             scrollingResetTimeInterval={150}
             style={Object {}}
             tabIndex={0}

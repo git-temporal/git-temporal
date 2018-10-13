@@ -1,7 +1,8 @@
 import { createSelector } from 'reselect';
 
 export const getSelectedPath = state => state.selectedPath;
-const getCommitsByPath = state => state.commitsByPath;
+export const getCommitsByPath = state => state.commitsByPath;
+export const getHighlightedCommitId = state => state.highlightedCommitId;
 
 // returns all commits for the current path
 export const getAllCommits = createSelector(
@@ -107,10 +108,12 @@ export const getAuthorsAndStats = createSelector(
 // and time range
 export const getFilteredCommits = createSelector(
   getSelectedPath,
+  getHighlightedCommitId,
   getAllCommits,
-  (selectedPath, commits) => {
+  (selectedPath, highlightedCommitId, commits) => {
     return {
       selectedPath,
+      highlightedCommitId,
       commits: commits.commits,
       isFetching: commits.isFetching,
     };

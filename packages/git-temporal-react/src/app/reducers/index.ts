@@ -4,12 +4,22 @@ import {
   INVALIDATE_PATH,
   REQUEST_COMMITS,
   RECEIVE_COMMITS,
+  HIGHLIGHT_COMMIT,
 } from '../actions';
 
 export const path = (state = '', action) => {
   switch (action.type) {
     case SELECT_PATH:
       return action.path;
+    default:
+      return state;
+  }
+};
+
+export const highlightedCommitId = (state = '', action) => {
+  switch (action.type) {
+    case HIGHLIGHT_COMMIT:
+      return action.commitId;
     default:
       return state;
   }
@@ -65,6 +75,7 @@ export const commitsByPath = (state = {}, action) => {
 const rootReducer = combineReducers({
   commitsByPath,
   path,
+  highlightedCommitId,
 });
 
 export default rootReducer;

@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/AddedDeleted when rendered epoch time 1539369263 (Fri, 12 Oct 2018 18:34:23 GMT) it should match snapshot (it should have rendered linesAdded and linesDeleted with commas) 1`] = `
+<span
+  style={
+    Object {
+      "color": "#333333",
+      "float": "right",
+      "fontSize": 11,
+      "fontWeight": "normal",
+    }
+  }
+>
+  <span
+    style={
+      Object {
+        "color": "green",
+      }
+    }
+  >
+    +
+    <Component
+      value={20034}
+    />
+  </span>
+  <span>
+     / 
+  </span>
+  <span
+    style={
+      Object {
+        "color": "red",
+      }
+    }
+  >
+    -
+    <Component
+      value={9877349}
+    />
+  </span>
+</span>
+`;

@@ -38,6 +38,7 @@ export interface ICommit {
 
 export interface IFilteredCommits {
   selectedPath: string;
+  highlightedCommitId: string;
   commits: ICommit[];
   isFetching: boolean;
 }

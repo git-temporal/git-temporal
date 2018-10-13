@@ -4,12 +4,15 @@ import { style } from 'app/styles';
 import { ICommit } from 'app/interfaces';
 
 import { EpochDate } from 'app/components/EpochDate';
-import { CommaNumber } from 'app/components/CommaNumber';
+import { AddedDeleted } from 'app/components/AddedDeleted';
 import { EpochSpan } from 'app/components/EpochSpan';
 import { CommitBody } from 'app/components/CommitBody';
 
 export interface CommitCardProps {
   commit: ICommit;
+  index?: number;
+  isExpanded?: boolean;
+  onClick?: (evt, commit: ICommit, index: number) => void;
   style?: string | object;
 }
 
@@ -30,25 +33,35 @@ const authorStyle = {
   marginLeft: 5,
 };
 
+const constrainedBodyStyle = {
+  maxHeight: 70,
+  overflow: 'hidden',
+  marginBottom: 10,
+  boxShadow: 'rgba(245, 245, 245, 0.5) 0px -34px 11px -18px inset',
+};
+
 export const CommitCard = (props: CommitCardProps): JSX.Element => {
-  const { commit } = props;
+  const { commit, isExpanded } = props;
+  const outerOverrideStyle = isExpanded ? 'selected' : {};
+  const bodyStyle =
+    isExpanded || commit.body.trim() === '' ? {} : constrainedBodyStyle;
   return (
-    <div style={style(defaultCardStyle, props.style)}>
+    <div
+      style={style(defaultCardStyle, props.style, outerOverrideStyle)}
+      onClick={evt => props.onClick(evt, commit, props.index)}
+    >
       <div style={style(dateLineStyle)}>
         <EpochDate epochTime={commit.authorDate} />
         <span style={{ marginLeft: 60 }}>{commit.hash}</span>
-        <span style={style('smallerText', { float: 'right' })}>
-          <span style={style('linesAdded')}>
-            +<CommaNumber value={commit.linesAdded} />
-          </span>
-          <span> / </span>
-          <span style={style('linesDeleted')}>
-            -<CommaNumber value={commit.linesDeleted} />
-          </span>
-        </span>
+        <AddedDeleted
+          linesAdded={commit.linesAdded}
+          linesDeleted={commit.linesDeleted}
+        />
       </div>
       <div style={style(messageStyle)}>{commit.message}</div>
-      <CommitBody text={commit.body} />
+      <div style={style(bodyStyle)}>
+        <CommitBody text={commit.body} />
+      </div>
       <div style={style(authorStyle)}>
         Authored by {commit.authorName}{' '}
         <EpochSpan

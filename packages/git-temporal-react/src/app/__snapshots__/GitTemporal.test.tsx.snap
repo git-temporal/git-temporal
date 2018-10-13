@@ -134,6 +134,7 @@ Object {
       "relativeDate": "3 days ago",
     },
   ],
+  "highlightedCommitId": undefined,
   "isFetching": false,
   "selectedPath": "testPath1",
 }

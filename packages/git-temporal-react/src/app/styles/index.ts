@@ -89,6 +89,9 @@ let globalStyles = {
   linesDeleted: {
     color: 'red',
   },
+  selected: {
+    backgroundColor: 'lightskyblue',
+  },
 };
 
 export function replaceGlobalStyles(newGlobalStyles) {

@@ -21,14 +21,14 @@ const renderBreakLine = line => {
 };
 
 const renderBrText = text => {
-  return text
-    .split(/\<br\>\s*\<br\>/gi)
-    .slice(0, -1)
-    .map(renderBreakLine);
+  return text.split(/\<br\>\s*\<br\>/gi).map(renderBreakLine);
 };
 
 // numbers for humans have commas
 export const CommitBody = (props: CommitBodyProps): JSX.Element => {
+  if (!props.text || props.text.replace(/\s/g, '') === '') {
+    return null;
+  }
   return (
     <div style={style(containerStyle, props.style)}>
       {renderBrText(props.text)}

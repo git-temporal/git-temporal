@@ -25,44 +25,11 @@ exports[`components/FileCard when rendered with required props it should match s
       }
     }
   />
-  <div
-    style={
-      Object {
-        "color": "#333333",
-        "float": "right",
-        "fontSize": 11,
-        "fontWeight": "normal",
-      }
-    }
-  >
-    <span
-      style={
-        Object {
-          "color": "green",
-        }
-      }
-    >
-      +
-      <Component
-        value={41962}
-      />
-    </span>
-    <span>
-       / 
-    </span>
-    <span
-      style={
-        Object {
-          "color": "red",
-        }
-      }
-    >
-      -
-      <Component
-        value={41962}
-      />
-    </span>
-  </div>
+  <Component
+    linesAdded={41962}
+    linesDeleted={41962}
+  />
+   
   <div
     style={
       Object {

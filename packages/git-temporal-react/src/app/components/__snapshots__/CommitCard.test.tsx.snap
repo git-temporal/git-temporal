@@ -2,6 +2,7 @@
 
 exports[`components/CommitCard when rendered with required props it should match snapshot (bars should be at 50%) 1`] = `
 <div
+  onClick={[Function]}
   style={
     Object {
       "backgroundColor": "white",
@@ -37,44 +38,10 @@ exports[`components/CommitCard when rendered with required props it should match
     >
       408e8ce22c
     </span>
-    <span
-      style={
-        Object {
-          "color": "#333333",
-          "float": "right",
-          "fontSize": 11,
-          "fontWeight": "normal",
-        }
-      }
-    >
-      <span
-        style={
-          Object {
-            "color": "green",
-          }
-        }
-      >
-        +
-        <Component
-          value={8}
-        />
-      </span>
-      <span>
-         / 
-      </span>
-      <span
-        style={
-          Object {
-            "color": "red",
-          }
-        }
-      >
-        -
-        <Component
-          value={8}
-        />
-      </span>
-    </span>
+    <Component
+      linesAdded={8}
+      linesDeleted={8}
+    />
   </div>
   <div
     style={
@@ -90,9 +57,20 @@ exports[`components/CommitCard when rendered with required props it should match
   >
     doc: update maintaining V8 guide
   </div>
-  <Component
-    text="Replace references to the outdated \`update-v8\` tool to its replacementin \`node-core-utils\`PR-URL: https://github.com/nodejs/node/pull/22913Reviewed-By: Richard Lau <riclau@uk.ibm.com>Reviewed-By: Colin Ihrig <cjihrig@gmail.com>Reviewed-By: Weijia Wang <starkwang@126.com>Reviewed-By: Sakthipriyan Vairamani <thechargingvolcano@gmail.com>Reviewed-By: Joyee Cheung <joyeec9h3@gmail.com>Reviewed-By: Luigi Pinca <luigipinca@gmail.com>Reviewed-By: James M Snell <jasnell@gmail.com>"
-  />
+  <div
+    style={
+      Object {
+        "boxShadow": "rgba(245, 245, 245, 0.5) 0px -34px 11px -18px inset",
+        "marginBottom": 10,
+        "maxHeight": 70,
+        "overflow": "hidden",
+      }
+    }
+  >
+    <Component
+      text="Replace references to the outdated \`update-v8\` tool to its replacementin \`node-core-utils\`PR-URL: https://github.com/nodejs/node/pull/22913Reviewed-By: Richard Lau <riclau@uk.ibm.com>Reviewed-By: Colin Ihrig <cjihrig@gmail.com>Reviewed-By: Weijia Wang <starkwang@126.com>Reviewed-By: Sakthipriyan Vairamani <thechargingvolcano@gmail.com>Reviewed-By: Joyee Cheung <joyeec9h3@gmail.com>Reviewed-By: Luigi Pinca <luigipinca@gmail.com>Reviewed-By: James M Snell <jasnell@gmail.com>"
+    />
+  </div>
   <div
     style={
       Object {
@@ -110,7 +88,7 @@ exports[`components/CommitCard when rendered with required props it should match
      
     <Component
       firstEpochTime={1537212012}
-      secondEpochTime={1539381861.309}
+      secondEpochTime={1539453672.656}
     />
      
     ago

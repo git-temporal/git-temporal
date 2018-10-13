@@ -3,6 +3,7 @@
 exports[`selectors/getFilteredCommits when asking for non existent path it should return an empty state 1`] = `
 Object {
   "commits": Array [],
+  "highlightedCommitId": undefined,
   "isFetching": true,
   "selectedPath": "some/bogus/path",
 }
@@ -142,6 +143,7 @@ Object {
       "relativeDate": "3 days ago",
     },
   ],
+  "highlightedCommitId": undefined,
   "isFetching": false,
   "selectedPath": "testPath1",
 }
@@ -281,6 +283,7 @@ Object {
       "relativeDate": "3 days ago",
     },
   ],
+  "highlightedCommitId": undefined,
   "isFetching": false,
   "selectedPath": "testPath1",
 }
@@ -725,6 +728,7 @@ Object {
       "relativeDate": "5 days ago",
     },
   ],
+  "highlightedCommitId": undefined,
   "isFetching": false,
   "selectedPath": "testPath2",
 }
