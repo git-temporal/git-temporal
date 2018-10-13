@@ -39,18 +39,9 @@ const filesStyle = {
   marginBottom: 10,
 };
 
-const constrainedBodyStyle = {
-  maxHeight: 70,
-  overflow: 'hidden',
-  marginBottom: 10,
-  boxShadow: 'rgba(245, 245, 245, 0.5) 0px -34px 11px -18px inset',
-};
-
 export const CommitCard = (props: CommitCardProps): JSX.Element => {
   const { commit, isExpanded } = props;
   const outerOverrideStyle = isExpanded ? 'selected' : {};
-  const bodyStyle =
-    isExpanded || commit.body.trim() === '' ? {} : constrainedBodyStyle;
   return (
     <div
       style={style(defaultCardStyle, props.style, outerOverrideStyle)}
@@ -65,9 +56,7 @@ export const CommitCard = (props: CommitCardProps): JSX.Element => {
         />
       </div>
       <div style={style(messageStyle)}>{commit.message}</div>
-      <div style={style(bodyStyle)}>
-        <CommitBody text={commit.body} />
-      </div>
+      <CommitBody text={commit.body} isExpanded={isExpanded} />
       <CommitCardFiles
         files={commit.files}
         isExpanded={isExpanded}
