@@ -4,12 +4,16 @@ exports[`components/CommitBody when rendered epoch time 1539369263 (Fri, 12 Oct 
 <div
   style={
     Object {
+      "boxShadow": "rgba(245, 245, 245, 0.5) 0px -34px 11px -18px inset",
       "color": "#333333",
       "display": "block",
       "fontSize": 13,
       "fontWeight": "normal",
       "marginBottom": 10,
       "marginLeft": 10,
+      "maxHeight": 70,
+      "overflow": "hidden",
+      "position": "relative",
     }
   }
 >
@@ -68,6 +72,18 @@ exports[`components/CommitBody when rendered epoch time 1539369263 (Fri, 12 Oct 
       Object {
         "display": "block",
         "marginBottom": 5,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "background": "linear-gradient(#ffffff00, white)",
+        "bottom": 0,
+        "display": "block",
+        "height": 20,
+        "position": "absolute",
+        "width": "100%",
       }
     }
   />

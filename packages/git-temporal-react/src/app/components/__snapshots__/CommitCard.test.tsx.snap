@@ -57,20 +57,9 @@ exports[`components/CommitCard when rendered with required props it should match
   >
     doc: update maintaining V8 guide
   </div>
-  <div
-    style={
-      Object {
-        "boxShadow": "rgba(245, 245, 245, 0.5) 0px -34px 11px -18px inset",
-        "marginBottom": 10,
-        "maxHeight": 70,
-        "overflow": "hidden",
-      }
-    }
-  >
-    <Component
-      text="Replace references to the outdated \`update-v8\` tool to its replacementin \`node-core-utils\`PR-URL: https://github.com/nodejs/node/pull/22913Reviewed-By: Richard Lau <riclau@uk.ibm.com>Reviewed-By: Colin Ihrig <cjihrig@gmail.com>Reviewed-By: Weijia Wang <starkwang@126.com>Reviewed-By: Sakthipriyan Vairamani <thechargingvolcano@gmail.com>Reviewed-By: Joyee Cheung <joyeec9h3@gmail.com>Reviewed-By: Luigi Pinca <luigipinca@gmail.com>Reviewed-By: James M Snell <jasnell@gmail.com>"
-    />
-  </div>
+  <Component
+    text="Replace references to the outdated \`update-v8\` tool to its replacementin \`node-core-utils\`PR-URL: https://github.com/nodejs/node/pull/22913Reviewed-By: Richard Lau <riclau@uk.ibm.com>Reviewed-By: Colin Ihrig <cjihrig@gmail.com>Reviewed-By: Weijia Wang <starkwang@126.com>Reviewed-By: Sakthipriyan Vairamani <thechargingvolcano@gmail.com>Reviewed-By: Joyee Cheung <joyeec9h3@gmail.com>Reviewed-By: Luigi Pinca <luigipinca@gmail.com>Reviewed-By: James M Snell <jasnell@gmail.com>"
+  />
   <Component
     files={
       Array [
