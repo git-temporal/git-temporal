@@ -92,6 +92,14 @@ let globalStyles = {
   selected: {
     backgroundColor: 'lightskyblue',
   },
+  link: {
+    color: 'blue',
+    cursor: 'pointer',
+  },
+  linkHover: {
+    _extends: 'link',
+    textDecoration: 'underline',
+  },
 };
 
 export function replaceGlobalStyles(newGlobalStyles) {

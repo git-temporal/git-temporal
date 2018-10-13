@@ -71,6 +71,28 @@ exports[`components/CommitCard when rendered with required props it should match
       text="Replace references to the outdated \`update-v8\` tool to its replacementin \`node-core-utils\`PR-URL: https://github.com/nodejs/node/pull/22913Reviewed-By: Richard Lau <riclau@uk.ibm.com>Reviewed-By: Colin Ihrig <cjihrig@gmail.com>Reviewed-By: Weijia Wang <starkwang@126.com>Reviewed-By: Sakthipriyan Vairamani <thechargingvolcano@gmail.com>Reviewed-By: Joyee Cheung <joyeec9h3@gmail.com>Reviewed-By: Luigi Pinca <luigipinca@gmail.com>Reviewed-By: James M Snell <jasnell@gmail.com>"
     />
   </div>
+  <Component
+    files={
+      Array [
+        Object {
+          "linesAdded": 8,
+          "linesDeleted": 8,
+          "name": "doc/guides/maintaining-V8.md",
+        },
+      ]
+    }
+    style={
+      Object {
+        "_extends": Array [
+          "block",
+          "normalText",
+        ],
+        "marginBottom": 10,
+        "marginLeft": 10,
+        "marginRight": 20,
+      }
+    }
+  />
   <div
     style={
       Object {

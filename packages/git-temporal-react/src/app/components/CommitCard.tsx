@@ -6,6 +6,7 @@ import { ICommit } from 'app/interfaces';
 import { EpochDate } from 'app/components/EpochDate';
 import { AddedDeleted } from 'app/components/AddedDeleted';
 import { CommitBody } from 'app/components/CommitBody';
+import { CommitCardFiles } from 'app/components/CommitCardFiles';
 
 export interface CommitCardProps {
   commit: ICommit;
@@ -30,6 +31,12 @@ const messageStyle = {
 const authorStyle = {
   _extends: ['normalText', 'block'],
   marginLeft: 5,
+};
+const filesStyle = {
+  _extends: ['block', 'normalText'],
+  marginLeft: 10,
+  marginRight: 20,
+  marginBottom: 10,
 };
 
 const constrainedBodyStyle = {
@@ -61,6 +68,11 @@ export const CommitCard = (props: CommitCardProps): JSX.Element => {
       <div style={style(bodyStyle)}>
         <CommitBody text={commit.body} />
       </div>
+      <CommitCardFiles
+        files={commit.files}
+        isExpanded={isExpanded}
+        style={filesStyle}
+      />
       <div style={style(authorStyle)}>
         Authored by {commit.authorName} {commit.relativeDate}
       </div>
