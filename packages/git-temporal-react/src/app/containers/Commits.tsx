@@ -20,7 +20,6 @@ export class Commits extends Component<IFilteredCommits & DispatchProps> {
   private _listWidth = 400;
   private highlightedIndex = null;
   private scrollToIndexOnNextRender = null;
-  private lastScrollToIndex = null;
 
   constructor(props) {
     super(props);
@@ -44,11 +43,7 @@ export class Commits extends Component<IFilteredCommits & DispatchProps> {
   });
 
   render() {
-    const scrollToRow = this.scrollToIndexOnNextRender || 0;
-    const scrollToAlignment =
-      this.lastScrollToIndex && this.lastScrollToIndex < scrollToRow
-        ? 'center'
-        : 'auto';
+    const scrollToIndex = this.scrollToIndexOnNextRender || 0;
     return (
       <div style={this.outerStyle}>
         <AutoSizer>
@@ -62,8 +57,7 @@ export class Commits extends Component<IFilteredCommits & DispatchProps> {
                 rowCount={this.props.commits.length}
                 ref={this._setListRef}
                 deferredMeasurementCache={this._cache}
-                scrollToIndex={scrollToRow}
-                scrollToAlignment={scrollToAlignment}
+                scrollToIndex={scrollToIndex}
               />
             );
           }}

@@ -27,7 +27,7 @@ const renderFile = (file: ICommitFile) => {
         linesDeleted={file.linesDeleted}
         style={{ marginLeft: 10 }}
       />
-      <span>{file.name}</span>
+      <span style={style('smallerText')}>{file.name}</span>
     </div>
   );
 };
