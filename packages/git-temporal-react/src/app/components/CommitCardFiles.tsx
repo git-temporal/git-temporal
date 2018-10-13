@@ -26,7 +26,6 @@ const renderFile = (file: ICommitFile) => {
       <AddedDeleted
         linesAdded={file.linesAdded}
         linesDeleted={file.linesDeleted}
-        style={{ marginLeft: 10 }}
       />
       <EllipsizedFileName
         style={style('smallerText')}
