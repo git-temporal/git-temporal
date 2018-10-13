@@ -1,5 +1,5 @@
 /*
-  A generic webpack for building React components written in coffeescript and CJSX
+  A generic webpack for building React component library
 
 */
 const Path = require('path');
