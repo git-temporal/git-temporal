@@ -5,7 +5,6 @@ import { ICommit } from 'app/interfaces';
 
 import { EpochDate } from 'app/components/EpochDate';
 import { AddedDeleted } from 'app/components/AddedDeleted';
-import { EpochSpan } from 'app/components/EpochSpan';
 import { CommitBody } from 'app/components/CommitBody';
 
 export interface CommitCardProps {
@@ -63,12 +62,7 @@ export const CommitCard = (props: CommitCardProps): JSX.Element => {
         <CommitBody text={commit.body} />
       </div>
       <div style={style(authorStyle)}>
-        Authored by {commit.authorName}{' '}
-        <EpochSpan
-          firstEpochTime={commit.authorDate}
-          secondEpochTime={Date.now() / 1000}
-        />{' '}
-        ago
+        Authored by {commit.authorName} {commit.relativeDate}
       </div>
     </div>
   );

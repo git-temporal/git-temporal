@@ -665,7 +665,7 @@ exports[`containers/Commits when rendered without props and then changing commit
           rowHeight={[Function]}
           rowRenderer={[Function]}
           scrollToAlignment="auto"
-          scrollToIndex={null}
+          scrollToIndex={0}
           style={Object {}}
           width={400}
         >
@@ -738,8 +738,8 @@ exports[`containers/Commits when rendered without props and then changing commit
             rowRenderer={[Function]}
             scrollToAlignment="auto"
             scrollToColumn={-1}
-            scrollToIndex={null}
-            scrollToRow={null}
+            scrollToIndex={0}
+            scrollToRow={0}
             scrollingResetTimeInterval={150}
             style={Object {}}
             tabIndex={0}
@@ -995,7 +995,7 @@ exports[`containers/Commits when rendered without props it should match snapshot
           rowHeight={[Function]}
           rowRenderer={[Function]}
           scrollToAlignment="auto"
-          scrollToIndex={null}
+          scrollToIndex={0}
           style={Object {}}
           width={400}
         >
@@ -1069,8 +1069,8 @@ exports[`containers/Commits when rendered without props it should match snapshot
             rowRenderer={[Function]}
             scrollToAlignment="auto"
             scrollToColumn={-1}
-            scrollToIndex={null}
-            scrollToRow={null}
+            scrollToIndex={0}
+            scrollToRow={0}
             scrollingResetTimeInterval={150}
             style={Object {}}
             tabIndex={0}

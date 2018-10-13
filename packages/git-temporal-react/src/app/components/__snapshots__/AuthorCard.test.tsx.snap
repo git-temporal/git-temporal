@@ -46,33 +46,10 @@ exports[`components/AuthorCard when rendered with required props it should match
         }
       }
     >
-      <span
-        style={
-          Object {
-            "color": "green",
-          }
-        }
-      >
-        +
-        <Component
-          value={100}
-        />
-      </span>
-      <span>
-         / 
-      </span>
-      <span
-        style={
-          Object {
-            "color": "red",
-          }
-        }
-      >
-        -
-        <Component
-          value={30}
-        />
-      </span>
+      <Component
+        linesAdded={100}
+        linesDeleted={30}
+      />
     </div>
     <Component
       denominator={260}

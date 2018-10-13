@@ -44,7 +44,7 @@ export class Commits extends Component<IFilteredCommits & DispatchProps> {
   });
 
   render() {
-    const scrollToRow = this.scrollToIndexOnNextRender;
+    const scrollToRow = this.scrollToIndexOnNextRender || 0;
     const scrollToAlignment =
       this.lastScrollToIndex && this.lastScrollToIndex < scrollToRow
         ? 'center'

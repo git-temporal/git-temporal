@@ -2,7 +2,7 @@ import React from 'react';
 import { style } from 'app/styles';
 
 import { AuthorGravatarImage } from 'app/components/AuthorGravatarImage';
-import { CommaNumber } from 'app/components/CommaNumber';
+import { AddedDeleted } from 'app/components/AddedDeleted';
 import { PercentBar } from 'app/components/PercentBar';
 import { EpochSpan } from 'app/components/EpochSpan';
 
@@ -46,13 +46,10 @@ export const AuthorCard = (props: AuthorCardProps): JSX.Element => {
           {author.authorName}
         </div>
         <div style={style(barLabelStyle)}>
-          <span style={style('linesAdded')}>
-            +<CommaNumber value={author.linesAdded} />
-          </span>
-          <span> / </span>
-          <span style={style('linesDeleted')}>
-            -<CommaNumber value={author.linesDeleted} />
-          </span>
+          <AddedDeleted
+            linesAdded={author.linesAdded}
+            linesDeleted={author.linesDeleted}
+          />
         </div>
         <PercentBar
           numerator={author.linesAdded + author.linesDeleted}
