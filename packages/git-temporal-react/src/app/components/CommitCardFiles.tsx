@@ -4,6 +4,7 @@ import { style } from 'app/styles';
 import { ICommitFile } from 'app/interfaces';
 
 import { AddedDeleted } from 'app/components/AddedDeleted';
+import { EllipsizedFileName } from 'app/components/EllipsizedFileName';
 
 export interface CommitCardFilesProps {
   files: ICommitFile[];
@@ -21,13 +22,17 @@ const renderNone = () => {
 
 const renderFile = (file: ICommitFile) => {
   return (
-    <div style={{ marginBottom: 5, wordBreak: 'break-all' }}>
+    <div style={{ wordBreak: 'break-all' }}>
       <AddedDeleted
         linesAdded={file.linesAdded}
         linesDeleted={file.linesDeleted}
         style={{ marginLeft: 10 }}
       />
-      <span style={style('smallerText')}>{file.name}</span>
+      <EllipsizedFileName
+        style={style('smallerText')}
+        fileName={file.name}
+        maxCharacters={58}
+      />
     </div>
   );
 };
