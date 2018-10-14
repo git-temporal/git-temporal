@@ -28,7 +28,7 @@ export class GitTemporal extends Component<
   }
 
   render() {
-    const { isFetching, commits } = this.props;
+    const { isFetching, viewCommitsOrFiles, commits } = this.props;
 
     return (
       <div style={style('page')}>
@@ -37,13 +37,16 @@ export class GitTemporal extends Component<
         ) : !commits || commits.length <= 0 ? (
           <h2>Empty.</h2>
         ) : (
-          <div style={style('flexColumns', { height: '100%' })}>
+          <div
+            style={style('flexColumns', {
+              height: '100%',
+            })}
+          >
             <Header />
             <Stats />
             <div style={style('flexRows', { flexGrow: 1 })}>
               <Authors />
-              <Files />
-              <Commits />
+              {viewCommitsOrFiles === 'files' ? <Files /> : <Commits />}
             </div>
           </div>
         )}

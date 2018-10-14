@@ -137,6 +137,7 @@ Object {
   "highlightedCommitId": undefined,
   "isFetching": false,
   "selectedPath": "testPath1",
+  "viewCommitsOrFiles": "commits",
 }
 `;
 
@@ -585,6 +586,7 @@ exports[`containers/Commits when rendered without props and then changing commit
   highlightedCommitId="56493bf1ebfab3ec102fe017f30fa4f81ba6a256"
   isFetching={false}
   selectedPath="some/path"
+  viewCommitsOrFiles="commits"
 >
   <div
     style={
@@ -914,6 +916,7 @@ exports[`containers/Commits when rendered without props it should match snapshot
   highlightedCommitId="56493bf1ebfab3ec102fe017f30fa4f81ba6a256"
   isFetching={false}
   selectedPath="some/path"
+  viewCommitsOrFiles="commits"
 >
   <div
     style={

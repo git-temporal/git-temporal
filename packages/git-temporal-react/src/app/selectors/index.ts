@@ -110,11 +110,13 @@ export const getAuthorsAndStats = createSelector(
 // and time range
 export const getFilteredCommits = createSelector(
   getSelectedPath,
+  getViewCommitsOrFiles,
   getHighlightedCommitId,
   getAllCommits,
-  (selectedPath, highlightedCommitId, commits) => {
+  (selectedPath, viewCommitsOrFiles, highlightedCommitId, commits) => {
     return {
       selectedPath,
+      viewCommitsOrFiles,
       highlightedCommitId,
       commits: commits.commits,
       isFetching: commits.isFetching,

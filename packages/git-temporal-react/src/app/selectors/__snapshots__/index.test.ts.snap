@@ -6,6 +6,7 @@ Object {
   "highlightedCommitId": undefined,
   "isFetching": true,
   "selectedPath": "some/bogus/path",
+  "viewCommitsOrFiles": "commits",
 }
 `;
 
@@ -146,6 +147,7 @@ Object {
   "highlightedCommitId": undefined,
   "isFetching": false,
   "selectedPath": "testPath1",
+  "viewCommitsOrFiles": "commits",
 }
 `;
 
@@ -286,6 +288,7 @@ Object {
   "highlightedCommitId": undefined,
   "isFetching": false,
   "selectedPath": "testPath1",
+  "viewCommitsOrFiles": "commits",
 }
 `;
 
@@ -731,5 +734,6 @@ Object {
   "highlightedCommitId": undefined,
   "isFetching": false,
   "selectedPath": "testPath2",
+  "viewCommitsOrFiles": "commits",
 }
 `;

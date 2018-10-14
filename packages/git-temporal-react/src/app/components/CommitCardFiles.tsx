@@ -20,9 +20,9 @@ const renderNone = () => {
   return <span>No files effected</span>;
 };
 
-const renderFile = (file: ICommitFile) => {
+const renderFile = (file: ICommitFile, index) => {
   return (
-    <div style={{ wordBreak: 'break-all' }}>
+    <div key={index} style={{ wordBreak: 'break-all' }}>
       <AddedDeleted
         linesAdded={file.linesAdded}
         linesDeleted={file.linesDeleted}

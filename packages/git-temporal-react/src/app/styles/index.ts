@@ -91,6 +91,7 @@ let globalStyles = {
   },
   selectable: {
     border: '1px solid lightskyblue',
+    borderRadius: 3,
     padding: '0px 5px',
     cursor: 'pointer',
   },

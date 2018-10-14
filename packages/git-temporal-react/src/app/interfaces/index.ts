@@ -1,7 +1,10 @@
+export type CommitsOrFilesType = 'commits' | 'files';
+
 export interface GitTemporalProps {
   // If not provided, the whole repository is assumed
   path?: string;
   serviceBaseUrl?: string;
+  viewCommitsOrFiles?: string; // CommitsOrFilesType;
 }
 
 export interface StateProps {
@@ -39,6 +42,8 @@ export interface ICommit {
 export interface IFilteredCommits {
   selectedPath: string;
   highlightedCommitId: string;
+  // TODO:  why doesn't the correct way work?  "The computer says, 'No'"
+  viewCommitsOrFiles?: string; // CommitsOrFilesType;
   commits: ICommit[];
   isFetching: boolean;
 }

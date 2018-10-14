@@ -33,8 +33,12 @@ const breakLineStyle = {
   marginBottom: 5,
 };
 
-const renderBreakLine = line => {
-  return <div style={style(breakLineStyle)}>{line.replace(/\<br\>/gi)}</div>;
+const renderBreakLine = (line, index) => {
+  return (
+    <div key={index} style={style(breakLineStyle)}>
+      {line.replace(/\<br\>/gi)}
+    </div>
+  );
 };
 
 const renderBrText = text => {

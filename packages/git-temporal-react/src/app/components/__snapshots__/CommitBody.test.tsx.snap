@@ -18,6 +18,7 @@ exports[`components/CommitBody when rendered epoch time 1539369263 (Fri, 12 Oct 
   }
 >
   <div
+    key="0"
     style={
       Object {
         "display": "block",
@@ -28,6 +29,7 @@ exports[`components/CommitBody when rendered epoch time 1539369263 (Fri, 12 Oct 
     each
   </div>
   <div
+    key="1"
     style={
       Object {
         "display": "block",
@@ -38,6 +40,7 @@ exports[`components/CommitBody when rendered epoch time 1539369263 (Fri, 12 Oct 
     line
   </div>
   <div
+    key="2"
     style={
       Object {
         "display": "block",
@@ -48,6 +51,7 @@ exports[`components/CommitBody when rendered epoch time 1539369263 (Fri, 12 Oct 
     should
   </div>
   <div
+    key="3"
     style={
       Object {
         "display": "block",
@@ -58,6 +62,7 @@ exports[`components/CommitBody when rendered epoch time 1539369263 (Fri, 12 Oct 
     be
   </div>
   <div
+    key="4"
     style={
       Object {
         "display": "block",
@@ -68,6 +73,7 @@ exports[`components/CommitBody when rendered epoch time 1539369263 (Fri, 12 Oct 
     in a span
   </div>
   <div
+    key="5"
     style={
       Object {
         "display": "block",

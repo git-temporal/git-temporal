@@ -36,7 +36,7 @@ export const AuthorCard = (props: AuthorCardProps): JSX.Element => {
   const { author, maxImpact, maxCommits } = props;
 
   return (
-    <div style={style('altCard', 'flexRows', props.style)}>
+    <div style={style('card', 'flexRows', props.style)}>
       <AuthorGravatarImage emails={author.authorEmails} />
       <div style={style(identifiersStyle)}>
         <div
