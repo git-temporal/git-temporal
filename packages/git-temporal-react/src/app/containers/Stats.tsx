@@ -33,6 +33,15 @@ export class Stats extends Component<StatsProps & DispatchProps> {
             secondEpochTime={this.props.maxAuthorDate}
           />
         </StackedLabelHeader>
+        <StackedLabelHeader label="Last Commit">
+          <div>
+            <EpochSpan
+              firstEpochTime={this.props.maxAuthorDate}
+              secondEpochTime={Date.now() / 1000}
+            />
+            <span> ago</span>
+          </div>
+        </StackedLabelHeader>
         <StackedLabelHeader label="Lines Added">
           <CommaNumber value={this.props.linesAdded} />
         </StackedLabelHeader>

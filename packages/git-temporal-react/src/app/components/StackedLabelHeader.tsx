@@ -20,7 +20,7 @@ export const StackedLabelHeader = (props: StackedLabelProps): JSX.Element => {
 
   return (
     <StackedLabel {...propsForward}>
-      <span style={style(localStyles.textStyle)}>{props.children}</span>
+      <div style={style(localStyles.textStyle)}>{props.children}</div>
     </StackedLabel>
   );
 };
