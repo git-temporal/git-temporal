@@ -3,6 +3,8 @@ export const RECEIVE_COMMITS = 'RECEIVE_COMMITS';
 export const SELECT_PATH = 'SELECT_PATH';
 export const INVALIDATE_PATH = 'INVALIDATE_PATH';
 export const HIGHLIGHT_COMMIT = 'HIGHLIGHT_COMMIT';
+export const VIEW_COMMITS = 'VIEW_COMMITS';
+export const VIEW_FILES = 'VIEW_FILES';
 
 export const selectPath = path => (dispatch, getState) => {
   const selectedPath = getState().selectedPath;
@@ -23,6 +25,14 @@ export const invalidatePath = path => ({
 export const highlightCommit = commitId => ({
   commitId,
   type: HIGHLIGHT_COMMIT,
+});
+
+export const viewCommits = () => ({
+  type: VIEW_COMMITS,
+});
+
+export const viewFiles = () => ({
+  type: VIEW_FILES,
 });
 
 export const requestCommits = path => ({

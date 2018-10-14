@@ -9,6 +9,7 @@ Object {
   "linesDeleted": 667,
   "maxAuthorDate": 1537541919,
   "minAuthorDate": 1526296167,
+  "viewCommitsOrFiles": "commits",
 }
 `;
 
@@ -55,14 +56,20 @@ exports[`containers/Stats when rendered without props it should match snapshot (
     />
   </Component>
   <Component
+    isSelected={false}
     label="Commits"
+    onLabelClick={[Function]}
+    title="Click to view Commits"
   >
     <Component
       value={52}
     />
   </Component>
   <Component
+    isSelected={false}
     label="Files"
+    onLabelClick={[Function]}
+    title="Click to view Files"
   >
     <Component
       value={110}

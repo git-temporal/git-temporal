@@ -3,6 +3,8 @@ import { createSelector } from 'reselect';
 export const getSelectedPath = state => state.selectedPath;
 export const getCommitsByPath = state => state.commitsByPath;
 export const getHighlightedCommitId = state => state.highlightedCommitId;
+export const getViewCommitsOrFiles = state =>
+  state.viewCommitsOrFiles || 'commits';
 
 // returns all commits for the current path
 export const getAllCommits = createSelector(
@@ -181,7 +183,8 @@ export const getFilteredStats = createSelector(
   getAllCommits,
   getAuthorsAndCommits,
   getFilteredFilesAndStats,
-  (allCommits, authorsAndCommits, filesAndStats) => {
+  getViewCommitsOrFiles,
+  (allCommits, authorsAndCommits, filesAndStats, viewCommitsOrFiles) => {
     let totalLinesAdded = 0;
     let totalLinesDeleted = 0;
     let minAuthorDate = Date.now();
@@ -201,6 +204,7 @@ export const getFilteredStats = createSelector(
     return {
       minAuthorDate,
       maxAuthorDate,
+      viewCommitsOrFiles,
       authors: authorsAndCommits.length,
       commits: allCommits.commits.length,
       files: filesAndStats.files.length,

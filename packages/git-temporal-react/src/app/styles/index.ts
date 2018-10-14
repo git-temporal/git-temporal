@@ -89,7 +89,13 @@ let globalStyles = {
   linesDeleted: {
     color: 'red',
   },
+  selectable: {
+    border: '1px solid lightskyblue',
+    padding: '0px 5px',
+    cursor: 'pointer',
+  },
   selected: {
+    _extends: 'selectable',
     backgroundColor: 'lightskyblue',
   },
   link: {

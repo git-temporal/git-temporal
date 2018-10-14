@@ -5,6 +5,8 @@ import {
   REQUEST_COMMITS,
   RECEIVE_COMMITS,
   HIGHLIGHT_COMMIT,
+  VIEW_COMMITS,
+  VIEW_FILES,
 } from '../actions';
 
 export const path = (state = '', action) => {
@@ -20,6 +22,17 @@ export const highlightedCommitId = (state = '', action) => {
   switch (action.type) {
     case HIGHLIGHT_COMMIT:
       return action.commitId;
+    default:
+      return state;
+  }
+};
+
+export const viewCommitsOrFiles = (state = 'commits', action) => {
+  switch (action.type) {
+    case VIEW_COMMITS:
+      return 'commits';
+    case VIEW_FILES:
+      return 'files';
     default:
       return state;
   }
@@ -76,6 +89,7 @@ const rootReducer = combineReducers({
   commitsByPath,
   path,
   highlightedCommitId,
+  viewCommitsOrFiles,
 });
 
 export default rootReducer;

@@ -7,8 +7,10 @@ import { style } from 'app/styles';
 import { StackedLabelHeader } from 'app/components/StackedLabelHeader';
 import { CommaNumber } from 'app/components/CommaNumber';
 import { EpochSpan } from 'app/components/EpochSpan';
+import { viewCommits, viewFiles } from 'app/actions';
 
 interface StatsProps {
+  viewCommitsOrFiles?: 'commits' | 'files';
   minAuthorDate?: number;
   maxAuthorDate?: number;
   authors?: number;
@@ -37,15 +39,31 @@ export class Stats extends Component<StatsProps & DispatchProps> {
         <StackedLabelHeader label="Lines Deleted">
           <CommaNumber value={this.props.linesDeleted} />
         </StackedLabelHeader>
-        <StackedLabelHeader label="Commits">
+        <StackedLabelHeader
+          label="Commits"
+          title="Click to view Commits"
+          isSelected={this.props.viewCommitsOrFiles === 'commits'}
+          onLabelClick={this.onCommitsClicked}
+        >
           <CommaNumber value={this.props.commits} />
         </StackedLabelHeader>
-        <StackedLabelHeader label="Files">
+        <StackedLabelHeader
+          label="Files"
+          title="Click to view Files"
+          onLabelClick={this.onFilesClicked}
+          isSelected={this.props.viewCommitsOrFiles === 'files'}
+        >
           <CommaNumber value={this.props.files} />
         </StackedLabelHeader>
       </div>
     );
   }
+  onCommitsClicked = () => {
+    this.props.dispatch(viewCommits());
+  };
+  onFilesClicked = () => {
+    this.props.dispatch(viewFiles());
+  };
 }
 
 export const mapStateToProps = state => {
