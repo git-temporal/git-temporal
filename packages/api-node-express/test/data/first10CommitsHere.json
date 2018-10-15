@@ -2,7 +2,8 @@
   {
     "id": "c8dd25bfba93d6776c8b87fd34fe703a52e7ae0a",
     "authorName": "Bee",
-    "relativeDate": "24 hours ago",
+    "authorEmail": "beewilkerson@invisionapp.com",
+    "relativeDate": "3 weeks ago",
     "authorDate": 1537721691,
     "message": "git-log-scraper: add snapshot testing",
     "body": "",
@@ -11,76 +12,77 @@
     "linesDeleted": 17181,
     "files": [
       {
-        "name": "UI Mock.studio",
         "linesAdded": 0,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "UI Mock.studio"
       },
       {
-        "name": "packages/git-log-scraper/package-lock.json",
         "linesAdded": 25,
-        "linesDeleted": 416
+        "linesDeleted": 416,
+        "name": "packages/git-log-scraper/package-lock.json"
       },
       {
-        "name": "packages/git-log-scraper/package.json",
         "linesAdded": 2,
-        "linesDeleted": 3
+        "linesDeleted": 3,
+        "name": "packages/git-log-scraper/package.json"
       },
       {
-        "name": "packages/git-log-scraper/src/gitLogScraper.ts",
         "linesAdded": 16,
-        "linesDeleted": 4
+        "linesDeleted": 4,
+        "name": "packages/git-log-scraper/src/gitLogScraper.ts"
       },
       {
-        "name": "packages/git-log-scraper/test/helpers/testDirectories.js",
         "linesAdded": 20,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/test/helpers/testDirectories.js"
       },
       {
-        "name": "packages/git-log-scraper/test/mocha.opts",
         "linesAdded": 0,
-        "linesDeleted": 2
+        "linesDeleted": 2,
+        "name": "packages/git-log-scraper/test/mocha.opts"
       },
       {
-        "name": "packages/git-log-scraper/test/pullTestRepos.js",
         "linesAdded": 2,
-        "linesDeleted": 2
+        "linesDeleted": 2,
+        "name": "packages/git-log-scraper/test/pullTestRepos.js"
       },
       {
-        "name": "packages/git-log-scraper/test/snapshots/atom.snapshot.json",
         "linesAdded": 7015,
-        "linesDeleted": 7015
+        "linesDeleted": 7015,
+        "name": "packages/git-log-scraper/test/snapshots/atom.snapshot.json"
       },
       {
-        "name": "packages/git-log-scraper/test/snapshots/node.snapshot.json",
         "linesAdded": 3148,
-        "linesDeleted": 3148
+        "linesDeleted": 3148,
+        "name": "packages/git-log-scraper/test/snapshots/node.snapshot.json"
       },
       {
-        "name": "packages/git-log-scraper/test/snapshots/react.snapshot.json",
         "linesAdded": 2009,
-        "linesDeleted": 2009
+        "linesDeleted": 2009,
+        "name": "packages/git-log-scraper/test/snapshots/react.snapshot.json"
       },
       {
-        "name": "packages/git-log-scraper/test/snapshots/vscode.snapshot.json",
         "linesAdded": 4577,
-        "linesDeleted": 4577
+        "linesDeleted": 4577,
+        "name": "packages/git-log-scraper/test/snapshots/vscode.snapshot.json"
       },
       {
-        "name": "packages/git-log-scraper/test/unit/testRepos.spec.js",
         "linesAdded": 60,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/test/unit/testRepos.spec.js"
       },
       {
-        "name": "packages/git-log-scraper/test/updateSnapshots.js",
         "linesAdded": 6,
-        "linesDeleted": 5
+        "linesDeleted": 5,
+        "name": "packages/git-log-scraper/test/updateSnapshots.js"
       }
     ]
   },
   {
     "id": "83e91b29e911a91d9444f491404580ce6f620516",
     "authorName": "Bee",
-    "relativeDate": "3 days ago",
+    "authorEmail": "beewilkerson@invisionapp.com",
+    "relativeDate": "3 weeks ago",
     "authorDate": 1537559568,
     "message": "add scripts to pull test repos and update snapshots; add snapshots",
     "body": "",
@@ -89,66 +91,67 @@
     "linesDeleted": 2,
     "files": [
       {
-        "name": "packages/git-log-scraper/.gitignore",
         "linesAdded": 1,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/.gitignore"
       },
       {
-        "name": "packages/git-log-scraper/package-lock.json",
         "linesAdded": 91,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/package-lock.json"
       },
       {
-        "name": "packages/git-log-scraper/package.json",
         "linesAdded": 2,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/package.json"
       },
       {
-        "name": "packages/git-log-scraper/src/gitLogScraper.ts",
         "linesAdded": 1,
-        "linesDeleted": 1
+        "linesDeleted": 1,
+        "name": "packages/git-log-scraper/src/gitLogScraper.ts"
       },
       {
-        "name": "packages/git-log-scraper/src/gitLogToJson.ts",
         "linesAdded": 1,
-        "linesDeleted": 1
+        "linesDeleted": 1,
+        "name": "packages/git-log-scraper/src/gitLogToJson.ts"
       },
       {
-        "name": "packages/git-log-scraper/test/pullTestRepos.js",
         "linesAdded": 33,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/test/pullTestRepos.js"
       },
       {
-        "name": "packages/git-log-scraper/test/snapshots/atom.snapshot.json",
         "linesAdded": 786141,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/test/snapshots/atom.snapshot.json"
       },
       {
-        "name": "packages/git-log-scraper/test/snapshots/node.snapshot.json",
         "linesAdded": 1732085,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/test/snapshots/node.snapshot.json"
       },
       {
-        "name": "packages/git-log-scraper/test/snapshots/react.snapshot.json",
         "linesAdded": 269764,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/test/snapshots/react.snapshot.json"
       },
       {
-        "name": "packages/git-log-scraper/test/snapshots/vscode.snapshot.json",
         "linesAdded": 1385088,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/test/snapshots/vscode.snapshot.json"
       },
       {
-        "name": "packages/git-log-scraper/test/updateSnapshots.js",
         "linesAdded": 33,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/test/updateSnapshots.js"
       }
     ]
   },
   {
     "id": "1465dcc0fe4ff1b8e70a8cb031465fbb806703dc",
     "authorName": "Bee",
-    "relativeDate": "3 days ago",
+    "authorEmail": "beewilkerson@invisionapp.com",
+    "relativeDate": "3 weeks ago",
     "authorDate": 1537543855,
     "message": "git-log-scraper: add main and bin for npm package",
     "body": "",
@@ -157,16 +160,17 @@
     "linesDeleted": 1,
     "files": [
       {
-        "name": "packages/git-log-scraper/package.json",
         "linesAdded": 4,
-        "linesDeleted": 1
+        "linesDeleted": 1,
+        "name": "packages/git-log-scraper/package.json"
       }
     ]
   },
   {
     "id": "e2565cba204ab4269d54cedcd4392c5011328055",
     "authorName": "Bee",
-    "relativeDate": "3 days ago",
+    "authorEmail": "beewilkerson@invisionapp.com",
+    "relativeDate": "3 weeks ago",
     "authorDate": 1537542798,
     "message": "git-log-scraper: add build script; fix exception when scraping repo with zero commits",
     "body": "",
@@ -175,26 +179,27 @@
     "linesDeleted": 3,
     "files": [
       {
-        "name": "packages/git-log-scraper/package.json",
         "linesAdded": 1,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/package.json"
       },
       {
-        "name": "packages/git-log-scraper/src/gitLogScraper.ts",
         "linesAdded": 1,
-        "linesDeleted": 3
+        "linesDeleted": 3,
+        "name": "packages/git-log-scraper/src/gitLogScraper.ts"
       },
       {
-        "name": "packages/git-log-scraper/tsconfig.json",
         "linesAdded": 1,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/tsconfig.json"
       }
     ]
   },
   {
     "id": "77144cf60eb6590b618b4a798817da4a4db1250c",
     "authorName": "Bee",
-    "relativeDate": "4 days ago",
+    "authorEmail": "beewilkerson@invisionapp.com",
+    "relativeDate": "3 weeks ago",
     "authorDate": 1537499639,
     "message": "log scraper add more info to the output of the cli script",
     "body": "",
@@ -203,21 +208,22 @@
     "linesDeleted": 2,
     "files": [
       {
-        "name": "packages/git-log-scraper/package.json",
         "linesAdded": 1,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/package.json"
       },
       {
-        "name": "packages/git-log-scraper/src/gitLogToJson.ts",
         "linesAdded": 3,
-        "linesDeleted": 2
+        "linesDeleted": 2,
+        "name": "packages/git-log-scraper/src/gitLogToJson.ts"
       }
     ]
   },
   {
     "id": "e287030d6d449367b8b765cf2b030a53c679f4d1",
     "authorName": "Bee",
-    "relativeDate": "4 days ago",
+    "authorEmail": "beewilkerson@invisionapp.com",
+    "relativeDate": "3 weeks ago",
     "authorDate": 1537494455,
     "message": "port git-log-utils to ts; add new package to mono repo: git-log-scraper",
     "body": "",
@@ -226,96 +232,97 @@
     "linesDeleted": 0,
     "files": [
       {
-        "name": "UI Mock.studio",
         "linesAdded": 0,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "UI Mock.studio"
       },
       {
-        "name": "packages/git-log-scraper/.babelrc.js",
         "linesAdded": 32,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/.babelrc.js"
       },
       {
-        "name": "packages/git-log-scraper/.eslintignore",
         "linesAdded": 7,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/.eslintignore"
       },
       {
-        "name": "packages/git-log-scraper/.eslintrc.js",
         "linesAdded": 35,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/.eslintrc.js"
       },
       {
-        "name": "packages/git-log-scraper/.gitignore",
         "linesAdded": 29,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/.gitignore"
       },
       {
-        "name": "packages/git-log-scraper/.prettierignore",
         "linesAdded": 7,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/.prettierignore"
       },
       {
-        "name": "packages/git-log-scraper/.prettierrc.js",
         "linesAdded": 4,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/.prettierrc.js"
       },
       {
-        "name": "packages/git-log-scraper/babel-register.js",
         "linesAdded": 15,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/babel-register.js"
       },
       {
-        "name": "packages/git-log-scraper/lint-staged.config.js",
         "linesAdded": 8,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/lint-staged.config.js"
       },
       {
-        "name": "packages/git-log-scraper/package-lock.json",
         "linesAdded": 7185,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/package-lock.json"
       },
       {
-        "name": "packages/git-log-scraper/package.json",
         "linesAdded": 60,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/package.json"
       },
       {
-        "name": "packages/git-log-scraper/src/gitLogScraper.ts",
         "linesAdded": 136,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/src/gitLogScraper.ts"
       },
       {
-        "name": "packages/git-log-scraper/src/gitLogToJson.ts",
         "linesAdded": 24,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/src/gitLogToJson.ts"
       },
       {
-        "name": "packages/git-log-scraper/test/mocha-reporters-config.json",
         "linesAdded": 22,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/test/mocha-reporters-config.json"
       },
       {
-        "name": "packages/git-log-scraper/test/mocha.opts",
         "linesAdded": 6,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/test/mocha.opts"
       },
       {
-        "name": "packages/git-log-scraper/tsconfig.json",
         "linesAdded": 29,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/tsconfig.json"
       },
       {
-        "name": "packages/git-log-scraper/tslint.json",
         "linesAdded": 35,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-log-scraper/tslint.json"
       }
     ]
   },
   {
     "id": "f2ef0fc9e064b37d30cb0f283e8f35bb72c0432d",
     "authorName": "Bee",
-    "relativeDate": "8 days ago",
+    "authorEmail": "beewilkerson@invisionapp.com",
+    "relativeDate": "4 weeks ago",
     "authorDate": 1537152909,
     "message": "WIP: initial setup of express service API",
     "body": "",
@@ -324,76 +331,77 @@
     "linesDeleted": 0,
     "files": [
       {
-        "name": "packages/api-node-express/.babelrc.js",
         "linesAdded": 21,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/api-node-express/.babelrc.js"
       },
       {
-        "name": "packages/api-node-express/.eslintignore",
         "linesAdded": 9,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/api-node-express/.eslintignore"
       },
       {
-        "name": "packages/api-node-express/.eslintrc.js",
         "linesAdded": 35,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/api-node-express/.eslintrc.js"
       },
       {
-        "name": "packages/api-node-express/.prettierignore",
         "linesAdded": 9,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/api-node-express/.prettierignore"
       },
       {
-        "name": "packages/api-node-express/.prettierrc.js",
         "linesAdded": 4,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/api-node-express/.prettierrc.js"
       },
       {
-        "name": "packages/api-node-express/babel-register.js",
         "linesAdded": 15,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/api-node-express/babel-register.js"
       },
       {
-        "name": "packages/api-node-express/lint-staged.config.js",
         "linesAdded": 11,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/api-node-express/lint-staged.config.js"
       },
       {
-        "name": "packages/api-node-express/package-lock.json",
         "linesAdded": 8119,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/api-node-express/package-lock.json"
       },
       {
-        "name": "packages/api-node-express/package.json",
         "linesAdded": 60,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/api-node-express/package.json"
       },
       {
-        "name": "packages/api-node-express/server.js",
         "linesAdded": 0,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/api-node-express/server.js"
       },
       {
-        "name": "packages/api-node-express/tsconfig.json",
         "linesAdded": 29,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/api-node-express/tsconfig.json"
       },
       {
-        "name": "packages/api-node-express/tslint.json",
         "linesAdded": 38,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/api-node-express/tslint.json"
       },
       {
-        "name": "packages/git-temporal/package.json",
         "linesAdded": 6,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-temporal/package.json"
       }
     ]
   },
   {
     "id": "803c27e4684c2db24ad6523ab9c52640f0c76f20",
     "authorName": "Bee",
-    "relativeDate": "8 days ago",
+    "authorEmail": "beewilkerson@invisionapp.com",
+    "relativeDate": "4 weeks ago",
     "authorDate": 1537108095,
     "message": "use CRA to create git-temporal package",
     "body": "",
@@ -402,111 +410,112 @@
     "linesDeleted": 5,
     "files": [
       {
-        "name": "packages/git-temporal/.gitignore",
         "linesAdded": 21,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-temporal/.gitignore"
       },
       {
-        "name": "packages/git-temporal/README.md",
         "linesAdded": 2448,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-temporal/README.md"
       },
       {
-        "name": "packages/git-temporal/images.d.ts",
         "linesAdded": 3,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-temporal/images.d.ts"
       },
       {
-        "name": "packages/git-temporal/package-lock.json",
         "linesAdded": 11817,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-temporal/package-lock.json"
       },
       {
-        "name": "packages/git-temporal/package.json",
         "linesAdded": 19,
-        "linesDeleted": 5
+        "linesDeleted": 5,
+        "name": "packages/git-temporal/package.json"
       },
       {
-        "name": "packages/git-temporal/public/favicon.ico",
         "linesAdded": 0,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-temporal/public/favicon.ico"
       },
       {
-        "name": "packages/git-temporal/public/index.html",
         "linesAdded": 40,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-temporal/public/index.html"
       },
       {
-        "name": "packages/git-temporal/public/manifest.json",
         "linesAdded": 15,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-temporal/public/manifest.json"
       },
       {
-        "name": "packages/git-temporal/src/App.css",
         "linesAdded": 28,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-temporal/src/App.css"
       },
       {
-        "name": "packages/git-temporal/src/App.test.tsx",
         "linesAdded": 9,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-temporal/src/App.test.tsx"
       },
       {
-        "name": "packages/git-temporal/src/App.tsx",
         "linesAdded": 22,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-temporal/src/App.tsx"
       },
       {
-        "name": "packages/git-temporal/src/index.css",
         "linesAdded": 5,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-temporal/src/index.css"
       },
       {
-        "name": "packages/git-temporal/src/index.tsx",
         "linesAdded": 11,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-temporal/src/index.tsx"
       },
       {
-        "name": "packages/git-temporal/src/logo.svg",
         "linesAdded": 7,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-temporal/src/logo.svg"
       },
       {
-        "name": "packages/git-temporal/src/registerServiceWorker.ts",
         "linesAdded": 123,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-temporal/src/registerServiceWorker.ts"
       },
       {
-        "name": "packages/git-temporal/tsconfig.json",
         "linesAdded": 30,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-temporal/tsconfig.json"
       },
       {
-        "name": "packages/git-temporal/tsconfig.prod.json",
         "linesAdded": 3,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-temporal/tsconfig.prod.json"
       },
       {
-        "name": "packages/git-temporal/tsconfig.test.json",
         "linesAdded": 6,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-temporal/tsconfig.test.json"
       },
       {
-        "name": "packages/git-temporal/tslint.json",
         "linesAdded": 10,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-temporal/tslint.json"
       },
       {
-        "name": "packages/git-temporal/yarn.lock",
         "linesAdded": 7410,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-temporal/yarn.lock"
       }
     ]
   },
   {
     "id": "a5044680e29943c4f7fadb24c5abac649168c2ee",
     "authorName": "Bee",
-    "relativeDate": "9 days ago",
+    "authorEmail": "beewilkerson@invisionapp.com",
+    "relativeDate": "4 weeks ago",
     "authorDate": 1537058808,
     "message": "initial packages",
     "body": "",
@@ -515,31 +524,32 @@
     "linesDeleted": 0,
     "files": [
       {
-        "name": "lerna.json",
         "linesAdded": 6,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "lerna.json"
       },
       {
-        "name": "package.json",
         "linesAdded": 7,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "package.json"
       },
       {
-        "name": "packages/desktop/package.json",
         "linesAdded": 24,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/desktop/package.json"
       },
       {
-        "name": "packages/git-temporal/package.json",
         "linesAdded": 24,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "packages/git-temporal/package.json"
       }
     ]
   },
   {
     "id": "073f1ed111cf2191a7198ec4ee52bb65770068d9",
     "authorName": "Bee Wilkerson",
-    "relativeDate": "13 days ago",
+    "authorEmail": "593784+littlebee@users.noreply.github.com",
+    "relativeDate": "5 weeks ago",
     "authorDate": 1536691136,
     "message": "Initial commit",
     "body": "",
@@ -548,14 +558,14 @@
     "linesDeleted": 0,
     "files": [
       {
-        "name": ".gitignore",
         "linesAdded": 61,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": ".gitignore"
       },
       {
-        "name": "LICENSE",
         "linesAdded": 21,
-        "linesDeleted": 0
+        "linesDeleted": 0,
+        "name": "LICENSE"
       }
     ]
   }
