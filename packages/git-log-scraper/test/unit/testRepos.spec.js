@@ -34,8 +34,9 @@ function testRepos() {
   for (const dir of repoDirs) {
     const fullRepoPath = path.join(testRepoBaseDir, dir);
     const fullSnapshotPath = path.join(snapshotDir, `${dir}.snapshot.json`);
+    process.chdir(fullRepoPath);
     const commitHistory = timeMe(`getCommitHistory for ${dir}`, () => {
-      return getCommitHistory(fullRepoPath);
+      return getCommitHistory();
     });
     const snapshotData = JSON.parse(fs.readFileSync(fullSnapshotPath));
 

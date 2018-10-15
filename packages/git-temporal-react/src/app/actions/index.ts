@@ -7,11 +7,11 @@ export const VIEW_COMMITS = 'VIEW_COMMITS';
 export const VIEW_FILES = 'VIEW_FILES';
 
 export const selectPath = path => (dispatch, _getState) => {
-  dispatch(fetchCommitsIfNeeded(path));
-  return {
-    selectedPath: path,
-    type: SELECT_PATH,
-  };
+  // if this comes from a rename, follow the most current name
+  const actualPath = path.replace(/\{(.*)\s=>\s(.*)\}/g, '$2');
+
+  dispatch(fetchCommitsIfNeeded(actualPath));
+  return { selectedPath: actualPath, type: SELECT_PATH };
 };
 
 export const invalidatePath = path => ({

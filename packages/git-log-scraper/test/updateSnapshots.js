@@ -30,8 +30,9 @@ const directories = getTestRepoDirectories();
 
 for (const directory of directories) {
   const fullPath = path.join(testRepoBaseDir, directory);
+  process.chdir(fullPath);
   console.log(`fetching git commit history for ${fullPath}`);
-  const commitHistory = getCommitHistory(fullPath);
+  const commitHistory = getCommitHistory();
   const outFilePath = path.join(snapshotDir, `${directory}.snapshot.json`);
   console.log(`saving to ${outFilePath}`);
   fs.writeFileSync(outFilePath, JSON.stringify(commitHistory, null, 2));
