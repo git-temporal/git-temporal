@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import { Commits, mapStateToProps } from './Commits';
-import basicReduxState from 'testHelpers/mocks/basicReduxState';
+import commitsForPath from 'testHelpers/mocks/commitsForPath';
 import fiveCommits from 'testHelpers/mocks/fiveCommits';
 import tenCommits from 'testHelpers/mocks/tenCommits';
 
@@ -10,8 +10,10 @@ const filteredCommitsMock = {
   selectedPath: 'some/path',
   commits: fiveCommits,
   isFetching: false,
+  didInvalidate: false,
   viewCommitsOrFiles: 'commits',
   highlightedCommitId: '56493bf1ebfab3ec102fe017f30fa4f81ba6a256',
+  isFileSelected: false,
 };
 
 describe('containers/Commits', () => {
@@ -36,7 +38,7 @@ describe('containers/Commits', () => {
   });
   describe('when calling mapStateToProps()', () => {
     test('it should respond with props', () => {
-      const propsOut = mapStateToProps(basicReduxState);
+      const propsOut = mapStateToProps(commitsForPath);
       expect(propsOut).toMatchSnapshot();
     });
   });

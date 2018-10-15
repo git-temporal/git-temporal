@@ -6,12 +6,10 @@ import * as reducers from 'app/reducers';
 // These tests are still somewhat contrived because they're based on a bunch of
 // dummy content.
 describe('reducers', () => {
-  describe('commitsByPath', () => {
-    const expectedWithoutPath = {
-      undefined: { commits: [], didInvalidate: true, isFetching: false },
-    };
-    test('returns default state', () => {
-      expect(reducers.commitsByPath(undefined, {})).toEqual(
+  describe('commits', () => {
+    const expectedWithoutPath = [];
+    test('returns default state without an action.type', () => {
+      expect(reducers.commits(expectedWithoutPath, {})).toEqual(
         expectedWithoutPath
       );
     });

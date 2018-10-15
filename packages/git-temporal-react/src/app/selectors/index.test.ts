@@ -1,24 +1,16 @@
 import * as selectors from '.';
-import commitsByPath from 'testHelpers/mocks/commitsByPath';
+import commitsForPath from 'testHelpers/mocks/commitsForPath';
 
-const testState1 = {
-  commitsByPath,
-  selectedPath: 'testPath1',
-};
+const testState1 = commitsForPath;
 
-const testState2 = {
-  commitsByPath,
-  selectedPath: 'testPath2',
-};
-
-// TODO: this will need more work and testing.  Right now, getFilteredCommits
+// TODO: this will need more work and testing.  Right now, getFilteredCommitsState
 // hits all of the selectors up the line
 
-describe('selectors/getFilteredCommits', () => {
+describe('selectors/getFilteredCommitsState', () => {
   describe('with first 5 commits from node test repo', () => {
     let commitsOut;
     beforeAll(async () => {
-      commitsOut = await selectors.getFilteredCommits(testState1);
+      commitsOut = await selectors.getFilteredCommitsState(testState1);
       // console.log('got commits', commitsOut);
     });
     test('it should match snapshot', () => {
@@ -28,27 +20,14 @@ describe('selectors/getFilteredCommits', () => {
       expect(commitsOut.commits.length).toBe(5);
     });
   });
-  describe('with first 10 commits from react test repo', () => {
-    let commitsOut;
-    beforeAll(async () => {
-      commitsOut = await selectors.getFilteredCommits(testState2);
-      // console.log('got commits', commitsOut);
-    });
-    test('it should match snapshot', () => {
-      expect(commitsOut).toMatchSnapshot();
-    });
-    test('it should have returned 10 commits for testPath2', () => {
-      expect(commitsOut.commits.length).toBe(10);
-    });
-  });
 
   describe('when dealing with commit containing bad author name', () => {
     let commitsOut;
     beforeAll(async () => {
       const testState = Object.assign({}, testState1);
-      testState.commitsByPath.testPath1.commits[0].authorName = null;
+      testState.commits[0].authorName = null;
 
-      commitsOut = await selectors.getFilteredCommits(testState);
+      commitsOut = await selectors.getFilteredCommitsState(testState);
       // console.log('got commits', commitsOut);
     });
     test('it should match snapshot', () => {
@@ -68,7 +47,7 @@ describe('selectors/getFilteredCommits', () => {
     beforeAll(async () => {
       const testState = Object.assign({}, testState1);
       testState.selectedPath = 'some/bogus/path';
-      commitsOut = await selectors.getFilteredCommits(testState);
+      commitsOut = await selectors.getFilteredCommitsState(testState);
     });
     test('it should return an empty state', () => {
       expect(commitsOut).toMatchSnapshot();

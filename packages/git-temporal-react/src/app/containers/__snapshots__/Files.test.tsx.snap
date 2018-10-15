@@ -147,6 +147,7 @@ Object {
       "linesDeleted": 0,
     },
   ],
+  "isFileSelected": false,
 }
 `;
 
@@ -229,6 +230,7 @@ exports[`containers/Files when rendered without props it should match snapshot (
       },
     ]
   }
+  isFileSelected={false}
 >
   <div
     style={

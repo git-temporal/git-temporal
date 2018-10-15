@@ -1,4 +1,5 @@
 const filesAndStats = {
+  isFileSelected: false,
   files: [
     {
       fileName: 'docs/js/react.js',

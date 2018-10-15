@@ -6,11 +6,8 @@ export const HIGHLIGHT_COMMIT = 'HIGHLIGHT_COMMIT';
 export const VIEW_COMMITS = 'VIEW_COMMITS';
 export const VIEW_FILES = 'VIEW_FILES';
 
-export const selectPath = path => (dispatch, getState) => {
-  const selectedPath = getState().selectedPath;
-  if (path !== selectedPath) {
-    dispatch(fetchCommitsIfNeeded(path));
-  }
+export const selectPath = path => (dispatch, _getState) => {
+  dispatch(fetchCommitsIfNeeded(path));
   return {
     selectedPath: path,
     type: SELECT_PATH,
@@ -18,7 +15,7 @@ export const selectPath = path => (dispatch, getState) => {
 };
 
 export const invalidatePath = path => ({
-  path,
+  selectedPath: path,
   type: INVALIDATE_PATH,
 });
 
@@ -36,33 +33,35 @@ export const viewFiles = () => ({
 });
 
 export const requestCommits = path => ({
-  path,
+  selectedPath: path,
   type: REQUEST_COMMITS,
 });
 
 export const receiveCommits = (path, json) => ({
   selectedPath: path,
+  commits: json.commits,
   type: RECEIVE_COMMITS,
-  commits: json,
 });
 
 const fetchCommits = path => dispatch => {
   dispatch(requestCommits(path));
+  const pathParam = path && path.trim().length > 0 ? `?path=${path}` : '';
   // TODO : replace this with serviceBaseUrl when it is in
-  return fetch(`http://localhost:11966/git-temporal/history`)
+  return fetch(`http://localhost:11966/git-temporal/history${pathParam}`)
     .then(response => response.json())
     .then(json => dispatch(receiveCommits(path, json)));
 };
 
 const shouldFetchCommits = (state, path) => {
-  const commits = state.commitsByPath[path];
-  if (!commits) {
-    return true;
-  }
-  if (commits.isFetching) {
+  if (state.isFetching) {
     return false;
   }
-  return commits.didInvalidate;
+  return (
+    state.didInvalidate ||
+    !state.commits ||
+    state.commits.length <= 0 ||
+    state.selectedPath !== path
+  );
 };
 
 export const fetchCommitsIfNeeded = path => (dispatch, getState) => {

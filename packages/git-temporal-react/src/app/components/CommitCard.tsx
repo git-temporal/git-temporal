@@ -12,7 +12,9 @@ export interface CommitCardProps {
   commit: ICommit;
   index?: number;
   isExpanded?: boolean;
+  isFileSelected?: boolean;
   onClick?: (evt, commit: ICommit, index: number) => void;
+  onFileClick?: (evt, fileName: string) => void;
   style?: string | object;
 }
 
@@ -40,7 +42,7 @@ const filesStyle = {
 };
 
 export const CommitCard = (props: CommitCardProps): JSX.Element => {
-  const { commit, isExpanded } = props;
+  const { commit, isExpanded, onFileClick } = props;
   const outerOverrideStyle = isExpanded ? 'selected' : {};
   return (
     <div
@@ -57,11 +59,14 @@ export const CommitCard = (props: CommitCardProps): JSX.Element => {
       </div>
       <div style={style(messageStyle)}>{commit.message}</div>
       <CommitBody text={commit.body} isExpanded={isExpanded} />
-      <CommitCardFiles
-        files={commit.files}
-        isExpanded={isExpanded}
-        style={filesStyle}
-      />
+      {props.isFileSelected ? null : (
+        <CommitCardFiles
+          files={commit.files}
+          isExpanded={isExpanded}
+          style={filesStyle}
+          onFileClick={onFileClick}
+        />
+      )}
       <div style={style(authorStyle)}>
         Authored by {commit.authorName} {commit.relativeDate}
       </div>

@@ -13,7 +13,7 @@ exports[`components/StackedLabelHeader when rendered with required props it shou
     ]
   }
 >
-  <span
+  <div
     style={
       Object {
         "color": "#333333",
@@ -25,6 +25,6 @@ exports[`components/StackedLabelHeader when rendered with required props it shou
     }
   >
     this is the text
-  </span>
+  </div>
 </Component>
 `;

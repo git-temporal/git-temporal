@@ -7,13 +7,13 @@ import {
   CellMeasurerCache,
 } from 'react-virtualized';
 
-import { highlightCommit } from 'app/actions';
-import { DispatchProps, IFilteredCommits } from 'app/interfaces';
-import { getFilteredCommits } from 'app/selectors';
+import { highlightCommit, selectPath } from 'app/actions';
+import { DispatchProps, IFilteredCommitsState } from 'app/interfaces';
+import { getFilteredCommitsState } from 'app/selectors';
 import { style } from 'app/styles';
 import { CommitCard } from 'app/components/CommitCard';
 
-export class Commits extends Component<IFilteredCommits & DispatchProps> {
+export class Commits extends Component<IFilteredCommitsState & DispatchProps> {
   private _cache;
   private _list = null;
 
@@ -31,8 +31,11 @@ export class Commits extends Component<IFilteredCommits & DispatchProps> {
   }
 
   componentDidUpdate(prevProps, _prevState) {
-    if (this.props.commits !== prevProps.commits) {
-      this.remeasureCells(prevProps.commits.length);
+    if (
+      this.props.commits !== prevProps.commits ||
+      this.props.selectedPath !== prevProps.selectedPath
+    ) {
+      this.remeasureCells();
     }
   }
 
@@ -90,6 +93,8 @@ export class Commits extends Component<IFilteredCommits & DispatchProps> {
             index={index}
             isExpanded={isHighlighted}
             onClick={this.onCommitCardClick}
+            onFileClick={this.onFileClick}
+            isFileSelected={this.props.isFileSelected}
           />
         </div>
       </CellMeasurer>
@@ -103,19 +108,30 @@ export class Commits extends Component<IFilteredCommits & DispatchProps> {
     this.scrollToIndexOnNextRender = index;
   };
 
+  onFileClick = (event, fileName) => {
+    event.stopPropagation();
+    this.props.dispatch(selectPath(fileName));
+  };
+
   _setListRef = ref => {
     this._list = ref;
   };
 
-  remeasureCells(index) {
-    this._cache.clear(this.highlightedIndex, 0);
-    this._cache.clear(index, 0);
+  remeasureCells(index = null) {
+    if (index !== null) {
+      console.log(`remeasuring cells ${this.highlightedIndex} ${index}`);
+      this._cache.clear(this.highlightedIndex, 0);
+      this._cache.clear(index, 0);
+    } else {
+      console.log('remeasuring all cells');
+      this._cache.clearAll();
+    }
     this._list.recomputeRowHeights();
   }
 }
 
 export const mapStateToProps = state => {
-  return getFilteredCommits(state);
+  return getFilteredCommitsState(state);
 };
 
 export default connect(mapStateToProps)(Commits);

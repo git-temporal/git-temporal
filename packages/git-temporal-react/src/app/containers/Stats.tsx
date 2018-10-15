@@ -18,10 +18,21 @@ interface StatsProps {
   files?: number;
   linesAdded?: number;
   linesDeleted?: number;
+  isFileSelected?: boolean;
 }
 
 export class Stats extends Component<StatsProps & DispatchProps> {
+  componentDidMount() {
+    this.viewCommitsIfIsFile();
+  }
+  componentDidUpdate() {
+    this.viewCommitsIfIsFile();
+  }
+
   render() {
+    const onFilesClicked = this.props.isFileSelected
+      ? null
+      : this.onFilesClicked;
     return (
       <div style={style('panel', 'flexRows')}>
         <StackedLabelHeader label="Contributors">
@@ -59,7 +70,7 @@ export class Stats extends Component<StatsProps & DispatchProps> {
         <StackedLabelHeader
           label="Files"
           title="Click to view Files"
-          onLabelClick={this.onFilesClicked}
+          onLabelClick={onFilesClicked}
           isSelected={this.props.viewCommitsOrFiles === 'files'}
         >
           <CommaNumber value={this.props.files} />
@@ -73,6 +84,13 @@ export class Stats extends Component<StatsProps & DispatchProps> {
   onFilesClicked = () => {
     this.props.dispatch(viewFiles());
   };
+
+  viewCommitsIfIsFile() {
+    const { dispatch, isFileSelected, viewCommitsOrFiles } = this.props;
+    if (isFileSelected && viewCommitsOrFiles === 'files') {
+      dispatch(viewCommits());
+    }
+  }
 }
 
 export const mapStateToProps = state => {

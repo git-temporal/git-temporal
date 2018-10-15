@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import { Files, mapStateToProps } from './Files';
-import basicReduxState from 'testHelpers/mocks/basicReduxState';
+import commitsForPath from 'testHelpers/mocks/commitsForPath';
 import filesAndStats from 'testHelpers/mocks/filesAndStats';
 
 describe('containers/Files', () => {
@@ -20,7 +20,7 @@ describe('containers/Files', () => {
   });
   describe('when calling mapStateToProps()', () => {
     test('it should respond with props', () => {
-      const propsOut = mapStateToProps(basicReduxState);
+      const propsOut = mapStateToProps(commitsForPath);
       expect(propsOut).toMatchSnapshot();
     });
   });

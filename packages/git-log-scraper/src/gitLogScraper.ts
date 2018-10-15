@@ -1,6 +1,4 @@
 import child_process from 'child_process';
-import path from 'path';
-import fs from 'fs';
 
 /*
     returns an array of javascript objects representing the commits that effected the requested file
@@ -27,31 +25,20 @@ export function getCommitHistory(fileName) {
 // Implementation
 
 function fetchFileHistory(fileName) {
-  let directory;
-  let actualFileName = fileName;
   const format = (
     '{"id": "%H", "authorName": "%an", "authorEmail": "%ae", "relativeDate": "%cr", "authorDate": %at, ' +
     ' "message": "%s", "body": "%b", "hash": "%h"}'
   ).replace(/\"/g, '#/dquotes/');
   const flags = ` --pretty=\"format:${format}\" --topo-order --date=local --numstat --follow`;
 
-  const fstats = fs.statSync(actualFileName);
-  if (fstats.isDirectory()) {
-    directory = actualFileName;
-    actualFileName = '.';
-  } else {
-    directory = path.dirname(actualFileName);
-    actualFileName = escapeForCli(path.basename(actualFileName));
-  }
-
-  const cmd = `git log${flags} ${actualFileName}`;
+  // use -- fileName and git log will work on deleted files and paths
+  const cmd = `git log${flags} -- ${escapeForCli(fileName)}`;
   if (process.env.DEBUG === '1') {
     console.warn(`$ ${cmd}`);
   }
   return child_process
     .execSync(cmd, {
       stdio: 'pipe',
-      cwd: directory,
     })
     .toString();
 }

@@ -39,13 +39,15 @@ export interface ICommit {
   files: ICommitFile[];
 }
 
-export interface IFilteredCommits {
+export interface IFilteredCommitsState {
   selectedPath: string;
   highlightedCommitId: string;
   // TODO:  why doesn't the correct way work?  "The computer says, 'No'"
   viewCommitsOrFiles?: string; // CommitsOrFilesType;
   commits: ICommit[];
   isFetching: boolean;
+  didInvalidate: boolean;
+  isFileSelected: boolean;
 }
 
 export interface IAuthorStats {
@@ -75,6 +77,7 @@ export interface IFileStats {
   firstCommitOn: number;
   lastCommitOn: number;
 }
-export interface IFilesAndStats {
+export interface IFilesContainerState {
   files?: IFileStats[];
+  isFileSelected: boolean;
 }

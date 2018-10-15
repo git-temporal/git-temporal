@@ -2,7 +2,7 @@ import reduxMockStore from 'redux-mock-store';
 import reduxThunk from 'redux-thunk';
 import fetchMock from 'fetch-mock';
 import fiveCommits from 'testHelpers/mocks/fiveCommits';
-import basicReduxState from 'testHelpers/mocks/basicReduxState';
+import commitsForPath from 'testHelpers/mocks/commitsForPath';
 
 // actions is globally mocked for all tests
 const actions = require.requireActual('./index');
@@ -10,7 +10,7 @@ const actions = require.requireActual('./index');
 const mockStore = reduxMockStore([reduxThunk.withExtraArgument({ fetch })]);
 
 const nonExistentTestPath = 'testPath/no/exist';
-const existingTestPath = 'testPath1'; // see mock for commitsByPath
+const existingTestPath = 'testPath1'; // see mock for commits
 
 describe('actions', () => {
   afterEach(() => {
@@ -19,15 +19,15 @@ describe('actions', () => {
   });
 
   test('fetchCommitsIfNeeded(existingPath) should not trigger any other actions', async done => {
-    const store = mockStore(basicReduxState);
+    const store = mockStore(commitsForPath);
     await store.dispatch(actions.fetchCommitsIfNeeded(existingTestPath));
     expect(store.getActions()).toEqual([]);
     done();
   });
 
   test('fetchCommitsIfNeeded(existingPath) should not trigger any other actions if already fetching', async done => {
-    const alteredState = Object.assign({}, basicReduxState);
-    alteredState.commitsByPath[existingTestPath].isFetching = true;
+    const alteredState = Object.assign({}, commitsForPath);
+    alteredState.isFetching = true;
     const store = mockStore(alteredState);
     await store.dispatch(actions.fetchCommitsIfNeeded(existingTestPath));
     expect(store.getActions()).toEqual([]);
@@ -35,12 +35,15 @@ describe('actions', () => {
   });
 
   test('fetchCommitsIfNeeded(nonExistentPath)', async done => {
-    const store = mockStore(basicReduxState);
-    fetchMock.getOnce('http://localhost:11966/git-temporal/history', {
-      body: JSON.stringify(fiveCommits),
+    const store = mockStore(commitsForPath);
+    fetchMock.getOnce('begin:http://localhost:11966/git-temporal/history', {
+      body: JSON.stringify({
+        commits: fiveCommits,
+        path: nonExistentTestPath,
+      }),
     });
     const expectedActions = [
-      { type: actions.REQUEST_COMMITS, path: nonExistentTestPath },
+      { type: actions.REQUEST_COMMITS, selectedPath: nonExistentTestPath },
       {
         type: actions.RECEIVE_COMMITS,
         selectedPath: nonExistentTestPath,
@@ -53,19 +56,19 @@ describe('actions', () => {
   });
 
   test('selectPath(existingPath) should not trigger any other actions', async done => {
-    const store = mockStore(basicReduxState);
+    const store = mockStore(commitsForPath);
     await store.dispatch(actions.selectPath(existingTestPath));
     expect(store.getActions()).toEqual([]);
     done();
   });
 
   test('selectPath(nonExistentPath) should trigger fetch', async done => {
-    const store = mockStore(basicReduxState);
-    fetchMock.getOnce('http://localhost:11966/git-temporal/history', {
+    const store = mockStore(commitsForPath);
+    fetchMock.getOnce('begin:http://localhost:11966/git-temporal/history', {
       body: JSON.stringify(fiveCommits),
     });
     const expectedActions = [
-      { type: actions.REQUEST_COMMITS, path: nonExistentTestPath },
+      { type: actions.REQUEST_COMMITS, selectedPath: nonExistentTestPath },
     ];
     await store.dispatch(actions.selectPath(nonExistentTestPath));
     expect(store.getActions()).toEqual(expectedActions);

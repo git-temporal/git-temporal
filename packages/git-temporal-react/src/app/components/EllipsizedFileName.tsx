@@ -5,6 +5,7 @@ export interface EllipsizedFileNameProps {
   fileName: string;
   maxCharacters: number;
   style?: object | string;
+  onClick?: (evt, fileName: string) => void;
 }
 
 export function ellipsizeFileName(
@@ -37,7 +38,23 @@ export const EllipsizedFileName = (
 ): JSX.Element => {
   return (
     <span title={props.fileName} style={style(props.style)}>
-      {ellipsizeFileName(props.fileName, props.maxCharacters)}
+      {renderFileNameLink(props.fileName, props.maxCharacters, props.onClick)}
     </span>
+  );
+};
+
+const renderFileNameLink = (
+  fileName: string,
+  maxCharacters: number,
+  onClick?
+): JSX.Element | string => {
+  const ellipsized = ellipsizeFileName(fileName, maxCharacters);
+  if (!onClick) {
+    return ellipsized;
+  }
+  return (
+    <a onClick={evt => onClick(evt, fileName)} style={style('link')}>
+      {ellipsized}
+    </a>
   );
 };

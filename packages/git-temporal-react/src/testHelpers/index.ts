@@ -4,7 +4,7 @@ import reduxThunk from 'redux-thunk';
 const middlewares = [reduxThunk]; // add your middlewares like `redux-thunk`
 
 const defaultInitialState = {
-  commitsByPath: {},
+  commits: [],
   selectedPath: '',
 };
 

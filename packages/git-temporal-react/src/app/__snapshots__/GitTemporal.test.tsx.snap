@@ -134,8 +134,10 @@ Object {
       "relativeDate": "3 days ago",
     },
   ],
+  "didInvalidate": undefined,
   "highlightedCommitId": undefined,
   "isFetching": false,
+  "isFileSelected": false,
   "selectedPath": "testPath1",
   "viewCommitsOrFiles": "commits",
 }

@@ -134,8 +134,10 @@ Object {
       "relativeDate": "3 days ago",
     },
   ],
+  "didInvalidate": undefined,
   "highlightedCommitId": undefined,
   "isFetching": false,
+  "isFileSelected": false,
   "selectedPath": "testPath1",
   "viewCommitsOrFiles": "commits",
 }
@@ -582,9 +584,11 @@ exports[`containers/Commits when rendered without props and then changing commit
       },
     ]
   }
+  didInvalidate={false}
   dispatch={[MockFunction]}
   highlightedCommitId="56493bf1ebfab3ec102fe017f30fa4f81ba6a256"
   isFetching={false}
+  isFileSelected={false}
   selectedPath="some/path"
   viewCommitsOrFiles="commits"
 >
@@ -622,19 +626,9 @@ exports[`containers/Commits when rendered without props and then changing commit
           autoHeight={false}
           deferredMeasurementCache={
             CellMeasurerCache {
-              "_cellHeightCache": Object {
-                "0-0": 0,
-                "1-0": 0,
-                "3-0": 0,
-                "4-0": 0,
-              },
-              "_cellWidthCache": Object {
-                "0-0": 0,
-                "1-0": 0,
-                "3-0": 0,
-                "4-0": 0,
-              },
-              "_columnCount": 1,
+              "_cellHeightCache": Object {},
+              "_cellWidthCache": Object {},
+              "_columnCount": 0,
               "_columnWidthCache": Object {},
               "_defaultHeight": 30,
               "_defaultWidth": 100,
@@ -643,15 +637,8 @@ exports[`containers/Commits when rendered without props and then changing commit
               "_keyMapper": [Function],
               "_minHeight": 0,
               "_minWidth": 0,
-              "_rowCount": 5,
-              "_rowHeightCache": Object {
-                "0-0": 0,
-                "1-0": 0,
-                "2-0": 30,
-                "3-0": 0,
-                "4-0": 0,
-                "5-0": 30,
-              },
+              "_rowCount": 0,
+              "_rowHeightCache": Object {},
               "columnWidth": [Function],
               "rowHeight": [Function],
             }
@@ -686,19 +673,9 @@ exports[`containers/Commits when rendered without props and then changing commit
             containerStyle={Object {}}
             deferredMeasurementCache={
               CellMeasurerCache {
-                "_cellHeightCache": Object {
-                  "0-0": 0,
-                  "1-0": 0,
-                  "3-0": 0,
-                  "4-0": 0,
-                },
-                "_cellWidthCache": Object {
-                  "0-0": 0,
-                  "1-0": 0,
-                  "3-0": 0,
-                  "4-0": 0,
-                },
-                "_columnCount": 1,
+                "_cellHeightCache": Object {},
+                "_cellWidthCache": Object {},
+                "_columnCount": 0,
                 "_columnWidthCache": Object {},
                 "_defaultHeight": 30,
                 "_defaultWidth": 100,
@@ -707,15 +684,8 @@ exports[`containers/Commits when rendered without props and then changing commit
                 "_keyMapper": [Function],
                 "_minHeight": 0,
                 "_minWidth": 0,
-                "_rowCount": 5,
-                "_rowHeightCache": Object {
-                  "0-0": 0,
-                  "1-0": 0,
-                  "2-0": 30,
-                  "3-0": 0,
-                  "4-0": 0,
-                  "5-0": 30,
-                },
+                "_rowCount": 0,
+                "_rowHeightCache": Object {},
                 "columnWidth": [Function],
                 "rowHeight": [Function],
               }
@@ -912,9 +882,11 @@ exports[`containers/Commits when rendered without props it should match snapshot
       },
     ]
   }
+  didInvalidate={false}
   dispatch={[MockFunction]}
   highlightedCommitId="56493bf1ebfab3ec102fe017f30fa4f81ba6a256"
   isFetching={false}
+  isFileSelected={false}
   selectedPath="some/path"
   viewCommitsOrFiles="commits"
 >

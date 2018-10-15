@@ -1,24 +1,16 @@
 import { createSelector } from 'reselect';
 
+// const getState = state => {
+//   return state;
+// };
+
 export const getSelectedPath = state => state.selectedPath;
-export const getCommitsByPath = state => state.commitsByPath;
+export const getCommits = state => state.commits;
+export const getIsFetching = state => state.isFetching;
+export const getDidInvalidate = state => state.getDidInvalidate;
 export const getHighlightedCommitId = state => state.highlightedCommitId;
 export const getViewCommitsOrFiles = state =>
   state.viewCommitsOrFiles || 'commits';
-
-// returns all commits for the current path
-export const getAllCommits = createSelector(
-  getSelectedPath,
-  getCommitsByPath,
-  (selectedPath, commitsByPath) => {
-    return (
-      commitsByPath[selectedPath] || {
-        isFetching: true,
-        commits: [],
-      }
-    );
-  }
-);
 
 const sumImpact = commits => {
   const impact = { linesAdded: 0, linesDeleted: 0 };
@@ -30,9 +22,9 @@ const sumImpact = commits => {
 };
 
 // returns array of
-export const getAuthorsAndCommits = createSelector(getAllCommits, commits => {
+export const getAuthorsAndCommits = createSelector(getCommits, commits => {
   const commitsByAuthor = {};
-  commits.commits.forEach(commit => {
+  commits.forEach(commit => {
     const commitsForThisAuthor = commitsByAuthor[commit.authorName] || {
       authorName: commit.authorName,
       authorEmails: [],
@@ -106,24 +98,6 @@ export const getAuthorsAndStats = createSelector(
   }
 );
 
-// returns commits for the current path filtered by selected authors
-// and time range
-export const getFilteredCommits = createSelector(
-  getSelectedPath,
-  getViewCommitsOrFiles,
-  getHighlightedCommitId,
-  getAllCommits,
-  (selectedPath, viewCommitsOrFiles, highlightedCommitId, commits) => {
-    return {
-      selectedPath,
-      viewCommitsOrFiles,
-      highlightedCommitId,
-      commits: commits.commits,
-      isFetching: commits.isFetching,
-    };
-  }
-);
-
 const getObjectValues = function(obj) {
   const values = [];
   for (const key in obj) {
@@ -132,6 +106,13 @@ const getObjectValues = function(obj) {
   return values;
 };
 
+// returns commits for the current path filtered by selected authors
+// and time range
+export const getFilteredCommits = createSelector(getCommits, commits => {
+  // TODO: filter returned commits by selected authors and date range
+  return commits;
+});
+
 // returns an array of
 // {
 //   fileName: string,
@@ -139,60 +120,99 @@ const getObjectValues = function(obj) {
 //   linesAdded: number,
 //   linesDeleted: number
 // }
-
-export const getFilteredFilesAndStats = createSelector(
-  getAllCommits,
-  commits => {
-    const commitsByFile = {};
-    for (const commit of commits.commits) {
-      if (!commit.files) {
-        continue;
-      }
-      for (const file of commit.files) {
-        const thisFile = commitsByFile[file.name] || {
-          fileName: file.name,
-          authorNames: [],
-          commits: 0,
-          linesAdded: 0,
-          linesDeleted: 0,
-          firstCommitOn: commit.authorDate,
-          lastCommitOn: commit.authorDate,
-        };
-        if (thisFile.authorNames.indexOf(commit.authorName) === -1) {
-          thisFile.authorNames.push(commit.authorName);
-        }
-        if (commit.authorDate < thisFile.firstCommitOn) {
-          thisFile.firstCommitOn = commit.authorDate;
-        }
-        if (commit.authorDate > thisFile.lastCommitOn) {
-          thisFile.lastCommitOn = commit.authorDate;
-        }
-        thisFile.linesAdded += file.linesAdded;
-        thisFile.linesDeleted += file.linesDeleted;
-        thisFile.commits += 1;
-        commitsByFile[file.name] = thisFile;
-      }
+export const getFilteredFiles = createSelector(getCommits, commits => {
+  const commitsByFile = {};
+  for (const commit of commits) {
+    if (!commit.files) {
+      continue;
     }
-    return {
-      files: getObjectValues(commitsByFile).sort((a, b) => {
-        return b.linesAdded + b.linesDeleted - (a.linesAdded + a.linesDeleted);
-      }),
-    };
+    for (const file of commit.files) {
+      const thisFile = commitsByFile[file.name] || {
+        fileName: file.name,
+        authorNames: [],
+        commits: 0,
+        linesAdded: 0,
+        linesDeleted: 0,
+        firstCommitOn: commit.authorDate,
+        lastCommitOn: commit.authorDate,
+      };
+      if (thisFile.authorNames.indexOf(commit.authorName) === -1) {
+        thisFile.authorNames.push(commit.authorName);
+      }
+      if (commit.authorDate < thisFile.firstCommitOn) {
+        thisFile.firstCommitOn = commit.authorDate;
+      }
+      if (commit.authorDate > thisFile.lastCommitOn) {
+        thisFile.lastCommitOn = commit.authorDate;
+      }
+      thisFile.linesAdded += file.linesAdded;
+      thisFile.linesDeleted += file.linesDeleted;
+      thisFile.commits += 1;
+      commitsByFile[file.name] = thisFile;
+    }
+  }
+  return getObjectValues(commitsByFile).sort((a, b) => {
+    return b.linesAdded + b.linesDeleted - (a.linesAdded + a.linesDeleted);
+  });
+});
+
+export const getIsFileSelected = createSelector(
+  getSelectedPath,
+  getFilteredFiles,
+  (selectedPath, files) => {
+    return files.length === 1 && files[0].fileName === selectedPath;
   }
 );
 
-export const getFilteredStats = createSelector(
-  getAllCommits,
-  getAuthorsAndCommits,
-  getFilteredFilesAndStats,
+export const getFilteredCommitsState = createSelector(
+  getSelectedPath,
   getViewCommitsOrFiles,
-  (allCommits, authorsAndCommits, filesAndStats, viewCommitsOrFiles) => {
+  getHighlightedCommitId,
+  getFilteredCommits,
+  getIsFileSelected,
+  getIsFetching,
+  getDidInvalidate,
+  (
+    selectedPath,
+    viewCommitsOrFiles,
+    highlightedCommitId,
+    commits,
+    isFileSelected,
+    isFetching,
+    didInvalidate
+  ) => ({
+    selectedPath,
+    viewCommitsOrFiles,
+    highlightedCommitId,
+    commits,
+    isFileSelected,
+    isFetching,
+    didInvalidate,
+  })
+);
+
+export const getFilesContainerState = createSelector(
+  getFilteredFiles,
+  getIsFileSelected,
+  (files, isFileSelected) => ({
+    files,
+    isFileSelected,
+  })
+);
+
+export const getFilteredStats = createSelector(
+  getCommits,
+  getAuthorsAndCommits,
+  getFilteredFiles,
+  getViewCommitsOrFiles,
+  getIsFileSelected,
+  (commits, authorsAndCommits, files, viewCommitsOrFiles, isFileSelected) => {
     let totalLinesAdded = 0;
     let totalLinesDeleted = 0;
     let minAuthorDate = Date.now();
     let maxAuthorDate = 0;
 
-    for (const commit of allCommits.commits) {
+    for (const commit of commits) {
       totalLinesAdded += commit.linesAdded;
       totalLinesDeleted += commit.linesDeleted;
       if (commit.authorDate < minAuthorDate) {
@@ -207,9 +227,10 @@ export const getFilteredStats = createSelector(
       minAuthorDate,
       maxAuthorDate,
       viewCommitsOrFiles,
+      isFileSelected,
       authors: authorsAndCommits.length,
-      commits: allCommits.commits.length,
-      files: filesAndStats.files.length,
+      commits: commits.length,
+      files: files.length,
       linesAdded: totalLinesAdded,
       linesDeleted: totalLinesDeleted,
     };

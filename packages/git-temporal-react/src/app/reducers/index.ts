@@ -9,10 +9,12 @@ import {
   VIEW_FILES,
 } from '../actions';
 
-export const path = (state = '', action) => {
+export const selectedPath = (state = '', action) => {
   switch (action.type) {
     case SELECT_PATH:
-      return action.path;
+    case REQUEST_COMMITS:
+    case RECEIVE_COMMITS:
+      return action.selectedPath;
     default:
       return state;
   }
@@ -38,56 +40,45 @@ export const viewCommitsOrFiles = (state = 'commits', action) => {
   }
 };
 
-export const commits = (
-  state = {
-    isFetching: false,
-    didInvalidate: false,
-    commits: [],
-  },
-  action
-) => {
+export const commits = (state = [], action) => {
   switch (action.type) {
     case INVALIDATE_PATH:
-      return {
-        ...state,
-        didInvalidate: true,
-      };
+      return [];
     case REQUEST_COMMITS:
-      return {
-        ...state,
-        isFetching: true,
-        didInvalidate: false,
-      };
+      return [];
     case RECEIVE_COMMITS:
-      return {
-        ...state,
-        isFetching: false,
-        didInvalidate: false,
-        commits: action.commits,
-        lastUpdated: action.receivedAt,
-      };
+      return action.commits;
+    default:
+      return state;
+  }
+};
+export const isFetching = (state = false, action) => {
+  switch (action.type) {
+    case REQUEST_COMMITS:
+      return true;
+    case RECEIVE_COMMITS:
+      return false;
     default:
       return state;
   }
 };
 
-export const commitsByPath = (state = {}, action) => {
+export const didInvalidate = (state = false, action) => {
   switch (action.type) {
     case INVALIDATE_PATH:
-    case RECEIVE_COMMITS:
+      return true;
     case REQUEST_COMMITS:
-      return {
-        ...state,
-        [action.path]: commits(state[action.path], action),
-      };
+      return false;
     default:
       return state;
   }
 };
 
 const rootReducer = combineReducers({
-  commitsByPath,
-  path,
+  commits,
+  selectedPath,
+  isFetching,
+  didInvalidate,
   highlightedCommitId,
   viewCommitsOrFiles,
 });

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { GitTemporalProps, DispatchProps, StateProps } from 'app/interfaces';
 import { selectPath } from 'app/actions';
-import { getFilteredCommits } from 'app/selectors';
+import { getFilteredCommitsState } from 'app/selectors';
 import { style } from 'app/styles';
 
 import Header from 'app/containers/Header';
@@ -56,7 +56,7 @@ export class GitTemporal extends Component<
 }
 // debugger;
 export function mapStateToProps(state) {
-  return getFilteredCommits(state);
+  return getFilteredCommitsState(state);
 }
 
 export default connect(mapStateToProps)(GitTemporal);

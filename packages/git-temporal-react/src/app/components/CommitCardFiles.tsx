@@ -10,6 +10,7 @@ export interface CommitCardFilesProps {
   files: ICommitFile[];
   isExpanded?: boolean;
   style?: object;
+  onFileClick?: (evt, fileName: string) => void;
 }
 
 const defaultContainerStyle = {
@@ -20,7 +21,7 @@ const renderNone = () => {
   return <span>No files effected</span>;
 };
 
-const renderFile = (file: ICommitFile, index) => {
+const renderFile = (file: ICommitFile, index, onClick) => {
   return (
     <div key={index} style={{ wordBreak: 'break-all' }}>
       <AddedDeleted
@@ -31,13 +32,14 @@ const renderFile = (file: ICommitFile, index) => {
         style={style('smallerText')}
         fileName={file.name}
         maxCharacters={58}
+        onClick={onClick}
       />
     </div>
   );
 };
 
-const renderFiles = (files: ICommitFile[]) => {
-  return files.map(renderFile);
+const renderFiles = (files: ICommitFile[], onFileClick) => {
+  return files.map((file, index) => renderFile(file, index, onFileClick));
 };
 
 const renderSummary = (files: ICommitFile[]) => {
@@ -57,7 +59,7 @@ export const CommitCardFiles = (props: CommitCardFilesProps): JSX.Element => {
       {props.files.length <= 0
         ? renderNone()
         : props.isExpanded
-          ? renderFiles(props.files)
+          ? renderFiles(props.files, props.onFileClick)
           : renderSummary(props.files)}
     </div>
   );

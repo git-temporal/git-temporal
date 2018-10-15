@@ -5,6 +5,7 @@ Object {
   "authors": 5,
   "commits": 5,
   "files": 13,
+  "isFileSelected": false,
   "linesAdded": 96,
   "linesDeleted": 667,
   "maxAuthorDate": 1537541919,
@@ -40,6 +41,19 @@ exports[`containers/Stats when rendered without props it should match snapshot (
       firstEpochTime={1536691136}
       secondEpochTime={1538663085}
     />
+  </Component>
+  <Component
+    label="Last Commit"
+  >
+    <div>
+      <Component
+        firstEpochTime={1538663085}
+        secondEpochTime={1539563458}
+      />
+      <span>
+         ago
+      </span>
+    </div>
   </Component>
   <Component
     label="Lines Added"

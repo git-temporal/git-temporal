@@ -10,6 +10,7 @@ import { EllipsizedFileName } from 'app/components/EllipsizedFileName';
 export interface FileCardProps {
   file: IFileStats;
   style?: string | object;
+  onFileClick?: (evt, fileName: string) => void;
 }
 
 const defaultCardStyle = {
@@ -18,13 +19,14 @@ const defaultCardStyle = {
 };
 
 export const FileCard = (props: FileCardProps): JSX.Element => {
-  const { file } = props;
+  const { file, onFileClick } = props;
   return (
     <div style={style(defaultCardStyle, props.style)}>
       <EllipsizedFileName
         fileName={file.fileName}
         maxCharacters={47}
         style={style('largerText', { display: 'block' })}
+        onClick={onFileClick}
       />
       <AddedDeleted
         linesAdded={file.linesAdded}

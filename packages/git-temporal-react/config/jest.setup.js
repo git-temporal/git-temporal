@@ -8,3 +8,5 @@ const Adapter = require('enzyme-adapter-react-16');
 Enzyme.configure({
   adapter: new Adapter(),
 });
+
+global.Date.now = jest.fn(() => 1539563458 * 1000);
