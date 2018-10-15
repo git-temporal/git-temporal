@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`containers/Header when rendered without props it should match snapshot (it should be showing empty indicator) 1`] = `
+exports[`containers/Header when rendered with a proper path it should match snapshot (it should have path links for all but last part of path) 1`] = `
 <div
   style={
     Object {
@@ -37,6 +37,139 @@ exports[`containers/Header when rendered without props it should match snapshot 
     }
   >
     Stats for 
+    <span>
+      <span
+        key="0"
+        onClick={[Function]}
+        style={
+          Object {
+            "color": "blue",
+            "cursor": "pointer",
+            "margin": "0px 2px",
+            "textDecoration": "underline",
+          }
+        }
+      >
+        repository:/
+      </span>
+    </span>
+    <span>
+      /
+      <span
+        key="1"
+        onClick={[Function]}
+        style={
+          Object {
+            "color": "blue",
+            "cursor": "pointer",
+            "margin": "0px 2px",
+            "textDecoration": "underline",
+          }
+        }
+      >
+        some
+      </span>
+    </span>
+    <span>
+      /
+      <span
+        key="2"
+        onClick={[Function]}
+        style={
+          Object {
+            "color": "blue",
+            "cursor": "pointer",
+            "margin": "0px 2px",
+            "textDecoration": "underline",
+          }
+        }
+      >
+        path
+      </span>
+    </span>
+    <span>
+      /
+      <span
+        key="3"
+        onClick={[Function]}
+        style={
+          Object {
+            "color": "blue",
+            "cursor": "pointer",
+            "margin": "0px 2px",
+            "textDecoration": "underline",
+          }
+        }
+      >
+        to
+      </span>
+    </span>
+    <span>
+      /
+      <span
+        key="4"
+        style={
+          Object {
+            "margin": "0px 2px",
+          }
+        }
+      >
+        File.txt
+      </span>
+    </span>
+  </span>
+</div>
+`;
+
+exports[`containers/Header when rendered without props it should match snapshot (it should be showing App Name and repository:/) 1`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "white",
+      "borderRadius": 3,
+      "display": "flex",
+      "marginRight": 10,
+      "padding": 10,
+    }
+  }
+>
+  <span
+    style={
+      Object {
+        "color": "#333333",
+        "fontSize": 20,
+        "fontWeight": "bold",
+        "marginBottom": 20,
+        "marginRight": 20,
+      }
+    }
+  >
+    Git Temporal 
+  </span>
+  <span
+    style={
+      Object {
+        "color": "#333333",
+        "fontSize": 18,
+        "fontWeight": "bold",
+        "marginBottom": 20,
+        "marginRight": 20,
+      }
+    }
+  >
+    Stats for 
+    <span>
+      <span
+        key="0"
+        style={
+          Object {
+            "margin": "0px 2px",
+          }
+        }
+      >
+        repository:/
+      </span>
+    </span>
   </span>
 </div>
 `;

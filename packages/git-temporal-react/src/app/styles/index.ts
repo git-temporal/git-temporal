@@ -102,6 +102,7 @@ let globalStyles = {
   link: {
     color: 'blue',
     cursor: 'pointer',
+    textDecoration: 'underline',
   },
   linkHover: {
     _extends: 'link',

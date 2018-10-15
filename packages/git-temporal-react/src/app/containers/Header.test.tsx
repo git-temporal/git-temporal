@@ -17,10 +17,27 @@ describe('containers/Header', () => {
       wrapper = shallow(<Header dispatch={mockDispatch} selectedPath="" />);
     });
 
-    test('it should match snapshot (it should be showing empty indicator)', () => {
+    test('it should match snapshot (it should be showing App Name and repository:/)', () => {
       expect(wrapper).toMatchSnapshot();
     });
   });
+  describe('when rendered with a proper path', () => {
+    let wrapper;
+    let mockDispatch;
+    beforeAll(() => {
+      // @ts-ignore
+      selectPath.mockClear();
+      mockDispatch = jest.fn();
+      wrapper = shallow(
+        <Header dispatch={mockDispatch} selectedPath="some/path/to/File.txt" />
+      );
+    });
+
+    test('it should match snapshot (it should have path links for all but last part of path)', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+  });
+
   describe('when calling mapStateToProps()', () => {
     test('it should respond with props', () => {
       const propsOut = mapStateToProps({ selectedPath: testPath });
