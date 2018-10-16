@@ -12,6 +12,8 @@ export const getHighlightedCommitId = state => state.highlightedCommitId;
 export const getViewCommitsOrFiles = state =>
   state.viewCommitsOrFiles || 'commits';
 
+export const getFilteredAuthors = state => state.filteredAuthors || [];
+
 const sumImpact = commits => {
   const impact = { linesAdded: 0, linesDeleted: 0 };
   for (const commit of commits) {
@@ -21,7 +23,7 @@ const sumImpact = commits => {
   return impact;
 };
 
-// returns array of
+// returns array of authors and commits NOT filtered by filteredAuthors
 export const getAuthorsAndCommits = createSelector(getCommits, commits => {
   const commitsByAuthor = {};
   commits.forEach(commit => {
@@ -57,47 +59,6 @@ export const getAuthorsAndCommits = createSelector(getCommits, commits => {
   });
 });
 
-export const getAuthorsAndStats = createSelector(
-  getAuthorsAndCommits,
-  authorsAndCommits => {
-    let totalLinesAdded = 0;
-    let totalLinesDeleted = 0;
-    let totalCommits = 0;
-    let maxImpact = 0;
-    let maxCommits = 0;
-
-    const authorsArray = authorsAndCommits.map(ac => {
-      totalCommits += ac.commits.length;
-      totalLinesDeleted += ac.linesDeleted;
-      totalLinesAdded += ac.linesAdded;
-      const impact = ac.linesAdded + ac.linesDeleted;
-      if (impact > maxImpact) {
-        maxImpact = impact;
-      }
-      if (ac.commits.length > maxCommits) {
-        maxCommits = ac.commits.length;
-      }
-      return {
-        authorName: ac.authorName,
-        authorEmails: ac.authorEmails,
-        linesAdded: ac.linesAdded,
-        linesDeleted: ac.linesDeleted,
-        totalCommits: ac.commits.length,
-        firstCommitOn: ac.firstCommitOn,
-        lastCommitOn: ac.lastCommitOn,
-      };
-    });
-    return {
-      totalLinesAdded,
-      totalLinesDeleted,
-      totalCommits,
-      maxImpact,
-      maxCommits,
-      authors: authorsArray,
-    };
-  }
-);
-
 const getObjectValues = function(obj) {
   const values = [];
   for (const key in obj) {
@@ -108,10 +69,18 @@ const getObjectValues = function(obj) {
 
 // returns commits for the current path filtered by selected authors
 // and time range
-export const getFilteredCommits = createSelector(getCommits, commits => {
-  // TODO: filter returned commits by selected authors and date range
-  return commits;
-});
+export const getFilteredCommits = createSelector(
+  getCommits,
+  getFilteredAuthors,
+  (commits, filteredAuthors) => {
+    if (!filteredAuthors || filteredAuthors.length <= 0) {
+      return commits;
+    }
+    return commits.filter(commit => {
+      return filteredAuthors.indexOf(commit.authorName) !== -1;
+    });
+  }
+);
 
 // returns an array of
 // {
@@ -120,7 +89,7 @@ export const getFilteredCommits = createSelector(getCommits, commits => {
 //   linesAdded: number,
 //   linesDeleted: number
 // }
-export const getFilteredFiles = createSelector(getCommits, commits => {
+export const getFilteredFiles = createSelector(getFilteredCommits, commits => {
   const commitsByFile = {};
   for (const commit of commits) {
     if (!commit.files) {
@@ -191,6 +160,53 @@ export const getFilteredCommitsState = createSelector(
   })
 );
 
+// note that the authors container state is not filtered by filteredAuthors
+export const getAuthorsContainerState = createSelector(
+  getAuthorsAndCommits,
+  getFilteredAuthors,
+  (authorsAndCommits, filteredAuthors) => {
+    let totalLinesAdded = 0;
+    let totalLinesDeleted = 0;
+    let totalCommits = 0;
+    let maxImpact = 0;
+    let maxCommits = 0;
+
+    const authorsArray = authorsAndCommits.map(ac => {
+      totalCommits += ac.commits.length;
+      totalLinesDeleted += ac.linesDeleted;
+      totalLinesAdded += ac.linesAdded;
+      const impact = ac.linesAdded + ac.linesDeleted;
+      const isFiltered =
+        filteredAuthors && filteredAuthors.indexOf(ac.authorName) !== -1;
+      if (impact > maxImpact) {
+        maxImpact = impact;
+      }
+      if (ac.commits.length > maxCommits) {
+        maxCommits = ac.commits.length;
+      }
+      return {
+        isFiltered,
+        authorName: ac.authorName,
+        authorEmails: ac.authorEmails,
+        linesAdded: ac.linesAdded,
+        linesDeleted: ac.linesDeleted,
+        totalCommits: ac.commits.length,
+        firstCommitOn: ac.firstCommitOn,
+        lastCommitOn: ac.lastCommitOn,
+      };
+    });
+    return {
+      totalLinesAdded,
+      totalLinesDeleted,
+      totalCommits,
+      maxImpact,
+      maxCommits,
+      filteredAuthors,
+      authors: authorsArray,
+    };
+  }
+);
+
 export const getFilesContainerState = createSelector(
   getFilteredFiles,
   getIsFileSelected,
@@ -200,13 +216,21 @@ export const getFilesContainerState = createSelector(
   })
 );
 
-export const getFilteredStats = createSelector(
-  getCommits,
-  getAuthorsAndCommits,
+export const getStatsContainerState = createSelector(
+  getFilteredCommits,
   getFilteredFiles,
   getViewCommitsOrFiles,
   getIsFileSelected,
-  (commits, authorsAndCommits, files, viewCommitsOrFiles, isFileSelected) => {
+  getAuthorsAndCommits,
+  getFilteredAuthors,
+  (
+    commits,
+    files,
+    viewCommitsOrFiles,
+    isFileSelected,
+    authorsAndCommits,
+    filteredAuthors
+  ) => {
     let totalLinesAdded = 0;
     let totalLinesDeleted = 0;
     let minAuthorDate = Date.now();
@@ -228,7 +252,7 @@ export const getFilteredStats = createSelector(
       maxAuthorDate,
       viewCommitsOrFiles,
       isFileSelected,
-      authors: authorsAndCommits.length,
+      authors: filteredAuthors.length || authorsAndCommits.length,
       commits: commits.length,
       files: files.length,
       linesAdded: totalLinesAdded,

@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { List, AutoSizer } from 'react-virtualized';
 
 import { DispatchProps, IAuthorsAndStats } from 'app/interfaces';
-import { getAuthorsAndStats } from 'app/selectors';
+import { getAuthorsContainerState } from 'app/selectors';
+import { addAuthorFilter, removeAuthorFilter } from 'app/actions';
 import { style } from 'app/styles';
 import { AuthorCard } from 'app/components/AuthorCard';
 
@@ -17,10 +18,12 @@ export class Authors extends Component<IAuthorsAndStats & DispatchProps> {
     display: 'flex',
     flexGrow: 1,
     position: 'relative',
-    maxWidth: 280,
+    maxWidth: 320,
   });
 
   render() {
+    // filteredAuthors is passed to RV List to get it to update on changes
+    // to filteredAuthors
     return (
       <div style={this.outerStyle}>
         <AutoSizer>
@@ -32,6 +35,7 @@ export class Authors extends Component<IAuthorsAndStats & DispatchProps> {
               rowHeight={110}
               rowRenderer={this.renderRow}
               rowCount={this.props.authors.length}
+              filteredAuthors={this.props.filteredAuthors}
             />
           )}
         </AutoSizer>
@@ -59,13 +63,24 @@ export class Authors extends Component<IAuthorsAndStats & DispatchProps> {
         totalCommits={totalCommits}
         maxImpact={maxImpact}
         maxCommits={maxCommits}
+        onFilterToggle={() =>
+          this.onAuthorFilterToggle(author.authorName, author.isFiltered)
+        }
       />
     );
+  }
+  onAuthorFilterToggle(authorName: string, isSelected: boolean): void {
+    const { dispatch } = this.props;
+    if (isSelected) {
+      dispatch(removeAuthorFilter(authorName));
+    } else {
+      dispatch(addAuthorFilter(authorName));
+    }
   }
 }
 
 export const mapStateToProps = state => {
-  return getAuthorsAndStats(state);
+  return getAuthorsContainerState(state);
 };
 
 export default connect(mapStateToProps)(Authors);

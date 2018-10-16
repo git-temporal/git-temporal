@@ -9,6 +9,7 @@ Object {
       ],
       "authorName": "Bee Wilkerson",
       "firstCommitOn": 1537541919,
+      "isFiltered": false,
       "lastCommitOn": 1537541919,
       "linesAdded": 2,
       "linesDeleted": 649,
@@ -20,6 +21,7 @@ Object {
       ],
       "authorName": "Daniel Bevenius",
       "firstCommitOn": 1526296167,
+      "isFiltered": false,
       "lastCommitOn": 1526296167,
       "linesAdded": 51,
       "linesDeleted": 1,
@@ -31,6 +33,7 @@ Object {
       ],
       "authorName": "Tobias Nießen",
       "firstCommitOn": 1537272890,
+      "isFiltered": false,
       "lastCommitOn": 1537272890,
       "linesAdded": 29,
       "linesDeleted": 6,
@@ -42,6 +45,7 @@ Object {
       ],
       "authorName": "Michaël Zasso",
       "firstCommitOn": 1537212012,
+      "isFiltered": false,
       "lastCommitOn": 1537212012,
       "linesAdded": 8,
       "linesDeleted": 8,
@@ -53,12 +57,14 @@ Object {
       ],
       "authorName": "Ruben Bridgewater",
       "firstCommitOn": 1537269982,
+      "isFiltered": false,
       "lastCommitOn": 1537269982,
       "linesAdded": 6,
       "linesDeleted": 3,
       "totalCommits": 1,
     },
   ],
+  "filteredAuthors": Array [],
   "maxCommits": 1,
   "maxImpact": 651,
   "totalCommits": 5,
@@ -124,6 +130,7 @@ exports[`containers/Authors when rendered without props it should match snapshot
     ]
   }
   dispatch={[MockFunction]}
+  filteredAuthors={Array []}
   maxCommits={919}
   maxImpact={233918}
   totalCommits={3211}
@@ -138,7 +145,7 @@ exports[`containers/Authors when rendered without props it should match snapshot
         "display": "flex",
         "flexGrow": 1,
         "marginRight": 10,
-        "maxWidth": 280,
+        "maxWidth": 320,
         "padding": 10,
         "position": "relative",
       }
@@ -162,6 +169,7 @@ exports[`containers/Authors when rendered without props it should match snapshot
         <List
           autoHeight={false}
           estimatedRowSize={30}
+          filteredAuthors={Array []}
           height={-20}
           noRowsRenderer={[Function]}
           onRowsRendered={[Function]}
@@ -191,6 +199,7 @@ exports[`containers/Authors when rendered without props it should match snapshot
             containerStyle={Object {}}
             estimatedColumnSize={100}
             estimatedRowSize={30}
+            filteredAuthors={Array []}
             getScrollbarSize={[Function]}
             height={-20}
             isScrollingOptOut={false}

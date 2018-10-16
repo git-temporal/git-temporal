@@ -6,6 +6,10 @@ export const HIGHLIGHT_COMMIT = 'HIGHLIGHT_COMMIT';
 export const VIEW_COMMITS = 'VIEW_COMMITS';
 export const VIEW_FILES = 'VIEW_FILES';
 
+export const ADD_AUTHOR_FILTER = 'ADD_AUTHOR_FILTER';
+export const REMOVE_AUTHOR_FILTER = 'REMOVE_AUTHOR_FILTER';
+export const REMOVE_ALL_AUTHOR_FILTERS = 'REMOVE_ALL_AUTHOR_FILTERS';
+
 export const selectPath = path => (dispatch, _getState) => {
   // if this comes from a rename, follow the most current name
   const actualPath = path.replace(/\{(.*)\s=>\s(.*)\}/g, '$2');
@@ -17,6 +21,20 @@ export const selectPath = path => (dispatch, _getState) => {
 export const invalidatePath = path => ({
   selectedPath: path,
   type: INVALIDATE_PATH,
+});
+
+export const addAuthorFilter = authorName => ({
+  authorName,
+  type: ADD_AUTHOR_FILTER,
+});
+
+export const removeAuthorFilter = authorName => ({
+  authorName,
+  type: REMOVE_AUTHOR_FILTER,
+});
+
+export const removeAllAuthorFilters = () => ({
+  type: REMOVE_ALL_AUTHOR_FILTERS,
 });
 
 export const highlightCommit = commitId => ({

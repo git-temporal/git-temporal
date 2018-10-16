@@ -5,6 +5,8 @@ import { AuthorGravatarImage } from 'app/components/AuthorGravatarImage';
 import { AddedDeleted } from 'app/components/AddedDeleted';
 import { PercentBar } from 'app/components/PercentBar';
 import { EpochSpan } from 'app/components/EpochSpan';
+import { ToggleButton } from 'app/components/ToggleButton';
+import { FilterIcon } from 'app/components/FilterIcon';
 
 import { IAuthorStats } from 'app/interfaces';
 
@@ -16,6 +18,7 @@ export interface AuthorCardProps {
   maxImpact: number;
   maxCommits: number;
   style?: string | object;
+  onFilterToggle?: (evt) => void;
 }
 
 const barLabelStyle = {
@@ -31,12 +34,25 @@ const authorNameStyle = {
   marginBottom: 5,
 };
 
-// numbers for humans have commas
+const filterButtonStyle = {
+  position: 'absolute',
+  right: 5,
+  top: 2,
+  padding: '5px 5px 3px 5px',
+};
+
 export const AuthorCard = (props: AuthorCardProps): JSX.Element => {
-  const { author, maxImpact, maxCommits } = props;
+  const { author, maxImpact, maxCommits, onFilterToggle } = props;
 
   return (
     <div style={style('card', 'flexRows', props.style)}>
+      <ToggleButton
+        isSelected={author.isFiltered}
+        onClick={onFilterToggle}
+        style={filterButtonStyle}
+      >
+        <FilterIcon />
+      </ToggleButton>
       <AuthorGravatarImage emails={author.authorEmails} />
       <div style={style(identifiersStyle)}>
         <div

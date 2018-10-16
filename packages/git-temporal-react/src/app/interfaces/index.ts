@@ -58,6 +58,7 @@ export interface IAuthorStats {
   totalCommits: number;
   firstCommitOn: number;
   lastCommitOn: number;
+  isFiltered: boolean;
 }
 export interface IAuthorsAndStats {
   authors?: any[];
@@ -66,6 +67,7 @@ export interface IAuthorsAndStats {
   totalCommits: number;
   maxImpact: number;
   maxCommits: number;
+  filteredAuthors: string[];
 }
 
 export interface IFileStats {

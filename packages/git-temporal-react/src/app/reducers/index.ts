@@ -7,6 +7,9 @@ import {
   HIGHLIGHT_COMMIT,
   VIEW_COMMITS,
   VIEW_FILES,
+  ADD_AUTHOR_FILTER,
+  REMOVE_AUTHOR_FILTER,
+  REMOVE_ALL_AUTHOR_FILTERS,
 } from '../actions';
 
 export const selectedPath = (state = '', action) => {
@@ -74,6 +77,28 @@ export const didInvalidate = (state = false, action) => {
   }
 };
 
+export const filteredAuthors = (state = [], action) => {
+  switch (action.type) {
+    case REQUEST_COMMITS:
+      return []; // clear filtered Authors on selected path change
+    case ADD_AUTHOR_FILTER:
+      if (state.indexOf(action.authorName) === -1) {
+        const newState = state.slice(0);
+        newState.push(action.authorName);
+        return newState;
+      }
+      return state;
+    case REMOVE_AUTHOR_FILTER:
+      const indexOf = state.indexOf(action.authorName);
+      if (indexOf >= 0) {
+        return state.slice(0, indexOf).concat(state.slice(indexOf + 1));
+      }
+    case REMOVE_ALL_AUTHOR_FILTERS:
+      return [];
+  }
+  return state;
+};
+
 const rootReducer = combineReducers({
   commits,
   selectedPath,
@@ -81,6 +106,7 @@ const rootReducer = combineReducers({
   didInvalidate,
   highlightedCommitId,
   viewCommitsOrFiles,
+  filteredAuthors,
 });
 
 export default rootReducer;

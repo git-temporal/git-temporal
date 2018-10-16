@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { DispatchProps } from 'app/interfaces';
-import { getFilteredStats } from 'app/selectors';
+import { getStatsContainerState } from 'app/selectors';
 import { style } from 'app/styles';
 import { StackedLabelHeader } from 'app/components/StackedLabelHeader';
 import { CommaNumber } from 'app/components/CommaNumber';
@@ -94,7 +94,7 @@ export class Stats extends Component<StatsProps & DispatchProps> {
 }
 
 export const mapStateToProps = state => {
-  return getFilteredStats(state);
+  return getStatsContainerState(state);
 };
 
 export default connect(mapStateToProps)(Stats);

@@ -45,6 +45,7 @@ const authorsAndStats = {
   totalCommits: 3211,
   maxImpact: 233918,
   maxCommits: 919,
+  filteredAuthors: [],
 };
 
 export default authorsAndStats;
