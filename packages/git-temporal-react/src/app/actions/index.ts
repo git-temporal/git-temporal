@@ -1,64 +1,54 @@
-export const REQUEST_COMMITS = 'REQUEST_COMMITS';
-export const RECEIVE_COMMITS = 'RECEIVE_COMMITS';
-export const SELECT_PATH = 'SELECT_PATH';
-export const INVALIDATE_PATH = 'INVALIDATE_PATH';
-export const HIGHLIGHT_COMMIT = 'HIGHLIGHT_COMMIT';
-export const VIEW_COMMITS = 'VIEW_COMMITS';
-export const VIEW_FILES = 'VIEW_FILES';
-
-export const ADD_AUTHOR_FILTER = 'ADD_AUTHOR_FILTER';
-export const REMOVE_AUTHOR_FILTER = 'REMOVE_AUTHOR_FILTER';
-export const REMOVE_ALL_AUTHOR_FILTERS = 'REMOVE_ALL_AUTHOR_FILTERS';
+import { ActionTypes } from './ActionTypes';
 
 export const selectPath = path => (dispatch, _getState) => {
   // if this comes from a rename, follow the most current name
   const actualPath = path.replace(/\{(.*)\s=>\s(.*)\}/g, '$2');
 
   dispatch(fetchCommitsIfNeeded(actualPath));
-  return { selectedPath: actualPath, type: SELECT_PATH };
+  return { selectedPath: actualPath, type: ActionTypes.SELECT_PATH };
 };
 
 export const invalidatePath = path => ({
   selectedPath: path,
-  type: INVALIDATE_PATH,
+  type: ActionTypes.INVALIDATE_PATH,
 });
 
 export const addAuthorFilter = authorName => ({
   authorName,
-  type: ADD_AUTHOR_FILTER,
+  type: ActionTypes.ADD_AUTHOR_FILTER,
 });
 
 export const removeAuthorFilter = authorName => ({
   authorName,
-  type: REMOVE_AUTHOR_FILTER,
+  type: ActionTypes.REMOVE_AUTHOR_FILTER,
 });
 
 export const removeAllAuthorFilters = () => ({
-  type: REMOVE_ALL_AUTHOR_FILTERS,
+  type: ActionTypes.REMOVE_ALL_AUTHOR_FILTERS,
 });
 
 export const highlightCommit = commitId => ({
   commitId,
-  type: HIGHLIGHT_COMMIT,
+  type: ActionTypes.HIGHLIGHT_COMMIT,
 });
 
 export const viewCommits = () => ({
-  type: VIEW_COMMITS,
+  type: ActionTypes.VIEW_COMMITS,
 });
 
 export const viewFiles = () => ({
-  type: VIEW_FILES,
+  type: ActionTypes.VIEW_FILES,
 });
 
 export const requestCommits = path => ({
   selectedPath: path,
-  type: REQUEST_COMMITS,
+  type: ActionTypes.REQUEST_COMMITS,
 });
 
 export const receiveCommits = (path, json) => ({
   selectedPath: path,
   commits: json.commits,
-  type: RECEIVE_COMMITS,
+  type: ActionTypes.RECEIVE_COMMITS,
 });
 
 const fetchCommits = path => dispatch => {
