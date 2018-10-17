@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { DispatchProps } from 'app/interfaces';
 import { getHeaderContainerState } from 'app/selectors';
 import { style } from 'app/styles';
-import { selectPath } from 'app/actions';
+import { selectPath, removeAllAuthorFilters } from 'app/actions';
 
 interface HeaderProps {
   // If not provided, the whole repository is assumed
@@ -80,8 +80,20 @@ export class Header extends Component<HeaderProps & DispatchProps> {
     if (!filteredAuthors || filteredAuthors.length <= 0) {
       return null;
     }
-    return `Showing commits by ${filteredAuthors.join(', ')}`;
+    return (
+      <span>
+        Showing commits by {filteredAuthors.join(', ')} (
+        <span style={style('link')} onClick={this.onShowAllAuthors}>
+          show all authors
+        </span>
+        )
+      </span>
+    );
   }
+
+  onShowAllAuthors = () => {
+    this.props.dispatch(removeAllAuthorFilters());
+  };
 
   onLinkPartClick = fullPath => {
     this.props.dispatch(selectPath(fullPath));

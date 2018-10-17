@@ -280,7 +280,24 @@ exports[`containers/Header when rendered with filteredAuthors it should match sn
           }
         }
       >
-        Showing commits by Author One, Author Two, Author Three
+        <span>
+          Showing commits by 
+          Author One, Author Two, Author Three
+           (
+          <span
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "blue",
+                "cursor": "pointer",
+                "textDecoration": "underline",
+              }
+            }
+          >
+            show all authors
+          </span>
+          )
+        </span>
       </div>
     </div>
   </div>
