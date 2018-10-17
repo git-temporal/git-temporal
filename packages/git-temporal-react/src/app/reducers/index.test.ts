@@ -87,56 +87,40 @@ describe('reducers', () => {
       {
         reducer: reducers.selectedPath,
         state: '',
-        actionTypes: [
-          ActionTypes.SELECT_PATH,
-          ActionTypes.REQUEST_COMMITS,
-          ActionTypes.RECEIVE_COMMITS,
-        ],
         action: { selectedPath: '/some/path' },
       },
       {
         reducer: reducers.highlightedCommitId,
         state: '',
-        actionTypes: [ActionTypes.HIGHLIGHT_COMMIT],
         action: { commitId: 'aphonyIdSTring' },
       },
       {
         reducer: reducers.viewCommitsOrFiles,
         state: '',
-        actionTypes: [ActionTypes.VIEW_COMMITS, ActionTypes.VIEW_FILES],
         action: {},
       },
       {
         reducer: reducers.commits,
-        state: '',
-        actionTypes: [
-          ActionTypes.INVALIDATE_PATH,
-          ActionTypes.REQUEST_COMMITS,
-          ActionTypes.RECEIVE_COMMITS,
-        ],
+        state: [],
         action: { commits: [] },
       },
       {
         reducer: reducers.isFetching,
-        state: '',
-        actionTypes: [ActionTypes.REQUEST_COMMITS, ActionTypes.RECEIVE_COMMITS],
+        state: false,
         action: {},
       },
       {
         reducer: reducers.didInvalidate,
-        state: '',
-        actionTypes: [
-          ActionTypes.INVALIDATE_PATH,
-          ActionTypes.REQUEST_COMMITS,
-          ActionTypes.RECEIVE_COMMITS,
-        ],
+        state: false,
         action: {},
       },
     ];
     test('It should always return a state for tested ActionTypes', () => {
       for (const test of testsToRun) {
-        for (const actionType of test.actionTypes) {
-          const action = Object.assign({}, test.action, { type: actionType });
+        for (const actionTypeKey of Object.keys(ActionTypes)) {
+          const action = Object.assign({}, test.action, {
+            type: ActionTypes[actionTypeKey],
+          });
           const fn = test.reducer as any;
           expect(fn(test.state, action)).toBeDefined();
         }
