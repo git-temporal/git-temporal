@@ -160,6 +160,15 @@ export const getFilteredCommitsState = createSelector(
   })
 );
 
+export const getHeaderContainerState = createSelector(
+  getSelectedPath,
+  getFilteredAuthors,
+  (selectedPath, filteredAuthors) => ({
+    selectedPath,
+    filteredAuthors,
+  })
+);
+
 // note that the authors container state is not filtered by filteredAuthors
 export const getAuthorsContainerState = createSelector(
   getAuthorsAndCommits,

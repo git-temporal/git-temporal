@@ -24,6 +24,10 @@ let globalStyles = {
     display: 'block',
     marginBottom: 10,
   },
+  inlineBlock: {
+    display: 'inline-block',
+    marginRight: 10,
+  },
   card: {
     _extends: 'panel',
     borderRadius: 7,
@@ -69,7 +73,8 @@ let globalStyles = {
   },
   h1Text: {
     _extends: 'headerText',
-    fontSize: 20,
+    fontSize: 28,
+    marginRight: 20,
   },
   h2Text: {
     _extends: 'headerText',
@@ -82,6 +87,15 @@ let globalStyles = {
   h4Text: {
     _extends: 'headerText',
     fontSize: 12,
+    marginBottom: 10,
+    marginRight: 10,
+  },
+  h5Text: {
+    _extends: 'headerText',
+    fontSize: 14,
+    fontWeight: 'normal',
+    marginBottom: 10,
+    marginRight: 10,
   },
   linesAdded: {
     color: 'green',

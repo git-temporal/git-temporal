@@ -2,9 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { selectPath } from 'app/actions';
 
-import { Header, mapStateToProps } from './Header';
+import { Header } from './Header';
 
-const testPath = 'some/contrived/path/file';
+const testAuthors = ['Author One', 'Author Two', 'Author Three'];
 
 describe('containers/Header', () => {
   describe('when rendered without props', () => {
@@ -37,11 +37,20 @@ describe('containers/Header', () => {
       expect(wrapper).toMatchSnapshot();
     });
   });
+  describe('when rendered with filteredAuthors', () => {
+    let wrapper;
+    let mockDispatch;
+    beforeAll(() => {
+      // @ts-ignore
+      selectPath.mockClear();
+      mockDispatch = jest.fn();
+      wrapper = shallow(
+        <Header dispatch={mockDispatch} filteredAuthors={testAuthors} />
+      );
+    });
 
-  describe('when calling mapStateToProps()', () => {
-    test('it should respond with props', () => {
-      const propsOut = mapStateToProps({ selectedPath: testPath });
-      expect(propsOut.selectedPath).toBe(testPath);
+    test('it should match snapshot (it should have path links for all but last part of path)', () => {
+      expect(wrapper).toMatchSnapshot();
     });
   });
 });

@@ -7,117 +7,296 @@ exports[`containers/Header when rendered with a proper path it should match snap
       "backgroundColor": "white",
       "borderRadius": 3,
       "display": "flex",
+      "flexDirection": "column",
       "marginRight": 10,
       "padding": 10,
     }
   }
 >
-  <span
+  <div
     style={
       Object {
-        "color": "#333333",
-        "fontSize": 20,
-        "fontWeight": "bold",
-        "marginBottom": 20,
-        "marginRight": 20,
+        "display": "flex",
+        "flexDirection": "row",
       }
     }
   >
-    Git Temporal 
-  </span>
-  <span
+    <div
+      style={
+        Object {
+          "color": "#333333",
+          "display": "inline-block",
+          "fontSize": 28,
+          "fontWeight": "bold",
+          "marginBottom": 20,
+          "marginRight": 20,
+        }
+      }
+    >
+      Git Temporal 
+    </div>
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "flexDirection": "column",
+          "marginBottom": 20,
+          "marginRight": 10,
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "color": "#333333",
+            "fontSize": 18,
+            "fontWeight": "bold",
+            "marginBottom": 10,
+            "marginRight": 20,
+          }
+        }
+      >
+        Stats for 
+        <span
+          style={
+            Object {
+              "wordBreak": "break-all",
+            }
+          }
+        >
+          <span
+            key="0"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "blue",
+                "cursor": "pointer",
+                "margin": "0px 2px",
+                "textDecoration": "underline",
+              }
+            }
+          >
+            repository:/
+          </span>
+        </span>
+        <span
+          style={
+            Object {
+              "wordBreak": "break-all",
+            }
+          }
+        >
+          /
+          <span
+            key="1"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "blue",
+                "cursor": "pointer",
+                "margin": "0px 2px",
+                "textDecoration": "underline",
+              }
+            }
+          >
+            some
+          </span>
+        </span>
+        <span
+          style={
+            Object {
+              "wordBreak": "break-all",
+            }
+          }
+        >
+          /
+          <span
+            key="2"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "blue",
+                "cursor": "pointer",
+                "margin": "0px 2px",
+                "textDecoration": "underline",
+              }
+            }
+          >
+            path
+          </span>
+        </span>
+        <span
+          style={
+            Object {
+              "wordBreak": "break-all",
+            }
+          }
+        >
+          /
+          <span
+            key="3"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "blue",
+                "cursor": "pointer",
+                "margin": "0px 2px",
+                "textDecoration": "underline",
+              }
+            }
+          >
+            to
+          </span>
+        </span>
+        <span
+          style={
+            Object {
+              "wordBreak": "break-all",
+            }
+          }
+        >
+          /
+          <span
+            key="4"
+            style={
+              Object {
+                "margin": "0px 2px",
+              }
+            }
+          >
+            File.txt
+          </span>
+        </span>
+      </div>
+      <div
+        style={
+          Object {
+            "color": "#333333",
+            "fontSize": 13,
+            "fontWeight": "normal",
+          }
+        }
+      />
+    </div>
+  </div>
+  <div
     style={
       Object {
         "color": "#333333",
-        "fontSize": 18,
-        "fontWeight": "bold",
-        "marginBottom": 20,
-        "marginRight": 20,
+        "fontSize": 14,
+        "fontWeight": "normal",
+        "marginBottom": 10,
+        "marginRight": 10,
       }
     }
   >
-    Stats for 
-    <span>
-      <span
-        key="0"
-        onClick={[Function]}
+    From January 18, 2014 18:06 GMT to January 19, 2014 18:06 GMT
+  </div>
+</div>
+`;
+
+exports[`containers/Header when rendered with filteredAuthors it should match snapshot (it should have path links for all but last part of path) 1`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "white",
+      "borderRadius": 3,
+      "display": "flex",
+      "flexDirection": "column",
+      "marginRight": 10,
+      "padding": 10,
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "row",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "color": "#333333",
+          "display": "inline-block",
+          "fontSize": 28,
+          "fontWeight": "bold",
+          "marginBottom": 20,
+          "marginRight": 20,
+        }
+      }
+    >
+      Git Temporal 
+    </div>
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "flexDirection": "column",
+          "marginBottom": 20,
+          "marginRight": 10,
+        }
+      }
+    >
+      <div
         style={
           Object {
-            "color": "blue",
-            "cursor": "pointer",
-            "margin": "0px 2px",
-            "textDecoration": "underline",
+            "color": "#333333",
+            "fontSize": 18,
+            "fontWeight": "bold",
+            "marginBottom": 10,
+            "marginRight": 20,
           }
         }
       >
-        repository:/
-      </span>
-    </span>
-    <span>
-      /
-      <span
-        key="1"
-        onClick={[Function]}
+        Stats for 
+        <span
+          style={
+            Object {
+              "wordBreak": "break-all",
+            }
+          }
+        >
+          <span
+            key="0"
+            style={
+              Object {
+                "margin": "0px 2px",
+              }
+            }
+          >
+            repository:/
+          </span>
+        </span>
+      </div>
+      <div
         style={
           Object {
-            "color": "blue",
-            "cursor": "pointer",
-            "margin": "0px 2px",
-            "textDecoration": "underline",
+            "color": "#333333",
+            "fontSize": 13,
+            "fontWeight": "normal",
           }
         }
       >
-        some
-      </span>
-    </span>
-    <span>
-      /
-      <span
-        key="2"
-        onClick={[Function]}
-        style={
-          Object {
-            "color": "blue",
-            "cursor": "pointer",
-            "margin": "0px 2px",
-            "textDecoration": "underline",
-          }
-        }
-      >
-        path
-      </span>
-    </span>
-    <span>
-      /
-      <span
-        key="3"
-        onClick={[Function]}
-        style={
-          Object {
-            "color": "blue",
-            "cursor": "pointer",
-            "margin": "0px 2px",
-            "textDecoration": "underline",
-          }
-        }
-      >
-        to
-      </span>
-    </span>
-    <span>
-      /
-      <span
-        key="4"
-        style={
-          Object {
-            "margin": "0px 2px",
-          }
-        }
-      >
-        File.txt
-      </span>
-    </span>
-  </span>
+        Showing commits by Author One, Author Two, Author Three
+      </div>
+    </div>
+  </div>
+  <div
+    style={
+      Object {
+        "color": "#333333",
+        "fontSize": 14,
+        "fontWeight": "normal",
+        "marginBottom": 10,
+        "marginRight": 10,
+      }
+    }
+  >
+    From January 18, 2014 18:06 GMT to January 19, 2014 18:06 GMT
+  </div>
 </div>
 `;
 
@@ -128,48 +307,98 @@ exports[`containers/Header when rendered without props it should match snapshot 
       "backgroundColor": "white",
       "borderRadius": 3,
       "display": "flex",
+      "flexDirection": "column",
       "marginRight": 10,
       "padding": 10,
     }
   }
 >
-  <span
+  <div
     style={
       Object {
-        "color": "#333333",
-        "fontSize": 20,
-        "fontWeight": "bold",
-        "marginBottom": 20,
-        "marginRight": 20,
+        "display": "flex",
+        "flexDirection": "row",
       }
     }
   >
-    Git Temporal 
-  </span>
-  <span
-    style={
-      Object {
-        "color": "#333333",
-        "fontSize": 18,
-        "fontWeight": "bold",
-        "marginBottom": 20,
-        "marginRight": 20,
+    <div
+      style={
+        Object {
+          "color": "#333333",
+          "display": "inline-block",
+          "fontSize": 28,
+          "fontWeight": "bold",
+          "marginBottom": 20,
+          "marginRight": 20,
+        }
       }
-    }
-  >
-    Stats for 
-    <span>
-      <span
-        key="0"
+    >
+      Git Temporal 
+    </div>
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "flexDirection": "column",
+          "marginBottom": 20,
+          "marginRight": 10,
+        }
+      }
+    >
+      <div
         style={
           Object {
-            "margin": "0px 2px",
+            "color": "#333333",
+            "fontSize": 18,
+            "fontWeight": "bold",
+            "marginBottom": 10,
+            "marginRight": 20,
           }
         }
       >
-        repository:/
-      </span>
-    </span>
-  </span>
+        Stats for 
+        <span
+          style={
+            Object {
+              "wordBreak": "break-all",
+            }
+          }
+        >
+          <span
+            key="0"
+            style={
+              Object {
+                "margin": "0px 2px",
+              }
+            }
+          >
+            repository:/
+          </span>
+        </span>
+      </div>
+      <div
+        style={
+          Object {
+            "color": "#333333",
+            "fontSize": 13,
+            "fontWeight": "normal",
+          }
+        }
+      />
+    </div>
+  </div>
+  <div
+    style={
+      Object {
+        "color": "#333333",
+        "fontSize": 14,
+        "fontWeight": "normal",
+        "marginBottom": 10,
+        "marginRight": 10,
+      }
+    }
+  >
+    From January 18, 2014 18:06 GMT to January 19, 2014 18:06 GMT
+  </div>
 </div>
 `;
