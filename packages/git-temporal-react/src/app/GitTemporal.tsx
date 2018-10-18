@@ -12,6 +12,8 @@ import Authors from 'app/containers/Authors';
 import Files from 'app/containers/Files';
 import Commits from 'app/containers/Commits';
 
+import { SpinnerContainer } from 'app/components/SpinnerContainer';
+
 export class GitTemporal extends Component<
   GitTemporalProps & DispatchProps & StateProps
 > {
@@ -32,23 +34,27 @@ export class GitTemporal extends Component<
 
     return (
       <div style={style('page')}>
-        {isFetching ? (
-          <h2> Loading...</h2>
-        ) : !commits || commits.length <= 0 ? (
+        {!isFetching && (!commits || commits.length <= 0) ? (
           <h2>Empty.</h2>
         ) : (
-          <div
-            style={style('flexColumns', {
-              height: '100%',
-            })}
-          >
-            <Header />
-            <Stats />
-            <div style={style('flexRows', { flexGrow: 1 })}>
-              <Authors />
-              {viewCommitsOrFiles === 'files' ? <Files /> : <Commits />}
+          <SpinnerContainer isSpinning={isFetching}>
+            <div
+              style={style('flexColumns', {
+                height: '100%',
+              })}
+            >
+              <Header />
+              {isFetching ? null : (
+                <div style={style('flexColumns', { flexGrow: 1 })}>
+                  <Stats />
+                  <div style={style('flexRows', { flexGrow: 1 })}>
+                    <Authors />
+                    {viewCommitsOrFiles === 'files' ? <Files /> : <Commits />}
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
+          </SpinnerContainer>
         )}
       </div>
     );
