@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/RadioMenuItem when rendered with isSelected=false it should match snapshot 1`] = `
+<MenuItem
+  onClick={[MockFunction]}
+  style={Object {}}
+>
+  <div>
+    <Component
+      isSelected={false}
+      onClick={[MockFunction]}
+      style={
+        Object {
+          "borderRadius": 7,
+          "display": "inline-block",
+          "height": 15,
+          "marginRight": 10,
+          "width": 15,
+        }
+      }
+    />
+    This is a radio menu item
+  </div>
+</MenuItem>
+`;
+
+exports[`components/RadioMenuItem when rendered with isSelected=true it should match snapshot 1`] = `
+<MenuItem
+  onClick={[MockFunction]}
+  style={Object {}}
+>
+  <div>
+    <Component
+      isSelected={true}
+      onClick={[MockFunction]}
+      style={
+        Object {
+          "borderRadius": 7,
+          "display": "inline-block",
+          "height": 15,
+          "marginRight": 10,
+          "width": 15,
+        }
+      }
+    />
+    This is a radio menu item
+  </div>
+</MenuItem>
+`;

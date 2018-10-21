@@ -14,7 +14,7 @@ describe('containers/Files', () => {
       wrapper = mount(<Files dispatch={mockDispatch} {...filesAndStats} />);
     });
 
-    test('it should match snapshot (it should be showing empty indicator)', () => {
+    test('it should match snapshot (it should be showing files)', () => {
       expect(wrapper).toMatchSnapshot();
     });
   });

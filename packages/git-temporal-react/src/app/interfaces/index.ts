@@ -20,6 +20,10 @@ export interface DispatchProps {
   dispatch?: (action: any) => void;
 }
 
+export interface TestProps {
+  testId?: string;
+}
+
 export interface ICommitFile {
   name: string;
   linesAdded: number;
@@ -68,6 +72,8 @@ export interface IAuthorsAndStats {
   maxImpact: number;
   maxCommits: number;
   filteredAuthors: string[];
+  authorsContainerFilter: string;
+  authorsContainerSort: string;
 }
 
 export interface IFileStats {

@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/SpinnerContainer when rendered with isSelected=false it should match snapshot 1`] = `
+<div
+  style={
+    Object {
+      "display": "block",
+      "height": "100%",
+      "position": "relative",
+      "width": "100%",
+    }
+  }
+>
+  This is should not be obscured
+</div>
+`;
+
+exports[`components/SpinnerContainer when rendered with isSelected=true it should match snapshot 1`] = `
+<div
+  style={
+    Object {
+      "display": "block",
+      "height": "100%",
+      "position": "relative",
+      "width": "100%",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "backgroundColor": "white",
+        "height": "100%",
+        "left": 0,
+        "opacity": 0.9,
+        "paddingTop": "10%",
+        "position": "absolute",
+        "textAlign": "center",
+        "top": 0,
+        "verticalAlign": "middle",
+        "width": "100%",
+        "zIndex": "5",
+      }
+    }
+  >
+    <Component />
+  </div>
+  This should be obscured
+</div>
+`;

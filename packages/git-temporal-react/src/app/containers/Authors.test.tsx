@@ -1,27 +1,56 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 
-import { Authors, mapStateToProps } from './Authors';
-import commitsForPath from 'testHelpers/mocks/commitsForPath';
+import { Authors } from './Authors';
 import authorsAndStats from 'testHelpers/mocks/authorsAndStats';
 
 describe('containers/Authors', () => {
-  describe('when rendered without props', () => {
+  describe('when rendered mock authors and stats', () => {
     let wrapper;
     let mockDispatch;
     beforeAll(() => {
+      debugger;
       mockDispatch = jest.fn();
-      wrapper = mount(<Authors dispatch={mockDispatch} {...authorsAndStats} />);
+      wrapper = shallow(
+        <Authors dispatch={mockDispatch} {...authorsAndStats} />
+      );
     });
 
-    test('it should match snapshot (it should be showing empty indicator)', () => {
+    test('it should match snapshot', () => {
       expect(wrapper).toMatchSnapshot();
     });
   });
-  describe('when calling mapStateToProps()', () => {
-    test('it should respond with props', () => {
-      const propsOut = mapStateToProps(commitsForPath);
-      expect(propsOut).toMatchSnapshot();
+  describe('when rendered mock filteredAuthors ', () => {
+    let wrapper;
+    let mockDispatch;
+    beforeAll(() => {
+      debugger;
+      mockDispatch = jest.fn();
+      wrapper = shallow(
+        <Authors dispatch={mockDispatch} {...authorsAndStats} />
+      );
+    });
+    beforeEach(() => {
+      mockDispatch.mockClear();
+    });
+    test('it should match snapshot', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+    test('calling renderList() should render the list', () => {
+      expect(wrapper.instance().renderList()).toMatchSnapshot();
+    });
+    test('calling renderRow() should render a row', () => {
+      expect(
+        wrapper.instance().renderRow({ index: 0, style: {}, key: 1 })
+      ).toMatchSnapshot();
+    });
+    test('calling onAuthorFilterToggle("bob", true) should dispatch removeAuthorFilter', () => {
+      wrapper.instance().onAuthorFilterToggle('bob', true);
+      expect(mockDispatch).toHaveBeenCalledTimes(1);
+    });
+    test('calling onAuthorFilterToggle("bob", false) should dispatch removeAuthorFilter', () => {
+      wrapper.instance().onAuthorFilterToggle('bob', false);
+      expect(mockDispatch).toHaveBeenCalledTimes(1);
     });
   });
 });

@@ -70,11 +70,13 @@ let globalStyles = {
     fontSize: 11,
   },
   boldText: {
-    _extends: 'normalText',
     fontWeight: 'bold',
   },
+  disabledText: {
+    color: '#e0e0e0',
+  },
   headerText: {
-    _extends: 'boldText',
+    _extends: ['normalText', 'boldText'],
     marginBottom: 20,
     marginRight: 20,
   },
@@ -113,7 +115,6 @@ let globalStyles = {
   selectable: {
     border: '1px solid lightskyblue',
     borderRadius: 3,
-    padding: '0px 5px',
     cursor: 'pointer',
   },
   selected: {
@@ -128,6 +129,10 @@ let globalStyles = {
   linkHover: {
     _extends: 'link',
     textDecoration: 'underline',
+  },
+  menuDivider: {
+    borderBottom: '2px solid whitesmoke',
+    marginBottom: 10,
   },
 };
 

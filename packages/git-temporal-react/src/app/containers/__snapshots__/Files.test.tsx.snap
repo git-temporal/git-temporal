@@ -151,7 +151,7 @@ Object {
 }
 `;
 
-exports[`containers/Files when rendered without props it should match snapshot (it should be showing empty indicator) 1`] = `
+exports[`containers/Files when rendered without props it should match snapshot (it should be showing files) 1`] = `
 <Files
   dispatch={[MockFunction]}
   files={

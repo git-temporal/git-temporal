@@ -1,5 +1,9 @@
 import { combineReducers } from 'redux';
-import { ActionTypes } from 'app/actions/ActionTypes';
+import {
+  ActionTypes,
+  AuthorsContainerFilters,
+  AuthorsContainerSorts,
+} from 'app/actions/ActionTypes';
 
 // these little actions are more trouble to test and end up being brittle
 // ignoring coverage on the smallest
@@ -69,6 +73,28 @@ export const didInvalidate = (state = false, action) => {
   }
 };
 
+export const authorsContainerFilter = (
+  state = AuthorsContainerFilters.ALL,
+  action
+) => {
+  switch (action.type) {
+    case ActionTypes.SET_AUTHORS_CONTAINER_FILTER:
+      return action.filter;
+  }
+  return state;
+};
+
+export const authorsContainerSort = (
+  state = AuthorsContainerSorts.TIME,
+  action
+) => {
+  switch (action.type) {
+    case ActionTypes.SET_AUTHORS_CONTAINER_SORT:
+      return action.sort;
+  }
+  return state;
+};
+
 export const filteredAuthors = (state = [], action) => {
   switch (action.type) {
     case ActionTypes.REQUEST_COMMITS:
@@ -100,6 +126,8 @@ const rootReducer = combineReducers({
   highlightedCommitId,
   viewCommitsOrFiles,
   filteredAuthors,
+  authorsContainerFilter,
+  authorsContainerSort,
 });
 
 export default rootReducer;

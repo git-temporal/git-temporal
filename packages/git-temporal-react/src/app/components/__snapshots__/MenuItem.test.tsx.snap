@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/MenuItem when rendered with required props it should match snapshot (it should have rendered a label and a text element) 1`] = `
+<div
+  onClick={[MockFunction]}
+  onMouseLeave={[Function]}
+  onMouseOver={[Function]}
+  style={
+    Object {
+      "border": "1px solid white",
+      "color": "#333333",
+      "display": "block",
+      "fontSize": 13,
+      "fontWeight": "normal",
+      "marginBottom": 10,
+      "padding": 5,
+    }
+  }
+>
+  this is the a menu item
+</div>
+`;

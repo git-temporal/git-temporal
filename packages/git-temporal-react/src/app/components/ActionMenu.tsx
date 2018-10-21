@@ -3,7 +3,7 @@ import { style } from 'app/styles';
 import { ToggleButton } from 'app/components/ToggleButton';
 
 export interface ActionMenuProps {
-  // This is the text or JSX that gets wrapped in a Toggle Button
+  // The children are the menu content
   children: string | JSX.Element | JSX.Element[];
   style?: string | object;
 }
@@ -23,13 +23,14 @@ const buttonStyle = {
   height: 29,
   width: 14,
   margin: 0,
+  padding: '0px 5px',
 };
 
 const menuStyle = {
   _extends: 'popup',
   right: 0,
   marginRight: 0,
-  minWidth: 160,
+  minWidth: 180,
   zIndex: 4,
 };
 

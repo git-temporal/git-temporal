@@ -7,7 +7,9 @@ import { getAuthorsContainerState } from 'app/selectors';
 import { addAuthorFilter, removeAuthorFilter } from 'app/actions';
 import { style } from 'app/styles';
 import { AuthorCard } from 'app/components/AuthorCard';
-import { ActionMenu } from 'app/components/ActionMenu';
+
+import AuthorsActionMenu from 'app/containers/AuthorsActionMenu';
+import { AuthorsContainerFilters } from 'app/actions/ActionTypes';
 
 export class Authors extends Component<IAuthorsAndStats & DispatchProps> {
   constructor(props) {
@@ -27,45 +29,62 @@ export class Authors extends Component<IAuthorsAndStats & DispatchProps> {
     display: 'block',
     flexGrow: 0,
   };
-  readonly actionMenuStyle = {
-    _extends: 'normalText',
-    position: 'absolute',
-    right: 10,
-  };
   readonly listStyle = {
     display: 'flex',
     flexGrow: 1,
   };
 
   render() {
+    const { authorsContainerFilter, authorsContainerSort } = this.props;
+    const filterTitle =
+      authorsContainerFilter === AuthorsContainerFilters.FILTERED
+        ? 'Filtered '
+        : '';
+    const sortTitle = authorsContainerSort;
+
     // filteredAuthors is passed to RV List to get it to update on changes
     // to filteredAuthors
     return (
       <div style={style(this.outerStyle)}>
-        <ActionMenu style={style(this.actionMenuStyle)}>
-          <div>This is the first Action</div>
-          <div>This is the second</div>
-        </ActionMenu>
+        <AuthorsActionMenu />
         <div style={style(this.headerStyle)}>
-          <span>Authors by Impact </span>
+          <span data-testId="header">
+            {filterTitle}
+            Authors by {sortTitle}
+          </span>
         </div>
         <div style={style(this.listStyle)}>
           <AutoSizer>
-            {({ height, width }) => (
-              <List
-                width={
-                  width || 100 // width and height below need minimums for testing
-                }
-                height={height || 100}
-                rowHeight={110}
-                rowRenderer={this.renderRow}
-                rowCount={this.props.authors.length}
-                filteredAuthors={this.props.filteredAuthors}
-              />
-            )}
+            {({ height, width }) => {
+              // filteredAuthors, authorsContainerFilter and authorsContainerSort are passed
+              // to the list to force it to update when they change
+              return this.renderList(height, width);
+            }}
           </AutoSizer>
         </div>
       </div>
+    );
+  }
+  renderList(height, width) {
+    const {
+      authors,
+      filteredAuthors,
+      authorsContainerFilter,
+      authorsContainerSort,
+    } = this.props;
+    return (
+      <List
+        width={
+          width || 100 // width and height below need minimums for testing
+        }
+        height={height || 100}
+        rowHeight={110}
+        rowRenderer={this.renderRow}
+        rowCount={authors.length}
+        filteredAuthors={filteredAuthors}
+        authorsContainerFilter={authorsContainerFilter}
+        authorsContainerSort={authorsContainerSort}
+      />
     );
   }
   renderRow({ index, style, key }) {
@@ -105,8 +124,4 @@ export class Authors extends Component<IAuthorsAndStats & DispatchProps> {
   }
 }
 
-export const mapStateToProps = state => {
-  return getAuthorsContainerState(state);
-};
-
-export default connect(mapStateToProps)(Authors);
+export default connect(getAuthorsContainerState)(Authors);

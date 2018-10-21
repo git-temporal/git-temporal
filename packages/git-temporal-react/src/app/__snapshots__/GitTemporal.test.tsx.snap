@@ -154,30 +154,44 @@ exports[`app/GitTemporal when changing path prop it should match snapshot (shoul
     }
   }
 >
-  <div
-    style={
-      Object {
-        "display": "flex",
-        "flexDirection": "column",
-        "height": "100%",
-      }
-    }
+  <Component
+    isSpinning={false}
   >
-    <Connect(Header) />
-    <Connect(Stats) />
     <div
       style={
         Object {
           "display": "flex",
-          "flexDirection": "row",
-          "flexGrow": 1,
+          "flexDirection": "column",
+          "height": "100%",
         }
       }
     >
-      <Connect(Authors) />
-      <Connect(Commits) />
+      <Connect(Header) />
+      <div
+        style={
+          Object {
+            "display": "flex",
+            "flexDirection": "column",
+            "flexGrow": 1,
+          }
+        }
+      >
+        <Connect(Stats) />
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "flexDirection": "row",
+              "flexGrow": 1,
+            }
+          }
+        >
+          <Connect(Authors) />
+          <Connect(Commits) />
+        </div>
+      </div>
     </div>
-  </div>
+  </Component>
 </div>
 `;
 
@@ -192,9 +206,21 @@ exports[`app/GitTemporal when rendered with commits and isFetching it should mat
     }
   }
 >
-  <h2>
-     Loading...
-  </h2>
+  <Component
+    isSpinning={true}
+  >
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "flexDirection": "column",
+          "height": "100%",
+        }
+      }
+    >
+      <Connect(Header) />
+    </div>
+  </Component>
 </div>
 `;
 
@@ -209,30 +235,44 @@ exports[`app/GitTemporal when rendered with commits and not fetching it should m
     }
   }
 >
-  <div
-    style={
-      Object {
-        "display": "flex",
-        "flexDirection": "column",
-        "height": "100%",
-      }
-    }
+  <Component
+    isSpinning={false}
   >
-    <Connect(Header) />
-    <Connect(Stats) />
     <div
       style={
         Object {
           "display": "flex",
-          "flexDirection": "row",
-          "flexGrow": 1,
+          "flexDirection": "column",
+          "height": "100%",
         }
       }
     >
-      <Connect(Authors) />
-      <Connect(Commits) />
+      <Connect(Header) />
+      <div
+        style={
+          Object {
+            "display": "flex",
+            "flexDirection": "column",
+            "flexGrow": 1,
+          }
+        }
+      >
+        <Connect(Stats) />
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "flexDirection": "row",
+              "flexGrow": 1,
+            }
+          }
+        >
+          <Connect(Authors) />
+          <Connect(Commits) />
+        </div>
+      </div>
     </div>
-  </div>
+  </Component>
 </div>
 `;
 

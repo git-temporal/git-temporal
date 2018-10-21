@@ -6,6 +6,14 @@ jest.mock('app/actions', () => {
     'requestCommits',
     'receiveCommits',
     'fetchCommitsIfNeeded',
+    'addAuthorFilter',
+    'removeAuthorFilter',
+    'removeAllAuthorFilters',
+    'setAuthorsContainerSort',
+    'setAuthorsContainerFilter',
+    'highlightCommit',
+    'viewCommits',
+    'viewFiles',
   ];
   for (const methodName of actionsToMock) {
     mockedActions[methodName] = jest.fn(path => {

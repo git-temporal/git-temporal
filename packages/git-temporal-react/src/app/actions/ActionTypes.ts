@@ -9,4 +9,17 @@ export enum ActionTypes {
   ADD_AUTHOR_FILTER = 'ADD_AUTHOR_FILTER',
   REMOVE_AUTHOR_FILTER = 'REMOVE_AUTHOR_FILTER',
   REMOVE_ALL_AUTHOR_FILTERS = 'REMOVE_ALL_AUTHOR_FILTERS',
+  SET_AUTHORS_CONTAINER_SORT = 'SET_AUTHORS_CONTAINER_SORT',
+  SET_AUTHORS_CONTAINER_FILTER = 'SET_AUTHORS_CONTAINER_FILTER',
+}
+
+export enum AuthorsContainerSorts {
+  TIME = 'time',
+  LINES = 'lines',
+  COMMITS = 'commits',
+}
+
+export enum AuthorsContainerFilters {
+  ALL = 'all',
+  FILTERED = 'filtered',
 }

@@ -1,5 +1,10 @@
 import { createSelector } from 'reselect';
 
+import {
+  AuthorsContainerSorts,
+  AuthorsContainerFilters,
+} from 'app/actions/ActionTypes';
+
 // const getState = state => {
 //   return state;
 // };
@@ -13,6 +18,8 @@ export const getViewCommitsOrFiles = state =>
   state.viewCommitsOrFiles || 'commits';
 
 export const getFilteredAuthors = state => state.filteredAuthors || [];
+export const getAuthorsContainerFilter = state => state.authorsContainerFilter;
+export const getAuthorsContainerSort = state => state.authorsContainerSort;
 
 const sumImpact = commits => {
   const impact = { linesAdded: 0, linesDeleted: 0 };
@@ -23,41 +30,57 @@ const sumImpact = commits => {
   return impact;
 };
 
-// returns array of authors and commits NOT filtered by filteredAuthors
-export const getAuthorsAndCommits = createSelector(getCommits, commits => {
-  const commitsByAuthor = {};
-  commits.forEach(commit => {
-    const commitsForThisAuthor = commitsByAuthor[commit.authorName] || {
-      authorName: commit.authorName,
-      authorEmails: [],
-      commits: [],
-      firstCommitOn: commit.authorDate,
-      lastCommitOn: commit.authorDate,
-    };
-    if (commitsForThisAuthor.authorEmails.indexOf(commit.authorEmail) === -1) {
-      commitsForThisAuthor.authorEmails.push(commit.authorEmail);
+// returns array of all authors NOT filtered by filteredAuthors, and commits
+export const getAuthorsAndCommits = createSelector(
+  getCommits,
+  getAuthorsContainerSort,
+  (commits, authorsContainerSort) => {
+    const commitsByAuthor = {};
+    commits.forEach(commit => {
+      const commitsForThisAuthor = commitsByAuthor[commit.authorName] || {
+        authorName: commit.authorName,
+        authorEmails: [],
+        commits: [],
+        firstCommitOn: commit.authorDate,
+        lastCommitOn: commit.authorDate,
+      };
+      if (
+        commitsForThisAuthor.authorEmails.indexOf(commit.authorEmail) === -1
+      ) {
+        commitsForThisAuthor.authorEmails.push(commit.authorEmail);
+      }
+      if (commit.authorDate < commitsForThisAuthor.firstCommitOn) {
+        commitsForThisAuthor.firstCommitOn = commit.authorDate;
+      }
+      if (commit.authorDate > commitsForThisAuthor.lastCommitOn) {
+        commitsForThisAuthor.lastCommitOn = commit.authorDate;
+      }
+      commitsForThisAuthor.commits.push(commit);
+      commitsByAuthor[commit.authorName] = commitsForThisAuthor;
+    });
+    const authorsAndCommits = [];
+    for (const key in commitsByAuthor) {
+      const authorAndCommits = commitsByAuthor[key];
+      const { linesAdded, linesDeleted } = sumImpact(authorAndCommits.commits);
+      authorAndCommits.linesAdded = linesAdded;
+      authorAndCommits.linesDeleted = linesDeleted;
+      authorsAndCommits.push(authorAndCommits);
     }
-    if (commit.authorDate < commitsForThisAuthor.firstCommitOn) {
-      commitsForThisAuthor.firstCommitOn = commit.authorDate;
-    }
-    if (commit.authorDate > commitsForThisAuthor.lastCommitOn) {
-      commitsForThisAuthor.lastCommitOn = commit.authorDate;
-    }
-    commitsForThisAuthor.commits.push(commit);
-    commitsByAuthor[commit.authorName] = commitsForThisAuthor;
-  });
-  const authorsAndCommits = [];
-  for (const key in commitsByAuthor) {
-    const authorAndCommits = commitsByAuthor[key];
-    const { linesAdded, linesDeleted } = sumImpact(authorAndCommits.commits);
-    authorAndCommits.linesAdded = linesAdded;
-    authorAndCommits.linesDeleted = linesDeleted;
-    authorsAndCommits.push(authorAndCommits);
+    return authorsAndCommits.sort((a, b) => {
+      switch (authorsContainerSort) {
+        case AuthorsContainerSorts.LINES:
+          return (
+            b.linesAdded + b.linesDeleted - (a.linesAdded + a.linesDeleted)
+          );
+        case AuthorsContainerSorts.COMMITS:
+          return b.commits.length - a.commits.length;
+        case AuthorsContainerSorts.TIME:
+          return b.lastCommitOn - a.lastCommitOn;
+      }
+      return 0;
+    });
   }
-  return authorsAndCommits.sort((a, b) => {
-    return b.linesAdded + b.linesDeleted - (a.linesAdded + a.linesDeleted);
-  });
-});
+);
 
 const getObjectValues = function(obj) {
   const values = [];
@@ -169,11 +192,46 @@ export const getHeaderContainerState = createSelector(
   })
 );
 
+export const getAuthorsActionMenuState = createSelector(
+  getAuthorsContainerFilter,
+  getAuthorsContainerSort,
+  getFilteredAuthors,
+  (authorsContainerFilter, authorsContainerSort, filteredAuthors) => ({
+    authorsContainerFilter,
+    authorsContainerSort,
+    filteredAuthors,
+  })
+);
+
+const filterAuthorsForAuthorsContainer = (
+  authors,
+  filteredAuthors,
+  authorsContainerFilter
+) => {
+  if (
+    !filteredAuthors ||
+    filteredAuthors.length === 0 ||
+    authorsContainerFilter === AuthorsContainerFilters.ALL
+  ) {
+    return authors;
+  }
+  return authors.filter(author => {
+    return filteredAuthors.indexOf(author.authorName) !== -1;
+  });
+};
+
 // note that the authors container state is not filtered by filteredAuthors
 export const getAuthorsContainerState = createSelector(
   getAuthorsAndCommits,
   getFilteredAuthors,
-  (authorsAndCommits, filteredAuthors) => {
+  getAuthorsContainerFilter,
+  getAuthorsContainerSort,
+  (
+    authorsAndCommits,
+    filteredAuthors,
+    authorsContainerFilter,
+    authorsContainerSort
+  ) => {
     let totalLinesAdded = 0;
     let totalLinesDeleted = 0;
     let totalCommits = 0;
@@ -204,6 +262,7 @@ export const getAuthorsContainerState = createSelector(
         lastCommitOn: ac.lastCommitOn,
       };
     });
+
     return {
       totalLinesAdded,
       totalLinesDeleted,
@@ -211,7 +270,13 @@ export const getAuthorsContainerState = createSelector(
       maxImpact,
       maxCommits,
       filteredAuthors,
-      authors: authorsArray,
+      authorsContainerSort,
+      authorsContainerFilter,
+      authors: filterAuthorsForAuthorsContainer(
+        authorsArray,
+        filteredAuthors,
+        authorsContainerFilter
+      ),
     };
   }
 );

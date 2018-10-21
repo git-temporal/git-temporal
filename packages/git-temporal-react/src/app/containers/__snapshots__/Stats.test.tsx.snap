@@ -14,7 +14,7 @@ Object {
 }
 `;
 
-exports[`containers/Stats when rendered without props it should match snapshot (it should be showing empty indicator) 1`] = `
+exports[`containers/Stats when rendered test props it should match snapshot (it should be showing empty indicator) 1`] = `
 <div
   style={
     Object {
@@ -80,9 +80,9 @@ exports[`containers/Stats when rendered without props it should match snapshot (
     />
   </Component>
   <Component
-    isSelected={false}
+    isSelected={true}
     label="Files"
-    onLabelClick={[Function]}
+    onLabelClick={null}
     title="Click to view Files"
   >
     <Component

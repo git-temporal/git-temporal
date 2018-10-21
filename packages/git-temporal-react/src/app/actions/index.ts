@@ -1,4 +1,8 @@
-import { ActionTypes } from './ActionTypes';
+import {
+  ActionTypes,
+  AuthorsContainerFilters,
+  AuthorsContainerSorts,
+} from './ActionTypes';
 
 export const selectPath = path => (dispatch, _getState) => {
   // if this comes from a rename, follow the most current name
@@ -25,6 +29,16 @@ export const removeAuthorFilter = authorName => ({
 
 export const removeAllAuthorFilters = () => ({
   type: ActionTypes.REMOVE_ALL_AUTHOR_FILTERS,
+});
+
+export const setAuthorsContainerSort = (sort: AuthorsContainerSorts) => ({
+  sort,
+  type: ActionTypes.SET_AUTHORS_CONTAINER_SORT,
+});
+
+export const setAuthorsContainerFilter = (filter: AuthorsContainerFilters) => ({
+  filter,
+  type: ActionTypes.SET_AUTHORS_CONTAINER_FILTER,
 });
 
 export const highlightCommit = commitId => ({

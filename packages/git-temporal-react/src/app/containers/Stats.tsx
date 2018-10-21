@@ -9,8 +9,12 @@ import { CommaNumber } from 'app/components/CommaNumber';
 import { EpochSpan } from 'app/components/EpochSpan';
 import { viewCommits, viewFiles } from 'app/actions';
 
+export enum CommitsOrFiles {
+  COMMITS = 'commits',
+  FILES = 'files',
+}
 interface StatsProps {
-  viewCommitsOrFiles?: 'commits' | 'files';
+  viewCommitsOrFiles?: CommitsOrFiles;
   minAuthorDate?: number;
   maxAuthorDate?: number;
   authors?: number;
@@ -22,13 +26,6 @@ interface StatsProps {
 }
 
 export class Stats extends Component<StatsProps & DispatchProps> {
-  componentDidMount() {
-    this.viewCommitsIfIsFile();
-  }
-  componentDidUpdate() {
-    this.viewCommitsIfIsFile();
-  }
-
   render() {
     const onFilesClicked = this.props.isFileSelected
       ? null

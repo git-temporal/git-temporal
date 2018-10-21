@@ -3,14 +3,14 @@ import { style } from 'app/styles';
 
 export interface ToggleButtonProps {
   // This is the text or JSX that gets wrapped in a Toggle Button
-  children: string | JSX.Element | JSX.Element[];
   isSelected: boolean;
   onClick: (evt) => void;
+  children?: string | JSX.Element | JSX.Element[];
   style?: string | object;
 }
 
 export const ToggleButton = (props: ToggleButtonProps): JSX.Element => {
-  const styles: any = ['button'];
+  const styles: any = [];
   if (props.isSelected) {
     styles.push('selected');
   } else {
@@ -19,7 +19,7 @@ export const ToggleButton = (props: ToggleButtonProps): JSX.Element => {
   styles.push(props.style);
   return (
     <div style={style(styles, props.style)} onClick={props.onClick}>
-      {props.children}
+      {props.children || ' '}
     </div>
   );
 };
