@@ -20,11 +20,16 @@ describe('containers/Commits', () => {
   describe('when rendered without props', () => {
     let wrapper;
     let mockDispatch;
+    const mockEvent = { stopPropagation: jest.fn };
     beforeAll(() => {
       mockDispatch = jest.fn();
       wrapper = mount(
         <Commits dispatch={mockDispatch} {...filteredCommitsMock} />
       );
+    });
+
+    beforeEach(() => {
+      mockDispatch.mockClear();
     });
 
     test('it should match snapshot (it should be showing empty indicator)', () => {
@@ -34,6 +39,16 @@ describe('containers/Commits', () => {
     test('and then changing commits should render new list', () => {
       wrapper.setProps({ commits: tenCommits });
       expect(wrapper).toMatchSnapshot();
+    });
+
+    test('when clicking on a CommitCard it should call dispatch', () => {
+      wrapper.instance().onCommitCardClick(mockEvent, fiveCommits[0], 0);
+      expect(mockDispatch).toHaveBeenCalledTimes(1);
+    });
+
+    test('when clicking on files it should call dispatch', () => {
+      wrapper.instance().onFileClick(mockEvent, 'some/bogus/file.js');
+      expect(mockDispatch).toHaveBeenCalledTimes(1);
     });
   });
   describe('when calling mapStateToProps()', () => {
