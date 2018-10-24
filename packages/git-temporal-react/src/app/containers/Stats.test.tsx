@@ -34,7 +34,6 @@ describe('containers/Stats', () => {
       expect(wrapper).toMatchSnapshot();
     });
     test('when clicking on commits it should call dispatch', () => {
-      debugger;
       wrapper.instance().onCommitsClick();
       expect(mockDispatch).toHaveBeenCalledTimes(1);
     });

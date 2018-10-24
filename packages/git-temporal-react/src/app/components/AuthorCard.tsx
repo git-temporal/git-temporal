@@ -21,10 +21,6 @@ export interface AuthorCardProps {
   onFilterToggle?: (evt) => void;
 }
 
-const barLabelStyle = {
-  _extends: 'smallerText',
-  textAlign: 'right',
-};
 const identifiersStyle = {
   _extends: 'flexColumns',
   width: '100%',
@@ -39,6 +35,10 @@ const filterButtonStyle = {
   right: 5,
   top: 2,
   padding: '5px 5px 3px 5px',
+};
+
+const addedDeletedStyle = {
+  marginTop: 6,
 };
 
 export const AuthorCard = (props: AuthorCardProps): JSX.Element => {
@@ -61,10 +61,18 @@ export const AuthorCard = (props: AuthorCardProps): JSX.Element => {
         >
           {author.authorName}
         </div>
-        <div style={style(barLabelStyle)}>
+        <div>
+          <span style={style('smallerText')}>
+            <EpochSpan
+              firstEpochTime={author.lastCommitOn}
+              secondEpochTime={Date.now() / 1000}
+            />
+            <span> ago</span>
+          </span>
           <AddedDeleted
             linesAdded={author.linesAdded}
             linesDeleted={author.linesDeleted}
+            style={style(addedDeletedStyle)}
           />
         </div>
         <PercentBar

@@ -54,19 +54,32 @@ exports[`components/AuthorCard when rendered with required props it should match
     >
       Zaphod Beeblebrox
     </div>
-    <div
-      style={
-        Object {
-          "color": "#333333",
-          "fontSize": 11,
-          "fontWeight": "normal",
-          "textAlign": "right",
+    <div>
+      <span
+        style={
+          Object {
+            "color": "#333333",
+            "fontSize": 11,
+            "fontWeight": "normal",
+          }
         }
-      }
-    >
+      >
+        <Component
+          firstEpochTime={132344555}
+          secondEpochTime={1539563458}
+        />
+        <span>
+           ago
+        </span>
+      </span>
       <Component
         linesAdded={100}
         linesDeleted={30}
+        style={
+          Object {
+            "marginTop": 6,
+          }
+        }
       />
     </div>
     <Component

@@ -27,9 +27,7 @@ interface StatsProps {
 
 export class Stats extends Component<StatsProps & DispatchProps> {
   render() {
-    const onFilesClicked = this.props.isFileSelected
-      ? null
-      : this.onFilesClicked;
+    const onFilesClick = this.props.isFileSelected ? null : this.onFilesClick;
     return (
       <div style={style('panel', 'flexRows')}>
         <StackedLabelHeader label="Contributors">
@@ -60,14 +58,14 @@ export class Stats extends Component<StatsProps & DispatchProps> {
           label="Commits"
           title="Click to view Commits"
           isSelected={this.props.viewCommitsOrFiles === 'commits'}
-          onLabelClick={this.onCommitsClicked}
+          onLabelClick={this.onCommitsClick}
         >
           <CommaNumber value={this.props.commits} />
         </StackedLabelHeader>
         <StackedLabelHeader
           label="Files"
           title="Click to view Files"
-          onLabelClick={onFilesClicked}
+          onLabelClick={onFilesClick}
           isSelected={this.props.viewCommitsOrFiles === 'files'}
         >
           <CommaNumber value={this.props.files} />
@@ -75,10 +73,10 @@ export class Stats extends Component<StatsProps & DispatchProps> {
       </div>
     );
   }
-  onCommitsClicked = () => {
+  onCommitsClick = () => {
     this.props.dispatch(viewCommits());
   };
-  onFilesClicked = () => {
+  onFilesClick = () => {
     this.props.dispatch(viewFiles());
   };
 
