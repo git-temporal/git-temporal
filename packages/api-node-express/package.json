@@ -8,7 +8,7 @@
     "test": "cross-env mocha --exit -r ../../babel-register.js --recursive --opts ./test/mocha.opts ./test/unit",
     "test-debug": "cross-env mocha --inspect-brk --exit -r ../../babel-register.js --recursive --opts ./test/mocha.opts ./test/unit",
     "debug": "DEBUG=1 node --inspect-brk -r ../../babel-register.js src/server.ts",
-    "dev": "DEBUG=1 node -r ../../babel-register.js src/server.ts",
+    "start": "DEBUG=1 node -r ../../babel-register.js src/server.ts",
     "prepublishOnly": "npm run build"
   },
   "bin": {

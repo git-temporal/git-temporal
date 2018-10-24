@@ -10,16 +10,25 @@ export interface AuthorGravatarImageProps {
   style?: object | string;
 }
 
-const initialState = {
-  emailsIndex: 0,
-};
-type AuthorGravatarImageState = Readonly<typeof initialState>;
+interface AuthorGravatarImageState {
+  emailsIndex: number;
+}
 
 export class AuthorGravatarImage extends React.Component<
   AuthorGravatarImageProps,
   AuthorGravatarImageState
 > {
-  readonly state: AuthorGravatarImageState = initialState;
+  readonly state: AuthorGravatarImageState = {
+    emailsIndex: 0,
+  };
+
+  componentWillReceiveProps(newProps) {
+    newProps.emails.forEach((email, index) => {
+      if (email !== this.props.emails[index]) {
+        this.setState({ emailsIndex: 0 });
+      }
+    });
+  }
 
   constructor(props) {
     super(props);
