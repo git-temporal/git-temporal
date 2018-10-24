@@ -26,6 +26,14 @@ interface StatsProps {
 }
 
 export class Stats extends Component<StatsProps & DispatchProps> {
+  componentDidMount() {
+    this.viewCommitsIfIsFile();
+  }
+
+  componentDidUpdate() {
+    this.viewCommitsIfIsFile();
+  }
+
   render() {
     const onFilesClick = this.props.isFileSelected ? null : this.onFilesClick;
     return (

@@ -14,7 +14,7 @@ Object {
 }
 `;
 
-exports[`containers/Stats when rendered test props it should match snapshot (it should be showing empty indicator) 1`] = `
+exports[`containers/Stats when rendered and a directory is selected it should match snapshot (it should be showing Commits selected) 1`] = `
 <div
   style={
     Object {
@@ -83,6 +83,84 @@ exports[`containers/Stats when rendered test props it should match snapshot (it 
     isSelected={true}
     label="Files"
     onLabelClick={null}
+    title="Click to view Files"
+  >
+    <Component
+      value={110}
+    />
+  </Component>
+</div>
+`;
+
+exports[`containers/Stats when rendered test props it should match snapshot (it should be showing empty indicator) 1`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "white",
+      "borderRadius": 3,
+      "display": "flex",
+      "flexDirection": "row",
+      "marginRight": 10,
+      "padding": 10,
+    }
+  }
+>
+  <Component
+    label="Contributors"
+  >
+    <Component
+      value={5}
+    />
+  </Component>
+  <Component
+    label="Active Time Span"
+  >
+    <Component
+      firstEpochTime={1536691136}
+      secondEpochTime={1538663085}
+    />
+  </Component>
+  <Component
+    label="Last Commit"
+  >
+    <div>
+      <Component
+        firstEpochTime={1538663085}
+        secondEpochTime={1539563458}
+      />
+      <span>
+         ago
+      </span>
+    </div>
+  </Component>
+  <Component
+    label="Lines Added"
+  >
+    <Component
+      value={700}
+    />
+  </Component>
+  <Component
+    label="Lines Deleted"
+  >
+    <Component
+      value={300}
+    />
+  </Component>
+  <Component
+    isSelected={true}
+    label="Commits"
+    onLabelClick={[Function]}
+    title="Click to view Commits"
+  >
+    <Component
+      value={52}
+    />
+  </Component>
+  <Component
+    isSelected={false}
+    label="Files"
+    onLabelClick={[Function]}
     title="Click to view Files"
   >
     <Component
