@@ -1,7 +1,6 @@
 import React from 'react';
 
 export interface FilterIconProps {
-  // Style of the div the SVG is rendered in
   width?: number;
   height?: number;
 }

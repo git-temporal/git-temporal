@@ -74,6 +74,7 @@ export interface IAuthorsAndStats {
   filteredAuthors: string[];
   authorsContainerFilter: string;
   authorsContainerSort: string;
+  authorsContainerSearch: string;
 }
 
 export interface IFileStats {

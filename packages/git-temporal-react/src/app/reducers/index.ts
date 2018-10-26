@@ -95,6 +95,14 @@ export const authorsContainerSort = (
   return state;
 };
 
+export const authorsContainerSearch = (state = '', action) => {
+  switch (action.type) {
+    case ActionTypes.SET_AUTHORS_CONTAINER_SEARCH:
+      return action.search;
+  }
+  return state;
+};
+
 export const filteredAuthors = (state = [], action) => {
   switch (action.type) {
     case ActionTypes.REQUEST_COMMITS:
@@ -128,6 +136,7 @@ const rootReducer = combineReducers({
   filteredAuthors,
   authorsContainerFilter,
   authorsContainerSort,
+  authorsContainerSearch,
 });
 
 export default rootReducer;

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/SearchToggle when rendered with value it should match snapshot 1`] = `
+<Component
+  onChange={[MockFunction]}
+  onClear={[Function]}
+  style={Object {}}
+  value="test value"
+/>
+`;

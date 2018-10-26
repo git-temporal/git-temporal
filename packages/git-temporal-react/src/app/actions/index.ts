@@ -41,6 +41,11 @@ export const setAuthorsContainerFilter = (filter: AuthorsContainerFilters) => ({
   type: ActionTypes.SET_AUTHORS_CONTAINER_FILTER,
 });
 
+export const setAuthorsContainerSearch = (search: string) => ({
+  search,
+  type: ActionTypes.SET_AUTHORS_CONTAINER_SEARCH,
+});
+
 export const highlightCommit = commitId => ({
   commitId,
   type: ActionTypes.HIGHLIGHT_COMMIT,

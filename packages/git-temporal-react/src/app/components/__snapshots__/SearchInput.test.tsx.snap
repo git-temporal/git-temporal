@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/SearchInput when rendered with value it should match snapshot 1`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "white",
+      "border": "1px solid grey",
+      "borderRadius": 3,
+      "color": "#333333",
+      "display": "flex",
+      "flexDirection": "row",
+      "fontSize": 13,
+      "fontWeight": "normal",
+      "marginRight": 10,
+      "padding": 5,
+      "position": "relative",
+    }
+  }
+>
+  <Component
+    height={16}
+    width={16}
+  />
+  <input
+    onChange={[Function]}
+    style={
+      Object {
+        "border": "none",
+        "flexGrow": 1,
+        "fontSize": 14,
+        "margin": "0px 5px",
+      }
+    }
+    type="text"
+    value="test value"
+  />
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "color": "#333333",
+        "cursor": "pointer",
+        "flexGrow": 0,
+        "fontSize": 11,
+        "fontWeight": "normal",
+        "paddingTop": 3,
+      }
+    }
+  >
+    X
+  </div>
+</div>
+`;

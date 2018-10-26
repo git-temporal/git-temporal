@@ -37,6 +37,17 @@ exports[`containers/Authors when rendered mock authors and stats it should match
       lines
     </span>
   </div>
+  <SearchToggle
+    onChange={[Function]}
+    style={
+      Object {
+        "position": "absolute",
+        "right": 29,
+        "width": 205,
+      }
+    }
+    value=""
+  />
   <div
     style={
       Object {
@@ -145,6 +156,17 @@ exports[`containers/Authors when rendered mock filteredAuthors  it should match 
       lines
     </span>
   </div>
+  <SearchToggle
+    onChange={[Function]}
+    style={
+      Object {
+        "position": "absolute",
+        "right": 29,
+        "width": 205,
+      }
+    }
+    value=""
+  />
   <div
     style={
       Object {

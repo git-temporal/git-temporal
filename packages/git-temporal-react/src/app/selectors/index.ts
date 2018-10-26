@@ -20,6 +20,7 @@ export const getViewCommitsOrFiles = state =>
 export const getFilteredAuthors = state => state.filteredAuthors || [];
 export const getAuthorsContainerFilter = state => state.authorsContainerFilter;
 export const getAuthorsContainerSort = state => state.authorsContainerSort;
+export const getAuthorsContainerSearch = state => state.authorsContainerSearch;
 
 const sumImpact = commits => {
   const impact = { linesAdded: 0, linesDeleted: 0 };
@@ -203,20 +204,65 @@ export const getAuthorsActionMenuState = createSelector(
   })
 );
 
-const filterAuthorsForAuthorsContainer = (
-  authors,
-  filteredAuthors,
-  authorsContainerFilter
-) => {
-  if (
+const isShowingAllAuthors = (filteredAuthors, authorsContainerFilter) => {
+  return (
     !filteredAuthors ||
     filteredAuthors.length === 0 ||
     authorsContainerFilter === AuthorsContainerFilters.ALL
+  );
+};
+
+const hasAuthorContainerSearch = authorsContainerSearch => {
+  return (
+    authorsContainerSearch && authorsContainerSearch.toString().trim() !== ''
+  );
+};
+
+const authorMatchesFilter = (
+  author,
+  authorsContainerFilter,
+  filteredAuthors
+) => {
+  return (
+    isShowingAllAuthors(filteredAuthors, authorsContainerFilter) ||
+    filteredAuthors.indexOf(author.authorName) !== -1
+  );
+};
+
+const authorMatchesSearch = (author, authorsContainerSearch) => {
+  if (!hasAuthorContainerSearch(authorsContainerSearch)) {
+    return true;
+  }
+  const searchText = authorsContainerSearch.toString().toLowerCase();
+  const matchesOnName = author.authorName.toLowerCase().includes(searchText);
+  if (matchesOnName) {
+    return true;
+  }
+  for (const authorEmail of author.authorEmails) {
+    if (authorEmail.toLowerCase().includes(searchText)) {
+      return true;
+    }
+  }
+  return false;
+};
+
+const filterAuthorsForAuthorsContainer = (
+  authors,
+  filteredAuthors,
+  authorsContainerFilter,
+  authorsContainerSearch
+) => {
+  if (
+    isShowingAllAuthors(filteredAuthors, authorsContainerFilter) &&
+    !hasAuthorContainerSearch(authorsContainerSearch)
   ) {
     return authors;
   }
   return authors.filter(author => {
-    return filteredAuthors.indexOf(author.authorName) !== -1;
+    return (
+      authorMatchesFilter(author, authorsContainerFilter, filteredAuthors) &&
+      authorMatchesSearch(author, authorsContainerSearch)
+    );
   });
 };
 
@@ -226,11 +272,13 @@ export const getAuthorsContainerState = createSelector(
   getFilteredAuthors,
   getAuthorsContainerFilter,
   getAuthorsContainerSort,
+  getAuthorsContainerSearch,
   (
     authorsAndCommits,
     filteredAuthors,
     authorsContainerFilter,
-    authorsContainerSort
+    authorsContainerSort,
+    authorsContainerSearch
   ) => {
     let totalLinesAdded = 0;
     let totalLinesDeleted = 0;
@@ -272,10 +320,12 @@ export const getAuthorsContainerState = createSelector(
       filteredAuthors,
       authorsContainerSort,
       authorsContainerFilter,
+      authorsContainerSearch,
       authors: filterAuthorsForAuthorsContainer(
         authorsArray,
         filteredAuthors,
-        authorsContainerFilter
+        authorsContainerFilter,
+        authorsContainerSearch
       ),
     };
   }

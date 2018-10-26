@@ -41,13 +41,6 @@ let globalStyles = {
     marginBottom: 10,
     marginRight: 10,
   },
-  borderPanel: {
-    _extends: 'panel',
-    border: '1px solid whitesmoke',
-    borderRadius: 4,
-    marginRight: 10,
-    marginBottom: 10,
-  },
   flexColumns: {
     display: 'flex',
     flexDirection: 'column',
