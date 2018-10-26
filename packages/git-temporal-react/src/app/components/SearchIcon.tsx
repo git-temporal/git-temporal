@@ -26,3 +26,7 @@ export const SearchIcon = (props: SearchIconProps): JSX.Element => {
     </svg>
   );
 };
+
+// required for stateless functional components to show name in enzyme snapshots:
+// https://github.com/adriantoine/enzyme-to-json/issues/19#issuecomment-285781119
+SearchIcon.displayName = 'SearchIcon';

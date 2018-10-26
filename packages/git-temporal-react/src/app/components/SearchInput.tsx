@@ -48,3 +48,7 @@ export const SearchInput = (props: SearchInputProps): JSX.Element => {
     </div>
   );
 };
+
+// required for stateless functional components to show name in enzyme snapshots:
+// https://github.com/adriantoine/enzyme-to-json/issues/19#issuecomment-285781119
+SearchInput.displayName = 'SearchInput';
