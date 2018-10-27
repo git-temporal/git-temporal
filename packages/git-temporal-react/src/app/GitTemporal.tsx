@@ -34,28 +34,26 @@ export class GitTemporal extends Component<
 
     return (
       <div style={style('page')}>
-        {!isFetching && (!commits || commits.length <= 0) ? (
-          <h2>Empty.</h2>
-        ) : (
-          <SpinnerContainer isSpinning={isFetching}>
-            <div
-              style={style('flexColumns', {
-                height: '100%',
-              })}
-            >
-              <Header />
-              {isFetching ? null : (
-                <div style={style('flexColumns', { flexGrow: 1 })}>
-                  <Stats />
-                  <div style={style('flexRows', { flexGrow: 1 })}>
-                    <Authors />
-                    {viewCommitsOrFiles === 'files' ? <Files /> : <Commits />}
-                  </div>
+        <SpinnerContainer isSpinning={isFetching}>
+          <div
+            style={style('flexColumns', {
+              height: '100%',
+            })}
+          >
+            <Header />
+            {!isFetching && (!commits || commits.length <= 0) ? (
+              <h2>Empty.</h2>
+            ) : isFetching ? null : (
+              <div style={style('flexColumns', { flexGrow: 1 })}>
+                <Stats />
+                <div style={style('flexRows', { flexGrow: 1 })}>
+                  <Authors />
+                  {viewCommitsOrFiles === 'files' ? <Files /> : <Commits />}
                 </div>
-              )}
-            </div>
-          </SpinnerContainer>
-        )}
+              </div>
+            )}
+          </div>
+        </SpinnerContainer>
       </div>
     );
   }

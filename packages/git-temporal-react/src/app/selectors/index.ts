@@ -19,14 +19,12 @@ export const getHighlightedCommitId = state => state.highlightedCommitId;
 export const getViewCommitsOrFiles = state =>
   state.viewCommitsOrFiles || 'commits';
 
+export const getSearch = state => state.search;
 export const getFilteredAuthors = state => state.filteredAuthors || [];
 export const getAuthorsContainerFilter = state => state.authorsContainerFilter;
 export const getAuthorsContainerSort = state => state.authorsContainerSort;
-export const getAuthorsContainerSearch = state => state.authorsContainerSearch;
 export const getCommitsContainerSort = state => state.commitsContainerSort;
-export const getCommitsContainerSearch = state => state.commitsContainerSearch;
 export const getFilesContainerSort = state => state.filesContainerSort;
-export const getFilesContainerSearch = state => state.filesContainerSearch;
 
 const sumImpact = commits => {
   const impact = { linesAdded: 0, linesDeleted: 0 };
@@ -35,70 +33,6 @@ const sumImpact = commits => {
     impact.linesDeleted += commit.linesDeleted;
   }
   return impact;
-};
-
-// returns array of all authors NOT filtered by filteredAuthors, and commits
-export const getAuthorsAndCommits = createSelector(
-  getCommits,
-  getAuthorsContainerSort,
-  (commits, authorsContainerSort) => {
-    const commitsByAuthor = {};
-    commits.forEach(commit => {
-      const commitsForThisAuthor = commitsByAuthor[commit.authorName] || {
-        authorName: commit.authorName,
-        authorEmails: [],
-        commits: [],
-        firstCommitOn: commit.authorDate,
-        lastCommitOn: commit.authorDate,
-      };
-      if (
-        commitsForThisAuthor.authorEmails.indexOf(commit.authorEmail) === -1
-      ) {
-        commitsForThisAuthor.authorEmails.push(commit.authorEmail);
-      }
-      if (commit.authorDate < commitsForThisAuthor.firstCommitOn) {
-        commitsForThisAuthor.firstCommitOn = commit.authorDate;
-      }
-      if (commit.authorDate > commitsForThisAuthor.lastCommitOn) {
-        commitsForThisAuthor.lastCommitOn = commit.authorDate;
-      }
-      commitsForThisAuthor.commits.push(commit);
-      commitsByAuthor[commit.authorName] = commitsForThisAuthor;
-    });
-    const authorsAndCommits = [];
-    for (const key in commitsByAuthor) {
-      const authorAndCommits = commitsByAuthor[key];
-      const { linesAdded, linesDeleted } = sumImpact(authorAndCommits.commits);
-      authorAndCommits.linesAdded = linesAdded;
-      authorAndCommits.linesDeleted = linesDeleted;
-      authorsAndCommits.push(authorAndCommits);
-    }
-    return authorsAndCommits.sort((a, b) => {
-      switch (authorsContainerSort) {
-        case AuthorsContainerSorts.LINES:
-          return (
-            b.linesAdded + b.linesDeleted - (a.linesAdded + a.linesDeleted)
-          );
-        case AuthorsContainerSorts.COMMITS:
-          return b.commits.length - a.commits.length;
-        case AuthorsContainerSorts.TIME:
-          return b.lastCommitOn - a.lastCommitOn;
-      }
-      return 0;
-    });
-  }
-);
-
-const getObjectValues = function(obj) {
-  const values = [];
-  for (const key in obj) {
-    values.push(obj[key]);
-  }
-  return values;
-};
-
-const hasSearch = searchText => {
-  return searchText && searchText.toString().trim() !== '';
 };
 
 const isShowingAllAuthors = (filteredAuthors, authorsContainerFilter?) => {
@@ -121,41 +55,54 @@ const authorMatchesFilter = (
   );
 };
 
-const matchesSearch = (authorName, searchText) => {
+const matchesSearch = (testText, searchText) => {
   if (!hasSearch(searchText)) {
     return true;
   }
+  if (!testText) {
+    return false;
+  }
   const realSearchText = searchText.toString().toLowerCase();
-  return authorName.toLowerCase().includes(realSearchText);
+  return testText.toLowerCase().includes(realSearchText);
 };
 
-const authorMatchesSearch = (author, searchText) => {
+const commitsMatchSearch = (commit, searchText) => {
   if (!hasSearch(searchText)) {
     return true;
   }
-  const realSearchText = searchText.toString().toLowerCase();
-  if (matchesSearch(author.authorName, realSearchText)) {
-    return true;
-  }
-  for (const authorEmail of author.authorEmails) {
-    if (matchesSearch(authorEmail, realSearchText)) {
+  const commits = !Array.isArray(commit) ? [commit] : commit;
+  for (const commit of commits) {
+    let matchesFileName = false;
+    for (const file of commit.files) {
+      matchesFileName = matchesSearch(file.name, searchText);
+      if (matchesFileName) {
+        break;
+      }
+    }
+    if (
+      matchesFileName ||
+      matchesSearch(commit.message, searchText) ||
+      matchesSearch(commit.id, searchText) ||
+      matchesSearch(commit.body, searchText) ||
+      matchesSearch(commit.authorName, searchText) ||
+      matchesSearch(commit.authorEmail, searchText)
+    ) {
       return true;
     }
   }
   return false;
 };
 
-const commitMatchesSearch = (commit, searchText) => {
-  if (!hasSearch(searchText)) {
-    return true;
+const getObjectValues = function(obj) {
+  const values = [];
+  for (const key in obj) {
+    values.push(obj[key]);
   }
-  return (
-    matchesSearch(commit.message, searchText) ||
-    matchesSearch(commit.id, searchText) ||
-    matchesSearch(commit.body, searchText) ||
-    matchesSearch(commit.authorName, searchText) ||
-    matchesSearch(commit.authorEmail, searchText)
-  );
+  return values;
+};
+
+const hasSearch = searchText => {
+  return searchText && searchText.toString().trim() !== '';
 };
 
 // returns commits for the current path filtered by selected authors
@@ -164,17 +111,19 @@ export const getFilteredCommits = createSelector(
   getCommits,
   getFilteredAuthors,
   getCommitsContainerSort,
-  getCommitsContainerSearch,
+  getSearch,
 
-  (commits, filteredAuthors, commitsContainerSort, commitsContainerSearch) => {
+  (commits, filteredAuthors, commitsContainerSort, search) => {
     const filteredCommits =
-      isShowingAllAuthors(filteredAuthors) && !hasSearch(commitsContainerSearch)
+      isShowingAllAuthors(filteredAuthors) && !hasSearch(search)
         ? commits
         : commits.filter(commit => {
-            return (
-              authorMatchesFilter(commit.authorName, filteredAuthors) &&
-              commitMatchesSearch(commit, commitsContainerSearch)
+            const authorMatches = authorMatchesFilter(
+              commit.authorName,
+              filteredAuthors
             );
+            const commitMatches = commitsMatchSearch(commit, search);
+            return authorMatches && commitMatches;
           });
 
     return filteredCommits.sort((a, b) => {
@@ -191,34 +140,62 @@ export const getFilteredCommits = createSelector(
   }
 );
 
-const filterFilesForFilesContainer = (
-  files,
-  filteredAuthors,
-  filesContainerSearch
-) => {
-  const filteredFiles = [];
-  for (const file of files) {
-    let authorMatched = false;
-    for (const authorName of file.authorNames) {
+// returns array of all authors NOT filtered by filteredAuthors, and commits
+export const getAuthorsAndCommits = createSelector(
+  getFilteredCommits,
+  getAuthorsContainerSort,
+  (commits, authorsContainerSort) => {
+    const commitsByAuthor = {};
+    commits.forEach(commit => {
+      const commitsForThisAuthor = commitsByAuthor[commit.authorName] || {
+        authorName: commit.authorName,
+        authorEmails: [],
+        commits: [],
+        files: {},
+        firstCommitOn: commit.authorDate,
+        lastCommitOn: commit.authorDate,
+      };
       if (
-        authorMatchesFilter(authorName, filteredAuthors) &&
-        matchesSearch(authorName, filesContainerSearch)
+        commitsForThisAuthor.authorEmails.indexOf(commit.authorEmail) === -1
       ) {
-        authorMatched = true;
-        break;
+        commitsForThisAuthor.authorEmails.push(commit.authorEmail);
       }
+      if (commit.authorDate < commitsForThisAuthor.firstCommitOn) {
+        commitsForThisAuthor.firstCommitOn = commit.authorDate;
+      }
+      if (commit.authorDate > commitsForThisAuthor.lastCommitOn) {
+        commitsForThisAuthor.lastCommitOn = commit.authorDate;
+      }
+      for (const file of commit.files) {
+        commitsForThisAuthor[file.fileName] = true;
+      }
+      commitsForThisAuthor.commits.push(commit);
+      commitsByAuthor[commit.authorName] = commitsForThisAuthor;
+    });
+    const authorsAndCommits = [];
+    for (const key in commitsByAuthor) {
+      const authorAndCommits = commitsByAuthor[key];
+      const { linesAdded, linesDeleted } = sumImpact(authorAndCommits.commits);
+      authorAndCommits.linesAdded = linesAdded;
+      authorAndCommits.linesDeleted = linesDeleted;
+      authorAndCommits.files = Object.keys(authorAndCommits.files);
+      authorsAndCommits.push(authorAndCommits);
     }
-    if (
-      authorMatched &&
-      (!hasSearch(filesContainerSearch) ||
-        matchesSearch(file.fileName, filesContainerSearch) ||
-        commitMatchesSearch(file.commit, filesContainerSearch))
-    ) {
-      filteredFiles.push(file);
-    }
+    return authorsAndCommits.sort((a, b) => {
+      switch (authorsContainerSort) {
+        case AuthorsContainerSorts.LINES:
+          return (
+            b.linesAdded + b.linesDeleted - (a.linesAdded + a.linesDeleted)
+          );
+        case AuthorsContainerSorts.COMMITS:
+          return b.commits.length - a.commits.length;
+        case AuthorsContainerSorts.TIME:
+          return b.lastCommitOn - a.lastCommitOn;
+      }
+      return 0;
+    });
   }
-  return filteredFiles;
-};
+);
 // returns an array of
 // {
 //   fileName: string,
@@ -228,10 +205,9 @@ const filterFilesForFilesContainer = (
 // }
 export const getFilteredFiles = createSelector(
   getFilteredCommits,
-  getFilteredAuthors,
   getFilesContainerSort,
-  getFilesContainerSearch,
-  (commits, filteredAuthors, filesContainerSort, filesContainerSearch) => {
+  getSearch,
+  (commits, filesContainerSort) => {
     const commitsByFile = {};
     for (const commit of commits) {
       if (!commit.files) {
@@ -241,7 +217,7 @@ export const getFilteredFiles = createSelector(
         const thisFile = commitsByFile[file.name] || {
           fileName: file.name,
           authorNames: [],
-          commits: 0,
+          commits: [],
           linesAdded: 0,
           linesDeleted: 0,
           firstCommitOn: commit.authorDate,
@@ -258,15 +234,12 @@ export const getFilteredFiles = createSelector(
         }
         thisFile.linesAdded += file.linesAdded;
         thisFile.linesDeleted += file.linesDeleted;
-        thisFile.commits += 1;
+        thisFile.commits.push(commit);
         commitsByFile[file.name] = thisFile;
       }
     }
-    const filteredFiles = filterFilesForFilesContainer(
-      getObjectValues(commitsByFile),
-      filteredAuthors,
-      filesContainerSearch
-    );
+    // files are filtered by virtual of getFilteredCommits
+    const filteredFiles = getObjectValues(commitsByFile);
 
     return filteredFiles.sort((a, b) => {
       switch (filesContainerSort) {
@@ -301,7 +274,7 @@ export const getFilteredCommitsState = createSelector(
   getIsFetching,
   getDidInvalidate,
   getCommitsContainerSort,
-  getCommitsContainerSearch,
+  getSearch,
   (
     selectedPath,
     viewCommitsOrFiles,
@@ -311,7 +284,7 @@ export const getFilteredCommitsState = createSelector(
     isFetching,
     didInvalidate,
     commitsContainerSort,
-    commitsContainerSearch
+    search
   ) => ({
     selectedPath,
     viewCommitsOrFiles,
@@ -321,16 +294,18 @@ export const getFilteredCommitsState = createSelector(
     isFetching,
     didInvalidate,
     commitsContainerSort,
-    commitsContainerSearch,
+    search,
   })
 );
 
 export const getHeaderContainerState = createSelector(
   getSelectedPath,
   getFilteredAuthors,
-  (selectedPath, filteredAuthors) => ({
+  getSearch,
+  (selectedPath, filteredAuthors, search) => ({
     selectedPath,
     filteredAuthors,
+    search,
   })
 );
 
@@ -345,42 +320,19 @@ export const getAuthorsActionMenuState = createSelector(
   })
 );
 
-const filterAuthorsForAuthorsContainer = (
-  authors,
-  filteredAuthors,
-  authorsContainerFilter,
-  authorsContainerSearch
-) => {
-  if (
-    isShowingAllAuthors(filteredAuthors, authorsContainerFilter) &&
-    !hasSearch(authorsContainerSearch)
-  ) {
-    return authors;
-  }
-  return authors.filter(author => {
-    return (
-      authorMatchesFilter(
-        author.authorName,
-        filteredAuthors,
-        authorsContainerFilter
-      ) && authorMatchesSearch(author, authorsContainerSearch)
-    );
-  });
-};
-
 // note that the authors container state is not filtered by filteredAuthors
 export const getAuthorsContainerState = createSelector(
   getAuthorsAndCommits,
   getFilteredAuthors,
   getAuthorsContainerFilter,
   getAuthorsContainerSort,
-  getAuthorsContainerSearch,
+  getSearch,
   (
     authorsAndCommits,
     filteredAuthors,
     authorsContainerFilter,
     authorsContainerSort,
-    authorsContainerSearch
+    search
   ) => {
     let totalLinesAdded = 0;
     let totalLinesDeleted = 0;
@@ -403,13 +355,7 @@ export const getAuthorsContainerState = createSelector(
       }
       return {
         isFiltered,
-        authorName: ac.authorName,
-        authorEmails: ac.authorEmails,
-        linesAdded: ac.linesAdded,
-        linesDeleted: ac.linesDeleted,
-        totalCommits: ac.commits.length,
-        firstCommitOn: ac.firstCommitOn,
-        lastCommitOn: ac.lastCommitOn,
+        ...ac,
       };
     });
 
@@ -422,13 +368,8 @@ export const getAuthorsContainerState = createSelector(
       filteredAuthors,
       authorsContainerSort,
       authorsContainerFilter,
-      authorsContainerSearch,
-      authors: filterAuthorsForAuthorsContainer(
-        authorsArray,
-        filteredAuthors,
-        authorsContainerFilter,
-        authorsContainerSearch
-      ),
+      search,
+      authors: authorsArray,
     };
   }
 );
@@ -437,12 +378,12 @@ export const getFilesContainerState = createSelector(
   getFilteredFiles,
   getIsFileSelected,
   getFilesContainerSort,
-  getFilesContainerSearch,
-  (files, isFileSelected, filesContainerSort, filesContainerSearch) => ({
+  getSearch,
+  (files, isFileSelected, filesContainerSort, search) => ({
     files,
     isFileSelected,
     filesContainerSort,
-    filesContainerSearch,
+    search,
   })
 );
 

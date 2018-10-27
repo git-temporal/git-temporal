@@ -48,7 +48,6 @@ const authorsAndStats = {
   filteredAuthors: [],
   authorsContainerFilter: 'all',
   authorsContainerSort: 'lines',
-  authorsContainerSearch: '',
 };
 
 export default authorsAndStats;

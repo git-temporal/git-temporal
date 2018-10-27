@@ -7,16 +7,11 @@ import {
   CellMeasurerCache,
 } from 'react-virtualized';
 
-import {
-  highlightCommit,
-  selectPath,
-  setCommitsContainerSearch,
-} from 'app/actions';
+import { highlightCommit, selectPath } from 'app/actions';
 import { DispatchProps, ICommitsContainerState } from 'app/interfaces';
 import { getFilteredCommitsState } from 'app/selectors';
 import { style } from 'app/styles';
 import { CommitCard } from 'app/components/CommitCard';
-import { SearchToggle } from 'app/components/SearchToggle';
 
 export class Commits extends Component<ICommitsContainerState & DispatchProps> {
   private _cache;
@@ -57,12 +52,6 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
     position: 'relative',
     marginRight: 0,
   };
-  readonly SearchToggleStyle = {
-    position: 'absolute',
-    width: 205,
-    right: 29,
-    top: 0,
-  };
 
   render() {
     const scrollToIndex = this.scrollToIndexOnNextRender || 0;
@@ -71,11 +60,6 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
       <div style={style(this.outerStyle)}>
         <div style={style(this.headerStyle)}>
           <span data-testId="header">Commits by {sortTitle}</span>
-          <SearchToggle
-            value={this.props.commitsContainerSearch}
-            style={style(this.SearchToggleStyle)}
-            onChange={this.onSearch}
-          />
         </div>
         <AutoSizer>
           {({ height }) => {
@@ -128,10 +112,6 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
       </CellMeasurer>
     );
   }
-
-  onSearch = value => {
-    this.props.dispatch(setCommitsContainerSearch(value));
-  };
 
   onCommitCardClick = (event, commit, index) => {
     event.stopPropagation();

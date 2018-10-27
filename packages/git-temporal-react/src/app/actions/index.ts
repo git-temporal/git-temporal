@@ -43,9 +43,9 @@ export const setAuthorsContainerSort = (sort: AuthorsContainerSorts) => ({
   type: ActionTypes.SET_AUTHORS_CONTAINER_SORT,
 });
 
-export const setAuthorsContainerSearch = (search: string) => ({
+export const setSearch = (search: string) => ({
   search,
-  type: ActionTypes.SET_AUTHORS_CONTAINER_SEARCH,
+  type: ActionTypes.SET_SEARCH,
 });
 
 export const setCommitsContainerSort = (sort: CommitsContainerSorts) => ({
@@ -53,19 +53,9 @@ export const setCommitsContainerSort = (sort: CommitsContainerSorts) => ({
   type: ActionTypes.SET_COMMITS_CONTAINER_SORT,
 });
 
-export const setCommitsContainerSearch = (search: string) => ({
-  search,
-  type: ActionTypes.SET_COMMITS_CONTAINER_SEARCH,
-});
-
 export const setFilesContainerSort = (sort: FilesContainerSorts) => ({
   sort,
   type: ActionTypes.SET_FILES_CONTAINER_SORT,
-});
-
-export const setFilesContainerSearch = (search: string) => ({
-  search,
-  type: ActionTypes.SET_FILES_CONTAINER_SEARCH,
 });
 
 export const highlightCommit = commitId => ({

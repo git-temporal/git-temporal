@@ -1,8 +1,9 @@
 import { FilesContainerSorts } from 'app/actions/ActionTypes';
+import fiveCommits from './fiveCommits';
+import tenCommits from './tenCommits';
 
 const filesAndStats = {
   isFileSelected: false,
-  filesContainerSearch: '',
   filesContainerSort: FilesContainerSorts.TIME,
   files: [
     {
@@ -18,7 +19,7 @@ const filesAndStats = {
         'Jim',
         'Marjan',
       ],
-      commits: 27,
+      commits: tenCommits,
       linesAdded: 41962,
       linesDeleted: 41962,
       firstCommitOn: 1427579814,
@@ -27,7 +28,7 @@ const filesAndStats = {
     {
       fileName: 'fixtures/attribute-behavior/public/react-dom.development.js',
       authorNames: ['Andrew Clark'],
-      commits: 2,
+      commits: fiveCommits,
       linesAdded: 22296,
       linesDeleted: 22296,
       firstCommitOn: 1503701077,
@@ -36,7 +37,7 @@ const filesAndStats = {
     {
       fileName: 'fixtures/dom/public/react-dom.js',
       authorNames: ['Brandon Dail', 'Nathan Hunzaker'],
-      commits: 2,
+      commits: tenCommits,
       linesAdded: 18938,
       linesDeleted: 18938,
       firstCommitOn: 1482155031,
@@ -53,7 +54,7 @@ const filesAndStats = {
         'Ben Alpert',
         'Jim',
       ],
-      commits: 22,
+      commits: tenCommits,
       linesAdded: 18265,
       linesDeleted: 18265,
       firstCommitOn: 1444082554,
@@ -62,7 +63,7 @@ const filesAndStats = {
     {
       fileName: 'docs/js/JSXTransformer.js',
       authorNames: ['Vipul A M', 'Paul O’Shannessy', 'Ben Alpert'],
-      commits: 4,
+      commits: fiveCommits,
       linesAdded: 15939,
       linesDeleted: 15939,
       firstCommitOn: 1427579814,

@@ -4,27 +4,51 @@ import { connect } from 'react-redux';
 import { DispatchProps } from 'app/interfaces';
 import { getHeaderContainerState } from 'app/selectors';
 import { style } from 'app/styles';
-import { selectPath, removeAllAuthorFilters } from 'app/actions';
+import { selectPath, removeAllAuthorFilters, setSearch } from 'app/actions';
+import { SearchInput } from 'app/components/SearchInput';
 
 interface HeaderProps {
   // If not provided, the whole repository is assumed
   selectedPath?: string;
   filteredAuthors?: string[];
+  search?: string;
 }
+
+const searchInputStyle = {
+  float: 'right',
+  borderRadius: 10,
+  marginLeft: 10,
+  marginTop: -5,
+};
+
+const topRowStyle = {
+  _extends: 'flexRows',
+  maxWidth: 1100,
+};
+
+const statsAndSearchStyle = {
+  _extends: ['inlineBlock', 'flexColumns'],
+  marginBottom: 20,
+  flexGrow: 1,
+};
 
 export class Header extends Component<HeaderProps & DispatchProps> {
   render() {
     return (
       <div style={style('panel', 'flexColumns')}>
-        <div style={style('flexRows')}>
+        <div style={style(topRowStyle)}>
           <div style={style('inlineBlock', 'h1Text')}>Git Temporal </div>
-          <div
-            style={style('inlineBlock', 'flexColumns', {
-              marginBottom: 20,
-            })}
-          >
-            <div style={style('h2Text', { marginBottom: 10 })}>
-              Stats for {this.renderPathLinks()}
+          <div style={style(statsAndSearchStyle)}>
+            <div>
+              <SearchInput
+                value={this.props.search}
+                onChange={this.onSearch}
+                onClear={this.onClear}
+                style={style(searchInputStyle)}
+              />
+              <div style={style('h2Text', { marginBottom: 10 })}>
+                Stats for {this.renderPathLinks()}
+              </div>
             </div>
             <div style={style('normalText')}>{this.renderAuthors()}</div>
           </div>
@@ -90,6 +114,14 @@ export class Header extends Component<HeaderProps & DispatchProps> {
       </span>
     );
   }
+
+  onSearch = value => {
+    this.props.dispatch(setSearch(value || ''));
+  };
+
+  onClear = () => {
+    this.props.dispatch(setSearch(''));
+  };
 
   onShowAllAuthors = () => {
     this.props.dispatch(removeAllAuthorFilters());

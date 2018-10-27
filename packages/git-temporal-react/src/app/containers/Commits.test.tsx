@@ -15,7 +15,6 @@ const filteredCommitsMock = {
   viewCommitsOrFiles: 'commits',
   highlightedCommitId: '56493bf1ebfab3ec102fe017f30fa4f81ba6a256',
   isFileSelected: false,
-  commitsContainerSearch: '',
   commitsContainerSort: CommitsContainerSorts.TIME,
 };
 

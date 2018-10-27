@@ -34,7 +34,8 @@ export const FileCard = (props: FileCardProps): JSX.Element => {
       />{' '}
       <div style={style('normalText')}>
         <span>
-          {file.commits} commits by {file.authorNames.length} authors spanning{' '}
+          {file.commits.length} commits by {file.authorNames.length} authors
+          spanning{' '}
         </span>
         <EpochSpan
           firstEpochTime={file.firstCommitOn}

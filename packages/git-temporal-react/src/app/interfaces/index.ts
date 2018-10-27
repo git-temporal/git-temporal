@@ -52,7 +52,6 @@ export interface ICommitsContainerState {
   didInvalidate: boolean;
   isFileSelected: boolean;
   commitsContainerSort: string;
-  commitsContainerSearch: string;
 }
 
 export interface IAuthorStats {
@@ -75,7 +74,6 @@ export interface IAuthorsContainerState {
   filteredAuthors: string[];
   authorsContainerFilter: string;
   authorsContainerSort: string;
-  authorsContainerSearch: string;
 }
 
 export interface IFileStats {
@@ -83,7 +81,7 @@ export interface IFileStats {
   authorNames: string[];
   linesAdded: number;
   linesDeleted: number;
-  commits: number;
+  commits: ICommit[];
   firstCommitOn: number;
   lastCommitOn: number;
 }
@@ -91,5 +89,4 @@ export interface IFilesContainerState {
   files?: IFileStats[];
   isFileSelected: boolean;
   filesContainerSort: string;
-  filesContainerSearch: string;
 }

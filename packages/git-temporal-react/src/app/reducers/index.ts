@@ -97,9 +97,9 @@ export const authorsContainerSort = (
   return state;
 };
 
-export const authorsContainerSearch = (state = '', action) => {
+export const search = (state = '', action) => {
   switch (action.type) {
-    case ActionTypes.SET_AUTHORS_CONTAINER_SEARCH:
+    case ActionTypes.SET_SEARCH:
       return action.search;
   }
   return state;
@@ -116,14 +116,6 @@ export const commitsContainerSort = (
   return state;
 };
 
-export const commitsContainerSearch = (state = '', action) => {
-  switch (action.type) {
-    case ActionTypes.SET_COMMITS_CONTAINER_SEARCH:
-      return action.search;
-  }
-  return state;
-};
-
 export const filesContainerSort = (
   state = FilesContainerSorts.TIME,
   action
@@ -131,14 +123,6 @@ export const filesContainerSort = (
   switch (action.type) {
     case ActionTypes.SET_FILES_CONTAINER_SORT:
       return action.sort;
-  }
-  return state;
-};
-
-export const filesContainerSearch = (state = '', action) => {
-  switch (action.type) {
-    case ActionTypes.SET_FILES_CONTAINER_SEARCH:
-      return action.search;
   }
   return state;
 };
@@ -174,13 +158,11 @@ const rootReducer = combineReducers({
   highlightedCommitId,
   viewCommitsOrFiles,
   filteredAuthors,
+  search,
   authorsContainerFilter,
   authorsContainerSort,
-  authorsContainerSearch,
   commitsContainerSort,
-  commitsContainerSearch,
   filesContainerSort,
-  filesContainerSearch,
 });
 
 export default rootReducer;

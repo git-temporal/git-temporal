@@ -4,14 +4,9 @@ import { List, AutoSizer } from 'react-virtualized';
 
 import { DispatchProps, IAuthorsContainerState } from 'app/interfaces';
 import { getAuthorsContainerState } from 'app/selectors';
-import {
-  addAuthorFilter,
-  removeAuthorFilter,
-  setAuthorsContainerSearch,
-} from 'app/actions';
+import { addAuthorFilter, removeAuthorFilter } from 'app/actions';
 import { style } from 'app/styles';
 import { AuthorCard } from 'app/components/AuthorCard';
-import { SearchToggle } from 'app/components/SearchToggle';
 
 import AuthorsActionMenu from 'app/containers/AuthorsActionMenu';
 import { AuthorsContainerFilters } from 'app/actions/ActionTypes';
@@ -33,11 +28,6 @@ export class Authors extends Component<IAuthorsContainerState & DispatchProps> {
     _extends: ['h2Text'],
     display: 'block',
     flexGrow: 0,
-  };
-  readonly SearchToggleStyle = {
-    position: 'absolute',
-    width: 205,
-    right: 29,
   };
   readonly listStyle = {
     display: 'flex',
@@ -63,11 +53,6 @@ export class Authors extends Component<IAuthorsContainerState & DispatchProps> {
             Authors by {sortTitle}
           </span>
         </div>
-        <SearchToggle
-          value={this.props.authorsContainerSearch}
-          style={style(this.SearchToggleStyle)}
-          onChange={this.onSearch}
-        />
         <div style={style(this.listStyle)}>
           <AutoSizer>
             {({ height, width }) => {
@@ -137,10 +122,6 @@ export class Authors extends Component<IAuthorsContainerState & DispatchProps> {
       dispatch(addAuthorFilter(authorName));
     }
   }
-
-  onSearch = value => {
-    this.props.dispatch(setAuthorsContainerSearch(value));
-  };
 }
 
 export default connect(getAuthorsContainerState)(Authors);
