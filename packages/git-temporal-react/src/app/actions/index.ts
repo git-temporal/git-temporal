@@ -2,6 +2,8 @@ import {
   ActionTypes,
   AuthorsContainerFilters,
   AuthorsContainerSorts,
+  CommitsContainerSorts,
+  FilesContainerSorts,
 } from './ActionTypes';
 
 export const selectPath = path => (dispatch, _getState) => {
@@ -31,19 +33,39 @@ export const removeAllAuthorFilters = () => ({
   type: ActionTypes.REMOVE_ALL_AUTHOR_FILTERS,
 });
 
-export const setAuthorsContainerSort = (sort: AuthorsContainerSorts) => ({
-  sort,
-  type: ActionTypes.SET_AUTHORS_CONTAINER_SORT,
-});
-
 export const setAuthorsContainerFilter = (filter: AuthorsContainerFilters) => ({
   filter,
   type: ActionTypes.SET_AUTHORS_CONTAINER_FILTER,
 });
 
+export const setAuthorsContainerSort = (sort: AuthorsContainerSorts) => ({
+  sort,
+  type: ActionTypes.SET_AUTHORS_CONTAINER_SORT,
+});
+
 export const setAuthorsContainerSearch = (search: string) => ({
   search,
   type: ActionTypes.SET_AUTHORS_CONTAINER_SEARCH,
+});
+
+export const setCommitsContainerSort = (sort: CommitsContainerSorts) => ({
+  sort,
+  type: ActionTypes.SET_COMMITS_CONTAINER_SORT,
+});
+
+export const setCommitsContainerSearch = (search: string) => ({
+  search,
+  type: ActionTypes.SET_COMMITS_CONTAINER_SEARCH,
+});
+
+export const setFilesContainerSort = (sort: FilesContainerSorts) => ({
+  sort,
+  type: ActionTypes.SET_FILES_CONTAINER_SORT,
+});
+
+export const setFilesContainerSearch = (search: string) => ({
+  search,
+  type: ActionTypes.SET_FILES_CONTAINER_SEARCH,
 });
 
 export const highlightCommit = commitId => ({

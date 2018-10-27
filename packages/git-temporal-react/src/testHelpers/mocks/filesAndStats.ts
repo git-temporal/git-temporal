@@ -1,5 +1,9 @@
+import { FilesContainerSorts } from 'app/actions/ActionTypes';
+
 const filesAndStats = {
   isFileSelected: false,
+  filesContainerSearch: '',
+  filesContainerSort: FilesContainerSorts.TIME,
   files: [
     {
       fileName: 'docs/js/react.js',

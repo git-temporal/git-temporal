@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { List, AutoSizer } from 'react-virtualized';
 
-import { DispatchProps, IAuthorsAndStats } from 'app/interfaces';
+import { DispatchProps, IAuthorsContainerState } from 'app/interfaces';
 import { getAuthorsContainerState } from 'app/selectors';
 import {
   addAuthorFilter,
@@ -16,7 +16,7 @@ import { SearchToggle } from 'app/components/SearchToggle';
 import AuthorsActionMenu from 'app/containers/AuthorsActionMenu';
 import { AuthorsContainerFilters } from 'app/actions/ActionTypes';
 
-export class Authors extends Component<IAuthorsAndStats & DispatchProps> {
+export class Authors extends Component<IAuthorsContainerState & DispatchProps> {
   constructor(props) {
     super(props);
     this.renderRow = this.renderRow.bind(this);

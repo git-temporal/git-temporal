@@ -3,6 +3,8 @@ import {
   ActionTypes,
   AuthorsContainerFilters,
   AuthorsContainerSorts,
+  CommitsContainerSorts,
+  FilesContainerSorts,
 } from 'app/actions/ActionTypes';
 
 // these little actions are more trouble to test and end up being brittle
@@ -103,6 +105,44 @@ export const authorsContainerSearch = (state = '', action) => {
   return state;
 };
 
+export const commitsContainerSort = (
+  state = CommitsContainerSorts.TIME,
+  action
+) => {
+  switch (action.type) {
+    case ActionTypes.SET_COMMITS_CONTAINER_SORT:
+      return action.sort;
+  }
+  return state;
+};
+
+export const commitsContainerSearch = (state = '', action) => {
+  switch (action.type) {
+    case ActionTypes.SET_COMMITS_CONTAINER_SEARCH:
+      return action.search;
+  }
+  return state;
+};
+
+export const filesContainerSort = (
+  state = FilesContainerSorts.TIME,
+  action
+) => {
+  switch (action.type) {
+    case ActionTypes.SET_FILES_CONTAINER_SORT:
+      return action.sort;
+  }
+  return state;
+};
+
+export const filesContainerSearch = (state = '', action) => {
+  switch (action.type) {
+    case ActionTypes.SET_FILES_CONTAINER_SEARCH:
+      return action.search;
+  }
+  return state;
+};
+
 export const filteredAuthors = (state = [], action) => {
   switch (action.type) {
     case ActionTypes.REQUEST_COMMITS:
@@ -137,6 +177,10 @@ const rootReducer = combineReducers({
   authorsContainerFilter,
   authorsContainerSort,
   authorsContainerSearch,
+  commitsContainerSort,
+  commitsContainerSearch,
+  filesContainerSort,
+  filesContainerSearch,
 });
 
 export default rootReducer;

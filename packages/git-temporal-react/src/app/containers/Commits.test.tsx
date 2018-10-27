@@ -5,6 +5,7 @@ import { Commits, mapStateToProps } from './Commits';
 import commitsForPath from 'testHelpers/mocks/commitsForPath';
 import fiveCommits from 'testHelpers/mocks/fiveCommits';
 import tenCommits from 'testHelpers/mocks/tenCommits';
+import { CommitsContainerSorts } from 'app/actions/ActionTypes';
 
 const filteredCommitsMock = {
   selectedPath: 'some/path',
@@ -14,6 +15,8 @@ const filteredCommitsMock = {
   viewCommitsOrFiles: 'commits',
   highlightedCommitId: '56493bf1ebfab3ec102fe017f30fa4f81ba6a256',
   isFileSelected: false,
+  commitsContainerSearch: '',
+  commitsContainerSort: CommitsContainerSorts.TIME,
 };
 
 describe('containers/Commits', () => {
