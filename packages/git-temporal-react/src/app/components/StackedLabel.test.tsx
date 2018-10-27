@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { StackedLabel } from './StackedLabel';
+import { SearchToggle } from './SearchToggle';
 
 describe('components/StackedLabel', () => {
   describe('when rendered with required props', () => {
@@ -23,5 +24,6 @@ describe('components/StackedLabel', () => {
       wrapper.setProps({ selected: false, onLabelClick: jest.fn() });
       expect(wrapper).toMatchSnapshot();
     });
+    SearchToggle;
   });
 });

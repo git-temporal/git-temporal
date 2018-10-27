@@ -12,10 +12,9 @@ export interface SearchInputProps {
 }
 
 const containerStyle = {
-  _extends: ['flexRows', 'borderedPanel', 'normalText'],
+  _extends: ['flexRows', 'borderedPanel', 'normalText', 'selectable'],
   position: 'relative',
   padding: 5,
-  border: '1px solid grey',
 };
 const searchInputStyle = {
   flexGrow: 1,
@@ -29,26 +28,39 @@ const clearIconStyle = {
   flexGrow: 0,
   cursor: 'pointer',
 };
-
-export const SearchInput = (props: SearchInputProps): JSX.Element => {
-  return (
-    <div style={style(containerStyle, props.style)}>
-      <SearchIcon height={16} width={16} />
-      <input
-        type="text"
-        style={searchInputStyle}
-        value={props.value}
-        onChange={evt => {
-          props.onChange(evt.target.value);
-        }}
-      />
-      <div style={style(clearIconStyle)} onClick={props.onClear}>
-        X
-      </div>
-    </div>
-  );
+const searchIconStyle = {
+  marginTop: 2,
 };
 
-// required for stateless functional components to show name in enzyme snapshots:
-// https://github.com/adriantoine/enzyme-to-json/issues/19#issuecomment-285781119
-SearchInput.displayName = 'SearchInput';
+export class SearchInput extends React.Component<SearchInputProps> {
+  static displayName = 'SearchInput';
+
+  private inputRef;
+
+  componentDidMount() {
+    this.inputRef && this.inputRef.focus();
+  }
+
+  render() {
+    const { value, onChange, onClear } = this.props;
+    return (
+      <div style={style(containerStyle, this.props.style)}>
+        <SearchIcon height={16} width={16} style={style(searchIconStyle)} />
+        <input
+          type="text"
+          style={searchInputStyle}
+          value={value}
+          onChange={evt => {
+            onChange(evt.target.value);
+          }}
+          ref={input => {
+            this.inputRef = input;
+          }}
+        />
+        <div style={style(clearIconStyle)} onClick={onClear}>
+          X
+        </div>
+      </div>
+    );
+  }
+}

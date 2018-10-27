@@ -1,8 +1,10 @@
 import React from 'react';
+import { style } from 'app/styles';
 
 export interface SearchIconProps {
   width?: number;
   height?: number;
+  style?: object;
 }
 
 export const SearchIcon = (props: SearchIconProps): JSX.Element => {
@@ -10,6 +12,7 @@ export const SearchIcon = (props: SearchIconProps): JSX.Element => {
 
   return (
     <svg
+      style={style(props.style)}
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       width={width}

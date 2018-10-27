@@ -5,9 +5,10 @@ exports[`components/SearchInput when rendered with value it should match snapsho
   style={
     Object {
       "backgroundColor": "white",
-      "border": "1px solid grey",
+      "border": "1px solid lightskyblue",
       "borderRadius": 3,
       "color": "#333333",
+      "cursor": "pointer",
       "display": "flex",
       "flexDirection": "row",
       "fontSize": 13,
@@ -20,6 +21,11 @@ exports[`components/SearchInput when rendered with value it should match snapsho
 >
   <SearchIcon
     height={16}
+    style={
+      Object {
+        "marginTop": 2,
+      }
+    }
     width={16}
   />
   <input
