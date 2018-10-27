@@ -12,6 +12,7 @@ import { DispatchProps, ICommitsContainerState } from 'app/interfaces';
 import { getFilteredCommitsState } from 'app/selectors';
 import { style } from 'app/styles';
 import { CommitCard } from 'app/components/CommitCard';
+import CommitsActionMenu from './CommitsActionMenu';
 
 export class Commits extends Component<ICommitsContainerState & DispatchProps> {
   private _cache;
@@ -50,7 +51,7 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
     display: 'block',
     flexGrow: 0,
     position: 'relative',
-    marginRight: 0,
+    marginRight: 30,
   };
 
   render() {
@@ -58,6 +59,7 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
     const sortTitle = this.props.commitsContainerSort;
     return (
       <div style={style(this.outerStyle)}>
+        <CommitsActionMenu />
         <div style={style(this.headerStyle)}>
           <span data-testId="header">Commits by {sortTitle}</span>
         </div>

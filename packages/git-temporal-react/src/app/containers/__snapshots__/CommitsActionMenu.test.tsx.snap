@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/CommitsActionMenu when rendered with basic props it should match snapshot 1`] = `
+<ActionMenu
+  style={
+    Object {
+      "color": "#333333",
+      "fontSize": 13,
+      "fontWeight": "normal",
+      "position": "absolute",
+      "right": 10,
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "color": "#333333",
+        "fontSize": 14,
+        "fontWeight": "normal",
+        "marginBottom": 10,
+        "marginRight": 10,
+      }
+    }
+  >
+    Sort by
+  </div>
+  <RadioMenuItem
+    isSelected={true}
+    onClick={[Function]}
+    testId="sortTime"
+  >
+    by time
+  </RadioMenuItem>
+  <RadioMenuItem
+    isSelected={false}
+    onClick={[Function]}
+    testId="sortLines"
+  >
+    by lines changed
+  </RadioMenuItem>
+</ActionMenu>
+`;

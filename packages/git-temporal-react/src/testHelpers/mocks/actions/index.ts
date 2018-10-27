@@ -7,6 +7,8 @@ jest.mock('app/actions', () => {
     'receiveCommits',
     'fetchCommitsIfNeeded',
     'setAuthorsContainerSort',
+    'setCommitsContainerSort',
+    'setFilesContainerSort',
     'highlightCommit',
     'viewCommits',
     'viewFiles',

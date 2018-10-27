@@ -55,7 +55,6 @@ export class AuthorsActionMenu extends Component<
         >
           by lines changed
         </RadioMenuItem>
-        <div style={style('menuDivider')} />
       </ActionMenu>
     );
   }

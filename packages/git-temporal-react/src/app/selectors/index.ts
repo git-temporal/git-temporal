@@ -253,6 +253,13 @@ export const getIsFileSelected = createSelector(
   }
 );
 
+export const getCommitsActionMenuState = createSelector(
+  getCommitsContainerSort,
+  commitsContainerSort => ({
+    commitsContainerSort,
+  })
+);
+
 export const getFilteredCommitsState = createSelector(
   getSelectedPath,
   getViewCommitsOrFiles,
@@ -355,6 +362,12 @@ const getFilteredFilesForFilesContainer = createSelector(
     }
     return files;
   }
+);
+export const getFilesActionMenuState = createSelector(
+  getFilesContainerSort,
+  filesContainerSort => ({
+    filesContainerSort,
+  })
 );
 
 export const getFilesContainerState = createSelector(
