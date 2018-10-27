@@ -40,7 +40,7 @@ exports[`components/FileCard when rendered with required props it should match s
     }
   >
     <span>
-      27
+      10
        commits by 
       9
        authors spanning

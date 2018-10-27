@@ -134,10 +134,12 @@ Object {
       "relativeDate": "3 days ago",
     },
   ],
+  "commitsContainerSort": undefined,
   "didInvalidate": undefined,
   "highlightedCommitId": undefined,
   "isFetching": false,
   "isFileSelected": false,
+  "search": undefined,
   "selectedPath": "testPath1",
   "viewCommitsOrFiles": "commits",
 }
@@ -287,8 +289,21 @@ exports[`app/GitTemporal when rendered without props it should match snapshot (i
     }
   }
 >
-  <h2>
-    Empty.
-  </h2>
+  <Component>
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "flexDirection": "column",
+          "height": "100%",
+        }
+      }
+    >
+      <Connect(Header) />
+      <h2>
+        Empty.
+      </h2>
+    </div>
+  </Component>
 </div>
 `;

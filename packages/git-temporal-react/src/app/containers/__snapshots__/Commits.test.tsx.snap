@@ -134,10 +134,12 @@ Object {
       "relativeDate": "3 days ago",
     },
   ],
+  "commitsContainerSort": undefined,
   "didInvalidate": undefined,
   "highlightedCommitId": undefined,
   "isFetching": false,
   "isFileSelected": false,
+  "search": undefined,
   "selectedPath": "testPath1",
   "viewCommitsOrFiles": "commits",
 }
@@ -584,6 +586,7 @@ exports[`containers/Commits when rendered without props and then changing commit
       },
     ]
   }
+  commitsContainerSort="time"
   didInvalidate={false}
   dispatch={[MockFunction]}
   highlightedCommitId="56493bf1ebfab3ec102fe017f30fa4f81ba6a256"
@@ -599,6 +602,7 @@ exports[`containers/Commits when rendered without props and then changing commit
         "border": "1px solid whitesmoke",
         "borderRadius": 3,
         "display": "flex",
+        "flexDirection": "column",
         "flexGrow": 1,
         "marginRight": 10,
         "maxWidth": 400,
@@ -607,6 +611,27 @@ exports[`containers/Commits when rendered without props and then changing commit
       }
     }
   >
+    <div
+      style={
+        Object {
+          "color": "#333333",
+          "display": "block",
+          "flexGrow": 0,
+          "fontSize": 18,
+          "fontWeight": "bold",
+          "marginBottom": 20,
+          "marginRight": 0,
+          "position": "relative",
+        }
+      }
+    >
+      <span
+        data-testId="header"
+      >
+        Commits by 
+        time
+      </span>
+    </div>
     <AutoSizer
       disableHeight={false}
       disableWidth={false}
@@ -882,6 +907,7 @@ exports[`containers/Commits when rendered without props it should match snapshot
       },
     ]
   }
+  commitsContainerSort="time"
   didInvalidate={false}
   dispatch={[MockFunction]}
   highlightedCommitId="56493bf1ebfab3ec102fe017f30fa4f81ba6a256"
@@ -897,6 +923,7 @@ exports[`containers/Commits when rendered without props it should match snapshot
         "border": "1px solid whitesmoke",
         "borderRadius": 3,
         "display": "flex",
+        "flexDirection": "column",
         "flexGrow": 1,
         "marginRight": 10,
         "maxWidth": 400,
@@ -905,6 +932,27 @@ exports[`containers/Commits when rendered without props it should match snapshot
       }
     }
   >
+    <div
+      style={
+        Object {
+          "color": "#333333",
+          "display": "block",
+          "flexGrow": 0,
+          "fontSize": 18,
+          "fontWeight": "bold",
+          "marginBottom": 20,
+          "marginRight": 0,
+          "position": "relative",
+        }
+      }
+    >
+      <span
+        data-testId="header"
+      >
+        Commits by 
+        time
+      </span>
+    </div>
     <AutoSizer
       disableHeight={false}
       disableWidth={false}
