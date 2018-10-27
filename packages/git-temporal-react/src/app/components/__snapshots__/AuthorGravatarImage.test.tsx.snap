@@ -1,6 +1,50 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/AuthorGravatarImage when rendered with times in order it should match snapshot 1`] = `
+exports[`components/AuthorGravatarImage when rendered with a single email and then updating props, should match snapshot (should be different src than the other snapshot) 1`] = `
+<div
+  style={
+    Object {
+      "display": "inline-block",
+      "height": 75,
+      "width": 75,
+    }
+  }
+>
+  <img
+    data-for="someone.else@wherever.com"
+    onError={[Function]}
+    src="https://www.gravatar.com/avatar/068bc2e4b384d3c789ce7ef3b3ddf6a5?s=75&d=404"
+    style={
+      Object {
+        "maxHeight": 75,
+        "width": 75,
+      }
+    }
+  />
+</div>
+`;
+
+exports[`components/AuthorGravatarImage when rendered with a single email and then when image not found, should match snapshot (should render AuthorPlaceholderImage) 1`] = `
+<div
+  style={
+    Object {
+      "display": "inline-block",
+      "height": 75,
+      "width": 75,
+    }
+  }
+>
+  <AuthorPlaceholderImage
+    holderForEmails={
+      Array [
+        "someone.else@wherever.com",
+      ]
+    }
+  />
+</div>
+`;
+
+exports[`components/AuthorGravatarImage when rendered with a single email it should match snapshot 1`] = `
 <div
   style={
     Object {

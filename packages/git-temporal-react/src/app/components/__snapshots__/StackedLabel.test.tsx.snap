@@ -1,5 +1,54 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`components/StackedLabel when rendered with required props and then setting "onLabelClick" prop, it should match snapshot (it should have changed style from first snapshot) 1`] = `
+<div
+  style={
+    Object {
+      "flexGrow": 0,
+      "marginBottom": 10,
+      "marginRight": 20,
+    }
+  }
+>
+  <div
+    onClick={[MockFunction]}
+    style={
+      Object {
+        "border": "1px solid lightskyblue",
+        "borderRadius": 3,
+        "cursor": "pointer",
+      }
+    }
+  >
+    This is the Label
+  </div>
+  <div>
+    this is the text
+  </div>
+</div>
+`;
+
+exports[`components/StackedLabel when rendered with required props and then setting "selected" prop, it should match snapshot (it should have changed style from first snapshot) 1`] = `
+<div
+  style={
+    Object {
+      "flexGrow": 0,
+      "marginBottom": 10,
+      "marginRight": 20,
+    }
+  }
+>
+  <div
+    style={Object {}}
+  >
+    This is the Label
+  </div>
+  <div>
+    this is the text
+  </div>
+</div>
+`;
+
 exports[`components/StackedLabel when rendered with required props it should match snapshot (it should have rendered a label and a text element) 1`] = `
 <div
   style={

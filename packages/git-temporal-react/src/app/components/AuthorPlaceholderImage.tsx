@@ -58,3 +58,5 @@ export const AuthorPlaceholderImage = (
     </svg>
   );
 };
+
+AuthorPlaceholderImage.displayName = 'AuthorPlaceholderImage';
