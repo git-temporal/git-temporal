@@ -34,7 +34,8 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
   componentDidUpdate(prevProps, _prevState) {
     if (
       this.props.commits !== prevProps.commits ||
-      this.props.selectedPath !== prevProps.selectedPath
+      this.props.selectedPath !== prevProps.selectedPath ||
+      this.props.commitsContainerSort !== prevProps.commitsContainerSort
     ) {
       this.remeasureCells();
     }
@@ -75,6 +76,7 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
                 ref={this._setListRef}
                 deferredMeasurementCache={this._cache}
                 scrollToIndex={scrollToIndex}
+                commitsContainerSort={this.props.commitsContainerSort}
               />
             );
           }}

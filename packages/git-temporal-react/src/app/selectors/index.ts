@@ -122,7 +122,7 @@ export const getFilteredCommits = createSelector(
             b.linesAdded + b.linesDeleted - (a.linesAdded + a.linesDeleted)
           );
         case CommitsContainerSorts.TIME:
-          return b.lastCommitOn - a.lastCommitOn;
+          return b.authorDate - a.authorDate;
       }
       return 0;
     });
