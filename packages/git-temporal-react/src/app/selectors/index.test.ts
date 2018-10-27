@@ -53,4 +53,22 @@ describe('selectors/getFilteredCommitsState', () => {
       expect(commitsOut).toMatchSnapshot();
     });
   });
+
+  describe('when calling getFilesContainerState() with search', () => {
+    test('it should have returned files in the container state', async () => {
+      const testState = Object.assign({}, testState1);
+      testState.search = 'options';
+      const containerState = await selectors.getFilesContainerState(testState);
+      expect(containerState.files.length).toBeGreaterThan(0);
+    });
+  });
+
+  describe('when calling getFilesContainerState() with "file=..."search', () => {
+    test('it should have returned files in the container state', async () => {
+      const testState = Object.assign({}, testState1);
+      testState.search = 'file=options';
+      const containerState = await selectors.getFilesContainerState(testState);
+      expect(containerState.files.length).toBeGreaterThan(0);
+    });
+  });
 });

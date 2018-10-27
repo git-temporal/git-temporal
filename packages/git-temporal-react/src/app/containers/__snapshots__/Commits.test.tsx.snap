@@ -139,7 +139,7 @@ Object {
   "highlightedCommitId": undefined,
   "isFetching": false,
   "isFileSelected": false,
-  "search": undefined,
+  "search": "",
   "selectedPath": "testPath1",
   "viewCommitsOrFiles": "commits",
 }

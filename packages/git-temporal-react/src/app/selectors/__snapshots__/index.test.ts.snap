@@ -139,7 +139,7 @@ Object {
   "highlightedCommitId": undefined,
   "isFetching": false,
   "isFileSelected": false,
-  "search": undefined,
+  "search": "",
   "selectedPath": "some/bogus/path",
   "viewCommitsOrFiles": "commits",
 }
@@ -284,7 +284,7 @@ Object {
   "highlightedCommitId": undefined,
   "isFetching": false,
   "isFileSelected": false,
-  "search": undefined,
+  "search": "",
   "selectedPath": "testPath1",
   "viewCommitsOrFiles": "commits",
 }
@@ -429,7 +429,7 @@ Object {
   "highlightedCommitId": undefined,
   "isFetching": false,
   "isFileSelected": false,
-  "search": undefined,
+  "search": "",
   "selectedPath": "testPath1",
   "viewCommitsOrFiles": "commits",
 }

@@ -636,7 +636,7 @@ Object {
   ],
   "filesContainerSort": undefined,
   "isFileSelected": false,
-  "search": undefined,
+  "search": "",
 }
 `;
 

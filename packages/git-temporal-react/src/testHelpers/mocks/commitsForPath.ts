@@ -6,6 +6,7 @@ const commitsForPath = {
   didInvalidate: false,
 
   commits: fiveCommits,
+  search: '',
 };
 
 export default commitsForPath;
