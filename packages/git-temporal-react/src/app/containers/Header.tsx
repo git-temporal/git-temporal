@@ -15,6 +15,7 @@ interface HeaderProps {
 
 const searchInputStyle = {
   float: 'right',
+  width: 250,
   borderRadius: 10,
   marginLeft: 10,
   marginTop: -5,
@@ -44,6 +45,7 @@ export class Header extends Component<HeaderProps & DispatchProps> {
                 onChange={this.onSearch}
                 onClear={this.onClear}
                 style={style(searchInputStyle)}
+                placeholder="search authors, files or commits"
               />
               <div style={style('h2Text', { marginBottom: 10 })}>
                 Stats for {this.renderPathLinks()}

@@ -42,7 +42,7 @@ export class SearchInput extends React.Component<SearchInputProps> {
   }
 
   render() {
-    const { value, onChange, onClear } = this.props;
+    const { value, onChange, onClear, placeholder } = this.props;
     return (
       <div style={style(containerStyle, this.props.style)}>
         <SearchIcon height={16} width={16} style={style(searchIconStyle)} />
@@ -50,6 +50,7 @@ export class SearchInput extends React.Component<SearchInputProps> {
           type="text"
           style={searchInputStyle}
           value={value}
+          placeholder={placeholder}
           onChange={evt => {
             onChange(evt.target.value);
           }}

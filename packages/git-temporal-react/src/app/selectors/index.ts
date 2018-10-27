@@ -43,6 +43,25 @@ const matchesSearch = (testText, searchText) => {
   return testText.toLowerCase().includes(realSearchText);
 };
 
+const matchesAuthorSearch = (testText, searchText) => {
+  return matchesSearch(
+    testText,
+    searchText.replace(/authors?\s*[\:\=]\s*/, '')
+  );
+};
+const matchesCommitSearch = (testText, searchText) => {
+  return matchesSearch(
+    testText,
+    searchText.replace(/commits?\s*[\:\=]\s*/, '')
+  );
+};
+
+const fileSearchRegex = /files?\s*[\:\=]\s*/;
+
+const matchesFileSearch = (testText, searchText) => {
+  return matchesSearch(testText, searchText.replace(fileSearchRegex, ''));
+};
+
 const commitsMatchSearch = (commit, searchText) => {
   if (!hasSearch(searchText)) {
     return true;
@@ -51,18 +70,18 @@ const commitsMatchSearch = (commit, searchText) => {
   for (const commit of commits) {
     let matchesFileName = false;
     for (const file of commit.files) {
-      matchesFileName = matchesSearch(file.name, searchText);
+      matchesFileName = matchesFileSearch(file.name, searchText);
       if (matchesFileName) {
         break;
       }
     }
     if (
       matchesFileName ||
-      matchesSearch(commit.message, searchText) ||
-      matchesSearch(commit.id, searchText) ||
-      matchesSearch(commit.body, searchText) ||
-      matchesSearch(commit.authorName, searchText) ||
-      matchesSearch(commit.authorEmail, searchText)
+      matchesCommitSearch(commit.message, searchText) ||
+      matchesCommitSearch(commit.id, searchText) ||
+      matchesCommitSearch(commit.body, searchText) ||
+      matchesAuthorSearch(commit.authorName, searchText) ||
+      matchesAuthorSearch(commit.authorEmail, searchText)
     ) {
       return true;
     }
@@ -323,8 +342,23 @@ export const getAuthorsContainerState = createSelector(
   }
 );
 
-export const getFilesContainerState = createSelector(
+const getFilteredFilesForFilesContainer = createSelector(
   getFilteredFiles,
+  getSearch,
+  (files, search) => {
+    // if the user specifically searched for files on show those in files container
+    // otherwise all files in any commits with this file would also show up here
+    if (search.match(fileSearchRegex)) {
+      return files.filter(file => {
+        return matchesFileSearch(file.fileName, search);
+      });
+    }
+    return files;
+  }
+);
+
+export const getFilesContainerState = createSelector(
+  getFilteredFilesForFilesContainer,
   getIsFileSelected,
   getFilesContainerSort,
   getSearch,
@@ -338,7 +372,7 @@ export const getFilesContainerState = createSelector(
 
 export const getStatsContainerState = createSelector(
   getFilteredCommits,
-  getFilteredFiles,
+  getFilteredFilesForFilesContainer,
   getViewCommitsOrFiles,
   getIsFileSelected,
   getAuthorsAndCommits,
