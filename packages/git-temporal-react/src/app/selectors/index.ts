@@ -348,7 +348,7 @@ const getFilteredFilesForFilesContainer = createSelector(
   (files, search) => {
     // if the user specifically searched for files on show those in files container
     // otherwise all files in any commits with this file would also show up here
-    if (search.match(fileSearchRegex)) {
+    if (hasSearch(search) && search.match(fileSearchRegex)) {
       return files.filter(file => {
         return matchesFileSearch(file.fileName, search);
       });
