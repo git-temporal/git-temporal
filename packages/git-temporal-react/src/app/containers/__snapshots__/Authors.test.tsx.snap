@@ -186,3 +186,108 @@ exports[`containers/Authors when rendered mock filteredAuthors  it should match 
   </div>
 </div>
 `;
+
+exports[`containers/Authors when rendered with authors and stats  calling renderList() should render the list 1`] = `
+<List
+  authorsContainerSort="lines"
+  autoHeight={false}
+  estimatedRowSize={30}
+  height={100}
+  noRowsRenderer={[Function]}
+  onRowsRendered={[Function]}
+  onScroll={[Function]}
+  overscanIndicesGetter={[Function]}
+  overscanRowCount={10}
+  rowCount={5}
+  rowHeight={110}
+  rowRenderer={[Function]}
+  scrollToAlignment="auto"
+  scrollToIndex={-1}
+  style={Object {}}
+  width={100}
+/>
+`;
+
+exports[`containers/Authors when rendered with authors and stats  calling renderRow() should render a row 1`] = `
+<Unknown
+  author={
+    Object {
+      "authorEmails": Array [
+        "dan.abramov@gmail.com",
+        "gaearon@fb.com",
+      ],
+      "authorName": "Dan Abramov",
+      "linesAdded": 129276,
+      "linesDeleted": 104642,
+      "totalCommits": 919,
+    }
+  }
+  maxCommits={919}
+  maxImpact={233918}
+  style={
+    Object {
+      "width": "calc(100% - 20px)",
+    }
+  }
+  totalCommits={3211}
+  totalLinesAdded={442190}
+  totalLinesDeleted={388007}
+/>
+`;
+
+exports[`containers/Authors when rendered with authors and stats  it should match snapshot 1`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "whitesmoke",
+      "borderRadius": 3,
+      "display": "flex",
+      "flexDirection": "column",
+      "flexGrow": 1,
+      "marginRight": 10,
+      "maxWidth": 320,
+      "padding": 10,
+      "position": "relative",
+    }
+  }
+>
+  <Connect(AuthorsActionMenu) />
+  <div
+    style={
+      Object {
+        "color": "#333333",
+        "display": "block",
+        "flexGrow": 0,
+        "fontSize": 18,
+        "fontWeight": "bold",
+        "marginBottom": 20,
+        "marginRight": 20,
+      }
+    }
+  >
+    <span
+      data-testId="header"
+    >
+      Authors by 
+      lines
+    </span>
+  </div>
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexGrow": 1,
+      }
+    }
+  >
+    <AutoSizer
+      disableHeight={false}
+      disableWidth={false}
+      onResize={[Function]}
+      style={Object {}}
+    >
+      <Component />
+    </AutoSizer>
+  </div>
+</div>
+`;

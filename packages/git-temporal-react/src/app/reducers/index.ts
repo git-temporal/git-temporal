@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 import {
   ActionTypes,
-  AuthorsContainerFilters,
   AuthorsContainerSorts,
   CommitsContainerSorts,
   FilesContainerSorts,
@@ -75,17 +74,6 @@ export const didInvalidate = (state = false, action) => {
   }
 };
 
-export const authorsContainerFilter = (
-  state = AuthorsContainerFilters.ALL,
-  action
-) => {
-  switch (action.type) {
-    case ActionTypes.SET_AUTHORS_CONTAINER_FILTER:
-      return action.filter;
-  }
-  return state;
-};
-
 export const authorsContainerSort = (
   state = AuthorsContainerSorts.TIME,
   action
@@ -127,29 +115,6 @@ export const filesContainerSort = (
   return state;
 };
 
-export const filteredAuthors = (state = [], action) => {
-  switch (action.type) {
-    case ActionTypes.REQUEST_COMMITS:
-      return []; // clear filtered Authors on selected path change
-    case ActionTypes.ADD_AUTHOR_FILTER:
-      if (state.indexOf(action.authorName) === -1) {
-        const newState = state.slice(0);
-        newState.push(action.authorName);
-        return newState;
-      }
-      break;
-    case ActionTypes.REMOVE_AUTHOR_FILTER:
-      const indexOf = state.indexOf(action.authorName);
-      if (indexOf >= 0) {
-        return state.slice(0, indexOf).concat(state.slice(indexOf + 1));
-      }
-      break;
-    case ActionTypes.REMOVE_ALL_AUTHOR_FILTERS:
-      return [];
-  }
-  return state;
-};
-
 const rootReducer = combineReducers({
   commits,
   selectedPath,
@@ -157,9 +122,7 @@ const rootReducer = combineReducers({
   didInvalidate,
   highlightedCommitId,
   viewCommitsOrFiles,
-  filteredAuthors,
   search,
-  authorsContainerFilter,
   authorsContainerSort,
   commitsContainerSort,
   filesContainerSort,

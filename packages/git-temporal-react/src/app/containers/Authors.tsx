@@ -4,12 +4,10 @@ import { List, AutoSizer } from 'react-virtualized';
 
 import { DispatchProps, IAuthorsContainerState } from 'app/interfaces';
 import { getAuthorsContainerState } from 'app/selectors';
-import { addAuthorFilter, removeAuthorFilter } from 'app/actions';
 import { style } from 'app/styles';
 import { AuthorCard } from 'app/components/AuthorCard';
 
 import AuthorsActionMenu from 'app/containers/AuthorsActionMenu';
-import { AuthorsContainerFilters } from 'app/actions/ActionTypes';
 
 export class Authors extends Component<IAuthorsContainerState & DispatchProps> {
   constructor(props) {
@@ -35,29 +33,18 @@ export class Authors extends Component<IAuthorsContainerState & DispatchProps> {
   };
 
   render() {
-    const { authorsContainerFilter, authorsContainerSort } = this.props;
-    const filterTitle =
-      authorsContainerFilter === AuthorsContainerFilters.FILTERED
-        ? 'Filtered '
-        : '';
+    const { authorsContainerSort } = this.props;
     const sortTitle = authorsContainerSort;
 
-    // filteredAuthors is passed to RV List to get it to update on changes
-    // to filteredAuthors
     return (
       <div style={style(this.outerStyle)}>
         <AuthorsActionMenu />
         <div style={style(this.headerStyle)}>
-          <span data-testId="header">
-            {filterTitle}
-            Authors by {sortTitle}
-          </span>
+          <span data-testId="header">Authors by {sortTitle}</span>
         </div>
         <div style={style(this.listStyle)}>
           <AutoSizer>
             {({ height, width }) => {
-              // filteredAuthors, authorsContainerFilter and authorsContainerSort are passed
-              // to the list to force it to update when they change
               return this.renderList(height, width);
             }}
           </AutoSizer>
@@ -66,12 +53,9 @@ export class Authors extends Component<IAuthorsContainerState & DispatchProps> {
     );
   }
   renderList(height, width) {
-    const {
-      authors,
-      filteredAuthors,
-      authorsContainerFilter,
-      authorsContainerSort,
-    } = this.props;
+    const { authors, authorsContainerSort } = this.props;
+
+    // authorsContainerSort is passed to the list to force it to update when they change
     return (
       <List
         width={
@@ -81,8 +65,6 @@ export class Authors extends Component<IAuthorsContainerState & DispatchProps> {
         rowHeight={110}
         rowRenderer={this.renderRow}
         rowCount={authors.length}
-        filteredAuthors={filteredAuthors}
-        authorsContainerFilter={authorsContainerFilter}
         authorsContainerSort={authorsContainerSort}
       />
     );
@@ -108,19 +90,8 @@ export class Authors extends Component<IAuthorsContainerState & DispatchProps> {
         totalCommits={totalCommits}
         maxImpact={maxImpact}
         maxCommits={maxCommits}
-        onFilterToggle={() =>
-          this.onAuthorFilterToggle(author.authorName, author.isFiltered)
-        }
       />
     );
-  }
-  onAuthorFilterToggle(authorName: string, isSelected: boolean): void {
-    const { dispatch } = this.props;
-    if (isSelected) {
-      dispatch(removeAuthorFilter(authorName));
-    } else {
-      dispatch(addAuthorFilter(authorName));
-    }
   }
 }
 

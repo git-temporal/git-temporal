@@ -1,7 +1,6 @@
 import { createSelector } from 'reselect';
 
 import {
-  AuthorsContainerFilters,
   AuthorsContainerSorts,
   CommitsContainerSorts,
   FilesContainerSorts,
@@ -20,8 +19,6 @@ export const getViewCommitsOrFiles = state =>
   state.viewCommitsOrFiles || 'commits';
 
 export const getSearch = state => state.search;
-export const getFilteredAuthors = state => state.filteredAuthors || [];
-export const getAuthorsContainerFilter = state => state.authorsContainerFilter;
 export const getAuthorsContainerSort = state => state.authorsContainerSort;
 export const getCommitsContainerSort = state => state.commitsContainerSort;
 export const getFilesContainerSort = state => state.filesContainerSort;
@@ -33,26 +30,6 @@ const sumImpact = commits => {
     impact.linesDeleted += commit.linesDeleted;
   }
   return impact;
-};
-
-const isShowingAllAuthors = (filteredAuthors, authorsContainerFilter?) => {
-  return (
-    !filteredAuthors ||
-    filteredAuthors.length === 0 ||
-    !authorsContainerFilter ||
-    authorsContainerFilter === AuthorsContainerFilters.ALL
-  );
-};
-
-const authorMatchesFilter = (
-  authorName,
-  filteredAuthors,
-  authorsContainerFilter?
-) => {
-  return (
-    isShowingAllAuthors(filteredAuthors, authorsContainerFilter) ||
-    filteredAuthors.indexOf(authorName) !== -1
-  );
 };
 
 const matchesSearch = (testText, searchText) => {
@@ -109,22 +86,15 @@ const hasSearch = searchText => {
 // and time range
 export const getFilteredCommits = createSelector(
   getCommits,
-  getFilteredAuthors,
   getCommitsContainerSort,
   getSearch,
 
-  (commits, filteredAuthors, commitsContainerSort, search) => {
-    const filteredCommits =
-      isShowingAllAuthors(filteredAuthors) && !hasSearch(search)
-        ? commits
-        : commits.filter(commit => {
-            const authorMatches = authorMatchesFilter(
-              commit.authorName,
-              filteredAuthors
-            );
-            const commitMatches = commitsMatchSearch(commit, search);
-            return authorMatches && commitMatches;
-          });
+  (commits, commitsContainerSort, search) => {
+    const filteredCommits = !hasSearch(search)
+      ? commits
+      : commits.filter(commit => {
+          return commitsMatchSearch(commit, search);
+        });
 
     return filteredCommits.sort((a, b) => {
       switch (commitsContainerSort) {
@@ -140,7 +110,6 @@ export const getFilteredCommits = createSelector(
   }
 );
 
-// returns array of all authors NOT filtered by filteredAuthors, and commits
 export const getAuthorsAndCommits = createSelector(
   getFilteredCommits,
   getAuthorsContainerSort,
@@ -300,40 +269,25 @@ export const getFilteredCommitsState = createSelector(
 
 export const getHeaderContainerState = createSelector(
   getSelectedPath,
-  getFilteredAuthors,
   getSearch,
-  (selectedPath, filteredAuthors, search) => ({
+  (selectedPath, search) => ({
     selectedPath,
-    filteredAuthors,
     search,
   })
 );
 
 export const getAuthorsActionMenuState = createSelector(
-  getAuthorsContainerFilter,
   getAuthorsContainerSort,
-  getFilteredAuthors,
-  (authorsContainerFilter, authorsContainerSort, filteredAuthors) => ({
-    authorsContainerFilter,
+  authorsContainerSort => ({
     authorsContainerSort,
-    filteredAuthors,
   })
 );
 
-// note that the authors container state is not filtered by filteredAuthors
 export const getAuthorsContainerState = createSelector(
   getAuthorsAndCommits,
-  getFilteredAuthors,
-  getAuthorsContainerFilter,
   getAuthorsContainerSort,
   getSearch,
-  (
-    authorsAndCommits,
-    filteredAuthors,
-    authorsContainerFilter,
-    authorsContainerSort,
-    search
-  ) => {
+  (authorsAndCommits, authorsContainerSort, search) => {
     let totalLinesAdded = 0;
     let totalLinesDeleted = 0;
     let totalCommits = 0;
@@ -345,8 +299,6 @@ export const getAuthorsContainerState = createSelector(
       totalLinesDeleted += ac.linesDeleted;
       totalLinesAdded += ac.linesAdded;
       const impact = ac.linesAdded + ac.linesDeleted;
-      const isFiltered =
-        filteredAuthors && filteredAuthors.indexOf(ac.authorName) !== -1;
       if (impact > maxImpact) {
         maxImpact = impact;
       }
@@ -354,7 +306,6 @@ export const getAuthorsContainerState = createSelector(
         maxCommits = ac.commits.length;
       }
       return {
-        isFiltered,
         ...ac,
       };
     });
@@ -365,9 +316,7 @@ export const getAuthorsContainerState = createSelector(
       totalCommits,
       maxImpact,
       maxCommits,
-      filteredAuthors,
       authorsContainerSort,
-      authorsContainerFilter,
       search,
       authors: authorsArray,
     };
@@ -393,15 +342,7 @@ export const getStatsContainerState = createSelector(
   getViewCommitsOrFiles,
   getIsFileSelected,
   getAuthorsAndCommits,
-  getFilteredAuthors,
-  (
-    commits,
-    files,
-    viewCommitsOrFiles,
-    isFileSelected,
-    authorsAndCommits,
-    filteredAuthors
-  ) => {
+  (commits, files, viewCommitsOrFiles, isFileSelected, authorsAndCommits) => {
     let totalLinesAdded = 0;
     let totalLinesDeleted = 0;
     let minAuthorDate = Date.now();
@@ -423,7 +364,7 @@ export const getStatsContainerState = createSelector(
       maxAuthorDate,
       viewCommitsOrFiles,
       isFileSelected,
-      authors: filteredAuthors.length || authorsAndCommits.length,
+      authors: authorsAndCommits.length,
       commits: commits.length,
       files: files.length,
       linesAdded: totalLinesAdded,

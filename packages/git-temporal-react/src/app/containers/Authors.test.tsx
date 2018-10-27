@@ -20,7 +20,7 @@ describe('containers/Authors', () => {
       expect(wrapper).toMatchSnapshot();
     });
   });
-  describe('when rendered mock filteredAuthors ', () => {
+  describe('when rendered with authors and stats ', () => {
     let wrapper;
     let mockDispatch;
     beforeAll(() => {
@@ -43,14 +43,6 @@ describe('containers/Authors', () => {
       expect(
         wrapper.instance().renderRow({ index: 0, style: {}, key: 1 })
       ).toMatchSnapshot();
-    });
-    test('calling onAuthorFilterToggle("bob", true) should dispatch removeAuthorFilter', () => {
-      wrapper.instance().onAuthorFilterToggle('bob', true);
-      expect(mockDispatch).toHaveBeenCalledTimes(1);
-    });
-    test('calling onAuthorFilterToggle("bob", false) should dispatch removeAuthorFilter', () => {
-      wrapper.instance().onAuthorFilterToggle('bob', false);
-      expect(mockDispatch).toHaveBeenCalledTimes(1);
     });
   });
 });

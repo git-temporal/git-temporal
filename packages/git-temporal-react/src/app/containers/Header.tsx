@@ -4,13 +4,12 @@ import { connect } from 'react-redux';
 import { DispatchProps } from 'app/interfaces';
 import { getHeaderContainerState } from 'app/selectors';
 import { style } from 'app/styles';
-import { selectPath, removeAllAuthorFilters, setSearch } from 'app/actions';
+import { selectPath, setSearch } from 'app/actions';
 import { SearchInput } from 'app/components/SearchInput';
 
 interface HeaderProps {
   // If not provided, the whole repository is assumed
   selectedPath?: string;
-  filteredAuthors?: string[];
   search?: string;
 }
 
@@ -50,7 +49,6 @@ export class Header extends Component<HeaderProps & DispatchProps> {
                 Stats for {this.renderPathLinks()}
               </div>
             </div>
-            <div style={style('normalText')}>{this.renderAuthors()}</div>
           </div>
         </div>
         <div style={style('h5Text')}>
@@ -99,32 +97,12 @@ export class Header extends Component<HeaderProps & DispatchProps> {
     });
   }
 
-  renderAuthors() {
-    const { filteredAuthors } = this.props;
-    if (!filteredAuthors || filteredAuthors.length <= 0) {
-      return null;
-    }
-    return (
-      <span>
-        Showing commits by {filteredAuthors.join(', ')} (
-        <span style={style('link')} onClick={this.onShowAllAuthors}>
-          show all authors
-        </span>
-        )
-      </span>
-    );
-  }
-
   onSearch = value => {
     this.props.dispatch(setSearch(value || ''));
   };
 
   onClear = () => {
     this.props.dispatch(setSearch(''));
-  };
-
-  onShowAllAuthors = () => {
-    this.props.dispatch(removeAllAuthorFilters());
   };
 
   onLinkPartClick = fullPath => {

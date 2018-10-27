@@ -62,7 +62,6 @@ export interface IAuthorStats {
   totalCommits: number;
   firstCommitOn: number;
   lastCommitOn: number;
-  isFiltered: boolean;
 }
 export interface IAuthorsContainerState {
   authors?: any[];
@@ -71,8 +70,6 @@ export interface IAuthorsContainerState {
   totalCommits: number;
   maxImpact: number;
   maxCommits: number;
-  filteredAuthors: string[];
-  authorsContainerFilter: string;
   authorsContainerSort: string;
 }
 

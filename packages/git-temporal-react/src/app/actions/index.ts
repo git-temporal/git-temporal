@@ -1,6 +1,5 @@
 import {
   ActionTypes,
-  AuthorsContainerFilters,
   AuthorsContainerSorts,
   CommitsContainerSorts,
   FilesContainerSorts,
@@ -17,25 +16,6 @@ export const selectPath = path => (dispatch, _getState) => {
 export const invalidatePath = path => ({
   selectedPath: path,
   type: ActionTypes.INVALIDATE_PATH,
-});
-
-export const addAuthorFilter = authorName => ({
-  authorName,
-  type: ActionTypes.ADD_AUTHOR_FILTER,
-});
-
-export const removeAuthorFilter = authorName => ({
-  authorName,
-  type: ActionTypes.REMOVE_AUTHOR_FILTER,
-});
-
-export const removeAllAuthorFilters = () => ({
-  type: ActionTypes.REMOVE_ALL_AUTHOR_FILTERS,
-});
-
-export const setAuthorsContainerFilter = (filter: AuthorsContainerFilters) => ({
-  filter,
-  type: ActionTypes.SET_AUTHORS_CONTAINER_FILTER,
 });
 
 export const setAuthorsContainerSort = (sort: AuthorsContainerSorts) => ({
