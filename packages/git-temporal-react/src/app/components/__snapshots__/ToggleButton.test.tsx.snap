@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/ToggleButton when rendered with isSelected=false it should match snapshot (should have rendered as selectable) 1`] = `
+<div
+  onClick={[MockFunction]}
+  style={
+    Object {
+      "border": "1px solid lightskyblue",
+      "borderRadius": 3,
+      "cursor": "pointer",
+    }
+  }
+>
+  ...
+</div>
+`;
+
+exports[`components/ToggleButton when rendered with isSelected=true it should match snapshot (should have rendered as selected) 1`] = `
+<div
+  onClick={[MockFunction]}
+  style={
+    Object {
+      "backgroundColor": "lightskyblue",
+      "border": "1px solid lightskyblue",
+      "borderRadius": 3,
+      "cursor": "pointer",
+    }
+  }
+>
+  ...
+</div>
+`;
