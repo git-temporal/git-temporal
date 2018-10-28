@@ -66,22 +66,26 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
         </div>
         <AutoSizer>
           {({ height }) => {
-            return (
-              <List
-                width={this._listWidth}
-                height={height || 100}
-                rowHeight={this._cache.rowHeight}
-                rowRenderer={this.renderRow}
-                rowCount={this.props.commits.length}
-                ref={this._setListRef}
-                deferredMeasurementCache={this._cache}
-                scrollToIndex={scrollToIndex}
-                commitsContainerSort={this.props.commitsContainerSort}
-              />
-            );
+            return this.renderList(height, scrollToIndex);
           }}
         </AutoSizer>
       </div>
+    );
+  }
+
+  renderList(height, scrollToIndex) {
+    return (
+      <List
+        width={this._listWidth}
+        height={height || 100}
+        rowHeight={this._cache.rowHeight}
+        rowRenderer={this.renderRow}
+        rowCount={this.props.commits.length}
+        ref={this._setListRef}
+        deferredMeasurementCache={this._cache}
+        scrollToIndex={scrollToIndex}
+        commitsContainerSort={this.props.commitsContainerSort}
+      />
     );
   }
   renderRow({ index, key, parent, style }) {
@@ -142,7 +146,7 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
       console.log('remeasuring all cells');
       this._cache.clearAll();
     }
-    this._list.recomputeRowHeights();
+    this._list && this._list.recomputeRowHeights();
   }
 }
 

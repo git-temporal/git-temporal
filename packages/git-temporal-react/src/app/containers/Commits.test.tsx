@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 
 import { Commits, mapStateToProps } from './Commits';
 import commitsForPath from 'testHelpers/mocks/commitsForPath';
@@ -25,13 +25,24 @@ describe('containers/Commits', () => {
     const mockEvent = { stopPropagation: jest.fn };
     beforeAll(() => {
       mockDispatch = jest.fn();
-      wrapper = mount(
+      wrapper = shallow(
         <Commits dispatch={mockDispatch} {...filteredCommitsMock} />
       );
     });
 
     beforeEach(() => {
       mockDispatch.mockClear();
+    });
+
+    test('and rendering List should return a List', () => {
+      const listReturn = wrapper.instance().renderList(300, 0);
+      expect(listReturn).toBeDefined();
+    });
+
+    test('and rendering row', () => {
+      expect(
+        wrapper.instance().renderRow({ index: 0, style: {}, key: 'test0' })
+      ).toBeDefined();
     });
 
     test('it should match snapshot (it should be showing empty indicator)', () => {

@@ -39,22 +39,26 @@ export class Files extends Component<IFilesContainerState & DispatchProps> {
           <span data-testId="header">Files by {sortTitle}</span>
         </div>
         <AutoSizer>
-          {({ height, width }) => (
-            <List
-              width={
-                width || 100 // width and height below need minimums for testing
-              }
-              height={height || 100}
-              rowHeight={60}
-              rowRenderer={this.renderRow}
-              rowCount={this.props.files.length}
-              filesContainerSort={this.props.filesContainerSort}
-            />
-          )}
+          {({ height, width }) => this.renderList(height, width)}
         </AutoSizer>
       </div>
     );
   }
+  renderList(height, width) {
+    return (
+      <List
+        width={
+          width || 100 // width and height below need minimums for testing
+        }
+        height={height || 100}
+        rowHeight={60}
+        rowRenderer={this.renderRow}
+        rowCount={this.props.files.length}
+        filesContainerSort={this.props.filesContainerSort}
+      />
+    );
+  }
+
   renderRow({ index, style, key }) {
     // console.log('render row', row);
     const file = this.props.files[index];
