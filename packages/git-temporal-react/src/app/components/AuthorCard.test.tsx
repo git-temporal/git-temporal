@@ -1,6 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
+import fiveCommits from 'testHelpers/mocks/fiveCommits';
+
 import { AuthorCard } from './AuthorCard';
 
 const testProps = {
@@ -9,14 +11,14 @@ const testProps = {
     authorEmails: ['president@galaxy.gov'],
     linesAdded: 100,
     linesDeleted: 30,
-    totalCommits: 70,
+    commits: fiveCommits,
     firstCommitOn: 132344525,
     lastCommitOn: 132344555,
     isFiltered: false,
   },
   totalLinesAdded: 200,
   totalLinesDeleted: 60,
-  totalCommits: 140,
+  totalCommits: 5,
   maxImpact: 260,
   maxCommits: 140,
 };

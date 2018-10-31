@@ -18,7 +18,7 @@ const searchInputStyle = {
   width: 250,
   borderRadius: 10,
   marginLeft: 10,
-  marginTop: -5,
+  marginTop: 0,
 };
 
 const topRowStyle = {

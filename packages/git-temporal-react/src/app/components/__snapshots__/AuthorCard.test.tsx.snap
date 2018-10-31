@@ -82,7 +82,7 @@ exports[`components/AuthorCard when rendered with required props it should match
         }
       }
     >
-      70
+      5
       <span>
          commits spanning 
       </span>
@@ -93,7 +93,7 @@ exports[`components/AuthorCard when rendered with required props it should match
     </div>
     <Component
       denominator={140}
-      numerator={70}
+      numerator={5}
     />
   </div>
 </div>

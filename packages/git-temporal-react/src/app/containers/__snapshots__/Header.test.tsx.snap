@@ -57,7 +57,7 @@ exports[`containers/Header when rendered with a proper path it should match snap
               "borderRadius": 10,
               "float": "right",
               "marginLeft": 10,
-              "marginTop": -5,
+              "marginTop": 0,
               "width": 250,
             }
           }
@@ -261,7 +261,7 @@ exports[`containers/Header when rendered without props it should match snapshot 
               "borderRadius": 10,
               "float": "right",
               "marginLeft": 10,
-              "marginTop": -5,
+              "marginTop": 0,
               "width": 250,
             }
           }

@@ -1,3 +1,5 @@
+import fiveCommits from 'testHelpers/mocks/fiveCommits';
+
 const authorsAndStats = {
   authors: [
     {
@@ -5,28 +7,28 @@ const authorsAndStats = {
       authorEmails: ['dan.abramov@gmail.com', 'gaearon@fb.com'],
       linesAdded: 129276,
       linesDeleted: 104642,
-      totalCommits: 919,
+      commits: fiveCommits,
     },
     {
       authorName: 'Paul O’Shannessy',
       authorEmails: ['paul@oshannessy.com'],
       linesAdded: 80522,
       linesDeleted: 125411,
-      totalCommits: 784,
+      commits: fiveCommits,
     },
     {
       authorName: 'Brian Vaughn',
       authorEmails: ['bvaughn@fb.com', 'brian.david.vaughn@gmail.com'],
       linesAdded: 70314,
       linesDeleted: 74382,
-      totalCommits: 304,
+      commits: fiveCommits,
     },
     {
       authorName: 'Andrew Clark',
       authorEmails: ['acdlite@me.com', 'acdlite@fb.com'],
       linesAdded: 82409,
       linesDeleted: 51329,
-      totalCommits: 387,
+      commits: fiveCommits,
     },
     {
       authorName: 'Ben Alpert',
@@ -37,7 +39,7 @@ const authorsAndStats = {
       ],
       linesAdded: 79669,
       linesDeleted: 32243,
-      totalCommits: 817,
+      commits: fiveCommits,
     },
   ],
   totalLinesAdded: 442190,

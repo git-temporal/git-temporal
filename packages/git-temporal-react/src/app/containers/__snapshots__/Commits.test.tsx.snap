@@ -184,14 +184,22 @@ exports[`containers/Commits when rendered without props and then changing commit
       time
     </span>
   </div>
-  <AutoSizer
-    disableHeight={false}
-    disableWidth={false}
-    onResize={[Function]}
-    style={Object {}}
+  <div
+    style={
+      Object {
+        "flexGrow": 1,
+      }
+    }
   >
-    <Component />
-  </AutoSizer>
+    <AutoSizer
+      disableHeight={false}
+      disableWidth={false}
+      onResize={[Function]}
+      style={Object {}}
+    >
+      <Component />
+    </AutoSizer>
+  </div>
 </div>
 `;
 
@@ -234,13 +242,21 @@ exports[`containers/Commits when rendered without props it should match snapshot
       time
     </span>
   </div>
-  <AutoSizer
-    disableHeight={false}
-    disableWidth={false}
-    onResize={[Function]}
-    style={Object {}}
+  <div
+    style={
+      Object {
+        "flexGrow": 1,
+      }
+    }
   >
-    <Component />
-  </AutoSizer>
+    <AutoSizer
+      disableHeight={false}
+      disableWidth={false}
+      onResize={[Function]}
+      style={Object {}}
+    >
+      <Component />
+    </AutoSizer>
+  </div>
 </div>
 `;

@@ -59,7 +59,7 @@ export interface IAuthorStats {
   authorEmails: string[];
   linesAdded: number;
   linesDeleted: number;
-  totalCommits: number;
+  commits: ICommit[];
   firstCommitOn: number;
   lastCommitOn: number;
 }

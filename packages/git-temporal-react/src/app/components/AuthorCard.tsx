@@ -63,14 +63,17 @@ export const AuthorCard = (props: AuthorCardProps): JSX.Element => {
           denominator={maxImpact}
         />
         <div style={style('smallerText')}>
-          {author.totalCommits}
+          {author.commits.length}
           <span> commits spanning </span>
           <EpochSpan
             firstEpochTime={author.firstCommitOn}
             secondEpochTime={author.lastCommitOn}
           />
         </div>
-        <PercentBar numerator={author.totalCommits} denominator={maxCommits} />
+        <PercentBar
+          numerator={author.commits.length}
+          denominator={maxCommits}
+        />
       </div>
     </div>
   );

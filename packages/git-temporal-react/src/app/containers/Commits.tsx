@@ -64,11 +64,13 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
         <div style={style(this.headerStyle)}>
           <span data-testId="header">Commits by {sortTitle}</span>
         </div>
-        <AutoSizer>
-          {({ height }) => {
-            return this.renderList(height, scrollToIndex);
-          }}
-        </AutoSizer>
+        <div style={{ flexGrow: 1 }}>
+          <AutoSizer>
+            {({ height }) => {
+              return this.renderList(height, scrollToIndex);
+            }}
+          </AutoSizer>
+        </div>
       </div>
     );
   }
