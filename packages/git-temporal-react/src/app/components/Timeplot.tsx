@@ -4,6 +4,7 @@ import * as d3 from 'd3';
 require('d3-selection-multi');
 
 import { ICommit } from 'app/interfaces';
+import { ZoomContainer } from 'app/components/ZoomContainer';
 
 export interface TimeplotProps {
   // The children are the menu content
@@ -12,10 +13,9 @@ export interface TimeplotProps {
   style?: string | object;
 }
 
-const containerStyle = {
+const timeplotStyle = {
   _extends: 'fill',
 };
-
 const blobStyle = {
   fill: '#696969',
   opacity: 0.3,
@@ -30,7 +30,7 @@ const LEFT_PADDING = 20;
 const PADDING = 20;
 
 export class Timeplot extends React.Component<TimeplotProps> {
-  private ref;
+  private timeplotRef;
 
   private svg;
   private xScale;
@@ -39,7 +39,7 @@ export class Timeplot extends React.Component<TimeplotProps> {
 
   constructor(props) {
     super(props);
-    this.ref = React.createRef();
+    this.timeplotRef = React.createRef();
     this.getUTCDateOfCommit = this.getUTCDateOfCommit.bind(this);
     this.getHourOfCommit = this.getHourOfCommit.bind(this);
   }
@@ -66,7 +66,12 @@ export class Timeplot extends React.Component<TimeplotProps> {
 
   render() {
     return (
-      <div style={style(containerStyle, this.props.style)} ref={this.ref} />
+      <ZoomContainer
+        style={this.props.style}
+        onZoom={() => this.renderTimeplot()}
+      >
+        <div style={style(timeplotStyle)} ref={this.timeplotRef} />
+      </ZoomContainer>
     );
   }
 
@@ -88,14 +93,14 @@ export class Timeplot extends React.Component<TimeplotProps> {
   }
 
   private clearTimeplot() {
-    const element = this.ref.current;
+    const element = this.timeplotRef.current;
     while (element.firstChild) {
       element.removeChild(element.firstChild);
     }
   }
 
   private renderTimeplot() {
-    const element = this.ref.current;
+    const element = this.timeplotRef.current;
     if (this.props.commits.length <= 0) {
       element.innerHtml =
         "<div class='placeholder'>No commits, nothing to see here.</div>";
@@ -109,7 +114,7 @@ export class Timeplot extends React.Component<TimeplotProps> {
       .append('svg')
       .attr('width', element.clientWidth)
       .attr('height', element.clientHeight);
-    this.computeScales();
+    this.calculateScales();
     this.renderAxis(this.svg);
     this.renderBlobs(this.svg);
     this.updateHighlightedCommit();
@@ -126,8 +131,8 @@ export class Timeplot extends React.Component<TimeplotProps> {
     return d.getUTCHours();
   }
 
-  private computeScales() {
-    const element = this.ref.current;
+  private calculateScales() {
+    const element = this.timeplotRef.current;
     const { commits } = this.props;
     const w = element.clientWidth;
     const h = element.clientHeight;
@@ -152,7 +157,7 @@ export class Timeplot extends React.Component<TimeplotProps> {
   }
 
   private renderAxis(svg) {
-    const element = this.ref.current;
+    const element = this.timeplotRef.current;
     const h = element.clientHeight;
 
     const xAxis = d3.axisBottom().scale(this.xScale);

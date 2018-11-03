@@ -5,6 +5,13 @@ import { DispatchProps, ITimeplotContainerState } from 'app/interfaces';
 import { getTimeplotContainerState } from 'app/selectors';
 
 import { Timeplot } from 'app/components/Timeplot';
+import { style } from 'app/styles';
+
+const statsStyle = {
+  _extends: 'normalText',
+  width: '100%',
+  textAlign: 'center',
+};
 
 export class TimeplotContainer extends Component<
   ITimeplotContainerState & DispatchProps
@@ -23,10 +30,15 @@ export class TimeplotContainer extends Component<
 
   render() {
     return (
-      <Timeplot
-        commits={this.props.commits}
-        highlightedCommitId={this.props.highlightedCommitId}
-      />
+      <div style={style(this.outerStyle)}>
+        <Timeplot
+          commits={this.props.commits}
+          highlightedCommitId={this.props.highlightedCommitId}
+        />
+        <div style={style(statsStyle)}>
+          {this.props.commits.length} commits by {this.props.authors} authors
+        </div>
+      </div>
     );
   }
 }

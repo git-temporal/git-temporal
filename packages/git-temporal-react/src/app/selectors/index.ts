@@ -424,9 +424,11 @@ export const getTimeplotContainerState = createSelector(
   getSelectedPath,
   getHighlightedCommitId,
   getCommits,
-  (selectedPath, highlightedCommitId, commits) => ({
+  getAuthorsAndCommits,
+  (selectedPath, highlightedCommitId, commits, authorsAndCommits) => ({
     selectedPath,
     highlightedCommitId,
     commits,
+    authors: authorsAndCommits.length,
   })
 );

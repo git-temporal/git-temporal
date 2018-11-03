@@ -1,4 +1,7 @@
 let globalStyles = {
+  backgroundColor: {
+    backgroundColor: 'white',
+  },
   page: {
     padding: 20,
     width: 'calc(100% - 40px)',

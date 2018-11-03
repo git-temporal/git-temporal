@@ -92,4 +92,5 @@ export interface ITimeplotContainerState {
   selectedPath: string;
   highlightedCommitId: string;
   commits: ICommit[];
+  authors: number;
 }
