@@ -11,6 +11,7 @@ import Stats from 'app/containers/Stats';
 import Authors from 'app/containers/Authors';
 import Files from 'app/containers/Files';
 import Commits from 'app/containers/Commits';
+import TimeplotContainer from 'app/containers/TimeplotContainer';
 
 import { SpinnerContainer } from 'app/components/SpinnerContainer';
 
@@ -50,6 +51,7 @@ export class GitTemporal extends Component<
                   <Authors />
                   {viewCommitsOrFiles === 'files' ? <Files /> : <Commits />}
                 </div>
+                <TimeplotContainer />
               </div>
             )}
           </div>

@@ -419,3 +419,14 @@ export const getStatsContainerState = createSelector(
     };
   }
 );
+
+export const getTimeplotContainerState = createSelector(
+  getSelectedPath,
+  getHighlightedCommitId,
+  getCommits,
+  (selectedPath, highlightedCommitId, commits) => ({
+    selectedPath,
+    highlightedCommitId,
+    commits,
+  })
+);

@@ -30,6 +30,8 @@
     "test-debug": "node --inspect-brk node_modules/.bin/jest --runInBand"
   },
   "dependencies": {
+    "d3": "^5.7.0",
+    "d3-selection-multi": "^1.0.1",
     "md5": "^2.2.1",
     "react-redux": "^5.0.7",
     "react-virtualized": "^9.20.1",

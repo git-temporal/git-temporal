@@ -87,3 +87,9 @@ export interface IFilesContainerState {
   isFileSelected: boolean;
   filesContainerSort: string;
 }
+
+export interface ITimeplotContainerState {
+  selectedPath: string;
+  highlightedCommitId: string;
+  commits: ICommit[];
+}
