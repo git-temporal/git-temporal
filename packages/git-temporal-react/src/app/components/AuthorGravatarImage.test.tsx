@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { AuthorGravatarImage } from './AuthorGravatarImage';
-import { AuthorPlaceholderImage } from './AuthorPlaceholderImage';
+// import { AuthorPlaceholderImage } from './AuthorPlaceholderImage';
 
 describe('components/AuthorGravatarImage', () => {
   describe('when rendered with a single email', () => {
@@ -23,7 +23,8 @@ describe('components/AuthorGravatarImage', () => {
     test('and then when image not found, should match snapshot (should render AuthorPlaceholderImage)', () => {
       wrapper.instance().onImageNotFound();
       expect(wrapper).toMatchSnapshot();
-      expect(wrapper.find(AuthorPlaceholderImage).length).toBe(1);
+      // console.log(wrapper.html());
+      expect(wrapper.find('AuthorPlaceholderImage').length).toBe(1);
     });
   });
 });

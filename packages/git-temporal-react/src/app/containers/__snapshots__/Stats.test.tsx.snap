@@ -2,7 +2,7 @@
 
 exports[`containers/Stats when calling mapStateToProps() it should respond with props 1`] = `
 Object {
-  "authors": 5,
+  "authors": 1,
   "commits": 5,
   "files": 13,
   "isFileSelected": false,

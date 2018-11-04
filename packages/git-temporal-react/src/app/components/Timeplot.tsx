@@ -19,6 +19,11 @@ export interface TimeplotProps {
   commits: ICommit[];
   highlightedCommitId?: string;
   style?: string | object;
+  onMouseEnter: (evt, date?) => void;
+  onMouseLeave: (evt, date?) => void;
+  onMouseMove: (evt, date) => void;
+  onMouseDown: (evt, date) => void;
+  onMouseUp: (evt, date) => void;
 }
 
 const timeplotStyle = {
@@ -78,7 +83,15 @@ export class Timeplot extends React.Component<TimeplotProps> {
         style={this.props.style}
         onZoom={() => this.renderTimeplot()}
       >
-        <div style={style(timeplotStyle)} ref={this.timeplotRef} />
+        <div
+          style={style(timeplotStyle)}
+          ref={this.timeplotRef}
+          onMouseEnter={this.onMouseEnter}
+          onMouseLeave={this.onMouseLeave}
+          onMouseMove={this.onMouseMove}
+          onMouseDown={this.onMouseDown}
+          onMouseUp={this.onMouseUp}
+        />
       </ZoomContainer>
     );
   }
@@ -209,4 +222,38 @@ export class Timeplot extends React.Component<TimeplotProps> {
       .duration(500)
       .attr('r', d => this.rScale(d.linesAdded + d.linesDeleted));
   }
+
+  private callCallbackWithDates(callback, evt) {
+    const element = this.timeplotRef.current;
+    const rect = element.getBoundingClientRect();
+    const relativeLeft = evt.clientX - rect.x + element.scrollLeft;
+    const exactDate = this.xScale.invert(relativeLeft);
+    const startLeft = relativeLeft - 20 < 0 ? 0 : relativeLeft - 20;
+    const startDate = this.xScale.invert(startLeft);
+    const endLeft =
+      relativeLeft + 20 > element.width ? element.width : relativeLeft + 20;
+    const endDate = this.xScale.invert(endLeft);
+
+    callback(evt, { exactDate, startDate, endDate, relativeLeft });
+  }
+
+  private onMouseEnter = evt => {
+    this.props.onMouseEnter(evt);
+  };
+
+  private onMouseLeave = evt => {
+    this.props.onMouseLeave(evt);
+  };
+
+  private onMouseMove = evt => {
+    this.callCallbackWithDates(this.props.onMouseMove, evt);
+  };
+  private onMouseDown = evt => {
+    console.log('onMouseDown', evt);
+    this.callCallbackWithDates(this.props.onMouseDown, evt);
+  };
+
+  private onMouseUp = evt => {
+    this.callCallbackWithDates(this.props.onMouseUp, evt);
+  };
 }
