@@ -129,13 +129,71 @@ export const getFilteredCommits = createSelector(
   }
 );
 
+const consolidateAuthorAndCommits = (
+  commitsByAuthorName,
+  authorAndCommitsArray
+) => {
+  let authorAndCommitsResult = null;
+  for (const authorAndCommits of authorAndCommitsArray) {
+    if (!authorAndCommitsResult) {
+      authorAndCommitsResult = authorAndCommits;
+      delete commitsByAuthorName[authorAndCommits.authorName];
+      continue;
+    }
+    if (
+      authorAndCommits.authorName.length >
+      authorAndCommitsResult.authorName.length
+    ) {
+      authorAndCommitsResult.authorName = authorAndCommits.authorName;
+    }
+    for (const email of authorAndCommits.authorEmails) {
+      if (authorAndCommitsResult.authorEmails.indexOf(email) === -1) {
+        authorAndCommitsResult.authorEmails.push(email);
+      }
+    }
+    if (authorAndCommits.authorDate < authorAndCommitsResult.firstCommitOn) {
+      authorAndCommitsResult.firstCommitOn = authorAndCommits.authorDate;
+    }
+    if (authorAndCommits.authorDate > authorAndCommitsResult.lastCommitOn) {
+      authorAndCommitsResult.lastCommitOn = authorAndCommits.authorDate;
+    }
+    for (const file in authorAndCommits.files) {
+      authorAndCommitsResult.files[file] = true;
+    }
+    authorAndCommitsResult.commits = authorAndCommitsResult.commits.concat(
+      authorAndCommits.commits
+    );
+    delete commitsByAuthorName[authorAndCommits.authorName];
+  }
+  commitsByAuthorName[
+    authorAndCommitsResult.authorName
+  ] = authorAndCommitsResult;
+  return authorAndCommitsResult;
+};
+
+const dedupeAuthorsAndCommits = (
+  commitsByAuthorName,
+  authorsAndCommitsByEmail
+) => {
+  console.log(authorsAndCommitsByEmail);
+  for (const email in authorsAndCommitsByEmail) {
+    const byEmail = authorsAndCommitsByEmail[email];
+    if (byEmail.length <= 1) {
+      continue;
+    }
+    consolidateAuthorAndCommits(commitsByAuthorName, byEmail);
+  }
+  return commitsByAuthorName;
+};
+
 export const getAuthorsAndCommits = createSelector(
   getFilteredCommits,
   getAuthorsContainerSort,
   (commits, authorsContainerSort) => {
-    const commitsByAuthor = {};
+    const commitsByAuthorName = {};
+    const authorsAndCommitsByEmail = {};
     commits.forEach(commit => {
-      const commitsForThisAuthor = commitsByAuthor[commit.authorName] || {
+      const commitsForThisAuthor = commitsByAuthorName[commit.authorName] || {
         authorName: commit.authorName,
         authorEmails: [],
         commits: [],
@@ -155,14 +213,24 @@ export const getAuthorsAndCommits = createSelector(
         commitsForThisAuthor.lastCommitOn = commit.authorDate;
       }
       for (const file of commit.files) {
-        commitsForThisAuthor[file.fileName] = true;
+        commitsForThisAuthor.files[file] = true;
       }
       commitsForThisAuthor.commits.push(commit);
-      commitsByAuthor[commit.authorName] = commitsForThisAuthor;
+      commitsByAuthorName[commit.authorName] = commitsForThisAuthor;
+      const byEmail = authorsAndCommitsByEmail[commit.authorEmail] || [];
+      if (!byEmail.includes(commitsForThisAuthor)) {
+        byEmail.push(commitsForThisAuthor);
+        authorsAndCommitsByEmail[commit.authorEmail] = byEmail;
+      }
     });
+
     const authorsAndCommits = [];
-    for (const key in commitsByAuthor) {
-      const authorAndCommits = commitsByAuthor[key];
+    const deduped = dedupeAuthorsAndCommits(
+      commitsByAuthorName,
+      authorsAndCommitsByEmail
+    );
+    for (const key in deduped) {
+      const authorAndCommits = commitsByAuthorName[key];
       const { linesAdded, linesDeleted } = sumImpact(authorAndCommits.commits);
       authorAndCommits.linesAdded = linesAdded;
       authorAndCommits.linesDeleted = linesDeleted;

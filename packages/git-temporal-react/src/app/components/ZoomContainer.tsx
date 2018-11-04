@@ -57,7 +57,6 @@ export class ZoomContainer extends React.Component<
         </div>
         <div style={style(zoomSelectorStyle)}>
           <label style={style('normalText')}>
-            <span>Zoom: </span>
             <select onChange={this.onZoomChange}>
               {this.renderZoomOptions()}
             </select>
@@ -72,7 +71,7 @@ export class ZoomContainer extends React.Component<
       const selected = zoom === this.state.zoom;
       return (
         <option key={index} value={zoom} selected={selected}>
-          {zoom}%
+          {zoom}% zoom
         </option>
       );
     });

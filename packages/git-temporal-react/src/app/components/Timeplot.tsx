@@ -6,6 +6,14 @@ require('d3-selection-multi');
 import { ICommit } from 'app/interfaces';
 import { ZoomContainer } from 'app/components/ZoomContainer';
 
+// https://github.com/wbkd/d3-extended
+d3.selection.prototype.moveToFront = function() {
+  return this.each(function() {
+    // @ts-ignore
+    this.parentNode.appendChild(this);
+  });
+};
+
 export interface TimeplotProps {
   // The children are the menu content
   commits: ICommit[];
@@ -82,6 +90,7 @@ export class Timeplot extends React.Component<TimeplotProps> {
       .attr('data-selected', false);
     this.svg
       .selectAll(`circle[data-id="${this.props.highlightedCommitId}"]`)
+      .moveToFront()
       .styles(style(highlightedBlobStyle))
       .attr('data-selected', true)
       .transition()
@@ -139,8 +148,6 @@ export class Timeplot extends React.Component<TimeplotProps> {
     const maxImpact = d3.max(commits.map(d => d.linesAdded + d.linesDeleted));
     const minDate = this.getUTCDateOfCommit(commits[commits.length - 1]);
     const maxDate = Date.now();
-    const minHour = d3.min(commits.map(this.getHourOfCommit));
-    const maxHour = d3.max(commits.map(this.getHourOfCommit));
 
     this.xScale = d3
       .scaleTime()
@@ -148,12 +155,12 @@ export class Timeplot extends React.Component<TimeplotProps> {
       .range([LEFT_PADDING, w - PADDING]);
     this.yScale = d3
       .scaleLinear()
-      .domain([minHour, maxHour])
+      .domain([0, 25])
       .range([10, h - PADDING * 2]);
     this.rScale = d3
-      .scaleLinear()
-      .domain([0, maxImpact])
-      .range([3, 15]);
+      .scalePow(10)
+      .domain([1, maxImpact])
+      .range([3, 30]);
   }
 
   private renderAxis(svg) {
@@ -192,6 +199,6 @@ export class Timeplot extends React.Component<TimeplotProps> {
       .styles(style(blobStyle))
       .transition()
       .duration(500)
-      .attr('r', d => this.rScale(d.linesAdded + d.linesDeleted || 0));
+      .attr('r', d => this.rScale(d.linesAdded + d.linesDeleted));
   }
 }
