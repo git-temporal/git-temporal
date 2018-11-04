@@ -110,7 +110,7 @@ export const getFilteredCommits = createSelector(
 
   (commits, commitsContainerSort, search) => {
     const filteredCommits = !hasSearch(search)
-      ? commits
+      ? commits.slice(0)
       : commits.filter(commit => {
           return commitsMatchSearch(commit, search);
         });

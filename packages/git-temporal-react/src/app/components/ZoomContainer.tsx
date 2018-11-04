@@ -44,6 +44,12 @@ export class ZoomContainer extends React.Component<
 > {
   readonly state: ZoomContainerState = initialState;
 
+  componentDidUpdate(_prevProps, prevState) {
+    if (prevState.zoom !== this.state.zoom) {
+      this.props.onZoom(this.state.zoom);
+    }
+  }
+
   render() {
     const zoomStyle = {
       width: `${this.state.zoom || 100}%`,
@@ -79,8 +85,6 @@ export class ZoomContainer extends React.Component<
 
   private onZoomChange = evt => {
     const value = parseInt(evt.target.value, 10);
-    this.setState({ zoom: value }, () => {
-      this.props.onZoom(value);
-    });
+    this.setState({ zoom: value });
   };
 }

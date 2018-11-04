@@ -137,7 +137,7 @@ export class Timeplot extends React.Component<TimeplotProps> {
 
   private getHourOfCommit(commit) {
     const d = this.getUTCDateOfCommit(commit);
-    return d.getUTCHours();
+    return d.getHours();
   }
 
   private calculateScales() {
@@ -147,7 +147,15 @@ export class Timeplot extends React.Component<TimeplotProps> {
     const h = element.clientHeight;
     const maxImpact = d3.max(commits.map(d => d.linesAdded + d.linesDeleted));
     const minDate = this.getUTCDateOfCommit(commits[commits.length - 1]);
-    const maxDate = Date.now();
+    const maxDate = this.getUTCDateOfCommit(commits[0]); // Date.now();
+
+    console.log(
+      'dates',
+      minDate,
+      maxDate,
+      commits[0].authorDate,
+      this.getHourOfCommit(commits[0])
+    );
 
     this.xScale = d3
       .scaleTime()
