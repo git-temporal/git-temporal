@@ -1,26 +1,23 @@
 import React from 'react';
 import { style } from 'app/styles';
 
+import { HorizontalScroller } from 'app/components/HorizontalScroller';
+
 export interface ZoomContainerProps {
   // The children are the menu content
   children: string | JSX.Element | JSX.Element[];
   onZoom?: (value: number) => void;
   style?: string | object;
 }
+
 const initialState = {
   zoom: 100,
 };
+
 type ZoomContainerState = Readonly<typeof initialState>;
 
 const outerStyle = {
   _extends: 'fill',
-  position: 'relative',
-};
-
-const containerStyle = {
-  overflowX: 'scroll',
-  height: '100%',
-  width: '100%',
   position: 'relative',
 };
 
@@ -55,12 +52,12 @@ export class ZoomContainer extends React.Component<
       width: `${this.state.zoom || 100}%`,
     };
     return (
-      <div style={style(outerStyle)}>
-        <div style={style(this.props.style, containerStyle)}>
+      <div style={style(this.props.style, outerStyle)}>
+        <HorizontalScroller>
           <div style={style(scrollContainerStyle, zoomStyle)}>
             {this.props.children}
           </div>
-        </div>
+        </HorizontalScroller>
         <div style={style(zoomSelectorStyle)}>
           <label style={style('normalText')}>
             <select onChange={this.onZoomChange}>
