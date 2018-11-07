@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { GitTemporalProps, DispatchProps, StateProps } from 'app/interfaces';
 import { selectPath } from 'app/actions';
-import { getFilteredCommitsState } from 'app/selectors';
+import { getGitTemporalContainerState } from 'app/selectors';
 import { style } from 'app/styles';
 
 import Header from 'app/containers/Header';
@@ -11,7 +11,7 @@ import Stats from 'app/containers/Stats';
 import Authors from 'app/containers/Authors';
 import Files from 'app/containers/Files';
 import Commits from 'app/containers/Commits';
-import TimeplotContainer from 'app/containers/TimeplotContainer';
+import Timeplot from 'app/containers/Timeplot';
 
 import { SpinnerContainer } from 'app/components/SpinnerContainer';
 
@@ -51,7 +51,7 @@ export class GitTemporal extends Component<
                   <Authors />
                   {viewCommitsOrFiles === 'files' ? <Files /> : <Commits />}
                 </div>
-                <TimeplotContainer />
+                <Timeplot />
               </div>
             )}
           </div>
@@ -60,9 +60,5 @@ export class GitTemporal extends Component<
     );
   }
 }
-// debugger;
-export function mapStateToProps(state) {
-  return getFilteredCommitsState(state);
-}
 
-export default connect(mapStateToProps)(GitTemporal);
+export default connect(getGitTemporalContainerState)(GitTemporal);

@@ -4,14 +4,23 @@ import { connect } from 'react-redux';
 import { DispatchProps } from 'app/interfaces';
 import { getHeaderContainerState } from 'app/selectors';
 import { style } from 'app/styles';
-import { selectPath, setSearch } from 'app/actions';
+import { selectPath, setSearch, setStartDate, setEndDate } from 'app/actions';
 import { SearchInput } from 'app/components/SearchInput';
+import { EpochDateTime } from 'app/components/EpochDateTime';
 
 interface HeaderProps {
   // If not provided, the whole repository is assumed
   selectedPath?: string;
   search?: string;
+  startDate?: number;
+  endDate?: number;
+  isDefaultDates?: boolean;
 }
+
+const appNameStyle = {
+  _extends: ['inlineBlock', 'h1Text'],
+  marginBottom: 10,
+};
 
 const searchInputStyle = {
   float: 'right',
@@ -28,20 +37,33 @@ const topRowStyle = {
 
 const statsAndSearchStyle = {
   _extends: ['inlineBlock', 'flexColumns'],
-  marginBottom: 20,
+  marginBottom: 10,
   flexGrow: 1,
+};
+
+const datesSelectedStyle = {
+  _extends: 'h2Text',
+  margin: '0px 5px',
+  color: '@colors.selected',
+};
+
+const dateOptions = {
+  month: 'long',
+  timeZoneName: 'short',
 };
 
 export class Header extends Component<HeaderProps & DispatchProps> {
   render() {
+    const { startDate, endDate, search, isDefaultDates } = this.props;
+    const epochStyle = isDefaultDates ? {} : datesSelectedStyle;
     return (
       <div style={style('panel', 'flexColumns')}>
         <div style={style(topRowStyle)}>
-          <div style={style('inlineBlock', 'h1Text')}>Git Temporal </div>
+          <div style={style(appNameStyle)}>Git Temporal </div>
           <div style={style(statsAndSearchStyle)}>
             <div>
               <SearchInput
-                value={this.props.search}
+                value={search}
                 onChange={this.onSearch}
                 onClear={this.onClear}
                 style={style(searchInputStyle)}
@@ -54,7 +76,27 @@ export class Header extends Component<HeaderProps & DispatchProps> {
           </div>
         </div>
         <div style={style('h5Text')}>
-          From January 18, 2014 18:06 GMT to January 19, 2014 18:06 GMT
+          From{' '}
+          <EpochDateTime
+            value={startDate}
+            displayOptions={dateOptions}
+            style={style(epochStyle)}
+          />{' '}
+          to{' '}
+          <EpochDateTime
+            value={endDate}
+            displayOptions={dateOptions}
+            style={style(epochStyle)}
+          />
+          {!isDefaultDates && (
+            <span>
+              {'  '}(
+              <span style={style('link')} onClick={this.onResetDatesClick}>
+                reset
+              </span>
+              )
+            </span>
+          )}
         </div>
       </div>
     );
@@ -109,6 +151,11 @@ export class Header extends Component<HeaderProps & DispatchProps> {
 
   onLinkPartClick = fullPath => {
     this.props.dispatch(selectPath(fullPath));
+  };
+
+  onResetDatesClick = () => {
+    this.props.dispatch(setStartDate(null));
+    this.props.dispatch(setEndDate(null));
   };
 }
 

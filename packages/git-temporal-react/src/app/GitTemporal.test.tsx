@@ -2,11 +2,10 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { selectPath } from 'app/actions';
 import fiveCommits from 'testHelpers/mocks/fiveCommits';
-import commitsForPath from 'testHelpers/mocks/commitsForPath';
 
 // debugger;
 
-import { GitTemporal, mapStateToProps } from './GitTemporal';
+import { GitTemporal } from './GitTemporal';
 
 describe('app/GitTemporal', () => {
   describe('when rendered without props', () => {
@@ -114,13 +113,6 @@ describe('app/GitTemporal', () => {
       expect(mockDispatch.mock.calls.length).toBe(2);
       // @ts-ignore
       expect(selectPath.mock.calls.length).toBe(2);
-    });
-  });
-
-  describe('when calling mapStateToProps() with basisReduxState', () => {
-    test('it should respond with props', () => {
-      const propsOut = mapStateToProps(commitsForPath);
-      expect(propsOut).toMatchSnapshot();
     });
   });
 });

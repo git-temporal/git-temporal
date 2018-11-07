@@ -28,6 +28,16 @@ export const setSearch = (search: string) => ({
   type: ActionTypes.SET_SEARCH,
 });
 
+export const setStartDate = (startDate: number) => ({
+  startDate,
+  type: ActionTypes.SET_START_DATE,
+});
+
+export const setEndDate = (endDate: number) => ({
+  endDate,
+  type: ActionTypes.SET_END_DATE,
+});
+
 export const setCommitsContainerSort = (sort: CommitsContainerSorts) => ({
   sort,
   type: ActionTypes.SET_COMMITS_CONTAINER_SORT,

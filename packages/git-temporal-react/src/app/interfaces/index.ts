@@ -88,9 +88,11 @@ export interface IFilesContainerState {
   filesContainerSort: string;
 }
 
-export interface ITimeplotContainerState {
+export interface ITimeplotState {
   selectedPath: string;
   highlightedCommitId: string;
   commits: ICommit[];
   authors: number;
+  startDate: number;
+  endDate: number;
 }

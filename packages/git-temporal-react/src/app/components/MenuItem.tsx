@@ -17,7 +17,10 @@ type MenuItemState = Readonly<typeof initialState>;
 const containerStyle = {
   _extends: ['block', 'normalText'],
   padding: 5,
-  border: '1px solid white',
+  // this keeps the card from moving on hover, but
+  // won't show a border regardless of background color
+  // when not hovering
+  border: '1px solid transparent',
 };
 const hoverContainerStyle = {
   _extends: [containerStyle, 'selectable'],

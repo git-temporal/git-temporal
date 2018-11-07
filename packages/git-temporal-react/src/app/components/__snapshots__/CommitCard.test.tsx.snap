@@ -27,7 +27,7 @@ exports[`components/CommitCard when rendered with required props it should match
     }
   >
     <Component
-      epochTime={1537212012}
+      value={1537212012}
     />
     <span
       style={

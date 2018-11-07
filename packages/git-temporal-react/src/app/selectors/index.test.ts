@@ -3,14 +3,14 @@ import commitsForPath from 'testHelpers/mocks/commitsForPath';
 
 const testState1 = commitsForPath;
 
-// TODO: this will need more work and testing.  Right now, getFilteredCommitsState
+// TODO: this will need more work and testing.  Right now, getCommitsContainerState
 // hits all of the selectors up the line
 
-describe('selectors/getFilteredCommitsState', () => {
+describe('selectors/getCommitsContainerState', () => {
   describe('with first 5 commits from node test repo', () => {
     let commitsOut;
     beforeAll(async () => {
-      commitsOut = await selectors.getFilteredCommitsState(testState1);
+      commitsOut = await selectors.getCommitsContainerState(testState1);
       // console.log('got commits', commitsOut);
     });
     test('it should match snapshot', () => {
@@ -27,7 +27,7 @@ describe('selectors/getFilteredCommitsState', () => {
       const testState = Object.assign({}, testState1);
       testState.commits[0].authorName = null;
 
-      commitsOut = await selectors.getFilteredCommitsState(testState);
+      commitsOut = await selectors.getCommitsContainerState(testState);
       // console.log('got commits', commitsOut);
     });
     test('it should match snapshot', () => {
@@ -47,7 +47,7 @@ describe('selectors/getFilteredCommitsState', () => {
     beforeAll(async () => {
       const testState = Object.assign({}, testState1);
       testState.selectedPath = 'some/bogus/path';
-      commitsOut = await selectors.getFilteredCommitsState(testState);
+      commitsOut = await selectors.getCommitsContainerState(testState);
     });
     test('it should return an empty state', () => {
       expect(commitsOut).toMatchSnapshot();

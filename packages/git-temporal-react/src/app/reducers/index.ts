@@ -93,6 +93,22 @@ export const search = (state = '', action) => {
   return state;
 };
 
+export const startDate = (state = null, action) => {
+  switch (action.type) {
+    case ActionTypes.SET_START_DATE:
+      return action.startDate;
+  }
+  return state;
+};
+
+export const endDate = (state = null, action) => {
+  switch (action.type) {
+    case ActionTypes.SET_END_DATE:
+      return action.endDate;
+  }
+  return state;
+};
+
 export const commitsContainerSort = (
   state = CommitsContainerSorts.TIME,
   action
@@ -126,6 +142,8 @@ const rootReducer = combineReducers({
   authorsContainerSort,
   commitsContainerSort,
   filesContainerSort,
+  startDate,
+  endDate,
 });
 
 export default rootReducer;

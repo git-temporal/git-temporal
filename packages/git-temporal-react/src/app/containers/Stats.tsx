@@ -25,6 +25,12 @@ interface StatsProps {
   isFileSelected?: boolean;
 }
 
+const outerStyle = {
+  _extends: ['panel', 'flexRows'],
+  paddingBottom: 0,
+  marginBottom: -10,
+};
+
 export class Stats extends Component<StatsProps & DispatchProps> {
   componentDidMount() {
     this.viewCommitsIfIsFile();
@@ -37,8 +43,8 @@ export class Stats extends Component<StatsProps & DispatchProps> {
   render() {
     const onFilesClick = this.props.isFileSelected ? null : this.onFilesClick;
     return (
-      <div style={style('panel', 'flexRows')}>
-        <StackedLabelHeader label="Contributors">
+      <div style={style(outerStyle)}>
+        <StackedLabelHeader label="Authors">
           <CommaNumber value={this.props.authors} />
         </StackedLabelHeader>
         <StackedLabelHeader label="Active Time Span">

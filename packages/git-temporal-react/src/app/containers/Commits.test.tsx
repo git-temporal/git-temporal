@@ -1,8 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Commits, mapStateToProps } from './Commits';
-import commitsForPath from 'testHelpers/mocks/commitsForPath';
+import { Commits } from './Commits';
 import fiveCommits from 'testHelpers/mocks/fiveCommits';
 import tenCommits from 'testHelpers/mocks/tenCommits';
 import { CommitsContainerSorts } from 'app/actions/ActionTypes';
@@ -62,12 +61,6 @@ describe('containers/Commits', () => {
     test('when clicking on files it should call dispatch', () => {
       wrapper.instance().onFileClick(mockEvent, 'some/bogus/file.js');
       expect(mockDispatch).toHaveBeenCalledTimes(1);
-    });
-  });
-  describe('when calling mapStateToProps()', () => {
-    test('it should respond with props', () => {
-      const propsOut = mapStateToProps(commitsForPath);
-      expect(propsOut).toMatchSnapshot();
     });
   });
 });

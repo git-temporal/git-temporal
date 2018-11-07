@@ -36,6 +36,7 @@
     "react-redux": "^5.0.7",
     "react-virtualized": "^9.20.1",
     "redux": "^4.0.0",
+    "redux-combine-actions": "^0.1.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0"

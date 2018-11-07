@@ -7,6 +7,9 @@ export interface ZoomContainerProps {
   // The children are the menu content
   children: string | JSX.Element | JSX.Element[];
   onZoom?: (value: number) => void;
+  onMouseEnter?: (evt: object) => void;
+  onMouseLeave?: (evt: object) => void;
+  onScroll: (scrollLeft: number) => void;
   style?: string | object;
 }
 
@@ -52,8 +55,12 @@ export class ZoomContainer extends React.Component<
       width: `${this.state.zoom || 100}%`,
     };
     return (
-      <div style={style(this.props.style, outerStyle)}>
-        <HorizontalScroller>
+      <div
+        style={style(this.props.style, outerStyle)}
+        onMouseEnter={this.props.onMouseEnter}
+        onMouseLeave={this.props.onMouseLeave}
+      >
+        <HorizontalScroller onScroll={this.props.onScroll}>
           <div style={style(scrollContainerStyle, zoomStyle)}>
             {this.props.children}
           </div>

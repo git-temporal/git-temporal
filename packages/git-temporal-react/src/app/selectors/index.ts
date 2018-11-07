@@ -1,26 +1,63 @@
 import { createSelector } from 'reselect';
 
 import {
-  getCommits,
   getSelectedPath,
   getViewCommitsOrFiles,
   getHighlightedCommitId,
   getIsFetching,
-  getDidInvalidate,
   getCommitsContainerSort,
   getSearch,
   getAuthorsContainerSort,
   getFilesContainerSort,
+  getStartDate,
+  getEndDate,
 } from './stateVars';
 
-import { hasSearch, matchesFileSearch, fileSearchRegex } from './search';
 import { getAuthorsAndCommits } from './authorsAndCommits';
-import { getIsFileSelected, getFilteredFiles } from './files';
+import { getIsFileSelected, getFilteredFilesForFilesContainer } from './files';
 
-import { getFilteredCommits } from './commits';
+import {
+  getFilteredCommits,
+  getFilteredSortedCommits,
+  getCommitsForTimeplot,
+} from './commits';
 
 // The methods exported from this module are intended to provide props for redux
 // containers mapStateToProps method and can be passed directly to that method
+
+export const getGitTemporalContainerState = createSelector(
+  getSelectedPath,
+  getFilteredCommits,
+  getIsFetching,
+  getViewCommitsOrFiles,
+  (selectedPath, commits, isFetching, viewCommitsOrFiles) => ({
+    selectedPath,
+    commits,
+    isFetching,
+    viewCommitsOrFiles,
+  })
+);
+
+export const getCommitsContainerState = createSelector(
+  getSelectedPath,
+  getHighlightedCommitId,
+  getFilteredSortedCommits,
+  getIsFileSelected,
+  getCommitsContainerSort,
+  (
+    selectedPath,
+    highlightedCommitId,
+    commits,
+    isFileSelected,
+    commitsContainerSort
+  ) => ({
+    selectedPath,
+    highlightedCommitId,
+    commits,
+    isFileSelected,
+    commitsContainerSort,
+  })
+);
 
 export const getCommitsActionMenuState = createSelector(
   getCommitsContainerSort,
@@ -29,46 +66,37 @@ export const getCommitsActionMenuState = createSelector(
   })
 );
 
-export const getFilteredCommitsState = createSelector(
-  getSelectedPath,
-  getViewCommitsOrFiles,
-  getHighlightedCommitId,
-  getFilteredCommits,
-  getIsFileSelected,
-  getIsFetching,
-  getDidInvalidate,
-  getCommitsContainerSort,
-  getSearch,
-  (
-    selectedPath,
-    viewCommitsOrFiles,
-    highlightedCommitId,
-    commits,
-    isFileSelected,
-    isFetching,
-    didInvalidate,
-    commitsContainerSort,
-    search
-  ) => ({
-    selectedPath,
-    viewCommitsOrFiles,
-    highlightedCommitId,
-    commits,
-    isFileSelected,
-    isFetching,
-    didInvalidate,
-    commitsContainerSort,
-    search,
-  })
-);
-
 export const getHeaderContainerState = createSelector(
+  getFilteredCommits,
   getSelectedPath,
   getSearch,
-  (selectedPath, search) => ({
-    selectedPath,
-    search,
-  })
+  getStartDate,
+  getEndDate,
+
+  (commits, selectedPath, search, startDate, endDate) => {
+    // psssst - commits are in descending order
+    const defaultedStartDate =
+      startDate ||
+      (commits &&
+        commits.length > 0 &&
+        commits[commits.length - 1].authorDate) ||
+      0;
+    const defaultedEndDate =
+      endDate ||
+      (commits && commits.length > 0 && commits[0].authorDate) ||
+      // @ts-ignore
+      Math.floor(new Date() / 1000);
+
+    const isDefaultDates = startDate == null && endDate == null;
+
+    return {
+      selectedPath,
+      search,
+      isDefaultDates,
+      startDate: defaultedStartDate,
+      endDate: defaultedEndDate,
+    };
+  }
 );
 
 export const getAuthorsActionMenuState = createSelector(
@@ -118,20 +146,6 @@ export const getAuthorsContainerState = createSelector(
   }
 );
 
-const getFilteredFilesForFilesContainer = createSelector(
-  getFilteredFiles,
-  getSearch,
-  (files, search) => {
-    // if the user specifically searched for files on show those in files container
-    // otherwise all files in any commits with this file would also show up here
-    if (hasSearch(search) && search.match(fileSearchRegex)) {
-      return files.filter(file => {
-        return matchesFileSearch(file.fileName, search);
-      });
-    }
-    return files;
-  }
-);
 export const getFilesActionMenuState = createSelector(
   getFilesContainerSort,
   filesContainerSort => ({
@@ -192,12 +206,23 @@ export const getStatsContainerState = createSelector(
 export const getTimeplotContainerState = createSelector(
   getSelectedPath,
   getHighlightedCommitId,
-  getCommits,
+  getCommitsForTimeplot,
   getAuthorsAndCommits,
-  (selectedPath, highlightedCommitId, commits, authorsAndCommits) => ({
+  getStartDate,
+  getEndDate,
+  (
     selectedPath,
     highlightedCommitId,
     commits,
+    authorsAndCommits,
+    startDate,
+    endDate
+  ) => ({
+    selectedPath,
+    highlightedCommitId,
+    commits,
+    startDate,
+    endDate,
     authors: authorsAndCommits.length,
   })
 );

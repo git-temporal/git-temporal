@@ -1,6 +1,7 @@
 import React from 'react';
 import { style } from 'app/styles';
 import { ToggleButton } from 'app/components/ToggleButton';
+import { Popup } from 'app/components/Popup';
 
 export interface ActionMenuProps {
   // The children are the menu content
@@ -27,25 +28,10 @@ const buttonStyle = {
 };
 
 const menuStyle = {
-  _extends: 'popup',
   right: 0,
   marginRight: 0,
   minWidth: 180,
-  zIndex: 4,
 };
-
-const backdropStyle = {
-  opacity: 0,
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  height: '100%',
-  width: '100%',
-  zIndex: 3,
-};
-
-const visible = { display: 'block' };
-const hidden = { display: 'none' };
 
 export class ActionMenu extends React.Component<
   ActionMenuProps,
@@ -54,16 +40,6 @@ export class ActionMenu extends React.Component<
   readonly state: ActionMenuState = initialState;
 
   render() {
-    const menuStyles: any = [menuStyle];
-    const backdropStyles: any = [backdropStyle];
-    if (this.state.menuOpen) {
-      menuStyles.push(visible);
-      backdropStyles.push(visible);
-    } else {
-      menuStyles.push(hidden);
-      backdropStyles.push(hidden);
-    }
-
     return (
       <div style={style(this.props.style, containerStyle)}>
         <ToggleButton
@@ -73,10 +49,13 @@ export class ActionMenu extends React.Component<
         >
           ...
         </ToggleButton>
-        <div style={style(backdropStyles)} onClick={this.onBackdropClick} />
-        <div style={style(menuStyles)} onClick={this.onToggleClick}>
+        <Popup
+          style={menuStyle}
+          isOpen={this.state.menuOpen}
+          onClose={this.onPopupClose}
+        >
           {this.props.children}
-        </div>
+        </Popup>
       </div>
     );
   }
@@ -84,7 +63,7 @@ export class ActionMenu extends React.Component<
   onToggleClick = () => {
     this.setState({ menuOpen: !this.state.menuOpen });
   };
-  onBackdropClick = () => {
+  onPopupClose = () => {
     this.setState({ menuOpen: false });
   };
 }

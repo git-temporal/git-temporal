@@ -16,7 +16,7 @@ const secondsPer = {
   minute: 60,
 };
 
-export function convertEpochDatesToTimeSpan(
+export function convertEpochDateTimesToTimeSpan(
   firstEpochTime: number,
   secondEpochTime: number
 ): string {
@@ -35,7 +35,10 @@ export function convertEpochDatesToTimeSpan(
 export const EpochSpan = (props: EpochSpanProps): JSX.Element => {
   return (
     <span style={style(props.style)}>
-      {convertEpochDatesToTimeSpan(props.firstEpochTime, props.secondEpochTime)}
+      {convertEpochDateTimesToTimeSpan(
+        props.firstEpochTime,
+        props.secondEpochTime
+      )}
     </span>
   );
 };

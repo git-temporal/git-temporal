@@ -1,6 +1,7 @@
 import React from 'react';
 import { style } from 'app/styles';
 
+import { debounce } from 'app/utilities/debounce';
 import { SearchIcon } from 'app/components/SearchIcon';
 
 export interface SearchInputProps {
@@ -9,6 +10,10 @@ export interface SearchInputProps {
   onClear: () => void;
   placeholder?: string;
   style?: object;
+}
+
+interface SearchInputState {
+  value: string;
 }
 
 const containerStyle = {
@@ -32,28 +37,48 @@ const searchIconStyle = {
   marginTop: 2,
 };
 
-export class SearchInput extends React.Component<SearchInputProps> {
+export class SearchInput extends React.Component<
+  SearchInputProps,
+  SearchInputState
+> {
   static displayName = 'SearchInput';
+  readonly state: SearchInputState = { value: '' };
 
   private inputRef;
+  private debouncedCallChangeCallback;
+
+  constructor(props) {
+    super(props);
+    this.debouncedCallChangeCallback = debounce(this.callChangeCallback, 750);
+  }
 
   componentDidMount() {
     this.inputRef && this.inputRef.focus();
+    if (this.props.value !== this.state.value) {
+      this.setState({ value: this.props.value });
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.value !== this.props.value &&
+      this.props.value !== this.state.value
+    ) {
+      this.setState({ value: this.props.value });
+    }
   }
 
   render() {
-    const { value, onChange, onClear, placeholder } = this.props;
+    const { onClear, placeholder } = this.props;
     return (
       <div style={style(containerStyle, this.props.style)}>
         <SearchIcon height={16} width={16} style={style(searchIconStyle)} />
         <input
           type="text"
           style={searchInputStyle}
-          value={value}
+          value={this.state.value}
           placeholder={placeholder}
-          onChange={evt => {
-            onChange(evt.target.value);
-          }}
+          onChange={this.onInputChange}
           ref={input => {
             this.inputRef = input;
           }}
@@ -64,4 +89,14 @@ export class SearchInput extends React.Component<SearchInputProps> {
       </div>
     );
   }
+
+  onInputChange = evt => {
+    const newValue = evt.target.value;
+    this.setState({ value: newValue });
+    this.debouncedCallChangeCallback(newValue);
+  };
+
+  callChangeCallback = value => {
+    this.props.onChange(value);
+  };
 }

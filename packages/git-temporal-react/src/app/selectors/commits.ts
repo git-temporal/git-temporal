@@ -2,24 +2,44 @@ import { createSelector } from 'reselect';
 import { CommitsContainerSorts } from 'app/actions/ActionTypes';
 
 import { hasSearch, commitsMatchSearch } from './search';
+import { hasDates, commitsMatchDates } from './dates';
 
-import { getCommits, getCommitsContainerSort, getSearch } from './stateVars';
+import {
+  getCommits,
+  getCommitsContainerSort,
+  getSearch,
+  getStartDate,
+  getEndDate,
+} from './stateVars';
 
 // returns commits for the current path filtered by selected authors
 // and time range
 export const getFilteredCommits = createSelector(
   getCommits,
-  getCommitsContainerSort,
   getSearch,
+  getStartDate,
+  getEndDate,
 
-  (commits, commitsContainerSort, search) => {
-    const filteredCommits = !hasSearch(search)
-      ? commits.slice(0)
-      : commits.filter(commit => {
-          return commitsMatchSearch(commit, search);
-        });
+  (commits, search, startDate, endDate) => {
+    const filteredCommits =
+      !hasSearch(search) && !hasDates(startDate, endDate)
+        ? commits.slice(0)
+        : commits.filter(commit => {
+            return (
+              commitsMatchSearch(commit, search) &&
+              commitsMatchDates(commit, startDate, endDate)
+            );
+          });
 
-    return filteredCommits.sort((a, b) => {
+    return filteredCommits;
+  }
+);
+
+export const getFilteredSortedCommits = createSelector(
+  getFilteredCommits,
+  getCommitsContainerSort,
+  (commits, commitsContainerSort) => {
+    return commits.sort((a, b) => {
       switch (commitsContainerSort) {
         case CommitsContainerSorts.LINES:
           return (
@@ -30,5 +50,22 @@ export const getFilteredCommits = createSelector(
       }
       return 0;
     });
+  }
+);
+
+// commits in the timeplot respect the search filter but not the date
+// filters
+export const getCommitsForTimeplot = createSelector(
+  getCommits,
+  getSearch,
+
+  (commits, search) => {
+    const filteredCommits = !hasSearch(search)
+      ? commits.slice(0)
+      : commits.filter(commit => {
+          return commitsMatchSearch(commit, search);
+        });
+
+    return filteredCommits;
   }
 );

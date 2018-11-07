@@ -7,6 +7,7 @@ export interface HorizontalScrollerProps {
   // The children are the menu content
   children: string | JSX.Element | JSX.Element[];
   style?: string | object;
+  onScroll?: (scrollLeft: number) => void;
 }
 
 const initialState = {
@@ -32,7 +33,7 @@ const touchArea = {
   top: 0,
   width: 0,
   height: 0,
-  zIndex: 1,
+  zIndex: 2,
   marginTop: 5,
 };
 
@@ -124,6 +125,8 @@ export class HorizontalScroller extends React.Component<
 
   private onScroll() {
     this.showHideTouchControls();
+    this.props.onScroll &&
+      this.props.onScroll(this.outerContainerRef.current.scrollLeft);
   }
 
   private onLeftTouchClick = () => {
@@ -165,82 +168,3 @@ export class HorizontalScroller extends React.Component<
     outerEl.scrollLeft = maxScrollLeft;
   };
 }
-
-//   render(initialScrollLeft) {
-//     if (initialScrollLeft == null) { initialScrollLeft = 0; }
-//     this.initialScrollLeft = initialScrollLeft;
-//     this._toggleTouchAreas();
-//     this.$element.scrollLeft(this.initialScrollLeft);
-//     return this.$element;
-//   }
-
-//   scrollFarRight() {
-//     return this.$element.scrollLeft(this._getChildWidth() - this.$element.width());
-//   }
-
-//   scrollFarLeft() {
-//     return this.$element.scrollLeft(0);
-//   }
-
-//   getScrollLeft() {
-//     return this.$element.scrollLeft();
-//   }
-
-//   getScrollRight() {
-//     return this.$element.scrollLeft() + this.$element.width();
-//   }
-
-//   _onScroll() {
-//     return this._toggleTouchAreas();
-//   }
-
-//   _onTouchClick(which) {
-//     switch (which) {
-//       case "left": return this.scrollFarLeft();
-//       case "right": return this.scrollFarRight();
-//     }
-//   }
-
-//   _toggleTouchAreas() {
-//     this._toggleTouchArea('left');
-//     return this._toggleTouchArea('right');
-//   }
-
-//   _toggleTouchArea(which) {
-//     let $touchArea = this.$element.find(`.gtm-touch-area.gtm-${which}`);
-//     if (!($touchArea.length > 0)) {
-//       $touchArea = $(`<div class='gtm-touch-area gtm-${which}'>`);
-//       $touchArea.on("click.gtmTouchArea", () => this._onTouchClick(which));
-//       this.$element.prepend($touchArea);
-//     }
-
-//     const scrollLeft = this.getScrollLeft();
-//     const relativeRight = this.getScrollRight();
-
-//     const { shouldHide, areaLeft } = (() => {
-//       switch (which) {
-//         case 'left':
-//           return {
-//             shouldHide: scrollLeft === 0,
-//             areaLeft: scrollLeft
-//           };
-//         case 'right':
-//           return {
-//             shouldHide: relativeRight >= (this._getChildWidth() - 10),
-//             areaLeft: relativeRight - 20
-//           };
-//       }
-//     })();
-
-//     if (shouldHide) {
-//       return $touchArea.hide();
-//     } else {
-//       $touchArea.css({ left: areaLeft });
-//       return $touchArea.show();
-//     }
-//   }
-
-//   _getChildWidth() {
-//     return this.$element.find('.timeplot').outerWidth(true);
-//   }
-// };

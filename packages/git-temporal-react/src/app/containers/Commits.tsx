@@ -9,7 +9,7 @@ import {
 
 import { highlightCommit, selectPath } from 'app/actions';
 import { DispatchProps, ICommitsContainerState } from 'app/interfaces';
-import { getFilteredCommitsState } from 'app/selectors';
+import { getCommitsContainerState } from 'app/selectors';
 import { style } from 'app/styles';
 import { CommitCard } from 'app/components/CommitCard';
 import CommitsActionMenu from './CommitsActionMenu';
@@ -116,7 +116,7 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
             isExpanded={isHighlighted}
             onClick={this.onCommitCardClick}
             onFileClick={this.onFileClick}
-            isFileSelected={this.props.isFileSelected}
+            hideFiles={this.props.isFileSelected}
           />
         </div>
       </CellMeasurer>
@@ -152,8 +152,4 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
   }
 }
 
-export const mapStateToProps = state => {
-  return getFilteredCommitsState(state);
-};
-
-export default connect(mapStateToProps)(Commits);
+export default connect(getCommitsContainerState)(Commits);

@@ -3,6 +3,7 @@ import { createSelector } from 'reselect';
 import { FilesContainerSorts } from 'app/actions/ActionTypes';
 
 import { getFilesContainerSort, getSearch, getSelectedPath } from './stateVars';
+import { hasSearch, matchesFileSearch, fileSearchRegex } from './search';
 import { getFilteredCommits } from './commits';
 
 const getObjectValues = function(obj) {
@@ -79,5 +80,20 @@ export const getIsFileSelected = createSelector(
   getFilteredFiles,
   (selectedPath, files) => {
     return files.length === 1 && files[0].fileName === selectedPath;
+  }
+);
+
+export const getFilteredFilesForFilesContainer = createSelector(
+  getFilteredFiles,
+  getSearch,
+  (files, search) => {
+    // if the user specifically searched for files on show those in files container
+    // otherwise all files in any commits with this file would also show up here
+    if (hasSearch(search) && search.match(fileSearchRegex)) {
+      return files.filter(file => {
+        return matchesFileSearch(file.fileName, search);
+      });
+    }
+    return files;
   }
 );

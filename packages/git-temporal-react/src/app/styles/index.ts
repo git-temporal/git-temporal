@@ -1,6 +1,23 @@
+let styleVars = {
+  colors: {
+    background: 'white',
+    boxShadow: 'rgba(0, 0, 0, 0.2)',
+    altBackground: 'whitesmoke',
+    text: '#333333',
+    disabledText: '#e0e0e0',
+    selectable: 'lightskyblue',
+    selected: 'lightskyblue',
+    leftRevColor: 'red',
+    rightRevColor: 'green',
+  },
+};
+
+// NOTE: the colors above are used below as string values preceded with '@' so they
+//   can be intepolated at runtime and allow changes for theme-ing
+
 let globalStyles = {
-  backgroundColor: {
-    backgroundColor: 'white',
+  background: {
+    background: '@colors.background',
   },
   page: {
     padding: 20,
@@ -9,26 +26,29 @@ let globalStyles = {
     position: 'absolute',
   },
   panel: {
-    backgroundColor: 'white',
+    background: '@colors.background',
     padding: 10,
-    display: 'flex',
     borderRadius: 3,
     marginRight: 10,
   },
   altPanel: {
     _extends: 'panel',
-    backgroundColor: 'whitesmoke',
+    background: '@colors.altBackground',
   },
   borderedPanel: {
     _extends: 'panel',
-    border: '1px solid whitesmoke',
+    border: `1px solid @colors.altBackground`,
+  },
+  fill: {
+    position: 'relative',
+    height: '100%',
+    width: '100%',
   },
   popup: {
     _extends: 'panel',
     position: 'absolute',
     zIndex: 1,
-    boxShadow:
-      '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+    boxShadow: '0 4px 8px 0 @colors.boxShadow, 0 6px 20px 0 @colors.boxShadow',
   },
   block: {
     display: 'block',
@@ -55,7 +75,7 @@ let globalStyles = {
   normalText: {
     fontSize: 13,
     fontWeight: 'normal',
-    color: '#333333',
+    color: '@colors.text',
   },
   largerText: {
     _extends: 'normalText',
@@ -69,7 +89,7 @@ let globalStyles = {
     fontWeight: 'bold',
   },
   disabledText: {
-    color: '#e0e0e0',
+    color: '@colors.disabledText',
   },
   headerText: {
     _extends: ['normalText', 'boldText'],
@@ -109,13 +129,14 @@ let globalStyles = {
     color: 'red',
   },
   selectable: {
-    border: '1px solid lightskyblue',
+    border: `1px solid @colors.selectable`,
     borderRadius: 3,
     cursor: 'pointer',
+    userSelect: 'none',
   },
   selected: {
     _extends: 'selectable',
-    backgroundColor: 'lightskyblue',
+    background: '@colors.selected',
   },
   link: {
     color: 'blue',
@@ -127,10 +148,14 @@ let globalStyles = {
     textDecoration: 'underline',
   },
   menuDivider: {
-    borderBottom: '2px solid whitesmoke',
+    borderBottom: `2px solid @colors.altBackground`,
     marginBottom: 10,
   },
 };
+
+export function extendStyleVars(newStyleVars) {
+  styleVars = Object.assign(styleVars, newStyleVars);
+}
 
 export function replaceGlobalStyles(newGlobalStyles) {
   globalStyles = newGlobalStyles;
@@ -154,7 +179,7 @@ export function style(...styles) {
       }
     }
   }
-  return styleOut;
+  return interpolateStyleVars(styleOut);
 }
 
 function processExtends(styleObject) {
@@ -173,4 +198,29 @@ function processExtends(styleObject) {
     }
   }
   return styleOut;
+}
+
+function interpolateStyleVars(styleObject) {
+  for (const key in styleObject) {
+    const value = styleObject[key];
+    if (!(typeof value === 'string' || value instanceof String)) {
+      continue;
+    }
+    const matches = value.match(/\@[^\s\.]*\.[^\s]*/g);
+    if (!matches || matches.length <= 0) {
+      continue;
+    }
+    let newValue = value;
+    for (const match of matches) {
+      const [matchedValue, styleVarsGroup, styleVar] = match.match(
+        /\@([^\s\.]*)\.([^\s]*)/
+      );
+      const interpolated = styleVars[styleVarsGroup][styleVar];
+      if (interpolated) {
+        newValue = newValue.replace(matchedValue, interpolated);
+      }
+    }
+    styleObject[key] = newValue;
+  }
+  return styleObject;
 }
