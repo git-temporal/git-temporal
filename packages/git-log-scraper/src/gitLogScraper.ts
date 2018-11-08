@@ -91,6 +91,9 @@ function parseGitLogOutput(output) {
     if (matches) {
       let attr;
       [, attr, parsedValue] = matches;
+      if (attr === 'authorDate') {
+        parsedValue = parseInt(parsedValue, 10);
+      }
       if (Object.keys(parsedAttributes).includes(attr)) {
         currentlyParsingAttr = attr;
         commitObj[currentlyParsingAttr] = parsedValue;

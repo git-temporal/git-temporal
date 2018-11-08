@@ -242,10 +242,9 @@ export class Timeplot extends React.Component<
 
   private onCommitSelected = (evt, commit) => {
     evt.stopPropagation();
-    console.log('onCommitSelected', evt, commit);
+    console.log('onCommitSelected', evt, commit, this.props.startDate);
     // TODO: test: you should be able to isolate a single commit (`+ 1` below)
     // if the user clicks the same commit twice we select just that commit
-
     if (commit.authorDate === this.props.startDate) {
       this.setDates(true, commit.authorDate * 1000 + 1);
     } else {
