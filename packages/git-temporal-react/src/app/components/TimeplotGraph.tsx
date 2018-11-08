@@ -72,9 +72,9 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
   private timeplotGraphRef;
 
   private svg;
-  private xScale;
-  private yScale;
-  private rScale;
+  public xScale;
+  public yScale;
+  public rScale;
 
   constructor(props) {
     super(props);
@@ -91,6 +91,7 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
       prevProps.forceRender !== this.props.forceRender
     ) {
       this.renderTimeplotGraph();
+      this.forceUpdate();
       return;
     }
     for (let i = 0; i < 20; i++) {
@@ -138,6 +139,16 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
       </div>
     );
   }
+
+  public getScrollWidth = () => {
+    const element = this.timeplotGraphRef.current;
+    return element && element.scrollWidth;
+  };
+
+  public scrollLeft = newScrollLeft => {
+    const element = this.timeplotGraphRef.current;
+    element.scrollLeft = newScrollLeft;
+  };
 
   private updateHighlightedCommit() {
     this.svg
@@ -220,7 +231,10 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
     const element = this.timeplotGraphRef.current;
     const h = element.clientHeight;
 
-    const xAxis = d3.axisBottom().scale(this.xScale);
+    const xAxis = d3
+      .axisBottom()
+      .scale(this.xScale)
+      .ticks(element.scrollWidth / 100);
     const yAxis = d3
       .axisLeft()
       .scale(this.yScale)
@@ -266,12 +280,7 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
       relativeLeft + 10 > element.width ? element.width : relativeLeft + 10;
     const endDate = this.xScale.invert(endLeft);
 
-    return {
-      exactDate,
-      startDate,
-      endDate,
-      relativeLeft,
-    };
+    return { exactDate, startDate, endDate, relativeLeft };
   }
 
   private onMouseEnter = evt => {

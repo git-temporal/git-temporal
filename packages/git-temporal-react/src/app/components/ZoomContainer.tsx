@@ -3,9 +3,16 @@ import { style } from 'app/styles';
 
 import { HorizontalScroller } from 'app/components/HorizontalScroller';
 
+export interface ICustomZoom {
+  label: string;
+  value: number;
+}
+
 export interface ZoomContainerProps {
   // The children are the menu content
   children: string | JSX.Element | JSX.Element[];
+  scrollLeft?: number;
+  customZooms?: ICustomZoom[];
   onZoom?: (value: number) => void;
   onMouseEnter?: (evt: object) => void;
   onMouseLeave?: (evt: object) => void;
@@ -60,7 +67,10 @@ export class ZoomContainer extends React.Component<
         onMouseEnter={this.props.onMouseEnter}
         onMouseLeave={this.props.onMouseLeave}
       >
-        <HorizontalScroller onScroll={this.props.onScroll}>
+        <HorizontalScroller
+          onScroll={this.props.onScroll}
+          scrollLeft={this.props.scrollLeft}
+        >
           <div style={style(scrollContainerStyle, zoomStyle)}>
             {this.props.children}
           </div>
@@ -77,11 +87,16 @@ export class ZoomContainer extends React.Component<
   }
 
   private renderZoomOptions(): any {
-    return availableZooms.map((zoom, index) => {
-      const selected = zoom === this.state.zoom;
+    const customZooms = this.props.customZooms || [];
+    const standardZooms = availableZooms.map(zoom => ({
+      value: zoom,
+      label: `${zoom}% zoom`,
+    }));
+    return customZooms.concat(standardZooms).map(({ value, label }, index) => {
+      const selected = value === this.state.zoom;
       return (
-        <option key={index} value={zoom} selected={selected}>
-          {zoom}% zoom
+        <option key={index} value={value} selected={selected}>
+          {label}
         </option>
       );
     });

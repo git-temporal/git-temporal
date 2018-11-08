@@ -1,22 +1,16 @@
 import child_process from 'child_process';
 
-/*
-    returns an array of javascript objects representing the commits that effected the requested file
-    with line stats, that looks like this:
-    [{
-        "id": "1c41d8f647f7ad30749edcd0a554bd94e301c651",
-        "authorName": "Bee Wilkerson",
-        "relativeDate": "6 days ago",
-        "authorDate": 1450881433,
-        "message": "docs all work again after refactoring to bumble-build",
-        "body": "",
-        "hash": "1c41d8f",
-        "linesAdded": 2,
-        "linesDeleted": 2
-    }, {
-        ...
-    }]
-*/
+const parsedAttributes = {
+  id: '%H%n',
+  hash: '%h%n',
+  authorName: '%an%n',
+  authorEmail: '%ae%n',
+  relativeDate: '%cr%n',
+  authorDate: '%at%n',
+  message: '%s%n',
+  body: '%b',
+};
+
 export function getCommitHistory(fileName) {
   const rawLog = fetchFileHistory(fileName);
   return parseGitLogOutput(rawLog);
@@ -25,10 +19,10 @@ export function getCommitHistory(fileName) {
 // Implementation
 
 function fetchFileHistory(fileName) {
-  const format = (
-    '{"id": "%H", "authorName": "%an", "authorEmail": "%ae", "relativeDate": "%cr", "authorDate": %at, ' +
-    ' "message": "%s", "body": "%b", "hash": "%h"}'
-  ).replace(/\"/g, '#/dquotes/');
+  let format = '';
+  for (const attr in parsedAttributes) {
+    format += `${attr}:${parsedAttributes[attr]}`;
+  }
   const flags = ` --pretty=\"format:${format}\" --topo-order --date=local --numstat --follow`;
 
   // use -- fileName and git log will work on deleted files and paths
@@ -43,89 +37,89 @@ function fetchFileHistory(fileName) {
     .toString();
 }
 
+function safelyParseInt(parseableNumber) {
+  if (parseableNumber === null || parseableNumber === undefined) {
+    return 0;
+  }
+  const parsedNumber = parseInt(parseableNumber, 10);
+  if (isNaN(parsedNumber)) {
+    return 0;
+  }
+
+  return parsedNumber;
+}
+
 function parseGitLogOutput(output) {
   const logItems = [];
-  const logLines = output.split('\n');
-  let currentCommitText = null;
+  const logLines = output.split(/\n\r?/);
+
+  let currentlyParsingAttr = null;
+  let parsedValue = null;
+
+  let commitObj = null;
   let totalLinesAdded = 0;
   let totalLinesDeleted = 0;
-  let files = [];
+  // let lineNumber = 0;
 
-  function addLogItem() {
-    const commitObj = parseCommitObj(currentCommitText);
+  const addLogItem = () => {
     if (!commitObj) {
-      console.warn(`failed to parse commit Object: ${currentCommitText}`);
-    } else {
-      commitObj.linesAdded = totalLinesAdded;
-      commitObj.linesDeleted = totalLinesDeleted;
-      commitObj.files = files;
-      logItems.push(commitObj);
+      return;
     }
+    commitObj.linesAdded = totalLinesAdded;
+    commitObj.linesDeleted = totalLinesDeleted;
+    logItems.push(commitObj);
+
     totalLinesAdded = 0;
     totalLinesDeleted = 0;
-    return (files = []);
-  }
-
-  function safelyParseInt(parseableNumber) {
-    if (parseableNumber === null || parseableNumber === undefined) {
-      return 0;
-    }
-    const parsedNumber = parseInt(parseableNumber, 10);
-    if (isNaN(parsedNumber)) {
-      return 0;
-    }
-
-    return parsedNumber;
-  }
+  };
 
   for (const line of logLines) {
-    let matches;
-    if (line.match(/^\{\#\/dquotes\/id\#\/dquotes\/\:/)) {
-      if (currentCommitText != null) {
-        addLogItem();
+    // lineNumber += 1;
+    let matches = line.match(/^id\:(.*)/);
+    if (matches) {
+      currentlyParsingAttr = 'id';
+      addLogItem();
+      commitObj = {
+        id: matches[1],
+        files: [],
+        body: '',
+        message: '',
+      };
+      continue;
+    }
+    matches = line.match(/^([^\:]+):(.*)/);
+    if (matches) {
+      let attr;
+      [, attr, parsedValue] = matches;
+      if (Object.keys(parsedAttributes).includes(attr)) {
+        currentlyParsingAttr = attr;
+        commitObj[currentlyParsingAttr] = parsedValue;
+        continue;
       }
-      currentCommitText = line;
-    } else if ((matches = line.match(/^([\d\-]+)\s+([\d\-]+)\s+(.*)/))) {
+    }
+    if ((matches = line.match(/^([\d\-]+)\s+([\d\-]+)\s+(.*)/))) {
       let [linesAdded, linesDeleted, fileName] = matches.slice(1);
       linesAdded = safelyParseInt(linesAdded);
       linesDeleted = safelyParseInt(linesDeleted);
       fileName = fileName.trim();
+      currentlyParsingAttr = 'files';
 
       totalLinesAdded += linesAdded;
       totalLinesDeleted += linesDeleted;
-      files.push({
+      commitObj.files.push({
         linesAdded,
         linesDeleted,
         name: fileName,
       });
-    } else if (line != null) {
-      currentCommitText += line;
+    } else if (currentlyParsingAttr === 'body') {
+      // console.log('got body line at line number', lineNumber);
+      commitObj.body += `<br>${line}`;
     }
   }
-
-  if (currentCommitText && currentCommitText.length > 0) {
+  if (commitObj) {
     addLogItem();
   }
-
   return logItems;
-}
-
-function parseCommitObj(line) {
-  const encLine = line
-    .replace(/\t/g, '  ') // tabs mess with JSON parse
-    .replace(/\"/g, "'") // sorry, can't parse with quotes in body or message
-    .replace(/(\n|\n\r)/g, ' <br>')
-    .replace(/\r/g, ' <br>')
-    .replace(/\#\/dquotes\//g, '"')
-    .replace(/\\/g, '\\\\')
-    .replace(/[\x00-\x1F\x7F-\x9F]/g, ' ');
-  try {
-    return JSON.parse(encLine);
-  } catch (error) {
-    console.warn(`#{line}\n\n`);
-    console.warn(`failed to parse JSON ${encLine}`);
-    return null;
-  }
 }
 
 /*

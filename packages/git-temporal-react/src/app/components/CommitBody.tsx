@@ -36,13 +36,13 @@ const breakLineStyle = {
 const renderBreakLine = (line, index) => {
   return (
     <div key={index} style={style(breakLineStyle)}>
-      {line.replace(/\<br\>/gi)}
+      {line}
     </div>
   );
 };
 
 const renderBrText = text => {
-  return text.split(/\<br\>\s*\<br\>/gi).map(renderBreakLine);
+  return text.split(/\<br\>/gi).map(renderBreakLine);
 };
 
 const renderContstrainedIndicator = isExpanded => {

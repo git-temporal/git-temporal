@@ -8,7 +8,7 @@ import { setStartDate, setEndDate } from 'app/actions';
 
 import { debounce } from 'app/utilities/debounce';
 import { throttle } from 'app/utilities/throttle';
-import { ZoomContainer } from 'app/components/ZoomContainer';
+import { ZoomContainer, ICustomZoom } from 'app/components/ZoomContainer';
 import { TimeplotGraph } from 'app/components/TimeplotGraph';
 import { EpochSpan } from 'app/components/EpochSpan';
 import { CommaNumber } from 'app/components/CommaNumber';
@@ -28,6 +28,7 @@ interface TimeplotLocalState {
   popupCommits: ICommit[];
   popupStartDate?: Date;
   popupEndDate?: Date;
+  customZooms: ICustomZoom[];
 }
 
 const initialState = {
@@ -38,6 +39,7 @@ const initialState = {
   popupCommits: [],
   popupStartDate: null,
   popupEndDate: null,
+  customZooms: [],
 };
 
 const outerStyle = {
@@ -90,8 +92,22 @@ export class Timeplot extends React.Component<
     this.debouncedOnMouseMove = throttle(this.onMouseMove, 0);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
     this.timeplotRef.current.focus();
+    if (
+      prevProps.startDate !== this.props.startDate ||
+      prevProps.endDate !== this.props.endDate
+    ) {
+      this.addCustomZooms();
+    }
+    if (prevState.timeplotRenders !== this.state.timeplotRenders) {
+      const timeplot = this.timeplotRef.current;
+      if (timeplot && this.props.startDate) {
+        this.setState({
+          scrollLeft: timeplot.xScale(this.props.startDate * 1000) - 33,
+        });
+      }
+    }
   }
 
   render() {
@@ -113,6 +129,8 @@ export class Timeplot extends React.Component<
           onZoom={this.onZoom}
           onMouseLeave={this.debouncedOnMouseLeave}
           onScroll={this.onScroll}
+          customZooms={this.state.customZooms}
+          scrollLeft={this.state.scrollLeft}
         >
           <TimeplotGraph
             forceRender={this.state.timeplotRenders}
@@ -164,7 +182,9 @@ export class Timeplot extends React.Component<
   };
 
   private onZoom = () => {
-    this.setState({ timeplotRenders: this.state.timeplotRenders + 1 });
+    this.setState({
+      timeplotRenders: this.state.timeplotRenders + 1,
+    });
   };
 
   private onMouseLeave = evt => {
@@ -255,6 +275,32 @@ export class Timeplot extends React.Component<
         }
       }
     }
+  }
+
+  private addCustomZooms() {
+    const { startDate, endDate } = this.props;
+    if (!startDate || !this.timeplotRef.current) {
+      this.setState({ customZooms: [] });
+      return;
+    }
+    const { xScale, getScrollWidth } = this.timeplotRef.current;
+    const defaultedEndDate = endDate ? endDate * 1000 : new Date();
+    const spanLeft = xScale(startDate * 1000);
+    const spanRight = xScale(defaultedEndDate);
+    const span = spanRight - spanLeft + 6;
+    if (span <= 0) {
+      this.setState({ customZooms: [] });
+      return;
+    }
+    const scrollWidth = getScrollWidth();
+    this.setState({
+      customZooms: [
+        {
+          value: Math.floor((scrollWidth / span) * 100),
+          label: 'Zoom to selected time span',
+        },
+      ],
+    });
   }
 }
 

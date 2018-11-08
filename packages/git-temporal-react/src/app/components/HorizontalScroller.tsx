@@ -6,6 +6,7 @@ import { debounce } from 'app/utilities/debounce';
 export interface HorizontalScrollerProps {
   // The children are the menu content
   children: string | JSX.Element | JSX.Element[];
+  scrollLeft: number;
   style?: string | object;
   onScroll?: (scrollLeft: number) => void;
 }
@@ -74,8 +75,11 @@ export class HorizontalScroller extends React.Component<
     this.showHideTouchControls();
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     this.showHideTouchControls();
+    if (prevProps.scrollLeft !== this.props.scrollLeft) {
+      this.outerContainerRef.current.scrollLeft = this.props.scrollLeft;
+    }
   }
 
   render() {
