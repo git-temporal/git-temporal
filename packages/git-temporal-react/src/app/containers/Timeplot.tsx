@@ -32,7 +32,8 @@ interface TimeplotLocalState {
 }
 
 const initialState = {
-  hoverMarkerLeft: -40,
+  // TODO: this should be a constant. I think it's used elsewhere?
+  hoverMarkerLeft: -40, // -40 = out of sight
   scrollLeft: 0,
   popupOpen: false,
   timeplotRenders: 0,

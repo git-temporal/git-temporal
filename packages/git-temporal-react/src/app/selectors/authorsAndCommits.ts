@@ -58,7 +58,7 @@ const dedupeAuthorsAndCommits = (
   commitsByAuthorName,
   authorsAndCommitsByEmail
 ) => {
-  console.log(authorsAndCommitsByEmail);
+  // console.log(authorsAndCommitsByEmail);
   for (const email in authorsAndCommitsByEmail) {
     const byEmail = authorsAndCommitsByEmail[email];
     if (byEmail.length <= 1) {
@@ -69,44 +69,53 @@ const dedupeAuthorsAndCommits = (
   return commitsByAuthorName;
 };
 
+const collateCommits = commits => {
+  const commitsByAuthorName = {};
+  const authorsAndCommitsByEmail = {};
+
+  commits.forEach(commit => {
+    const commitsForThisAuthor = commitsByAuthorName[commit.authorName] || {
+      authorName: commit.authorName,
+      authorEmails: [],
+      commits: [],
+      files: {},
+      firstCommitOn: commit.authorDate,
+      lastCommitOn: commit.authorDate,
+    };
+    if (commitsForThisAuthor.authorEmails.indexOf(commit.authorEmail) === -1) {
+      commitsForThisAuthor.authorEmails.push(commit.authorEmail);
+    }
+    if (commit.authorDate < commitsForThisAuthor.firstCommitOn) {
+      commitsForThisAuthor.firstCommitOn = commit.authorDate;
+    }
+    if (commit.authorDate > commitsForThisAuthor.lastCommitOn) {
+      commitsForThisAuthor.lastCommitOn = commit.authorDate;
+    }
+    for (const file of commit.files) {
+      commitsForThisAuthor.files[file] = true;
+    }
+    commitsForThisAuthor.commits.push(commit);
+    commitsByAuthorName[commit.authorName] = commitsForThisAuthor;
+    const byEmail = authorsAndCommitsByEmail[commit.authorEmail] || [];
+    if (!byEmail.includes(commitsForThisAuthor)) {
+      byEmail.push(commitsForThisAuthor);
+      authorsAndCommitsByEmail[commit.authorEmail] = byEmail;
+    }
+  });
+  return {
+    commitsByAuthorName,
+    authorsAndCommitsByEmail,
+  };
+};
+
 export const getAuthorsAndCommits = createSelector(
   getFilteredCommits,
   getAuthorsContainerSort,
   (commits, authorsContainerSort) => {
-    const commitsByAuthorName = {};
-    const authorsAndCommitsByEmail = {};
-    commits.forEach(commit => {
-      const commitsForThisAuthor = commitsByAuthorName[commit.authorName] || {
-        authorName: commit.authorName,
-        authorEmails: [],
-        commits: [],
-        files: {},
-        firstCommitOn: commit.authorDate,
-        lastCommitOn: commit.authorDate,
-      };
-      if (
-        commitsForThisAuthor.authorEmails.indexOf(commit.authorEmail) === -1
-      ) {
-        commitsForThisAuthor.authorEmails.push(commit.authorEmail);
-      }
-      if (commit.authorDate < commitsForThisAuthor.firstCommitOn) {
-        commitsForThisAuthor.firstCommitOn = commit.authorDate;
-      }
-      if (commit.authorDate > commitsForThisAuthor.lastCommitOn) {
-        commitsForThisAuthor.lastCommitOn = commit.authorDate;
-      }
-      for (const file of commit.files) {
-        commitsForThisAuthor.files[file] = true;
-      }
-      commitsForThisAuthor.commits.push(commit);
-      commitsByAuthorName[commit.authorName] = commitsForThisAuthor;
-      const byEmail = authorsAndCommitsByEmail[commit.authorEmail] || [];
-      if (!byEmail.includes(commitsForThisAuthor)) {
-        byEmail.push(commitsForThisAuthor);
-        authorsAndCommitsByEmail[commit.authorEmail] = byEmail;
-      }
-    });
-
+    // TODO: dear prettier, this \/ looks like shit
+    const { commitsByAuthorName, authorsAndCommitsByEmail } = collateCommits(
+      commits
+    );
     const authorsAndCommits = [];
     const deduped = dedupeAuthorsAndCommits(
       commitsByAuthorName,

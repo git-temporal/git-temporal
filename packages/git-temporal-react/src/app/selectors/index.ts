@@ -74,7 +74,7 @@ export const getHeaderContainerState = createSelector(
   getEndDate,
 
   (commits, selectedPath, search, startDate, endDate) => {
-    // psssst - commits are in descending order
+    // psssst - commits are in descending time order
     const defaultedStartDate =
       startDate ||
       (commits &&
