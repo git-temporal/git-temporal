@@ -6,7 +6,7 @@ exports[`components/RadioMenuItem when rendered with isSelected=false it should 
   style={Object {}}
 >
   <div>
-    <Component
+    <ToggleButton
       isSelected={false}
       onClick={[MockFunction]}
       style={
@@ -30,7 +30,7 @@ exports[`components/RadioMenuItem when rendered with isSelected=true it should m
   style={Object {}}
 >
   <div>
-    <Component
+    <ToggleButton
       isSelected={true}
       onClick={[MockFunction]}
       style={

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/DateTime when rendered epoch time 1539369263 (Fri, 12 Oct 2018 18:34:23 GMT) it should match snapshot (it should have rendered "3 weeks") 1`] = `
+<span
+  style={Object {}}
+>
+  Oct 12, 2018, 11 AM
+</span>
+`;

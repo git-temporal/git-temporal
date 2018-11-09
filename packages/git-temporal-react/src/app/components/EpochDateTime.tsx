@@ -19,3 +19,5 @@ export const EpochDateTime = (props: EpochDateTimeProps): JSX.Element => {
     />
   );
 };
+
+EpochDateTime.displayName = 'EpochDateTime';

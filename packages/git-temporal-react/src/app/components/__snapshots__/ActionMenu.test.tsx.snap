@@ -10,7 +10,7 @@ exports[`components/ActionMenu when rendered with text child it should match sna
     }
   }
 >
-  <Component
+  <ToggleButton
     isSelected={false}
     onClick={[Function]}
     style={
@@ -24,40 +24,19 @@ exports[`components/ActionMenu when rendered with text child it should match sna
     }
   >
     ...
-  </Component>
-  <div
-    onClick={[Function]}
+  </ToggleButton>
+  <Popup
+    isOpen={false}
+    onClose={[Function]}
     style={
       Object {
-        "display": "none",
-        "height": "100%",
-        "left": 0,
-        "opacity": 0,
-        "position": "fixed",
-        "top": 0,
-        "width": "100%",
-        "zIndex": 3,
-      }
-    }
-  />
-  <div
-    onClick={[Function]}
-    style={
-      Object {
-        "backgroundColor": "white",
-        "borderRadius": 3,
-        "boxShadow": "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
-        "display": "none",
         "marginRight": 0,
         "minWidth": 180,
-        "padding": 10,
-        "position": "absolute",
         "right": 0,
-        "zIndex": 4,
       }
     }
   >
     this is a menu (or anything really)
-  </div>
+  </Popup>
 </div>
 `;

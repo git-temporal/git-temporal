@@ -37,3 +37,5 @@ export const StackedLabel = (props: StackedLabelProps): JSX.Element => {
     </div>
   );
 };
+
+StackedLabel.displayName = 'StackedLabel';

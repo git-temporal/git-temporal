@@ -2,102 +2,113 @@
 
 exports[`components/CommitCard when rendered with required props it should match snapshot (bars should be at 50%) 1`] = `
 <div
-  onClick={[Function]}
   style={
     Object {
-      "backgroundColor": "white",
+      "background": "white",
       "borderBottom": "1px solid whitesmoke",
       "borderRadius": 7,
       "display": "block",
-      "marginBottom": 10,
-      "marginRight": 10,
-      "padding": 10,
+      "marginBottom": 0,
+      "marginRight": 0,
+      "padding": 0,
     }
   }
 >
-  <div
-    style={
-      Object {
-        "color": "#333333",
-        "display": "block",
-        "fontSize": 11,
-        "fontWeight": "normal",
-        "marginBottom": 10,
-      }
-    }
+  <MenuItem
+    onClick={[Function]}
   >
-    <Component
-      value={1537212012}
-    />
-    <span
+    <div
       style={
         Object {
-          "marginLeft": 60,
+          "color": "#333333",
+          "display": "flex",
+          "flexDirection": "row",
+          "fontSize": 11,
+          "fontWeight": "normal",
+          "marginBottom": 10,
         }
       }
     >
-      408e8ce22c
-    </span>
-    <Component
-      linesAdded={8}
-      linesDeleted={8}
-    />
-  </div>
-  <div
-    style={
-      Object {
-        "color": "#333333",
-        "display": "block",
-        "fontSize": 16,
-        "fontWeight": "normal",
-        "marginBottom": 10,
-        "marginLeft": 5,
-      }
-    }
-  >
-    doc: update maintaining V8 guide
-  </div>
-  <Component
-    text="Replace references to the outdated \`update-v8\` tool to its replacementin \`node-core-utils\`PR-URL: https://github.com/nodejs/node/pull/22913Reviewed-By: Richard Lau <riclau@uk.ibm.com>Reviewed-By: Colin Ihrig <cjihrig@gmail.com>Reviewed-By: Weijia Wang <starkwang@126.com>Reviewed-By: Sakthipriyan Vairamani <thechargingvolcano@gmail.com>Reviewed-By: Joyee Cheung <joyeec9h3@gmail.com>Reviewed-By: Luigi Pinca <luigipinca@gmail.com>Reviewed-By: James M Snell <jasnell@gmail.com>"
-  />
-  <Component
-    files={
-      Array [
+      <EpochDateTime
+        displayOptions={
+          Object {
+            "minute": "numeric",
+            "month": "long",
+          }
+        }
+        value={1537212012}
+      />
+      <span
+        style={
+          Object {
+            "flexGrow": 1,
+            "textAlign": "center",
+          }
+        }
+      >
+        408e8ce22c
+      </span>
+      <AddedDeleted
+        linesAdded={8}
+        linesDeleted={8}
+      />
+    </div>
+    <div
+      style={
         Object {
-          "linesAdded": 8,
-          "linesDeleted": 8,
-          "name": "doc/guides/maintaining-V8.md",
-        },
-      ]
-    }
-    style={
-      Object {
-        "_extends": Array [
-          "block",
-          "normalText",
-        ],
-        "marginBottom": 10,
-        "marginLeft": 10,
-        "marginRight": 20,
+          "color": "#333333",
+          "display": "block",
+          "fontSize": 16,
+          "fontWeight": "normal",
+          "marginBottom": 10,
+          "marginLeft": 5,
+        }
       }
-    }
-  />
-  <div
-    style={
-      Object {
-        "color": "#333333",
-        "display": "block",
-        "fontSize": 13,
-        "fontWeight": "normal",
-        "marginBottom": 10,
-        "marginLeft": 5,
+    >
+      doc: update maintaining V8 guide
+    </div>
+    <CommitBody
+      text="Replace references to the outdated \`update-v8\` tool to its replacementin \`node-core-utils\`PR-URL: https://github.com/nodejs/node/pull/22913Reviewed-By: Richard Lau <riclau@uk.ibm.com>Reviewed-By: Colin Ihrig <cjihrig@gmail.com>Reviewed-By: Weijia Wang <starkwang@126.com>Reviewed-By: Sakthipriyan Vairamani <thechargingvolcano@gmail.com>Reviewed-By: Joyee Cheung <joyeec9h3@gmail.com>Reviewed-By: Luigi Pinca <luigipinca@gmail.com>Reviewed-By: James M Snell <jasnell@gmail.com>"
+    />
+    <CommitCardFiles
+      files={
+        Array [
+          Object {
+            "linesAdded": 8,
+            "linesDeleted": 8,
+            "name": "doc/guides/maintaining-V8.md",
+          },
+        ]
       }
-    }
-  >
-    Authored by 
-    Michaël Zasso
-     
-    3 days ago
-  </div>
+      style={
+        Object {
+          "_extends": Array [
+            "block",
+            "normalText",
+          ],
+          "marginBottom": 10,
+          "marginLeft": 10,
+          "marginRight": 20,
+        }
+      }
+    />
+    <div
+      style={
+        Object {
+          "color": "#333333",
+          "display": "block",
+          "fontSize": 13,
+          "fontWeight": "normal",
+          "marginBottom": 10,
+          "marginLeft": 5,
+        }
+      }
+    >
+      Authored by 
+      Michaël Zasso
+       
+      3 days ago
+    </div>
+  </MenuItem>
 </div>
 `;

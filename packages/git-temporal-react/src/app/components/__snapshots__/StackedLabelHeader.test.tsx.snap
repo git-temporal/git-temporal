@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`components/StackedLabelHeader when rendered with required props it should match snapshot (it should have rendered a label and a text element) 1`] = `
-<Component
+<StackedLabel
   label="This is the Label"
   labelStyle={
     Array [
@@ -26,5 +26,5 @@ exports[`components/StackedLabelHeader when rendered with required props it shou
   >
     this is the text
   </div>
-</Component>
+</StackedLabel>
 `;

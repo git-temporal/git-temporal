@@ -4,7 +4,7 @@ exports[`components/AuthorCard when rendered with required props it should match
 <div
   style={
     Object {
-      "backgroundColor": "white",
+      "background": "white",
       "borderRadius": 7,
       "display": "flex",
       "flexDirection": "row",
@@ -51,7 +51,7 @@ exports[`components/AuthorCard when rendered with required props it should match
           }
         }
       >
-        <Component
+        <EpochSpan
           firstEpochTime={132344555}
           secondEpochTime={1539563458}
         />
@@ -59,7 +59,7 @@ exports[`components/AuthorCard when rendered with required props it should match
            ago
         </span>
       </span>
-      <Component
+      <AddedDeleted
         linesAdded={100}
         linesDeleted={30}
         style={
@@ -69,7 +69,7 @@ exports[`components/AuthorCard when rendered with required props it should match
         }
       />
     </div>
-    <Component
+    <PercentBar
       denominator={260}
       numerator={130}
     />
@@ -86,12 +86,12 @@ exports[`components/AuthorCard when rendered with required props it should match
       <span>
          commits spanning 
       </span>
-      <Component
+      <EpochSpan
         firstEpochTime={132344525}
         secondEpochTime={132344555}
       />
     </div>
-    <Component
+    <PercentBar
       denominator={140}
       numerator={5}
     />

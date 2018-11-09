@@ -18,26 +18,28 @@ exports[`containers/Stats when rendered and a directory is selected it should ma
 <div
   style={
     Object {
-      "backgroundColor": "white",
+      "background": "white",
       "borderRadius": 3,
       "display": "flex",
       "flexDirection": "row",
+      "marginBottom": -10,
       "marginRight": 10,
       "padding": 10,
+      "paddingBottom": 0,
     }
   }
 >
   <Component
-    label="Contributors"
+    label="Authors"
   >
-    <Component
+    <CommaNumber
       value={5}
     />
   </Component>
   <Component
     label="Active Time Span"
   >
-    <Component
+    <EpochSpan
       firstEpochTime={1536691136}
       secondEpochTime={1538663085}
     />
@@ -46,7 +48,7 @@ exports[`containers/Stats when rendered and a directory is selected it should ma
     label="Last Commit"
   >
     <div>
-      <Component
+      <EpochSpan
         firstEpochTime={1538663085}
         secondEpochTime={1539563458}
       />
@@ -58,14 +60,14 @@ exports[`containers/Stats when rendered and a directory is selected it should ma
   <Component
     label="Lines Added"
   >
-    <Component
+    <CommaNumber
       value={700}
     />
   </Component>
   <Component
     label="Lines Deleted"
   >
-    <Component
+    <CommaNumber
       value={300}
     />
   </Component>
@@ -75,7 +77,7 @@ exports[`containers/Stats when rendered and a directory is selected it should ma
     onLabelClick={[Function]}
     title="Click to view Commits"
   >
-    <Component
+    <CommaNumber
       value={52}
     />
   </Component>
@@ -85,7 +87,7 @@ exports[`containers/Stats when rendered and a directory is selected it should ma
     onLabelClick={null}
     title="Click to view Files"
   >
-    <Component
+    <CommaNumber
       value={110}
     />
   </Component>
@@ -96,26 +98,28 @@ exports[`containers/Stats when rendered test props it should match snapshot (it 
 <div
   style={
     Object {
-      "backgroundColor": "white",
+      "background": "white",
       "borderRadius": 3,
       "display": "flex",
       "flexDirection": "row",
+      "marginBottom": -10,
       "marginRight": 10,
       "padding": 10,
+      "paddingBottom": 0,
     }
   }
 >
   <Component
-    label="Contributors"
+    label="Authors"
   >
-    <Component
+    <CommaNumber
       value={5}
     />
   </Component>
   <Component
     label="Active Time Span"
   >
-    <Component
+    <EpochSpan
       firstEpochTime={1536691136}
       secondEpochTime={1538663085}
     />
@@ -124,7 +128,7 @@ exports[`containers/Stats when rendered test props it should match snapshot (it 
     label="Last Commit"
   >
     <div>
-      <Component
+      <EpochSpan
         firstEpochTime={1538663085}
         secondEpochTime={1539563458}
       />
@@ -136,14 +140,14 @@ exports[`containers/Stats when rendered test props it should match snapshot (it 
   <Component
     label="Lines Added"
   >
-    <Component
+    <CommaNumber
       value={700}
     />
   </Component>
   <Component
     label="Lines Deleted"
   >
-    <Component
+    <CommaNumber
       value={300}
     />
   </Component>
@@ -153,7 +157,7 @@ exports[`containers/Stats when rendered test props it should match snapshot (it 
     onLabelClick={[Function]}
     title="Click to view Commits"
   >
-    <Component
+    <CommaNumber
       value={52}
     />
   </Component>
@@ -163,7 +167,7 @@ exports[`containers/Stats when rendered test props it should match snapshot (it 
     onLabelClick={[Function]}
     title="Click to view Files"
   >
-    <Component
+    <CommaNumber
       value={110}
     />
   </Component>

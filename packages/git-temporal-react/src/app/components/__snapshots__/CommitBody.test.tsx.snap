@@ -36,11 +36,29 @@ exports[`components/CommitBody when rendered epoch time 1539369263 (Fri, 12 Oct 
         "marginBottom": 5,
       }
     }
+  />
+  <div
+    key="2"
+    style={
+      Object {
+        "display": "block",
+        "marginBottom": 5,
+      }
+    }
   >
     line
   </div>
   <div
-    key="2"
+    key="3"
+    style={
+      Object {
+        "display": "block",
+        "marginBottom": 5,
+      }
+    }
+  />
+  <div
+    key="4"
     style={
       Object {
         "display": "block",
@@ -51,7 +69,16 @@ exports[`components/CommitBody when rendered epoch time 1539369263 (Fri, 12 Oct 
     should
   </div>
   <div
-    key="3"
+    key="5"
+    style={
+      Object {
+        "display": "block",
+        "marginBottom": 5,
+      }
+    }
+  />
+  <div
+    key="6"
     style={
       Object {
         "display": "block",
@@ -62,7 +89,16 @@ exports[`components/CommitBody when rendered epoch time 1539369263 (Fri, 12 Oct 
     be
   </div>
   <div
-    key="4"
+    key="7"
+    style={
+      Object {
+        "display": "block",
+        "marginBottom": 5,
+      }
+    }
+  />
+  <div
+    key="8"
     style={
       Object {
         "display": "block",
@@ -73,7 +109,16 @@ exports[`components/CommitBody when rendered epoch time 1539369263 (Fri, 12 Oct 
     in a span
   </div>
   <div
-    key="5"
+    key="9"
+    style={
+      Object {
+        "display": "block",
+        "marginBottom": 5,
+      }
+    }
+  />
+  <div
+    key="10"
     style={
       Object {
         "display": "block",

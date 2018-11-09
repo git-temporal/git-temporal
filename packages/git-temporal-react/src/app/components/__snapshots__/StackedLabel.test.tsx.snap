@@ -17,6 +17,7 @@ exports[`components/StackedLabel when rendered with required props and then sett
         "border": "1px solid lightskyblue",
         "borderRadius": 3,
         "cursor": "pointer",
+        "userSelect": "none",
       }
     }
   >

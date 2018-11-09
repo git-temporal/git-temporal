@@ -27,3 +27,5 @@ export const CommaNumber = (props: NumberProps): JSX.Element => {
     </span>
   );
 };
+
+CommaNumber.displayName = 'CommaNumber';

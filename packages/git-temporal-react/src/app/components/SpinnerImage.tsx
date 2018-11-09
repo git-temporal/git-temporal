@@ -72,3 +72,5 @@ export const SpinnerImage = (props: SpinnerImageProps): JSX.Element => {
     </svg>
   );
 };
+
+SpinnerImage.displayName = 'SpinnerImage';

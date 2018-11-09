@@ -644,7 +644,7 @@ exports[`containers/Files when rendered without props it should match snapshot (
 <div
   style={
     Object {
-      "backgroundColor": "white",
+      "background": "white",
       "border": "1px solid whitesmoke",
       "borderRadius": 3,
       "display": "flex",

@@ -7,7 +7,7 @@ exports[`components/MenuItem when rendered with required props it should match s
   onMouseOver={[Function]}
   style={
     Object {
-      "border": "1px solid white",
+      "border": "1px solid transparent",
       "color": "#333333",
       "display": "block",
       "fontSize": 13,

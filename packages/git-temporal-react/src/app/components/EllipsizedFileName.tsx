@@ -43,6 +43,8 @@ export const EllipsizedFileName = (
   );
 };
 
+EllipsizedFileName.displayName = 'EllipsizedFileName';
+
 const renderFileNameLink = (
   fileName: string,
   maxCharacters: number,

@@ -43,7 +43,7 @@ exports[`components/SpinnerContainer when rendered with isSelected=true it shoul
       }
     }
   >
-    <Component />
+    <SpinnerImage />
   </div>
   This should be obscured
 </div>

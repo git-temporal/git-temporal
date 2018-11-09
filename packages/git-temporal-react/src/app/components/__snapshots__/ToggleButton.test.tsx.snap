@@ -8,6 +8,7 @@ exports[`components/ToggleButton when rendered with isSelected=false it should m
       "border": "1px solid lightskyblue",
       "borderRadius": 3,
       "cursor": "pointer",
+      "userSelect": "none",
     }
   }
 >
@@ -20,10 +21,11 @@ exports[`components/ToggleButton when rendered with isSelected=true it should ma
   onClick={[MockFunction]}
   style={
     Object {
-      "backgroundColor": "lightskyblue",
+      "background": "lightskyblue",
       "border": "1px solid lightskyblue",
       "borderRadius": 3,
       "cursor": "pointer",
+      "userSelect": "none",
     }
   }
 >

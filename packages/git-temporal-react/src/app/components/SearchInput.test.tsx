@@ -22,13 +22,18 @@ describe('components/SearchInput', () => {
       expect(wrapper).toMatchSnapshot();
     });
 
-    test('and then changing input, should call onChange', () => {
+    test('and then changing input, should call onChange', done => {
       const event = {
         preventDefault() {},
         target: { value: 'the-value' },
       };
       wrapper.find('input').simulate('change', event);
-      expect(onChangeMock).toBeCalledWith('the-value');
+      // the component should debounce the input and change callback
+      expect(onChangeMock).toHaveBeenCalledTimes(0);
+      setTimeout(() => {
+        expect(onChangeMock).toBeCalledWith('the-value');
+        done();
+      }, 1000);
     });
   });
 });

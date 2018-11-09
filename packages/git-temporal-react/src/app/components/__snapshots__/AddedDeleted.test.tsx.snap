@@ -19,7 +19,7 @@ exports[`components/AddedDeleted when rendered epoch time 1539369263 (Fri, 12 Oc
     }
   >
     +
-    <Component
+    <CommaNumber
       value={20034}
     />
   </span>
@@ -34,7 +34,7 @@ exports[`components/AddedDeleted when rendered epoch time 1539369263 (Fri, 12 Oc
     }
   >
     -
-    <Component
+    <CommaNumber
       value={9877349}
     />
   </span>

@@ -21,6 +21,7 @@ exports[`components/SearchToggle when rendered without a value it should match s
       "marginRight": 12,
       "paddingTop": 6,
       "textAlign": "center",
+      "userSelect": "none",
       "width": 25,
     }
   }

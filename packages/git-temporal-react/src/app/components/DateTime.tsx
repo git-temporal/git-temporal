@@ -25,3 +25,5 @@ export const DateTime = (props: DateTimeProps): JSX.Element => {
   const humanDateTime = props.value.toLocaleString('en-US', displayOptions);
   return <span style={style(props.style)}>{humanDateTime}</span>;
 };
+
+DateTime.displayName = 'DateTime';

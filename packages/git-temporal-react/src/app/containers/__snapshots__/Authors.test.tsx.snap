@@ -4,7 +4,7 @@ exports[`containers/Authors when rendered mock authors and stats it should match
 <div
   style={
     Object {
-      "backgroundColor": "whitesmoke",
+      "background": "whitesmoke",
       "borderRadius": 3,
       "display": "flex",
       "flexDirection": "column",
@@ -240,7 +240,7 @@ exports[`containers/Authors when rendered with authors and stats  it should matc
 <div
   style={
     Object {
-      "backgroundColor": "whitesmoke",
+      "background": "whitesmoke",
       "borderRadius": 3,
       "display": "flex",
       "flexDirection": "column",

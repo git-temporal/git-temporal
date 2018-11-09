@@ -23,3 +23,5 @@ export const AddedDeleted = (props: AddedDeletedProps): JSX.Element => {
     </span>
   );
 };
+
+AddedDeleted.displayName = 'AddedDeleted';

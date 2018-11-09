@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`selectors/getFilteredCommitsState when asking for non existent path it should return an empty state 1`] = `
+exports[`selectors/getCommitsContainerState when asking for non existent path it should return an empty state 1`] = `
 Object {
   "commits": Array [
     Object {
@@ -135,17 +135,13 @@ Object {
     },
   ],
   "commitsContainerSort": undefined,
-  "didInvalidate": undefined,
   "highlightedCommitId": undefined,
-  "isFetching": false,
   "isFileSelected": false,
-  "search": "",
   "selectedPath": "some/bogus/path",
-  "viewCommitsOrFiles": "commits",
 }
 `;
 
-exports[`selectors/getFilteredCommitsState when dealing with commit containing bad author name it should match snapshot 1`] = `
+exports[`selectors/getCommitsContainerState when dealing with commit containing bad author name it should match snapshot 1`] = `
 Object {
   "commits": Array [
     Object {
@@ -280,17 +276,13 @@ Object {
     },
   ],
   "commitsContainerSort": undefined,
-  "didInvalidate": undefined,
   "highlightedCommitId": undefined,
-  "isFetching": false,
   "isFileSelected": false,
-  "search": "",
   "selectedPath": "testPath1",
-  "viewCommitsOrFiles": "commits",
 }
 `;
 
-exports[`selectors/getFilteredCommitsState with first 5 commits from node test repo it should match snapshot 1`] = `
+exports[`selectors/getCommitsContainerState with first 5 commits from node test repo it should match snapshot 1`] = `
 Object {
   "commits": Array [
     Object {
@@ -425,12 +417,8 @@ Object {
     },
   ],
   "commitsContainerSort": undefined,
-  "didInvalidate": undefined,
   "highlightedCommitId": undefined,
-  "isFetching": false,
   "isFileSelected": false,
-  "search": "",
   "selectedPath": "testPath1",
-  "viewCommitsOrFiles": "commits",
 }
 `;

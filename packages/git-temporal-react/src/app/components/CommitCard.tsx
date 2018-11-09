@@ -94,3 +94,5 @@ export const CommitCard = (props: CommitCardProps): JSX.Element => {
     </div>
   );
 };
+
+CommitCard.displayName = 'CommitCard';

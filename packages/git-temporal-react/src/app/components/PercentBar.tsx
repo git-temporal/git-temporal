@@ -30,3 +30,5 @@ export const PercentBar = ({
     </div>
   );
 };
+
+PercentBar.displayName = 'PercentBar';

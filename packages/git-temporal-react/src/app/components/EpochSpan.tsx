@@ -42,3 +42,5 @@ export const EpochSpan = (props: EpochSpanProps): JSX.Element => {
     </span>
   );
 };
+
+EpochSpan.displayName = 'EpochSpan';

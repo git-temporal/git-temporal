@@ -23,3 +23,5 @@ export const ToggleButton = (props: ToggleButtonProps): JSX.Element => {
     </div>
   );
 };
+
+ToggleButton.displayName = 'ToggleButton';

@@ -65,3 +65,5 @@ export const CommitBody = (props: CommitBodyProps): JSX.Element => {
     </div>
   );
 };
+
+CommitBody.displayName = 'CommitBody';

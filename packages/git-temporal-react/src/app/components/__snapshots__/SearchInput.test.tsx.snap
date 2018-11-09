@@ -4,7 +4,7 @@ exports[`components/SearchInput when rendered with value it should match snapsho
 <div
   style={
     Object {
-      "backgroundColor": "white",
+      "background": "white",
       "border": "1px solid lightskyblue",
       "borderRadius": 3,
       "color": "#333333",
@@ -16,6 +16,7 @@ exports[`components/SearchInput when rendered with value it should match snapsho
       "marginRight": 10,
       "padding": 5,
       "position": "relative",
+      "userSelect": "none",
     }
   }
 >

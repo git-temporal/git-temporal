@@ -4,7 +4,7 @@ exports[`components/FileCard when rendered with required props it should match s
 <div
   style={
     Object {
-      "backgroundColor": "white",
+      "background": "white",
       "borderRadius": 7,
       "display": "block",
       "marginBottom": 10,
@@ -13,7 +13,7 @@ exports[`components/FileCard when rendered with required props it should match s
     }
   }
 >
-  <Component
+  <EllipsizedFileName
     fileName="docs/js/react.js"
     maxCharacters={47}
     style={
@@ -25,7 +25,7 @@ exports[`components/FileCard when rendered with required props it should match s
       }
     }
   />
-  <Component
+  <AddedDeleted
     linesAdded={41962}
     linesDeleted={41962}
   />
@@ -46,7 +46,7 @@ exports[`components/FileCard when rendered with required props it should match s
        authors spanning
        
     </span>
-    <Component
+    <EpochSpan
       firstEpochTime={1427579814}
       secondEpochTime={1493211770}
     />

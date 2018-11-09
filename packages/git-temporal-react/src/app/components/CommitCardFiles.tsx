@@ -64,3 +64,5 @@ export const CommitCardFiles = (props: CommitCardFilesProps): JSX.Element => {
     </div>
   );
 };
+
+CommitCardFiles.displayName = 'CommitCardFiles';
