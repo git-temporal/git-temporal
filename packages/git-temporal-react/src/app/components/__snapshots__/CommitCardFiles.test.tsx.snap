@@ -1,0 +1,123 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/CommitCardFiles when rendered with files and expanded=false it should match snapshot (it should have rendered "3 files changed") 1`] = `
+<div
+  style={
+    Object {
+      "marginBottom": 10,
+    }
+  }
+>
+  <span
+    style={
+      Object {
+        "color": "blue",
+        "cursor": "pointer",
+        "textDecoration": "underline",
+      }
+    }
+  >
+    3
+     
+    files
+     changed
+  </span>
+</div>
+`;
+
+exports[`components/CommitCardFiles when rendered with files and expanded=true it should match snapshot (it should have rendered 3 files with added and deleted)") 1`] = `
+<div
+  style={
+    Object {
+      "marginBottom": 10,
+    }
+  }
+>
+  <div
+    key="0"
+    style={
+      Object {
+        "wordBreak": "break-all",
+      }
+    }
+  >
+    <AddedDeleted
+      linesAdded={1}
+      linesDeleted={1}
+    />
+    <EllipsizedFileName
+      fileName="doc/api/crypto.md"
+      maxCharacters={58}
+      style={
+        Object {
+          "color": "#333333",
+          "fontSize": 11,
+          "fontWeight": "normal",
+        }
+      }
+    />
+  </div>
+  <div
+    key="1"
+    style={
+      Object {
+        "wordBreak": "break-all",
+      }
+    }
+  >
+    <AddedDeleted
+      linesAdded={2}
+      linesDeleted={5}
+    />
+    <EllipsizedFileName
+      fileName="src/node_crypto.cc"
+      maxCharacters={58}
+      style={
+        Object {
+          "color": "#333333",
+          "fontSize": 11,
+          "fontWeight": "normal",
+        }
+      }
+    />
+  </div>
+  <div
+    key="2"
+    style={
+      Object {
+        "wordBreak": "break-all",
+      }
+    }
+  >
+    <AddedDeleted
+      linesAdded={26}
+      linesDeleted={0}
+    />
+    <EllipsizedFileName
+      fileName="test/parallel/test-crypto-authenticated.js"
+      maxCharacters={58}
+      style={
+        Object {
+          "color": "#333333",
+          "fontSize": 11,
+          "fontWeight": "normal",
+        }
+      }
+    />
+  </div>
+</div>
+`;
+
+exports[`components/CommitCardFiles when rendered without files it should match snapshot (it should have rendered a placeholder message)") 1`] = `
+<div
+  style={
+    Object {
+      "marginBottom": 10,
+    }
+  }
+>
+  <span>
+    No files effected
+  </span>
+</div>
+`;

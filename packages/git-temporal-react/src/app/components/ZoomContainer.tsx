@@ -16,7 +16,7 @@ export interface ZoomContainerProps {
   onZoom?: (value: number) => void;
   onMouseEnter?: (evt: object) => void;
   onMouseLeave?: (evt: object) => void;
-  onScroll: (scrollLeft: number) => void;
+  onScroll?: (scrollLeft: number) => void;
   style?: string | object;
 }
 
@@ -52,7 +52,7 @@ export class ZoomContainer extends React.Component<
   readonly state: ZoomContainerState = initialState;
 
   componentDidUpdate(_prevProps, prevState) {
-    if (prevState.zoom !== this.state.zoom) {
+    if (prevState.zoom !== this.state.zoom && this.props.onZoom) {
       this.props.onZoom(this.state.zoom);
     }
   }

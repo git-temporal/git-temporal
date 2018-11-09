@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/ZoomContainer when rendered it should match snapshot 1`] = `
+<div
+  style={
+    Object {
+      "height": "100%",
+      "position": "relative",
+      "width": "100%",
+    }
+  }
+>
+  <HorizontalScroller>
+    <div
+      style={
+        Object {
+          "height": "100%",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        This is something contained in a ZoomContainer
+      </div>
+    </div>
+  </HorizontalScroller>
+  <div
+    style={
+      Object {
+        "backgroundColor": undefined,
+        "bottom": -19,
+        "position": "absolute",
+        "right": 18,
+      }
+    }
+  >
+    <label
+      style={
+        Object {
+          "color": "#333333",
+          "fontSize": 13,
+          "fontWeight": "normal",
+        }
+      }
+    >
+      <select
+        onChange={[Function]}
+      >
+        <option
+          key="0"
+          selected={true}
+          value={100}
+        >
+          100% zoom
+        </option>
+        <option
+          key="1"
+          selected={false}
+          value={200}
+        >
+          200% zoom
+        </option>
+        <option
+          key="2"
+          selected={false}
+          value={300}
+        >
+          300% zoom
+        </option>
+        <option
+          key="3"
+          selected={false}
+          value={500}
+        >
+          500% zoom
+        </option>
+        <option
+          key="4"
+          selected={false}
+          value={800}
+        >
+          800% zoom
+        </option>
+        <option
+          key="5"
+          selected={false}
+          value={1300}
+        >
+          1300% zoom
+        </option>
+      </select>
+    </label>
+  </div>
+</div>
+`;

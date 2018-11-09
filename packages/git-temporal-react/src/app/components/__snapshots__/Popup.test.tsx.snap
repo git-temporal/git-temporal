@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/Popup when rendered with isOpen=true) it should match snapshot 1`] = `
+<div
+  style={
+    Object {
+      "overflow": "visible",
+    }
+  }
+>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "display": "block",
+        "height": "100%",
+        "left": 0,
+        "opacity": 0,
+        "position": "fixed",
+        "top": 0,
+        "width": "100%",
+        "zIndex": 3,
+      }
+    }
+  />
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "white",
+        "borderRadius": 3,
+        "boxShadow": "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2)",
+        "display": "block",
+        "marginRight": 0,
+        "minWidth": 180,
+        "padding": 10,
+        "position": "absolute",
+        "right": 0,
+        "zIndex": 4,
+      }
+    }
+  >
+    This is some popup content, yo.
+  </div>
+</div>
+`;

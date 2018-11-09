@@ -7,7 +7,7 @@ const testText =
   'each<br><br>line<br><br>should<br><br>be<br><br>in a span<br><br>';
 
 describe('components/CommitBody', () => {
-  describe('when rendered epoch time 1539369263 (Fri, 12 Oct 2018 18:34:23 GMT)', () => {
+  describe('when rendered with text containing <br>s', () => {
     let wrapper;
     beforeAll(() => {
       wrapper = shallow(<CommitBody text={testText} />);

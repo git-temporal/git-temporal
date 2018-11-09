@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/CommitBody when rendered epoch time 1539369263 (Fri, 12 Oct 2018 18:34:23 GMT) it should match snapshot (it should have rendered a block element for each line with <br><br>") 1`] = `
+exports[`components/CommitBody when rendered with text containing <br>s it should match snapshot (it should have rendered a block element for each line with <br><br>") 1`] = `
 <div
   style={
     Object {

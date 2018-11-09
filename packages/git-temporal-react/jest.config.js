@@ -13,8 +13,7 @@ module.exports = {
   setupFiles: ['./config/jest.setup.js', './config/polyfills.js'],
   snapshotSerializers: ['enzyme-to-json/serializer'],
 
-  testPathIgnorePatterns: ['test/functional', 'test/helpers', 'test/coverage'],
-  testRegex: '.*(test|spec)\\.(tsx|ts|js|jsx)$',
+  testRegex: 'src/.*(test|spec)\\.(tsx|ts|js|jsx)$',
   testURL: 'http://localhost',
 
   transform: {

@@ -6,7 +6,7 @@ import { debounce } from 'app/utilities/debounce';
 export interface HorizontalScrollerProps {
   // The children are the menu content
   children: string | JSX.Element | JSX.Element[];
-  scrollLeft: number;
+  scrollLeft?: number;
   style?: string | object;
   onScroll?: (scrollLeft: number) => void;
 }
@@ -88,8 +88,13 @@ export class HorizontalScroller extends React.Component<
         style={style(outerStyle, this.props.style)}
         ref={this.outerContainerRef}
         onScroll={this.debouncedOnScroll}
+        data-testid="outerContainer"
       >
-        <div style={style(innerContainerStyle)} ref={this.innerContainerRef}>
+        <div
+          style={style(innerContainerStyle)}
+          ref={this.innerContainerRef}
+          data-testid="innerContainer"
+        >
           {this.props.children}
         </div>
         {this.state.showingLeftTouch && (
@@ -97,6 +102,7 @@ export class HorizontalScroller extends React.Component<
             style={style(leftTouchStyle)}
             onClick={this.onLeftTouchClick}
             onDoubleClick={this.onLeftTouchDoubleClick}
+            data-testid="leftTouch"
           />
         )}
         {this.state.showingRightTouch && (
@@ -104,6 +110,7 @@ export class HorizontalScroller extends React.Component<
             style={style(rightTouchStyle)}
             onClick={this.onRightTouchClick}
             onDoubleClick={this.onRightTouchDoubleClick}
+            data-testid="rightTouch"
           />
         )}
       </div>
@@ -125,6 +132,12 @@ export class HorizontalScroller extends React.Component<
     if (shouldUpdate) {
       this.setState({ showingLeftTouch, showingRightTouch });
     }
+    // console.log('innerBoundingRect', innerBoundingRect);
+    // console.log('innerEl.scrollWidth', innerEl.scrollWidth);
+    // console.log('outerEl.clientWidth', outerEl.clientWidth);
+    // console.log('outerEl.scrollLeft', outerEl.scrollLeft);
+    // console.log('showingLeftTouch', showingLeftTouch);
+    // console.log('showingRightTouch', showingRightTouch);
   }
 
   private onScroll() {

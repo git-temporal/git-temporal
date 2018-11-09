@@ -24,7 +24,7 @@
     "build-webpack": "NODE_ENV=production webpack --display-error-details --config config/webpack.config.prod.js",
     "coverage": "open coverage/lcov-report/index.html",
     "start": "node scripts/start.js",
-    "test": "npm run build && cross-env NODE_ENV=test jest",
+    "test": "cross-env NODE_ENV=test jest",
     "test-coverage": "npm run test -- --coverage",
     "test-watch": "npm run test -- --watch",
     "test-debug": "node --inspect-brk node_modules/.bin/jest --runInBand"

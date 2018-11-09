@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/HorizontalScroller when rendered with 100% width div it should match snapshot (it should have render just the children without left or right touch controls)") 1`] = `
+<HorizontalScroller
+  onScroll={[MockFunction]}
+>
+  <div
+    data-testid="outerContainer"
+    onScroll={[Function]}
+    style={
+      Object {
+        "height": "100%",
+        "overflowX": "scroll",
+        "position": [Function],
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      data-testid="innerContainer"
+      style={
+        Object {
+          "display": "block",
+          "position": "relative",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        This is a 100% width div
+      </div>
+    </div>
+  </div>
+</HorizontalScroller>
+`;
+
+exports[`components/HorizontalScroller when rendered with 200% width div and then clicking the right touch, it should should scroll left 1`] = `
+<HorizontalScroller
+  onScroll={[MockFunction]}
+  scrollLeft={100}
+>
+  <div
+    data-testid="outerContainer"
+    onScroll={[Function]}
+    style={
+      Object {
+        "height": "100%",
+        "overflowX": "scroll",
+        "position": [Function],
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      data-testid="innerContainer"
+      style={
+        Object {
+          "display": "block",
+          "position": "relative",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "width": "200%",
+          }
+        }
+      >
+        This is a 200% width div
+      </div>
+    </div>
+  </div>
+</HorizontalScroller>
+`;
+
+exports[`components/HorizontalScroller when rendered with 200% width div it should match snapshot (should have rendered the child with a right touch control)) 1`] = `
+<HorizontalScroller
+  onScroll={[MockFunction]}
+>
+  <div
+    data-testid="outerContainer"
+    onScroll={[Function]}
+    style={
+      Object {
+        "height": "100%",
+        "overflowX": "scroll",
+        "position": [Function],
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      data-testid="innerContainer"
+      style={
+        Object {
+          "display": "block",
+          "position": "relative",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "width": "200%",
+          }
+        }
+      >
+        This is a 200% width div
+      </div>
+    </div>
+  </div>
+</HorizontalScroller>
+`;

@@ -205,13 +205,13 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
     const minDate = getUTCDateOfCommit(commits[commits.length - 1]);
     const maxDate = getUTCDateOfCommit(commits[0]); // Date.now();
 
-    console.log(
-      'dates',
-      minDate,
-      maxDate,
-      commits[0].authorDate,
-      getHourOfCommit(commits[0])
-    );
+    // console.log(
+    //   'dates',
+    //   minDate,
+    //   maxDate,
+    //   commits[0].authorDate,
+    //   getHourOfCommit(commits[0])
+    // );
 
     this.xScale = d3
       .scaleTime()

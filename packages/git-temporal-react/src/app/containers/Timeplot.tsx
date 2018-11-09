@@ -155,8 +155,8 @@ export class Timeplot extends React.Component<
           <TimeplotPopup
             commits={this.state.popupCommits}
             isOpen={this.state.popupOpen}
-            dateStart={this.state.popupStartDate}
-            dateEnd={this.state.popupEndDate}
+            startDate={this.state.popupStartDate}
+            endDate={this.state.popupEndDate}
             left={popupLeft}
             onClose={this.onPopupClose}
             onCommitSelected={this.onCommitSelected}
@@ -229,7 +229,7 @@ export class Timeplot extends React.Component<
       this.lastMouseDownDate &&
       startDate.toString() !== this.lastMouseDownDate.toString()
     ) {
-      console.log('startDate differs', startDate, this.lastMouseDownDate);
+      // console.log('startDate differs', startDate, this.lastMouseDownDate);
       this.setDates(true, startDate);
     }
   };
@@ -243,7 +243,7 @@ export class Timeplot extends React.Component<
 
   private onCommitSelected = (evt, commit) => {
     evt.stopPropagation();
-    console.log('onCommitSelected', evt, commit, this.props.startDate);
+    // console.log('onCommitSelected', evt, commit, this.props.startDate);
     // TODO: test: you should be able to isolate a single commit (`+ 1` below)
     // if the user clicks the same commit twice we select just that commit
     if (commit.authorDate === this.props.startDate) {
@@ -261,6 +261,7 @@ export class Timeplot extends React.Component<
     } else if (startDate) {
       if (shiftKey) {
         if (epochDate < startDate) {
+          console.log('setDates', startDate);
           dispatch(setEndDate(startDate));
           dispatch(setStartDate(epochDate));
         } else {

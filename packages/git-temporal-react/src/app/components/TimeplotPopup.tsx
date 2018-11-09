@@ -9,8 +9,8 @@ import { CommitCard } from 'app/components/CommitCard';
 export interface TimeplotPopupProps {
   // This is the text or JSX that gets wrapped in a Toggle Button
   commits: ICommit[];
-  dateStart: Date;
-  dateEnd: Date;
+  startDate: Date;
+  endDate: Date;
   left: number;
   isOpen: boolean;
   onClose: () => void;
@@ -57,8 +57,8 @@ const commitListStyle = {
 export const TimeplotPopup = (props: TimeplotPopupProps): JSX.Element => {
   const {
     commits,
-    dateStart,
-    dateEnd,
+    startDate,
+    endDate,
     isOpen,
     onClose,
     onCommitSelected,
@@ -66,7 +66,7 @@ export const TimeplotPopup = (props: TimeplotPopupProps): JSX.Element => {
   const popupStyle = {
     left: props.left,
   };
-  if (!(commits && dateStart && dateEnd)) {
+  if (!(commits && startDate && endDate)) {
     return null;
   }
   const commitsText =
@@ -81,7 +81,7 @@ export const TimeplotPopup = (props: TimeplotPopupProps): JSX.Element => {
       <div>
         <div style={style(headerStyle)}>
           <div style={style('largerText')}>There {commitsText} between</div>
-          <DateTime value={dateStart} /> and <DateTime value={dateEnd} />
+          <DateTime value={startDate} /> and <DateTime value={endDate} />
         </div>
         <div style={style(commitListStyle)}>
           {commits.map((commit, index) => (
