@@ -48,20 +48,7 @@ exports[`containers/Header when rendered with a proper path it should match snap
       }
     >
       <div>
-        <SearchInput
-          onChange={[Function]}
-          onClear={[Function]}
-          placeholder="search authors, files or commits"
-          style={
-            Object {
-              "borderRadius": 10,
-              "float": "right",
-              "marginLeft": 10,
-              "marginTop": 0,
-              "width": 250,
-            }
-          }
-        />
+        <Connect(Search) />
         <div
           style={
             Object {
@@ -309,20 +296,7 @@ exports[`containers/Header when rendered without props it should match snapshot 
       }
     >
       <div>
-        <SearchInput
-          onChange={[Function]}
-          onClear={[Function]}
-          placeholder="search authors, files or commits"
-          style={
-            Object {
-              "borderRadius": 10,
-              "float": "right",
-              "marginLeft": 10,
-              "marginTop": 0,
-              "width": 250,
-            }
-          }
-        />
+        <Connect(Search) />
         <div
           style={
             Object {

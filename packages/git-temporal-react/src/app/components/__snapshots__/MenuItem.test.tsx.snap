@@ -2,7 +2,7 @@
 
 exports[`components/MenuItem when rendered with required props it should match snapshot (it should have rendered a label and a text element) 1`] = `
 <div
-  onClick={[MockFunction]}
+  onClick={[Function]}
   onMouseLeave={[Function]}
   onMouseOver={[Function]}
   style={

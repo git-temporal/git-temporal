@@ -24,7 +24,6 @@ exports[`components/Popup when rendered with isOpen=true) it should match snapsh
     }
   />
   <div
-    onClick={[Function]}
     style={
       Object {
         "background": "white",
