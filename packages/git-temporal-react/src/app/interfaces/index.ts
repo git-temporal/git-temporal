@@ -43,6 +43,15 @@ export interface ICommit {
   files: ICommitFile[];
 }
 
+export interface IHeaderContainerState {
+  // If not provided, the whole repository is assumed
+  selectedPath?: string;
+  search?: string;
+  startDate?: number;
+  endDate?: number;
+  isDefaultDates?: boolean;
+}
+
 export interface ICommitsContainerState {
   selectedPath: string;
   highlightedCommitId: string;

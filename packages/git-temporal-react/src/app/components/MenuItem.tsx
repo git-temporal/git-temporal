@@ -1,13 +1,14 @@
 import React from 'react';
 import { style } from 'app/styles';
-import { TestProps } from 'app/interfaces';
 
 export interface MenuItemProps {
   // The children are the menu content
   children: string | JSX.Element | JSX.Element[];
-  onClick: (evt) => void;
+  onClick: (evt, value?) => void;
+  value?: any;
   style?: string | object;
   disabled?: boolean;
+  selected?: boolean;
 }
 const initialState = {
   isHovering: false,
@@ -28,23 +29,25 @@ const hoverContainerStyle = {
 const disabledContainerStyle = {
   _extends: [containerStyle, 'disabledText'],
 };
+const selectedStyle = {
+  _extends: [containerStyle, 'selected'],
+};
 
-export class MenuItem extends React.Component<
-  MenuItemProps & TestProps,
-  MenuItemState
-> {
+export class MenuItem extends React.Component<MenuItemProps, MenuItemState> {
   readonly state: MenuItemState = initialState;
 
   render() {
     const outerStyle = this.props.disabled
       ? disabledContainerStyle
-      : this.state.isHovering
-        ? hoverContainerStyle
-        : containerStyle;
+      : this.props.selected
+        ? selectedStyle
+        : this.state.isHovering
+          ? hoverContainerStyle
+          : containerStyle;
     return (
       <div
         style={style(outerStyle, this.props.style)}
-        onClick={this.props.onClick}
+        onClick={this.onClick}
         onMouseOver={this.onMouseOver}
         onMouseLeave={this.onMouseLeave}
       >
@@ -53,11 +56,15 @@ export class MenuItem extends React.Component<
     );
   }
 
-  onMouseOver = () => {
+  private onClick = evt => {
+    this.props.onClick(evt, this.props.value);
+  };
+
+  private onMouseOver = () => {
     this.setState({ isHovering: true });
   };
 
-  onMouseLeave = () => {
+  private onMouseLeave = () => {
     this.setState({ isHovering: false });
   };
 }

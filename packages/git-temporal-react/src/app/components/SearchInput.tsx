@@ -8,6 +8,9 @@ export interface SearchInputProps {
   value: string;
   onChange: (value) => void;
   onClear: () => void;
+  onFocus?: (evt) => void;
+  onBlur?: (evt) => void;
+  onKeyDown?: (evt) => void;
   placeholder?: string;
   style?: object;
 }
@@ -69,7 +72,7 @@ export class SearchInput extends React.Component<
   }
 
   render() {
-    const { onClear, placeholder } = this.props;
+    const { onClear, onFocus, onBlur, onKeyDown, placeholder } = this.props;
     return (
       <div style={style(containerStyle, this.props.style)}>
         <SearchIcon height={16} width={16} style={style(searchIconStyle)} />
@@ -79,6 +82,9 @@ export class SearchInput extends React.Component<
           value={this.state.value}
           placeholder={placeholder}
           onChange={this.onInputChange}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          onKeyDown={onKeyDown}
           ref={input => {
             this.inputRef = input;
           }}

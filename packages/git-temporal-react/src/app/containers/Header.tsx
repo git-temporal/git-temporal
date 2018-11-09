@@ -1,33 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { DispatchProps } from 'app/interfaces';
+import { DispatchProps, IHeaderContainerState } from 'app/interfaces';
 import { getHeaderContainerState } from 'app/selectors';
 import { style } from 'app/styles';
-import { selectPath, setSearch, setStartDate, setEndDate } from 'app/actions';
-import { SearchInput } from 'app/components/SearchInput';
+import { selectPath, setStartDate, setEndDate } from 'app/actions';
 import { EpochDateTime } from 'app/components/EpochDateTime';
 
-interface HeaderProps {
-  // If not provided, the whole repository is assumed
-  selectedPath?: string;
-  search?: string;
-  startDate?: number;
-  endDate?: number;
-  isDefaultDates?: boolean;
-}
+import Search from 'app/containers/Search';
 
 const appNameStyle = {
   _extends: ['inlineBlock', 'h1Text'],
   marginBottom: 10,
-};
-
-const searchInputStyle = {
-  float: 'right',
-  width: 250,
-  borderRadius: 10,
-  marginLeft: 10,
-  marginTop: 0,
 };
 
 const topRowStyle = {
@@ -52,9 +36,9 @@ const dateOptions = {
   timeZoneName: 'short',
 };
 
-export class Header extends Component<HeaderProps & DispatchProps> {
+export class Header extends Component<IHeaderContainerState & DispatchProps> {
   render() {
-    const { startDate, endDate, search, isDefaultDates } = this.props;
+    const { startDate, endDate, isDefaultDates } = this.props;
     const epochStyle = isDefaultDates ? {} : datesSelectedStyle;
     return (
       <div style={style('panel', 'flexColumns')}>
@@ -62,13 +46,7 @@ export class Header extends Component<HeaderProps & DispatchProps> {
           <div style={style(appNameStyle)}>Git Temporal </div>
           <div style={style(statsAndSearchStyle)}>
             <div>
-              <SearchInput
-                value={search}
-                onChange={this.onSearch}
-                onClear={this.onClear}
-                style={style(searchInputStyle)}
-                placeholder="search authors, files or commits"
-              />
+              <Search />
               <div style={style('h2Text', { marginBottom: 10 })}>
                 Stats for {this.renderPathLinks()}
               </div>
@@ -140,14 +118,6 @@ export class Header extends Component<HeaderProps & DispatchProps> {
       return this.renderLinkPart(part, index, fullPathSoFar, lastIndex);
     });
   }
-
-  onSearch = value => {
-    this.props.dispatch(setSearch(value || ''));
-  };
-
-  onClear = () => {
-    this.props.dispatch(setSearch(''));
-  };
 
   onLinkPartClick = fullPath => {
     this.props.dispatch(selectPath(fullPath));

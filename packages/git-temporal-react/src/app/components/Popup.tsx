@@ -3,9 +3,9 @@ import { style } from 'app/styles';
 
 export interface PopupProps {
   isOpen: boolean;
-  onClose: () => void;
   // The children are the popup content
   children: string | JSX.Element | JSX.Element[];
+  onClose?: () => void;
   style?: string | object;
   noBackdrop?: boolean;
 }
@@ -52,14 +52,12 @@ export class Popup extends React.Component<PopupProps> {
         {!this.props.noBackdrop && (
           <div style={style(backdropStyles)} onClick={this.onClose} />
         )}
-        <div style={style(popupStyles)} onClick={this.onClose}>
-          {this.props.children}
-        </div>
+        <div style={style(popupStyles)}>{this.props.children}</div>
       </div>
     );
   }
 
   onClose = () => {
-    this.props.onClose();
+    this.props.onClose && this.props.onClose();
   };
 }

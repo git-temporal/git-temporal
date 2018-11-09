@@ -69,11 +69,10 @@ export const getCommitsActionMenuState = createSelector(
 export const getHeaderContainerState = createSelector(
   getFilteredCommits,
   getSelectedPath,
-  getSearch,
   getStartDate,
   getEndDate,
 
-  (commits, selectedPath, search, startDate, endDate) => {
+  (commits, selectedPath, startDate, endDate) => {
     // psssst - commits are in descending time order
     const defaultedStartDate =
       startDate ||
@@ -91,13 +90,18 @@ export const getHeaderContainerState = createSelector(
 
     return {
       selectedPath,
-      search,
       isDefaultDates,
       startDate: defaultedStartDate,
       endDate: defaultedEndDate,
     };
   }
 );
+
+export const getSearchContainerState = createSelector(getSearch, search => {
+  return {
+    search,
+  };
+});
 
 export const getAuthorsActionMenuState = createSelector(
   getAuthorsContainerSort,
