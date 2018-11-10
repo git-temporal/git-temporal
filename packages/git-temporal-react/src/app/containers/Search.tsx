@@ -127,12 +127,10 @@ export class Search extends Component<
   };
 
   private onSearchBlur = () => {
-    console.log('got onSearchBlur');
     this.setState({ searchHasFocus: false });
   };
 
   private onSuggestClick = (_evt, value) => {
-    console.log('got onSuggestClick', value, this.getUnprefixedSearch());
     this.selectSuggestion(value);
   };
 

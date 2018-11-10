@@ -14,6 +14,7 @@ jest.mock('app/actions', () => {
     'viewFiles',
     'setStartDate',
     'setEndDate',
+    'setSearch',
   ];
   for (const methodName of actionsToMock) {
     mockedActions[methodName] = jest.fn(path => {

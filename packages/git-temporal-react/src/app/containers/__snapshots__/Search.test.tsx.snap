@@ -1,0 +1,336 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/Search when rendered with search text and then on focus, it should show popup 1`] = `
+<div
+  style={
+    Object {
+      "float": "right",
+      "overflow": "visible",
+      "position": "relative",
+      "width": 250,
+    }
+  }
+>
+  <SearchInput
+    onBlur={[Function]}
+    onChange={[Function]}
+    onClear={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    placeholder="search authors, files or commits"
+    style={
+      Object {
+        "borderRadius": 10,
+        "marginLeft": 10,
+        "marginTop": 0,
+        "width": "100%",
+      }
+    }
+    value="someone"
+  />
+  <Popup
+    isOpen={true}
+    noBackdrop={true}
+    style={
+      Object {
+        "marginRight": 0,
+      }
+    }
+  >
+    <MenuItem
+      key="searchSuggestion_all"
+      onClick={[Function]}
+      selected={true}
+      value="all"
+    >
+      <div>
+        Search everywhere for '
+        someone
+        '
+      </div>
+    </MenuItem>
+    <MenuItem
+      key="searchSuggestion_0"
+      onClick={[Function]}
+      selected={false}
+      value="author:"
+    >
+      <div
+        style={
+          Object {
+            "color": "#333333",
+            "fontSize": 13,
+            "fontWeight": "normal",
+          }
+        }
+      >
+        author:
+         
+        someone
+      </div>
+    </MenuItem>
+    <MenuItem
+      key="searchSuggestion_1"
+      onClick={[Function]}
+      selected={false}
+      value="commit:"
+    >
+      <div
+        style={
+          Object {
+            "color": "#333333",
+            "fontSize": 13,
+            "fontWeight": "normal",
+          }
+        }
+      >
+        commit:
+         
+        someone
+      </div>
+    </MenuItem>
+    <MenuItem
+      key="searchSuggestion_2"
+      onClick={[Function]}
+      selected={false}
+      value="file:"
+    >
+      <div
+        style={
+          Object {
+            "color": "#333333",
+            "fontSize": 13,
+            "fontWeight": "normal",
+          }
+        }
+      >
+        file:
+         
+        someone
+      </div>
+    </MenuItem>
+  </Popup>
+</div>
+`;
+
+exports[`containers/Search when rendered with search text it should match snapshot (it should have rendered search, but NOT the popup 1`] = `
+<div
+  style={
+    Object {
+      "float": "right",
+      "overflow": "visible",
+      "position": "relative",
+      "width": 250,
+    }
+  }
+>
+  <SearchInput
+    onBlur={[Function]}
+    onChange={[Function]}
+    onClear={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    placeholder="search authors, files or commits"
+    style={
+      Object {
+        "borderRadius": 10,
+        "marginLeft": 10,
+        "marginTop": 0,
+        "width": "100%",
+      }
+    }
+    value="someone"
+  />
+  <Popup
+    isOpen={false}
+    noBackdrop={true}
+    style={
+      Object {
+        "marginRight": 0,
+      }
+    }
+  >
+    <MenuItem
+      key="searchSuggestion_all"
+      onClick={[Function]}
+      selected={true}
+      value="all"
+    >
+      <div>
+        Search everywhere for '
+        someone
+        '
+      </div>
+    </MenuItem>
+    <MenuItem
+      key="searchSuggestion_0"
+      onClick={[Function]}
+      selected={false}
+      value="author:"
+    >
+      <div
+        style={
+          Object {
+            "color": "#333333",
+            "fontSize": 13,
+            "fontWeight": "normal",
+          }
+        }
+      >
+        author:
+         
+        someone
+      </div>
+    </MenuItem>
+    <MenuItem
+      key="searchSuggestion_1"
+      onClick={[Function]}
+      selected={false}
+      value="commit:"
+    >
+      <div
+        style={
+          Object {
+            "color": "#333333",
+            "fontSize": 13,
+            "fontWeight": "normal",
+          }
+        }
+      >
+        commit:
+         
+        someone
+      </div>
+    </MenuItem>
+    <MenuItem
+      key="searchSuggestion_2"
+      onClick={[Function]}
+      selected={false}
+      value="file:"
+    >
+      <div
+        style={
+          Object {
+            "color": "#333333",
+            "fontSize": 13,
+            "fontWeight": "normal",
+          }
+        }
+      >
+        file:
+         
+        someone
+      </div>
+    </MenuItem>
+  </Popup>
+</div>
+`;
+
+exports[`containers/Search when rendered without props it should match snapshot (should render search without popup) 1`] = `
+<div
+  style={
+    Object {
+      "float": "right",
+      "overflow": "visible",
+      "position": "relative",
+      "width": 250,
+    }
+  }
+>
+  <SearchInput
+    onBlur={[Function]}
+    onChange={[Function]}
+    onClear={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    placeholder="search authors, files or commits"
+    style={
+      Object {
+        "borderRadius": 10,
+        "marginLeft": 10,
+        "marginTop": 0,
+        "width": "100%",
+      }
+    }
+    value=""
+  />
+  <Popup
+    isOpen={false}
+    noBackdrop={true}
+    style={
+      Object {
+        "marginRight": 0,
+      }
+    }
+  >
+    <MenuItem
+      key="searchSuggestion_all"
+      onClick={[Function]}
+      selected={true}
+      value="all"
+    >
+      <div>
+        Search everywhere for '
+        '
+      </div>
+    </MenuItem>
+    <MenuItem
+      key="searchSuggestion_0"
+      onClick={[Function]}
+      selected={false}
+      value="author:"
+    >
+      <div
+        style={
+          Object {
+            "color": "#333333",
+            "fontSize": 13,
+            "fontWeight": "normal",
+          }
+        }
+      >
+        author:
+         
+      </div>
+    </MenuItem>
+    <MenuItem
+      key="searchSuggestion_1"
+      onClick={[Function]}
+      selected={false}
+      value="commit:"
+    >
+      <div
+        style={
+          Object {
+            "color": "#333333",
+            "fontSize": 13,
+            "fontWeight": "normal",
+          }
+        }
+      >
+        commit:
+         
+      </div>
+    </MenuItem>
+    <MenuItem
+      key="searchSuggestion_2"
+      onClick={[Function]}
+      selected={false}
+      value="file:"
+    >
+      <div
+        style={
+          Object {
+            "color": "#333333",
+            "fontSize": 13,
+            "fontWeight": "normal",
+          }
+        }
+      >
+        file:
+         
+      </div>
+    </MenuItem>
+  </Popup>
+</div>
+`;

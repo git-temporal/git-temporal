@@ -10,6 +10,10 @@ module.exports = {
   moduleFileExtensions: ['ts', 'js', 'tsx'],
   moduleDirectories: ['node_modules', 'src'],
 
+  moduleNameMapper: {
+    'app/(.*)$': '<rootDir>/src/app/$1',
+  },
+
   setupFiles: ['./config/jest.setup.js', './config/polyfills.js'],
   snapshotSerializers: ['enzyme-to-json/serializer'],
 

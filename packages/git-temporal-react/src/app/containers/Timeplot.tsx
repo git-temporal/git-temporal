@@ -189,7 +189,6 @@ export class Timeplot extends React.Component<
   };
 
   private onMouseLeave = evt => {
-    console.log('got mouseLeave', evt);
     this.setState({ popupOpen: false, hoverMarkerLeft: -40 });
   };
 
@@ -219,12 +218,10 @@ export class Timeplot extends React.Component<
 
   private onMouseDown = ({ shiftKey }, { startDate }) => {
     this.lastMouseDownDate = startDate;
-    console.log('got mouseDown', shiftKey, startDate);
     this.setDates(shiftKey, startDate);
   };
 
   private onMouseUp = ({ shiftKey }, { startDate }) => {
-    console.log('got mouseUp', shiftKey, startDate);
     if (
       this.lastMouseDownDate &&
       startDate.toString() !== this.lastMouseDownDate.toString()
@@ -261,7 +258,6 @@ export class Timeplot extends React.Component<
     } else if (startDate) {
       if (shiftKey) {
         if (epochDate < startDate) {
-          console.log('setDates', startDate);
           dispatch(setEndDate(startDate));
           dispatch(setStartDate(epochDate));
         } else {

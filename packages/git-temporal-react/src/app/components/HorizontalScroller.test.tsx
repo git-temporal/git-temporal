@@ -43,7 +43,6 @@ describe('components/HorizontalScroller', () => {
       );
       const innerEl = wrapper.find('[data-testid="innerContainer"]');
       const outerEl = wrapper.find('[data-testid="outerContainer"]');
-      console.log('innerEl html', innerEl.html());
       // TODO : the below never changes the element properties in the test
       //   uncomment the console.log lines in showHideTouchControls() to see
       innerEl.scrollWidth = 200;

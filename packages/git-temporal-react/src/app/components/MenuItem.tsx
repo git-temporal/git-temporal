@@ -1,5 +1,6 @@
 import React from 'react';
 import { style } from 'app/styles';
+import { TestProps } from 'app/interfaces';
 
 export interface MenuItemProps {
   // The children are the menu content
@@ -33,7 +34,10 @@ const selectedStyle = {
   _extends: [containerStyle, 'selected'],
 };
 
-export class MenuItem extends React.Component<MenuItemProps, MenuItemState> {
+export class MenuItem extends React.Component<
+  MenuItemProps & TestProps,
+  MenuItemState
+> {
   readonly state: MenuItemState = initialState;
 
   render() {

@@ -17,7 +17,6 @@ describe('components/SearchToggle', () => {
     });
 
     test('it should have rendered a SearchInput', () => {
-      // console.log(wrapper.html());
       expect(wrapper.find('SearchInput').length).toBe(1);
     });
   });

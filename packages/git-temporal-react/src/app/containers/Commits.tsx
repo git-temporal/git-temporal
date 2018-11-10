@@ -141,11 +141,9 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
 
   remeasureCells(index = null) {
     if (index !== null) {
-      console.log(`remeasuring cells ${this.highlightedIndex} ${index}`);
       this._cache.clear(this.highlightedIndex, 0);
       this._cache.clear(index, 0);
     } else {
-      console.log('remeasuring all cells');
       this._cache.clearAll();
     }
     this._list && this._list.recomputeRowHeights();
