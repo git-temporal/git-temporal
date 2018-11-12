@@ -15,3 +15,16 @@ export function filterCommitsForSpan(commits, dateStart, dateEnd) {
     return dateStart <= commitDate && commitDate <= dateEnd;
   });
 }
+
+export function first20CommitsEqual(commitsA, commitsB) {
+  for (let i = 0; i < 20; i++) {
+    if (
+      i >= commitsA.length ||
+      i >= commitsB.length ||
+      commitsA[i].id !== commitsB[i].id
+    ) {
+      return false;
+    }
+  }
+  return true;
+}

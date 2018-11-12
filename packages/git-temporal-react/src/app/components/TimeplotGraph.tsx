@@ -6,7 +6,11 @@ require('d3-selection-multi');
 import { ICommit } from 'app/interfaces';
 import { addMoveToFront } from 'app/utilities/d3';
 import { dateFromEpochDate } from 'app/utilities/dates';
-import { getUTCDateOfCommit, getHourOfCommit } from 'app/utilities/commits';
+import {
+  getUTCDateOfCommit,
+  getHourOfCommit,
+  first20CommitsEqual,
+} from 'app/utilities/commits';
 
 addMoveToFront(d3);
 
@@ -83,29 +87,25 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
 
   componentDidMount() {
     this.renderTimeplotGraph();
+    window && window.addEventListener('resize', this.renderTimeplotGraph);
   }
 
   componentDidUpdate(prevProps) {
     if (
       prevProps.commits.length !== this.props.commits.length ||
-      prevProps.forceRender !== this.props.forceRender
+      prevProps.forceRender !== this.props.forceRender ||
+      !first20CommitsEqual(prevProps.commits, this.props.commits)
     ) {
       this.renderTimeplotGraph();
       this.forceUpdate();
-      return;
-    }
-    for (let i = 0; i < 20; i++) {
-      if (i >= prevProps.commits.length || i >= this.props.commits.length) {
-        return;
-      }
-      if (prevProps.commits[i].id !== this.props.commits[i].id) {
-        this.renderTimeplotGraph();
-        return;
-      }
     }
     if (prevProps.highlightedCommitId !== this.props.highlightedCommitId) {
       this.updateHighlightedCommit();
     }
+  }
+
+  componentWillUnmount() {
+    window && window.removeEventListener('resize', this.renderTimeplotGraph);
   }
 
   focus() {
@@ -175,7 +175,7 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
     }
   }
 
-  private renderTimeplotGraph() {
+  private renderTimeplotGraph = () => {
     const element = this.timeplotGraphRef.current;
     if (this.props.commits.length <= 0) {
       element.innerHtml =
@@ -194,7 +194,7 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
     this.renderAxis(this.svg);
     this.renderBlobs(this.svg);
     this.updateHighlightedCommit();
-  }
+  };
 
   private calibrateScales() {
     const element = this.timeplotGraphRef.current;

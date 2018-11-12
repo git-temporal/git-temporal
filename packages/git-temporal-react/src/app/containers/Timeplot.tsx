@@ -188,7 +188,7 @@ export class Timeplot extends React.Component<
     });
   };
 
-  private onMouseLeave = evt => {
+  private onMouseLeave = _evt => {
     this.setState({ popupOpen: false, hoverMarkerLeft: -40 });
   };
 
@@ -216,12 +216,14 @@ export class Timeplot extends React.Component<
     this.lastMouseMoveCoords = { pageX, pageY };
   };
 
-  private onMouseDown = ({ shiftKey }, { startDate }) => {
+  private onMouseDown = (evt, { startDate }) => {
+    evt.preventDefault();
     this.lastMouseDownDate = startDate;
-    this.setDates(shiftKey, startDate);
+    this.setDates(evt.shiftKey, startDate);
   };
 
-  private onMouseUp = ({ shiftKey }, { startDate }) => {
+  private onMouseUp = (evt, { startDate }) => {
+    evt.preventDefault();
     if (
       this.lastMouseDownDate &&
       startDate.toString() !== this.lastMouseDownDate.toString()
