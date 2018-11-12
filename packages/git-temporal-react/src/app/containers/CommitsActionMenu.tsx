@@ -14,6 +14,10 @@ interface CommitsActionMenuProps {
   commitsContainerSort?: CommitsContainerSorts;
 }
 
+interface CommitsActionMenuState {
+  isMenuOpen: boolean;
+}
+
 const containerStyle = {
   _extends: 'normalText',
   position: 'absolute',
@@ -21,12 +25,19 @@ const containerStyle = {
 };
 
 export class CommitsActionMenu extends Component<
-  CommitsActionMenuProps & DispatchProps
+  CommitsActionMenuProps & DispatchProps,
+  CommitsActionMenuState
 > {
+  readonly state = { isMenuOpen: false };
+
   render() {
     const { commitsContainerSort } = this.props;
     return (
-      <ActionMenu style={style(containerStyle)}>
+      <ActionMenu
+        style={style(containerStyle)}
+        isMenuOpen={this.state.isMenuOpen}
+        onMenuToggle={this.onMenuToggle}
+      >
         <div style={style('h5Text')}>Sort by</div>
         <RadioMenuItem
           testId="sortTime"
@@ -52,7 +63,12 @@ export class CommitsActionMenu extends Component<
 
   sortCommits(newCommitsContainerSort: CommitsContainerSorts) {
     this.props.dispatch(setCommitsContainerSort(newCommitsContainerSort));
+    this.setState({ isMenuOpen: false });
   }
+
+  onMenuToggle = () => {
+    this.setState({ isMenuOpen: !this.state.isMenuOpen });
+  };
 }
 
 export default connect(getCommitsActionMenuState)(CommitsActionMenu);

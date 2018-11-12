@@ -14,6 +14,10 @@ interface FilesActionMenuProps {
   filesContainerSort?: FilesContainerSorts;
 }
 
+interface CommitsActionMenuState {
+  isMenuOpen: boolean;
+}
+
 const containerStyle = {
   _extends: 'normalText',
   position: 'absolute',
@@ -21,12 +25,19 @@ const containerStyle = {
 };
 
 export class FilesActionMenu extends Component<
-  FilesActionMenuProps & DispatchProps
+  FilesActionMenuProps & DispatchProps,
+  CommitsActionMenuState
 > {
+  readonly state = { isMenuOpen: false };
+
   render() {
     const { filesContainerSort } = this.props;
     return (
-      <ActionMenu style={style(containerStyle)}>
+      <ActionMenu
+        style={style(containerStyle)}
+        isMenuOpen={this.state.isMenuOpen}
+        onMenuToggle={this.onMenuToggle}
+      >
         <div style={style('h5Text')}>Sort by</div>
         <RadioMenuItem
           testId="sortTime"
@@ -61,7 +72,12 @@ export class FilesActionMenu extends Component<
 
   sortFiles(newFilesContainerSort: FilesContainerSorts) {
     this.props.dispatch(setFilesContainerSort(newFilesContainerSort));
+    this.setState({ isMenuOpen: false });
   }
+
+  onMenuToggle = () => {
+    this.setState({ isMenuOpen: !this.state.isMenuOpen });
+  };
 }
 
 export default connect(getFilesActionMenuState)(FilesActionMenu);

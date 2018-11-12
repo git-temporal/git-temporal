@@ -14,6 +14,10 @@ interface AuthorsActionMenuProps {
   authorsContainerSort?: AuthorsContainerSorts;
 }
 
+interface AuthorsActionMenuState {
+  isMenuOpen: boolean;
+}
+
 const containerStyle = {
   _extends: 'normalText',
   position: 'absolute',
@@ -21,12 +25,19 @@ const containerStyle = {
 };
 
 export class AuthorsActionMenu extends Component<
-  AuthorsActionMenuProps & DispatchProps
+  AuthorsActionMenuProps & DispatchProps,
+  AuthorsActionMenuState
 > {
+  readonly state = { isMenuOpen: false };
+
   render() {
     const { authorsContainerSort } = this.props;
     return (
-      <ActionMenu style={style(containerStyle)}>
+      <ActionMenu
+        style={style(containerStyle)}
+        isMenuOpen={this.state.isMenuOpen}
+        onMenuToggle={this.onMenuToggle}
+      >
         <div style={style('h5Text')}>Sort by</div>
         <RadioMenuItem
           testId="sortTime"
@@ -61,7 +72,12 @@ export class AuthorsActionMenu extends Component<
 
   sortAuthors(newAuthorsContainerSort: AuthorsContainerSorts) {
     this.props.dispatch(setAuthorsContainerSort(newAuthorsContainerSort));
+    this.setState({ isMenuOpen: false });
   }
+
+  onMenuToggle = () => {
+    this.setState({ isMenuOpen: !this.state.isMenuOpen });
+  };
 }
 
 export default connect(getAuthorsActionMenuState)(AuthorsActionMenu);

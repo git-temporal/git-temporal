@@ -5,7 +5,7 @@ export interface PopupProps {
   isOpen: boolean;
   // The children are the popup content
   children: string | JSX.Element | JSX.Element[];
-  onClose?: () => void;
+  onClose?: (evt) => void;
   style?: string | object;
   noBackdrop?: boolean;
 }
@@ -57,7 +57,7 @@ export class Popup extends React.Component<PopupProps> {
     );
   }
 
-  onClose = () => {
-    this.props.onClose && this.props.onClose();
+  onClose = evt => {
+    this.props.onClose && this.props.onClose(evt);
   };
 }

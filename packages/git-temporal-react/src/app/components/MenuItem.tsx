@@ -30,7 +30,7 @@ const hoverContainerStyle = {
 const disabledContainerStyle = {
   _extends: [containerStyle, 'disabledText'],
 };
-const selectedStyle = {
+const selectedContainerStyle = {
   _extends: [containerStyle, 'selected'],
 };
 
@@ -44,7 +44,7 @@ export class MenuItem extends React.Component<
     const outerStyle = this.props.disabled
       ? disabledContainerStyle
       : this.props.selected
-        ? selectedStyle
+        ? selectedContainerStyle
         : this.state.isHovering
           ? hoverContainerStyle
           : containerStyle;

@@ -6,12 +6,10 @@ import { Popup } from 'app/components/Popup';
 export interface ActionMenuProps {
   // The children are the menu content
   children: string | JSX.Element | JSX.Element[];
+  isMenuOpen: boolean;
+  onMenuToggle: (evt) => void;
   style?: string | object;
 }
-const initialState = {
-  menuOpen: false,
-};
-type ActionMenuState = Readonly<typeof initialState>;
 
 const containerStyle = {
   overflow: 'visible',
@@ -33,37 +31,25 @@ const menuStyle = {
   minWidth: 180,
 };
 
-export class ActionMenu extends React.Component<
-  ActionMenuProps,
-  ActionMenuState
-> {
-  readonly state: ActionMenuState = initialState;
+export const ActionMenu = (props: ActionMenuProps): JSX.Element => {
+  {
+    const { isMenuOpen, onMenuToggle } = props;
 
-  render() {
     return (
-      <div style={style(this.props.style, containerStyle)}>
+      <div style={style(props.style, containerStyle)}>
         <ToggleButton
-          isSelected={this.state.menuOpen}
-          onClick={this.onToggleClick}
+          isSelected={isMenuOpen}
+          onClick={onMenuToggle}
           style={buttonStyle}
         >
           ...
         </ToggleButton>
-        <Popup
-          style={menuStyle}
-          isOpen={this.state.menuOpen}
-          onClose={this.onPopupClose}
-        >
-          {this.props.children}
+        <Popup style={menuStyle} isOpen={isMenuOpen} onClose={onMenuToggle}>
+          {props.children}
         </Popup>
       </div>
     );
   }
+};
 
-  onToggleClick = () => {
-    this.setState({ menuOpen: !this.state.menuOpen });
-  };
-  onPopupClose = () => {
-    this.setState({ menuOpen: false });
-  };
-}
+ActionMenu.displayName = 'ActionMenu';
