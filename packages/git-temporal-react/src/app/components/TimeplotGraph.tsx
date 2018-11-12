@@ -223,8 +223,9 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
       .range([10, h - PADDING * 2]);
     this.rScale = d3
       .scalePow(10)
-      .domain([1, maxImpact])
-      .range([3, 30]);
+      .domain([1, maxImpact > 10000 ? 10000 : maxImpact])
+      .range([3, 30])
+      .clamp(true);
   }
 
   private renderAxis(svg) {
