@@ -8,7 +8,9 @@ describe('components/ActionMenu', () => {
     let wrapper;
     beforeAll(() => {
       wrapper = shallow(
-        <ActionMenu>this is a menu (or anything really)</ActionMenu>
+        <ActionMenu isMenuOpen={true} onMenuToggle={jest.fn()}>
+          this is a menu (or anything really)
+        </ActionMenu>
       );
     });
 

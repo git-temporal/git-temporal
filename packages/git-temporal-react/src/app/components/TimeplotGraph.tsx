@@ -83,6 +83,8 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
   constructor(props) {
     super(props);
     this.timeplotGraphRef = React.createRef();
+
+    this.renderTimeplotGraph = this.renderTimeplotGraph.bind(this);
   }
 
   componentDidMount() {
@@ -96,6 +98,7 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
       prevProps.forceRender !== this.props.forceRender ||
       !first20CommitsEqual(prevProps.commits, this.props.commits)
     ) {
+      console.log('commits updated for forceRender');
       this.renderTimeplotGraph();
       this.forceUpdate();
     }
@@ -175,7 +178,7 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
     }
   }
 
-  private renderTimeplotGraph = () => {
+  private renderTimeplotGraph() {
     const element = this.timeplotGraphRef.current;
     if (this.props.commits.length <= 0) {
       element.innerHtml =
@@ -194,7 +197,7 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
     this.renderAxis(this.svg);
     this.renderBlobs(this.svg);
     this.updateHighlightedCommit();
-  };
+  }
 
   private calibrateScales() {
     const element = this.timeplotGraphRef.current;

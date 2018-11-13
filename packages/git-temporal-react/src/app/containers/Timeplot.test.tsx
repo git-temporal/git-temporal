@@ -33,7 +33,7 @@ describe('components/Timeplot', () => {
       wrapper
         .instance()
         .onMouseDown(
-          { shiftKey: true },
+          { shiftKey: true, preventDefault: jest.fn() },
           { startDate: new Date(fiveCommits[3].authorDate * 1000) }
         );
     });
@@ -41,7 +41,7 @@ describe('components/Timeplot', () => {
       wrapper
         .instance()
         .onMouseDown(
-          { shiftKey: false },
+          { shiftKey: false, preventDefault: jest.fn() },
           { startDate: new Date(fiveCommits[4].authorDate * 1000) }
         );
     });
@@ -50,7 +50,7 @@ describe('components/Timeplot', () => {
       wrapper
         .instance()
         .onMouseDown(
-          { shiftKey: false },
+          { shiftKey: false, preventDefault: jest.fn() },
           { startDate: new Date(fiveCommits[3].authorDate * 1000) }
         );
     });

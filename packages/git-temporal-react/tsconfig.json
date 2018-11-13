@@ -5,6 +5,5 @@
     "types": ["node", "jest"],
     "baseUrl": "./src"
   },
-  "include": ["src/app/**/*.*"],
-  "exclude": ["src/app/**/*.test.*"]
+  "include": ["src/app/**/*.*"]
 }

@@ -17,12 +17,11 @@ export function filterCommitsForSpan(commits, dateStart, dateEnd) {
 }
 
 export function first20CommitsEqual(commitsA, commitsB) {
-  for (let i = 0; i < 20; i++) {
-    if (
-      i >= commitsA.length ||
-      i >= commitsB.length ||
-      commitsA[i].id !== commitsB[i].id
-    ) {
+  if (commitsA.length !== commitsB.length) {
+    return false;
+  }
+  for (let i = 0; i < 20 && i < commitsA.length; i++) {
+    if (commitsA[i].id !== commitsB[i].id) {
       return false;
     }
   }
