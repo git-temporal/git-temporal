@@ -131,6 +131,14 @@ export const filesContainerSort = (
   return state;
 };
 
+export const isFileSelected = (state = false, action) => {
+  switch (action.type) {
+    case ActionTypes.RECEIVE_COMMITS:
+      return action.isFileSelected;
+  }
+  return state;
+};
+
 const rootReducer = combineReducers({
   commits,
   selectedPath,
@@ -144,6 +152,7 @@ const rootReducer = combineReducers({
   filesContainerSort,
   startDate,
   endDate,
+  isFileSelected,
 });
 
 export default rootReducer;

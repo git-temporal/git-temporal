@@ -105,3 +105,10 @@ export interface ITimeplotState {
   startDate: number;
   endDate: number;
 }
+
+export interface IDifferenceViewerContainerState {
+  selectedPath: string;
+  commits: ICommit[];
+  startDate: number;
+  endDate: number;
+}

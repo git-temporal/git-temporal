@@ -20,6 +20,7 @@ export class Files extends Component<IFilesContainerState & DispatchProps> {
     flexGrow: 1,
     position: 'relative',
     maxWidth: 400,
+    minWidth: 400,
   };
 
   readonly headerStyle = {
@@ -38,24 +39,23 @@ export class Files extends Component<IFilesContainerState & DispatchProps> {
         <div style={style(this.headerStyle)}>
           <span data-testId="header">Files by {sortTitle}</span>
         </div>
-        <AutoSizer>
-          {({ height, width }) => this.renderList(height, width)}
-        </AutoSizer>
+        <div style={{ flexGrow: 1 }}>
+          <AutoSizer>
+            {({ height, width }) => (
+              <List
+                width={
+                  width || 100 // width and height below need minimums for testing
+                }
+                height={height || 100}
+                rowHeight={60}
+                rowRenderer={this.renderRow}
+                rowCount={this.props.files.length}
+                filesContainerSort={this.props.filesContainerSort}
+              />
+            )}
+          </AutoSizer>
+        </div>
       </div>
-    );
-  }
-  renderList(height, width) {
-    return (
-      <List
-        width={
-          width || 100 // width and height below need minimums for testing
-        }
-        height={height || 100}
-        rowHeight={60}
-        rowRenderer={this.renderRow}
-        rowCount={this.props.files.length}
-        filesContainerSort={this.props.filesContainerSort}
-      />
     );
   }
 

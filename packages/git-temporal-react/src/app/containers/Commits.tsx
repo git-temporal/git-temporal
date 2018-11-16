@@ -26,9 +26,7 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
     super(props);
     this.renderRow = this.renderRow.bind(this);
 
-    this._cache = new CellMeasurerCache({
-      fixedWidth: true,
-    });
+    this._cache = new CellMeasurerCache({ fixedWidth: true });
   }
 
   componentDidUpdate(prevProps, _prevState) {
@@ -43,8 +41,8 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
 
   readonly outerStyle = {
     _extends: ['borderedPanel', 'flexColumns'],
-    flexGrow: 1,
     position: 'relative',
+    minWidth: 400,
     maxWidth: this._listWidth,
   };
   readonly headerStyle = {

@@ -7,6 +7,8 @@ import { style } from 'app/styles';
 import { StackedLabelHeader } from 'app/components/StackedLabelHeader';
 import { CommaNumber } from 'app/components/CommaNumber';
 import { EpochSpan } from 'app/components/EpochSpan';
+import { ExplodeOnChange } from 'app/components/ExplodeOnChange';
+
 import { viewCommits, viewFiles } from 'app/actions';
 
 export enum CommitsOrFiles {
@@ -29,6 +31,7 @@ const outerStyle = {
   _extends: ['panel', 'flexRows'],
   paddingBottom: 0,
   marginBottom: -10,
+  flexShrink: 0,
 };
 
 export class Stats extends Component<StatsProps & DispatchProps> {
@@ -41,32 +44,44 @@ export class Stats extends Component<StatsProps & DispatchProps> {
   }
 
   render() {
-    const onFilesClick = this.props.isFileSelected ? null : this.onFilesClick;
+    const onFilesClick = this.props.files === 1 ? null : this.onFilesClick;
     return (
       <div style={style(outerStyle)}>
         <StackedLabelHeader label="Authors">
-          <CommaNumber value={this.props.authors} />
+          <ExplodeOnChange value={this.props.authors}>
+            <CommaNumber value={this.props.authors} />
+          </ExplodeOnChange>
         </StackedLabelHeader>
         <StackedLabelHeader label="Active Time Span">
-          <EpochSpan
-            firstEpochTime={this.props.minAuthorDate}
-            secondEpochTime={this.props.maxAuthorDate}
-          />
+          <ExplodeOnChange
+            value={this.props.minAuthorDate + this.props.maxAuthorDate}
+          >
+            <EpochSpan
+              firstEpochTime={this.props.minAuthorDate}
+              secondEpochTime={this.props.maxAuthorDate}
+            />
+          </ExplodeOnChange>
         </StackedLabelHeader>
         <StackedLabelHeader label="Last Commit">
           <div>
-            <EpochSpan
-              firstEpochTime={this.props.maxAuthorDate}
-              secondEpochTime={Date.now() / 1000}
-            />
-            <span> ago</span>
+            <ExplodeOnChange value={this.props.maxAuthorDate}>
+              <EpochSpan
+                firstEpochTime={this.props.maxAuthorDate}
+                secondEpochTime={Date.now() / 1000}
+              />
+              <span> ago</span>
+            </ExplodeOnChange>
           </div>
         </StackedLabelHeader>
         <StackedLabelHeader label="Lines Added">
-          <CommaNumber value={this.props.linesAdded} />
+          <ExplodeOnChange value={this.props.linesAdded}>
+            <CommaNumber value={this.props.linesAdded} />
+          </ExplodeOnChange>
         </StackedLabelHeader>
         <StackedLabelHeader label="Lines Deleted">
-          <CommaNumber value={this.props.linesDeleted} />
+          <ExplodeOnChange value={this.props.linesDeleted}>
+            <CommaNumber value={this.props.linesDeleted} />
+          </ExplodeOnChange>
         </StackedLabelHeader>
         <StackedLabelHeader
           label="Commits"
@@ -74,7 +89,9 @@ export class Stats extends Component<StatsProps & DispatchProps> {
           isSelected={this.props.viewCommitsOrFiles === 'commits'}
           onLabelClick={this.onCommitsClick}
         >
-          <CommaNumber value={this.props.commits} />
+          <ExplodeOnChange value={this.props.commits}>
+            <CommaNumber value={this.props.commits} />
+          </ExplodeOnChange>
         </StackedLabelHeader>
         <StackedLabelHeader
           label="Files"
@@ -82,7 +99,9 @@ export class Stats extends Component<StatsProps & DispatchProps> {
           onLabelClick={onFilesClick}
           isSelected={this.props.viewCommitsOrFiles === 'files'}
         >
-          <CommaNumber value={this.props.files} />
+          <ExplodeOnChange value={this.props.files}>
+            <CommaNumber value={this.props.files} />
+          </ExplodeOnChange>
         </StackedLabelHeader>
       </div>
     );
@@ -95,7 +114,8 @@ export class Stats extends Component<StatsProps & DispatchProps> {
   };
 
   viewCommitsIfIsFile() {
-    const { dispatch, isFileSelected, viewCommitsOrFiles } = this.props;
+    const { dispatch, viewCommitsOrFiles } = this.props;
+    const isFileSelected = this.props.files === 1;
     if (isFileSelected && viewCommitsOrFiles === 'files') {
       dispatch(viewCommits());
     }

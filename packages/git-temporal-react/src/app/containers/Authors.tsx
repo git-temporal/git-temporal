@@ -18,8 +18,8 @@ export class Authors extends Component<IAuthorsContainerState & DispatchProps> {
   readonly outerStyle = {
     _extends: ['altPanel', 'flexColumns'],
     display: 'flex',
-    flexGrow: 1,
     position: 'relative',
+    minWidth: 320,
     maxWidth: 320,
   };
   readonly headerStyle = {

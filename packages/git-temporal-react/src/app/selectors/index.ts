@@ -11,10 +11,11 @@ import {
   getFilesContainerSort,
   getStartDate,
   getEndDate,
+  getIsFileSelected,
 } from './stateVars';
 
 import { getAuthorsAndCommits } from './authorsAndCommits';
-import { getIsFileSelected, getFilteredFilesForFilesContainer } from './files';
+import { getFilteredFilesForFilesContainer } from './files';
 
 import {
   getFilteredCommits,
@@ -228,5 +229,18 @@ export const getTimeplotContainerState = createSelector(
     startDate,
     endDate,
     authors: authorsAndCommits.length,
+  })
+);
+
+export const getDifferenceViewerContainerState = createSelector(
+  getSelectedPath,
+  getFilteredCommits,
+  getStartDate,
+  getEndDate,
+  (selectedPath, commits, startDate, endDate) => ({
+    selectedPath,
+    commits,
+    startDate,
+    endDate,
   })
 );

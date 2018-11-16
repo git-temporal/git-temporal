@@ -46,6 +46,7 @@ const initialState = {
 const outerStyle = {
   _extends: ['borderedPanel', 'flexColumns'],
   flexGrow: 0,
+  flexShrink: 0,
   position: 'relative',
   marginTop: 10,
   minHeight: 100,
@@ -94,6 +95,9 @@ export class Timeplot extends React.Component<
   }
 
   componentDidUpdate(prevProps, prevState) {
+    if (!this.timeplotRef.current) {
+      return;
+    }
     this.timeplotRef.current.focus();
     if (
       prevProps.startDate !== this.props.startDate ||
@@ -113,6 +117,9 @@ export class Timeplot extends React.Component<
 
   render() {
     const { commits = [], startDate, endDate } = this.props;
+    if (!commits || commits.length === 0) {
+      return null;
+    }
     const popupLeft =
       this.state.hoverMarkerLeft - this.state.scrollLeft <
       TIMEPLOT_POPUP_WIDTH + 20

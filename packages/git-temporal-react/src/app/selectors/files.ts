@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 
 import { FilesContainerSorts } from 'app/actions/ActionTypes';
 
-import { getFilesContainerSort, getSearch, getSelectedPath } from './stateVars';
+import { getFilesContainerSort, getSearch } from './stateVars';
 import { hasSearch, matchesFileSearch, fileSearchRegex } from './search';
 import { getFilteredCommits } from './commits';
 
@@ -72,14 +72,6 @@ export const getFilteredFiles = createSelector(
       }
       return 0;
     });
-  }
-);
-
-export const getIsFileSelected = createSelector(
-  getSelectedPath,
-  getFilteredFiles,
-  (selectedPath, files) => {
-    return files.length === 1 && files[0].fileName === selectedPath;
   }
 );
 

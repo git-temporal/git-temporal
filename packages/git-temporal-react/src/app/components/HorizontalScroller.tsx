@@ -3,11 +3,16 @@ import { style } from 'app/styles';
 import { relative } from 'path';
 import { debounce } from 'app/utilities/debounce';
 
+import { CaretRightIcon } from 'app/components/CaretRightIcon';
+import { CaretLeftIcon } from 'app/components/CaretLeftIcon';
+
 export interface HorizontalScrollerProps {
   // The children are the menu content
   children: string | JSX.Element | JSX.Element[];
   scrollLeft?: number;
   style?: string | object;
+  innerStyle?: string | object;
+  iconStyle?: string | object;
   onScroll?: (scrollLeft: number) => void;
 }
 
@@ -18,10 +23,17 @@ const initialState = {
 
 type HorizontalScrollerState = Readonly<typeof initialState>;
 
+const farOuterStyle = {
+  display: 'flex',
+  width: '100%',
+  position: 'relative',
+};
+
 const outerStyle = {
   _extends: 'fill',
   overflowX: 'scroll',
   position: relative,
+  scrollBehavior: 'smooth',
 };
 
 const innerContainerStyle = {
@@ -32,25 +44,36 @@ const innerContainerStyle = {
 const touchArea = {
   position: 'absolute',
   top: 0,
-  width: 0,
-  height: 0,
+  width: 40,
+  height: '100%',
+  verticalAlign: 'middle',
   zIndex: 2,
   marginTop: 5,
+  opacity: 0.5,
+  color: 'lightskyblue',
 };
 
 const leftTouchStyle = {
   _extends: touchArea,
-  borderTop: '60px solid transparent',
-  borderBottom: '60px solid transparent',
-  borderRight: '20px solid rgba(96, 96, 96, .6)',
+  left: -20,
+  // borderTop: '60px solid transparent',
+  // borderBottom: '60px solid transparent',
+  // borderRight: '20px solid rgba(96, 96, 96, .6)',
 };
 
 const rightTouchStyle = {
   _extends: touchArea,
-  right: 0,
-  borderTop: '60px solid transparent',
-  borderBottom: '60px solid transparent',
-  borderLeft: '20px solid rgba(96, 96, 96, .6)',
+  right: -20,
+  // borderTop: '60px solid transparent',
+  // borderBottom: '60px solid transparent',
+  // borderLeft: '20px solid rgba(96, 96, 96, .6)',
+};
+
+const iconStyle = {
+  transform: 'scaleY(3)',
+  maxHeight: '50%',
+  top: '12%',
+  position: 'absolute',
 };
 
 export class HorizontalScroller extends React.Component<
@@ -84,18 +107,20 @@ export class HorizontalScroller extends React.Component<
 
   render() {
     return (
-      <div
-        style={style(outerStyle, this.props.style)}
-        ref={this.outerContainerRef}
-        onScroll={this.debouncedOnScroll}
-        data-testid="outerContainer"
-      >
+      <div style={style(farOuterStyle)}>
         <div
-          style={style(innerContainerStyle)}
-          ref={this.innerContainerRef}
-          data-testid="innerContainer"
+          style={style(outerStyle, this.props.style)}
+          ref={this.outerContainerRef}
+          onScroll={this.debouncedOnScroll}
+          data-testid="outerContainer"
         >
-          {this.props.children}
+          <div
+            style={style(innerContainerStyle, this.props.innerStyle)}
+            ref={this.innerContainerRef}
+            data-testid="innerContainer"
+          >
+            {this.props.children}
+          </div>
         </div>
         {this.state.showingLeftTouch && (
           <div
@@ -103,7 +128,13 @@ export class HorizontalScroller extends React.Component<
             onClick={this.onLeftTouchClick}
             onDoubleClick={this.onLeftTouchDoubleClick}
             data-testid="leftTouch"
-          />
+          >
+            <CaretLeftIcon
+              width={40}
+              height={100}
+              style={style(iconStyle, this.props.iconStyle)}
+            />{' '}
+          </div>
         )}
         {this.state.showingRightTouch && (
           <div
@@ -111,7 +142,13 @@ export class HorizontalScroller extends React.Component<
             onClick={this.onRightTouchClick}
             onDoubleClick={this.onRightTouchDoubleClick}
             data-testid="rightTouch"
-          />
+          >
+            <CaretRightIcon
+              width={40}
+              height={100}
+              style={style(iconStyle, this.props.iconStyle)}
+            />
+          </div>
         )}
       </div>
     );

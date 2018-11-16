@@ -12,8 +12,35 @@ import Authors from 'app/containers/Authors';
 import Files from 'app/containers/Files';
 import Commits from 'app/containers/Commits';
 import Timeplot from 'app/containers/Timeplot';
+import DifferenceViewer from 'app/containers/DifferenceViewer';
 
 import { SpinnerContainer } from 'app/components/SpinnerContainer';
+import { HorizontalScroller } from 'app/components/HorizontalScroller';
+import { TransitionVisible } from 'app/components/TransitionVisible';
+
+const outerScrollStyle = {
+  _extends: 'flexRows',
+  position: 'relative',
+  minHeight: '100%',
+  height: 'initial',
+};
+
+const innerScrollStyle = {
+  position: 'relative',
+  display: 'flex',
+  flexDirection: 'row',
+  flexGrow: 1,
+};
+
+const scrollerIconStyle = {
+  transform: 'scaleY(8)',
+  top: '35%',
+};
+
+const transitionStyle = {
+  _extends: 'flexColumns',
+  flexGrow: 1,
+};
 
 export class GitTemporal extends Component<
   GitTemporalProps & DispatchProps & StateProps
@@ -31,29 +58,31 @@ export class GitTemporal extends Component<
   }
 
   render() {
-    const { isFetching, viewCommitsOrFiles, commits } = this.props;
+    const { isFetching, viewCommitsOrFiles } = this.props;
 
     return (
       <div style={style('page')}>
         <SpinnerContainer isSpinning={isFetching}>
-          <div
-            style={style('flexColumns', {
-              height: '100%',
-            })}
-          >
+          <div style={style('flexColumns', { height: '100%' })}>
             <Header />
-            {!isFetching && (!commits || commits.length <= 0) ? (
-              <h2>Empty.</h2>
-            ) : isFetching ? null : (
-              <div style={style('flexColumns', { flexGrow: 1 })}>
-                <Stats />
-                <div style={style('flexRows', { flexGrow: 1 })}>
+            <TransitionVisible
+              isVisible={!isFetching}
+              style={style(transitionStyle)}
+            >
+              <Stats />
+              <div style={{ display: 'flex', flexGrow: 1 }}>
+                <HorizontalScroller
+                  style={style(outerScrollStyle)}
+                  innerStyle={style(innerScrollStyle)}
+                  iconStyle={style(scrollerIconStyle)}
+                >
                   <Authors />
                   {viewCommitsOrFiles === 'files' ? <Files /> : <Commits />}
-                </div>
-                <Timeplot />
+                  <DifferenceViewer />
+                </HorizontalScroller>
               </div>
-            )}
+              <Timeplot />
+            </TransitionVisible>
           </div>
         </SpinnerContainer>
       </div>

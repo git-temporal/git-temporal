@@ -1,3 +1,5 @@
+import * as fs from 'fs';
+import * as path from 'path';
 // @ts-ignore
 import express from 'express';
 import { getCommitHistory } from '@git-temporal/git-log-scraper';
@@ -30,8 +32,12 @@ app.get('/git-temporal/history', (req, res) => {
     `retrieved ${commits.length} commits for ${req.query.path} in ${Date.now() -
       timeStart}ms`
   );
+  const resolvedPath = path.resolve('.', requestPath);
+  const isFile =
+    fs.existsSync(resolvedPath) && !fs.lstatSync(resolvedPath).isDirectory();
   res.send({
     commits,
+    isFile,
     path: req.query.path,
   });
 });

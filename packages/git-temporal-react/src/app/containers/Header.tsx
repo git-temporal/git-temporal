@@ -6,8 +6,14 @@ import { getHeaderContainerState } from 'app/selectors';
 import { style } from 'app/styles';
 import { selectPath, setStartDate, setEndDate } from 'app/actions';
 import { EpochDateTime } from 'app/components/EpochDateTime';
+import { ExplodeOnChange } from 'app/components/ExplodeOnChange';
 
 import Search from 'app/containers/Search';
+
+const outerStyle = {
+  _extends: ['panel', 'flexColumns'],
+  flexShrink: 0,
+};
 
 const appNameStyle = {
   _extends: ['inlineBlock', 'h1Text'],
@@ -25,7 +31,11 @@ const statsAndSearchStyle = {
   flexGrow: 1,
 };
 
-const datesSelectedStyle = {
+const dateStyle = {
+  transition: 'all 2s ease -in -out',
+};
+
+const dateSelectedStyle = {
   _extends: 'h2Text',
   margin: '0px 5px',
   color: '@colors.selected',
@@ -39,9 +49,9 @@ const dateOptions = {
 export class Header extends Component<IHeaderContainerState & DispatchProps> {
   render() {
     const { startDate, endDate, isDefaultDates } = this.props;
-    const epochStyle = isDefaultDates ? {} : datesSelectedStyle;
+    const epochStyle = [dateStyle, isDefaultDates ? {} : dateSelectedStyle];
     return (
-      <div style={style('panel', 'flexColumns')}>
+      <div style={style(outerStyle)}>
         <div style={style(topRowStyle)}>
           <div style={style(appNameStyle)}>Git Temporal </div>
           <div style={style(statsAndSearchStyle)}>
@@ -55,17 +65,21 @@ export class Header extends Component<IHeaderContainerState & DispatchProps> {
         </div>
         <div style={style('h5Text')}>
           From{' '}
-          <EpochDateTime
-            value={startDate}
-            displayOptions={dateOptions}
-            style={style(epochStyle)}
-          />{' '}
+          <ExplodeOnChange value={startDate}>
+            <EpochDateTime
+              value={startDate}
+              displayOptions={dateOptions}
+              style={style(epochStyle)}
+            />
+          </ExplodeOnChange>{' '}
           to{' '}
-          <EpochDateTime
-            value={endDate}
-            displayOptions={dateOptions}
-            style={style(epochStyle)}
-          />
+          <ExplodeOnChange value={endDate}>
+            <EpochDateTime
+              value={endDate}
+              displayOptions={dateOptions}
+              style={style(epochStyle)}
+            />
+          </ExplodeOnChange>
           {!isDefaultDates && (
             <span>
               {'  '}(

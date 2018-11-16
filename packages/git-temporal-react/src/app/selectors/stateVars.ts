@@ -13,3 +13,5 @@ export const getEndDate = state => state.endDate;
 export const getAuthorsContainerSort = state => state.authorsContainerSort;
 export const getCommitsContainerSort = state => state.commitsContainerSort;
 export const getFilesContainerSort = state => state.filesContainerSort;
+
+export const getIsFileSelected = state => state.isFileSelected;

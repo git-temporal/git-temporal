@@ -69,6 +69,7 @@ export const requestCommits = path => ({
 export const receiveCommits = (path, json) => ({
   selectedPath: path,
   commits: json.commits,
+  isFileSelected: json.isFile,
   type: ActionTypes.RECEIVE_COMMITS,
 });
 
