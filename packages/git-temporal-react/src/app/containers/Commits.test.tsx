@@ -12,7 +12,7 @@ const filteredCommitsMock = {
   isFetching: false,
   didInvalidate: false,
   viewCommitsOrFiles: 'commits',
-  highlightedCommitId: '56493bf1ebfab3ec102fe017f30fa4f81ba6a256',
+  highlightedCommitIds: ['56493bf1ebfab3ec102fe017f30fa4f81ba6a256'],
   isFileSelected: false,
   commitsContainerSort: CommitsContainerSorts.TIME,
 };

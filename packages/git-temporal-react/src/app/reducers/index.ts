@@ -20,10 +20,10 @@ export const selectedPath = (state = '', action) => {
   }
 };
 
-export const highlightedCommitId = (state = '', action) => {
+export const highlightedCommitIds = (state = '', action) => {
   switch (action.type) {
-    case ActionTypes.HIGHLIGHT_COMMIT:
-      return action.commitId;
+    case ActionTypes.HIGHLIGHT_COMMITS:
+      return action.commitIds;
     default:
       return state;
   }
@@ -144,7 +144,7 @@ const rootReducer = combineReducers({
   selectedPath,
   isFetching,
   didInvalidate,
-  highlightedCommitId,
+  highlightedCommitIds,
   viewCommitsOrFiles,
   search,
   authorsContainerSort,

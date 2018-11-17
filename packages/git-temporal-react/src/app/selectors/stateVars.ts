@@ -2,7 +2,7 @@ export const getSelectedPath = state => state.selectedPath;
 export const getCommits = state => state.commits;
 export const getIsFetching = state => state.isFetching;
 export const getDidInvalidate = state => state.getDidInvalidate;
-export const getHighlightedCommitId = state => state.highlightedCommitId;
+export const getHighlightedCommitIds = state => state.highlightedCommitIds;
 export const getViewCommitsOrFiles = state =>
   state.viewCommitsOrFiles || 'commits';
 

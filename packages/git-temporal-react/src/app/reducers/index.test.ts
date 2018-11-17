@@ -26,9 +26,9 @@ describe('reducers', () => {
         action: { selectedPath: '/some/path' },
       },
       {
-        reducer: reducers.highlightedCommitId,
+        reducer: reducers.highlightedCommitIds,
         state: '',
-        action: { commitId: 'aphonyIdSTring' },
+        action: { commitIds: ['aphonyIdSTring'] },
       },
       {
         reducer: reducers.viewCommitsOrFiles,

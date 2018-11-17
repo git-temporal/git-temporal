@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { List, AutoSizer } from 'react-virtualized';
 
+import { highlightCommits } from 'app/actions';
 import { DispatchProps, IAuthorsContainerState } from 'app/interfaces';
 import { getAuthorsContainerState } from 'app/selectors';
 import { style } from 'app/styles';
@@ -83,6 +84,7 @@ export class Authors extends Component<IAuthorsContainerState & DispatchProps> {
     return (
       <AuthorCard
         key={key}
+        index={index}
         style={style}
         author={author}
         totalLinesAdded={totalLinesAdded}
@@ -90,9 +92,17 @@ export class Authors extends Component<IAuthorsContainerState & DispatchProps> {
         totalCommits={totalCommits}
         maxImpact={maxImpact}
         maxCommits={maxCommits}
+        onClick={this.onAuthorClick}
       />
     );
   }
+
+  onAuthorClick = (_evt, author) => {
+    const commitIds = author.commits.map(commit => {
+      return commit.id;
+    });
+    this.props.dispatch(highlightCommits(commitIds));
+  };
 }
 
 export default connect(getAuthorsContainerState)(Authors);

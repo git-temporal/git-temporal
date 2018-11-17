@@ -145,7 +145,7 @@ export class Timeplot extends React.Component<
             commits={this.props.commits}
             style={style(timeplotStyle)}
             ref={this.timeplotRef}
-            highlightedCommitId={this.props.highlightedCommitId}
+            highlightedCommitIds={this.props.highlightedCommitIds}
             startDate={startDate}
             endDate={endDate}
             onMouseMove={this.debouncedOnMouseMove}

@@ -22,7 +22,7 @@ export interface TimeplotGraphProps {
   // increment or change the value passed to force a rerender of the graph
   // for zoom or resize changes
   forceRender?: number;
-  highlightedCommitId?: string;
+  highlightedCommitIds?: string[];
   style?: string | object;
   onMouseEnter?: (evt, date?) => void;
   onMouseLeave?: (evt, date?) => void;
@@ -43,7 +43,7 @@ const blobStyle = {
 
 const highlightedBlobStyle = {
   fill: '@colors.selected',
-  opacity: 0.8,
+  opacity: 0.5,
 };
 
 const markerStyle = {
@@ -102,8 +102,8 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
       this.renderTimeplotGraph();
       this.forceUpdate();
     }
-    if (prevProps.highlightedCommitId !== this.props.highlightedCommitId) {
-      this.updateHighlightedCommit();
+    if (prevProps.highlightedCommitIds !== this.props.highlightedCommitIds) {
+      this.updateHighlightedCommits();
     }
   }
 
@@ -153,21 +153,22 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
     element.scrollLeft = newScrollLeft;
   };
 
-  private updateHighlightedCommit() {
+  private updateHighlightedCommits() {
     this.svg
       .selectAll('circle[data-selected="true"]')
       .styles(style(blobStyle))
       .attr('data-selected', false);
     this.svg
-      .selectAll(`circle[data-id="${this.props.highlightedCommitId}"]`)
+      .selectAll(`circle`)
+      .filter(d => this.props.highlightedCommitIds.includes(d.id))
       .moveToFront()
       .styles(style(highlightedBlobStyle))
       .attr('data-selected', true)
       .transition()
-      .duration(500)
-      .attr('r', 100)
+      .duration(300)
+      .attr('r', d => this.rScale(d.linesAdded + d.linesDeleted || 0) * 5)
       .transition()
-      .duration(500)
+      .duration(800)
       .attr('r', d => this.rScale(d.linesAdded + d.linesDeleted || 0));
   }
 
@@ -196,7 +197,7 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
     this.calibrateScales();
     this.renderAxis(this.svg);
     this.renderBlobs(this.svg);
-    this.updateHighlightedCommit();
+    this.updateHighlightedCommits();
   }
 
   private calibrateScales() {

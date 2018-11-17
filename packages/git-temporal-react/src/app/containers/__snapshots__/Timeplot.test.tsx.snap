@@ -139,7 +139,7 @@ exports[`components/Timeplot when rendered it should match snapshot (it should h
   }
   dispatch={[MockFunction]}
   endDate={1526296167}
-  highlightedCommitId="56493bf1ebfab3ec102fe017f30fa4f81ba6a256"
+  highlightedCommitIds=["56493bf1ebfab3ec102fe017f30fa4f81ba6a256"]
   selectedPath="some/path/to/nowhere"
   startDate={1537212012}
 >
@@ -347,7 +347,7 @@ exports[`components/Timeplot when rendered it should match snapshot (it should h
                   }
                   endDate={1526296167}
                   forceRender={0}
-                  highlightedCommitId="56493bf1ebfab3ec102fe017f30fa4f81ba6a256"
+                  highlightedCommitIds=["56493bf1ebfab3ec102fe017f30fa4f81ba6a256"]
                   onMouseDown={[Function]}
                   onMouseMove={[Function]}
                   onMouseUp={[Function]}

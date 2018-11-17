@@ -11,7 +11,7 @@ describe('components/Timeplot', () => {
       wrapper = mount(
         <Timeplot
           selectedPath="some/path/to/nowhere"
-          highlightedCommitId={fiveCommits[2].id}
+          highlightedCommitIds={[fiveCommits[2].id]}
           commits={fiveCommits}
           authors={6}
           startDate={fiveCommits[3].authorDate}

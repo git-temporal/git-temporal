@@ -9,7 +9,7 @@ jest.mock('app/actions', () => {
     'setAuthorsContainerSort',
     'setCommitsContainerSort',
     'setFilesContainerSort',
-    'highlightCommit',
+    'highlightCommits',
     'viewCommits',
     'viewFiles',
     'setStartDate',

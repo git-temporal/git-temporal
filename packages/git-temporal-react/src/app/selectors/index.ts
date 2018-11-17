@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 import {
   getSelectedPath,
   getViewCommitsOrFiles,
-  getHighlightedCommitId,
+  getHighlightedCommitIds,
   getIsFetching,
   getCommitsContainerSort,
   getSearch,
@@ -41,19 +41,19 @@ export const getGitTemporalContainerState = createSelector(
 
 export const getCommitsContainerState = createSelector(
   getSelectedPath,
-  getHighlightedCommitId,
+  getHighlightedCommitIds,
   getFilteredSortedCommits,
   getIsFileSelected,
   getCommitsContainerSort,
   (
     selectedPath,
-    highlightedCommitId,
+    highlightedCommitIds,
     commits,
     isFileSelected,
     commitsContainerSort
   ) => ({
     selectedPath,
-    highlightedCommitId,
+    highlightedCommitIds,
     commits,
     isFileSelected,
     commitsContainerSort,
@@ -210,21 +210,21 @@ export const getStatsContainerState = createSelector(
 
 export const getTimeplotContainerState = createSelector(
   getSelectedPath,
-  getHighlightedCommitId,
+  getHighlightedCommitIds,
   getCommitsForTimeplot,
   getAuthorsAndCommits,
   getStartDate,
   getEndDate,
   (
     selectedPath,
-    highlightedCommitId,
+    highlightedCommitIds,
     commits,
     authorsAndCommits,
     startDate,
     endDate
   ) => ({
     selectedPath,
-    highlightedCommitId,
+    highlightedCommitIds,
     commits,
     startDate,
     endDate,

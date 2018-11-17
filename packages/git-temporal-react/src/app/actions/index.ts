@@ -48,9 +48,9 @@ export const setFilesContainerSort = (sort: FilesContainerSorts) => ({
   type: ActionTypes.SET_FILES_CONTAINER_SORT,
 });
 
-export const highlightCommit = commitId => ({
-  commitId,
-  type: ActionTypes.HIGHLIGHT_COMMIT,
+export const highlightCommits = commitIds => ({
+  commitIds,
+  type: ActionTypes.HIGHLIGHT_COMMITS,
 });
 
 export const viewCommits = () => ({

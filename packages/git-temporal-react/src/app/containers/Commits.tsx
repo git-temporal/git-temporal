@@ -7,7 +7,7 @@ import {
   CellMeasurerCache,
 } from 'react-virtualized';
 
-import { highlightCommit, selectPath } from 'app/actions';
+import { highlightCommits, selectPath } from 'app/actions';
 import { DispatchProps, ICommitsContainerState } from 'app/interfaces';
 import { getCommitsContainerState } from 'app/selectors';
 import { style } from 'app/styles';
@@ -33,7 +33,8 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
     if (
       this.props.commits !== prevProps.commits ||
       this.props.selectedPath !== prevProps.selectedPath ||
-      this.props.commitsContainerSort !== prevProps.commitsContainerSort
+      this.props.commitsContainerSort !== prevProps.commitsContainerSort ||
+      this.props.highlightedCommitIds !== prevProps.highlightedCommitIds
     ) {
       this.remeasureCells();
     }
@@ -91,8 +92,8 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
   renderRow({ index, key, parent, style }) {
     // console.log('render row', row);
     const commit = this.props.commits[index];
-    const isHighlighted = this.props.highlightedCommitId
-      ? this.props.highlightedCommitId === commit.id
+    const isHighlighted = this.props.highlightedCommitIds
+      ? this.props.highlightedCommitIds.includes(commit.id)
       : false;
     if (isHighlighted) {
       this.highlightedIndex = index;
@@ -123,7 +124,7 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
 
   onCommitCardClick = (event, commit, index) => {
     event.stopPropagation();
-    this.props.dispatch(highlightCommit(commit.id));
+    this.props.dispatch(highlightCommits([commit.id]));
     this.remeasureCells(index);
     this.scrollToIndexOnNextRender = index;
   };

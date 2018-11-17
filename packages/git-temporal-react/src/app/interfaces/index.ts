@@ -54,7 +54,7 @@ export interface IHeaderContainerState {
 
 export interface ICommitsContainerState {
   selectedPath: string;
-  highlightedCommitId: string;
+  highlightedCommitIds: string[];
   viewCommitsOrFiles?: string;
   commits: ICommit[];
   isFetching: boolean;
@@ -99,7 +99,7 @@ export interface IFilesContainerState {
 
 export interface ITimeplotState {
   selectedPath: string;
-  highlightedCommitId: string;
+  highlightedCommitIds: string[];
   commits: ICommit[];
   authors: number;
   startDate: number;

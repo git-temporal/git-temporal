@@ -21,6 +21,7 @@ const testProps = {
   totalCommits: 5,
   maxImpact: 260,
   maxCommits: 140,
+  onClick: jest.fn(),
 };
 
 describe('components/AuthorCard', () => {
