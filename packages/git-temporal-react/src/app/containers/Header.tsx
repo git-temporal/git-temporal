@@ -50,6 +50,7 @@ const dateSelectedStyle = {
 const searchAndResetStyle = {
   float: 'right',
   position: 'relative',
+  minHeight: 60,
 };
 
 const resetHighlightsLinkStyle = {
