@@ -154,6 +154,7 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
   };
 
   private updateHighlightedCommits() {
+    const explosionFactor = this.props.highlightedCommitIds.length < 5 ? 25 : 5;
     this.svg
       .selectAll('circle[data-selected="true"]')
       .styles(style(blobStyle))
@@ -166,7 +167,10 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
       .attr('data-selected', true)
       .transition()
       .duration(300)
-      .attr('r', d => this.rScale(d.linesAdded + d.linesDeleted || 0) * 5)
+      .attr(
+        'r',
+        d => this.rScale(d.linesAdded + d.linesDeleted || 0) * explosionFactor
+      )
       .transition()
       .duration(800)
       .attr('r', d => this.rScale(d.linesAdded + d.linesDeleted || 0));

@@ -17,6 +17,7 @@ export interface AuthorCardProps {
   maxImpact: number;
   maxCommits: number;
   onClick: (evt, commit: IAuthorStats, index: number) => void;
+  isHighlighted?: boolean;
   index?: number;
   style?: string | object;
 }
@@ -24,7 +25,8 @@ export interface AuthorCardProps {
 const menuItemStyle = {
   fontSize: 'initial',
   display: 'flex',
-  padding: 0,
+  padding: 10,
+  marginRight: -10,
   width: '100%',
 };
 
@@ -42,12 +44,13 @@ const addedDeletedStyle = {
 };
 
 export const AuthorCard = (props: AuthorCardProps): JSX.Element => {
-  const { author, maxImpact, maxCommits, index } = props;
+  const { author, maxImpact, maxCommits, index, isHighlighted } = props;
+  const addStyles = isHighlighted ? 'selected' : {};
 
   return (
-    <div style={style('card', 'flexRows', props.style)}>
+    <div style={style('flexRows', props.style)}>
       <MenuItem
-        style={menuItemStyle}
+        style={style(menuItemStyle, addStyles)}
         onClick={evt => props.onClick(evt, author, index)}
       >
         <AuthorGravatarImage emails={author.authorEmails} />

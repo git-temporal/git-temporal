@@ -50,6 +50,7 @@ export interface IHeaderContainerState {
   startDate?: number;
   endDate?: number;
   isDefaultDates?: boolean;
+  highlightedCommitIds?: string[];
 }
 
 export interface ICommitsContainerState {
@@ -80,6 +81,7 @@ export interface IAuthorsContainerState {
   maxImpact: number;
   maxCommits: number;
   authorsContainerSort: string;
+  highlightedCommitIds: string[];
 }
 
 export interface IFileStats {

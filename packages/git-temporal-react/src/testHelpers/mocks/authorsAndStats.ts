@@ -48,6 +48,7 @@ const authorsAndStats = {
   maxImpact: 233918,
   maxCommits: 919,
   authorsContainerSort: 'lines',
+  highlightedCommitIds: [],
 };
 
 export default authorsAndStats;

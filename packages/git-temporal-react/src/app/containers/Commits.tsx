@@ -33,8 +33,7 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
     if (
       this.props.commits !== prevProps.commits ||
       this.props.selectedPath !== prevProps.selectedPath ||
-      this.props.commitsContainerSort !== prevProps.commitsContainerSort ||
-      this.props.highlightedCommitIds !== prevProps.highlightedCommitIds
+      this.props.commitsContainerSort !== prevProps.commitsContainerSort
     ) {
       this.remeasureCells();
     }
@@ -92,9 +91,16 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
   renderRow({ index, key, parent, style }) {
     // console.log('render row', row);
     const commit = this.props.commits[index];
-    const isHighlighted = this.props.highlightedCommitIds
-      ? this.props.highlightedCommitIds.includes(commit.id)
-      : false;
+    let isHighlighted = false;
+    let isExpanded = false;
+    if (
+      this.props.highlightedCommitIds &&
+      this.props.highlightedCommitIds.length > 0
+    ) {
+      isHighlighted = this.props.highlightedCommitIds.includes(commit.id);
+      isExpanded = this.props.highlightedCommitIds[0] === commit.id;
+    }
+
     if (isHighlighted) {
       this.highlightedIndex = index;
     }
@@ -112,7 +118,8 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
           <CommitCard
             commit={commit}
             index={index}
-            isExpanded={isHighlighted}
+            isHighlighted={isHighlighted}
+            isExpanded={isExpanded}
             onClick={this.onCommitCardClick}
             onFileClick={this.onFileClick}
             hideFiles={this.props.isFileSelected}
@@ -124,7 +131,21 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
 
   onCommitCardClick = (event, commit, index) => {
     event.stopPropagation();
-    this.props.dispatch(highlightCommits([commit.id]));
+    const { highlightedCommitIds } = this.props;
+    let newHighlightedCommitIds = [commit.id];
+    if (highlightedCommitIds && highlightedCommitIds.length > 0) {
+      const index = highlightedCommitIds.indexOf(commit.id);
+      if (index !== -1) {
+        // moving it to the top causes it to also be the expanded
+        // commit card.
+        newHighlightedCommitIds = newHighlightedCommitIds.concat(
+          highlightedCommitIds
+            .slice(0, index)
+            .concat(highlightedCommitIds.slice(index + 1))
+        );
+      }
+    }
+    this.props.dispatch(highlightCommits(newHighlightedCommitIds));
     this.remeasureCells(index);
     this.scrollToIndexOnNextRender = index;
   };

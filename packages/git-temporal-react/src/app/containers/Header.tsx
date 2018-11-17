@@ -4,11 +4,17 @@ import { connect } from 'react-redux';
 import { DispatchProps, IHeaderContainerState } from 'app/interfaces';
 import { getHeaderContainerState } from 'app/selectors';
 import { style } from 'app/styles';
-import { selectPath, setStartDate, setEndDate } from 'app/actions';
+import {
+  selectPath,
+  setStartDate,
+  setEndDate,
+  highlightCommits,
+} from 'app/actions';
 import { EpochDateTime } from 'app/components/EpochDateTime';
 import { ExplodeOnChange } from 'app/components/ExplodeOnChange';
 
 import Search from 'app/containers/Search';
+import { ResetLink } from 'app/components/ResetLink';
 
 const outerStyle = {
   _extends: ['panel', 'flexColumns'],
@@ -41,6 +47,18 @@ const dateSelectedStyle = {
   color: '@colors.selected',
 };
 
+const searchAndResetStyle = {
+  float: 'right',
+  position: 'relative',
+};
+
+const resetHighlightsLinkStyle = {
+  position: 'absolute',
+  right: 0,
+  marginTop: 10,
+  marginRight: -20,
+};
+
 const dateOptions = {
   month: 'long',
   timeZoneName: 'short',
@@ -48,7 +66,12 @@ const dateOptions = {
 
 export class Header extends Component<IHeaderContainerState & DispatchProps> {
   render() {
-    const { startDate, endDate, isDefaultDates } = this.props;
+    const {
+      startDate,
+      endDate,
+      isDefaultDates,
+      highlightedCommitIds,
+    } = this.props;
     const epochStyle = [dateStyle, isDefaultDates ? {} : dateSelectedStyle];
     return (
       <div style={style(outerStyle)}>
@@ -56,7 +79,17 @@ export class Header extends Component<IHeaderContainerState & DispatchProps> {
           <div style={style(appNameStyle)}>Git Temporal </div>
           <div style={style(statsAndSearchStyle)}>
             <div>
-              <Search />
+              <div style={style(searchAndResetStyle)}>
+                <Search />
+                {highlightedCommitIds.length > 0 && (
+                  <ResetLink
+                    style={style(resetHighlightsLinkStyle)}
+                    onClick={this.onResetHighlightedCommits}
+                  >
+                    Reset highlighted authors and commits
+                  </ResetLink>
+                )}
+              </div>
               <div style={style('h2Text', { marginBottom: 10 })}>
                 Stats for {this.renderPathLinks()}
               </div>
@@ -83,10 +116,7 @@ export class Header extends Component<IHeaderContainerState & DispatchProps> {
           {!isDefaultDates && (
             <span>
               {'  '}(
-              <span style={style('link')} onClick={this.onResetDatesClick}>
-                reset
-              </span>
-              )
+              <ResetLink onClick={this.onResetDatesClick}>Reset</ResetLink>)
             </span>
           )}
         </div>
@@ -140,6 +170,10 @@ export class Header extends Component<IHeaderContainerState & DispatchProps> {
   onResetDatesClick = () => {
     this.props.dispatch(setStartDate(null));
     this.props.dispatch(setEndDate(null));
+  };
+
+  onResetHighlightedCommits = () => {
+    this.props.dispatch(highlightCommits([]));
   };
 }
 

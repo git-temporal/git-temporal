@@ -54,19 +54,21 @@ export class Authors extends Component<IAuthorsContainerState & DispatchProps> {
     );
   }
   renderList(height, width) {
-    const { authors, authorsContainerSort } = this.props;
+    const { authors, authorsContainerSort, highlightedCommitIds } = this.props;
 
-    // authorsContainerSort is passed to the list to force it to update when they change
+    // authorsContainerSort and highlightedCommitIds are passed
+    // to the list to force it to update when they change. as you do
     return (
       <List
         width={
           width || 100 // width and height below need minimums for testing
         }
         height={height || 100}
-        rowHeight={110}
+        rowHeight={120}
         rowRenderer={this.renderRow}
         rowCount={authors.length}
         authorsContainerSort={authorsContainerSort}
+        highlightedCommitIds={highlightedCommitIds}
       />
     );
   }
@@ -79,7 +81,16 @@ export class Authors extends Component<IAuthorsContainerState & DispatchProps> {
       totalCommits,
       maxImpact,
       maxCommits,
+      highlightedCommitIds,
     } = this.props;
+    const isHighlighted =
+      highlightedCommitIds &&
+      highlightedCommitIds.length > 0 &&
+      author.commits
+        .map(c => {
+          return c.id;
+        })
+        .includes(highlightedCommitIds[0]);
     style.width = 'calc(100% - 20px)';
     return (
       <AuthorCard
@@ -92,6 +103,7 @@ export class Authors extends Component<IAuthorsContainerState & DispatchProps> {
         totalCommits={totalCommits}
         maxImpact={maxImpact}
         maxCommits={maxCommits}
+        isHighlighted={isHighlighted}
         onClick={this.onAuthorClick}
       />
     );

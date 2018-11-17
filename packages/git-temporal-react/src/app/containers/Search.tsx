@@ -26,7 +26,6 @@ const initialState = {
 };
 
 const containerStyle = {
-  float: 'right',
   width: 250,
   overflow: 'visible',
   position: 'relative',

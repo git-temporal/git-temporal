@@ -72,8 +72,9 @@ export const getHeaderContainerState = createSelector(
   getSelectedPath,
   getStartDate,
   getEndDate,
+  getHighlightedCommitIds,
 
-  (commits, selectedPath, startDate, endDate) => {
+  (commits, selectedPath, startDate, endDate, highlightedCommitIds) => {
     // psssst - commits are in descending time order
     const defaultedStartDate =
       startDate ||
@@ -92,6 +93,7 @@ export const getHeaderContainerState = createSelector(
     return {
       selectedPath,
       isDefaultDates,
+      highlightedCommitIds,
       startDate: defaultedStartDate,
       endDate: defaultedEndDate,
     };
@@ -115,7 +117,8 @@ export const getAuthorsContainerState = createSelector(
   getAuthorsAndCommits,
   getAuthorsContainerSort,
   getSearch,
-  (authorsAndCommits, authorsContainerSort, search) => {
+  getHighlightedCommitIds,
+  (authorsAndCommits, authorsContainerSort, search, highlightedCommitIds) => {
     let totalLinesAdded = 0;
     let totalLinesDeleted = 0;
     let totalCommits = 0;
@@ -146,6 +149,7 @@ export const getAuthorsContainerState = createSelector(
       maxCommits,
       authorsContainerSort,
       search,
+      highlightedCommitIds,
       authors: authorsArray,
     };
   }

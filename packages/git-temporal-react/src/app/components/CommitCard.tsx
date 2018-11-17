@@ -13,6 +13,7 @@ export interface CommitCardProps {
   commit: ICommit;
   index?: number;
   isExpanded?: boolean;
+  isHighlighted?: boolean;
   hideFiles?: boolean;
   hideCommitBody?: boolean;
   onClick?: (evt, commit: ICommit, index: number) => void;
@@ -53,8 +54,8 @@ const dateDisplayOptions = {
 };
 
 export const CommitCard = (props: CommitCardProps): JSX.Element => {
-  const { commit, isExpanded, onFileClick } = props;
-  const outerOverrideStyle = isExpanded ? 'selected' : {};
+  const { commit, isExpanded, isHighlighted, onFileClick } = props;
+  const outerOverrideStyle = isHighlighted ? 'selected' : {};
   return (
     <div style={style(defaultCardStyle, props.style, outerOverrideStyle)}>
       <MenuItem
