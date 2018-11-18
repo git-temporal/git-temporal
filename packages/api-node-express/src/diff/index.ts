@@ -1,10 +1,13 @@
 import child_process from 'child_process';
 import fs from 'fs';
-import os from 'os';
 
 import { timeThis } from '../common/timeThis';
 import { escapeForCli } from '../common/escapeForCli';
-import { isGitIgnored } from '../common/isGitIgnored';
+
+interface IFetchContents {
+  contents: string;
+  isDirectory: boolean;
+}
 
 export function serveDiff(req, res) {
   const requestPath = req.query.path || '.';
@@ -12,27 +15,37 @@ export function serveDiff(req, res) {
   const rightCommit = req.query.rightCommit || 'local';
 
   console.log(`fetching diffs`, requestPath, leftCommit, rightCommit);
-
   const { time, result: response } = timeThis(() => {
-    return {
+    const { contents: leftFileContents, isDirectory } = fetchContents(
       leftCommit,
+      requestPath
+    );
+    const { contents: rightFileContents } = fetchContents(
       rightCommit,
+      requestPath
+    );
+
+    return {
+      isDirectory,
+      leftCommit,
+      leftFileContents,
+      rightCommit,
+      rightFileContents,
       path: requestPath,
-      leftContents: fetchContents(leftCommit, requestPath),
-      rightContents: fetchContents(rightCommit, requestPath),
+      rawDiff: fetchDiff(leftCommit, rightCommit, requestPath, isDirectory),
     };
   });
   console.log(`done in ${time}ms`, requestPath, leftCommit, rightCommit);
   res.send(response);
 }
 
-function fetchContents(commitId, requestPath): object[] | string {
+function fetchContents(commitId, requestPath): IFetchContents {
   return commitId === 'local'
     ? fetchFromLocal(requestPath)
     : fetchFromGit(commitId, requestPath === '.' ? './' : requestPath);
 }
 
-function fetchFromGit(commitId, requestPath): object[] | string {
+function fetchFromGit(commitId, requestPath): IFetchContents {
   // use -- fileName and git log will work on deleted files and paths
   const cmd = `git show ${commitId}:${escapeForCli(requestPath)}`;
   if (process.env.DEBUG === '1') {
@@ -43,42 +56,37 @@ function fetchFromGit(commitId, requestPath): object[] | string {
       stdio: 'pipe',
     })
     .toString();
-  debugger;
-  return rawContents.match(/^tree /)
-    ? processGitDirShow(rawContents)
-    : Buffer.from(rawContents).toString('base64');
+  const isDirectory = rawContents.match(/^tree /) !== null;
+  return {
+    isDirectory,
+    contents: isDirectory ? null : Buffer.from(rawContents).toString('base64'),
+  };
 }
 
-function fetchFromLocal(requestPath) {
+function fetchFromLocal(requestPath): IFetchContents {
   if (!fs.existsSync(requestPath)) {
-    return [];
+    return { contents: null, isDirectory: false };
   }
-  let contents: string | object[] = [];
-  if (fs.statSync(requestPath).isDirectory()) {
-    contents = readLocalGitFiles(requestPath);
-  } else {
-    contents = fs.readFileSync(requestPath).toString('base64');
+  const isDirectory = fs.statSync(requestPath).isDirectory();
+  const returnValue: IFetchContents = {
+    isDirectory,
+    contents: null,
+  };
+  if (!isDirectory) {
+    returnValue.contents = fs.readFileSync(requestPath).toString('base64');
   }
-
-  return contents;
+  return returnValue;
 }
 
-function processGitDirShow(rawContents) {
-  const filteredLines = rawContents.split(os.EOL).filter((line, index) => {
-    return index !== 0 && line.trim() !== '';
-  });
-
-  return filteredLines.map(line => {
-    return { name: line.trim() };
-  });
-}
-
-function readLocalGitFiles(requestPath) {
-  const filteredLines = fs.readdirSync(requestPath).filter(line => {
-    return !isGitIgnored(line);
-  });
-
-  return filteredLines.map(line => {
-    return { name: line.trim() };
-  });
+function fetchDiff(leftCommit, rightCommit, requestPath, isDirectory) {
+  const isDiffOnLocal = rightCommit === 'local';
+  const leftPath = isDiffOnLocal ? leftCommit : `${leftCommit}:${requestPath}`;
+  const rightPath = isDiffOnLocal
+    ? requestPath
+    : `${rightCommit}:${requestPath}`;
+  const extraOpts = isDirectory ? '--stat=10000 --compact-summary' : '';
+  const outputBuffer = child_process.execSync(
+    `git diff ${extraOpts} ${leftPath} ${rightPath}`
+  );
+  return outputBuffer.toString('base64');
 }

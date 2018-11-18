@@ -102,22 +102,19 @@ This API returns a JSON object.
 
 #### Parameters
 
-| param       | type   | default       | description                                     |
-| ----------- | ------ | ------------- | ----------------------------------------------- |
-| path        | string | repo root     | path relative to repository root                |
-| leftCommit  | string | HEAD rev      | commit ID hash for the `leftContents` returned  |
-| rightCommit | string | local changes | commit ID hash for the `rightContents` returned |
+| param       | type   | default       | description                                         |
+| ----------- | ------ | ------------- | --------------------------------------------------- |
+| path        | string | repo root     | path relative to repository root                    |
+| leftCommit  | string | HEAD rev      | commit ID hash for the `leftFileContents` returned  |
+| rightCommit | string | local changes | commit ID hash for the `rightFileContents` returned |
 
 #### Returns
 
-This API returns a JSON object. The `leftContents` and `rightContents` members vary
-depending on whether a file or directory was requested in `path` parameter.
+This API returns a JSON object.
 
-When a directory is requested, the `leftContents` and `rightContents` members will contain an
-array of files and directories (basename only) at the time of their respective commit parameters.
-Directories are indicated by a trailing '/' (slash).
+When a directory is requested, the `leftFileContents` and `rightFileContents` members will be null.
 
-When a file is requested, the `leftContents` and `rightContents` members will contain the
+When a file is requested, the `leftFileContents` and `rightFileContents` members will contain the
 base64 encoded contents of the file at time of `leftCommit` and `rightCommit` respectively.
 
 #### _Example response to request for directory_
@@ -125,22 +122,14 @@ base64 encoded contents of the file at time of `leftCommit` and `rightCommit` re
 ```json
 {
   "path": "the/path/requested",
+  "isDirectory": true,
   "leftCommit": "235eaf93ab",
   "rightCommit": "343bc246f3d",
-  "leftContents": [{
-    "name": "baseNameOfSomeDirectory/"
-  },{
-    "name": "baseNameOfSomeFile.ext"
-  },{
-    ...
-  }],
-  "rightContents": [{
-    "name": "baseNameOfSomeDirectory/"
-  },{
-    "name": "someAddedFile.ext"
-  },{
-    ...
-  }]
+  "leftFileContents": null,
+  "rightFileContents": null,
+  "rawDiff":"IHBhY2thZ2VzL2FwaS1ub2RlLWV4cHJlc3Mvc3JjL2RpZmYvaW5kZXgu
+  HMgfCA4NCArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
+  KysrLS0tLS0tLS0tLS0tLS0tL..."
 }
 ```
 
@@ -149,17 +138,22 @@ base64 encoded contents of the file at time of `leftCommit` and `rightCommit` re
 ```json
 {
   "path": "path/requestedFile.ext",
+  "isDirectory": false,
   "leftCommit": "235eaf93ab",
   "rightCommit": "343bc246f3d",
-  "leftContents": "TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCBieSB0aGlz
+  "leftFileContents": "TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCBieSB0aGlz
 IHNpbmd1bGFyIHBhc3Npb24gZnJvbSBvdGhlciBhbmltYWxzLCB3aGljaCBpcyBhIGx1c3Qgb2Yg
 dGhlIG1pbmQsIHRoYXQgYnkgYSBwZXJzZXZlcmFuY2Ugb2YgZGVsaWdodCBpbiB0aGUgY29udGlu
 dWVkIGFuZCBpbmRlZmF0aWdhYmxlIGdlbmVyYXRpb24gb2Yga25vd2xlZGdlLCBleGNlZWRzIHRo
 ZSBzaG9ydCB2ZWhlbWVuY2Ugb2YgYW55IGNhcm5hbCBwbGVhc3VyZS4",
-  "rightContents": "TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCBieSB0aGlz
+  "rightFileContents": "TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCBieSB0aGlz
 IHNpbmd1bGFyIHBhc3Npb24gZnJvbSBvdGhlciBhbmltYWxzLCB3aGljaCBpcyBhIGx1c3Qgb2Yg
 dGhlIG1pbmQsIHRoYXQgYnkgYSBwZXJzZXZlcmFuY2Ugb2YgZGVsaWdodCBpbiB0aGUgY29udGlu
 dWVkIGFuZCBpbmRlZmF0aWdhYmxlIGdlbmVyYXRpb24gb2Yga25vd2xlZGdlLCBleGNlZWRzIHRo
-ZSBzaG9ydCB2ZWhlbWVuY2Ugb2YgYW55IGNhcm5hbCBwbGVhc3VyZS4"
+ZSBzaG9ydCB2ZWhlbWVuY2Ugb2YgYW55IGNhcm5hbCBwbGVhc3VyZS4",
+  "rawDiff": "IHBhY2thZ2VzL2FwaS1ub2RlLWV4cHJlc3Mvc3JjL2RpZmYvaW5kZXgu
+HMgfCA4NCArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
+KysrLS0tLS0tLS0tLS0tLS0tL..."
+
 }
 ```
