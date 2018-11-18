@@ -1,17 +1,20 @@
 /* eslint import/no-extraneous-dependencies: 0 */ // --> OFF
+/* eslint no-console: 0 */ // --> OFF
 
-path = require('path');
+const path = require('path');
 
 // Add support for generators and async functions:
 require('regenerator-runtime/runtime');
 
 require('@babel/register')();
 
+const tsConfigPath = path.resolve('.', 'tsconfig.json');
+console.log(`using tsConfig at ${tsConfigPath}`);
 require('ts-node').register({
   typeCheck: false,
   ignoreWarnings: true,
   disableWarnings: true,
-  project: path.resolve(__dirname, 'tsconfig.json'),
+  project: tsConfigPath,
 });
 
 require('tsconfig-paths');

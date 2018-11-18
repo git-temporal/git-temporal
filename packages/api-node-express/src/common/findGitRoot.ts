@@ -5,7 +5,7 @@ import * as os from 'os';
 const osRoot =
   os.platform() === 'win32' ? process.cwd().split(path.sep)[0] : '/';
 
-export default function findGitRoot(startingPath?: string): string | null {
+export function findGitRoot(startingPath?: string): string | null {
   console.log(startingPath);
   let currentPath =
     (startingPath && path.resolve(startingPath)) || process.cwd();

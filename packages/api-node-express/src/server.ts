@@ -1,10 +1,9 @@
-import * as fs from 'fs';
-import * as path from 'path';
 // @ts-ignore
 import express from 'express';
-import { getCommitHistory } from '@git-temporal/git-log-scraper';
 
-import findGitRoot from './common/findGitRoot';
+import { serveHistory } from './history';
+import { serveDiff } from './diff';
+import { findGitRoot } from './common/findGitRoot';
 
 const app = express();
 const port = process.env.GT_API_PORT || 11966;
@@ -23,24 +22,8 @@ app.use((_req, res, next) => {
   next();
 });
 
-app.get('/git-temporal/history', (req, res) => {
-  const requestPath = req.query.path || '.';
-  console.log('getting git log for path: ', requestPath, req.params, req.query);
-  const timeStart = Date.now();
-  const commits = getCommitHistory(requestPath);
-  console.log(
-    `retrieved ${commits.length} commits for ${req.query.path} in ${Date.now() -
-      timeStart}ms`
-  );
-  const resolvedPath = path.resolve('.', requestPath);
-  const isFile =
-    fs.existsSync(resolvedPath) && !fs.lstatSync(resolvedPath).isDirectory();
-  res.send({
-    commits,
-    isFile,
-    path: req.query.path,
-  });
-});
+app.get('/git-temporal/history', serveHistory);
+app.get('/git-temporal/diff', serveDiff);
 
 app.listen(port, () =>
   console.log(`git-temporal API server listening on port ${port}!`)

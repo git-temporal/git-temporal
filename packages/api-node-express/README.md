@@ -7,6 +7,17 @@
     - [Locally installed](#locally-installed)
     - [More Runtime Options](#more-runtime-options)
   - [API](#api)
+    - [URI: /git-temporal/history](#uri-git-temporalhistory)
+      - [method: GET](#method-get)
+      - [Parameters](#parameters)
+      - [Returns](#returns)
+      - [Example](#example)
+    - [URI: /git-temporal/diff](#uri-git-temporaldiff)
+      - [Method: GET](#method-get)
+      - [Parameters](#parameters-1)
+      - [Returns](#returns-1)
+      - [_Example response to request for directory_](#_example-response-to-request-for-directory_)
+      - [_Example response to request for file_](#_example-response-to-request-for-file_)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -43,16 +54,26 @@ open http://localhost:11966/git-temporal/history
 
 ## API
 
-method: GET
-URI: /git-temporal/history
-Params:
+### URI: /git-temporal/history
 
-- path: string // path relative to repository root to return data for. default: repo root.
+#### method: GET
 
-Returns: JSON ex:
+#### Parameters
+
+| param | type   | default   | description                      |
+| ----- | ------ | --------- | -------------------------------- |
+| path  | string | repo root | path relative to repository root |
+
+#### Returns
+
+This API returns a JSON object.
+
+#### Example
 
 ```json
-[{
+{
+  "path": "the/path/requested",
+  "commits": [{
     "id": "eeb817785c771362416fd87ea7d2a1a32dde9842",
     "authorName": "Dan",
     "relativeDate": "5 days ago",
@@ -69,7 +90,76 @@ Returns: JSON ex:
         "linesDeleted": 42
       }
     ]
-}, {
+  }, {
   ...
-}]
+  }]
+}
+```
+
+### URI: /git-temporal/diff
+
+#### Method: GET
+
+#### Parameters
+
+| param       | type   | default       | description                                     |
+| ----------- | ------ | ------------- | ----------------------------------------------- |
+| path        | string | repo root     | path relative to repository root                |
+| leftCommit  | string | HEAD rev      | commit ID hash for the `leftContents` returned  |
+| rightCommit | string | local changes | commit ID hash for the `rightContents` returned |
+
+#### Returns
+
+This API returns a JSON object. The `leftContents` and `rightContents` members vary
+depending on whether a file or directory was requested in `path` parameter.
+
+When a directory is requested, the `leftContents` and `rightContents` members will contain an
+array of files and directories (basename only) at the time of their respective commit parameters.
+Directories are indicated by a trailing '/' (slash).
+
+When a file is requested, the `leftContents` and `rightContents` members will contain the
+base64 encoded contents of the file at time of `leftCommit` and `rightCommit` respectively.
+
+#### _Example response to request for directory_
+
+```json
+{
+  "path": "the/path/requested",
+  "leftCommit": "235eaf93ab",
+  "rightCommit": "343bc246f3d",
+  "leftContents": [{
+    "name": "baseNameOfSomeDirectory/"
+  },{
+    "name": "baseNameOfSomeFile.ext"
+  },{
+    ...
+  }],
+  "rightContents": [{
+    "name": "baseNameOfSomeDirectory/"
+  },{
+    "name": "someAddedFile.ext"
+  },{
+    ...
+  }]
+}
+```
+
+#### _Example response to request for file_
+
+```json
+{
+  "path": "path/requestedFile.ext",
+  "leftCommit": "235eaf93ab",
+  "rightCommit": "343bc246f3d",
+  "leftContents": "TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCBieSB0aGlz
+IHNpbmd1bGFyIHBhc3Npb24gZnJvbSBvdGhlciBhbmltYWxzLCB3aGljaCBpcyBhIGx1c3Qgb2Yg
+dGhlIG1pbmQsIHRoYXQgYnkgYSBwZXJzZXZlcmFuY2Ugb2YgZGVsaWdodCBpbiB0aGUgY29udGlu
+dWVkIGFuZCBpbmRlZmF0aWdhYmxlIGdlbmVyYXRpb24gb2Yga25vd2xlZGdlLCBleGNlZWRzIHRo
+ZSBzaG9ydCB2ZWhlbWVuY2Ugb2YgYW55IGNhcm5hbCBwbGVhc3VyZS4",
+  "rightContents": "TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCBieSB0aGlz
+IHNpbmd1bGFyIHBhc3Npb24gZnJvbSBvdGhlciBhbmltYWxzLCB3aGljaCBpcyBhIGx1c3Qgb2Yg
+dGhlIG1pbmQsIHRoYXQgYnkgYSBwZXJzZXZlcmFuY2Ugb2YgZGVsaWdodCBpbiB0aGUgY29udGlu
+dWVkIGFuZCBpbmRlZmF0aWdhYmxlIGdlbmVyYXRpb24gb2Yga25vd2xlZGdlLCBleGNlZWRzIHRo
+ZSBzaG9ydCB2ZWhlbWVuY2Ugb2YgYW55IGNhcm5hbCBwbGVhc3VyZS4"
+}
 ```
