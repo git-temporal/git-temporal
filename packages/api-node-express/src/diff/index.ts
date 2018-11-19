@@ -1,5 +1,6 @@
 import child_process from 'child_process';
 import fs from 'fs';
+import os from 'os';
 
 import { timeThis } from '../common/timeThis';
 import { escapeForCli } from '../common/escapeForCli';
@@ -25,14 +26,19 @@ export function serveDiff(req, res) {
       requestPath
     );
 
+    const { filesAdded = null, filesDeleted = null, filesModified = null } =
+      isDirectory && fetchDirectoryDiff(leftCommit, rightCommit, requestPath);
+
     return {
       isDirectory,
       leftCommit,
       leftFileContents,
       rightCommit,
       rightFileContents,
+      filesAdded,
+      filesDeleted,
+      filesModified,
       path: requestPath,
-      rawDiff: fetchDiff(leftCommit, rightCommit, requestPath, isDirectory),
     };
   });
   console.log(`done in ${time}ms`, requestPath, leftCommit, rightCommit);
@@ -78,15 +84,55 @@ function fetchFromLocal(requestPath): IFetchContents {
   return returnValue;
 }
 
-function fetchDiff(leftCommit, rightCommit, requestPath, isDirectory) {
+function fetchDirectoryDiff(
+  leftCommit,
+  rightCommit,
+  requestPath
+): { filesAdded: string[]; filesDeleted: string[]; filesModified: string[] } {
   const isDiffOnLocal = rightCommit === 'local';
   const leftPath = isDiffOnLocal ? leftCommit : `${leftCommit}:${requestPath}`;
   const rightPath = isDiffOnLocal
     ? requestPath
     : `${rightCommit}:${requestPath}`;
-  const extraOpts = isDirectory ? '--stat=300 --compact-summary' : '';
+  const extraOpts = '--stat=300 --compact-summary';
   const outputBuffer = child_process.execSync(
     `git diff ${extraOpts} ${leftPath} ${rightPath}`
   );
-  return outputBuffer.toString('base64');
+  const outputLines = outputBuffer.toString().split(os.EOL);
+  return parseDirectoryDiff(outputLines);
+}
+
+function parseDirectoryDiff(outputLines) {
+  const filesAdded = [];
+  const filesDeleted = [];
+  const filesModified = [];
+
+  for (const line of outputLines) {
+    let matches = line.match(/(.*)\((gone|new)\)/);
+    if (matches) {
+      const [fileName, newOrGone] = matches;
+
+      switch (newOrGone) {
+        case 'new':
+          filesAdded.push(fileName.trim());
+          break;
+        case 'gone':
+          filesDeleted.push(fileName.trim());
+          break;
+        default:
+          filesModified.push(fileName.trim());
+      }
+    } else {
+      matches = line.match(/^([^\|]*)\|/);
+      if (!matches) {
+        continue;
+      }
+      filesModified.push(matches[1].trim());
+    }
+  }
+  return {
+    filesAdded,
+    filesDeleted,
+    filesModified,
+  };
 }

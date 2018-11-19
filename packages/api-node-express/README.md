@@ -112,10 +112,12 @@ This API returns a JSON object.
 
 This API returns a JSON object.
 
-When a directory is requested, the `leftFileContents` and `rightFileContents` members will be null.
+When a directory is requested, the `leftFileContents` and `rightFileContents` members will be null
+and `filesAdded`, `filesDeleted` and `filesModified` will be arrays of respective file paths.
 
 When a file is requested, the `leftFileContents` and `rightFileContents` members will contain the
-base64 encoded contents of the file at time of `leftCommit` and `rightCommit` respectively.
+base64 encoded contents of the file at time of `leftCommit` and `rightCommit` respectively and
+`filesAdded`, `filesDeleted` and `filesModified` will be null;
 
 #### _Example response to request for directory_
 
@@ -127,9 +129,9 @@ base64 encoded contents of the file at time of `leftCommit` and `rightCommit` re
   "rightCommit": "343bc246f3d",
   "leftFileContents": null,
   "rightFileContents": null,
-  "rawDiff":"IHBhY2thZ2VzL2FwaS1ub2RlLWV4cHJlc3Mvc3JjL2RpZmYvaW5kZXgu
-  HMgfCA4NCArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
-  KysrLS0tLS0tLS0tLS0tLS0tL..."
+  "filesAdded": ["some/path/file.ext", "some/path/file2.ext"],
+  "filesDeleted": ["some/otherPath/file.ext"],
+  "filesModified": []
 }
 ```
 
@@ -151,9 +153,8 @@ IHNpbmd1bGFyIHBhc3Npb24gZnJvbSBvdGhlciBhbmltYWxzLCB3aGljaCBpcyBhIGx1c3Qgb2Yg
 dGhlIG1pbmQsIHRoYXQgYnkgYSBwZXJzZXZlcmFuY2Ugb2YgZGVsaWdodCBpbiB0aGUgY29udGlu
 dWVkIGFuZCBpbmRlZmF0aWdhYmxlIGdlbmVyYXRpb24gb2Yga25vd2xlZGdlLCBleGNlZWRzIHRo
 ZSBzaG9ydCB2ZWhlbWVuY2Ugb2YgYW55IGNhcm5hbCBwbGVhc3VyZS4",
-  "rawDiff": "IHBhY2thZ2VzL2FwaS1ub2RlLWV4cHJlc3Mvc3JjL2RpZmYvaW5kZXgu
-HMgfCA4NCArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
-KysrLS0tLS0tLS0tLS0tLS0tL..."
-
+  "filesAdded": null,
+  "filesDeleted": null,
+  "filesModified: null,
 }
 ```
