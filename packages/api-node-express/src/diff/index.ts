@@ -84,7 +84,7 @@ function fetchDiff(leftCommit, rightCommit, requestPath, isDirectory) {
   const rightPath = isDiffOnLocal
     ? requestPath
     : `${rightCommit}:${requestPath}`;
-  const extraOpts = isDirectory ? '--stat=10000 --compact-summary' : '';
+  const extraOpts = isDirectory ? '--stat=300 --compact-summary' : '';
   const outputBuffer = child_process.execSync(
     `git diff ${extraOpts} ${leftPath} ${rightPath}`
   );
