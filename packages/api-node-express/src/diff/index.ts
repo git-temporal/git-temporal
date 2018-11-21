@@ -95,10 +95,16 @@ function fetchDirectoryDiff(
     ? requestPath
     : `${rightCommit}:${requestPath}`;
   const extraOpts = '--stat=300 --compact-summary';
-  const outputBuffer = child_process.execSync(
-    `git diff ${extraOpts} ${leftPath} ${rightPath}`
-  );
-  const outputLines = outputBuffer.toString().split(os.EOL);
+  let outputLines = [];
+  try {
+    const outputBuffer = child_process.execSync(
+      `git diff ${extraOpts} ${leftPath} ${rightPath}`
+    );
+    outputLines = outputBuffer.toString().split(os.EOL);
+  } catch (e) {
+    // TODO : test for specific error and only ignore doesn't exist in rev errors
+    console.log('Error retrieving git diff', e);
+  }
   return parseDirectoryDiff(outputLines);
 }
 
@@ -110,8 +116,8 @@ function parseDirectoryDiff(outputLines) {
   for (const line of outputLines) {
     let matches = line.match(/(.*)\((gone|new)\)/);
     if (matches) {
-      const [fileName, newOrGone] = matches;
-
+      const [fileName, newOrGone] = matches.slice(1);
+      // console.log('parseDirectoryDiff', fileName, newOrGone);
       switch (newOrGone) {
         case 'new':
           filesAdded.push(fileName.trim());
@@ -119,20 +125,21 @@ function parseDirectoryDiff(outputLines) {
         case 'gone':
           filesDeleted.push(fileName.trim());
           break;
-        default:
-          filesModified.push(fileName.trim());
       }
     } else {
       matches = line.match(/^([^\|]*)\|/);
-      if (!matches) {
-        continue;
+      if (matches) {
+        filesModified.push(matches[1].trim());
       }
-      filesModified.push(matches[1].trim());
     }
   }
   return {
-    filesAdded,
-    filesDeleted,
-    filesModified,
+    filesAdded: filesAdded.sort(fileNameComparator),
+    filesDeleted: filesDeleted.sort(fileNameComparator),
+    filesModified: filesModified.sort(fileNameComparator),
   };
+}
+
+function fileNameComparator(a, b) {
+  return a.localeCompare(b);
 }

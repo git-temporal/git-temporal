@@ -9,6 +9,7 @@ let styleVars = {
     selected: 'lightskyblue',
     leftRevColor: 'red',
     rightRevColor: 'green',
+    error: 'red',
   },
 };
 
@@ -121,6 +122,10 @@ let globalStyles = {
     fontWeight: 'normal',
     marginBottom: 10,
     marginRight: 10,
+  },
+  errorText: {
+    _extends: 'largerText',
+    color: '@colors.error',
   },
   linesAdded: {
     color: 'green',

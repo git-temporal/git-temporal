@@ -87,7 +87,7 @@ export class Header extends Component<IHeaderContainerState & DispatchProps> {
                     style={style(resetHighlightsLinkStyle)}
                     onClick={this.onResetHighlightedCommits}
                   >
-                    Reset highlighted authors and commits
+                    Reset search, filters & highlights
                   </ResetLink>
                 )}
               </div>

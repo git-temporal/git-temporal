@@ -9,12 +9,18 @@ import {
 import { getDifferenceViewerContainerState } from 'app/selectors';
 import { style } from 'app/styles';
 
+import { SpinnerContainer } from 'app/components/SpinnerContainer';
+import { Error } from 'app/components/Error';
+
 interface IDifferenceViewerLocalState {
-  leftFileContents?: string;
-  rightFileContents?: string;
-  rawDiff?: string;
   isDirectory: boolean;
   isFetching: boolean;
+  errorOnLastFetch?: string;
+  leftFileContents?: string;
+  rightFileContents?: string;
+  filesAdded?: string[];
+  filesDeleted?: string[];
+  filesModified?: string[];
 }
 
 const outerStyle = {
@@ -29,11 +35,10 @@ export class DifferenceViewer extends Component<
   IDifferenceViewerContainerState & DispatchProps,
   IDifferenceViewerLocalState
 > {
-  readonly state = { isFetching: false, isDirectory: false };
-
-  constructor(props) {
-    super(props);
-  }
+  readonly state: IDifferenceViewerLocalState = {
+    isFetching: false,
+    isDirectory: false,
+  };
 
   componentDidUpdate(prevProps) {
     if (
@@ -48,10 +53,19 @@ export class DifferenceViewer extends Component<
   render() {
     return (
       <div style={style(outerStyle)}>
-        <img
-          style={{ width: '100%', height: '100%' }}
-          src="Freehand_-_diff_viewer.png"
-        />
+        {this.state.errorOnLastFetch ? (
+          <Error
+            message="Unable to retrieve diff from service."
+            htmlDetailMessage={this.state.errorOnLastFetch}
+          />
+        ) : (
+          <SpinnerContainer isSpinning={this.state.isFetching}>
+            <img
+              style={{ width: '100%', height: '100%' }}
+              src="Freehand_-_diff_viewer.png"
+            />
+          </SpinnerContainer>
+        )}
       </div>
     );
   }
@@ -73,8 +87,8 @@ export class DifferenceViewer extends Component<
     return fetch(
       `http://localhost:11966/git-temporal/diff${pathParam}${leftCommit}${rightCommit}`
     )
-      .then(response => response.json())
-      .then(this.diffReceived);
+      .then(this.onDiffResponse)
+      .then(this.onDiffReceived);
   }
 
   getLastCommitId(commits?: ICommit[]) {
@@ -93,14 +107,34 @@ export class DifferenceViewer extends Component<
     return whichCommits[0].id;
   }
 
-  diffReceived = diff => {
+  onDiffResponse = response => {
+    if (response.status >= 400) {
+      console.error('error on diff api call', response);
+      response.text().then(responseText => {
+        this.setState({
+          errorOnLastFetch: `${response.status} - ${
+            response.statusText
+          }\n\n${responseText}`,
+        });
+      });
+      return null;
+    }
+    return response.json();
+  };
+
+  onDiffReceived = diff => {
+    if (!diff) {
+      return;
+    }
     this.setState({
       isFetching: false,
       isDirectory: diff.isDirectory,
-      // contents and diff are base64 encoded
+      // contents are base64 encoded
       leftFileContents: diff.leftFileContents && atob(diff.leftFileContents),
       rightFileContents: diff.rightFileContents && atob(diff.rightFileContents),
-      rawDiff: atob(diff.rawDiff),
+      filesAdded: diff.filesAdded,
+      filesDeleted: diff.filesDeleted,
+      filesModified: diff.filesModified,
     });
   };
 }
