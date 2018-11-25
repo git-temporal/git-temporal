@@ -32,7 +32,7 @@ const backdropStyle = {
 
 export const SpinnerContainer = (props: SpinnerContainerProps): JSX.Element => {
   return (
-    <div style={style(containerStyle)}>
+    <div style={style(containerStyle, props.style)}>
       {renderSpinner(props.isSpinning)}
       {props.children}
     </div>

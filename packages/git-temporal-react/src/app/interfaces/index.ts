@@ -1,4 +1,5 @@
 export type CommitsOrFilesType = 'commits' | 'files';
+export type ModifiedFileStatuses = 'modified' | 'added' | 'deleted';
 
 export interface GitTemporalProps {
   // If not provided, the whole repository is assumed
@@ -41,6 +42,12 @@ export interface ICommit {
   linesAdded: number;
   linesDeleted: number;
   files: ICommitFile[];
+}
+
+export interface IModifiedFile {
+  status: ModifiedFileStatuses;
+  path: string;
+  delta: number;
 }
 
 export interface IHeaderContainerState {
@@ -111,6 +118,7 @@ export interface ITimeplotState {
 export interface IDifferenceViewerContainerState {
   selectedPath: string;
   commits: ICommit[];
+  filteredCommits: ICommit[];
   startDate: number;
   endDate: number;
 }

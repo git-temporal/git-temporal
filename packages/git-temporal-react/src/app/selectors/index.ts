@@ -215,7 +215,7 @@ export const getStatsContainerState = createSelector(
 export const getTimeplotContainerState = createSelector(
   getSelectedPath,
   getHighlightedCommitIds,
-  getCommitsForTimeplot,
+  getCommitsForTimeplot, // not filtered by start and end dates
   getAuthorsAndCommits,
   getStartDate,
   getEndDate,
@@ -238,13 +238,28 @@ export const getTimeplotContainerState = createSelector(
 
 export const getDifferenceViewerContainerState = createSelector(
   getSelectedPath,
+  getCommitsForTimeplot, // not filtered by start and end dates
   getFilteredCommits,
   getStartDate,
   getEndDate,
-  (selectedPath, commits, startDate, endDate) => ({
+  (selectedPath, commits, filteredCommits, startDate, endDate) => ({
     selectedPath,
     commits,
+    filteredCommits,
     startDate,
     endDate,
+  })
+);
+
+export const getDifferenceViewerHeaderState = createSelector(
+  getCommitsForTimeplot, // not filtered by start and end dates
+  getFilteredCommits,
+  getStartDate,
+  getEndDate,
+  (timeplotCommits, filteredCommits, startDate, endDate) => ({
+    startDate,
+    endDate,
+    timeplotCommits,
+    filteredCommits,
   })
 );

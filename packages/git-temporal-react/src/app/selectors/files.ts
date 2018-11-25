@@ -1,8 +1,14 @@
+import * as path from 'path';
 import { createSelector } from 'reselect';
 
+import { IModifiedFile } from 'app/interfaces';
 import { FilesContainerSorts } from 'app/actions/ActionTypes';
 
-import { getFilesContainerSort, getSearch } from './stateVars';
+import {
+  getFilesContainerSort,
+  getSearch,
+  getModifiedFiles,
+} from './stateVars';
 import { hasSearch, matchesFileSearch, fileSearchRegex } from './search';
 import { getFilteredCommits } from './commits';
 
@@ -87,5 +93,38 @@ export const getFilteredFilesForFilesContainer = createSelector(
       });
     }
     return files;
+  }
+);
+
+export const convertModifiedFilesToTree = createSelector(
+  getModifiedFiles,
+  (modifiedFiles: IModifiedFile[]) => {
+    if (!modifiedFiles) {
+      return {};
+    }
+    const fileTree = {};
+    let index = 0;
+    modifiedFiles.forEach(file => {
+      let currentNode = fileTree;
+      const parsedPaths = file.path.split(path.sep);
+      for (const pathPart of parsedPaths) {
+        let nodeForPart = currentNode[pathPart];
+        if (!nodeForPart) {
+          nodeForPart = currentNode[pathPart] = {
+            index,
+            status: file.status,
+            delta: file.delta,
+            nodes: {},
+          };
+          index += 1;
+        } else {
+          nodeForPart.status =
+            file.status === 'modified' ? 'modified' : nodeForPart.status;
+          nodeForPart.delta = nodeForPart.delta + file.delta;
+        }
+        currentNode = nodeForPart.nodes;
+      }
+    });
+    return fileTree;
   }
 );

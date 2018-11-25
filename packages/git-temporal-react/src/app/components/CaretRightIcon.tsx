@@ -1,10 +1,11 @@
 import React from 'react';
+import { style } from 'app/styles';
 // import { style } from 'app/styles';
 
 export interface CaretRightIconProps {
   width?: number;
   height?: number;
-  style?: object;
+  style?: string | object;
 }
 
 export const CaretRightIcon = (props: CaretRightIconProps): JSX.Element => {
@@ -17,7 +18,7 @@ export const CaretRightIcon = (props: CaretRightIconProps): JSX.Element => {
       role="img"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 192 512"
-      style={props.style}
+      style={style(props.style)}
     >
       <path
         fill="currentColor"

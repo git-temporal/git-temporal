@@ -10,6 +10,12 @@ interface IFetchContents {
   isDirectory: boolean;
 }
 
+interface IModifiedFile {
+  path: string;
+  delta: number;
+  status: string;
+}
+
 export function serveDiff(req, res) {
   const requestPath = req.query.path || '.';
   const leftCommit = req.query.leftCommit || 'HEAD';
@@ -26,7 +32,7 @@ export function serveDiff(req, res) {
       requestPath
     );
 
-    const { filesAdded = null, filesDeleted = null, filesModified = null } =
+    const modifiedFiles: IModifiedFile[] =
       isDirectory && fetchDirectoryDiff(leftCommit, rightCommit, requestPath);
 
     return {
@@ -35,9 +41,7 @@ export function serveDiff(req, res) {
       leftFileContents,
       rightCommit,
       rightFileContents,
-      filesAdded,
-      filesDeleted,
-      filesModified,
+      modifiedFiles,
       path: requestPath,
     };
   });
@@ -88,7 +92,7 @@ function fetchDirectoryDiff(
   leftCommit,
   rightCommit,
   requestPath
-): { filesAdded: string[]; filesDeleted: string[]; filesModified: string[] } {
+): IModifiedFile[] {
   const isDiffOnLocal = rightCommit === 'local';
   const leftPath = isDiffOnLocal ? leftCommit : `${leftCommit}:${requestPath}`;
   const rightPath = isDiffOnLocal
@@ -108,38 +112,34 @@ function fetchDirectoryDiff(
   return parseDirectoryDiff(outputLines);
 }
 
-function parseDirectoryDiff(outputLines) {
-  const filesAdded = [];
-  const filesDeleted = [];
-  const filesModified = [];
+function parseDirectoryDiff(outputLines): IModifiedFile[] {
+  const modifiedFiles = [];
 
   for (const line of outputLines) {
-    let matches = line.match(/(.*)\((gone|new)\)/);
+    let matches = line.match(/(.*)\((gone|new)\).*\|\s*(\d*)/);
     if (matches) {
-      const [fileName, newOrGone] = matches.slice(1);
-      // console.log('parseDirectoryDiff', fileName, newOrGone);
-      switch (newOrGone) {
-        case 'new':
-          filesAdded.push(fileName.trim());
-          break;
-        case 'gone':
-          filesDeleted.push(fileName.trim());
-          break;
-      }
+      const [fileName, newOrGone, delta] = matches.slice(1);
+      const status = newOrGone === 'new' ? 'added' : 'deleted';
+      modifiedFiles.push(makeFile(fileName, delta, status));
     } else {
-      matches = line.match(/^([^\|]*)\|/);
+      matches = line.match(/^([^\|]*)\|\s*(\d*)/);
       if (matches) {
-        filesModified.push(matches[1].trim());
+        const [fileName, delta] = matches.slice(1);
+        modifiedFiles.push(makeFile(fileName, delta));
       }
     }
   }
+  return modifiedFiles.sort(fileNameComparator);
+}
+
+function makeFile(fileName, delta, status = 'modified') {
   return {
-    filesAdded: filesAdded.sort(fileNameComparator),
-    filesDeleted: filesDeleted.sort(fileNameComparator),
-    filesModified: filesModified.sort(fileNameComparator),
+    status,
+    path: fileName.trim(),
+    delta: parseInt(delta, 10),
   };
 }
 
 function fileNameComparator(a, b) {
-  return a.localeCompare(b);
+  return a.path.localeCompare(b.path);
 }

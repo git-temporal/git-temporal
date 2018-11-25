@@ -113,11 +113,11 @@ This API returns a JSON object.
 This API returns a JSON object.
 
 When a directory is requested, the `leftFileContents` and `rightFileContents` members will be null
-and `filesAdded`, `filesDeleted` and `filesModified` will be arrays of respective file paths.
+and `filesAdded`, `filesDeleted` and `modifiedFiles` will be arrays of respective file paths.
 
 When a file is requested, the `leftFileContents` and `rightFileContents` members will contain the
 base64 encoded contents of the file at time of `leftCommit` and `rightCommit` respectively and
-`filesAdded`, `filesDeleted` and `filesModified` will be null;
+`filesAdded`, `filesDeleted` and `modifiedFiles` will be null;
 
 #### _Example response to request for directory_
 
@@ -131,7 +131,7 @@ base64 encoded contents of the file at time of `leftCommit` and `rightCommit` re
   "rightFileContents": null,
   "filesAdded": ["some/path/file.ext", "some/path/file2.ext"],
   "filesDeleted": ["some/otherPath/file.ext"],
-  "filesModified": []
+  "modifiedFiles": []
 }
 ```
 
@@ -155,6 +155,6 @@ dWVkIGFuZCBpbmRlZmF0aWdhYmxlIGdlbmVyYXRpb24gb2Yga25vd2xlZGdlLCBleGNlZWRzIHRo
 ZSBzaG9ydCB2ZWhlbWVuY2Ugb2YgYW55IGNhcm5hbCBwbGVhc3VyZS4",
   "filesAdded": null,
   "filesDeleted": null,
-  "filesModified: null,
+  "modifiedFiles: null,
 }
 ```

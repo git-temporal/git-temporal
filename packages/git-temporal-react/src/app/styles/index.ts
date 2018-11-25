@@ -55,6 +55,9 @@ let globalStyles = {
     display: 'block',
     marginBottom: 10,
   },
+  inline: {
+    display: 'inline-block',
+  },
   inlineBlock: {
     display: 'inline-block',
     marginRight: 10,
