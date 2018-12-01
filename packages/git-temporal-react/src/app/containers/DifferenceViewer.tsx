@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as path from 'path';
 
 import {
   DispatchProps,
@@ -9,12 +10,13 @@ import {
 } from 'app/interfaces';
 import { getDifferenceViewerContainerState } from 'app/selectors';
 import { style } from 'app/styles';
-
+import { selectPath } from 'app/actions';
 import { SpinnerContainer } from 'app/components/SpinnerContainer';
 import { Error } from 'app/components/Error';
 import { DirectoryDifferences } from 'app/components/DirectoryDifferences';
-import { RevSelector } from 'app/components/RevSelector';
-import { EpochDateTime } from 'app/components/EpochDateTime';
+import { FileDifferences } from 'app/components/FileDifferences';
+
+import DifferenceViewerHeader from 'app/containers/DifferenceViewerHeader';
 
 interface IDifferenceViewerLocalState {
   isDirectory: boolean;
@@ -32,14 +34,8 @@ const outerStyle = {
   minWidth: '90%',
 };
 
-const revSelectorsStyle = {
-  _extends: 'flexRows',
-  flexGrow: 0,
-};
-
-const revSelectorStyle = {
-  flexGrow: 1,
-  textAlign: 'center',
+const innerStyle = {
+  _extends: 'flexColumns',
 };
 
 export class DifferenceViewer extends Component<
@@ -63,10 +59,6 @@ export class DifferenceViewer extends Component<
   }
 
   render() {
-    const { commits, startDate, endDate } = this.props;
-    const disablePrevious = startDate && commits[0].authorDate <= startDate;
-    const disableNext = !endDate;
-
     return (
       <div style={style(outerStyle)}>
         {this.state.errorOnLastFetch ? (
@@ -75,29 +67,20 @@ export class DifferenceViewer extends Component<
             htmlDetailMessage={this.state.errorOnLastFetch}
           />
         ) : (
-          <SpinnerContainer isSpinning={this.state.isFetching}>
-            <div style={style(revSelectorsStyle)}>
-              <RevSelector
-                style={style(revSelectorStyle)}
-                disablePrevious={disablePrevious}
-                disableNext={disableNext}
-              >
-                {this.renderLeftRev()}
-              </RevSelector>
-              <RevSelector
-                style={style(revSelectorStyle)}
-                disablePrevious={disablePrevious}
-                disableNext={disableNext}
-              >
-                {this.renderRightRev()}
-              </RevSelector>
-            </div>
+          <SpinnerContainer
+            isSpinning={this.state.isFetching}
+            style={style(innerStyle)}
+          >
+            <DifferenceViewerHeader />
             {this.state.isDirectory ? (
-              <DirectoryDifferences modifiedFiles={this.state.modifiedFiles} />
+              <DirectoryDifferences
+                modifiedFiles={this.state.modifiedFiles}
+                onFileClick={this.onFileClick}
+              />
             ) : (
-              <img
-                style={{ width: '100%', height: '100%' }}
-                src="Freehand_-_diff_viewer.png"
+              <FileDifferences
+                leftFileContents={this.state.leftFileContents}
+                rightFileContents={this.state.rightFileContents}
               />
             )}
           </SpinnerContainer>
@@ -106,46 +89,24 @@ export class DifferenceViewer extends Component<
     );
   }
 
-  renderRightRev() {
-    const { endDate, filteredCommits } = this.props;
-    const lastCommit = filteredCommits[filteredCommits.length - 1];
-    return endDate ? (
-      <span>
-        <span>#{lastCommit.hash} - </span>
-        <EpochDateTime value={lastCommit.authorDate} />
-      </span>
-    ) : (
-      <span>Uncommitted Local Changes</span>
-    );
-  }
-
-  renderLeftRev() {
-    const { startDate, filteredCommits, commits } = this.props;
-    const firstCommit = filteredCommits[0] || commits[commits.length - 1];
-    if (!firstCommit) {
-      return null;
-    }
-    return (
-      <span>
-        <span>#{firstCommit.hash} - </span>
-        <EpochDateTime value={firstCommit.authorDate} />
-        {!startDate && ' (Local HEAD Revision)'}
-      </span>
-    );
-  }
-
   fetchDiff() {
+    const lastFilteredCommit = this.getLastFilteredCommit();
+    const leftCommit =
+      this.props.startDate && lastFilteredCommit
+        ? `&leftCommit=${lastFilteredCommit.id}`
+        : '';
+    const firstFilteredCommit = this.getFirstFilteredCommit();
+    const rightCommit =
+      this.props.endDate && firstFilteredCommit
+        ? `&rightCommit=${firstFilteredCommit.id}`
+        : '';
     const path = this.props.selectedPath || './';
-    const leftCommit = this.props.startDate
-      ? `&leftCommit=${this.getLastFilteredCommitId()}`
-      : '';
-    const rightCommit = this.props.endDate
-      ? `&rightCommit=${this.getFirstFilteredCommitId()}`
-      : '';
+    this.getPathForCommit(firstFilteredCommit);
+    this.getPathForCommit(lastFilteredCommit);
 
     const pathParam = path && path.trim().length > 0 ? `?path=${path}` : '';
 
-    this.setState({ isFetching: true });
+    this.setState({ isFetching: true, errorOnLastFetch: null });
 
     // TODO : replace this with serviceBaseUrl when it is in
     return fetch(
@@ -156,19 +117,40 @@ export class DifferenceViewer extends Component<
   }
 
   getLastFilteredCommitId(commits?: ICommit[]) {
+    const lastCommit = this.getLastFilteredCommit(commits);
+    return (lastCommit && lastCommit.id) || null;
+  }
+
+  getLastFilteredCommit(commits?: ICommit[]) {
     const whichCommits = commits || this.props.filteredCommits;
     if (!whichCommits || whichCommits.length < 1) {
       return null;
     }
-    return whichCommits[whichCommits.length - 1].id;
+    return whichCommits[whichCommits.length - 1];
   }
 
   getFirstFilteredCommitId(commits?: ICommit[]) {
+    const firstCommit = this.getFirstFilteredCommit(commits);
+    return (firstCommit && firstCommit.id) || null;
+  }
+
+  getFirstFilteredCommit(commits?: ICommit[]) {
     const whichCommits = commits || this.props.filteredCommits;
     if (!whichCommits || whichCommits.length <= 0) {
       return null;
     }
-    return whichCommits[0].id;
+    return whichCommits[0];
+  }
+
+  getPathForCommit(commit) {
+    console.log(commit);
+    const path = this.props.selectedPath || './';
+    // const {files} = commit
+    // if (files.length === 1 && files[0].name === path) {
+    //   path = commit.files[0].name;
+    //   path = path.replace(/\{(.*)\s=>\s(.*)\}/g, '$2');
+    // }
+    return path;
   }
 
   onDiffResponse = response => {
@@ -199,6 +181,11 @@ export class DifferenceViewer extends Component<
       rightFileContents: diff.rightFileContents && atob(diff.rightFileContents),
       modifiedFiles: diff.modifiedFiles,
     });
+  };
+
+  onFileClick = relativePath => {
+    const fullPath = path.join(this.props.selectedPath, relativePath);
+    this.props.dispatch(selectPath(fullPath));
   };
 }
 

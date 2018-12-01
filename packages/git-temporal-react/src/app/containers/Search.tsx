@@ -7,7 +7,7 @@ import { style } from 'app/styles';
 import { setSearch } from 'app/actions';
 import { SearchInput } from 'app/components/SearchInput';
 import { Popup } from 'app/components/Popup';
-import { MenuItem } from 'app/components/MenuItem';
+import { Selectable } from 'app/components/Selectable';
 
 import { debounce } from 'app/utilities/debounce';
 
@@ -85,20 +85,20 @@ export class Search extends Component<
   private renderPopupSuggestions(): JSX.Element[] {
     const unPrefixedSearch = this.getUnprefixedSearch();
     const menuItems: JSX.Element[] = [
-      <MenuItem
+      <Selectable
         value="all"
         key="searchSuggestion_all"
         onClick={this.onSuggestClick}
         selected={this.state.selectedSuggestion === 'all'}
       >
         <div>Search everywhere for '{unPrefixedSearch}'</div>
-      </MenuItem>,
+      </Selectable>,
     ];
 
     return menuItems.concat(
       suggestedSearchPrefixes.map((prefix, index) => {
         return (
-          <MenuItem
+          <Selectable
             key={`searchSuggestion_${index}`}
             value={prefix}
             onClick={this.onSuggestClick}
@@ -107,7 +107,7 @@ export class Search extends Component<
             <div style={style('normalText')}>
               {prefix} {unPrefixedSearch}
             </div>
-          </MenuItem>
+          </Selectable>
         );
       })
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { style } from 'app/styles';
 import { TestProps } from 'app/interfaces';
-import { MenuItem } from 'app/components/MenuItem';
+import { Selectable } from 'app/components/Selectable';
 import { ToggleButton } from 'app/components/ToggleButton';
 
 export interface RadioMenuItemProps {
@@ -26,7 +26,7 @@ export class RadioMenuItem extends React.Component<
 > {
   render() {
     return (
-      <MenuItem
+      <Selectable
         style={style(this.props.style)}
         onClick={this.props.onClick}
         disabled={this.props.disabled}
@@ -39,7 +39,7 @@ export class RadioMenuItem extends React.Component<
           />
           {this.props.children}
         </div>
-      </MenuItem>
+      </Selectable>
     );
   }
 }

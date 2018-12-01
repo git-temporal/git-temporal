@@ -52,6 +52,7 @@ function safelyParseInt(parseableNumber) {
 function parseGitLogOutput(output) {
   const logItems = [];
   const logLines = output.split(/\n\r?/);
+  let commitIndex = 0;
 
   let currentlyParsingAttr = null;
   let parsedValue = null;
@@ -67,10 +68,12 @@ function parseGitLogOutput(output) {
     }
     commitObj.linesAdded = totalLinesAdded;
     commitObj.linesDeleted = totalLinesDeleted;
+    commitObj.index = commitIndex;
     logItems.push(commitObj);
 
     totalLinesAdded = 0;
     totalLinesDeleted = 0;
+    commitIndex += 1;
   };
 
   for (const line of logLines) {

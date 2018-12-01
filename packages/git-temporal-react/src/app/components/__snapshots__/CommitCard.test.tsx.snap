@@ -14,7 +14,7 @@ exports[`components/CommitCard when rendered with required props it should match
     }
   }
 >
-  <MenuItem
+  <Selectable
     onClick={[Function]}
   >
     <div
@@ -109,6 +109,6 @@ exports[`components/CommitCard when rendered with required props it should match
        
       3 days ago
     </div>
-  </MenuItem>
+  </Selectable>
 </div>
 `;

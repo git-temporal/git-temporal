@@ -1,40 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import {
-  DispatchProps,
-  IDifferenceViewerContainerState,
-  ICommit,
-  IModifiedFile,
-} from 'app/interfaces';
-import { getDifferenceViewerContainerState } from 'app/selectors';
 import { style } from 'app/styles';
 
-import { SpinnerContainer } from 'app/components/SpinnerContainer';
-import { Error } from 'app/components/Error';
-import { DirectoryDifferences } from 'app/components/DirectoryDifferences';
+import { DispatchProps, IDifferenceViewerHeaderState } from 'app/interfaces';
+import { getDifferenceViewerHeaderState } from 'app/selectors';
+import { setDates } from 'app/actions/setDates';
+
 import { RevSelector } from 'app/components/RevSelector';
 import { EpochDateTime } from 'app/components/EpochDateTime';
 
-interface IDifferenceViewerLocalState {
-  isDirectory: boolean;
-  isFetching: boolean;
-  errorOnLastFetch?: string;
-  leftFileContents?: string;
-  rightFileContents?: string;
-  modifiedFiles?: IModifiedFile[];
-}
-
 const outerStyle = {
-  _extends: ['borderedPanel', 'flexColumns'],
-  flexGrow: 1,
-  position: 'relative',
-  minWidth: '90%',
-};
-
-const revSelectorsStyle = {
   _extends: 'flexRows',
   flexGrow: 0,
+  marginBottom: 10,
+  paddingBottom: 10,
+  marginTop: -10,
+  borderBottom: '1px solid @colors.panelBorder',
+  maxHeight: 30,
 };
 
 const revSelectorStyle = {
@@ -42,164 +24,177 @@ const revSelectorStyle = {
   textAlign: 'center',
 };
 
-export class DifferenceViewer extends Component<
-  IDifferenceViewerContainerState & DispatchProps,
-  IDifferenceViewerLocalState
+export class DifferenceViewerHeader extends Component<
+  IDifferenceViewerHeaderState & DispatchProps
 > {
-  readonly state: IDifferenceViewerLocalState = {
-    isFetching: false,
-    isDirectory: false,
-  };
-
-  componentDidUpdate(prevProps) {
-    if (
-      this.getFirstFilteredCommitId(prevProps.filteredCommits) !==
-        this.getFirstFilteredCommitId() ||
-      this.getLastFilteredCommitId(prevProps.filteredCommits) !==
-        this.getLastFilteredCommitId()
-    ) {
-      this.fetchDiff();
-    }
-  }
-
   render() {
-    const { commits, startDate, endDate } = this.props;
-    const disablePrevious = startDate && commits[0].authorDate <= startDate;
+    const { timeplotCommits, startDate, endDate } = this.props;
+    if (!timeplotCommits || timeplotCommits.length <= 0) {
+      return null;
+    }
+    const disablePrevious =
+      startDate && timeplotCommits[0].authorDate <= startDate;
     const disableNext = !endDate;
 
     return (
       <div style={style(outerStyle)}>
-        {this.state.errorOnLastFetch ? (
-          <Error
-            message="Unable to retrieve diff from service."
-            htmlDetailMessage={this.state.errorOnLastFetch}
-          />
-        ) : (
-          <SpinnerContainer isSpinning={this.state.isFetching}>
-            <div style={style(revSelectorsStyle)}>
-              <RevSelector
-                style={style(revSelectorStyle)}
-                disablePrevious={disablePrevious}
-                disableNext={disableNext}
-              >
-                {this.renderLeftRev()}
-              </RevSelector>
-              <RevSelector
-                style={style(revSelectorStyle)}
-                disablePrevious={disablePrevious}
-                disableNext={disableNext}
-              >
-                {this.renderRightRev()}
-              </RevSelector>
-            </div>
-            {this.state.isDirectory ? (
-              <DirectoryDifferences modifiedFiles={this.state.modifiedFiles} />
-            ) : (
-              <img
-                style={{ width: '100%', height: '100%' }}
-                src="Freehand_-_diff_viewer.png"
-              />
-            )}
-          </SpinnerContainer>
-        )}
+        <RevSelector
+          style={style(revSelectorStyle)}
+          disablePrevious={disablePrevious}
+          disableNext={disableNext}
+          onNextRevClick={this.onLeftRevNext}
+          onPreviousRevClick={this.onLeftRevPrevious}
+        >
+          {this.renderLeftRevChildren()}
+        </RevSelector>
+        <RevSelector
+          style={style(revSelectorStyle)}
+          disablePrevious={disablePrevious}
+          disableNext={disableNext}
+          onNextRevClick={this.onRightRevNext}
+          onPreviousRevClick={this.onRightRevPrevious}
+        >
+          {this.renderRightRevChildren()}
+        </RevSelector>
       </div>
     );
   }
 
-  renderRightRev() {
-    const { endDate, filteredCommits } = this.props;
-    const lastCommit = filteredCommits[filteredCommits.length - 1];
-    return endDate ? (
-      <span>
-        <span>#{lastCommit.hash} - </span>
-        <EpochDateTime value={lastCommit.authorDate} />
-      </span>
-    ) : (
-      <span>Uncommitted Local Changes</span>
-    );
-  }
-
-  renderLeftRev() {
-    const { startDate, filteredCommits, commits } = this.props;
-    const firstCommit = filteredCommits[0] || commits[commits.length - 1];
-    if (!firstCommit) {
+  renderLeftRevChildren() {
+    const { startDate, timeplotCommits } = this.props;
+    if (!timeplotCommits || timeplotCommits.length === 0) {
+      return null;
+    }
+    // reminder: commits are in descending cron order
+    const startingCommit = this.getStartingCommit();
+    if (!startingCommit) {
       return null;
     }
     return (
       <span>
-        <span>#{firstCommit.hash} - </span>
-        <EpochDateTime value={firstCommit.authorDate} />
+        <span>#{startingCommit.hash} - </span>
+        <EpochDateTime value={startingCommit.authorDate} />
         {!startDate && ' (Local HEAD Revision)'}
       </span>
     );
   }
 
-  fetchDiff() {
-    const path = this.props.selectedPath || './';
-    const leftCommit = this.props.startDate
-      ? `&leftCommit=${this.getLastFilteredCommitId()}`
-      : '';
-    const rightCommit = this.props.endDate
-      ? `&rightCommit=${this.getFirstFilteredCommitId()}`
-      : '';
-
-    const pathParam = path && path.trim().length > 0 ? `?path=${path}` : '';
-
-    this.setState({ isFetching: true });
-
-    // TODO : replace this with serviceBaseUrl when it is in
-    return fetch(
-      `http://localhost:11966/git-temporal/diff${pathParam}${leftCommit}${rightCommit}`
-    )
-      .then(this.onDiffResponse)
-      .then(this.onDiffReceived);
-  }
-
-  getLastFilteredCommitId(commits?: ICommit[]) {
-    const whichCommits = commits || this.props.filteredCommits;
-    if (!whichCommits || whichCommits.length < 1) {
+  renderRightRevChildren() {
+    const { endDate, filteredCommits } = this.props;
+    if (!filteredCommits || filteredCommits.length === 0) {
       return null;
     }
-    return whichCommits[whichCommits.length - 1].id;
-  }
-
-  getFirstFilteredCommitId(commits?: ICommit[]) {
-    const whichCommits = commits || this.props.filteredCommits;
-    if (!whichCommits || whichCommits.length <= 0) {
+    // reminder: commits are in descending cron order
+    const latestCommit = filteredCommits[0];
+    if (!latestCommit) {
       return null;
     }
-    return whichCommits[0].id;
+    return endDate ? (
+      <span>
+        <span>#{latestCommit.hash} - </span>
+        <EpochDateTime value={latestCommit.authorDate} />
+      </span>
+    ) : (
+      <span>Local Revision</span>
+    );
   }
 
-  onDiffResponse = response => {
-    if (response.status >= 400) {
-      console.error('error on diff api call', response);
-      response.text().then(responseText => {
-        this.setState({
-          errorOnLastFetch: `${response.status} - ${
-            response.statusText
-          }\n\n${responseText}`,
-          isFetching: false,
-        });
-      });
-      return null;
-    }
-    return response.json();
+  onLeftRevPrevious = () => {
+    this.setLeftRev(-1);
   };
 
-  onDiffReceived = diff => {
-    if (!diff) {
+  onLeftRevNext = () => {
+    this.setLeftRev(1);
+  };
+
+  setLeftRev(relativeIndex) {
+    const {
+      dispatch,
+      startDate,
+      endDate,
+      filteredCommits,
+      timeplotCommits,
+    } = this.props;
+    if (!filteredCommits || filteredCommits.length === 0) {
       return;
     }
-    this.setState({
-      isFetching: false,
-      isDirectory: diff.isDirectory,
-      // contents are base64 encoded
-      leftFileContents: diff.leftFileContents && atob(diff.leftFileContents),
-      rightFileContents: diff.rightFileContents && atob(diff.rightFileContents),
-      modifiedFiles: diff.modifiedFiles,
-    });
+    if (!startDate && relativeIndex > 0) {
+      return; // already at end
+    }
+    const foundIndex = startDate
+      ? timeplotCommits.findIndex(commit => {
+          return commit.id === filteredCommits[filteredCommits.length - 1].id;
+        })
+      : 0;
+    const adjacentCommit = timeplotCommits[foundIndex - relativeIndex];
+    if (adjacentCommit) {
+      setDates(
+        dispatch,
+        startDate,
+        endDate,
+        false,
+        adjacentCommit.authorDate * 1000
+      );
+    }
+  }
+
+  onRightRevPrevious = () => {
+    this.setRightRev(-1);
   };
+
+  onRightRevNext = () => {
+    this.setRightRev(1);
+  };
+
+  setRightRev(relativeIndex) {
+    const {
+      dispatch,
+      startDate,
+      endDate,
+      filteredCommits,
+      timeplotCommits,
+    } = this.props;
+    if (!filteredCommits || filteredCommits.length === 0) {
+      return;
+    }
+    if (!endDate && relativeIndex > 0) {
+      return; // already at end
+    }
+    const latestFilteredCommit = endDate
+      ? filteredCommits[0]
+      : timeplotCommits[0];
+    const foundIndex = timeplotCommits.findIndex(commit => {
+      return commit.id === latestFilteredCommit.id;
+    });
+    const adjacentCommit = timeplotCommits[foundIndex - relativeIndex];
+    if (adjacentCommit) {
+      setDates(
+        dispatch,
+        startDate,
+        endDate,
+        true,
+        adjacentCommit.authorDate * 1000
+      );
+    }
+  }
+  // starting commit is the last effective commit that comes before the set start date
+  getStartingCommit() {
+    const { startDate, filteredCommits, timeplotCommits } = this.props;
+    if (!timeplotCommits || timeplotCommits.length === 0) {
+      return null;
+    }
+    if (!startDate || !filteredCommits || filteredCommits.length === 0) {
+      return timeplotCommits[0];
+    }
+    // reminder: commits are in descending cron order
+    const earliestFilteredCommit = filteredCommits[filteredCommits.length - 1];
+    const foundIndex = timeplotCommits.findIndex(commit => {
+      return commit.id === earliestFilteredCommit.id;
+    });
+    return timeplotCommits[
+      Math.min(foundIndex + 1, filteredCommits.length - 1)
+    ];
+  }
 }
 
-export default connect(getDifferenceViewerContainerState)(DifferenceViewer);
+export default connect(getDifferenceViewerHeaderState)(DifferenceViewerHeader);

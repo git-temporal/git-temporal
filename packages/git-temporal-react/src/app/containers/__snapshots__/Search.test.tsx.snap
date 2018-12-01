@@ -37,7 +37,7 @@ exports[`containers/Search when rendered with search text and then on focus, it 
       }
     }
   >
-    <MenuItem
+    <Selectable
       key="searchSuggestion_all"
       onClick={[Function]}
       selected={true}
@@ -48,8 +48,8 @@ exports[`containers/Search when rendered with search text and then on focus, it 
         someone
         '
       </div>
-    </MenuItem>
-    <MenuItem
+    </Selectable>
+    <Selectable
       key="searchSuggestion_0"
       onClick={[Function]}
       selected={false}
@@ -68,8 +68,8 @@ exports[`containers/Search when rendered with search text and then on focus, it 
          
         someone
       </div>
-    </MenuItem>
-    <MenuItem
+    </Selectable>
+    <Selectable
       key="searchSuggestion_1"
       onClick={[Function]}
       selected={false}
@@ -88,8 +88,8 @@ exports[`containers/Search when rendered with search text and then on focus, it 
          
         someone
       </div>
-    </MenuItem>
-    <MenuItem
+    </Selectable>
+    <Selectable
       key="searchSuggestion_2"
       onClick={[Function]}
       selected={false}
@@ -108,7 +108,7 @@ exports[`containers/Search when rendered with search text and then on focus, it 
          
         someone
       </div>
-    </MenuItem>
+    </Selectable>
   </Popup>
 </div>
 `;
@@ -150,7 +150,7 @@ exports[`containers/Search when rendered with search text it should match snapsh
       }
     }
   >
-    <MenuItem
+    <Selectable
       key="searchSuggestion_all"
       onClick={[Function]}
       selected={true}
@@ -161,8 +161,8 @@ exports[`containers/Search when rendered with search text it should match snapsh
         someone
         '
       </div>
-    </MenuItem>
-    <MenuItem
+    </Selectable>
+    <Selectable
       key="searchSuggestion_0"
       onClick={[Function]}
       selected={false}
@@ -181,8 +181,8 @@ exports[`containers/Search when rendered with search text it should match snapsh
          
         someone
       </div>
-    </MenuItem>
-    <MenuItem
+    </Selectable>
+    <Selectable
       key="searchSuggestion_1"
       onClick={[Function]}
       selected={false}
@@ -201,8 +201,8 @@ exports[`containers/Search when rendered with search text it should match snapsh
          
         someone
       </div>
-    </MenuItem>
-    <MenuItem
+    </Selectable>
+    <Selectable
       key="searchSuggestion_2"
       onClick={[Function]}
       selected={false}
@@ -221,7 +221,7 @@ exports[`containers/Search when rendered with search text it should match snapsh
          
         someone
       </div>
-    </MenuItem>
+    </Selectable>
   </Popup>
 </div>
 `;
@@ -263,7 +263,7 @@ exports[`containers/Search when rendered without props it should match snapshot 
       }
     }
   >
-    <MenuItem
+    <Selectable
       key="searchSuggestion_all"
       onClick={[Function]}
       selected={true}
@@ -273,8 +273,8 @@ exports[`containers/Search when rendered without props it should match snapshot 
         Search everywhere for '
         '
       </div>
-    </MenuItem>
-    <MenuItem
+    </Selectable>
+    <Selectable
       key="searchSuggestion_0"
       onClick={[Function]}
       selected={false}
@@ -292,8 +292,8 @@ exports[`containers/Search when rendered without props it should match snapshot 
         author:
          
       </div>
-    </MenuItem>
-    <MenuItem
+    </Selectable>
+    <Selectable
       key="searchSuggestion_1"
       onClick={[Function]}
       selected={false}
@@ -311,8 +311,8 @@ exports[`containers/Search when rendered without props it should match snapshot 
         commit:
          
       </div>
-    </MenuItem>
-    <MenuItem
+    </Selectable>
+    <Selectable
       key="searchSuggestion_2"
       onClick={[Function]}
       selected={false}
@@ -330,7 +330,7 @@ exports[`containers/Search when rendered without props it should match snapshot 
         file:
          
       </div>
-    </MenuItem>
+    </Selectable>
   </Popup>
 </div>
 `;

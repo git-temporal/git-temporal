@@ -42,10 +42,6 @@ export const viewCommitsOrFiles = (state = 'commits', action) => {
 
 export const commits = (state = [], action) => {
   switch (action.type) {
-    case ActionTypes.INVALIDATE_PATH:
-      return [];
-    case ActionTypes.REQUEST_COMMITS:
-      return [];
     case ActionTypes.RECEIVE_COMMITS:
       return action.commits;
     default:

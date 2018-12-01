@@ -57,20 +57,30 @@ function fetchContents(commitId, requestPath): IFetchContents {
 
 function fetchFromGit(commitId, requestPath): IFetchContents {
   // use -- fileName and git log will work on deleted files and paths
-  const cmd = `git show ${commitId}:${escapeForCli(requestPath)}`;
+  const cmd = `git show ${commitId}:./${escapeForCli(requestPath)}`;
   if (process.env.DEBUG === '1') {
     console.warn(`$ ${cmd}`);
   }
-  const rawContents = child_process
-    .execSync(cmd, {
-      stdio: 'pipe',
-    })
-    .toString();
-  const isDirectory = rawContents.match(/^tree /) !== null;
-  return {
-    isDirectory,
-    contents: isDirectory ? null : Buffer.from(rawContents).toString('base64'),
-  };
+  try {
+    const rawContents = child_process
+      .execSync(cmd, {
+        stdio: 'pipe',
+      })
+      .toString();
+    const isDirectory = rawContents.match(/^tree /) !== null;
+    return {
+      isDirectory,
+      contents: isDirectory
+        ? null
+        : Buffer.from(rawContents).toString('base64'),
+    };
+  } catch (e) {
+    console.log(e.status, e.Error);
+    return {
+      isDirectory: false,
+      contents: null,
+    };
+  }
 }
 
 function fetchFromLocal(requestPath): IFetchContents {

@@ -11,12 +11,15 @@ export function serveHistory(req, res) {
   console.log(
     `retrieved ${commits.length} commits for ${req.query.path} in ${time}ms`
   );
+
   const resolvedPath = path.resolve('.', requestPath);
   const isFile =
     fs.existsSync(resolvedPath) && !fs.lstatSync(resolvedPath).isDirectory();
   res.send({
-    commits,
     isFile,
     path: req.query.path,
+    commits: commits.sort((a, b) => {
+      return b.authorDate - a.authorDate;
+    }),
   });
 }

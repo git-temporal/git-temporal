@@ -15,6 +15,3 @@ export const getCommitsContainerSort = state => state.commitsContainerSort;
 export const getFilesContainerSort = state => state.filesContainerSort;
 
 export const getIsFileSelected = state => state.isFileSelected;
-
-// this is not part of the redux state tree
-export const getModifiedFiles = state => state.modifiedFiles;

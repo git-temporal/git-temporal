@@ -1,15 +1,19 @@
 let styleVars = {
   colors: {
+    added: 'green',
+    altBackground: 'whitesmoke',
     background: 'white',
     boxShadow: 'rgba(0, 0, 0, 0.2)',
-    altBackground: 'whitesmoke',
-    text: '#333333',
+    deleted: 'red',
     disabledText: '#e0e0e0',
-    selectable: 'lightskyblue',
-    selected: 'lightskyblue',
+    error: 'red',
+    modified: 'orange',
+    panelBorder: 'whitesmoke',
     leftRevColor: 'red',
     rightRevColor: 'green',
-    error: 'red',
+    selectable: 'lightskyblue',
+    selected: 'lightskyblue',
+    text: '#333333',
   },
 };
 
@@ -38,7 +42,7 @@ let globalStyles = {
   },
   borderedPanel: {
     _extends: 'panel',
-    border: `1px solid @colors.altBackground`,
+    border: '1px solid @colors.panelBorder',
   },
   fill: {
     position: 'relative',
@@ -78,6 +82,7 @@ let globalStyles = {
   },
   normalText: {
     fontSize: 13,
+    lineHeight: 1.35,
     fontWeight: 'normal',
     color: '@colors.text',
   },

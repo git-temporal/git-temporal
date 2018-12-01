@@ -122,3 +122,9 @@ export interface IDifferenceViewerContainerState {
   startDate: number;
   endDate: number;
 }
+export interface IDifferenceViewerHeaderState {
+  timeplotCommits?: ICommit[];
+  filteredCommits?: ICommit[];
+  startDate?: number;
+  endDate?: number;
+}

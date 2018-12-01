@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/MenuItem when rendered with required props it should match snapshot (it should have rendered a label and a text element) 1`] = `
+exports[`components/Selectable when rendered with required props it should match snapshot (it should have rendered a label and a text element) 1`] = `
 <div
   onClick={[Function]}
   onMouseLeave={[Function]}

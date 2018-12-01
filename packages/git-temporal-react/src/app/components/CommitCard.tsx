@@ -7,7 +7,7 @@ import { EpochDateTime } from 'app/components/EpochDateTime';
 import { AddedDeleted } from 'app/components/AddedDeleted';
 import { CommitBody } from 'app/components/CommitBody';
 import { CommitCardFiles } from 'app/components/CommitCardFiles';
-import { MenuItem } from 'app/components/MenuItem';
+import { Selectable } from 'app/components/Selectable';
 
 export interface CommitCardProps {
   commit: ICommit;
@@ -24,7 +24,7 @@ export interface CommitCardProps {
 const defaultCardStyle = {
   _extends: ['card', 'block'],
   borderBottom: '1px solid whitesmoke',
-  // wrapping in MenuItem provides sufficient margins and padding
+  // wrapping in Selectable provides sufficient margins and padding
   marginBottom: 0,
   marginRight: 0,
   padding: 0,
@@ -58,7 +58,7 @@ export const CommitCard = (props: CommitCardProps): JSX.Element => {
   const outerOverrideStyle = isHighlighted ? 'selected' : {};
   return (
     <div style={style(defaultCardStyle, props.style, outerOverrideStyle)}>
-      <MenuItem
+      <Selectable
         onClick={evt =>
           props.onClick && props.onClick(evt, commit, props.index)
         }
@@ -91,7 +91,7 @@ export const CommitCard = (props: CommitCardProps): JSX.Element => {
         <div style={style(authorStyle)}>
           Authored by {commit.authorName} {commit.relativeDate}
         </div>
-      </MenuItem>
+      </Selectable>
     </div>
   );
 };

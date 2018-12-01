@@ -5,7 +5,7 @@ import { AuthorGravatarImage } from 'app/components/AuthorGravatarImage';
 import { AddedDeleted } from 'app/components/AddedDeleted';
 import { PercentBar } from 'app/components/PercentBar';
 import { EpochSpan } from 'app/components/EpochSpan';
-import { MenuItem } from 'app/components/MenuItem';
+import { Selectable } from 'app/components/Selectable';
 
 import { IAuthorStats } from 'app/interfaces';
 
@@ -49,7 +49,7 @@ export const AuthorCard = (props: AuthorCardProps): JSX.Element => {
 
   return (
     <div style={style('flexRows', props.style)}>
-      <MenuItem
+      <Selectable
         style={style(menuItemStyle, addStyles)}
         onClick={evt => props.onClick(evt, author, index)}
       >
@@ -92,7 +92,7 @@ export const AuthorCard = (props: AuthorCardProps): JSX.Element => {
             denominator={maxCommits}
           />
         </div>
-      </MenuItem>
+      </Selectable>
     </div>
   );
 };

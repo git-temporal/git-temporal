@@ -2,32 +2,26 @@ import React from 'react';
 import { style } from 'app/styles';
 
 import { IModifiedFile } from 'app/interfaces';
-import { convertModifiedFilesToTree } from 'app/selectors/files';
+import { convertModifiedFilesToTrees } from 'app/selectors/files';
 
-import { CaretDownIcon } from 'app/components/CaretDownIcon';
-import { CaretRightIcon } from 'app/components/CaretRightIcon';
-import { FileIcon } from 'app/components/FileIcon';
+import { DirectoryTree } from 'app/components/DirectoryTree';
 
 export interface DirectoryDifferencesProps {
   modifiedFiles: IModifiedFile[];
+  // only show commits that DON't have .status of this value
   style?: object | string;
+  onFileClick: (fullPath: string) => void;
 }
 
 interface DirectoryDifferencesState {
   // these map to the index of each node
-  expandedNodes: number[];
+  expandedNodes: string[];
 }
 
 const outerStyle = {
-  display: 'inline-block',
+  _extends: 'flexRows',
   transition: 'all 1s ease',
-};
-const directoryNodeStyle = {
-  display: 'block',
-  marginLeft: 20,
-};
-const treeNodeStyle = {
-  marginLeft: 10,
+  overflow: 'scroll',
 };
 // const iconSize = 12;
 
@@ -55,57 +49,26 @@ export class DirectoryDifferences extends React.Component<
     }
   }
   render() {
-    const modifiedTree = convertModifiedFilesToTree(this.props);
-    console.log(
-      'DirectoryDifferences::render()',
-      this.props.modifiedFiles,
-      modifiedTree
-    );
+    const { leftTree, rightTree } = convertModifiedFilesToTrees(
+      this.props
+    ) as any;
+    console.log('DirectoryDifferences::render()', leftTree, rightTree);
     return (
       <div style={style(outerStyle, this.props.style)}>
-        {this.renderTree(modifiedTree)}
+        <DirectoryTree
+          fileTree={leftTree}
+          expandedNodes={this.state.expandedNodes}
+          onExpandNode={this.onExpandNode}
+          onFileClick={this.onFileClick}
+        />
+        <DirectoryTree
+          fileTree={rightTree}
+          expandedNodes={this.state.expandedNodes}
+          onExpandNode={this.onExpandNode}
+          onFileClick={this.onFileClick}
+        />
       </div>
     );
-  }
-
-  renderTree(treeNode) {
-    let renderedTreeNodes = [];
-    for (const nodeName in treeNode) {
-      const childNode = treeNode[nodeName];
-      const isExpanded =
-        this.state.expandedNodes.includes(childNode.index) ||
-        Object.keys(childNode.nodes).length <= 1;
-      const isFile =
-        !childNode.nodes || Object.keys(childNode.nodes).length === 0;
-      const { Icon, onClick } = isFile
-        ? {
-            Icon: FileIcon,
-            onClick: null,
-          }
-        : {
-            Icon: isExpanded ? CaretDownIcon : CaretRightIcon,
-            onClick: () => {
-              this.onExpandNode(childNode.index);
-            },
-          };
-      renderedTreeNodes.push(
-        <div
-          style={style(treeNodeStyle)}
-          onClick={onClick}
-          key={childNode.index}
-        >
-          <Icon height={14} width={14} />
-          {'    '}
-          {nodeName}
-        </div>
-      );
-      if (isExpanded) {
-        renderedTreeNodes = renderedTreeNodes.concat(
-          this.renderTree(childNode.nodes)
-        );
-      }
-    }
-    return <div style={directoryNodeStyle}>{renderedTreeNodes}</div>;
   }
 
   didModifiedFilesChange(prevModifiedFiles) {
@@ -130,12 +93,16 @@ export class DirectoryDifferences extends React.Component<
     });
   }
 
-  onExpandNode = nodeIndex => {
-    const currentIndex = this.state.expandedNodes.indexOf(nodeIndex);
+  onFileClick = fullPath => {
+    this.props.onFileClick(fullPath);
+  };
+
+  onExpandNode = fullPath => {
+    const currentIndex = this.state.expandedNodes.indexOf(fullPath);
     let expandedNodes;
     if (currentIndex === -1) {
       expandedNodes = this.state.expandedNodes.slice(0);
-      expandedNodes.push(nodeIndex);
+      expandedNodes.push(fullPath);
       this.setState({ expandedNodes });
     } else {
       expandedNodes = this.state.expandedNodes

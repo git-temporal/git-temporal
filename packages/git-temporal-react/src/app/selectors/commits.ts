@@ -35,6 +35,20 @@ export const getFilteredCommits = createSelector(
   }
 );
 
+export const getFirstFilteredCommit = createSelector(
+  getFilteredCommits,
+  commits => {
+    return commits[0];
+  }
+);
+
+export const getLastFilteredCommit = createSelector(
+  getFilteredCommits,
+  commits => {
+    return commits[commits.length - 1];
+  }
+);
+
 export const getFilteredSortedCommits = createSelector(
   getFilteredCommits,
   getCommitsContainerSort,

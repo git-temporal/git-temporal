@@ -4,7 +4,7 @@ import { style } from 'app/styles';
 import { ITimeplotState, ICommit, DispatchProps } from 'app/interfaces';
 
 import { getTimeplotContainerState } from 'app/selectors';
-import { setStartDate, setEndDate } from 'app/actions';
+import { setDates } from 'app/actions/setDates';
 
 import { debounce } from 'app/utilities/debounce';
 import { throttle } from 'app/utilities/throttle';
@@ -260,27 +260,8 @@ export class Timeplot extends React.Component<
   };
 
   private setDates(shiftKey, date) {
-    const epochDate = Math.floor(date / 1000);
     const { dispatch, startDate, endDate } = this.props;
-    if (!startDate && !endDate) {
-      dispatch(setStartDate(epochDate));
-    } else if (startDate) {
-      if (shiftKey) {
-        if (epochDate < startDate) {
-          dispatch(setEndDate(startDate));
-          dispatch(setStartDate(epochDate));
-        } else {
-          dispatch(setEndDate(epochDate));
-        }
-      } else {
-        if (endDate && epochDate > endDate) {
-          dispatch(setStartDate(endDate));
-          dispatch(setEndDate(epochDate));
-        } else {
-          dispatch(setStartDate(epochDate));
-        }
-      }
-    }
+    setDates(dispatch, startDate, endDate, shiftKey, date);
   }
 
   private addCustomZooms() {

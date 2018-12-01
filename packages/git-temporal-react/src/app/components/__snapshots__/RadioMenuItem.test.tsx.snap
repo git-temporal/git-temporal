@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`components/RadioMenuItem when rendered with isSelected=false it should match snapshot 1`] = `
-<MenuItem
+<Selectable
   onClick={[MockFunction]}
   style={Object {}}
 >
@@ -21,11 +21,11 @@ exports[`components/RadioMenuItem when rendered with isSelected=false it should 
     />
     This is a radio menu item
   </div>
-</MenuItem>
+</Selectable>
 `;
 
 exports[`components/RadioMenuItem when rendered with isSelected=true it should match snapshot 1`] = `
-<MenuItem
+<Selectable
   onClick={[MockFunction]}
   style={Object {}}
 >
@@ -45,5 +45,5 @@ exports[`components/RadioMenuItem when rendered with isSelected=true it should m
     />
     This is a radio menu item
   </div>
-</MenuItem>
+</Selectable>
 `;

@@ -252,11 +252,13 @@ export const getDifferenceViewerContainerState = createSelector(
 );
 
 export const getDifferenceViewerHeaderState = createSelector(
+  getSelectedPath,
   getCommitsForTimeplot, // not filtered by start and end dates
   getFilteredCommits,
   getStartDate,
   getEndDate,
-  (timeplotCommits, filteredCommits, startDate, endDate) => ({
+  (selectedPath, timeplotCommits, filteredCommits, startDate, endDate) => ({
+    selectedPath,
     startDate,
     endDate,
     timeplotCommits,

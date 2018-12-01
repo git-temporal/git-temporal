@@ -4,11 +4,7 @@ import { createSelector } from 'reselect';
 import { IModifiedFile } from 'app/interfaces';
 import { FilesContainerSorts } from 'app/actions/ActionTypes';
 
-import {
-  getFilesContainerSort,
-  getSearch,
-  getModifiedFiles,
-} from './stateVars';
+import { getFilesContainerSort, getSearch } from './stateVars';
 import { hasSearch, matchesFileSearch, fileSearchRegex } from './search';
 import { getFilteredCommits } from './commits';
 
@@ -96,35 +92,54 @@ export const getFilteredFilesForFilesContainer = createSelector(
   }
 );
 
-export const convertModifiedFilesToTree = createSelector(
+export const getModifiedFiles = state => state.modifiedFiles;
+export const convertModifiedFilesToTrees = createSelector(
   getModifiedFiles,
   (modifiedFiles: IModifiedFile[]) => {
+    const returnValues = {
+      leftTree: {},
+      rightTree: {},
+    };
     if (!modifiedFiles) {
       return {};
     }
-    const fileTree = {};
     let index = 0;
     modifiedFiles.forEach(file => {
-      let currentNode = fileTree;
-      const parsedPaths = file.path.split(path.sep);
-      for (const pathPart of parsedPaths) {
-        let nodeForPart = currentNode[pathPart];
-        if (!nodeForPart) {
-          nodeForPart = currentNode[pathPart] = {
-            index,
-            status: file.status,
-            delta: file.delta,
-            nodes: {},
-          };
-          index += 1;
-        } else {
-          nodeForPart.status =
-            file.status === 'modified' ? 'modified' : nodeForPart.status;
-          nodeForPart.delta = nodeForPart.delta + file.delta;
-        }
-        currentNode = nodeForPart.nodes;
+      let trees = [];
+      switch (file.status) {
+        case 'added':
+          trees = [returnValues.rightTree];
+          break;
+        case 'deleted':
+          trees = [returnValues.leftTree];
+          break;
+        case 'modified':
+          trees = [returnValues.leftTree, returnValues.rightTree];
+          break;
+      }
+      for (const tree of trees) {
+        let currentNode = tree;
+        const parsedPaths = file.path.split(path.sep);
+        parsedPaths.forEach((pathPart, pathPartIndex) => {
+          let nodeForPart = currentNode[pathPart];
+          if (!nodeForPart) {
+            nodeForPart = currentNode[pathPart] = {
+              index,
+              status: file.status,
+              delta: file.delta,
+              fullPath: parsedPaths.slice(0, pathPartIndex + 1).join(path.sep),
+              nodes: {},
+            };
+            index += 1;
+          } else {
+            nodeForPart.status =
+              file.status === 'modified' ? 'modified' : nodeForPart.status;
+            nodeForPart.delta = nodeForPart.delta + file.delta;
+          }
+          currentNode = nodeForPart.nodes;
+        });
       }
     });
-    return fileTree;
+    return returnValues;
   }
 );
