@@ -6,5 +6,6 @@ baseConfig.plugins.push([
   {
     root: ['./src'],
   },
+  'babel-plugin-dynamic-import-node',
 ]);
 module.exports = baseConfig;

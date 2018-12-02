@@ -19,6 +19,7 @@ exports[`components/StackedLabelHeader when rendered with required props it shou
         "color": "#333333",
         "fontSize": 18,
         "fontWeight": "bold",
+        "lineHeight": 1.35,
         "marginBottom": 20,
         "marginRight": 20,
       }

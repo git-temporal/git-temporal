@@ -635,7 +635,7 @@ Object {
     },
   ],
   "filesContainerSort": undefined,
-  "isFileSelected": false,
+  "isFileSelected": undefined,
   "search": "",
 }
 `;
@@ -652,6 +652,7 @@ exports[`containers/Files when rendered without props it should match snapshot (
       "flexGrow": 1,
       "marginRight": 10,
       "maxWidth": 400,
+      "minWidth": 400,
       "padding": 10,
       "position": "relative",
     }
@@ -666,6 +667,7 @@ exports[`containers/Files when rendered without props it should match snapshot (
         "flexGrow": 0,
         "fontSize": 18,
         "fontWeight": "bold",
+        "lineHeight": 1.35,
         "marginBottom": 20,
         "marginRight": 30,
         "position": "relative",
@@ -679,13 +681,21 @@ exports[`containers/Files when rendered without props it should match snapshot (
       time
     </span>
   </div>
-  <AutoSizer
-    disableHeight={false}
-    disableWidth={false}
-    onResize={[Function]}
-    style={Object {}}
+  <div
+    style={
+      Object {
+        "flexGrow": 1,
+      }
+    }
   >
-    <Component />
-  </AutoSizer>
+    <AutoSizer
+      disableHeight={false}
+      disableWidth={false}
+      onResize={[Function]}
+      style={Object {}}
+    >
+      <Component />
+    </AutoSizer>
+  </div>
 </div>
 `;

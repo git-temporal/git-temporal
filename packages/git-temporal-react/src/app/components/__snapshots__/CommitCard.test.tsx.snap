@@ -25,6 +25,7 @@ exports[`components/CommitCard when rendered with required props it should match
           "flexDirection": "row",
           "fontSize": 11,
           "fontWeight": "normal",
+          "lineHeight": 1.35,
           "marginBottom": 10,
         }
       }
@@ -60,6 +61,7 @@ exports[`components/CommitCard when rendered with required props it should match
           "display": "block",
           "fontSize": 16,
           "fontWeight": "normal",
+          "lineHeight": 1.35,
           "marginBottom": 10,
           "marginLeft": 5,
         }
@@ -99,6 +101,7 @@ exports[`components/CommitCard when rendered with required props it should match
           "display": "block",
           "fontSize": 13,
           "fontWeight": "normal",
+          "lineHeight": 1.35,
           "marginBottom": 10,
           "marginLeft": 5,
         }

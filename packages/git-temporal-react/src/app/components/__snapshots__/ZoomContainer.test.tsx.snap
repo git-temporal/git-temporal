@@ -46,6 +46,7 @@ exports[`components/ZoomContainer when rendered it should match snapshot 1`] = `
           "color": "#333333",
           "fontSize": 13,
           "fontWeight": "normal",
+          "lineHeight": 1.35,
         }
       }
     >

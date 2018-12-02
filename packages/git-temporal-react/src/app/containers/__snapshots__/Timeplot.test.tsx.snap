@@ -139,7 +139,11 @@ exports[`components/Timeplot when rendered it should match snapshot (it should h
   }
   dispatch={[MockFunction]}
   endDate={1526296167}
-  highlightedCommitIds=["56493bf1ebfab3ec102fe017f30fa4f81ba6a256"]
+  highlightedCommitIds={
+    Array [
+      "56493bf1ebfab3ec102fe017f30fa4f81ba6a256",
+    ]
+  }
   selectedPath="some/path/to/nowhere"
   startDate={1537212012}
 >
@@ -152,6 +156,7 @@ exports[`components/Timeplot when rendered it should match snapshot (it should h
         "display": "flex",
         "flexDirection": "column",
         "flexGrow": 0,
+        "flexShrink": 0,
         "marginRight": 10,
         "marginTop": 10,
         "minHeight": 100,
@@ -182,190 +187,190 @@ exports[`components/Timeplot when rendered it should match snapshot (it should h
           scrollLeft={0}
         >
           <div
-            data-testid="outerContainer"
-            onScroll={[Function]}
             style={
               Object {
-                "height": "100%",
-                "overflowX": "scroll",
-                "position": [Function],
+                "display": "flex",
+                "position": "relative",
                 "width": "100%",
               }
             }
           >
             <div
-              data-testid="innerContainer"
+              data-testid="outerContainer"
+              onScroll={[Function]}
               style={
                 Object {
-                  "display": "block",
-                  "position": "relative",
+                  "height": "100%",
+                  "overflowX": "scroll",
+                  "position": [Function],
+                  "scrollBehavior": "smooth",
+                  "width": "100%",
                 }
               }
             >
               <div
+                data-testid="innerContainer"
                 style={
                   Object {
-                    "height": "100%",
-                    "width": "100%",
+                    "display": "block",
+                    "position": "relative",
                   }
                 }
               >
-                <TimeplotGraph
-                  commits={
-                    Array [
-                      Object {
-                        "authorDate": 1537541919,
-                        "authorName": "Bee Wilkerson",
-                        "body": "",
-                        "files": Array [
-                          Object {
-                            "linesAdded": 2,
-                            "linesDeleted": 649,
-                            "name": "README.md",
-                          },
-                        ],
-                        "hash": "c698a0f01d",
-                        "id": "c698a0f01de1fa682443510920a2dafc2440d6c8",
-                        "linesAdded": 2,
-                        "linesDeleted": 649,
-                        "message": "Explain why this fork exists in README.md",
-                        "relativeDate": "2 days ago",
-                      },
-                      Object {
-                        "authorDate": 1537272890,
-                        "authorName": "Tobias Nießen",
-                        "body": "Calling setAuthTag multiple times can result in hard to detect bugssince to the user, it is unclear which invocation actually affectedOpenSSL.PR-URL: https://github.com/nodejs/node/pull/22931Reviewed-By: Anna Henningsen <anna@addaleax.net>Reviewed-By: James M Snell <jasnell@gmail.com>Reviewed-By: Ujjwal Sharma <usharma1998@gmail.com>",
-                        "files": Array [
-                          Object {
-                            "linesAdded": 1,
-                            "linesDeleted": 1,
-                            "name": "doc/api/crypto.md",
-                          },
-                          Object {
-                            "linesAdded": 2,
-                            "linesDeleted": 5,
-                            "name": "src/node_crypto.cc",
-                          },
-                          Object {
-                            "linesAdded": 26,
-                            "linesDeleted": 0,
-                            "name": "test/parallel/test-crypto-authenticated.js",
-                          },
-                        ],
-                        "hash": "058c5b81cd",
-                        "id": "058c5b81cdbabe8989a194ba5d388f4c230f4af6",
-                        "linesAdded": 29,
-                        "linesDeleted": 6,
-                        "message": "crypto: do not allow multiple calls to setAuthTag",
-                        "relativeDate": "2 days ago",
-                      },
-                      Object {
-                        "authorDate": 1526296167,
-                        "authorName": "Daniel Bevenius",
-                        "body": "This commit adds a --completion-bash option to node which can besourced to provide bash code completion for node options.Usage:$ node --completion-bash  > node_bash_completion$ source node_bash_completion$ node --[tab]PR-URL: https://github.com/nodejs/node/pull/20713Reviewed-By: Anna Henningsen <anna@addaleax.net>Reviewed-By: James M Snell <jasnell@gmail.com>Reviewed-By: Denys Otrishko <shishugi@gmail.com>",
-                        "files": Array [
-                          Object {
-                            "linesAdded": 11,
-                            "linesDeleted": 0,
-                            "name": "doc/api/cli.md",
-                          },
-                          Object {
-                            "linesAdded": 3,
-                            "linesDeleted": 0,
-                            "name": "doc/node.1",
-                          },
-                          Object {
-                            "linesAdded": 25,
-                            "linesDeleted": 0,
-                            "name": "lib/internal/bash_completion.js",
-                          },
-                          Object {
-                            "linesAdded": 7,
-                            "linesDeleted": 1,
-                            "name": "lib/internal/bootstrap/node.js",
-                          },
-                          Object {
-                            "linesAdded": 1,
-                            "linesDeleted": 0,
-                            "name": "node.gyp",
-                          },
-                          Object {
-                            "linesAdded": 3,
-                            "linesDeleted": 0,
-                            "name": "src/node_options.cc",
-                          },
-                          Object {
-                            "linesAdded": 1,
-                            "linesDeleted": 0,
-                            "name": "src/node_options.h",
-                          },
-                        ],
-                        "hash": "56493bf1eb",
-                        "id": "56493bf1ebfab3ec102fe017f30fa4f81ba6a256",
-                        "linesAdded": 51,
-                        "linesDeleted": 1,
-                        "message": "tools: add bash completion for node",
-                        "relativeDate": "2 days ago",
-                      },
-                      Object {
-                        "authorDate": 1537212012,
-                        "authorName": "Michaël Zasso",
-                        "body": "Replace references to the outdated \`update-v8\` tool to its replacementin \`node-core-utils\`PR-URL: https://github.com/nodejs/node/pull/22913Reviewed-By: Richard Lau <riclau@uk.ibm.com>Reviewed-By: Colin Ihrig <cjihrig@gmail.com>Reviewed-By: Weijia Wang <starkwang@126.com>Reviewed-By: Sakthipriyan Vairamani <thechargingvolcano@gmail.com>Reviewed-By: Joyee Cheung <joyeec9h3@gmail.com>Reviewed-By: Luigi Pinca <luigipinca@gmail.com>Reviewed-By: James M Snell <jasnell@gmail.com>",
-                        "files": Array [
-                          Object {
-                            "linesAdded": 8,
-                            "linesDeleted": 8,
-                            "name": "doc/guides/maintaining-V8.md",
-                          },
-                        ],
-                        "hash": "408e8ce22c",
-                        "id": "408e8ce22ce7436e88a9977b4dc99fc3c431fc67",
-                        "linesAdded": 8,
-                        "linesDeleted": 8,
-                        "message": "doc: update maintaining V8 guide",
-                        "relativeDate": "3 days ago",
-                      },
-                      Object {
-                        "authorDate": 1537269982,
-                        "authorName": "Ruben Bridgewater",
-                        "body": "Currently the documentation is not specific how fast-tracking shouldbe applied. This specifies exactly how things should be done to preventconfusion.PR-URL: https://github.com/nodejs/node/pull/22929Reviewed-By: Denys Otrishko <shishugi@gmail.com>Reviewed-By: Anna Henningsen <anna@addaleax.net>Reviewed-By: Tobias Nießen <tniessen@tnie.de>Reviewed-By: Vse Mozhet Byt <vsemozhetbyt@gmail.com>Reviewed-By: John-David Dalton <john.david.dalton@gmail.com>Reviewed-By: Matteo Collina <matteo.collina@gmail.com>Reviewed-By: Luigi Pinca <luigipinca@gmail.com>Reviewed-By: Michaël Zasso <targos@protonmail.com>Reviewed-By: Weijia Wang <starkwang@126.com>Reviewed-By: Richard Lau <riclau@uk.ibm.com>Reviewed-By: Matheus Marchini <mat@mmarchini.me>Reviewed-By: Sakthipriyan Vairamani <thechargingvolcano@gmail.com>Reviewed-By: Yuta Hiroto <hello@hiroppy.me>Reviewed-By: Rich Trott <rtrott@gmail.com>Reviewed-By: Trivikram Kamat <trivikr.dev@gmail.com>Reviewed-By: George Adams <george.adams@uk.ibm.com>",
-                        "files": Array [
-                          Object {
-                            "linesAdded": 6,
-                            "linesDeleted": 3,
-                            "name": "COLLABORATOR_GUIDE.md",
-                          },
-                        ],
-                        "hash": "54af9738b9",
-                        "id": "54af9738b9fad1c1e46ea9170037146324cd152e",
-                        "linesAdded": 6,
-                        "linesDeleted": 3,
-                        "message": "doc: specify fast-tracking",
-                        "relativeDate": "3 days ago",
-                      },
-                    ]
-                  }
-                  endDate={1526296167}
-                  forceRender={0}
-                  highlightedCommitIds=["56493bf1ebfab3ec102fe017f30fa4f81ba6a256"]
-                  onMouseDown={[Function]}
-                  onMouseMove={[Function]}
-                  onMouseUp={[Function]}
-                  startDate={1537212012}
+                <div
                   style={
                     Object {
                       "height": "100%",
-                      "position": "relative",
                       "width": "100%",
                     }
                   }
                 >
-                  <div
+                  <TimeplotGraph
+                    commits={
+                      Array [
+                        Object {
+                          "authorDate": 1537541919,
+                          "authorName": "Bee Wilkerson",
+                          "body": "",
+                          "files": Array [
+                            Object {
+                              "linesAdded": 2,
+                              "linesDeleted": 649,
+                              "name": "README.md",
+                            },
+                          ],
+                          "hash": "c698a0f01d",
+                          "id": "c698a0f01de1fa682443510920a2dafc2440d6c8",
+                          "linesAdded": 2,
+                          "linesDeleted": 649,
+                          "message": "Explain why this fork exists in README.md",
+                          "relativeDate": "2 days ago",
+                        },
+                        Object {
+                          "authorDate": 1537272890,
+                          "authorName": "Tobias Nießen",
+                          "body": "Calling setAuthTag multiple times can result in hard to detect bugssince to the user, it is unclear which invocation actually affectedOpenSSL.PR-URL: https://github.com/nodejs/node/pull/22931Reviewed-By: Anna Henningsen <anna@addaleax.net>Reviewed-By: James M Snell <jasnell@gmail.com>Reviewed-By: Ujjwal Sharma <usharma1998@gmail.com>",
+                          "files": Array [
+                            Object {
+                              "linesAdded": 1,
+                              "linesDeleted": 1,
+                              "name": "doc/api/crypto.md",
+                            },
+                            Object {
+                              "linesAdded": 2,
+                              "linesDeleted": 5,
+                              "name": "src/node_crypto.cc",
+                            },
+                            Object {
+                              "linesAdded": 26,
+                              "linesDeleted": 0,
+                              "name": "test/parallel/test-crypto-authenticated.js",
+                            },
+                          ],
+                          "hash": "058c5b81cd",
+                          "id": "058c5b81cdbabe8989a194ba5d388f4c230f4af6",
+                          "linesAdded": 29,
+                          "linesDeleted": 6,
+                          "message": "crypto: do not allow multiple calls to setAuthTag",
+                          "relativeDate": "2 days ago",
+                        },
+                        Object {
+                          "authorDate": 1526296167,
+                          "authorName": "Daniel Bevenius",
+                          "body": "This commit adds a --completion-bash option to node which can besourced to provide bash code completion for node options.Usage:$ node --completion-bash  > node_bash_completion$ source node_bash_completion$ node --[tab]PR-URL: https://github.com/nodejs/node/pull/20713Reviewed-By: Anna Henningsen <anna@addaleax.net>Reviewed-By: James M Snell <jasnell@gmail.com>Reviewed-By: Denys Otrishko <shishugi@gmail.com>",
+                          "files": Array [
+                            Object {
+                              "linesAdded": 11,
+                              "linesDeleted": 0,
+                              "name": "doc/api/cli.md",
+                            },
+                            Object {
+                              "linesAdded": 3,
+                              "linesDeleted": 0,
+                              "name": "doc/node.1",
+                            },
+                            Object {
+                              "linesAdded": 25,
+                              "linesDeleted": 0,
+                              "name": "lib/internal/bash_completion.js",
+                            },
+                            Object {
+                              "linesAdded": 7,
+                              "linesDeleted": 1,
+                              "name": "lib/internal/bootstrap/node.js",
+                            },
+                            Object {
+                              "linesAdded": 1,
+                              "linesDeleted": 0,
+                              "name": "node.gyp",
+                            },
+                            Object {
+                              "linesAdded": 3,
+                              "linesDeleted": 0,
+                              "name": "src/node_options.cc",
+                            },
+                            Object {
+                              "linesAdded": 1,
+                              "linesDeleted": 0,
+                              "name": "src/node_options.h",
+                            },
+                          ],
+                          "hash": "56493bf1eb",
+                          "id": "56493bf1ebfab3ec102fe017f30fa4f81ba6a256",
+                          "linesAdded": 51,
+                          "linesDeleted": 1,
+                          "message": "tools: add bash completion for node",
+                          "relativeDate": "2 days ago",
+                        },
+                        Object {
+                          "authorDate": 1537212012,
+                          "authorName": "Michaël Zasso",
+                          "body": "Replace references to the outdated \`update-v8\` tool to its replacementin \`node-core-utils\`PR-URL: https://github.com/nodejs/node/pull/22913Reviewed-By: Richard Lau <riclau@uk.ibm.com>Reviewed-By: Colin Ihrig <cjihrig@gmail.com>Reviewed-By: Weijia Wang <starkwang@126.com>Reviewed-By: Sakthipriyan Vairamani <thechargingvolcano@gmail.com>Reviewed-By: Joyee Cheung <joyeec9h3@gmail.com>Reviewed-By: Luigi Pinca <luigipinca@gmail.com>Reviewed-By: James M Snell <jasnell@gmail.com>",
+                          "files": Array [
+                            Object {
+                              "linesAdded": 8,
+                              "linesDeleted": 8,
+                              "name": "doc/guides/maintaining-V8.md",
+                            },
+                          ],
+                          "hash": "408e8ce22c",
+                          "id": "408e8ce22ce7436e88a9977b4dc99fc3c431fc67",
+                          "linesAdded": 8,
+                          "linesDeleted": 8,
+                          "message": "doc: update maintaining V8 guide",
+                          "relativeDate": "3 days ago",
+                        },
+                        Object {
+                          "authorDate": 1537269982,
+                          "authorName": "Ruben Bridgewater",
+                          "body": "Currently the documentation is not specific how fast-tracking shouldbe applied. This specifies exactly how things should be done to preventconfusion.PR-URL: https://github.com/nodejs/node/pull/22929Reviewed-By: Denys Otrishko <shishugi@gmail.com>Reviewed-By: Anna Henningsen <anna@addaleax.net>Reviewed-By: Tobias Nießen <tniessen@tnie.de>Reviewed-By: Vse Mozhet Byt <vsemozhetbyt@gmail.com>Reviewed-By: John-David Dalton <john.david.dalton@gmail.com>Reviewed-By: Matteo Collina <matteo.collina@gmail.com>Reviewed-By: Luigi Pinca <luigipinca@gmail.com>Reviewed-By: Michaël Zasso <targos@protonmail.com>Reviewed-By: Weijia Wang <starkwang@126.com>Reviewed-By: Richard Lau <riclau@uk.ibm.com>Reviewed-By: Matheus Marchini <mat@mmarchini.me>Reviewed-By: Sakthipriyan Vairamani <thechargingvolcano@gmail.com>Reviewed-By: Yuta Hiroto <hello@hiroppy.me>Reviewed-By: Rich Trott <rtrott@gmail.com>Reviewed-By: Trivikram Kamat <trivikr.dev@gmail.com>Reviewed-By: George Adams <george.adams@uk.ibm.com>",
+                          "files": Array [
+                            Object {
+                              "linesAdded": 6,
+                              "linesDeleted": 3,
+                              "name": "COLLABORATOR_GUIDE.md",
+                            },
+                          ],
+                          "hash": "54af9738b9",
+                          "id": "54af9738b9fad1c1e46ea9170037146324cd152e",
+                          "linesAdded": 6,
+                          "linesDeleted": 3,
+                          "message": "doc: specify fast-tracking",
+                          "relativeDate": "3 days ago",
+                        },
+                      ]
+                    }
+                    endDate={1526296167}
+                    forceRender={0}
+                    highlightedCommitIds={
+                      Array [
+                        "56493bf1ebfab3ec102fe017f30fa4f81ba6a256",
+                      ]
+                    }
                     onMouseDown={[Function]}
-                    onMouseEnter={[Function]}
-                    onMouseLeave={[Function]}
                     onMouseMove={[Function]}
                     onMouseUp={[Function]}
+                    startDate={1537212012}
                     style={
                       Object {
                         "height": "100%",
@@ -375,6 +380,11 @@ exports[`components/Timeplot when rendered it should match snapshot (it should h
                     }
                   >
                     <div
+                      onMouseDown={[Function]}
+                      onMouseEnter={[Function]}
+                      onMouseLeave={[Function]}
+                      onMouseMove={[Function]}
+                      onMouseUp={[Function]}
                       style={
                         Object {
                           "height": "100%",
@@ -382,60 +392,70 @@ exports[`components/Timeplot when rendered it should match snapshot (it should h
                           "width": "100%",
                         }
                       }
-                    />
-                    <div
-                      style={
-                        Object {
-                          "backgroundColor": "red",
-                          "height": 130,
-                          "opacity": 0.5,
-                          "position": "absolute",
-                          "top": 0,
-                          "width": 3,
-                          "zIndex": 1,
+                    >
+                      <div
+                        style={
+                          Object {
+                            "height": "100%",
+                            "position": "relative",
+                            "width": "100%",
+                          }
                         }
-                      }
-                    />
-                    <div
-                      style={
-                        Object {
-                          "backgroundColor": "green",
-                          "height": 130,
-                          "opacity": 0.5,
-                          "position": "absolute",
-                          "top": 0,
-                          "width": 3,
-                          "zIndex": 1,
+                      />
+                      <div
+                        style={
+                          Object {
+                            "backgroundColor": "red",
+                            "height": 130,
+                            "opacity": 0.5,
+                            "position": "absolute",
+                            "top": 0,
+                            "width": 3,
+                            "zIndex": 1,
+                          }
                         }
+                      />
+                      <div
+                        style={
+                          Object {
+                            "backgroundColor": "green",
+                            "height": 130,
+                            "opacity": 0.5,
+                            "position": "absolute",
+                            "top": 0,
+                            "width": 3,
+                            "zIndex": 1,
+                          }
+                        }
+                      />
+                    </div>
+                  </TimeplotGraph>
+                  <div
+                    onMouseEnter={[Function]}
+                    onMouseMove={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "lightskyblue",
+                        "height": 130,
+                        "left": -40,
+                        "opacity": 0.5,
+                        "position": "absolute",
+                        "top": 0,
+                        "width": 10,
+                        "zIndex": 1,
                       }
-                    />
-                  </div>
-                </TimeplotGraph>
-                <div
-                  onMouseEnter={[Function]}
-                  onMouseMove={[Function]}
-                  style={
-                    Object {
-                      "backgroundColor": "lightskyblue",
-                      "height": 130,
-                      "left": -40,
-                      "opacity": 0.5,
-                      "position": "absolute",
-                      "top": 0,
-                      "width": 10,
-                      "zIndex": 1,
                     }
-                  }
-                />
-                <Component
-                  commits={Array []}
-                  endDate={null}
-                  isOpen={false}
-                  left={-20}
-                  onClose={[Function]}
-                  onCommitSelected={[Function]}
-                  startDate={null}
-                />
+                  />
+                  <Component
+                    commits={Array []}
+                    endDate={null}
+                    isOpen={false}
+                    left={-20}
+                    onClose={[Function]}
+                    onCommitSelected={[Function]}
+                    startDate={null}
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -456,6 +476,7 @@ exports[`components/Timeplot when rendered it should match snapshot (it should h
                 "color": "#333333",
                 "fontSize": 13,
                 "fontWeight": "normal",
+                "lineHeight": 1.35,
               }
             }
           >
@@ -515,6 +536,7 @@ exports[`components/Timeplot when rendered it should match snapshot (it should h
           "color": "#333333",
           "fontSize": 13,
           "fontWeight": "normal",
+          "lineHeight": 1.35,
           "textAlign": "center",
           "width": "100%",
         }

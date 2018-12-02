@@ -4,7 +4,6 @@ exports[`containers/Search when rendered with search text and then on focus, it 
 <div
   style={
     Object {
-      "float": "right",
       "overflow": "visible",
       "position": "relative",
       "width": 250,
@@ -61,6 +60,7 @@ exports[`containers/Search when rendered with search text and then on focus, it 
             "color": "#333333",
             "fontSize": 13,
             "fontWeight": "normal",
+            "lineHeight": 1.35,
           }
         }
       >
@@ -81,6 +81,7 @@ exports[`containers/Search when rendered with search text and then on focus, it 
             "color": "#333333",
             "fontSize": 13,
             "fontWeight": "normal",
+            "lineHeight": 1.35,
           }
         }
       >
@@ -101,6 +102,7 @@ exports[`containers/Search when rendered with search text and then on focus, it 
             "color": "#333333",
             "fontSize": 13,
             "fontWeight": "normal",
+            "lineHeight": 1.35,
           }
         }
       >
@@ -117,7 +119,6 @@ exports[`containers/Search when rendered with search text it should match snapsh
 <div
   style={
     Object {
-      "float": "right",
       "overflow": "visible",
       "position": "relative",
       "width": 250,
@@ -174,6 +175,7 @@ exports[`containers/Search when rendered with search text it should match snapsh
             "color": "#333333",
             "fontSize": 13,
             "fontWeight": "normal",
+            "lineHeight": 1.35,
           }
         }
       >
@@ -194,6 +196,7 @@ exports[`containers/Search when rendered with search text it should match snapsh
             "color": "#333333",
             "fontSize": 13,
             "fontWeight": "normal",
+            "lineHeight": 1.35,
           }
         }
       >
@@ -214,6 +217,7 @@ exports[`containers/Search when rendered with search text it should match snapsh
             "color": "#333333",
             "fontSize": 13,
             "fontWeight": "normal",
+            "lineHeight": 1.35,
           }
         }
       >
@@ -230,7 +234,6 @@ exports[`containers/Search when rendered without props it should match snapshot 
 <div
   style={
     Object {
-      "float": "right",
       "overflow": "visible",
       "position": "relative",
       "width": 250,
@@ -286,6 +289,7 @@ exports[`containers/Search when rendered without props it should match snapshot 
             "color": "#333333",
             "fontSize": 13,
             "fontWeight": "normal",
+            "lineHeight": 1.35,
           }
         }
       >
@@ -305,6 +309,7 @@ exports[`containers/Search when rendered without props it should match snapshot 
             "color": "#333333",
             "fontSize": 13,
             "fontWeight": "normal",
+            "lineHeight": 1.35,
           }
         }
       >
@@ -324,6 +329,7 @@ exports[`containers/Search when rendered without props it should match snapshot 
             "color": "#333333",
             "fontSize": 13,
             "fontWeight": "normal",
+            "lineHeight": 1.35,
           }
         }
       >

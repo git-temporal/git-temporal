@@ -5,34 +5,45 @@ exports[`components/HorizontalScroller when rendered with 100% width div it shou
   onScroll={[MockFunction]}
 >
   <div
-    data-testid="outerContainer"
-    onScroll={[Function]}
     style={
       Object {
-        "height": "100%",
-        "overflowX": "scroll",
-        "position": [Function],
+        "display": "flex",
+        "position": "relative",
         "width": "100%",
       }
     }
   >
     <div
-      data-testid="innerContainer"
+      data-testid="outerContainer"
+      onScroll={[Function]}
       style={
         Object {
-          "display": "block",
-          "position": "relative",
+          "height": "100%",
+          "overflowX": "scroll",
+          "position": [Function],
+          "scrollBehavior": "smooth",
+          "width": "100%",
         }
       }
     >
       <div
+        data-testid="innerContainer"
         style={
           Object {
-            "width": "100%",
+            "display": "block",
+            "position": "relative",
           }
         }
       >
-        This is a 100% width div
+        <div
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+        >
+          This is a 100% width div
+        </div>
       </div>
     </div>
   </div>
@@ -45,34 +56,45 @@ exports[`components/HorizontalScroller when rendered with 200% width div and the
   scrollLeft={100}
 >
   <div
-    data-testid="outerContainer"
-    onScroll={[Function]}
     style={
       Object {
-        "height": "100%",
-        "overflowX": "scroll",
-        "position": [Function],
+        "display": "flex",
+        "position": "relative",
         "width": "100%",
       }
     }
   >
     <div
-      data-testid="innerContainer"
+      data-testid="outerContainer"
+      onScroll={[Function]}
       style={
         Object {
-          "display": "block",
-          "position": "relative",
+          "height": "100%",
+          "overflowX": "scroll",
+          "position": [Function],
+          "scrollBehavior": "smooth",
+          "width": "100%",
         }
       }
     >
       <div
+        data-testid="innerContainer"
         style={
           Object {
-            "width": "200%",
+            "display": "block",
+            "position": "relative",
           }
         }
       >
-        This is a 200% width div
+        <div
+          style={
+            Object {
+              "width": "200%",
+            }
+          }
+        >
+          This is a 200% width div
+        </div>
       </div>
     </div>
   </div>
@@ -84,34 +106,45 @@ exports[`components/HorizontalScroller when rendered with 200% width div it shou
   onScroll={[MockFunction]}
 >
   <div
-    data-testid="outerContainer"
-    onScroll={[Function]}
     style={
       Object {
-        "height": "100%",
-        "overflowX": "scroll",
-        "position": [Function],
+        "display": "flex",
+        "position": "relative",
         "width": "100%",
       }
     }
   >
     <div
-      data-testid="innerContainer"
+      data-testid="outerContainer"
+      onScroll={[Function]}
       style={
         Object {
-          "display": "block",
-          "position": "relative",
+          "height": "100%",
+          "overflowX": "scroll",
+          "position": [Function],
+          "scrollBehavior": "smooth",
+          "width": "100%",
         }
       }
     >
       <div
+        data-testid="innerContainer"
         style={
           Object {
-            "width": "200%",
+            "display": "block",
+            "position": "relative",
           }
         }
       >
-        This is a 200% width div
+        <div
+          style={
+            Object {
+              "width": "200%",
+            }
+          }
+        >
+          This is a 200% width div
+        </div>
       </div>
     </div>
   </div>

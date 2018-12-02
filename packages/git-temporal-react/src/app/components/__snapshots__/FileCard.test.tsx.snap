@@ -22,6 +22,7 @@ exports[`components/FileCard when rendered with required props it should match s
         "display": "block",
         "fontSize": 16,
         "fontWeight": "normal",
+        "lineHeight": 1.35,
       }
     }
   />
@@ -36,6 +37,7 @@ exports[`components/FileCard when rendered with required props it should match s
         "color": "#333333",
         "fontSize": 13,
         "fontWeight": "normal",
+        "lineHeight": 1.35,
       }
     }
   >

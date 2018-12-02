@@ -13,6 +13,7 @@ exports[`components/TimeplotPopup when rendered with all of the things it should
       "fontSize": 13,
       "fontWeight": "normal",
       "left": 0,
+      "lineHeight": 1.35,
       "position": "fixed",
       "right": "initial",
       "width": 350,
@@ -38,6 +39,7 @@ exports[`components/TimeplotPopup when rendered with all of the things it should
             "color": "#333333",
             "fontSize": 16,
             "fontWeight": "normal",
+            "lineHeight": 1.35,
           }
         }
       >
@@ -247,6 +249,7 @@ exports[`components/TimeplotPopup when rendered with all of the things it should
           "flexDirection": "column",
           "fontSize": 11,
           "fontWeight": "normal",
+          "lineHeight": 1.35,
           "marginBottom": -10,
           "marginLeft": -10,
           "marginRight": -10,

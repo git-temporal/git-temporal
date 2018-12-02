@@ -136,7 +136,7 @@ Object {
   ],
   "commitsContainerSort": undefined,
   "highlightedCommitIds": undefined,
-  "isFileSelected": false,
+  "isFileSelected": undefined,
   "selectedPath": "some/bogus/path",
 }
 `;
@@ -277,7 +277,7 @@ Object {
   ],
   "commitsContainerSort": undefined,
   "highlightedCommitIds": undefined,
-  "isFileSelected": false,
+  "isFileSelected": undefined,
   "selectedPath": "testPath1",
 }
 `;
@@ -418,7 +418,7 @@ Object {
   ],
   "commitsContainerSort": undefined,
   "highlightedCommitIds": undefined,
-  "isFileSelected": false,
+  "isFileSelected": undefined,
   "selectedPath": "testPath1",
 }
 `;

@@ -9,6 +9,7 @@ exports[`containers/FilesActionMenu when rendered with basic props it should mat
       "color": "#333333",
       "fontSize": 13,
       "fontWeight": "normal",
+      "lineHeight": 1.35,
       "position": "absolute",
       "right": 10,
     }
@@ -20,6 +21,7 @@ exports[`containers/FilesActionMenu when rendered with basic props it should mat
         "color": "#333333",
         "fontSize": 14,
         "fontWeight": "normal",
+        "lineHeight": 1.35,
         "marginBottom": 10,
         "marginRight": 10,
       }

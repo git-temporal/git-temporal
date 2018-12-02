@@ -1,5 +1,6 @@
 require('../../../babel-register');
 require('../src/testHelpers/mocks/actions');
+require('../src/testHelpers/mocks/monacoEditor');
 
 /* eslint-disable */
 const Enzyme = require('enzyme');

@@ -5,7 +5,7 @@ Object {
   "authors": 1,
   "commits": 5,
   "files": 13,
-  "isFileSelected": false,
+  "isFileSelected": undefined,
   "linesAdded": 96,
   "linesDeleted": 667,
   "maxAuthorDate": 1537541919,
@@ -22,6 +22,7 @@ exports[`containers/Stats when rendered and a directory is selected it should ma
       "borderRadius": 3,
       "display": "flex",
       "flexDirection": "row",
+      "flexShrink": 0,
       "marginBottom": -10,
       "marginRight": 10,
       "padding": 10,
@@ -32,44 +33,64 @@ exports[`containers/Stats when rendered and a directory is selected it should ma
   <Component
     label="Authors"
   >
-    <CommaNumber
+    <ExplodeOnChange
       value={5}
-    />
+    >
+      <CommaNumber
+        value={5}
+      />
+    </ExplodeOnChange>
   </Component>
   <Component
     label="Active Time Span"
   >
-    <EpochSpan
-      firstEpochTime={1536691136}
-      secondEpochTime={1538663085}
-    />
+    <ExplodeOnChange
+      value={3075354221}
+    >
+      <EpochSpan
+        firstEpochTime={1536691136}
+        secondEpochTime={1538663085}
+      />
+    </ExplodeOnChange>
   </Component>
   <Component
     label="Last Commit"
   >
     <div>
-      <EpochSpan
-        firstEpochTime={1538663085}
-        secondEpochTime={1539563458}
-      />
-      <span>
-         ago
-      </span>
+      <ExplodeOnChange
+        value={1538663085}
+      >
+        <EpochSpan
+          firstEpochTime={1538663085}
+          secondEpochTime={1539563458}
+        />
+        <span>
+           ago
+        </span>
+      </ExplodeOnChange>
     </div>
   </Component>
   <Component
     label="Lines Added"
   >
-    <CommaNumber
+    <ExplodeOnChange
       value={700}
-    />
+    >
+      <CommaNumber
+        value={700}
+      />
+    </ExplodeOnChange>
   </Component>
   <Component
     label="Lines Deleted"
   >
-    <CommaNumber
+    <ExplodeOnChange
       value={300}
-    />
+    >
+      <CommaNumber
+        value={300}
+      />
+    </ExplodeOnChange>
   </Component>
   <Component
     isSelected={false}
@@ -77,19 +98,27 @@ exports[`containers/Stats when rendered and a directory is selected it should ma
     onLabelClick={[Function]}
     title="Click to view Commits"
   >
-    <CommaNumber
+    <ExplodeOnChange
       value={52}
-    />
+    >
+      <CommaNumber
+        value={52}
+      />
+    </ExplodeOnChange>
   </Component>
   <Component
     isSelected={true}
     label="Files"
-    onLabelClick={null}
+    onLabelClick={[Function]}
     title="Click to view Files"
   >
-    <CommaNumber
+    <ExplodeOnChange
       value={110}
-    />
+    >
+      <CommaNumber
+        value={110}
+      />
+    </ExplodeOnChange>
   </Component>
 </div>
 `;
@@ -102,6 +131,7 @@ exports[`containers/Stats when rendered test props it should match snapshot (it 
       "borderRadius": 3,
       "display": "flex",
       "flexDirection": "row",
+      "flexShrink": 0,
       "marginBottom": -10,
       "marginRight": 10,
       "padding": 10,
@@ -112,44 +142,64 @@ exports[`containers/Stats when rendered test props it should match snapshot (it 
   <Component
     label="Authors"
   >
-    <CommaNumber
+    <ExplodeOnChange
       value={5}
-    />
+    >
+      <CommaNumber
+        value={5}
+      />
+    </ExplodeOnChange>
   </Component>
   <Component
     label="Active Time Span"
   >
-    <EpochSpan
-      firstEpochTime={1536691136}
-      secondEpochTime={1538663085}
-    />
+    <ExplodeOnChange
+      value={3075354221}
+    >
+      <EpochSpan
+        firstEpochTime={1536691136}
+        secondEpochTime={1538663085}
+      />
+    </ExplodeOnChange>
   </Component>
   <Component
     label="Last Commit"
   >
     <div>
-      <EpochSpan
-        firstEpochTime={1538663085}
-        secondEpochTime={1539563458}
-      />
-      <span>
-         ago
-      </span>
+      <ExplodeOnChange
+        value={1538663085}
+      >
+        <EpochSpan
+          firstEpochTime={1538663085}
+          secondEpochTime={1539563458}
+        />
+        <span>
+           ago
+        </span>
+      </ExplodeOnChange>
     </div>
   </Component>
   <Component
     label="Lines Added"
   >
-    <CommaNumber
+    <ExplodeOnChange
       value={700}
-    />
+    >
+      <CommaNumber
+        value={700}
+      />
+    </ExplodeOnChange>
   </Component>
   <Component
     label="Lines Deleted"
   >
-    <CommaNumber
+    <ExplodeOnChange
       value={300}
-    />
+    >
+      <CommaNumber
+        value={300}
+      />
+    </ExplodeOnChange>
   </Component>
   <Component
     isSelected={true}
@@ -157,9 +207,13 @@ exports[`containers/Stats when rendered test props it should match snapshot (it 
     onLabelClick={[Function]}
     title="Click to view Commits"
   >
-    <CommaNumber
+    <ExplodeOnChange
       value={52}
-    />
+    >
+      <CommaNumber
+        value={52}
+      />
+    </ExplodeOnChange>
   </Component>
   <Component
     isSelected={false}
@@ -167,9 +221,13 @@ exports[`containers/Stats when rendered test props it should match snapshot (it 
     onLabelClick={[Function]}
     title="Click to view Files"
   >
-    <CommaNumber
+    <ExplodeOnChange
       value={110}
-    />
+    >
+      <CommaNumber
+        value={110}
+      />
+    </ExplodeOnChange>
   </Component>
 </div>
 `;

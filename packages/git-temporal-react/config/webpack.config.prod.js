@@ -2,15 +2,21 @@
   A generic webpack for building React component library
 
 */
-const Path = require('path');
-const Webpack = require('webpack');
-const { StatsWriterPlugin } = require('webpack-stats-plugin');
+const path = require('path');
 
-const outputDir = Path.resolve(__dirname, '../dist/');
+const webpack = require('webpack');
+const { StatsWriterPlugin } = require('webpack-stats-plugin');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
+
+const outputDir = path.resolve(__dirname, '../dist/');
+const libDir = path.resolve(__dirname, '../lib');
+
+const devWebpack = require('./webpack.config.dev');
+const paths = require('./paths');
 
 module.exports = {
   name: 'git-temporal-react',
-  entry: './index.js',
+  entry: [require.resolve('./polyfills'), require.resolve('../index.js')],
   output: {
     path: outputDir,
     filename: `git-temporal-react.js`,
@@ -21,11 +27,15 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     // test directory isn't included in bundle but the linter config looks here for module resolution queues
-    modules: [Path.resolve(__dirname, '../src'), 'node_modules'],
+    modules: ['node_modules', libDir, paths.appNodeModules],
+    alias: {
+      app: libDir,
+    },
+    // plugins: devWebpack.resolve.plugins,
   },
-  resolveLoader: {
-    modules: [Path.resolve(__dirname, '../node_modules')],
-  },
+  // resolveLoader: {
+  //   modules: [path.resolve(__dirname, '../node_modules')],
+  // },
   externals: {
     react: {
       root: 'React',
@@ -40,27 +50,13 @@ module.exports = {
       amd: 'react-dom',
     },
   },
-  module: {
-    loaders: [
-      {
-        test: /\.(t|j)sx?$/,
-        // loaders: ['cache-loader', 'babel-loader'],
-        loaders: ['babel-loader'],
-      },
-      {
-        test: /\.(csv|txt|tpl)$/,
-        loader: 'raw-loader',
-      },
-      {
-        //inline base64 encoded images, fonts
-        test: /\.(png|jpg|gif|woff|woff2|svg|ttf|eot)$/,
-        loader: 'url-loader',
-      },
-    ],
-  },
+  module: devWebpack.module,
 
   plugins: [
-    // // This plugin produces app/webroot/v7/webpackStats.json
+    new webpack.optimize.LimitChunkCountPlugin({
+      maxChunks: 1,
+    }),
+    // // This plugin produces dist/webpackStats.json
     // //
     // // You can upload the file here to easily analyze the contents of the bundles:
     // // https://chrisbateman.github.io/webpack-visualizer/
@@ -74,17 +70,18 @@ module.exports = {
         return JSON.stringify(stats, null, 2);
       },
     }),
-    new Webpack.DefinePlugin({
+    new webpack.DefinePlugin({
       // this is what tells React to run in production mode
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
       },
     }),
-    new Webpack.optimize.UglifyJsPlugin({
-      // makes stack traces on exception unintelligible
-      mangle: false,
-      mangleProperties: false,
-      sourceMap: false,
-    }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   // makes stack traces on exception unintelligible
+    //   mangle: false,
+    //   mangleProperties: false,
+    //   sourceMap: false,
+    // }),
+    new MonacoWebpackPlugin(),
   ],
 };

@@ -4,97 +4,107 @@ exports[`components/AuthorCard when rendered with required props it should match
 <div
   style={
     Object {
-      "background": "white",
-      "borderRadius": 7,
       "display": "flex",
       "flexDirection": "row",
-      "marginBottom": 10,
-      "marginRight": 10,
-      "padding": 10,
     }
   }
 >
-  <AuthorGravatarImage
-    emails={
-      Array [
-        "president@galaxy.gov",
-      ]
-    }
-  />
-  <div
+  <Selectable
+    onClick={[Function]}
     style={
       Object {
         "display": "flex",
-        "flexDirection": "column",
-        "marginLeft": 10,
+        "fontSize": "initial",
+        "marginRight": -10,
+        "padding": 10,
         "width": "100%",
       }
     }
   >
+    <AuthorGravatarImage
+      emails={
+        Array [
+          "president@galaxy.gov",
+        ]
+      }
+    />
     <div
       style={
         Object {
-          "marginBottom": 5,
+          "display": "flex",
+          "flexDirection": "column",
+          "marginLeft": 10,
+          "width": "100%",
         }
       }
-      title="president@galaxy.gov"
     >
-      Zaphod Beeblebrox
-    </div>
-    <div>
-      <span
+      <div
+        style={
+          Object {
+            "marginBottom": 5,
+          }
+        }
+        title="president@galaxy.gov"
+      >
+        Zaphod Beeblebrox
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "#333333",
+              "fontSize": 11,
+              "fontWeight": "normal",
+              "lineHeight": 1.35,
+            }
+          }
+        >
+          <EpochSpan
+            firstEpochTime={132344555}
+            secondEpochTime={1539563458}
+          />
+          <span>
+             ago
+          </span>
+        </span>
+        <AddedDeleted
+          linesAdded={100}
+          linesDeleted={30}
+          style={
+            Object {
+              "marginTop": 6,
+            }
+          }
+        />
+      </div>
+      <PercentBar
+        denominator={260}
+        numerator={130}
+      />
+      <div
         style={
           Object {
             "color": "#333333",
             "fontSize": 11,
             "fontWeight": "normal",
+            "lineHeight": 1.35,
           }
         }
       >
-        <EpochSpan
-          firstEpochTime={132344555}
-          secondEpochTime={1539563458}
-        />
+        5
         <span>
-           ago
+           commits spanning 
         </span>
-      </span>
-      <AddedDeleted
-        linesAdded={100}
-        linesDeleted={30}
-        style={
-          Object {
-            "marginTop": 6,
-          }
-        }
+        <EpochSpan
+          firstEpochTime={132344525}
+          secondEpochTime={132344555}
+        />
+      </div>
+      <PercentBar
+        denominator={140}
+        numerator={5}
       />
     </div>
-    <PercentBar
-      denominator={260}
-      numerator={130}
-    />
-    <div
-      style={
-        Object {
-          "color": "#333333",
-          "fontSize": 11,
-          "fontWeight": "normal",
-        }
-      }
-    >
-      5
-      <span>
-         commits spanning 
-      </span>
-      <EpochSpan
-        firstEpochTime={132344525}
-        secondEpochTime={132344555}
-      />
-    </div>
-    <PercentBar
-      denominator={140}
-      numerator={5}
-    />
-  </div>
+  </Selectable>
 </div>
 `;

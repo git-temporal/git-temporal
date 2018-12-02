@@ -9,7 +9,7 @@ require('regenerator-runtime/runtime');
 require('@babel/register')();
 
 const tsConfigPath = path.resolve('.', 'tsconfig.json');
-console.log(`using tsConfig at ${tsConfigPath}`);
+// console.log(`using tsConfig at ${tsConfigPath}`);
 require('ts-node').register({
   typeCheck: false,
   ignoreWarnings: true,

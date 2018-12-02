@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/ResetLink when rendered with required props it should match snapshot (it should have rendered a label and a text element) 1`] = `
+<div
+  onClick={[MockFunction]}
+  style={
+    Object {
+      "color": "blue",
+      "cursor": "pointer",
+      "display": "inline-block",
+      "fontSize": 11,
+      "fontWeight": "normal",
+      "lineHeight": 1.35,
+      "marginRight": 0,
+      "textDecoration": "underline",
+    }
+  }
+>
+  <UndoIcon
+    height={10}
+    width={10}
+  />
+   
+  this is the text
+</div>
+`;

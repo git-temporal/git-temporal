@@ -13,6 +13,7 @@ exports[`components/SearchInput when rendered with value it should match snapsho
       "flexDirection": "row",
       "fontSize": 13,
       "fontWeight": "normal",
+      "lineHeight": 1.35,
       "marginRight": 10,
       "padding": 5,
       "position": "relative",
@@ -51,6 +52,7 @@ exports[`components/SearchInput when rendered with value it should match snapsho
         "flexGrow": 0,
         "fontSize": 11,
         "fontWeight": "normal",
+        "lineHeight": 1.35,
         "paddingTop": 3,
       }
     }

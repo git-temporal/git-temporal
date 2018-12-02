@@ -19,6 +19,7 @@
     ]
   },
   "globals": {
+    "acquireVsCodeApi": true,
     "after": true,
     "afterEach": true,
     "app": true,
@@ -26,9 +27,11 @@
     "before": true,
     "beforeEach": true,
     "describe": true,
+    "document": true,
     "expect": true,
     "HTMLElement": true,
     "it": true,
-    "test": true
+    "test": true,
+    "window": true
   }
 }

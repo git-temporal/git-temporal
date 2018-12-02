@@ -9,6 +9,7 @@ exports[`components/CommitBody when rendered with text containing <br>s it shoul
       "display": "block",
       "fontSize": 13,
       "fontWeight": "normal",
+      "lineHeight": 1.35,
       "marginBottom": 10,
       "marginLeft": 10,
       "maxHeight": 70,

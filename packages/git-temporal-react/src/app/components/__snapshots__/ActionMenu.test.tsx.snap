@@ -11,6 +11,8 @@ exports[`components/ActionMenu when rendered with text child it should match sna
   }
 >
   <ToggleButton
+    isSelected={true}
+    onClick={[MockFunction]}
     style={
       Object {
         "_extends": "h2Text",
@@ -24,6 +26,8 @@ exports[`components/ActionMenu when rendered with text child it should match sna
     ...
   </ToggleButton>
   <Popup
+    isOpen={true}
+    onClose={[MockFunction]}
     style={
       Object {
         "marginRight": 0,
