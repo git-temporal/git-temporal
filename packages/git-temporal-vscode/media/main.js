@@ -6,7 +6,7 @@
   const oldState = vscode.getState();
 
   const counter = document.getElementById('lines-of-code-counter');
-  console.log(oldState);
+  // console.log(oldState);
   let currentCount = (oldState && oldState.count) || 0;
   counter.textContent = currentCount;
 

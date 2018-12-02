@@ -98,7 +98,7 @@ class CatCodingPanel {
 
     // Update the content based on view changes
     this._panel.onDidChangeViewState(
-      e => {
+      () => {
         if (this._panel.visible) {
           this.update();
         }
@@ -142,7 +142,6 @@ class CatCodingPanel {
   }
 
   private update() {
-    const z = 1 + 2;
     // Vary the webview's content based on where it is located in the editor.
     switch (this._panel.viewColumn) {
       case vscode.ViewColumn.Two:
