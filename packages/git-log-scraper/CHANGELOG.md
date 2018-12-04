@@ -1,7 +1,15 @@
+## [0.3.0](https://github.com/git-temporal/git-temporal/tree/master/packages/git-log-scraper/compare/v0.2.0...v0.3.0) - (2018-12-03)
+
+This update includes a refactor of how log data is parsed from the `git log` output.
+
+### Other Commits
+
+- [77144cf](https://github.com/git-temporal/git-temporal/tree/master/packages/git-log-scraper/commit/77144cf60eb6590b618b4a798817da4a4db1250c) log scraper add more info to the output of the cli script
+- [e2565cb](https://github.com/git-temporal/git-temporal/tree/master/packages/git-log-scraper/commit/e2565cba204ab4269d54cedcd4392c5011328055) git-log-scraper: add build script; fix exception when scraping repo with zero commits
+- [1465dcc](https://github.com/git-temporal/git-temporal/tree/master/packages/git-log-scraper/commit/1465dcc0fe4ff1b8e70a8cb031465fbb806703dc) git-log-scraper: add main and bin for npm package
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-**Table of Contents** _generated with [DocToc](https://github.com/thlorenz/doctoc)_
 
 - [0.2.0 - (2018-10-05)](#020---2018-10-05)
   - [Other Commits](#other-commits)
