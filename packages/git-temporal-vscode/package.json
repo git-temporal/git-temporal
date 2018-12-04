@@ -1,8 +1,8 @@
 {
-	"name": "cat-coding",
-	"description": "Cat Coding - A Webview API Sample",
+	"name": "git-temporal",
+	"description": "Git Temporal - all about time and time travel",
 	"version": "0.0.1",
-	"publisher": "vscode-samples",
+	"publisher": "littlebee",
 	"engines": {
 		"vscode": "^1.25.0"
 	},
@@ -10,28 +10,21 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:catCoding.start",
-		"onCommand:catCoding.doRefactor",
-		"onWebviewPanel:catCoding"
+		"onCommand:gitTemporal.start"
 	],
 	"main": "./out/extension",
 	"contributes": {
 		"commands": [
 			{
-				"command": "catCoding.start",
-				"title": "Start cat coding session",
-				"category": "Cat Coding"
-			},
-			{
-				"command": "catCoding.doRefactor",
-				"title": "Do some refactoring",
-				"category": "Cat Coding"
+				"command": "gitTemporal.start",
+				"title": "Open Git Temporal",
+				"category": "git-temporal"
 			}
 		]
 	},
 	"scripts": {
-		"vscode:prepublish": "tsc -p ./",
-		"compile": "tsc -p ./",
+		"vscode:prepublish": "npm run build",
+		"build": "tsc -p ./",
 		"watch": "tsc -w -p ./",
 		"postinstall": "node ./node_modules/vscode/bin/install"
 	},
