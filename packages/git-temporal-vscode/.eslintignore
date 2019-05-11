@@ -1,0 +1,7 @@
+dist
+out/**/*
+!.babelrc.js
+config
+test/coverage
+test/helpers
+mochawesome-report
