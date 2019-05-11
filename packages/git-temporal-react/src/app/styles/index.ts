@@ -209,6 +209,8 @@ function processExtends(styleObject) {
     } else {
       styleOut[propertyName] = styleObject[propertyName];
     }
+    // @ts-ignore
+    delete styleOut._extends;
   }
   return styleOut;
 }

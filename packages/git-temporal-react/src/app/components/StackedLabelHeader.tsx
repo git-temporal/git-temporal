@@ -15,7 +15,7 @@ const localStyles = {
 
 export const StackedLabelHeader = (props: StackedLabelProps): JSX.Element => {
   const propsForward = Object.assign({}, props, {
-    labelStyle: [localStyles.labelStyle, props.labelStyle],
+    labelStyle: style(localStyles.labelStyle, props.labelStyle),
   });
 
   return (
