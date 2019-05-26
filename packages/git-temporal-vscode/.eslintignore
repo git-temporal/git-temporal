@@ -1,5 +1,5 @@
 dist
-out/**/*
+lib/**/*
 !.babelrc.js
 config
 test/coverage

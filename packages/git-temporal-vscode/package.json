@@ -1,39 +1,76 @@
 {
-	"name": "git-temporal",
-	"description": "Git Temporal - all about time and time travel",
-	"version": "0.0.1",
-	"publisher": "littlebee",
-	"engines": {
-		"vscode": "^1.25.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-		"onCommand:gitTemporal.start"
-	],
-	"main": "./out/extension",
-	"contributes": {
-		"commands": [
-			{
-				"command": "gitTemporal.start",
-				"title": "Open Git Temporal",
-				"category": "git-temporal"
-			}
-		]
-	},
-	"scripts": {
-		"vscode:prepublish": "npm run build",
-		"build": "tsc -p ./",
-		"watch": "tsc -w -p ./",
-		"postinstall": "node ./node_modules/vscode/bin/install"
-	},
-	"dependencies": {
-		"vscode": "^1.1.18"
-	},
-	"devDependencies": {
-		"@types/node": "^10.5.2",
-		"tslint": "^5.11.0",
-		"typescript": "^2.9.2"
-	}
+  "name": "git-temporal",
+  "description": "Git Temporal - all about time and time travel",
+  "version": "0.0.1",
+  "publisher": "littlebee",
+  "engines": {
+    "vscode": "^1.25.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:gitTemporal.start"
+  ],
+  "main": "./lib/extension/index.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "gitTemporal.start",
+        "title": "Open Git Temporal",
+        "category": "git-temporal"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "tsc -p ./ && npx webpack",
+    "watch": "tsc -w -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install"
+  },
+  "dependencies": {
+    "vscode": "^1.1.18"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-proposal-do-expressions": "^7.2.0",
+    "@babel/plugin-proposal-export-default-from": "^7.2.0",
+    "@babel/plugin-proposal-logical-assignment-operators": "^7.2.0",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.4.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
+    "@babel/plugin-proposal-optional-chaining": "^7.2.0",
+    "@babel/plugin-proposal-pipeline-operator": "^7.3.2",
+    "@babel/plugin-transform-modules-commonjs": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.3.3",
+    "@babel/register": "^7.4.4",
+    "@types/node": "^10.14.7",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.0-beta.2",
+    "babel-plugin-istanbul": "^5.1.4",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "bumble-util": "^0.4.1",
+    "chai": "^4.2.0",
+    "cross-env": "^5.2.0",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
+    "prettier": "^1.17.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "regenerator-runtime": "^0.13.2",
+    "source-map-loader": "^0.2.1",
+    "ts-node": "^8.1.1",
+    "tsconfig-paths": "^3.8.0",
+    "tslint": "^5.16.0",
+    "tslint-config-airbnb": "^5.11.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-react": "^4.0.0",
+    "typescript": "^2.9.2",
+    "underscore": "^1.9.1",
+    "webpack": "^3.8.1",
+    "webpack-stats-plugin": "^0.2.1"
+  }
 }
