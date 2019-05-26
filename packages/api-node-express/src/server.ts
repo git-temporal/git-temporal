@@ -3,7 +3,7 @@ import express from 'express';
 
 import { serveHistory } from './history';
 import { serveDiff } from './diff';
-import { findGitRoot } from './common/findGitRoot';
+import { findGitRoot } from '@git-temporal/commons';
 
 const app = express();
 const port = process.env.GT_API_PORT || 11966;

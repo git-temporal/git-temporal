@@ -1,0 +1,70 @@
+{
+  "name": "@git-temporal/git-diff-scraper",
+  "version": "0.1.0",
+  "description": "Scrapes git and returns a diff json containing 2 specified versions of a file",
+  "keywords": [
+    "git",
+    "git-temporal",
+    "git-diff"
+  ],
+  "author": "Bee <beewilkerson@invisionapp.com>",
+  "homepage": "https://github.com/git-temporal/git-temporal",
+  "license": "MIT",
+  "main": "lib/gitDiffScraper.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/git-temporal/git-temporal.git"
+  },
+  "scripts": {
+    "build": "NODE_ENV=production tsc",
+    "test": "cross-env mocha --exit -r ../../babel-register.js --recursive --opts ./test/mocha.opts ./test/unit",
+    "test-debug": "cross-env mocha --inspect-brk --exit -r ../../babel-register.js --recursive --opts ./test/mocha.opts ./test/unit",
+    "prepublishOnly": "npm run build"
+  },
+  "bugs": {
+    "url": "https://github.com/git-temporal/git-temporal/issues"
+  },
+  "dependencies": {
+    "@git-temporal/commons": "^0.1.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-proposal-do-expressions": "^7.2.0",
+    "@babel/plugin-proposal-export-default-from": "^7.2.0",
+    "@babel/plugin-proposal-logical-assignment-operators": "^7.2.0",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.4.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
+    "@babel/plugin-proposal-optional-chaining": "^7.2.0",
+    "@babel/plugin-proposal-pipeline-operator": "^7.3.2",
+    "@babel/plugin-transform-modules-commonjs": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-typescript": "^7.3.3",
+    "@babel/register": "^7.4.4",
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-istanbul": "^5.1.4",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "bumble-util": "^0.4.1",
+    "chai": "^4.2.0",
+    "cross-env": "^5.2.0",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
+    "prettier": "^1.17.1",
+    "regenerator-runtime": "^0.13.2",
+    "ts-node": "^8.2.0",
+    "tsconfig-paths": "^3.8.0",
+    "tslint": "^5.16.0",
+    "tslint-config-airbnb": "^5.11.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-react": "^4.0.0",
+    "typescript": "^3.4.5",
+    "underscore": "^1.9.1"
+  }
+}

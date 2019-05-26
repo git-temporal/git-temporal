@@ -2,7 +2,6 @@ import child_process from 'child_process';
 import fs from 'fs';
 import os from 'os';
 
-import { timeThis } from '../common/timeThis';
 import { escapeForCli } from '@git-temporal/commons';
 
 interface IFetchContents {
@@ -16,38 +15,35 @@ interface IModifiedFile {
   status: string;
 }
 
-export function serveDiff(req, res) {
-  const requestPath = req.query.path || '.';
-  const leftCommit = req.query.leftCommit || 'HEAD';
-  const rightCommit = req.query.rightCommit || 'local';
+export function getDiff(
+  requestPath: string = '.',
+  leftCommit: string = 'HEAD',
+  rightCommit: string = 'local'
+) {
+  const { contents: leftFileContents, isDirectory } = fetchContents(
+    leftCommit,
+    requestPath
+  );
+  const { contents: rightFileContents } = fetchContents(
+    rightCommit,
+    requestPath
+  );
 
-  console.log(`fetching diffs`, requestPath, leftCommit, rightCommit);
-  const { time, result: response } = timeThis(() => {
-    const { contents: leftFileContents, isDirectory } = fetchContents(
-      leftCommit,
-      requestPath
-    );
-    const { contents: rightFileContents } = fetchContents(
-      rightCommit,
-      requestPath
-    );
+  const modifiedFiles: IModifiedFile[] =
+    isDirectory && fetchDirectoryDiff(leftCommit, rightCommit, requestPath);
 
-    const modifiedFiles: IModifiedFile[] =
-      isDirectory && fetchDirectoryDiff(leftCommit, rightCommit, requestPath);
-
-    return {
-      isDirectory,
-      leftCommit,
-      leftFileContents,
-      rightCommit,
-      rightFileContents,
-      modifiedFiles,
-      path: requestPath,
-    };
-  });
-  console.log(`done in ${time}ms`, requestPath, leftCommit, rightCommit);
-  res.send(response);
+  return {
+    isDirectory,
+    leftCommit,
+    leftFileContents,
+    rightCommit,
+    rightFileContents,
+    modifiedFiles,
+    path: requestPath,
+  };
 }
+
+// Implementation
 
 function fetchContents(commitId, requestPath): IFetchContents {
   return commitId === 'local'
