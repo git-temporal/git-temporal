@@ -28,6 +28,8 @@ if (module.hot) {
   });
 }
 
+console.log('git-temporal-react in app/index');
+
 export default class GitTemporalIndex extends React.Component<
   GitTemporalProps
 > {

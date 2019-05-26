@@ -1,5 +1,5 @@
 {
-  "name": "git-temporal",
+  "name": "@git-temporal/git-temporal-vscode",
   "description": "Git Temporal - all about time and time travel",
   "version": "0.0.1",
   "publisher": "littlebee",
@@ -29,6 +29,7 @@
     "postinstall": "node ./node_modules/vscode/bin/install"
   },
   "dependencies": {
+    "@git-temporal/git-temporal-react": "^0.1.0",
     "vscode": "^1.1.18"
   },
   "devDependencies": {
@@ -47,6 +48,7 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
     "@babel/register": "^7.4.4",
+    "@git-temporal/git-temporal-react": "^0.1.0",
     "@types/node": "^10.14.7",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.0-beta.2",

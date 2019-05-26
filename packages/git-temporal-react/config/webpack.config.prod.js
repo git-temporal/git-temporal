@@ -16,7 +16,10 @@ const paths = require('./paths');
 
 module.exports = {
   name: 'git-temporal-react',
-  entry: [require.resolve('./polyfills'), require.resolve('../index.js')],
+  entry: [
+    require.resolve('./polyfills'),
+    require.resolve('../lib/app/index.js'),
+  ],
   output: {
     path: outputDir,
     filename: `git-temporal-react.js`,
@@ -29,7 +32,7 @@ module.exports = {
     // test directory isn't included in bundle but the linter config looks here for module resolution queues
     modules: ['node_modules', libDir, paths.appNodeModules],
     alias: {
-      app: libDir,
+      app: path.join(libDir, 'app'),
     },
     // plugins: devWebpack.resolve.plugins,
   },

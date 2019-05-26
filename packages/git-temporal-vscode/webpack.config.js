@@ -73,7 +73,7 @@ module.exports = {
     new webpack.DefinePlugin({
       // this is what tells React to run in production mode
       'process.env': {
-        NODE_ENV: JSON.stringify('production'),
+        NODE_ENV: JSON.stringify('development'),
       },
     }),
     // new webpack.optimize.UglifyJsPlugin({

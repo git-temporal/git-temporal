@@ -5,6 +5,10 @@ import {
   FilesContainerSorts,
 } from './ActionTypes';
 
+// @ts-ignore
+if (window && window.IS_VSCODE_WEBVIEW) {
+  console.log('git-temporal-react: running in VSCode!');
+}
 export const selectPath = path => (dispatch, _getState) => {
   // if this comes from a rename, follow the most current name
   const actualPath = path.replace(/\{(.*)\s=>\s(.*)\}/g, '$2');
