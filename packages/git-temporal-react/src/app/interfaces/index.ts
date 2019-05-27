@@ -44,6 +44,16 @@ export interface ICommit {
   files: ICommitFile[];
 }
 
+export interface IDiff {
+  isDirectory: boolean;
+  leftCommit: string;
+  leftFileContents: string;
+  rightCommit: string;
+  rightFileContents: string;
+  modifiedFiles: IModifiedFile[];
+  path: string;
+}
+
 export interface IModifiedFile {
   status: ModifiedFileStatuses;
   path: string;
@@ -121,6 +131,8 @@ export interface IDifferenceViewerContainerState {
   filteredCommits: ICommit[];
   startDate: number;
   endDate: number;
+  diff: IDiff;
+  isDiffFetching: boolean;
 }
 export interface IDifferenceViewerHeaderState {
   timeplotCommits?: ICommit[];

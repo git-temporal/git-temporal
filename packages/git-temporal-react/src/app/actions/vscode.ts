@@ -1,4 +1,13 @@
-import { receiveCommits } from 'app/actions';
+import { receiveCommits } from 'app/actions/commits';
+
+// @ts-ignore
+export const isVscode = window && window.IS_VSCODE_WEBVIEW;
+// @ts-ignore
+export const vscode = isVscode ? acquireVsCodeApi() : null;
+
+if (isVscode) {
+  console.log('git-temporal-react: running in VSCode.');
+}
 
 export function handleVscodeMessages(dispatch) {
   // @ts-ignore

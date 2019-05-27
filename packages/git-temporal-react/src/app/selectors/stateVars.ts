@@ -15,3 +15,6 @@ export const getCommitsContainerSort = state => state.commitsContainerSort;
 export const getFilesContainerSort = state => state.filesContainerSort;
 
 export const getIsFileSelected = state => state.isFileSelected;
+
+export const getDiff = state => state.diff;
+export const getIsDiffFetching = state => state.isDiffFetching;

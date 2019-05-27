@@ -8,11 +8,14 @@ const osRoot =
 export function findGitRoot(startingPath?: string): string | null {
   let currentPath =
     (startingPath && path.resolve(startingPath)) || process.cwd();
-  if (!fs.lstatSync(currentPath).isDirectory()) {
-    currentPath = path.dirname(currentPath);
+  try {
+    if (!fs.lstatSync(currentPath).isDirectory()) {
+      currentPath = path.dirname(currentPath);
+    }
+  } catch {
+    return null; // starting path doesn't exist on disk
   }
   let files;
-
   do {
     files = fs.readdirSync(currentPath);
     if (files.includes('.git')) {

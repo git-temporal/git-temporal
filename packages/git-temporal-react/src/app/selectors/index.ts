@@ -12,6 +12,8 @@ import {
   getStartDate,
   getEndDate,
   getIsFileSelected,
+  getDiff,
+  getIsDiffFetching,
 } from './stateVars';
 
 import { getAuthorsAndCommits } from './authorsAndCommits';
@@ -242,12 +244,24 @@ export const getDifferenceViewerContainerState = createSelector(
   getFilteredCommits,
   getStartDate,
   getEndDate,
-  (selectedPath, commits, filteredCommits, startDate, endDate) => ({
+  getDiff,
+  getIsDiffFetching,
+  (
     selectedPath,
     commits,
     filteredCommits,
     startDate,
     endDate,
+    diff,
+    isDiffFetching
+  ) => ({
+    selectedPath,
+    commits,
+    filteredCommits,
+    startDate,
+    endDate,
+    diff,
+    isDiffFetching,
   })
 );
 

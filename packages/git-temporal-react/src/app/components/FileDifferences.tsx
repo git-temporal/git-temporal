@@ -47,8 +47,13 @@ export class FileDifferences extends React.Component<FileDifferencesProps> {
   renderMonacoEditor() {
     const el = this.monacoEditorElRef.current;
 
-    const originalModel = editor.createModel(this.props.leftFileContents);
-    const modifiedModel = editor.createModel(this.props.rightFileContents);
+    const leftFileContents =
+      this.props.leftFileContents && atob(this.props.leftFileContents);
+    const rightFileContents =
+      this.props.rightFileContents && atob(this.props.rightFileContents);
+
+    const originalModel = editor.createModel(leftFileContents);
+    const modifiedModel = editor.createModel(rightFileContents);
 
     const diffEditor = editor.createDiffEditor(el);
     diffEditor.setModel({

@@ -9,7 +9,7 @@ import {
 // these little actions are more trouble to test and end up being brittle
 // ignoring coverage on the smallest
 
-export const selectedPath = (state = '', action) => {
+export const selectedPath = (state = '', action: any) => {
   switch (action.type) {
     case ActionTypes.SELECT_PATH:
     case ActionTypes.REQUEST_COMMITS:
@@ -20,7 +20,7 @@ export const selectedPath = (state = '', action) => {
   }
 };
 
-export const highlightedCommitIds = (state = '', action) => {
+export const highlightedCommitIds = (state = '', action: any) => {
   switch (action.type) {
     case ActionTypes.HIGHLIGHT_COMMITS:
       return action.commitIds;
@@ -29,7 +29,7 @@ export const highlightedCommitIds = (state = '', action) => {
   }
 };
 
-export const viewCommitsOrFiles = (state = 'commits', action) => {
+export const viewCommitsOrFiles = (state = 'commits', action: any) => {
   switch (action.type) {
     case ActionTypes.VIEW_COMMITS:
       return 'commits';
@@ -40,7 +40,7 @@ export const viewCommitsOrFiles = (state = 'commits', action) => {
   }
 };
 
-export const commits = (state = [], action) => {
+export const commits = (state = [], action: any) => {
   switch (action.type) {
     case ActionTypes.RECEIVE_COMMITS:
       return action.commits;
@@ -48,7 +48,7 @@ export const commits = (state = [], action) => {
       return state;
   }
 };
-export const isFetching = (state = false, action) => {
+export const isFetching = (state = false, action: any) => {
   switch (action.type) {
     case ActionTypes.REQUEST_COMMITS:
       return true;
@@ -59,7 +59,27 @@ export const isFetching = (state = false, action) => {
   }
 };
 
-export const didInvalidate = (state = false, action) => {
+export const diff = (state = {}, action: any) => {
+  switch (action.type) {
+    case ActionTypes.RECEIVE_DIFF:
+      return action.diff;
+    default:
+      return state;
+  }
+};
+
+export const isDiffFetching = (state = false, action: any) => {
+  switch (action.type) {
+    case ActionTypes.REQUEST_DIFF:
+      return true;
+    case ActionTypes.RECEIVE_DIFF:
+      return false;
+    default:
+      return state;
+  }
+};
+
+export const didInvalidate = (state = false, action: any) => {
   switch (action.type) {
     case ActionTypes.INVALIDATE_PATH:
       return true;
@@ -72,7 +92,7 @@ export const didInvalidate = (state = false, action) => {
 
 export const authorsContainerSort = (
   state = AuthorsContainerSorts.TIME,
-  action
+  action: any
 ) => {
   switch (action.type) {
     case ActionTypes.SET_AUTHORS_CONTAINER_SORT:
@@ -81,7 +101,7 @@ export const authorsContainerSort = (
   return state;
 };
 
-export const search = (state = '', action) => {
+export const search = (state = '', action: any) => {
   switch (action.type) {
     case ActionTypes.SET_SEARCH:
       return action.search;
@@ -89,7 +109,7 @@ export const search = (state = '', action) => {
   return state;
 };
 
-export const startDate = (state = null, action) => {
+export const startDate = (state = null, action: any) => {
   switch (action.type) {
     case ActionTypes.SET_START_DATE:
       return action.startDate;
@@ -97,7 +117,7 @@ export const startDate = (state = null, action) => {
   return state;
 };
 
-export const endDate = (state = null, action) => {
+export const endDate = (state = null, action: any) => {
   switch (action.type) {
     case ActionTypes.SET_END_DATE:
       return action.endDate;
@@ -107,7 +127,7 @@ export const endDate = (state = null, action) => {
 
 export const commitsContainerSort = (
   state = CommitsContainerSorts.TIME,
-  action
+  action: any
 ) => {
   switch (action.type) {
     case ActionTypes.SET_COMMITS_CONTAINER_SORT:
@@ -118,7 +138,7 @@ export const commitsContainerSort = (
 
 export const filesContainerSort = (
   state = FilesContainerSorts.TIME,
-  action
+  action: any
 ) => {
   switch (action.type) {
     case ActionTypes.SET_FILES_CONTAINER_SORT:
@@ -127,7 +147,7 @@ export const filesContainerSort = (
   return state;
 };
 
-export const isFileSelected = (state = false, action) => {
+export const isFileSelected = (state = false, action: any) => {
   switch (action.type) {
     case ActionTypes.RECEIVE_COMMITS:
       return action.isFileSelected;
@@ -149,6 +169,8 @@ const rootReducer = combineReducers({
   startDate,
   endDate,
   isFileSelected,
+  diff,
+  isDiffFetching,
 });
 
 export default rootReducer;

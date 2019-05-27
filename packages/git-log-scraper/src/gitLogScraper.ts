@@ -15,7 +15,9 @@ const parsedAttributes = {
 
 export function getCommitHistory(fileName) {
   const gitRoot = findGitRoot(fileName);
-  process.chdir(gitRoot);
+  if (gitRoot) {
+    process.chdir(gitRoot);
+  }
   const rawLog = fetchFileHistory(fileName);
   const commits = parseGitLogOutput(rawLog).sort((a, b) => {
     return b.authorDate - a.authorDate;
