@@ -6,9 +6,14 @@ import {
 } from './ActionTypes';
 
 // @ts-ignore
-if (window && window.IS_VSCODE_WEBVIEW) {
-  console.log('git-temporal-react: running in VSCode!');
+const isVscode = window && window.IS_VSCODE_WEBVIEW;
+let vscode = null;
+if (isVscode) {
+  console.log('git-temporal-react: running in VSCode.');
+  // @ts-ignore
+  vscode = acquireVsCodeApi();
 }
+
 export const selectPath = path => (dispatch, _getState) => {
   // if this comes from a rename, follow the most current name
   const actualPath = path.replace(/\{(.*)\s=>\s(.*)\}/g, '$2');
@@ -79,11 +84,17 @@ export const receiveCommits = (path, json) => ({
 
 const fetchCommits = path => dispatch => {
   dispatch(requestCommits(path));
-  const pathParam = path && path.trim().length > 0 ? `?path=${path}` : '';
-  // TODO : replace this with serviceBaseUrl when it is in
-  return fetch(`http://localhost:11966/git-temporal/history${pathParam}`)
-    .then(response => response.json())
-    .then(json => dispatch(receiveCommits(path, json)));
+  if (isVscode) {
+    console.log('git-temporal-react: sending history request to vscode ', path);
+    // see actions/vscode.ts for response handling that comes as a window event
+    vscode.postMessage({ path, command: 'history' });
+  } else {
+    const pathParam = path && path.trim().length > 0 ? `?path=${path}` : '';
+    // TODO : replace this with serviceBaseUrl when it is in
+    fetch(`http://localhost:11966/git-temporal/history${pathParam}`)
+      .then(response => response.json())
+      .then(json => dispatch(receiveCommits(path, json)));
+  }
 };
 
 const shouldFetchCommits = (state, path) => {

@@ -1,4 +1,6 @@
 import child_process from 'child_process';
+import * as fs from 'fs';
+import { findGitRoot } from '@git-temporal/commons';
 
 const parsedAttributes = {
   id: '%H%n',
@@ -12,8 +14,20 @@ const parsedAttributes = {
 };
 
 export function getCommitHistory(fileName) {
+  const gitRoot = findGitRoot(fileName);
+  process.chdir(gitRoot);
   const rawLog = fetchFileHistory(fileName);
-  return parseGitLogOutput(rawLog);
+  const commits = parseGitLogOutput(rawLog).sort((a, b) => {
+    return b.authorDate - a.authorDate;
+  });
+  const isFile =
+    fs.existsSync(fileName) && !fs.lstatSync(fileName).isDirectory();
+
+  return {
+    isFile,
+    commits,
+    path: fileName,
+  };
 }
 
 // Implementation
@@ -130,7 +144,7 @@ function parseGitLogOutput(output) {
 
 /*
     See nodejs path.normalize().  This method extends path.normalize() to add:
-    - escape of space characters 
+    - escape of space characters
 */
 function escapeForCli(filepath) {
   if (!filepath || filepath.trim().length === 0) {

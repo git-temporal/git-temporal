@@ -5,7 +5,7 @@ import { getCommitHistory } from './gitLogScraper';
 const HELP = `
 Dumps git log json for a file or directory.
 
-usage: 
+usage:
   npx @git-temporal/git-log-scraper <pathToGitDirOrFile>
 
 examples:
@@ -23,5 +23,5 @@ if (!path || path === '--help') {
   process.exit(1);
 }
 const commitHistory = getCommitHistory(path);
-console.warn(`parsed ${commitHistory.length} commits`);
+console.warn(`parsed ${commitHistory.commits.length} commits`);
 console.log(JSON.stringify(commitHistory, null, 2));

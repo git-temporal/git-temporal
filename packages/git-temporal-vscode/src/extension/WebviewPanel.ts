@@ -1,5 +1,6 @@
 import * as path from 'path';
 import * as vscode from 'vscode';
+import { getCommitHistory } from '@git-temporal/git-log-scraper';
 
 export class WebviewPanel {
   // Only allow a single git-temporal panel to exist at a time
@@ -70,10 +71,23 @@ export class WebviewPanel {
     // Handle messages from the webview
     this._panel.webview.onDidReceiveMessage(
       message => {
+        console.log('git-temporal-vscode: got message', message);
         switch (message.command) {
           case 'alert':
             vscode.window.showErrorMessage(message.text);
             return;
+          case 'history':
+            const history = getCommitHistory(message.path);
+            console.log(
+              'git-temporal-vscode: sending history',
+              message.path,
+              history
+            );
+            this._panel.webview.postMessage({
+              type: 'commitData',
+              data: history,
+              path: message.path,
+            });
         }
       },
       null,
@@ -109,6 +123,7 @@ export class WebviewPanel {
     // And the uri we use to load this script in the webview
     const scriptUri = scriptPathOnDisk.with({ scheme: 'vscode-resource' });
     const nonce = getNonce();
+    const currentPath = vscode.window.activeTextEditor.document.fileName;
 
     return `
       <!DOCTYPE html>
@@ -120,7 +135,7 @@ export class WebviewPanel {
           <title>Git Temporal</title>
       </head>
       <body>
-        <div id="gitTemporal">Loading...</div>
+        <div id="gitTemporal" data-current-path="${currentPath}">Loading...</div>
         <script nonce="${nonce}" src="${scriptUri}"></script>
       </body>
       </html>

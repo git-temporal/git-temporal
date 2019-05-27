@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { GitTemporalProps, DispatchProps, StateProps } from 'app/interfaces';
 import { selectPath } from 'app/actions';
+import { handleVscodeMessages } from 'app/actions/vscode';
 import { getGitTemporalContainerState } from 'app/selectors';
 import { style } from 'app/styles';
 
@@ -48,6 +49,7 @@ export class GitTemporal extends Component<
   componentDidMount() {
     const { path, dispatch } = this.props;
     dispatch(selectPath(path));
+    handleVscodeMessages(dispatch);
   }
 
   componentWillReceiveProps(nextProps) {
