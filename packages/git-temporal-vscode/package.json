@@ -31,6 +31,7 @@
   "dependencies": {
     "@git-temporal/git-temporal-react": "^0.1.0",
     "@git-temporal/git-log-scraper": "^0.3.0",
+    "@git-temporal/git-diff-scraper": "^0.1.0",
     "vscode": "^1.1.18"
   },
   "devDependencies": {

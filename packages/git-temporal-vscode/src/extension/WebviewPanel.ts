@@ -1,6 +1,7 @@
 import * as path from 'path';
 import * as vscode from 'vscode';
 import { getCommitHistory } from '@git-temporal/git-log-scraper';
+import { getDiff } from '@git-temporal/git-diff-scraper';
 
 export class WebviewPanel {
   // Only allow a single git-temporal panel to exist at a time
@@ -88,6 +89,20 @@ export class WebviewPanel {
               data: history,
               path: message.path,
             });
+            break;
+          case 'diff':
+            const diff = getDiff(
+              message.path,
+              message.leftCommit,
+              message.rightCommit
+            );
+            console.log('git-temporal-vscode: sending diff', diff);
+            this._panel.webview.postMessage({
+              type: 'diffData',
+              data: diff,
+              path: message.path,
+            });
+            break;
         }
       },
       null,

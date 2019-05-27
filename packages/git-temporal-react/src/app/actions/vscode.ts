@@ -1,4 +1,5 @@
 import { receiveCommits } from 'app/actions/commits';
+import { receiveDiff } from 'app/actions/diff';
 
 // @ts-ignore
 export const isVscode = window && window.IS_VSCODE_WEBVIEW;
@@ -24,11 +25,16 @@ export function handleVscodeMessages(dispatch) {
     switch (type) {
       case 'commitData':
         console.log(
-          `git-temporal-react: received ${
+          `git-temporal-react: received commits ${
             data.commits.length
           } commits for ${path}`
         );
         dispatch(receiveCommits(path, data));
+        break;
+      case 'diffData':
+        console.log(`git-temporal-react: received diff ${data}`);
+        dispatch(receiveDiff(path, data));
+        break;
     }
   }
 }

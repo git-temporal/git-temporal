@@ -21,7 +21,12 @@ export const fetchDiff = (
   dispatch(requestDiff(path));
 
   if (isVscode) {
-    console.log('git-temporal-react: sending diff request to vscode ', path);
+    console.log(
+      'git-temporal-react: sending diff request to vscode ',
+      path,
+      leftCommit,
+      rightCommit
+    );
     // see actions/vscode.ts for response handling that comes as a window event
     vscode.postMessage({ path, leftCommit, rightCommit, command: 'diff' });
   } else {

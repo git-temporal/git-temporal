@@ -1,8 +1,9 @@
 import child_process from 'child_process';
 import fs from 'fs';
 import os from 'os';
+import path from 'path';
 
-import { escapeForCli } from '@git-temporal/commons';
+import { escapeForCli, findGitRoot } from '@git-temporal/commons';
 
 interface IFetchContents {
   contents: string;
@@ -17,15 +18,23 @@ interface IModifiedFile {
 
 export function getDiff(
   requestPath: string = '.',
-  leftCommit: string = 'HEAD',
-  rightCommit: string = 'local'
+  leftCommit?: string,
+  rightCommit?: string
 ) {
+  const _leftCommit = leftCommit || 'HEAD';
+  const _rightCommit = rightCommit || 'local';
+  console.log(
+    'git-diff-scraper: getDiff',
+    requestPath,
+    _leftCommit,
+    _rightCommit
+  );
   const { contents: leftFileContents, isDirectory } = fetchContents(
-    leftCommit,
+    _leftCommit,
     requestPath
   );
   const { contents: rightFileContents } = fetchContents(
-    rightCommit,
+    _rightCommit,
     requestPath
   );
 
@@ -52,11 +61,17 @@ function fetchContents(commitId, requestPath): IFetchContents {
 }
 
 function fetchFromGit(commitId, requestPath): IFetchContents {
-  // use -- fileName and git log will work on deleted files and paths
-  const cmd = `git show ${commitId}:./${escapeForCli(requestPath)}`;
-  if (process.env.DEBUG === '1') {
-    console.warn(`$ ${cmd}`);
+  const gitRoot = findGitRoot(requestPath);
+  if (gitRoot) {
+    console.log('git-diff-scraper: changing to gitRoot', gitRoot);
+    process.chdir(gitRoot);
   }
+  const _requestPath = normalizeRequestPath(gitRoot, requestPath);
+
+  // use -- fileName and git log will work on deleted files and paths
+  const cmd = `git show ${commitId}:${escapeForCli(_requestPath)}`;
+  console.log(`git-diff-scraper: $ ${cmd}`);
+
   try {
     const rawContents = child_process
       .execSync(cmd, {
@@ -71,7 +86,7 @@ function fetchFromGit(commitId, requestPath): IFetchContents {
         : Buffer.from(rawContents).toString('base64'),
     };
   } catch (e) {
-    console.log(e.status, e.Error);
+    console.error('git-diff-scraper: error executing git', e.status, e);
     return {
       isDirectory: false,
       contents: null,
@@ -148,4 +163,27 @@ function makeFile(fileName, delta, status = 'modified') {
 
 function fileNameComparator(a, b) {
   return a.path.localeCompare(b.path);
+}
+
+function normalizeRequestPath(
+  gitRoot: string | null,
+  requestPath: string
+): string {
+  if (!gitRoot) {
+    return requestPath;
+  }
+  const parsedRequestPath = path.parse(requestPath);
+  if (parsedRequestPath.root === '') {
+    // it's already a relative path
+    return requestPath;
+  }
+  const parsedRoot = path.parse(gitRoot);
+  const relativeDir = parsedRequestPath.dir.slice(gitRoot.length + 1);
+  console.log(
+    'normalizeREquestPath',
+    relativeDir,
+    parsedRoot,
+    parsedRequestPath
+  );
+  return path.join(relativeDir, parsedRequestPath.base);
 }
