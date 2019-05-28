@@ -52,6 +52,10 @@ export class GitTemporal extends Component<
     handleVscodeMessages(dispatch);
   }
 
+  componentWillUnmount() {
+    console.log('git-temporal-react: unmounting GitTemporal');
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.path !== this.props.path) {
       const { dispatch, path } = nextProps;
@@ -61,6 +65,7 @@ export class GitTemporal extends Component<
 
   render() {
     const { isFetching, viewCommitsOrFiles } = this.props;
+    console.log('git-temporal-react: rendering GitTemporal');
 
     return (
       <div style={style('page')}>

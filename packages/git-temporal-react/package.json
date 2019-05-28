@@ -39,7 +39,7 @@
     "monaco-editor": "0.15.6",
     "monaco-editor-webpack-plugin": "^1.7.0",
     "react-redux": "5.0.7",
-    "react-virtualized": "9.20.1",
+    "react-virtualized": "9.21.1",
     "redux": "4.0.0",
     "redux-combine-actions": "0.1.2",
     "redux-logger": "3.0.6",

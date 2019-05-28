@@ -43,11 +43,11 @@ export function getDiff(
 
   return {
     isDirectory,
-    leftCommit,
     leftFileContents,
-    rightCommit,
     rightFileContents,
     modifiedFiles,
+    rightCommit: _rightCommit,
+    leftCommit: _leftCommit,
     path: requestPath,
   };
 }
@@ -177,13 +177,6 @@ function normalizeRequestPath(
     // it's already a relative path
     return requestPath;
   }
-  const parsedRoot = path.parse(gitRoot);
   const relativeDir = parsedRequestPath.dir.slice(gitRoot.length + 1);
-  console.log(
-    'normalizeREquestPath',
-    relativeDir,
-    parsedRoot,
-    parsedRequestPath
-  );
   return path.join(relativeDir, parsedRequestPath.base);
 }

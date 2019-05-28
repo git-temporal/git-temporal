@@ -3,7 +3,9 @@
   "compilerOptions": {
     "outDir": "./lib",
     "types": ["node", "jest"],
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
   },
   "include": ["src/**/*.*"]
 }

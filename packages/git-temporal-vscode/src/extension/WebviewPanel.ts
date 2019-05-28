@@ -111,6 +111,8 @@ export class WebviewPanel {
   }
 
   public dispose() {
+    console.log('git-temporal-vscode: disposing WebviewPanel.html');
+
     WebviewPanel.currentPanel = undefined;
 
     // Clean up our resources
@@ -125,6 +127,7 @@ export class WebviewPanel {
   }
 
   private update() {
+    console.log('git-temporal-vscode: updating WebviewPanel.html');
     this._panel.title = 'Git Temporal';
     this._panel.webview.html = this.getHtmlForWebview();
   }

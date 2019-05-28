@@ -39,6 +39,10 @@ export class Stats extends Component<StatsProps & DispatchProps> {
     this.viewCommitsIfIsFile();
   }
 
+  componentWillUnmount() {
+    console.log('git-temporal-react: unmounting Stats');
+  }
+
   componentDidUpdate() {
     this.viewCommitsIfIsFile();
   }

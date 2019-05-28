@@ -31,6 +31,10 @@ const innerStyle = {
 export class DifferenceViewer extends Component<
   IDifferenceViewerContainerState & DispatchProps
 > {
+  componentWillUnmount() {
+    console.log('git-temporal-react: unmounting DifferenceViewer');
+  }
+
   componentDidUpdate(prevProps) {
     if (
       this.getFirstFilteredCommitId(prevProps.filteredCommits) !==

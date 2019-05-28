@@ -15,6 +15,10 @@ export class Files extends Component<IFilesContainerState & DispatchProps> {
     this.renderRow = this.renderRow.bind(this);
   }
 
+  componentWillUnmount() {
+    console.log('git-temporal-react: unmounting Files');
+  }
+
   readonly outerStyle = {
     _extends: ['borderedPanel', 'flexColumns'],
     flexGrow: 1,

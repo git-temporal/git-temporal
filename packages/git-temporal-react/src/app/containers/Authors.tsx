@@ -16,6 +16,10 @@ export class Authors extends Component<IAuthorsContainerState & DispatchProps> {
     this.renderRow = this.renderRow.bind(this);
   }
 
+  componentWillUnmount() {
+    console.log('git-temporal-react: unmounting Authors');
+  }
+
   readonly outerStyle = {
     _extends: ['altPanel', 'flexColumns'],
     display: 'flex',
@@ -28,15 +32,12 @@ export class Authors extends Component<IAuthorsContainerState & DispatchProps> {
     display: 'block',
     flexGrow: 0,
   };
-  readonly listStyle = {
-    display: 'flex',
-    flexGrow: 1,
-  };
+  readonly listStyle = { display: 'flex', flexGrow: 1 };
 
   render() {
     const { authorsContainerSort } = this.props;
     const sortTitle = authorsContainerSort;
-
+    console.log('git-temporal-react: rendering Authors');
     return (
       <div style={style(this.outerStyle)}>
         <AuthorsActionMenu />

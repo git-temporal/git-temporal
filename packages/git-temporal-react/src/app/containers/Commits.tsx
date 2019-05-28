@@ -11,6 +11,7 @@ import { highlightCommits, selectPath } from 'app/actions';
 import { DispatchProps, ICommitsContainerState } from 'app/interfaces';
 import { getCommitsContainerState } from 'app/selectors';
 import { style } from 'app/styles';
+import { ExtendingList } from 'app/components/ExtendingList';
 import { CommitCard } from 'app/components/CommitCard';
 import CommitsActionMenu from './CommitsActionMenu';
 
@@ -27,6 +28,10 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
     this.renderRow = this.renderRow.bind(this);
 
     this._cache = new CellMeasurerCache({ fixedWidth: true });
+  }
+
+  componentWillUnmount() {
+    console.log('git-temporal-react: unmounting Commits');
   }
 
   componentDidUpdate(prevProps, _prevState) {
@@ -54,6 +59,8 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
   };
 
   render() {
+    console.log('rendering commits', this.props.commits);
+
     const scrollToIndex = this.scrollToIndexOnNextRender || 0;
     const sortTitle = this.props.commitsContainerSort;
     return (
@@ -74,21 +81,22 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
   }
 
   renderList(height, scrollToIndex) {
+    const listStyle = {
+      width: this._listWidth,
+      height: height || 100,
+    };
+    // This originally used List from react-virtualized to render the list
+    // but it needed CellMeasurer which didn't work in VSCode webview :/
     return (
-      <List
-        width={this._listWidth}
-        height={height || 100}
-        rowHeight={this._cache.rowHeight}
-        rowRenderer={this.renderRow}
+      <ExtendingList
         rowCount={this.props.commits.length}
-        ref={this._setListRef}
-        deferredMeasurementCache={this._cache}
-        scrollToIndex={scrollToIndex}
-        commitsContainerSort={this.props.commitsContainerSort}
+        rowRenderer={this.renderRow}
+        style={listStyle}
       />
     );
   }
-  renderRow({ index, key, parent, style }) {
+
+  renderRow(index: number, key: string | number) {
     // console.log('render row', row);
     const commit = this.props.commits[index];
     let isHighlighted = false;
@@ -105,27 +113,17 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
       this.highlightedIndex = index;
     }
     return (
-      <CellMeasurer
-        cache={this._cache}
-        columnIndex={0}
-        key={key}
-        overscanRowCount={10}
-        parent={parent}
-        rowIndex={index}
-        width={this._listWidth}
-      >
-        <div style={style}>
-          <CommitCard
-            commit={commit}
-            index={index}
-            isHighlighted={isHighlighted}
-            isExpanded={isExpanded}
-            onClick={this.onCommitCardClick}
-            onFileClick={this.onFileClick}
-            hideFiles={this.props.isFileSelected}
-          />
-        </div>
-      </CellMeasurer>
+      <div key={key}>
+        <CommitCard
+          commit={commit}
+          index={index}
+          isHighlighted={isHighlighted}
+          isExpanded={isExpanded}
+          onClick={this.onCommitCardClick}
+          onFileClick={this.onFileClick}
+          hideFiles={this.props.isFileSelected}
+        />
+      </div>
     );
   }
 
