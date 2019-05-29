@@ -36,6 +36,10 @@ export class FileDifferences extends React.Component<FileDifferencesProps> {
     // window && window.addEventListener('resize', this.renderMonacoEditor);
   }
 
+  componentDidUpdate() {
+    this.renderMonacoEditor();
+  }
+
   render() {
     return (
       <div style={style(outerStyle)}>
@@ -46,11 +50,16 @@ export class FileDifferences extends React.Component<FileDifferencesProps> {
 
   renderMonacoEditor() {
     const el = this.monacoEditorElRef.current;
+    el.innerHTML = '';
 
     const leftFileContents =
-      this.props.leftFileContents && atob(this.props.leftFileContents);
+      (this.props.leftFileContents && atob(this.props.leftFileContents)) || '';
     const rightFileContents =
-      this.props.rightFileContents && atob(this.props.rightFileContents);
+      (this.props.rightFileContents && atob(this.props.rightFileContents)) ||
+      '';
+
+    console.log(`renderMonacoEditor: ${JSON.stringify(this.props, null, 2)}`);
+    // console.log(`renderMonacoEditor: atob: ${rightFileContents}`);
 
     const originalModel = editor.createModel(leftFileContents);
     const modifiedModel = editor.createModel(rightFileContents);
