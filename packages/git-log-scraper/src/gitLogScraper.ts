@@ -1,6 +1,9 @@
 import child_process from 'child_process';
 import * as fs from 'fs';
 import { findGitRoot } from '@git-temporal/commons';
+import { log, setPrefix } from '@git-temporal/logger';
+
+setPrefix('git-log-scraper');
 
 const parsedAttributes = {
   id: '%H%n',
@@ -44,7 +47,7 @@ function fetchFileHistory(fileName) {
   // use -- fileName and git log will work on deleted files and paths
   const cmd = `git log${flags} -- ${escapeForCli(fileName)}`;
   if (process.env.DEBUG === '1') {
-    console.warn(`$ ${cmd}`);
+    log(`$ ${cmd}`);
   }
   return child_process
     .execSync(cmd, {
@@ -134,7 +137,6 @@ function parseGitLogOutput(output) {
         name: fileName,
       });
     } else if (currentlyParsingAttr === 'body') {
-      // console.log('got body line at line number', lineNumber);
       commitObj.body += `<br>${line}`;
     }
   }

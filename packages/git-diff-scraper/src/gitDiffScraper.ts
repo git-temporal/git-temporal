@@ -4,6 +4,9 @@ import os from 'os';
 import path from 'path';
 
 import { escapeForCli, findGitRoot } from '@git-temporal/commons';
+import { debug, setPrefix } from '@git-temporal/logger';
+
+setPrefix('git-diff-scraper');
 
 interface IFetchContents {
   contents: string;
@@ -23,12 +26,7 @@ export function getDiff(
 ) {
   const _leftCommit = leftCommit || 'HEAD';
   const _rightCommit = rightCommit || 'local';
-  console.log(
-    'git-diff-scraper: getDiff',
-    requestPath,
-    _leftCommit,
-    _rightCommit
-  );
+  debug('getDiff', requestPath, _leftCommit, _rightCommit);
   const { contents: leftFileContents, isDirectory } = fetchContents(
     _leftCommit,
     requestPath
@@ -63,14 +61,14 @@ function fetchContents(commitId, requestPath): IFetchContents {
 function fetchFromGit(commitId, requestPath): IFetchContents {
   const gitRoot = findGitRoot(requestPath);
   if (gitRoot) {
-    console.log('git-diff-scraper: changing to gitRoot', gitRoot);
+    debug('changing to gitRoot', gitRoot);
     process.chdir(gitRoot);
   }
   const _requestPath = normalizeRequestPath(gitRoot, requestPath);
 
   // use -- fileName and git log will work on deleted files and paths
   const cmd = `git show ${commitId}:${escapeForCli(_requestPath)}`;
-  console.log(`git-diff-scraper: $ ${cmd}`);
+  debug(`$ ${cmd}`);
 
   try {
     const rawContents = child_process
@@ -86,7 +84,7 @@ function fetchFromGit(commitId, requestPath): IFetchContents {
         : Buffer.from(rawContents).toString('base64'),
     };
   } catch (e) {
-    console.error('git-diff-scraper: error executing git', e.status, e);
+    console.error('error executing git', e.status, e);
     return {
       isDirectory: false,
       contents: null,
@@ -128,7 +126,7 @@ function fetchDirectoryDiff(
     outputLines = outputBuffer.toString().split(os.EOL);
   } catch (e) {
     // TODO : test for specific error and only ignore doesn't exist in rev errors
-    console.log('Error retrieving git diff', e);
+    debug('Error retrieving git diff', e);
   }
   return parseDirectoryDiff(outputLines);
 }

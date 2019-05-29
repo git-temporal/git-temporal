@@ -31,6 +31,7 @@
     "test-debug": "node --inspect-brk node_modules/.bin/jest --runInBand"
   },
   "dependencies": {
+    "@git-temporal/logger": "0.1.0",
     "babel-plugin-dynamic-import-node": "^2.2.0",
     "d3": "5.7.0",
     "d3-selection-multi": "1.0.1",

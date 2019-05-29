@@ -31,7 +31,8 @@
     "url": "https://github.com/git-temporal/git-temporal/issues"
   },
   "dependencies": {
-    "@git-temporal/commons": "^0.1.0"
+    "@git-temporal/commons": "^0.1.0",
+    "@git-temporal/logger": "^0.1.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",

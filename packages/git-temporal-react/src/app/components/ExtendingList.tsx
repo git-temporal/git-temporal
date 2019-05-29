@@ -98,14 +98,6 @@ export class ExtendingList extends React.Component<
     }
 
     const innerBoundingRect = innerEl.getBoundingClientRect();
-    console.log(
-      'onScroll',
-      innerEl.scrollHeight,
-      outerEl.clientHeight,
-      outerEl.scrollTop,
-      innerBoundingRect.height,
-      innerEl.scrollHeight
-    );
     if (
       innerEl.scrollHeight > outerEl.clientHeight &&
       outerEl.scrollTop + outerEl.clientHeight > innerEl.scrollHeight - 200

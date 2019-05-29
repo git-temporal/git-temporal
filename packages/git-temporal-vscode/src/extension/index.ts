@@ -1,5 +1,8 @@
 import * as vscode from 'vscode';
 import { WebviewPanel } from './WebviewPanel';
+import { debug, setPrefix } from '@git-temporal/logger';
+
+setPrefix('git-temporal-vscode');
 
 export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
@@ -15,7 +18,7 @@ export function activate(context: vscode.ExtensionContext) {
         webviewPanel: vscode.WebviewPanel,
         state: any
       ) {
-        console.log(`Got state: ${state}`);
+        debug(`Got state: ${state}`);
         WebviewPanel.revive(webviewPanel, context.extensionPath);
       },
     });

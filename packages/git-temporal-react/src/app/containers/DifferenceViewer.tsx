@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as path from 'path';
+import { debug } from '@git-temporal/logger';
 
 import {
   DispatchProps,
@@ -32,7 +33,7 @@ export class DifferenceViewer extends Component<
   IDifferenceViewerContainerState & DispatchProps
 > {
   componentWillUnmount() {
-    console.log('git-temporal-react: unmounting DifferenceViewer');
+    debug('unmounting DifferenceViewer');
   }
 
   componentDidUpdate(prevProps) {

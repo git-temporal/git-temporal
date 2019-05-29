@@ -206,7 +206,6 @@ export class Timeplot extends React.Component<
       endDate
     );
     const { pageX, pageY } = evt;
-    // console.log('onMouseMove', pageX, pageY);
     // this enables greater agility, if the users vertical movement is
     // greater than their horizontal, they might be headed to the popup
     if (!this.lastMouseMoveCoords || pageY >= this.lastMouseMoveCoords.pageY) {
@@ -235,7 +234,6 @@ export class Timeplot extends React.Component<
       this.lastMouseDownDate &&
       startDate.toString() !== this.lastMouseDownDate.toString()
     ) {
-      // console.log('startDate differs', startDate, this.lastMouseDownDate);
       this.setDates(true, startDate);
     }
   };

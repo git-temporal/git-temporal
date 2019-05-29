@@ -98,7 +98,6 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
       prevProps.forceRender !== this.props.forceRender ||
       !first20CommitsEqual(prevProps.commits, this.props.commits)
     ) {
-      console.log('commits updated for forceRender');
       this.renderTimeplotGraph();
       this.forceUpdate();
     }
@@ -212,14 +211,6 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
     const maxImpact = d3.max(commits.map(d => d.linesAdded + d.linesDeleted));
     const minDate = getUTCDateOfCommit(commits[commits.length - 1]);
     const maxDate = getUTCDateOfCommit(commits[0]); // Date.now();
-
-    // console.log(
-    //   'dates',
-    //   minDate,
-    //   maxDate,
-    //   commits[0].authorDate,
-    //   getHourOfCommit(commits[0])
-    // );
 
     this.xScale = d3
       .scaleTime()

@@ -1,6 +1,7 @@
 import { ActionTypes } from 'app/actions/ActionTypes';
 import { isVscode, vscode } from 'app/actions/vscode';
 import { Dispatch } from 'redux';
+import { debug } from '@git-temporal/logger';
 
 export const requestDiff = (path: string) => ({
   selectedPath: path,
@@ -21,12 +22,7 @@ export const fetchDiff = (
   dispatch(requestDiff(path));
 
   if (isVscode) {
-    console.log(
-      'git-temporal-react: sending diff request to vscode ',
-      path,
-      leftCommit,
-      rightCommit
-    );
+    debug('sending diff request to vscode ', path, leftCommit, rightCommit);
     // see actions/vscode.ts for response handling that comes as a window event
     vscode.postMessage({ path, leftCommit, rightCommit, command: 'diff' });
   } else {

@@ -1,5 +1,6 @@
 import { ActionTypes } from 'app/actions/ActionTypes';
 import { isVscode, vscode } from 'app/actions/vscode';
+import { debug } from '@git-temporal/logger';
 
 export const requestCommits = path => ({
   selectedPath: path,
@@ -16,7 +17,7 @@ export const receiveCommits = (path, json) => ({
 const fetchCommits = path => dispatch => {
   dispatch(requestCommits(path));
   if (isVscode) {
-    console.log('git-temporal-react: sending history request to vscode ', path);
+    debug('sending history request to vscode ', path);
     // see actions/vscode.ts for response handling that comes as a window event
     vscode.postMessage({ path, command: 'history' });
   } else {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { List, AutoSizer } from 'react-virtualized';
+import { debug } from '@git-temporal/logger';
 
 import { highlightCommits } from 'app/actions';
 import { DispatchProps, IAuthorsContainerState } from 'app/interfaces';
@@ -17,7 +18,7 @@ export class Authors extends Component<IAuthorsContainerState & DispatchProps> {
   }
 
   componentWillUnmount() {
-    console.log('git-temporal-react: unmounting Authors');
+    debug('unmounting Authors');
   }
 
   readonly outerStyle = {
@@ -37,7 +38,7 @@ export class Authors extends Component<IAuthorsContainerState & DispatchProps> {
   render() {
     const { authorsContainerSort } = this.props;
     const sortTitle = authorsContainerSort;
-    console.log('git-temporal-react: rendering Authors');
+    debug('rendering Authors');
     return (
       <div style={style(this.outerStyle)}>
         <AuthorsActionMenu />
@@ -74,7 +75,7 @@ export class Authors extends Component<IAuthorsContainerState & DispatchProps> {
     );
   }
   renderRow({ index, style, key }) {
-    // console.log('render row', row);
+    // debug('render row', row);
     const author = this.props.authors[index];
     const {
       totalLinesAdded,

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { debug } from '@git-temporal/logger';
 
 import { GitTemporalProps, DispatchProps, StateProps } from 'app/interfaces';
 import { selectPath } from 'app/actions';
@@ -53,7 +54,7 @@ export class GitTemporal extends Component<
   }
 
   componentWillUnmount() {
-    console.log('git-temporal-react: unmounting GitTemporal');
+    debug('unmounting GitTemporal');
   }
 
   componentWillReceiveProps(nextProps) {
@@ -65,7 +66,7 @@ export class GitTemporal extends Component<
 
   render() {
     const { isFetching, viewCommitsOrFiles } = this.props;
-    console.log('git-temporal-react: rendering GitTemporal');
+    debug('rendering GitTemporal');
 
     return (
       <div style={style('page')}>

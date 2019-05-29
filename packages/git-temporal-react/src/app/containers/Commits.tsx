@@ -6,6 +6,7 @@ import {
   CellMeasurer,
   CellMeasurerCache,
 } from 'react-virtualized';
+import { debug } from '@git-temporal/logger';
 
 import { highlightCommits, selectPath } from 'app/actions';
 import { DispatchProps, ICommitsContainerState } from 'app/interfaces';
@@ -31,7 +32,7 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
   }
 
   componentWillUnmount() {
-    console.log('git-temporal-react: unmounting Commits');
+    debug('unmounting Commits');
   }
 
   componentDidUpdate(prevProps, _prevState) {
@@ -59,7 +60,7 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
   };
 
   render() {
-    console.log('rendering commits', this.props.commits);
+    debug('rendering commits', this.props.commits);
 
     const scrollToIndex = this.scrollToIndexOnNextRender || 0;
     const sortTitle = this.props.commitsContainerSort;
@@ -97,7 +98,7 @@ export class Commits extends Component<ICommitsContainerState & DispatchProps> {
   }
 
   renderRow(index: number, key: string | number) {
-    // console.log('render row', row);
+    // debug('render row', row);
     const commit = this.props.commits[index];
     let isHighlighted = false;
     let isExpanded = false;

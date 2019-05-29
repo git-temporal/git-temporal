@@ -1,5 +1,6 @@
 import { receiveCommits } from 'app/actions/commits';
 import { receiveDiff } from 'app/actions/diff';
+import { debug } from '@git-temporal/logger';
 
 // @ts-ignore
 export const isVscode = window && window.IS_VSCODE_WEBVIEW;
@@ -7,7 +8,7 @@ export const isVscode = window && window.IS_VSCODE_WEBVIEW;
 export const vscode = isVscode ? acquireVsCodeApi() : null;
 
 if (isVscode) {
-  console.log('git-temporal-react: running in VSCode.');
+  debug('running in VSCode.');
 }
 
 export function handleVscodeMessages(dispatch) {
@@ -18,21 +19,17 @@ export function handleVscodeMessages(dispatch) {
   window.addEventListener('message', handleMessage);
 
   function handleMessage(event: Event) {
-    console.log('git-temporal-react: received window message');
-    console.log(JSON.stringify(event, null, 2));
+    debug('received window message');
+    debug(JSON.stringify(event, null, 2));
     // @ts-ignore
     const { type, path, data } = event.data;
     switch (type) {
       case 'commitData':
-        console.log(
-          `git-temporal-react: received commits ${
-            data.commits.length
-          } commits for ${path}`
-        );
+        debug(`received commits ${data.commits.length} commits for ${path}`);
         dispatch(receiveCommits(path, data));
         break;
       case 'diffData':
-        console.log(`git-temporal-react: received diff ${data}`);
+        debug(`received diff ${data}`);
         dispatch(receiveDiff(path, data));
         break;
     }

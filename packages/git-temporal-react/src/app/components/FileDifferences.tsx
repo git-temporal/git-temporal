@@ -1,6 +1,7 @@
 import React from 'react';
 import { style } from 'app/styles';
 import { editor } from 'monaco-editor';
+import { debug } from '@git-temporal/logger';
 
 export interface FileDifferencesProps {
   leftFileContents: string;
@@ -58,8 +59,7 @@ export class FileDifferences extends React.Component<FileDifferencesProps> {
       (this.props.rightFileContents && atob(this.props.rightFileContents)) ||
       '';
 
-    console.log(`renderMonacoEditor: ${JSON.stringify(this.props, null, 2)}`);
-    // console.log(`renderMonacoEditor: atob: ${rightFileContents}`);
+    debug(`renderMonacoEditor: ${JSON.stringify(this.props, null, 2)}`);
 
     const originalModel = editor.createModel(leftFileContents);
     const modifiedModel = editor.createModel(rightFileContents);

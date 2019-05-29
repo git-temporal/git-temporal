@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { debug } from '@git-temporal/logger';
 
 import { DispatchProps } from 'app/interfaces';
 import { getStatsContainerState } from 'app/selectors';
@@ -40,7 +41,7 @@ export class Stats extends Component<StatsProps & DispatchProps> {
   }
 
   componentWillUnmount() {
-    console.log('git-temporal-react: unmounting Stats');
+    debug('unmounting Stats');
   }
 
   componentDidUpdate() {

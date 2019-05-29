@@ -1,5 +1,6 @@
 import React from 'react';
 import { style } from 'app/styles';
+import { debug } from '@git-temporal/logger';
 
 import { IModifiedFile } from 'app/interfaces';
 import { convertModifiedFilesToTrees } from 'app/selectors/files';
@@ -40,11 +41,7 @@ export class DirectoryDifferences extends React.Component<
 
   componentDidUpdate(prevProps) {
     if (this.didModifiedFilesChange(prevProps.modifiedFiles)) {
-      console.log(
-        'componentDidUpdate modifiedFiles changed',
-        prevProps,
-        this.props
-      );
+      debug('componentDidUpdate modifiedFiles changed', prevProps, this.props);
       this.setState({ expandedNodes: [] });
     }
   }
@@ -52,7 +49,7 @@ export class DirectoryDifferences extends React.Component<
     const { leftTree, rightTree } = convertModifiedFilesToTrees(
       this.props
     ) as any;
-    console.log('DirectoryDifferences::render()', leftTree, rightTree);
+    debug('DirectoryDifferences::render()', leftTree, rightTree);
     return (
       <div style={style(outerStyle, this.props.style)}>
         <DirectoryTree
@@ -73,13 +70,13 @@ export class DirectoryDifferences extends React.Component<
 
   didModifiedFilesChange(prevModifiedFiles) {
     const { modifiedFiles } = this.props;
-    // console.log('didModifiedFilesChange', modifiedFiles, prevModifiedFiles);
+    // debug('didModifiedFilesChange', modifiedFiles, prevModifiedFiles);
     if (!modifiedFiles || !prevModifiedFiles) {
-      // console.log('one or both null');
+      // debug('one or both null');
       return modifiedFiles !== prevModifiedFiles;
     }
     if (modifiedFiles.length !== prevModifiedFiles.length) {
-      // console.log('lengthsDiffer');
+      // debug('lengthsDiffer');
       return true;
     }
     return !modifiedFiles.every((file, index) => {

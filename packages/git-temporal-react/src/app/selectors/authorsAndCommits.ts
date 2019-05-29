@@ -58,7 +58,6 @@ const dedupeAuthorsAndCommits = (
   commitsByAuthorName,
   authorsAndCommitsByEmail
 ) => {
-  // console.log(authorsAndCommitsByEmail);
   for (const email in authorsAndCommitsByEmail) {
     const byEmail = authorsAndCommitsByEmail[email];
     if (byEmail.length <= 1) {

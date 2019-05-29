@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { List, AutoSizer } from 'react-virtualized';
+import { debug } from '@git-temporal/logger';
 
 import { selectPath } from 'app/actions';
 import { DispatchProps, IFilesContainerState } from 'app/interfaces';
@@ -16,7 +17,7 @@ export class Files extends Component<IFilesContainerState & DispatchProps> {
   }
 
   componentWillUnmount() {
-    console.log('git-temporal-react: unmounting Files');
+    debug('unmounting Files');
   }
 
   readonly outerStyle = {
@@ -64,7 +65,6 @@ export class Files extends Component<IFilesContainerState & DispatchProps> {
   }
 
   renderRow({ index, style, key }) {
-    // console.log('render row', row);
     const file = this.props.files[index];
     style.width = 'calc(100% - 20px)';
     return (

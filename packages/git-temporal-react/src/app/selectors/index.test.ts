@@ -11,7 +11,6 @@ describe('selectors/getCommitsContainerState', () => {
     let commitsOut;
     beforeAll(async () => {
       commitsOut = await selectors.getCommitsContainerState(testState1);
-      // console.log('got commits', commitsOut);
     });
     test('it should match snapshot', () => {
       expect(commitsOut).toMatchSnapshot();
@@ -28,7 +27,6 @@ describe('selectors/getCommitsContainerState', () => {
       testState.commits[0].authorName = null;
 
       commitsOut = await selectors.getCommitsContainerState(testState);
-      // console.log('got commits', commitsOut);
     });
     test('it should match snapshot', () => {
       expect(commitsOut).toMatchSnapshot();

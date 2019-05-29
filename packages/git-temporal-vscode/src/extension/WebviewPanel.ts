@@ -2,6 +2,7 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 import { getCommitHistory } from '@git-temporal/git-log-scraper';
 import { getDiff } from '@git-temporal/git-diff-scraper';
+import { debug } from '@git-temporal/logger';
 
 export class WebviewPanel {
   // Only allow a single git-temporal panel to exist at a time
@@ -25,7 +26,7 @@ export class WebviewPanel {
       return;
     }
     // Otherwise, create a new panel.
-    console.log('git-temporal:createOrShow extensionPath', extensionPath);
+    debug('createOrShow extensionPath', extensionPath);
     const panel = vscode.window.createWebviewPanel(
       WebviewPanel.viewType,
       'Git Temporal',
@@ -72,18 +73,14 @@ export class WebviewPanel {
     // Handle messages from the webview
     this._panel.webview.onDidReceiveMessage(
       message => {
-        console.log('git-temporal-vscode: got message', message);
+        debug('got message', message);
         switch (message.command) {
           case 'alert':
             vscode.window.showErrorMessage(message.text);
             return;
           case 'history':
             const history = getCommitHistory(message.path);
-            console.log(
-              'git-temporal-vscode: sending history',
-              message.path,
-              history
-            );
+            debug('sending history', message.path, history);
             this._panel.webview.postMessage({
               type: 'commitData',
               data: history,
@@ -96,7 +93,7 @@ export class WebviewPanel {
               message.leftCommit,
               message.rightCommit
             );
-            console.log('git-temporal-vscode: sending diff', diff);
+            debug('sending diff', diff);
             this._panel.webview.postMessage({
               type: 'diffData',
               data: diff,
@@ -111,7 +108,7 @@ export class WebviewPanel {
   }
 
   public dispose() {
-    console.log('git-temporal-vscode: disposing WebviewPanel.html');
+    debug('disposing WebviewPanel.html');
 
     WebviewPanel.currentPanel = undefined;
 
@@ -127,7 +124,7 @@ export class WebviewPanel {
   }
 
   private update() {
-    console.log('git-temporal-vscode: updating WebviewPanel.html');
+    debug('updating WebviewPanel.html');
     this._panel.title = 'Git Temporal';
     this._panel.webview.html = this.getHtmlForWebview();
   }

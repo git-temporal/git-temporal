@@ -23,7 +23,6 @@ describe('components/AuthorGravatarImage', () => {
     test('and then when image not found, should match snapshot (should render AuthorPlaceholderImage)', () => {
       wrapper.instance().onImageNotFound();
       expect(wrapper).toMatchSnapshot();
-      // console.log(wrapper.html());
       expect(wrapper.find('AuthorPlaceholderImage').length).toBe(1);
     });
   });
