@@ -18,6 +18,7 @@ const panelStyle = {
 const openPanelStyle = {
   ...panelStyle,
   height: 400,
+  marginBottom: '@margins.large',
 };
 
 const closedPanelStyle = {

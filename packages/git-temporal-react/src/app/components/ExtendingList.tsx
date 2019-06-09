@@ -47,8 +47,7 @@ export class ExtendingList extends React.Component<
     this.innerContainerRef = React.createRef();
     this.outerContainerRef = React.createRef();
 
-    // this.onScroll = this.onScroll.bind(this);
-    // this.debouncedOnScroll = debounce(this.onScroll, 50);
+    this.onScroll = this.onScroll.bind(this);
   }
   render() {
     return (

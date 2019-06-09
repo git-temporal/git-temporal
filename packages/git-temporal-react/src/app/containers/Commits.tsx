@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 // @ts-ignore
 import { useSelector, useDispatch } from 'react-redux';
-import { AutoSizer } from 'react-virtualized';
 import { debug } from '@git-temporal/logger';
 
 import { highlightCommits, selectPath } from 'app/actions';
@@ -32,15 +31,9 @@ export const Commits: React.FC = (): React.ReactElement => {
   return (
     <CollapsibleGroup title={title}>
       <CommitsActionMenu />
-      <div style={scrollStyle}>{renderList()}</div>
+      <ExtendingList rowCount={commits.length} rowRenderer={renderRow} />
     </CollapsibleGroup>
   );
-
-  function renderList() {
-    // This originally used List from react-virtualized to render the list
-    // but it needed CellMeasurer which didn't work in VSCode webview :/
-    return <ExtendingList rowCount={commits.length} rowRenderer={renderRow} />;
-  }
 
   function renderRow(index: number, key: string | number) {
     // debug('render row', row);

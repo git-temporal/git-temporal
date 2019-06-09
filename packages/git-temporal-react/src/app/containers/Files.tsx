@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 // @ts-ignore
 import { useSelector, useDispatch } from 'react-redux';
-import { List, AutoSizer } from 'react-virtualized';
 import { debug } from '@git-temporal/logger';
 
 import { selectPath } from 'app/actions';
@@ -11,6 +10,7 @@ import { getFilteredFilesForFilesContainer } from 'app/selectors/files';
 import FilesActionMenu from './FilesActionMenu';
 import { FileCard } from 'app/components/FileCard';
 import { CollapsibleGroup } from 'app/components/CollapsibleGroup';
+import { ExtendingList } from 'app/components/ExtendingList';
 
 export const Files: React.FC = (): React.ReactElement => {
   const filesContainerSort = useSelector(getFilesContainerSort);
@@ -21,31 +21,13 @@ export const Files: React.FC = (): React.ReactElement => {
   return (
     <CollapsibleGroup title={title}>
       <FilesActionMenu />
-      <div style={{ flexGrow: 1 }}>
-        <AutoSizer>
-          {({ height, width }) => (
-            <List
-              width={
-                width || 100 // width and height below need minimums for testing
-              }
-              height={height || 100}
-              rowHeight={60}
-              rowRenderer={renderRow}
-              rowCount={files.length}
-              filesContainerSort={filesContainerSort}
-            />
-          )}
-        </AutoSizer>
-      </div>
+      <ExtendingList rowCount={files.length} rowRenderer={renderRow} />
     </CollapsibleGroup>
   );
 
-  function renderRow({ index, style, key }) {
+  function renderRow(index: number, key: string) {
     const file = files[index];
-    style.width = 'calc(100% - 20px)';
-    return (
-      <FileCard key={key} style={style} file={file} onFileClick={onFileClick} />
-    );
+    return <FileCard key={key} file={file} onFileClick={onFileClick} />;
   }
 
   function onFileClick(event, fileName) {
