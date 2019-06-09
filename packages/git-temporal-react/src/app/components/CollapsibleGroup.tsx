@@ -1,46 +1,49 @@
 import React, { useState, ReactElement } from 'react';
 import { style as s } from 'app/styles';
+import { CaretRightIcon } from './CaretRightIcon';
+import { CaretDownIcon } from './CaretDownIcon';
 
 interface ComponentProps {
   children: ReactElement[];
-  style: object;
-  onOpen?: () => void;
-  onClose?: () => void;
+  title: string;
+  style?: object;
 }
 
-const openPanelStyle = {
+const panelStyle = {
   _extends: ['flexColumn'],
-  position: 'relative',
-  width: 300,
+  flexGrow: 0,
+  flexShrink: 0,
+};
+
+const openPanelStyle = {
+  ...panelStyle,
+  height: 400,
 };
 
 const closedPanelStyle = {
-  _extends: ['flexColumn'],
-  position: 'relative',
-  width: 30,
+  ...panelStyle,
+  height: 30,
 };
 
 const toggleIconStyle = {
-  position: 'absolute',
-  right: '@margins.medium',
-  top: '@margins.medium',
   cursor: 'pointer',
-  zIndex: 1,
 };
 
-export const CollapsibleSidePanel: React.FC<ComponentProps> = ({
+export const CollapsibleGroup: React.FC<ComponentProps> = ({
   children,
   style,
-  onOpen,
-  onClose,
+  title,
 }): React.ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
 
   const panelStyle = isOpen ? openPanelStyle : closedPanelStyle;
   return (
     <div style={s(panelStyle, style)} onClick={didClickPanel}>
-      <div style={s(toggleIconStyle)} onClick={didToggle}>
-        |||
+      <div style={s('flexRow')}>
+        <div style={s(toggleIconStyle)} onClick={didToggle}>
+          {isOpen ? <CaretDownIcon /> : <CaretRightIcon />}
+        </div>
+        <div style={s('h2Text')}>{title}</div>
       </div>
       {isOpen && children}
     </div>
@@ -51,11 +54,6 @@ export const CollapsibleSidePanel: React.FC<ComponentProps> = ({
   }
 
   function didToggle() {
-    if (isOpen) {
-      onClose && onClose();
-    } else {
-      onOpen && onOpen();
-    }
     setIsOpen(!isOpen);
   }
 };

@@ -83,3 +83,25 @@ export const getCommitsForTimeplot = createSelector(
     return filteredCommits;
   }
 );
+
+export const getAuthorDateRange = createSelector(
+  getFilteredCommits,
+  commits => {
+    let minAuthorDate = Date.now();
+    let maxAuthorDate = 0;
+
+    for (const commit of commits) {
+      if (commit.authorDate < minAuthorDate) {
+        minAuthorDate = commit.authorDate;
+      }
+      if (commit.authorDate > maxAuthorDate) {
+        maxAuthorDate = commit.authorDate;
+      }
+    }
+
+    return {
+      minAuthorDate,
+      maxAuthorDate,
+    };
+  }
+);

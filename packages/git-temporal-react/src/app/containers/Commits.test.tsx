@@ -22,9 +22,7 @@ describe('containers/Commits', () => {
     const mockEvent = { stopPropagation: jest.fn };
     beforeAll(() => {
       mockDispatch = jest.fn();
-      wrapper = shallow(
-        <Commits dispatch={mockDispatch} {...filteredCommitsMock} />
-      );
+      wrapper = shallow(<Commits />);
     });
 
     beforeEach(() => {

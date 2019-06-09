@@ -19,12 +19,12 @@ import { FileDifferences } from 'app/components/FileDifferences';
 import DifferenceViewerHeader from 'app/containers/DifferenceViewerHeader';
 
 const outerStyle = {
-  _extends: ['borderedPanel', 'flexColumns', 'flexGrow'],
+  _extends: ['borderedPanel', 'flexColumn', 'flexGrow'],
   position: 'relative',
 };
 
 const innerStyle = {
-  _extends: 'flexColumns',
+  _extends: 'flexColumn',
 };
 
 export class DifferenceViewer extends Component<

@@ -11,9 +11,7 @@ describe('containers/Authors', () => {
     beforeAll(() => {
       debugger;
       mockDispatch = jest.fn();
-      wrapper = shallow(
-        <Authors dispatch={mockDispatch} {...authorsAndStats} />
-      );
+      wrapper = shallow(<Authors />);
     });
 
     test('it should match snapshot', () => {
@@ -26,9 +24,7 @@ describe('containers/Authors', () => {
     beforeAll(() => {
       debugger;
       mockDispatch = jest.fn();
-      wrapper = shallow(
-        <Authors dispatch={mockDispatch} {...authorsAndStats} />
-      );
+      wrapper = shallow(<Authors />);
     });
     beforeEach(() => {
       mockDispatch.mockClear();

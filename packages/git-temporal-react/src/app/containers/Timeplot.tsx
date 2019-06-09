@@ -46,7 +46,7 @@ const initialState = {
 };
 
 const outerStyle = {
-  _extends: ['borderedPanel', 'flexColumns'],
+  _extends: ['borderedPanel', 'flexColumn'],
   flexGrow: 0,
   flexShrink: 0,
   position: 'relative',

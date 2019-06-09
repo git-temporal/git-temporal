@@ -86,11 +86,11 @@ let globalStyles = {
     marginBottom: '@margins.medium',
     marginRight: '@margins.medium',
   },
-  flexColumns: {
+  flexColumn: {
     display: 'flex',
     flexDirection: 'column',
   },
-  flexRows: {
+  flexRow: {
     display: 'flex',
     flexDirection: 'row',
   },

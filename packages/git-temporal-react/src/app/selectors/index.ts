@@ -16,7 +16,7 @@ import {
   getRerenderRequestedAt,
 } from './stateVars';
 
-import { getAuthorsAndCommits } from './authorsAndCommits';
+import { getAuthorsAndCommits } from './authors';
 import { getFilteredFilesForFilesContainer } from './files';
 
 import {
@@ -36,30 +36,6 @@ export const getGitTemporalContainerState = createSelector(
     selectedPath,
     commits,
     isFetching,
-  })
-);
-
-export const getCommitsContainerState = createSelector(
-  getSelectedPath,
-  getHighlightedCommitIds,
-  getFilteredSortedCommits,
-  getIsFetching,
-  getIsFileSelected,
-  getCommitsContainerSort,
-  (
-    selectedPath,
-    highlightedCommitIds,
-    commits,
-    isFetching,
-    isFileSelected,
-    commitsContainerSort
-  ) => ({
-    selectedPath,
-    highlightedCommitIds,
-    commits,
-    isFetching,
-    isFileSelected,
-    commitsContainerSort,
   })
 );
 
@@ -114,48 +90,6 @@ export const getAuthorsActionMenuState = createSelector(
   })
 );
 
-export const getAuthorsContainerState = createSelector(
-  getAuthorsAndCommits,
-  getAuthorsContainerSort,
-  getSearch,
-  getHighlightedCommitIds,
-  (authorsAndCommits, authorsContainerSort, search, highlightedCommitIds) => {
-    let totalLinesAdded = 0;
-    let totalLinesDeleted = 0;
-    let totalCommits = 0;
-    let maxImpact = 0;
-    let maxCommits = 0;
-
-    const authorsArray = authorsAndCommits.map(ac => {
-      totalCommits += ac.commits.length;
-      totalLinesDeleted += ac.linesDeleted;
-      totalLinesAdded += ac.linesAdded;
-      const impact = ac.linesAdded + ac.linesDeleted;
-      if (impact > maxImpact) {
-        maxImpact = impact;
-      }
-      if (ac.commits.length > maxCommits) {
-        maxCommits = ac.commits.length;
-      }
-      return {
-        ...ac,
-      };
-    });
-
-    return {
-      totalLinesAdded,
-      totalLinesDeleted,
-      totalCommits,
-      maxImpact,
-      maxCommits,
-      authorsContainerSort,
-      search,
-      highlightedCommitIds,
-      authors: authorsArray,
-    };
-  }
-);
-
 export const getFilesActionMenuState = createSelector(
   getFilesContainerSort,
   filesContainerSort => ({
@@ -174,30 +108,6 @@ export const getFilesContainerState = createSelector(
     filesContainerSort,
     search,
   })
-);
-
-export const getStatsContainerState = createSelector(
-  getFilteredCommits,
-  getIsFileSelected,
-  (commits, isFileSelected) => {
-    let minAuthorDate = Date.now();
-    let maxAuthorDate = 0;
-
-    for (const commit of commits) {
-      if (commit.authorDate < minAuthorDate) {
-        minAuthorDate = commit.authorDate;
-      }
-      if (commit.authorDate > maxAuthorDate) {
-        maxAuthorDate = commit.authorDate;
-      }
-    }
-
-    return {
-      minAuthorDate,
-      maxAuthorDate,
-      isFileSelected,
-    };
-  }
 );
 
 export const getTimeplotContainerState = createSelector(

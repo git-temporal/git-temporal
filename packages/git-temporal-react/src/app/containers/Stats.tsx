@@ -1,68 +1,44 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { debug } from '@git-temporal/logger';
+import React from 'react';
+// @ts-ignore
+import { useSelector } from 'react-redux';
 
-import { DispatchProps } from 'app/interfaces';
-import { getStatsContainerState } from 'app/selectors';
 import { style } from 'app/styles';
+import { getAuthorDateRange } from 'app/selectors/commits';
 import { StackedLabel } from 'app/components/StackedLabel';
-import { CommaNumber } from 'app/components/CommaNumber';
 import { EpochSpan } from 'app/components/EpochSpan';
 import { ExplodeOnChange } from 'app/components/ExplodeOnChange';
 
-interface StatsProps {
-  minAuthorDate?: number;
-  maxAuthorDate?: number;
-  authors?: number;
-  commits?: number;
-  files?: number;
-  linesAdded?: number;
-  linesDeleted?: number;
-  isFileSelected?: boolean;
-}
-
 const outerStyle = {
-  _extends: ['flexColumns'],
-  paddingBottom: 0,
+  _extends: ['flexRow'],
+  marginBottom: '@margins.medium',
+  paddingLeft: '@margins.medium',
   flexShrink: 0,
 };
 
-export class Stats extends Component<StatsProps & DispatchProps> {
-  componentWillUnmount() {
-    debug('unmounting Stats');
-  }
+export const Stats: React.FC = (): React.ReactElement => {
+  const { minAuthorDate, maxAuthorDate } = useSelector(getAuthorDateRange);
 
-  render() {
-    return (
-      <div style={style(outerStyle)}>
-        <StackedLabel label="Active Time Span">
-          <ExplodeOnChange
-            value={this.props.minAuthorDate + this.props.maxAuthorDate}
-          >
+  return (
+    <div style={style(outerStyle)}>
+      <StackedLabel label="Active Time Span">
+        <ExplodeOnChange value={minAuthorDate + maxAuthorDate}>
+          <EpochSpan
+            firstEpochTime={minAuthorDate}
+            secondEpochTime={maxAuthorDate}
+          />
+        </ExplodeOnChange>
+      </StackedLabel>
+      <StackedLabel label="Last Commit">
+        <div>
+          <ExplodeOnChange value={maxAuthorDate}>
             <EpochSpan
-              firstEpochTime={this.props.minAuthorDate}
-              secondEpochTime={this.props.maxAuthorDate}
+              firstEpochTime={maxAuthorDate}
+              secondEpochTime={Date.now() / 1000}
             />
+            <span> ago</span>
           </ExplodeOnChange>
-        </StackedLabel>
-        <StackedLabel label="Last Commit">
-          <div>
-            <ExplodeOnChange value={this.props.maxAuthorDate}>
-              <EpochSpan
-                firstEpochTime={this.props.maxAuthorDate}
-                secondEpochTime={Date.now() / 1000}
-              />
-              <span> ago</span>
-            </ExplodeOnChange>
-          </div>
-        </StackedLabel>
-      </div>
-    );
-  }
-}
-
-export const mapStateToProps = state => {
-  return getStatsContainerState(state);
+        </div>
+      </StackedLabel>
+    </div>
+  );
 };
-
-export default connect(mapStateToProps)(Stats);

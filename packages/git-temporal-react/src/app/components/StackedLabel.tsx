@@ -18,7 +18,7 @@ const defaultContainerStyle = {
 };
 
 export const StackedLabel = (props: StackedLabelProps): JSX.Element => {
-  const labelStyles = [props.labelStyle];
+  const labelStyles = [props.labelStyle, 'smallerText'];
   if (props.isSelected) {
     labelStyles.push('selected');
   } else if (props.onLabelClick) {

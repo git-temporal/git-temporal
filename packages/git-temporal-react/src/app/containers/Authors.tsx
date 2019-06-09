@@ -1,63 +1,50 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+// @ts-ignore
+import { useSelector, useDispatch } from 'react-redux';
 import { List, AutoSizer } from 'react-virtualized';
 import { debug } from '@git-temporal/logger';
 
-import { highlightCommits } from 'app/actions';
-import { DispatchProps, IAuthorsContainerState } from 'app/interfaces';
-import { getAuthorsContainerState } from 'app/selectors';
 import { style } from 'app/styles';
+import { highlightCommits } from 'app/actions';
+import { getAuthorsStats } from 'app/selectors/authors';
+import {
+  getAuthorsContainerSort,
+  getHighlightedCommitIds,
+} from 'app/selectors/stateVars';
+import { CollapsibleGroup } from 'app/components/CollapsibleGroup';
 import { AuthorCard } from 'app/components/AuthorCard';
 
 import AuthorsActionMenu from 'app/containers/AuthorsActionMenu';
 
-export class Authors extends Component<IAuthorsContainerState & DispatchProps> {
-  constructor(props) {
-    super(props);
-    this.renderRow = this.renderRow.bind(this);
-  }
+const headerStyle = {
+  _extends: ['h2Text'],
+  display: 'block',
+  flexGrow: 0,
+};
+const listStyle = { display: 'flex', flexGrow: 1 };
 
-  componentWillUnmount() {
-    debug('unmounting Authors');
-  }
+export const Authors: React.FC = (): React.ReactElement => {
+  const authorsContainerSort = useSelector(getAuthorsContainerSort);
+  const highlightedCommitIds = useSelector(getHighlightedCommitIds);
+  const authorStats = useSelector(getAuthorsStats);
+  const dispatch = useDispatch();
 
-  readonly outerStyle = {
-    _extends: ['altPanel', 'flexColumns'],
-    display: 'flex',
-    position: 'relative',
-    minWidth: 320,
-    maxWidth: 320,
-  };
-  readonly headerStyle = {
-    _extends: ['h2Text'],
-    display: 'block',
-    flexGrow: 0,
-  };
-  readonly listStyle = { display: 'flex', flexGrow: 1 };
+  const groupTitle = `${authorStats.authors.length} Authors`;
 
-  render() {
-    const { authorsContainerSort } = this.props;
-    const sortTitle = authorsContainerSort;
-    debug('rendering Authors');
-    return (
-      <div style={style(this.outerStyle)}>
-        <AuthorsActionMenu />
-        <div style={style(this.headerStyle)}>
-          <span data-testId="header">Authors by {sortTitle}</span>
-        </div>
-        <div style={style(this.listStyle)}>
-          <AutoSizer>
-            {({ height, width }) => {
-              return this.renderList(height, width);
-            }}
-          </AutoSizer>
-        </div>
+  return (
+    <CollapsibleGroup title={groupTitle}>
+      <AuthorsActionMenu />
+      <div style={style(listStyle)}>
+        <AutoSizer>
+          {({ height, width }) => {
+            return renderList(height, width);
+          }}
+        </AutoSizer>
       </div>
-    );
-  }
-  renderList(height, width) {
-    const { authors, authorsContainerSort, highlightedCommitIds } = this.props;
+    </CollapsibleGroup>
+  );
 
+  function renderList(height, width) {
     // authorsContainerSort and highlightedCommitIds are passed
     // to the list to force it to update when they change. as you do
     return (
@@ -67,24 +54,17 @@ export class Authors extends Component<IAuthorsContainerState & DispatchProps> {
         }
         height={height || 100}
         rowHeight={120}
-        rowRenderer={this.renderRow}
-        rowCount={authors.length}
+        rowRenderer={renderRow}
+        rowCount={authorStats.authors.length}
         authorsContainerSort={authorsContainerSort}
         highlightedCommitIds={highlightedCommitIds}
       />
     );
   }
-  renderRow({ index, style, key }) {
+
+  function renderRow({ index, style, key }) {
     // debug('render row', row);
-    const author = this.props.authors[index];
-    const {
-      totalLinesAdded,
-      totalLinesDeleted,
-      totalCommits,
-      maxImpact,
-      maxCommits,
-      highlightedCommitIds,
-    } = this.props;
+    const author = authorStats.authors[index];
     const isHighlighted =
       highlightedCommitIds &&
       highlightedCommitIds.length > 0 &&
@@ -100,23 +80,21 @@ export class Authors extends Component<IAuthorsContainerState & DispatchProps> {
         index={index}
         style={style}
         author={author}
-        totalLinesAdded={totalLinesAdded}
-        totalLinesDeleted={totalLinesDeleted}
-        totalCommits={totalCommits}
-        maxImpact={maxImpact}
-        maxCommits={maxCommits}
+        totalLinesAdded={authorStats.totalLinesAdded}
+        totalLinesDeleted={authorStats.totalLinesDeleted}
+        totalCommits={authorStats.totalCommits}
+        maxImpact={authorStats.maxImpact}
+        maxCommits={authorStats.maxCommits}
         isHighlighted={isHighlighted}
-        onClick={this.onAuthorClick}
+        onClick={onAuthorClick}
       />
     );
   }
 
-  onAuthorClick = (_evt, author) => {
+  function onAuthorClick(_evt, author) {
     const commitIds = author.commits.map(commit => {
       return commit.id;
     });
-    this.props.dispatch(highlightCommits(commitIds));
-  };
-}
-
-export default connect(getAuthorsContainerState)(Authors);
+    dispatch(highlightCommits(commitIds));
+  }
+};

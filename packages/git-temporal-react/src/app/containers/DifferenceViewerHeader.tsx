@@ -10,7 +10,7 @@ import { RevSelector } from 'app/components/RevSelector';
 import { EpochDateTime } from 'app/components/EpochDateTime';
 
 const outerStyle = {
-  _extends: 'flexRows',
+  _extends: 'flexRow',
   flexGrow: 0,
   marginBottom: 10,
   paddingBottom: 10,

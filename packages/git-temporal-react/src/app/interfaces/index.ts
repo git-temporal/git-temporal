@@ -66,15 +66,6 @@ export interface IHeaderContainerState {
   isDefaultDates?: boolean;
 }
 
-export interface ICommitsContainerState {
-  selectedPath: string;
-  highlightedCommitIds: string[];
-  commits: ICommit[];
-  isFetching: boolean;
-  isFileSelected: boolean;
-  commitsContainerSort: string;
-}
-
 export interface IAuthorStats {
   authorName: string;
   authorEmails: string[];
@@ -83,16 +74,6 @@ export interface IAuthorStats {
   commits: ICommit[];
   firstCommitOn: number;
   lastCommitOn: number;
-}
-export interface IAuthorsContainerState {
-  authors?: any[];
-  totalLinesAdded: number;
-  totalLinesDeleted: number;
-  totalCommits: number;
-  maxImpact: number;
-  maxCommits: number;
-  authorsContainerSort: string;
-  highlightedCommitIds: string[];
 }
 
 export interface IFileStats {
@@ -103,11 +84,6 @@ export interface IFileStats {
   commits: ICommit[];
   firstCommitOn: number;
   lastCommitOn: number;
-}
-export interface IFilesContainerState {
-  files?: IFileStats[];
-  isFileSelected: boolean;
-  filesContainerSort: string;
 }
 
 export interface ITimeplotState {

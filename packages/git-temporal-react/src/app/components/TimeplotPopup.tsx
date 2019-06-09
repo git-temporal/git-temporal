@@ -39,7 +39,7 @@ const headerStyle = {
   marginLeft: -10,
 };
 const footerStyle = {
-  _extends: ['altPanel', 'smallerText', 'flexColumns'],
+  _extends: ['altPanel', 'smallerText', 'flexColumn'],
   // compensate for padding of panel to move this to the bottom, left & right edges
   marginRight: -10,
   marginBottom: -10,
@@ -95,13 +95,13 @@ export const TimeplotPopup = (props: TimeplotPopupProps): JSX.Element => {
           ))}
         </div>
         <div style={style(footerStyle)}>
-          <div style={style('flexRows')}>
+          <div style={style('flexRow')}>
             <div>Click to select left revision</div>
             <div style={{ flexGrow: 1, textAlign: 'right' }}>
               Shift + Click to select right revision
             </div>
           </div>
-          <div style={style('flexRows', { marginTop: 5 })}>
+          <div style={style('flexRow', { marginTop: 5 })}>
             <div> Click twice to select a single commit</div>
             <div style={{ flexGrow: 1, textAlign: 'right' }}>
               ...or click and drag below

@@ -17,8 +17,9 @@ import { TransitionVisible } from 'app/components/TransitionVisible';
 import { SidePanel } from './containers/SidePanel';
 
 const transitionStyle = {
-  _extends: 'flexColumns',
+  _extends: 'flexColumn',
   flexGrow: 1,
+  overflow: 'hidden',
 };
 
 export class GitTemporal extends Component<
@@ -48,15 +49,15 @@ export class GitTemporal extends Component<
     return (
       <div style={style('page')}>
         <SpinnerContainer isSpinning={isFetching}>
-          <div style={style('flexColumns', { height: '100%' })}>
+          <div style={style('flexColumn', { height: '100%' })}>
             <Header />
             <TransitionVisible
               isVisible={!isFetching}
               style={style(transitionStyle)}
             >
-              <div style={style('flexRows', 'flexGrow')}>
+              <div style={style('flexRow', 'flexGrow', { overflow: 'hidden' })}>
                 <SidePanel />
-                <div style={style('flexColumns', 'flexGrow')}>
+                <div style={style('flexColumn', 'flexGrow')}>
                   <DifferenceViewer />
                   <Timeplot />
                 </div>

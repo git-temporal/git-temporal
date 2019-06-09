@@ -11,7 +11,7 @@ import { ExplodeOnChange } from 'app/components/ExplodeOnChange';
 import { ResetLink } from 'app/components/ResetLink';
 
 const outerStyle = {
-  _extends: ['flexColumns'],
+  _extends: ['flexColumn'],
   flexShrink: 0,
 };
 
@@ -21,11 +21,11 @@ const appNameStyle = {
 };
 
 const topRowStyle = {
-  _extends: 'flexRows',
+  _extends: 'flexRow',
 };
 
 const statsAndSearchStyle = {
-  _extends: ['inlineBlock', 'flexColumns'],
+  _extends: ['inlineBlock', 'flexColumn'],
   marginBottom: 10,
   flexGrow: 1,
 };

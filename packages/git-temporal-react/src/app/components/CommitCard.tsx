@@ -31,7 +31,7 @@ const defaultCardStyle = {
 };
 
 const dateLineStyle = {
-  _extends: ['smallerText', 'block', 'flexRows'],
+  _extends: ['smallerText', 'block', 'flexRow'],
 };
 const messageStyle = {
   _extends: ['largerText', 'block'],

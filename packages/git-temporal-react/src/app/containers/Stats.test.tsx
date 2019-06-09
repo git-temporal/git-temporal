@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Stats, mapStateToProps } from './Stats';
+import { Stats } from './Stats';
 import commitsForPath from 'testHelpers/mocks/commitsForPath';
 
 const testProps = {
@@ -23,7 +23,7 @@ describe('containers/Stats', () => {
     let mockDispatch;
     beforeAll(() => {
       mockDispatch = jest.fn();
-      wrapper = shallow(<Stats dispatch={mockDispatch} {...testProps} />);
+      wrapper = shallow(<Stats />);
     });
     beforeEach(() => {
       mockDispatch.mockClear();
@@ -39,31 +39,6 @@ describe('containers/Stats', () => {
     test('when clicking on files it should call dispatch', () => {
       wrapper.instance().onFilesClick();
       expect(mockDispatch).toHaveBeenCalledTimes(1);
-    });
-  });
-  describe('when rendered and a directory is selected', () => {
-    let wrapper;
-    let mockDispatch;
-    beforeAll(() => {
-      const dirTestProps = Object.assign({}, testProps, {
-        isFileSelected: true,
-      });
-      mockDispatch = jest.fn();
-      wrapper = shallow(<Stats dispatch={mockDispatch} {...dirTestProps} />);
-    });
-    beforeEach(() => {
-      mockDispatch.mockClear();
-    });
-
-    test('it should match snapshot (it should be showing Commits selected)', () => {
-      expect(wrapper).toMatchSnapshot();
-    });
-  });
-
-  describe('when calling mapStateToProps()', () => {
-    test('it should respond with props', () => {
-      const propsOut = mapStateToProps(commitsForPath);
-      expect(propsOut).toMatchSnapshot();
     });
   });
 });

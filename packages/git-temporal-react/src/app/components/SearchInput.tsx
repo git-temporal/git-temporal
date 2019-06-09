@@ -20,7 +20,7 @@ interface SearchInputState {
 }
 
 const containerStyle = {
-  _extends: ['flexRows', 'borderedPanel', 'normalText', 'selectable'],
+  _extends: ['flexRow', 'borderedPanel', 'normalText', 'selectable'],
   position: 'relative',
   padding: 5,
 };

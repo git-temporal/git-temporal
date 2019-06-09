@@ -6,10 +6,10 @@ import { style } from 'app/styles';
 import { getHighlightedCommitIds } from 'app/selectors/stateVars';
 import { highlightCommits, requestRerender } from 'app/actions';
 
-import Stats from 'app/containers/Stats';
-import Authors from 'app/containers/Authors';
-import Files from 'app/containers/Files';
-import Commits from 'app/containers/Commits';
+import { Stats } from 'app/containers/Stats';
+import { Authors } from 'app/containers/Authors';
+import { Files } from 'app/containers/Files';
+import { Commits } from 'app/containers/Commits';
 import Search from 'app/containers/Search';
 
 import { CollapsibleSidePanel } from 'app/components/CollapsibleSidePanel';
@@ -17,7 +17,7 @@ import { ResetLink } from 'app/components/ResetLink';
 
 const containerStyle = {
   _extends: ['altPanel'],
-  overflow: 'auto',
+  overflow: 'hidden',
 };
 
 const searchAndResetStyle = {
@@ -52,10 +52,12 @@ export const SidePanel: React.FC = (): React.ReactElement => {
           </ResetLink>
         )}
       </div>
-      <Stats />
-      <Authors />
-      <Commits />
-      <Files />
+      <div style={{ flexGrow: 1, overflow: 'auto' }}>
+        <Stats />
+        <Authors />
+        <Commits />
+        <Files />
+      </div>
     </CollapsibleSidePanel>
   );
 

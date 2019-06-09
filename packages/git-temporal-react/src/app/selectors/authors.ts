@@ -3,6 +3,80 @@ import { AuthorsContainerSorts } from 'app/actions/ActionTypes';
 import { getAuthorsContainerSort } from './stateVars';
 import { getFilteredCommits } from './commits';
 
+export const getAuthorsAndCommits = createSelector(
+  getFilteredCommits,
+  getAuthorsContainerSort,
+  (commits, authorsContainerSort) => {
+    // TODO: dear prettier, this \/ looks like shit
+    const { commitsByAuthorName, authorsAndCommitsByEmail } = collateCommits(
+      commits
+    );
+    const authorsAndCommits = [];
+    const deduped = dedupeAuthorsAndCommits(
+      commitsByAuthorName,
+      authorsAndCommitsByEmail
+    );
+    for (const key in deduped) {
+      const authorAndCommits = commitsByAuthorName[key];
+      const { linesAdded, linesDeleted } = sumImpact(authorAndCommits.commits);
+      authorAndCommits.linesAdded = linesAdded;
+      authorAndCommits.linesDeleted = linesDeleted;
+      authorAndCommits.files = Object.keys(authorAndCommits.files);
+      authorsAndCommits.push(authorAndCommits);
+    }
+    return authorsAndCommits.sort((a, b) => {
+      switch (authorsContainerSort) {
+        case AuthorsContainerSorts.LINES:
+          return (
+            b.linesAdded + b.linesDeleted - (a.linesAdded + a.linesDeleted)
+          );
+        case AuthorsContainerSorts.COMMITS:
+          return b.commits.length - a.commits.length;
+        case AuthorsContainerSorts.TIME:
+          return b.lastCommitOn - a.lastCommitOn;
+      }
+      return 0;
+    });
+  }
+);
+
+export const getAuthorsStats = createSelector(
+  getAuthorsAndCommits,
+  getAuthorsContainerSort,
+  authorsAndCommits => {
+    let totalLinesAdded = 0;
+    let totalLinesDeleted = 0;
+    let totalCommits = 0;
+    let maxImpact = 0;
+    let maxCommits = 0;
+
+    const authorsArray = authorsAndCommits.map(ac => {
+      totalCommits += ac.commits.length;
+      totalLinesDeleted += ac.linesDeleted;
+      totalLinesAdded += ac.linesAdded;
+      const impact = ac.linesAdded + ac.linesDeleted;
+      if (impact > maxImpact) {
+        maxImpact = impact;
+      }
+      if (ac.commits.length > maxCommits) {
+        maxCommits = ac.commits.length;
+      }
+      return {
+        ...ac,
+      };
+    });
+
+    return {
+      totalLinesAdded,
+      totalLinesDeleted,
+      totalCommits,
+      maxImpact,
+      maxCommits,
+      authors: authorsArray,
+    };
+  }
+);
+
 const sumImpact = commits => {
   const impact = { linesAdded: 0, linesDeleted: 0 };
   for (const commit of commits) {
@@ -106,40 +180,3 @@ const collateCommits = commits => {
     authorsAndCommitsByEmail,
   };
 };
-
-export const getAuthorsAndCommits = createSelector(
-  getFilteredCommits,
-  getAuthorsContainerSort,
-  (commits, authorsContainerSort) => {
-    // TODO: dear prettier, this \/ looks like shit
-    const { commitsByAuthorName, authorsAndCommitsByEmail } = collateCommits(
-      commits
-    );
-    const authorsAndCommits = [];
-    const deduped = dedupeAuthorsAndCommits(
-      commitsByAuthorName,
-      authorsAndCommitsByEmail
-    );
-    for (const key in deduped) {
-      const authorAndCommits = commitsByAuthorName[key];
-      const { linesAdded, linesDeleted } = sumImpact(authorAndCommits.commits);
-      authorAndCommits.linesAdded = linesAdded;
-      authorAndCommits.linesDeleted = linesDeleted;
-      authorAndCommits.files = Object.keys(authorAndCommits.files);
-      authorsAndCommits.push(authorAndCommits);
-    }
-    return authorsAndCommits.sort((a, b) => {
-      switch (authorsContainerSort) {
-        case AuthorsContainerSorts.LINES:
-          return (
-            b.linesAdded + b.linesDeleted - (a.linesAdded + a.linesDeleted)
-          );
-        case AuthorsContainerSorts.COMMITS:
-          return b.commits.length - a.commits.length;
-        case AuthorsContainerSorts.TIME:
-          return b.lastCommitOn - a.lastCommitOn;
-      }
-      return 0;
-    });
-  }
-);
