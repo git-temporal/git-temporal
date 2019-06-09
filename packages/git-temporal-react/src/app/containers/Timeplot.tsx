@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { debug } from '@git-temporal/logger';
+
 import { style } from 'app/styles';
 import { ITimeplotState, ICommit, DispatchProps } from 'app/interfaces';
 
@@ -86,9 +88,11 @@ export class Timeplot extends React.Component<
   private debouncedOnMouseMove;
   private lastMouseMoveCoords: { pageX: number; pageY: number };
   private lastMouseDownDate;
+  private lastRerenderRequestedAt;
 
   constructor(props) {
     super(props);
+    this.lastRerenderRequestedAt = Date.now();
     this.timeplotRef = React.createRef();
     this.debouncedOnMouseLeave = debounce(this.onMouseLeave, 100);
     this.debouncedOnMouseMove = throttle(this.onMouseMove, 0);
@@ -112,6 +116,11 @@ export class Timeplot extends React.Component<
           scrollLeft: timeplot.xScale(this.props.startDate * 1000) - 33,
         });
       }
+    }
+    if (this.lastRerenderRequestedAt < this.props.rerenderRequestedAt) {
+      debug('forcing timeplot rerender');
+      this.lastRerenderRequestedAt = this.props.rerenderRequestedAt;
+      this.setState({ timeplotRenders: this.state.timeplotRenders + 1 });
     }
   }
 

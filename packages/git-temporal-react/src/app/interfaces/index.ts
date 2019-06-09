@@ -1,11 +1,9 @@
-export type CommitsOrFilesType = 'commits' | 'files';
 export type ModifiedFileStatuses = 'modified' | 'added' | 'deleted';
 
 export interface GitTemporalProps {
   // If not provided, the whole repository is assumed
   path?: string;
   serviceBaseUrl?: string;
-  viewCommitsOrFiles?: string; // CommitsOrFilesType;
 }
 
 export interface StateProps {
@@ -13,7 +11,6 @@ export interface StateProps {
   commits?: ICommit[];
   isFetching?: boolean;
   isEmpty?: boolean;
-  didInvalidate?: boolean;
   lastUpdated?: number;
 }
 
@@ -67,16 +64,13 @@ export interface IHeaderContainerState {
   startDate?: number;
   endDate?: number;
   isDefaultDates?: boolean;
-  highlightedCommitIds?: string[];
 }
 
 export interface ICommitsContainerState {
   selectedPath: string;
   highlightedCommitIds: string[];
-  viewCommitsOrFiles?: string;
   commits: ICommit[];
   isFetching: boolean;
-  didInvalidate: boolean;
   isFileSelected: boolean;
   commitsContainerSort: string;
 }
@@ -123,6 +117,7 @@ export interface ITimeplotState {
   authors: number;
   startDate: number;
   endDate: number;
+  rerenderRequestedAt: Date;
 }
 
 export interface IDifferenceViewerContainerState {
@@ -133,6 +128,7 @@ export interface IDifferenceViewerContainerState {
   endDate: number;
   diff: IDiff;
   isDiffFetching: boolean;
+  rerenderRequestedAt: Date;
 }
 export interface IDifferenceViewerHeaderState {
   timeplotCommits?: ICommit[];

@@ -1,10 +1,10 @@
 export const getSelectedPath = state => state.selectedPath;
 export const getCommits = state => state.commits;
 export const getIsFetching = state => state.isFetching;
-export const getDidInvalidate = state => state.getDidInvalidate;
+
+export const getRerenderRequestedAt = state => state.rerenderRequestedAt;
+
 export const getHighlightedCommitIds = state => state.highlightedCommitIds;
-export const getViewCommitsOrFiles = state =>
-  state.viewCommitsOrFiles || 'commits';
 
 export const getSearch = state => state.search;
 export const getStartDate = state => state.startDate;

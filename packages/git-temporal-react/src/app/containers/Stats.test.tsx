@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Stats, mapStateToProps, CommitsOrFiles } from './Stats';
+import { Stats, mapStateToProps } from './Stats';
 import commitsForPath from 'testHelpers/mocks/commitsForPath';
 
 const testProps = {
@@ -13,7 +13,6 @@ const testProps = {
   linesAdded: 700,
   linesDeleted: 300,
   isFileSelected: false,
-  viewCommitsOrFiles: CommitsOrFiles.COMMITS,
 };
 
 global.Date.now = jest.fn(() => 1539563458 * 1000);
@@ -48,7 +47,6 @@ describe('containers/Stats', () => {
     beforeAll(() => {
       const dirTestProps = Object.assign({}, testProps, {
         isFileSelected: true,
-        viewCommitsOrFiles: CommitsOrFiles.FILES,
       });
       mockDispatch = jest.fn();
       wrapper = shallow(<Stats dispatch={mockDispatch} {...dirTestProps} />);
@@ -59,16 +57,6 @@ describe('containers/Stats', () => {
 
     test('it should match snapshot (it should be showing Commits selected)', () => {
       expect(wrapper).toMatchSnapshot();
-    });
-
-    test('it should call dispatch to change to CommitsOrFiles.COMMITS onComponentDidMount', () => {
-      wrapper.instance().componentDidMount();
-      expect(mockDispatch).toHaveBeenCalledTimes(1);
-    });
-
-    test('it should call dispatch to change to CommitsOrFiles.COMMITS onComponentDidUpdate', () => {
-      wrapper.instance().componentDidUpdate();
-      expect(mockDispatch).toHaveBeenCalledTimes(1);
     });
   });
 

@@ -31,11 +31,6 @@ describe('reducers', () => {
         action: { commitIds: ['aphonyIdSTring'] },
       },
       {
-        reducer: reducers.viewCommitsOrFiles,
-        state: '',
-        action: {},
-      },
-      {
         reducer: reducers.commits,
         state: [],
         action: { commits: [] },
@@ -46,8 +41,8 @@ describe('reducers', () => {
         action: {},
       },
       {
-        reducer: reducers.didInvalidate,
-        state: false,
+        reducer: reducers.rerenderRequestedAt,
+        state: Date.now(),
         action: {},
       },
     ];

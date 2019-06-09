@@ -1,4 +1,10 @@
 {
   "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "typeRoots": [
+      "**/node_modules/@types",
+      "node_modules/monaco-editor/monaco.d.ts"
+    ]
+  },
   "exclude": ["src/**/*.test.*", "src/testHelpers/**/*"]
 }

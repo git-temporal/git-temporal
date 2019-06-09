@@ -16,6 +16,7 @@ describe('components/Timeplot', () => {
           authors={6}
           startDate={fiveCommits[3].authorDate}
           endDate={fiveCommits[2].authorDate}
+          rerenderRequestedAt={null}
           dispatch={jest.fn()}
         />
       );

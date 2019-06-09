@@ -9,35 +9,12 @@ import { getGitTemporalContainerState } from 'app/selectors';
 import { style } from 'app/styles';
 
 import Header from 'app/containers/Header';
-import Stats from 'app/containers/Stats';
-import Authors from 'app/containers/Authors';
-import Files from 'app/containers/Files';
-import Commits from 'app/containers/Commits';
 import Timeplot from 'app/containers/Timeplot';
 import DifferenceViewer from 'app/containers/DifferenceViewer';
 
 import { SpinnerContainer } from 'app/components/SpinnerContainer';
-import { HorizontalScroller } from 'app/components/HorizontalScroller';
 import { TransitionVisible } from 'app/components/TransitionVisible';
-
-const outerScrollStyle = {
-  _extends: 'flexRows',
-  position: 'relative',
-  minHeight: '100%',
-  height: 'initial',
-};
-
-const innerScrollStyle = {
-  position: 'relative',
-  display: 'flex',
-  flexDirection: 'row',
-  flexGrow: 1,
-};
-
-const scrollerIconStyle = {
-  transform: 'scaleY(8)',
-  top: '35%',
-};
+import { SidePanel } from './containers/SidePanel';
 
 const transitionStyle = {
   _extends: 'flexColumns',
@@ -65,7 +42,7 @@ export class GitTemporal extends Component<
   }
 
   render() {
-    const { isFetching, viewCommitsOrFiles } = this.props;
+    const { isFetching } = this.props;
     debug('rendering GitTemporal');
 
     return (
@@ -77,19 +54,13 @@ export class GitTemporal extends Component<
               isVisible={!isFetching}
               style={style(transitionStyle)}
             >
-              <Stats />
-              <div style={{ display: 'flex', flexGrow: 1 }}>
-                <HorizontalScroller
-                  style={style(outerScrollStyle)}
-                  innerStyle={style(innerScrollStyle)}
-                  iconStyle={style(scrollerIconStyle)}
-                >
-                  <Authors />
-                  {viewCommitsOrFiles === 'files' ? <Files /> : <Commits />}
+              <div style={style('flexRows', 'flexGrow')}>
+                <SidePanel />
+                <div style={style('flexColumns', 'flexGrow')}>
                   <DifferenceViewer />
-                </HorizontalScroller>
+                  <Timeplot />
+                </div>
               </div>
-              <Timeplot />
             </TransitionVisible>
           </div>
         </SpinnerContainer>

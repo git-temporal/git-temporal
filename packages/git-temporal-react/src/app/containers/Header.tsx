@@ -4,20 +4,14 @@ import { connect } from 'react-redux';
 import { DispatchProps, IHeaderContainerState } from 'app/interfaces';
 import { getHeaderContainerState } from 'app/selectors';
 import { style } from 'app/styles';
-import {
-  selectPath,
-  setStartDate,
-  setEndDate,
-  highlightCommits,
-} from 'app/actions';
+import { selectPath, setStartDate, setEndDate } from 'app/actions';
 import { EpochDateTime } from 'app/components/EpochDateTime';
 import { ExplodeOnChange } from 'app/components/ExplodeOnChange';
 
-import Search from 'app/containers/Search';
 import { ResetLink } from 'app/components/ResetLink';
 
 const outerStyle = {
-  _extends: ['panel', 'flexColumns'],
+  _extends: ['flexColumns'],
   flexShrink: 0,
 };
 
@@ -28,7 +22,6 @@ const appNameStyle = {
 
 const topRowStyle = {
   _extends: 'flexRows',
-  maxWidth: 1100,
 };
 
 const statsAndSearchStyle = {
@@ -47,19 +40,6 @@ const dateSelectedStyle = {
   color: '@colors.selected',
 };
 
-const searchAndResetStyle = {
-  float: 'right',
-  position: 'relative',
-  minHeight: 60,
-};
-
-const resetHighlightsLinkStyle = {
-  position: 'absolute',
-  right: 0,
-  marginTop: 10,
-  marginRight: -20,
-};
-
 const dateOptions = {
   month: 'long',
   timeZoneName: 'short',
@@ -67,59 +47,44 @@ const dateOptions = {
 
 export class Header extends Component<IHeaderContainerState & DispatchProps> {
   render() {
-    const {
-      startDate,
-      endDate,
-      isDefaultDates,
-      highlightedCommitIds,
-    } = this.props;
+    const { startDate, endDate, isDefaultDates } = this.props;
     const epochStyle = [dateStyle, isDefaultDates ? {} : dateSelectedStyle];
     return (
       <div style={style(outerStyle)}>
         <div style={style(topRowStyle)}>
           <div style={style(appNameStyle)}>Git Temporal </div>
-          <div style={style(statsAndSearchStyle)}>
-            <div>
-              <div style={style(searchAndResetStyle)}>
-                <Search />
-                {highlightedCommitIds.length > 0 && (
-                  <ResetLink
-                    style={style(resetHighlightsLinkStyle)}
-                    onClick={this.onResetHighlightedCommits}
-                  >
-                    Reset search, filters & highlights
-                  </ResetLink>
-                )}
-              </div>
-              <div style={style('h2Text', { marginBottom: 10 })}>
-                Stats for {this.renderPathLinks()}
-              </div>
-            </div>
+          <div style={style('flexGrow')} />
+          <div style={style('h5Text')}>
+            From{' '}
+            <ExplodeOnChange value={startDate}>
+              <EpochDateTime
+                value={startDate}
+                displayOptions={dateOptions}
+                style={style(epochStyle)}
+              />
+            </ExplodeOnChange>{' '}
+            to{' '}
+            <ExplodeOnChange value={endDate}>
+              <EpochDateTime
+                value={endDate}
+                displayOptions={dateOptions}
+                style={style(epochStyle)}
+              />
+            </ExplodeOnChange>
+            {!isDefaultDates && (
+              <span>
+                {'  '}(
+                <ResetLink onClick={this.onResetDatesClick}>Reset</ResetLink>)
+              </span>
+            )}
           </div>
         </div>
-        <div style={style('h5Text')}>
-          From{' '}
-          <ExplodeOnChange value={startDate}>
-            <EpochDateTime
-              value={startDate}
-              displayOptions={dateOptions}
-              style={style(epochStyle)}
-            />
-          </ExplodeOnChange>{' '}
-          to{' '}
-          <ExplodeOnChange value={endDate}>
-            <EpochDateTime
-              value={endDate}
-              displayOptions={dateOptions}
-              style={style(epochStyle)}
-            />
-          </ExplodeOnChange>
-          {!isDefaultDates && (
-            <span>
-              {'  '}(
-              <ResetLink onClick={this.onResetDatesClick}>Reset</ResetLink>)
-            </span>
-          )}
+        <div style={style(statsAndSearchStyle)}>
+          <div>
+            <div style={style('h2Text', { marginBottom: 10 })}>
+              {this.renderPathLinks()}
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -171,10 +136,6 @@ export class Header extends Component<IHeaderContainerState & DispatchProps> {
   onResetDatesClick = () => {
     this.props.dispatch(setStartDate(null));
     this.props.dispatch(setEndDate(null));
-  };
-
-  onResetHighlightedCommits = () => {
-    this.props.dispatch(highlightCommits([]));
   };
 }
 
