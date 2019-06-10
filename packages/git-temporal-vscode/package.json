@@ -24,7 +24,8 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run build",
-    "build": "tsc -p ./ && npx webpack",
+    "dist": "mkdir -p dist/ && cp node_modules/@git-temporal/git-temporal-react/dist/git-temporal-react.vscode.js dist/",
+    "build": "tsc -p ./ && npm run dist",
     "watch": "tsc -w -p ./",
     "postinstall": "node ./node_modules/vscode/bin/install"
   },
@@ -33,6 +34,8 @@
     "@git-temporal/git-log-scraper": "^0.3.0",
     "@git-temporal/git-diff-scraper": "^0.1.0",
     "@git-temporal/logger": "^0.1.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "vscode": "^1.1.18"
   },
   "devDependencies": {
@@ -52,7 +55,6 @@
     "@babel/preset-typescript": "^7.3.3",
     "@babel/register": "^7.4.4",
     "babel-eslint": "^10.0.1",
-    "babel-loader": "^8.0.0-beta.2",
     "babel-plugin-istanbul": "^5.1.4",
     "babel-plugin-module-resolver": "^3.2.0",
     "bumble-util": "^0.4.1",
@@ -61,10 +63,7 @@
     "mocha": "^6.1.4",
     "nyc": "^14.1.1",
     "prettier": "^1.17.1",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
     "regenerator-runtime": "^0.13.2",
-    "source-map-loader": "^0.2.1",
     "ts-node": "^8.1.1",
     "tsconfig-paths": "^3.8.0",
     "tslint": "^5.16.0",
@@ -72,8 +71,6 @@
     "tslint-config-prettier": "^1.18.0",
     "tslint-react": "^4.0.0",
     "typescript": "^2.9.2",
-    "underscore": "^1.9.1",
-    "webpack": "^3.8.1",
-    "webpack-stats-plugin": "^0.2.1"
+    "underscore": "^1.9.1"
   }
 }

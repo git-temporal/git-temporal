@@ -20,9 +20,9 @@
   },
   "homepage": "https://github.com/git-temporal/git-temporal/blob/master/packages/git-temporal-react/README.md",
   "scripts": {
-    "build": "rm -Rf lib dist && npm run build-tsc && npm run build-webpack",
+    "build": "npm run build-tsc && npm run build-vscode-webpack",
     "build-tsc": "NODE_ENV=production tsc -p ./tsconfig.build.json",
-    "build-webpack": "NODE_ENV=production webpack --display-error-details --config config/webpack.config.prod.js",
+    "build-vscode-webpack": "NODE_ENV=production webpack --display-error-details --config config/webpack.config.vscode.js",
     "coverage": "open coverage/lcov-report/index.html",
     "start": "node scripts/start.js",
     "test": "cross-env NODE_ENV=test jest",
