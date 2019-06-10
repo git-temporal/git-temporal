@@ -13,6 +13,7 @@ const outerStyle = {
   marginBottom: '@margins.medium',
   paddingLeft: '@margins.medium',
   flexShrink: 0,
+  justifyContent: 'center',
 };
 
 export const Stats: React.FC = (): React.ReactElement => {

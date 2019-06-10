@@ -1,4 +1,5 @@
 import React, { useState, ReactElement } from 'react';
+import { delay } from 'lodash';
 import { style as s } from 'app/styles';
 
 interface ComponentProps {
@@ -8,16 +9,22 @@ interface ComponentProps {
   onClose?: () => void;
 }
 
+const openDelaySeconds = 0.25;
+const closeDelaySeconds = 0.5;
+
 const openPanelStyle = {
   _extends: ['flexColumn'],
   position: 'relative',
+  flexShrink: 0,
   width: 300,
+  transition: `all ${openDelaySeconds}s ease`,
 };
 
 const closedPanelStyle = {
   _extends: ['flexColumn'],
   position: 'relative',
   width: 30,
+  transition: `all ${closeDelaySeconds}s ease`,
 };
 
 const toggleIconStyle = {
@@ -52,9 +59,9 @@ export const CollapsibleSidePanel: React.FC<ComponentProps> = ({
 
   function didToggle() {
     if (isOpen) {
-      onClose && onClose();
+      onClose && delay(() => onClose(), closeDelaySeconds * 1000);
     } else {
-      onOpen && onOpen();
+      onOpen && delay(() => onOpen(), openDelaySeconds * 1000);
     }
     setIsOpen(!isOpen);
   }

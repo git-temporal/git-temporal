@@ -13,17 +13,20 @@ const panelStyle = {
   _extends: ['flexColumn'],
   flexGrow: 0,
   flexShrink: 0,
+  position: 'relative',
 };
 
 const openPanelStyle = {
   ...panelStyle,
-  height: 400,
+  height: 'calc(100% - 120px)',
   marginBottom: '@margins.large',
+  transition: `all .25s ease`,
 };
 
 const closedPanelStyle = {
   ...panelStyle,
   height: 30,
+  transition: `all .5s ease`,
 };
 
 const toggleIconStyle = {

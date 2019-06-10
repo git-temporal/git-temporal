@@ -33,14 +33,16 @@ export const FileCard = (props: FileCardProps): JSX.Element => {
         linesDeleted={file.linesDeleted}
       />{' '}
       <div style={style('normalText')}>
-        <span>
+        <div>
           {file.commits.length} commits by {file.authorNames.length} authors
+        </div>
+        <div>
           spanning{' '}
-        </span>
-        <EpochSpan
-          firstEpochTime={file.firstCommitOn}
-          secondEpochTime={file.lastCommitOn}
-        />
+          <EpochSpan
+            firstEpochTime={file.firstCommitOn}
+            secondEpochTime={file.lastCommitOn}
+          />
+        </div>
       </div>
     </div>
   );

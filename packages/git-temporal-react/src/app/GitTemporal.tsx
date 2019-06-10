@@ -55,9 +55,17 @@ export class GitTemporal extends Component<
               isVisible={!isFetching}
               style={style(transitionStyle)}
             >
-              <div style={style('flexRow', 'flexGrow', { overflow: 'hidden' })}>
+              <div
+                style={style('flexRow', 'flexGrow', {
+                  overflow: 'hidden',
+                })}
+              >
                 <SidePanel />
-                <div style={style('flexColumn', 'flexGrow')}>
+                <div
+                  style={style('flexColumn', 'flexGrow', {
+                    transition: `all .5 ease`,
+                  })}
+                >
                   <DifferenceViewer />
                   <Timeplot />
                 </div>
