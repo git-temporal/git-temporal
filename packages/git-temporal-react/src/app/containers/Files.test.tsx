@@ -1,9 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Files, mapStateToProps } from './Files';
+import { Files } from './Files';
 import commitsForPath from 'testHelpers/mocks/commitsForPath';
-import filesAndStats from 'testHelpers/mocks/filesAndStats';
 
 describe('containers/Files', () => {
   describe('when rendered without props', () => {
@@ -11,7 +10,7 @@ describe('containers/Files', () => {
     let mockDispatch;
     beforeAll(() => {
       mockDispatch = jest.fn();
-      wrapper = shallow(<Files dispatch={mockDispatch} {...filesAndStats} />);
+      wrapper = shallow(<Files />);
     });
 
     test('it should match snapshot (it should be showing files)', () => {
@@ -35,12 +34,6 @@ describe('containers/Files', () => {
       wrapper.instance().onFileClick(mockEvent, 'some/file/path');
       expect(mockDispatch).toBeCalled();
       expect(mockEvent.stopPropagation).toBeCalled();
-    });
-  });
-  describe('when calling mapStateToProps()', () => {
-    test('it should respond with props', () => {
-      const propsOut = mapStateToProps(commitsForPath);
-      expect(propsOut).toMatchSnapshot();
     });
   });
 });

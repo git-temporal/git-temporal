@@ -31,7 +31,7 @@ const menuItemStyle = {
 };
 
 const identifiersStyle = {
-  _extends: 'flexColumns',
+  _extends: 'flexColumn',
   width: '100%',
   marginLeft: 10,
 };
@@ -48,7 +48,7 @@ export const AuthorCard = (props: AuthorCardProps): JSX.Element => {
   const addStyles = isHighlighted ? 'selected' : {};
 
   return (
-    <div style={style('flexRows', props.style)}>
+    <div style={style('flexRow', props.style)}>
       <Selectable
         style={style(menuItemStyle, addStyles)}
         onClick={evt => props.onClick(evt, author, index)}

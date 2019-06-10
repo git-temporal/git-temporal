@@ -29,17 +29,6 @@ export const highlightedCommitIds = (state = '', action: any) => {
   }
 };
 
-export const viewCommitsOrFiles = (state = 'commits', action: any) => {
-  switch (action.type) {
-    case ActionTypes.VIEW_COMMITS:
-      return 'commits';
-    case ActionTypes.VIEW_FILES:
-      return 'files';
-    default:
-      return state;
-  }
-};
-
 export const commits = (state = [], action: any) => {
   switch (action.type) {
     case ActionTypes.RECEIVE_COMMITS:
@@ -79,12 +68,10 @@ export const isDiffFetching = (state = false, action: any) => {
   }
 };
 
-export const didInvalidate = (state = false, action: any) => {
+export const rerenderRequestedAt = (state = null, action: any) => {
   switch (action.type) {
-    case ActionTypes.INVALIDATE_PATH:
-      return true;
-    case ActionTypes.REQUEST_COMMITS:
-      return false;
+    case ActionTypes.REQUEST_RERENDER:
+      return Date.now();
     default:
       return state;
   }
@@ -159,9 +146,8 @@ const rootReducer = combineReducers({
   commits,
   selectedPath,
   isFetching,
-  didInvalidate,
+  rerenderRequestedAt,
   highlightedCommitIds,
-  viewCommitsOrFiles,
   search,
   authorsContainerSort,
   commitsContainerSort,

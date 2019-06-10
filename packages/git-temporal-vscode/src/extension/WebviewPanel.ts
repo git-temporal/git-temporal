@@ -4,6 +4,8 @@ import { getCommitHistory } from '@git-temporal/git-log-scraper';
 import { getDiff } from '@git-temporal/git-diff-scraper';
 import { debug } from '@git-temporal/logger';
 
+let activeTextEditor;
+
 export class WebviewPanel {
   // Only allow a single git-temporal panel to exist at a time
   // for a given instance of vscode.
@@ -21,6 +23,7 @@ export class WebviewPanel {
 
   public static createOrShow(extensionPath: string) {
     // If we already have a panel, show it.
+    activeTextEditor = vscode.window.activeTextEditor;
     if (WebviewPanel.currentPanel) {
       WebviewPanel.currentPanel._panel.reveal();
       return;
@@ -131,15 +134,19 @@ export class WebviewPanel {
 
   private getHtmlForWebview() {
     // Local path to index script run in the webview
+
+    // const scriptPathOnDisk = vscode.Uri.file(
+    //   path.join(this._extensionPath, 'dist', 'index.js')
+    // );
     const scriptPathOnDisk = vscode.Uri.file(
-      path.join(this._extensionPath, 'dist', 'index.js')
+      path.join(this._extensionPath, 'dist', 'git-temporal-react.vscode.js')
     );
 
     // And the uri we use to load this script in the webview
     const scriptUri = scriptPathOnDisk.with({ scheme: 'vscode-resource' });
     const nonce = getNonce();
-    const currentPath = vscode.window.activeTextEditor.document.fileName;
-
+    const currentPath = activeTextEditor.document.fileName;
+    console.log('webviewPanel currentPath', currentPath);
     return `
       <!DOCTYPE html>
       <html lang="en">

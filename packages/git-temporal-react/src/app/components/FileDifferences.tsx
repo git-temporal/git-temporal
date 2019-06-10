@@ -1,9 +1,11 @@
 import React from 'react';
+import { defer } from 'lodash';
 import { style } from 'app/styles';
 import { editor } from 'monaco-editor';
 import { debug } from '@git-temporal/logger';
 
 export interface FileDifferencesProps {
+  rerenderRequestedAt: Date;
   leftFileContents: string;
   rightFileContents: string;
   style?: string | object;
@@ -23,12 +25,11 @@ const editorStyle = {
 };
 
 export class FileDifferences extends React.Component<FileDifferencesProps> {
-  private monacoEditorElRef;
+  private monacoEditorElRef = React.createRef<HTMLDivElement>();
+  private navigator: any;
 
-  constructor(props) {
+  constructor(props: FileDifferencesProps) {
     super(props);
-    this.monacoEditorElRef = React.createRef();
-
     this.renderMonacoEditor = this.renderMonacoEditor.bind(this);
   }
 
@@ -38,7 +39,7 @@ export class FileDifferences extends React.Component<FileDifferencesProps> {
   }
 
   componentDidUpdate() {
-    this.renderMonacoEditor();
+    defer(() => this.renderMonacoEditor());
   }
 
   render() {
@@ -70,9 +71,9 @@ export class FileDifferences extends React.Component<FileDifferencesProps> {
       modified: modifiedModel,
     });
 
-    // const navi = editor.createDiffNavigator(diffEditor, {
-    //   followsCaret: true, // resets the navigator state when the user selects something in the editor
-    //   ignoreCharChanges: true, // jump from line to line
-    // });
+    this.navigator = editor.createDiffNavigator(diffEditor, {
+      followsCaret: true, // resets the navigator state when the user selects something in the editor
+      ignoreCharChanges: true, // jump from line to line
+    });
   }
 }

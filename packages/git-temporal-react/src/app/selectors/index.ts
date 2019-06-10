@@ -2,7 +2,6 @@ import { createSelector } from 'reselect';
 
 import {
   getSelectedPath,
-  getViewCommitsOrFiles,
   getHighlightedCommitIds,
   getIsFetching,
   getCommitsContainerSort,
@@ -14,9 +13,10 @@ import {
   getIsFileSelected,
   getDiff,
   getIsDiffFetching,
+  getRerenderRequestedAt,
 } from './stateVars';
 
-import { getAuthorsAndCommits } from './authorsAndCommits';
+import { getAuthorsAndCommits } from './authors';
 import { getFilteredFilesForFilesContainer } from './files';
 
 import {
@@ -32,33 +32,10 @@ export const getGitTemporalContainerState = createSelector(
   getSelectedPath,
   getFilteredCommits,
   getIsFetching,
-  getViewCommitsOrFiles,
-  (selectedPath, commits, isFetching, viewCommitsOrFiles) => ({
+  (selectedPath, commits, isFetching) => ({
     selectedPath,
     commits,
     isFetching,
-    viewCommitsOrFiles,
-  })
-);
-
-export const getCommitsContainerState = createSelector(
-  getSelectedPath,
-  getHighlightedCommitIds,
-  getFilteredSortedCommits,
-  getIsFileSelected,
-  getCommitsContainerSort,
-  (
-    selectedPath,
-    highlightedCommitIds,
-    commits,
-    isFileSelected,
-    commitsContainerSort
-  ) => ({
-    selectedPath,
-    highlightedCommitIds,
-    commits,
-    isFileSelected,
-    commitsContainerSort,
   })
 );
 
@@ -74,9 +51,8 @@ export const getHeaderContainerState = createSelector(
   getSelectedPath,
   getStartDate,
   getEndDate,
-  getHighlightedCommitIds,
 
-  (commits, selectedPath, startDate, endDate, highlightedCommitIds) => {
+  (commits, selectedPath, startDate, endDate) => {
     // psssst - commits are in descending time order
     const defaultedStartDate =
       startDate ||
@@ -95,7 +71,6 @@ export const getHeaderContainerState = createSelector(
     return {
       selectedPath,
       isDefaultDates,
-      highlightedCommitIds,
       startDate: defaultedStartDate,
       endDate: defaultedEndDate,
     };
@@ -113,48 +88,6 @@ export const getAuthorsActionMenuState = createSelector(
   authorsContainerSort => ({
     authorsContainerSort,
   })
-);
-
-export const getAuthorsContainerState = createSelector(
-  getAuthorsAndCommits,
-  getAuthorsContainerSort,
-  getSearch,
-  getHighlightedCommitIds,
-  (authorsAndCommits, authorsContainerSort, search, highlightedCommitIds) => {
-    let totalLinesAdded = 0;
-    let totalLinesDeleted = 0;
-    let totalCommits = 0;
-    let maxImpact = 0;
-    let maxCommits = 0;
-
-    const authorsArray = authorsAndCommits.map(ac => {
-      totalCommits += ac.commits.length;
-      totalLinesDeleted += ac.linesDeleted;
-      totalLinesAdded += ac.linesAdded;
-      const impact = ac.linesAdded + ac.linesDeleted;
-      if (impact > maxImpact) {
-        maxImpact = impact;
-      }
-      if (ac.commits.length > maxCommits) {
-        maxCommits = ac.commits.length;
-      }
-      return {
-        ...ac,
-      };
-    });
-
-    return {
-      totalLinesAdded,
-      totalLinesDeleted,
-      totalCommits,
-      maxImpact,
-      maxCommits,
-      authorsContainerSort,
-      search,
-      highlightedCommitIds,
-      authors: authorsArray,
-    };
-  }
 );
 
 export const getFilesActionMenuState = createSelector(
@@ -177,43 +110,6 @@ export const getFilesContainerState = createSelector(
   })
 );
 
-export const getStatsContainerState = createSelector(
-  getFilteredCommits,
-  getFilteredFilesForFilesContainer,
-  getViewCommitsOrFiles,
-  getIsFileSelected,
-  getAuthorsAndCommits,
-  (commits, files, viewCommitsOrFiles, isFileSelected, authorsAndCommits) => {
-    let totalLinesAdded = 0;
-    let totalLinesDeleted = 0;
-    let minAuthorDate = Date.now();
-    let maxAuthorDate = 0;
-
-    for (const commit of commits) {
-      totalLinesAdded += commit.linesAdded;
-      totalLinesDeleted += commit.linesDeleted;
-      if (commit.authorDate < minAuthorDate) {
-        minAuthorDate = commit.authorDate;
-      }
-      if (commit.authorDate > maxAuthorDate) {
-        maxAuthorDate = commit.authorDate;
-      }
-    }
-
-    return {
-      minAuthorDate,
-      maxAuthorDate,
-      viewCommitsOrFiles,
-      isFileSelected,
-      authors: authorsAndCommits.length,
-      commits: commits.length,
-      files: files.length,
-      linesAdded: totalLinesAdded,
-      linesDeleted: totalLinesDeleted,
-    };
-  }
-);
-
 export const getTimeplotContainerState = createSelector(
   getSelectedPath,
   getHighlightedCommitIds,
@@ -221,19 +117,22 @@ export const getTimeplotContainerState = createSelector(
   getAuthorsAndCommits,
   getStartDate,
   getEndDate,
+  getRerenderRequestedAt,
   (
     selectedPath,
     highlightedCommitIds,
     commits,
     authorsAndCommits,
     startDate,
-    endDate
+    endDate,
+    rerenderRequestedAt
   ) => ({
     selectedPath,
     highlightedCommitIds,
     commits,
     startDate,
     endDate,
+    rerenderRequestedAt,
     authors: authorsAndCommits.length,
   })
 );
@@ -246,6 +145,7 @@ export const getDifferenceViewerContainerState = createSelector(
   getEndDate,
   getDiff,
   getIsDiffFetching,
+  getRerenderRequestedAt,
   (
     selectedPath,
     commits,
@@ -253,7 +153,8 @@ export const getDifferenceViewerContainerState = createSelector(
     startDate,
     endDate,
     diff,
-    isDiffFetching
+    isDiffFetching,
+    rerenderRequestedAt
   ) => ({
     selectedPath,
     commits,
@@ -262,6 +163,7 @@ export const getDifferenceViewerContainerState = createSelector(
     endDate,
     diff,
     isDiffFetching,
+    rerenderRequestedAt,
   })
 );
 

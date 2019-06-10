@@ -20,7 +20,7 @@ interface DirectoryDifferencesState {
 }
 
 const outerStyle = {
-  _extends: 'flexRows',
+  _extends: 'flexRow',
   transition: 'all 1s ease',
   overflow: 'scroll',
 };

@@ -34,10 +34,7 @@ const shouldFetchCommits = (state, path) => {
     return false;
   }
   return (
-    state.didInvalidate ||
-    !state.commits ||
-    state.commits.length <= 0 ||
-    state.selectedPath !== path
+    !state.commits || state.commits.length <= 0 || state.selectedPath !== path
   );
 };
 

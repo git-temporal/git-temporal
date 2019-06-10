@@ -7,6 +7,7 @@
     - [Start the log scraping service](#start-the-log-scraping-service)
     - [Start the hot UI Server](#start-the-hot-ui-server)
 - [Updates](#updates)
+  - [June 10, 2019](#june-10-2019)
   - [May 29, 2019](#may-29-2019)
   - [May 11, 2019](#may-11-2019)
   - [_Coming Soon to a Code Editor / Electron Desktop Near You!_](#_coming-soon-to-a-code-editor--electron-desktop-near-you_)
@@ -42,6 +43,20 @@ npm run start
 ```
 
 # Updates
+
+## June 10, 2019
+
+We have a new look!
+
+[<img alt="New side panel design" src="docs/20190610_git-temporal-react.png"
+/>]
+
+And it almost all works in VSCode!
+
+[<img alt="New side panel design" src="docs/20190610_git-temporal-vscode.png"
+/>]
+
+I've also been busy bringing the version of react up to 16.8 and react-redux to 7.1.0-alpha4 and beginning refactoring of the redux containers to functional components using hooks
 
 ## May 29, 2019
 

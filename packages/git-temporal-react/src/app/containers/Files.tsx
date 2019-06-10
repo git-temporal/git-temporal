@@ -1,90 +1,37 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { List, AutoSizer } from 'react-virtualized';
+// @ts-ignore
+import { useSelector, useDispatch } from 'react-redux';
 import { debug } from '@git-temporal/logger';
 
 import { selectPath } from 'app/actions';
-import { DispatchProps, IFilesContainerState } from 'app/interfaces';
-import { getFilesContainerState } from 'app/selectors';
-import { style } from 'app/styles';
-import { FileCard } from 'app/components/FileCard';
+import { getFilesContainerSort } from 'app/selectors/stateVars';
+import { getFilteredFilesForFilesContainer } from 'app/selectors/files';
+
 import FilesActionMenu from './FilesActionMenu';
+import { FileCard } from 'app/components/FileCard';
+import { CollapsibleGroup } from 'app/components/CollapsibleGroup';
+import { ExtendingList } from 'app/components/ExtendingList';
 
-export class Files extends Component<IFilesContainerState & DispatchProps> {
-  constructor(props) {
-    super(props);
-    this.renderRow = this.renderRow.bind(this);
+export const Files: React.FC = (): React.ReactElement => {
+  const filesContainerSort = useSelector(getFilesContainerSort);
+  const files = useSelector(getFilteredFilesForFilesContainer);
+  const dispatch = useDispatch();
+
+  const title = `${files.length} Files`;
+  return (
+    <CollapsibleGroup title={title}>
+      <FilesActionMenu />
+      <ExtendingList rowCount={files.length} rowRenderer={renderRow} />
+    </CollapsibleGroup>
+  );
+
+  function renderRow(index: number, key: string) {
+    const file = files[index];
+    return <FileCard key={key} file={file} onFileClick={onFileClick} />;
   }
 
-  componentWillUnmount() {
-    debug('unmounting Files');
-  }
-
-  readonly outerStyle = {
-    _extends: ['borderedPanel', 'flexColumns'],
-    flexGrow: 1,
-    position: 'relative',
-    maxWidth: 400,
-    minWidth: 400,
-  };
-
-  readonly headerStyle = {
-    _extends: ['h2Text'],
-    display: 'block',
-    flexGrow: 0,
-    position: 'relative',
-    marginRight: 30,
-  };
-
-  render() {
-    const sortTitle = this.props.filesContainerSort;
-    return (
-      <div style={style(this.outerStyle)}>
-        <FilesActionMenu />
-        <div style={style(this.headerStyle)}>
-          <span data-testId="header">Files by {sortTitle}</span>
-        </div>
-        <div style={{ flexGrow: 1 }}>
-          <AutoSizer>
-            {({ height, width }) => (
-              <List
-                width={
-                  width || 100 // width and height below need minimums for testing
-                }
-                height={height || 100}
-                rowHeight={60}
-                rowRenderer={this.renderRow}
-                rowCount={this.props.files.length}
-                filesContainerSort={this.props.filesContainerSort}
-              />
-            )}
-          </AutoSizer>
-        </div>
-      </div>
-    );
-  }
-
-  renderRow({ index, style, key }) {
-    const file = this.props.files[index];
-    style.width = 'calc(100% - 20px)';
-    return (
-      <FileCard
-        key={key}
-        style={style}
-        file={file}
-        onFileClick={this.onFileClick}
-      />
-    );
-  }
-
-  onFileClick = (event, fileName) => {
+  function onFileClick(event, fileName) {
     event.stopPropagation();
-    this.props.dispatch(selectPath(fileName));
-  };
-}
-
-export const mapStateToProps = state => {
-  return getFilesContainerState(state);
+    dispatch(selectPath(fileName));
+  }
 };
-
-export default connect(mapStateToProps)(Files);

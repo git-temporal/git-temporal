@@ -15,11 +15,6 @@ export const selectPath = path => (dispatch, _getState) => {
   return { selectedPath: actualPath, type: ActionTypes.SELECT_PATH };
 };
 
-export const invalidatePath = path => ({
-  selectedPath: path,
-  type: ActionTypes.INVALIDATE_PATH,
-});
-
 export const setAuthorsContainerSort = (sort: AuthorsContainerSorts) => ({
   sort,
   type: ActionTypes.SET_AUTHORS_CONTAINER_SORT,
@@ -55,10 +50,8 @@ export const highlightCommits = commitIds => ({
   type: ActionTypes.HIGHLIGHT_COMMITS,
 });
 
-export const viewCommits = () => ({
-  type: ActionTypes.VIEW_COMMITS,
-});
-
-export const viewFiles = () => ({
-  type: ActionTypes.VIEW_FILES,
-});
+// the timeplot and the monaco editor are native components that
+// will update on data changes, but need to be told to rerender whenever
+// the dimensions of their containers change. Like for example, when
+// the side panel is opened or closed.
+export const requestRerender = () => ({ type: ActionTypes.REQUEST_RERENDER });

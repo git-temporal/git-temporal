@@ -23,15 +23,12 @@ export interface CommitCardProps {
 
 const defaultCardStyle = {
   _extends: ['card', 'block'],
-  borderBottom: '1px solid whitesmoke',
-  // wrapping in Selectable provides sufficient margins and padding
-  marginBottom: 0,
   marginRight: 0,
   padding: 0,
 };
 
 const dateLineStyle = {
-  _extends: ['smallerText', 'block', 'flexRows'],
+  _extends: ['smallerText', 'block', 'flexRow'],
 };
 const messageStyle = {
   _extends: ['largerText', 'block'],

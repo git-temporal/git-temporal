@@ -10,8 +10,6 @@ const filteredCommitsMock = {
   selectedPath: 'some/path',
   commits: fiveCommits,
   isFetching: false,
-  didInvalidate: false,
-  viewCommitsOrFiles: 'commits',
   highlightedCommitIds: ['56493bf1ebfab3ec102fe017f30fa4f81ba6a256'],
   isFileSelected: false,
   commitsContainerSort: CommitsContainerSorts.TIME,
@@ -24,9 +22,7 @@ describe('containers/Commits', () => {
     const mockEvent = { stopPropagation: jest.fn };
     beforeAll(() => {
       mockDispatch = jest.fn();
-      wrapper = shallow(
-        <Commits dispatch={mockDispatch} {...filteredCommitsMock} />
-      );
+      wrapper = shallow(<Commits />);
     });
 
     beforeEach(() => {

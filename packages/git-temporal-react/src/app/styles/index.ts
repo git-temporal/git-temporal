@@ -1,3 +1,12 @@
+// to use a style var, for example:
+//
+// import { style } from 'app/styles';
+//
+// const myStyle = {
+//   backgroundColor: '@colors.altBackground',
+// }
+// return (<MyComponent style={style(myStyle)}/>);
+//
 let styleVars = {
   colors: {
     added: 'green',
@@ -15,6 +24,11 @@ let styleVars = {
     selected: 'lightskyblue',
     text: '#333333',
   },
+  margins: {
+    small: 5,
+    medium: 10,
+    large: 20,
+  },
 };
 
 // NOTE: the colors above are used below as string values preceded with '@' so they
@@ -25,16 +39,16 @@ let globalStyles = {
     background: '@colors.background',
   },
   page: {
-    padding: 20,
+    padding: '@margins.large',
     width: 'calc(100% - 40px)',
     height: 'calc(100% - 40px)',
     position: 'absolute',
   },
   panel: {
     background: '@colors.background',
-    padding: 10,
+    padding: '@margins.medium',
     borderRadius: 3,
-    marginRight: 10,
+    marginRight: '@margins.medium',
   },
   altPanel: {
     _extends: 'panel',
@@ -57,28 +71,32 @@ let globalStyles = {
   },
   block: {
     display: 'block',
-    marginBottom: 10,
+    marginBottom: '@margins.medium',
   },
   inline: {
     display: 'inline-block',
   },
   inlineBlock: {
     display: 'inline-block',
-    marginRight: 10,
+    marginRight: '@margins.medium',
   },
   card: {
     _extends: 'panel',
     borderRadius: 7,
-    marginBottom: 10,
-    marginRight: 10,
+    marginBottom: '@margins.medium',
+    marginRight: '@margins.medium',
   },
-  flexColumns: {
+  flexColumn: {
     display: 'flex',
     flexDirection: 'column',
   },
-  flexRows: {
+  flexRow: {
     display: 'flex',
     flexDirection: 'row',
+  },
+  flexGrow: {
+    display: 'flex',
+    flexGrow: 1,
   },
   normalText: {
     fontSize: 13,
@@ -102,13 +120,13 @@ let globalStyles = {
   },
   headerText: {
     _extends: ['normalText', 'boldText'],
-    marginBottom: 20,
-    marginRight: 20,
+    marginBottom: '@margins.large',
+    marginRight: '@margins.large',
   },
   h1Text: {
     _extends: 'headerText',
     fontSize: 28,
-    marginRight: 20,
+    marginRight: '@margins.large',
   },
   h2Text: {
     _extends: 'headerText',
@@ -121,15 +139,15 @@ let globalStyles = {
   h4Text: {
     _extends: 'headerText',
     fontSize: 12,
-    marginBottom: 10,
-    marginRight: 10,
+    marginBottom: '@margins.medium',
+    marginRight: '@margins.medium',
   },
   h5Text: {
     _extends: 'headerText',
     fontSize: 14,
     fontWeight: 'normal',
-    marginBottom: 10,
-    marginRight: 10,
+    marginBottom: '@margins.medium',
+    marginRight: '@margins.medium',
   },
   errorText: {
     _extends: 'largerText',
@@ -162,7 +180,7 @@ let globalStyles = {
   },
   menuDivider: {
     borderBottom: `2px solid @colors.altBackground`,
-    marginBottom: 10,
+    marginBottom: '@margins.medium',
   },
 };
 
@@ -227,12 +245,12 @@ function interpolateStyleVars(styleObject) {
     }
     let newValue = value;
     for (const match of matches) {
-      const [matchedValue, styleVarsGroup, styleVar] = match.match(
+      const [_matchedValue, styleVarsGroup, styleVar] = match.match(
         /\@([^\s\.]*)\.([^\s]*)/
       );
       const interpolated = styleVars[styleVarsGroup][styleVar];
       if (interpolated) {
-        newValue = newValue.replace(matchedValue, interpolated);
+        newValue = interpolated;
       }
     }
     styleObject[key] = newValue;

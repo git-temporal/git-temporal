@@ -18,11 +18,11 @@ module.exports = {
   name: 'git-temporal-react',
   entry: [
     require.resolve('./polyfills'),
-    require.resolve('../lib/app/index.js'),
+    require.resolve('../index.vscode.js'),
   ],
   output: {
     path: outputDir,
-    filename: `git-temporal-react.js`,
+    filename: `git-temporal-react.vscode.js`,
     libraryTarget: 'umd',
     library: 'GitTemporal',
     publicPath: '/',
@@ -36,23 +36,7 @@ module.exports = {
     },
     // plugins: devWebpack.resolve.plugins,
   },
-  // resolveLoader: {
-  //   modules: [path.resolve(__dirname, '../node_modules')],
-  // },
-  externals: {
-    react: {
-      root: 'React',
-      commonjs2: 'react',
-      commonjs: 'react',
-      amd: 'react',
-    },
-    'react-dom': {
-      root: 'ReactDOM',
-      commonjs2: 'react-dom',
-      commonjs: 'react-dom',
-      amd: 'react-dom',
-    },
-  },
+
   module: devWebpack.module,
 
   plugins: [
@@ -66,19 +50,19 @@ module.exports = {
     // //
     // // Upload here: http://webpack.github.io/analyse/ to see the full dependency graph .
     new StatsWriterPlugin({
-      filename: 'webpackStats.json',
+      filename: 'webpackStats.vscode.json',
       fields: null,
       transform(data, opts) {
         const stats = opts.compiler.getStats().toJson({ chunkModules: true });
         return JSON.stringify(stats, null, 2);
       },
     }),
-    new webpack.DefinePlugin({
-      // this is what tells React to run in production mode
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-      },
-    }),
+    // new webpack.DefinePlugin({
+    //   // this is what tells React to run in production mode
+    //   'process.env': {
+    //     NODE_ENV: JSON.stringify('production'),
+    //   },
+    // }),
     // new webpack.optimize.UglifyJsPlugin({
     //   // makes stack traces on exception unintelligible
     //   mangle: false,

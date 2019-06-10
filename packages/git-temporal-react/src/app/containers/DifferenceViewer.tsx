@@ -19,14 +19,12 @@ import { FileDifferences } from 'app/components/FileDifferences';
 import DifferenceViewerHeader from 'app/containers/DifferenceViewerHeader';
 
 const outerStyle = {
-  _extends: ['borderedPanel', 'flexColumns'],
-  flexGrow: 1,
+  _extends: ['borderedPanel', 'flexColumn', 'flexGrow'],
   position: 'relative',
-  minWidth: '90%',
 };
 
 const innerStyle = {
-  _extends: 'flexColumns',
+  _extends: 'flexColumn',
 };
 
 export class DifferenceViewer extends Component<
@@ -64,6 +62,7 @@ export class DifferenceViewer extends Component<
             <FileDifferences
               leftFileContents={this.props.diff.leftFileContents}
               rightFileContents={this.props.diff.rightFileContents}
+              rerenderRequestedAt={this.props.rerenderRequestedAt}
             />
           )}
         </SpinnerContainer>
