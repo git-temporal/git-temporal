@@ -10,14 +10,14 @@ interface ComponentProps {
 }
 
 const panelStyle = {
-  _extends: ['flexColumn'],
+  _extends: 'flexColumn',
   flexGrow: 0,
   flexShrink: 0,
   position: 'relative',
 };
 
 const openPanelStyle = {
-  ...panelStyle,
+  _extends: panelStyle,
   height: 'calc(100% - 120px)',
   marginBottom: '@margins.large',
   transition: `all .25s ease`,

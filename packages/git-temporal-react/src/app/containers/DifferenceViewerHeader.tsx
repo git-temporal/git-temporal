@@ -71,11 +71,15 @@ export class DifferenceViewerHeader extends Component<
       return null;
     }
     return (
-      <span>
-        <span>#{startingCommit.hash} - </span>
-        <EpochDateTime value={startingCommit.authorDate} />
-        {!startDate && ' (Local HEAD Revision)'}
-      </span>
+      <div style={style('flexColumn', { alignItems: 'center' })}>
+        <div style={style('flexRow')}>
+          <EpochDateTime value={startingCommit.authorDate} />
+        </div>
+        <div style={style('flexRow')}>
+          #{startingCommit.hash}
+          {!startDate && ' (Local HEAD)'}
+        </div>
+      </div>
     );
   }
 
@@ -90,12 +94,14 @@ export class DifferenceViewerHeader extends Component<
       return null;
     }
     return endDate ? (
-      <span>
-        <span>#{latestCommit.hash} - </span>
-        <EpochDateTime value={latestCommit.authorDate} />
-      </span>
+      <>
+        <div>#{latestCommit.hash}</div>
+        <div>
+          <EpochDateTime value={latestCommit.authorDate} />
+        </div>
+      </>
     ) : (
-      <span>Local Revision</span>
+      <span>Local Changes</span>
     );
   }
 

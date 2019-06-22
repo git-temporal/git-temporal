@@ -113,11 +113,8 @@ export class Header extends Component<IHeaderContainerState & DispatchProps> {
   }
   renderPathLinks() {
     const { selectedPath } = this.props;
-    let parts = ['repository:/'];
-    if (selectedPath && selectedPath.trim().length > 0) {
-      parts = parts.concat(selectedPath.split('/'));
-    }
-    const lastIndex = parts.length - 1;
+    const parts = [];
+    const lastIndex = 0;
     let fullPathSoFar = '';
     return parts.map((part, index) => {
       // > 1 means don't add 'repository:'

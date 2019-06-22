@@ -43,6 +43,7 @@ let globalStyles = {
     width: 'calc(100% - 40px)',
     height: 'calc(100% - 40px)',
     position: 'absolute',
+    backgroundColor: '@colors.background',
   },
   panel: {
     background: '@colors.background',

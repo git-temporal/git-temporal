@@ -15,29 +15,34 @@ export interface RevSelectorProps {
   disableNext?: boolean;
 }
 
-const ICON_SIZE = 28;
+const ICON_SIZE = 24;
 
 const defaultContainerStyle = {
-  _extends: ['inline', 'h2Text'],
+  _extends: ['flexRow', 'h3Text'],
   marginRight: 20,
   marginBottom: 10,
   fontWeight: 'normal',
 };
 
+const iconStyle = {
+  _extends: 'flexRow',
+};
+
 const labelStyle = {
-  _extends: 'inline',
-  verticalAlign: 'super',
+  _extends: 'flexColumn',
+  flexGrow: 1,
+  alignItems: 'center',
 };
 
 export const RevSelector = (props: RevSelectorProps): JSX.Element => {
   return (
     <div style={style(defaultContainerStyle, props.style)}>
-      <Selectable style="inline" onClick={props.onPreviousRevClick}>
-        <CaretLeftIcon style="inline" height={ICON_SIZE} width={ICON_SIZE} />
+      <Selectable style={style(iconStyle)} onClick={props.onPreviousRevClick}>
+        <CaretLeftIcon height={ICON_SIZE} width={ICON_SIZE} />
       </Selectable>
       <div style={style(labelStyle)}>{props.children}</div>
-      <Selectable style="inline" onClick={props.onNextRevClick}>
-        <CaretRightIcon style="inline" height={ICON_SIZE} width={ICON_SIZE} />
+      <Selectable style={style(iconStyle)} onClick={props.onNextRevClick}>
+        <CaretRightIcon height={ICON_SIZE} width={ICON_SIZE} />
       </Selectable>
     </div>
   );
