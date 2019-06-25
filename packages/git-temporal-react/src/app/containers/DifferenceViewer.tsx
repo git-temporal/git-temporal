@@ -1,22 +1,22 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+// @ts-ignore
+import { useSelector, useDispatch } from 'react-redux';
 import * as path from 'path';
 import { debug } from '@git-temporal/logger';
-
-import {
-  DispatchProps,
-  IDifferenceViewerContainerState,
-  ICommit,
-} from 'app/interfaces';
-import { getDifferenceViewerContainerState } from 'app/selectors';
 import { style } from 'app/styles';
 import { selectPath } from 'app/actions';
-import { fetchDiff } from 'app/actions/diff';
+import {
+  getSelectedPath,
+  getDiff,
+  getIsDiffFetching,
+  getRerenderRequestedAt,
+} from 'app/selectors/stateVars';
+import { getDirectoryDiff } from 'app/selectors/files';
+
+import { DifferenceViewerHeader } from 'app/containers/DifferenceViewerHeader';
 import { SpinnerContainer } from 'app/components/SpinnerContainer';
 import { DirectoryDifferences } from 'app/components/DirectoryDifferences';
 import { FileDifferences } from 'app/components/FileDifferences';
-
-import DifferenceViewerHeader from 'app/containers/DifferenceViewerHeader';
 
 const outerStyle = {
   _extends: ['borderedPanel', 'flexColumn', 'flexGrow'],
@@ -24,95 +24,47 @@ const outerStyle = {
 };
 
 const innerStyle = {
-  _extends: 'flexColumn',
+  _extends: ['flexColumn', 'flexGrow'],
 };
 
-export class DifferenceViewer extends Component<
-  IDifferenceViewerContainerState & DispatchProps
-> {
-  componentWillUnmount() {
-    debug('unmounting DifferenceViewer');
-  }
+export const DifferenceViewer: React.FC = (): React.ReactElement => {
+  const selectedPath = useSelector(getSelectedPath);
+  const diff = useSelector(getDiff);
+  const isDiffFetching = useSelector(getIsDiffFetching);
+  const rerenderRequestedAt = useSelector(getRerenderRequestedAt);
+  const dirDiff = useSelector(getDirectoryDiff);
 
-  componentDidUpdate(prevProps) {
-    if (
-      this.getFirstFilteredCommitId(prevProps.filteredCommits) !==
-        this.getFirstFilteredCommitId() ||
-      this.getLastFilteredCommitId(prevProps.filteredCommits) !==
-        this.getLastFilteredCommitId()
-    ) {
-      this.updateDiff();
-    }
-  }
+  const dispatch = useDispatch();
 
-  render() {
-    return (
-      <div style={style(outerStyle)}>
-        <SpinnerContainer
-          isSpinning={this.props.isDiffFetching || !this.props.diff}
-          style={style(innerStyle)}
-        >
-          <DifferenceViewerHeader />
-          {this.props.diff.isDirectory ? (
-            <DirectoryDifferences
-              modifiedFiles={this.props.diff.modifiedFiles}
-              onFileClick={this.onFileClick}
-            />
-          ) : (
+  return (
+    <div style={style(outerStyle)}>
+      <SpinnerContainer
+        isSpinning={isDiffFetching || !diff}
+        style={style(innerStyle)}
+      >
+        <DifferenceViewerHeader />
+        {diff && diff.isDirectory ? (
+          <DirectoryDifferences
+            modifiedFiles={diff.modifiedFiles}
+            leftTree={dirDiff.leftTree}
+            rightTree={dirDiff.rightTree}
+            onFileClick={onFileClick}
+          />
+        ) : (
+          diff && (
             <FileDifferences
-              leftFileContents={this.props.diff.leftFileContents}
-              rightFileContents={this.props.diff.rightFileContents}
-              rerenderRequestedAt={this.props.rerenderRequestedAt}
+              leftFileContents={diff.leftFileContents}
+              rightFileContents={diff.rightFileContents}
+              rerenderRequestedAt={rerenderRequestedAt}
             />
-          )}
-        </SpinnerContainer>
-      </div>
-    );
+          )
+        )}
+      </SpinnerContainer>
+    </div>
+  );
+
+  function onFileClick(relativePath) {
+    const fullPath = path.join(selectedPath, relativePath);
+    dispatch(selectPath(fullPath));
   }
-
-  updateDiff() {
-    const lastFilteredCommit = this.getLastFilteredCommit();
-    const leftCommit =
-      this.props.startDate && lastFilteredCommit && lastFilteredCommit.id;
-    const firstFilteredCommit = this.getFirstFilteredCommit();
-    const rightCommit =
-      this.props.endDate && firstFilteredCommit && firstFilteredCommit.id;
-
-    const path = this.props.selectedPath || './';
-
-    this.props.dispatch(fetchDiff(path, leftCommit, rightCommit));
-  }
-
-  getLastFilteredCommitId(commits?: ICommit[]) {
-    const lastCommit = this.getLastFilteredCommit(commits);
-    return (lastCommit && lastCommit.id) || null;
-  }
-
-  getLastFilteredCommit(commits?: ICommit[]) {
-    const whichCommits = commits || this.props.filteredCommits;
-    if (!whichCommits || whichCommits.length < 1) {
-      return null;
-    }
-    return whichCommits[whichCommits.length - 1];
-  }
-
-  getFirstFilteredCommitId(commits?: ICommit[]) {
-    const firstCommit = this.getFirstFilteredCommit(commits);
-    return (firstCommit && firstCommit.id) || null;
-  }
-
-  getFirstFilteredCommit(commits?: ICommit[]) {
-    const whichCommits = commits || this.props.filteredCommits;
-    if (!whichCommits || whichCommits.length <= 0) {
-      return null;
-    }
-    return whichCommits[0];
-  }
-
-  onFileClick = relativePath => {
-    const fullPath = path.join(this.props.selectedPath, relativePath);
-    this.props.dispatch(selectPath(fullPath));
-  };
-}
-
-export default connect(getDifferenceViewerContainerState)(DifferenceViewer);
+};

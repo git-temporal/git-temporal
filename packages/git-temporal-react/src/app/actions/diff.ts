@@ -1,9 +1,11 @@
+import { ICommit } from 'app/interfaces';
+import { dateFilteredCommits } from 'app/selectors/dates';
 import { ActionTypes } from 'app/actions/ActionTypes';
 import { isVscode, vscode } from 'app/actions/vscode';
-import { Dispatch } from 'redux';
 import { debug } from '@git-temporal/logger';
+import { start } from 'repl';
 
-export const requestDiff = (path: string) => ({
+const requestDiff = (path: string) => ({
   selectedPath: path,
   type: ActionTypes.REQUEST_DIFF,
 });
@@ -16,19 +18,35 @@ export const receiveDiff = (path: string, diff: any) => ({
 
 export const fetchDiff = (
   path: string,
-  leftCommit: string,
-  rightCommit: string
-) => (dispatch: Dispatch) => {
+  commits: ICommit[],
+  startDate: number,
+  endDate: number
+) => (dispatch: any): void => {
   dispatch(requestDiff(path));
+  const filteredCommits = dateFilteredCommits(commits, startDate, endDate);
+  if (!filteredCommits || filteredCommits.length === 0) {
+    return;
+  }
+  // commits are in descending order
+  const rightCommit = filteredCommits[0];
+  const leftCommit = filteredCommits.slice(-1)[0];
 
   if (isVscode) {
     debug('sending diff request to vscode ', path, leftCommit, rightCommit);
     // see actions/vscode.ts for response handling that comes as a window event
-    vscode.postMessage({ path, leftCommit, rightCommit, command: 'diff' });
+    vscode.postMessage({
+      path,
+      leftCommit: leftCommit.id,
+      rightCommit: rightCommit.id,
+      command: 'diff',
+    });
   } else {
-    const pathParam = path && path.trim().length > 0 ? `?path=${path}` : '';
-    const leftCommitParam = leftCommit ? `&leftCommit=${leftCommit}` : '';
-    const rightCommitParam = rightCommit ? `&rightCommit=${rightCommit}` : '';
+    const pathParam =
+      path && path.trim().length > 0 ? `?path=${path}` : '?path=.';
+    const leftCommitParam = leftCommit ? `&leftCommit=${leftCommit.id}` : '';
+    const rightCommitParam = rightCommit
+      ? `&rightCommit=${rightCommit.id}`
+      : '';
 
     // TODO : replace this with serviceBaseUrl when it is in
     const url = `http://localhost:11966/git-temporal/diff${pathParam}${leftCommitParam}${rightCommitParam}`;

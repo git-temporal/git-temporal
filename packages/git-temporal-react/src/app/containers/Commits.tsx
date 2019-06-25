@@ -18,7 +18,7 @@ import { CollapsibleGroup } from 'app/components/CollapsibleGroup';
 const scrollStyle = {
   flexGrow: 1,
   overflow: 'auto',
-  marginBotton: '@margins.large',
+  marginBotton: '@margins.large+px',
 };
 
 export const Commits: React.FC = (): React.ReactElement => {

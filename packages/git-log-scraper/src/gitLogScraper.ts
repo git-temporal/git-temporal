@@ -17,10 +17,6 @@ const parsedAttributes = {
 };
 
 export function getCommitHistory(fileName) {
-  const gitRoot = findGitRoot(fileName);
-  if (gitRoot) {
-    process.chdir(gitRoot);
-  }
   const rawLog = fetchFileHistory(fileName);
   const commits = parseGitLogOutput(rawLog).sort((a, b) => {
     return b.authorDate - a.authorDate;
@@ -38,6 +34,8 @@ export function getCommitHistory(fileName) {
 // Implementation
 
 function fetchFileHistory(fileName) {
+  const gitRoot = findGitRoot(fileName);
+
   let format = '';
   for (const attr in parsedAttributes) {
     format += `${attr}:${parsedAttributes[attr]}`;
@@ -51,6 +49,7 @@ function fetchFileHistory(fileName) {
   }
   return child_process
     .execSync(cmd, {
+      cwd: gitRoot,
       stdio: 'pipe',
     })
     .toString();

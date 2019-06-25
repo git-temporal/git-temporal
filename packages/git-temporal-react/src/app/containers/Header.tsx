@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { DispatchProps, IHeaderContainerState } from 'app/interfaces';
 import { getHeaderContainerState } from 'app/selectors';
 import { style } from 'app/styles';
-import { selectPath, setStartDate, setEndDate } from 'app/actions';
+import { selectPath } from 'app/actions';
+import { setDates } from 'app/actions/setDates';
 import { EpochDateTime } from 'app/components/EpochDateTime';
 import { ExplodeOnChange } from 'app/components/ExplodeOnChange';
 
@@ -81,7 +82,7 @@ export class Header extends Component<IHeaderContainerState & DispatchProps> {
         </div>
         <div style={style(statsAndSearchStyle)}>
           <div>
-            <div style={style('h2Text', { marginBottom: 10 })}>
+            <div style={style('h4Text', { marginBottom: 10 })}>
               {this.renderPathLinks()}
             </div>
           </div>
@@ -113,8 +114,11 @@ export class Header extends Component<IHeaderContainerState & DispatchProps> {
   }
   renderPathLinks() {
     const { selectedPath } = this.props;
-    const parts = [];
-    const lastIndex = 0;
+    let parts = ['(repo root)/'];
+    if (selectedPath && selectedPath.trim().length > 0) {
+      parts = parts.concat(selectedPath.split('/'));
+    }
+    const lastIndex = parts.length - 1;
     let fullPathSoFar = '';
     return parts.map((part, index) => {
       // > 1 means don't add 'repository:'
@@ -131,8 +135,15 @@ export class Header extends Component<IHeaderContainerState & DispatchProps> {
   };
 
   onResetDatesClick = () => {
-    this.props.dispatch(setStartDate(null));
-    this.props.dispatch(setEndDate(null));
+    setDates(
+      this.props.dispatch,
+      this.props.selectedPath,
+      this.props.commits,
+      null,
+      null,
+      false,
+      null
+    );
   };
 }
 

@@ -24,8 +24,8 @@ export const TIMEPLOT_POPUP_WIDTH = 350;
 
 const defaultPopupStyle = {
   _extends: 'normalText',
-  position: 'fixed',
-  bottom: 200,
+  position: 'absolute',
+  bottom: 180,
   width: TIMEPLOT_POPUP_WIDTH,
   right: 'initial',
   border: 'solid 2px @colors.selectable',
@@ -61,6 +61,8 @@ export const TimeplotPopup = (props: TimeplotPopupProps): JSX.Element => {
     endDate,
     isOpen,
     onClose,
+    onMouseEnter,
+    onMouseLeave,
     onCommitSelected,
   } = props;
   const popupStyle = {
@@ -76,9 +78,11 @@ export const TimeplotPopup = (props: TimeplotPopupProps): JSX.Element => {
       style={style(defaultPopupStyle, popupStyle)}
       isOpen={isOpen}
       onClose={onClose}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       noBackdrop
     >
-      <div>
+      <>
         <div style={style(headerStyle)}>
           <div style={style('largerText')}>There {commitsText} between</div>
           <DateTime value={startDate} /> and <DateTime value={endDate} />
@@ -108,7 +112,7 @@ export const TimeplotPopup = (props: TimeplotPopupProps): JSX.Element => {
             </div>
           </div>
         </div>
-      </div>
+      </>
     </Popup>
   );
 };

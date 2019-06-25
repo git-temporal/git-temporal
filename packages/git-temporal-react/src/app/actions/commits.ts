@@ -1,6 +1,11 @@
 import { ActionTypes } from 'app/actions/ActionTypes';
 import { isVscode, vscode } from 'app/actions/vscode';
 import { debug } from '@git-temporal/logger';
+import { fetchDiff } from 'app/actions/diff';
+
+if (window) {
+  window['GTDEBUG'] = 1;
+}
 
 export const requestCommits = path => ({
   selectedPath: path,
@@ -14,6 +19,13 @@ export const receiveCommits = (path, json) => ({
   type: ActionTypes.RECEIVE_COMMITS,
 });
 
+export const receiveRawCommits = (path, json) => (dispatch, getState) => {
+  debug('ReceivedRawCommits', path, dispatch, getState);
+  const { startDate, endDate } = getState();
+  dispatch(fetchDiff(path, json.commits, startDate, endDate));
+  dispatch(receiveCommits(path, json));
+};
+
 const fetchCommits = path => dispatch => {
   dispatch(requestCommits(path));
   if (isVscode) {
@@ -25,7 +37,9 @@ const fetchCommits = path => dispatch => {
     // TODO : replace this with serviceBaseUrl when it is in
     fetch(`http://localhost:11966/git-temporal/history${pathParam}`)
       .then(response => response.json())
-      .then(json => dispatch(receiveCommits(path, json)));
+      .then(json => {
+        dispatch(receiveRawCommits(path, json));
+      });
   }
 };
 

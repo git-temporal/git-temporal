@@ -1,10 +1,10 @@
 import * as path from 'path';
 import { createSelector } from 'reselect';
 
-import { IModifiedFile } from 'app/interfaces';
+import { IDiff } from 'app/interfaces';
 import { FilesContainerSorts } from 'app/actions/ActionTypes';
 
-import { getFilesContainerSort, getSearch } from './stateVars';
+import { getFilesContainerSort, getSearch, getDiff } from './stateVars';
 import { hasSearch, matchesFileSearch, fileSearchRegex } from './search';
 import { getFilteredCommits } from './commits';
 
@@ -92,29 +92,30 @@ export const getFilteredFilesForFilesContainer = createSelector(
   }
 );
 
-export const getModifiedFiles = state => state.modifiedFiles;
-export const convertModifiedFilesToTrees = createSelector(
-  getModifiedFiles,
-  (modifiedFiles: IModifiedFile[]) => {
-    const returnValues = {
-      leftTree: {},
-      rightTree: {},
-    };
-    if (!modifiedFiles) {
+export const getDirectoryDiff = createSelector(
+  getDiff,
+  (diff: IDiff | null) => {
+    if (!diff || !diff.isDirectory) {
+      return null;
+    }
+    const leftTree = {};
+    const rightTree = {};
+
+    if (!diff.modifiedFiles) {
       return {};
     }
     let index = 0;
-    modifiedFiles.forEach(file => {
+    diff.modifiedFiles.forEach(file => {
       let trees = [];
       switch (file.status) {
         case 'added':
-          trees = [returnValues.rightTree];
+          trees = [rightTree];
           break;
         case 'deleted':
-          trees = [returnValues.leftTree];
+          trees = [leftTree];
           break;
         case 'modified':
-          trees = [returnValues.leftTree, returnValues.rightTree];
+          trees = [leftTree, rightTree];
           break;
       }
       for (const tree of trees) {
@@ -140,6 +141,9 @@ export const convertModifiedFilesToTrees = createSelector(
         });
       }
     });
-    return returnValues;
+    return {
+      leftTree,
+      rightTree,
+    };
   }
 );

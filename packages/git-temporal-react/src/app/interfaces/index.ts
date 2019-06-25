@@ -60,6 +60,7 @@ export interface IModifiedFile {
 export interface IHeaderContainerState {
   // If not provided, the whole repository is assumed
   selectedPath?: string;
+  commits?: ICommit[];
   search?: string;
   startDate?: number;
   endDate?: number;
@@ -94,21 +95,4 @@ export interface ITimeplotState {
   startDate: number;
   endDate: number;
   rerenderRequestedAt: Date;
-}
-
-export interface IDifferenceViewerContainerState {
-  selectedPath: string;
-  commits: ICommit[];
-  filteredCommits: ICommit[];
-  startDate: number;
-  endDate: number;
-  diff: IDiff;
-  isDiffFetching: boolean;
-  rerenderRequestedAt: Date;
-}
-export interface IDifferenceViewerHeaderState {
-  timeplotCommits?: ICommit[];
-  filteredCommits?: ICommit[];
-  startDate?: number;
-  endDate?: number;
 }

@@ -48,7 +48,7 @@ export const isFetching = (state = false, action: any) => {
   }
 };
 
-export const diff = (state = {}, action: any) => {
+export const diff = (state = null, action: any) => {
   switch (action.type) {
     case ActionTypes.RECEIVE_DIFF:
       return action.diff;

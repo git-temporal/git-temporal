@@ -10,7 +10,7 @@ import { style } from 'app/styles';
 
 import Header from 'app/containers/Header';
 import Timeplot from 'app/containers/Timeplot';
-import DifferenceViewer from 'app/containers/DifferenceViewer';
+import { DifferenceViewer } from 'app/containers/DifferenceViewer';
 
 import { SpinnerContainer } from 'app/components/SpinnerContainer';
 import { TransitionVisible } from 'app/components/TransitionVisible';

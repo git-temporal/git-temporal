@@ -10,8 +10,8 @@ import { ExplodeOnChange } from 'app/components/ExplodeOnChange';
 
 const outerStyle = {
   _extends: ['flexRow'],
-  marginBottom: '@margins.medium',
-  paddingLeft: '@margins.medium',
+  marginBottom: '@margins.medium+px',
+  paddingLeft: '@margins.medium+px',
   flexShrink: 0,
   justifyContent: 'center',
 };

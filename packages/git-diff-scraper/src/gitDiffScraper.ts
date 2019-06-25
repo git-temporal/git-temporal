@@ -4,13 +4,14 @@ import os from 'os';
 import path from 'path';
 
 import { escapeForCli, findGitRoot } from '@git-temporal/commons';
-import { debug, setPrefix } from '@git-temporal/logger';
+import { debug, error, setPrefix } from '@git-temporal/logger';
 
 setPrefix('git-diff-scraper');
 
 interface IFetchContents {
   contents: string;
   isDirectory: boolean;
+  error?: string;
 }
 
 interface IModifiedFile {
@@ -26,18 +27,24 @@ export function getDiff(
 ) {
   const _leftCommit = leftCommit || 'HEAD';
   const _rightCommit = rightCommit || 'local';
+  const gitRoot = findGitRoot(requestPath);
+  const normalizedRequestPath = normalizeRequestPath(gitRoot, requestPath);
+
   debug('getDiff', requestPath, _leftCommit, _rightCommit);
   const { contents: leftFileContents, isDirectory } = fetchContents(
     _leftCommit,
-    requestPath
+    normalizedRequestPath,
+    gitRoot
   );
   const { contents: rightFileContents } = fetchContents(
     _rightCommit,
-    requestPath
+    normalizedRequestPath,
+    gitRoot
   );
 
   const modifiedFiles: IModifiedFile[] =
-    isDirectory && fetchDirectoryDiff(leftCommit, rightCommit, requestPath);
+    isDirectory &&
+    fetchDirectoryDiff(leftCommit, rightCommit, normalizedRequestPath, gitRoot);
 
   return {
     isDirectory,
@@ -52,27 +59,21 @@ export function getDiff(
 
 // Implementation
 
-function fetchContents(commitId, requestPath): IFetchContents {
+function fetchContents(commitId, requestPath, gitRoot): IFetchContents {
   return commitId === 'local'
     ? fetchFromLocal(requestPath)
-    : fetchFromGit(commitId, requestPath === '.' ? './' : requestPath);
+    : fetchFromGit(commitId, requestPath === '.' ? './' : requestPath, gitRoot);
 }
 
-function fetchFromGit(commitId, requestPath): IFetchContents {
-  const gitRoot = findGitRoot(requestPath);
-  if (gitRoot) {
-    debug('changing to gitRoot', gitRoot);
-    process.chdir(gitRoot);
-  }
-  const _requestPath = normalizeRequestPath(gitRoot, requestPath);
-
+function fetchFromGit(commitId, requestPath, gitRoot): IFetchContents {
   // use -- fileName and git log will work on deleted files and paths
-  const cmd = `git show ${commitId}:${escapeForCli(_requestPath)}`;
+  const cmd = `git show ${commitId}:${escapeForCli(requestPath)}`;
   debug(`$ ${cmd}`);
 
   try {
     const rawContents = child_process
       .execSync(cmd, {
+        cwd: gitRoot,
         stdio: 'pipe',
       })
       .toString();
@@ -84,10 +85,16 @@ function fetchFromGit(commitId, requestPath): IFetchContents {
         : Buffer.from(rawContents).toString('base64'),
     };
   } catch (e) {
-    console.error('error executing git', e.status, e);
+    console.error(
+      'error executing git',
+      process.cwd,
+      e.status,
+      Buffer.from(e.stderr).toString('base64')
+    );
     return {
       isDirectory: false,
       contents: null,
+      error: e.status,
     };
   }
 }
@@ -110,23 +117,27 @@ function fetchFromLocal(requestPath): IFetchContents {
 function fetchDirectoryDiff(
   leftCommit,
   rightCommit,
-  requestPath
+  requestPath,
+  gitRoot
 ): IModifiedFile[] {
+  const path = requestPath === '.' ? './' : requestPath;
   const isDiffOnLocal = rightCommit === 'local';
-  const leftPath = isDiffOnLocal ? leftCommit : `${leftCommit}:${requestPath}`;
-  const rightPath = isDiffOnLocal
-    ? requestPath
-    : `${rightCommit}:${requestPath}`;
+  const leftPath = isDiffOnLocal ? leftCommit : `${leftCommit}:${path}`;
+  const rightPath = isDiffOnLocal ? path : `${rightCommit}:${path}`;
   const extraOpts = '--stat=300 --compact-summary';
   let outputLines = [];
   try {
     const outputBuffer = child_process.execSync(
-      `git diff ${extraOpts} ${leftPath} ${rightPath}`
+      `git diff ${extraOpts} ${leftPath} ${rightPath}`,
+      {
+        cwd: gitRoot,
+        stdio: 'pipe',
+      }
     );
     outputLines = outputBuffer.toString().split(os.EOL);
   } catch (e) {
     // TODO : test for specific error and only ignore doesn't exist in rev errors
-    debug('Error retrieving git diff', e);
+    error('Error retrieving git diff', e);
   }
   return parseDirectoryDiff(outputLines);
 }
@@ -170,11 +181,21 @@ function normalizeRequestPath(
   if (!gitRoot) {
     return requestPath;
   }
+  if (gitRoot === requestPath) {
+    return './';
+  }
   const parsedRequestPath = path.parse(requestPath);
   if (parsedRequestPath.root === '') {
     // it's already a relative path
     return requestPath;
   }
+
   const relativeDir = parsedRequestPath.dir.slice(gitRoot.length + 1);
+  console.log(
+    `normalizeRequestPath ${gitRoot},
+      ${relativeDir},
+      ${parsedRequestPath.dir},
+      ${parsedRequestPath.base}`
+  );
   return path.join(relativeDir, parsedRequestPath.base);
 }

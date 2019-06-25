@@ -7,9 +7,9 @@
     "build": "NODE_ENV=production tsc",
     "test": "cross-env mocha --exit -r ../../babel-register.js --recursive --opts ./test/mocha.opts ./test/unit",
     "test-debug": "cross-env mocha --inspect-brk --exit -r ../../babel-register.js --recursive --opts ./test/mocha.opts ./test/unit",
-    "debug": "DEBUG=1 node --inspect-brk -r ../../babel-register.js src/server.ts",
-    "start": "DEBUG=1 node -r ../../babel-register.js src/server.ts",
-    "start-react": "DEBUG=1 GT_GIT_REPO_PATH=../../../react node -r ../../babel-register.js src/server.ts",
+    "debug": "GTDEBUG=1 DEBUG=1 node --inspect-brk -r ../../babel-register.js src/server.ts",
+    "start": "GTDEBUG=1 DEBUG=1 node -r ../../babel-register.js src/server.ts",
+    "start-react": "GTDEBUG=1 DEBUG=1 GT_GIT_REPO_PATH=../../../react node -r ../../babel-register.js src/server.ts",
     "prepublishOnly": "npm run build"
   },
   "bin": {
@@ -33,11 +33,12 @@
   },
   "homepage": "https://github.com/git-temporal/git-temporal#readme",
   "dependencies": {
-    "@git-temporal/git-log-scraper": "^0.3.0",
     "@git-temporal/commons": "^0.1.0",
-    "@git-temporal/logger": "^0.1.0",
     "@git-temporal/git-diff-scraper": "^0.1.0",
-    "express": "^4.16.3"
+    "@git-temporal/git-log-scraper": "^0.3.0",
+    "@git-temporal/logger": "^0.1.0",
+    "express": "^4.16.3",
+    "morgan": "^1.9.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.0",

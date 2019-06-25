@@ -19,7 +19,7 @@ const panelStyle = {
 const openPanelStyle = {
   _extends: panelStyle,
   height: 'calc(100% - 120px)',
-  marginBottom: '@margins.large',
+  marginBottom: '@margins.large+px',
   transition: `all .25s ease`,
 };
 

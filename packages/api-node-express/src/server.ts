@@ -1,5 +1,6 @@
 // @ts-ignore
 import express from 'express';
+import morgan from 'morgan';
 import { debug, log, setPrefix } from '@git-temporal/logger';
 
 import { serveHistory } from './history';
@@ -16,16 +17,19 @@ const gitRoot = findGitRoot(gitRepoPath);
 debug('git root dir: ', gitRoot);
 process.chdir(gitRoot);
 
-app.use((_req, res, next) => {
+app.use(standardHeaders);
+app.use(morgan('combined'));
+
+app.get('/git-temporal/history', serveHistory);
+app.get('/git-temporal/diff', serveDiff);
+
+app.listen(port, () => log(`API server listening on port ${port}!`));
+
+function standardHeaders(_req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept'
   );
   next();
-});
-
-app.get('/git-temporal/history', serveHistory);
-app.get('/git-temporal/diff', serveDiff);
-
-app.listen(port, () => log(`API server listening on port ${port}!`));
+}

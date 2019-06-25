@@ -15,8 +15,7 @@ export interface FileDifferencesProps {
 const outerStyle = {
   position: 'relative',
   flexGrow: 1,
-  transition: 'all 1s ease',
-  overflow: 'scroll',
+  overflow: 'visible',
 };
 
 const editorStyle = {
@@ -60,6 +59,11 @@ export class FileDifferences extends React.Component<FileDifferencesProps> {
       (this.props.rightFileContents && atob(this.props.rightFileContents)) ||
       '';
 
+    debug(
+      `renderMonacoEditor: el ${el.offsetHeight} ${el.clientHeight} ${
+        el.offsetWidth
+      } ${el.clientWidth}`
+    );
     debug(`renderMonacoEditor: ${JSON.stringify(this.props, null, 2)}`);
 
     const originalModel = editor.createModel(leftFileContents);

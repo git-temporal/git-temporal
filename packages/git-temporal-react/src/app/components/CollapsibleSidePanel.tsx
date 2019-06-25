@@ -29,8 +29,8 @@ const closedPanelStyle = {
 
 const toggleIconStyle = {
   position: 'absolute',
-  right: '@margins.medium',
-  top: '@margins.medium',
+  right: '@margins.medium+px',
+  top: '@margins.medium+px',
   cursor: 'pointer',
   zIndex: 1,
 };

@@ -11,19 +11,13 @@ import {
   getStartDate,
   getEndDate,
   getIsFileSelected,
-  getDiff,
-  getIsDiffFetching,
   getRerenderRequestedAt,
 } from './stateVars';
 
 import { getAuthorsAndCommits } from './authors';
 import { getFilteredFilesForFilesContainer } from './files';
 
-import {
-  getFilteredCommits,
-  getFilteredSortedCommits,
-  getCommitsForTimeplot,
-} from './commits';
+import { getFilteredCommits, getCommitsForTimeplot } from './commits';
 
 // The methods exported from this module are intended to provide props for redux
 // containers mapStateToProps method and can be passed directly to that method
@@ -69,6 +63,7 @@ export const getHeaderContainerState = createSelector(
     const isDefaultDates = startDate == null && endDate == null;
 
     return {
+      commits,
       selectedPath,
       isDefaultDates,
       startDate: defaultedStartDate,
@@ -134,50 +129,5 @@ export const getTimeplotContainerState = createSelector(
     endDate,
     rerenderRequestedAt,
     authors: authorsAndCommits.length,
-  })
-);
-
-export const getDifferenceViewerContainerState = createSelector(
-  getSelectedPath,
-  getCommitsForTimeplot, // not filtered by start and end dates
-  getFilteredCommits,
-  getStartDate,
-  getEndDate,
-  getDiff,
-  getIsDiffFetching,
-  getRerenderRequestedAt,
-  (
-    selectedPath,
-    commits,
-    filteredCommits,
-    startDate,
-    endDate,
-    diff,
-    isDiffFetching,
-    rerenderRequestedAt
-  ) => ({
-    selectedPath,
-    commits,
-    filteredCommits,
-    startDate,
-    endDate,
-    diff,
-    isDiffFetching,
-    rerenderRequestedAt,
-  })
-);
-
-export const getDifferenceViewerHeaderState = createSelector(
-  getSelectedPath,
-  getCommitsForTimeplot, // not filtered by start and end dates
-  getFilteredCommits,
-  getStartDate,
-  getEndDate,
-  (selectedPath, timeplotCommits, filteredCommits, startDate, endDate) => ({
-    selectedPath,
-    startDate,
-    endDate,
-    timeplotCommits,
-    filteredCommits,
   })
 );

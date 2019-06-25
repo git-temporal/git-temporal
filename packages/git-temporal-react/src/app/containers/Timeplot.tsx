@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { delay } from 'lodash';
 import { debug } from '@git-temporal/logger';
 
 import { style } from 'app/styles';
@@ -31,6 +32,7 @@ interface TimeplotLocalState {
   popupStartDate?: Date;
   popupEndDate?: Date;
   customZooms: ICustomZoom[];
+  mouseInPopover: boolean;
 }
 
 const initialState = {
@@ -43,6 +45,7 @@ const initialState = {
   popupStartDate: null,
   popupEndDate: null,
   customZooms: [],
+  mouseInPopover: false,
 };
 
 const outerStyle = {
@@ -132,60 +135,64 @@ export class Timeplot extends React.Component<
     const popupLeft =
       this.state.hoverMarkerLeft - this.state.scrollLeft <
       TIMEPLOT_POPUP_WIDTH + 20
-        ? this.state.hoverMarkerLeft - this.state.scrollLeft + 20
+        ? this.state.hoverMarkerLeft - this.state.scrollLeft - 5
         : this.state.hoverMarkerLeft -
           this.state.scrollLeft -
           TIMEPLOT_POPUP_WIDTH +
-          30;
+          10;
     const firstCommitTime = commits[commits.length - 1].authorDate;
     const lastCommitTime = commits[0].authorDate;
 
     return (
-      <div style={style(outerStyle)}>
-        <ZoomContainer
-          onZoom={this.onZoom}
-          onMouseLeave={this.debouncedOnMouseLeave}
-          onScroll={this.onScroll}
-          customZooms={this.state.customZooms}
-          scrollLeft={this.state.scrollLeft}
-        >
-          <TimeplotGraph
-            forceRender={this.state.timeplotRenders}
-            commits={this.props.commits}
-            style={style(timeplotStyle)}
-            ref={this.timeplotRef}
-            highlightedCommitIds={this.props.highlightedCommitIds}
-            startDate={startDate}
-            endDate={endDate}
-            onMouseMove={this.debouncedOnMouseMove}
-            onMouseDown={this.onMouseDown}
-            onMouseUp={this.onMouseUp}
-          />
-          <div
-            style={style(hoverMarkerStyle, {
-              left: this.state.hoverMarkerLeft,
-            })}
-            onMouseMove={this.onMouseHoverMarker}
-            onMouseEnter={this.onMouseHoverMarker}
-          />
-          <TimeplotPopup
-            commits={this.state.popupCommits}
-            isOpen={this.state.popupOpen}
-            startDate={this.state.popupStartDate}
-            endDate={this.state.popupEndDate}
-            left={popupLeft}
-            onClose={this.onPopupClose}
-            onCommitSelected={this.onCommitSelected}
-          />
-        </ZoomContainer>
+      <div style={{ position: 'relative', overflow: 'visible' }}>
+        <div style={style(outerStyle)}>
+          <ZoomContainer
+            onZoom={this.onZoom}
+            onMouseLeave={this.debouncedOnMouseLeave}
+            onScroll={this.onScroll}
+            customZooms={this.state.customZooms}
+            scrollLeft={this.state.scrollLeft}
+          >
+            <TimeplotGraph
+              forceRender={this.state.timeplotRenders}
+              commits={this.props.commits}
+              style={style(timeplotStyle)}
+              ref={this.timeplotRef}
+              highlightedCommitIds={this.props.highlightedCommitIds}
+              startDate={startDate}
+              endDate={endDate}
+              onMouseMove={this.debouncedOnMouseMove}
+              onMouseDown={this.onMouseDown}
+              onMouseUp={this.onMouseUp}
+            />
+            <div
+              style={style(hoverMarkerStyle, {
+                left: this.state.hoverMarkerLeft,
+              })}
+              onMouseMove={this.onMouseHoverMarker}
+              onMouseEnter={this.onMouseHoverMarker}
+            />
+          </ZoomContainer>
 
-        <div style={style(statsStyle)}>
-          <CommaNumber value={this.props.commits.length} /> commits spanning{' '}
-          <EpochSpan
-            firstEpochTime={firstCommitTime}
-            secondEpochTime={lastCommitTime}
-          />
+          <div style={style(statsStyle)}>
+            <CommaNumber value={this.props.commits.length} /> commits spanning{' '}
+            <EpochSpan
+              firstEpochTime={firstCommitTime}
+              secondEpochTime={lastCommitTime}
+            />
+          </div>
         </div>
+        <TimeplotPopup
+          commits={this.state.popupCommits}
+          isOpen={this.state.popupOpen}
+          startDate={this.state.popupStartDate}
+          endDate={this.state.popupEndDate}
+          left={popupLeft}
+          onClose={this.onPopupClose}
+          onCommitSelected={this.onCommitSelected}
+          onMouseEnter={this.onMouseEnterPopup}
+          onMouseLeave={this.onMouseLeavePopup}
+        />
       </div>
     );
   }
@@ -204,8 +211,20 @@ export class Timeplot extends React.Component<
     });
   };
 
+  private onMouseEnterPopup = evt => {
+    this.setState({ mouseInPopover: true });
+  };
+
+  private onMouseLeavePopup = evt => {
+    this.setState({ mouseInPopover: false, popupOpen: false });
+  };
+
   private onMouseLeave = _evt => {
-    this.setState({ popupOpen: false, hoverMarkerLeft: -40 });
+    delay(() => {
+      if (!this.state.mouseInPopover) {
+        this.setState({ popupOpen: false });
+      }
+    }, 250);
   };
 
   private onMouseMove = (evt, { startDate, endDate, relativeLeft }) => {
@@ -267,8 +286,16 @@ export class Timeplot extends React.Component<
   };
 
   private setDates(shiftKey, date) {
-    const { dispatch, startDate, endDate } = this.props;
-    setDates(dispatch, startDate, endDate, shiftKey, date);
+    const { dispatch, startDate, endDate, commits, selectedPath } = this.props;
+    setDates(
+      dispatch,
+      selectedPath,
+      commits,
+      startDate,
+      endDate,
+      shiftKey,
+      date
+    );
   }
 
   private addCustomZooms() {

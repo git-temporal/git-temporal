@@ -6,6 +6,8 @@ export interface PopupProps {
   // The children are the popup content
   children: string | JSX.Element | JSX.Element[];
   onClose?: (evt) => void;
+  onMouseEnter?: (evt) => void;
+  onMouseLeave?: (evt) => void;
   style?: string | object;
   noBackdrop?: boolean;
 }
@@ -50,14 +52,28 @@ export class Popup extends React.Component<PopupProps> {
     return (
       <div style={style(containerStyle)}>
         {!this.props.noBackdrop && (
-          <div style={style(backdropStyles)} onClick={this.onClose} />
+          <div style={style(backdropStyles)} onClick={this.onBackdropClick} />
         )}
-        <div style={style(popupStyles)}>{this.props.children}</div>
+        <div
+          style={style(popupStyles)}
+          onMouseEnter={this.onMouseEnter}
+          onMouseLeave={this.onMouseLeave}
+        >
+          {this.props.children}
+        </div>
       </div>
     );
   }
 
-  onClose = evt => {
+  onBackdropClick = (evt: any) => {
     this.props.onClose && this.props.onClose(evt);
+  };
+
+  onMouseEnter = (evt: any) => {
+    this.props.onMouseEnter && this.props.onMouseEnter(evt);
+  };
+
+  onMouseLeave = (evt: any) => {
+    this.props.onMouseLeave && this.props.onMouseLeave(evt);
   };
 }

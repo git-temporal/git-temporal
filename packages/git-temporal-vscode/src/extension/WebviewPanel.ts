@@ -6,6 +6,8 @@ import { debug } from '@git-temporal/logger';
 
 let activeTextEditor;
 
+process.env.GTDEBUG = '1';
+
 export class WebviewPanel {
   // Only allow a single git-temporal panel to exist at a time
   // for a given instance of vscode.

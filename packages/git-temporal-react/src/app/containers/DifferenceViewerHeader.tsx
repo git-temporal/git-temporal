@@ -1,9 +1,18 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+// @ts-ignore
+import { useSelector, useDispatch } from 'react-redux';
+
 import { style } from 'app/styles';
 
-import { DispatchProps, IDifferenceViewerHeaderState } from 'app/interfaces';
-import { getDifferenceViewerHeaderState } from 'app/selectors';
+import {
+  getStartDate,
+  getEndDate,
+  getSelectedPath,
+} from 'app/selectors/stateVars';
+import {
+  getCommitsForTimeplot,
+  getFilteredCommits,
+} from 'app/selectors/commits';
 import { setDates } from 'app/actions/setDates';
 
 import { RevSelector } from 'app/components/RevSelector';
@@ -24,49 +33,50 @@ const revSelectorStyle = {
   textAlign: 'center',
 };
 
-export class DifferenceViewerHeader extends Component<
-  IDifferenceViewerHeaderState & DispatchProps
-> {
-  render() {
-    const { timeplotCommits, startDate, endDate } = this.props;
-    if (!timeplotCommits || timeplotCommits.length <= 0) {
-      return null;
-    }
-    const disablePrevious =
-      startDate && timeplotCommits[0].authorDate <= startDate;
-    const disableNext = !endDate;
+export const DifferenceViewerHeader: React.FC = (): React.ReactElement => {
+  const selectedPath = useSelector(getSelectedPath);
+  const startDate = useSelector(getStartDate);
+  const endDate = useSelector(getEndDate);
+  const timeplotCommits = useSelector(getCommitsForTimeplot);
+  const filteredCommits = useSelector(getFilteredCommits);
+  const dispatch = useDispatch();
 
-    return (
-      <div style={style(outerStyle)}>
-        <RevSelector
-          style={style(revSelectorStyle)}
-          disablePrevious={disablePrevious}
-          disableNext={disableNext}
-          onNextRevClick={this.onLeftRevNext}
-          onPreviousRevClick={this.onLeftRevPrevious}
-        >
-          {this.renderLeftRevChildren()}
-        </RevSelector>
-        <RevSelector
-          style={style(revSelectorStyle)}
-          disablePrevious={disablePrevious}
-          disableNext={disableNext}
-          onNextRevClick={this.onRightRevNext}
-          onPreviousRevClick={this.onRightRevPrevious}
-        >
-          {this.renderRightRevChildren()}
-        </RevSelector>
-      </div>
-    );
+  if (!timeplotCommits || timeplotCommits.length <= 0) {
+    return null;
   }
+  const disablePrevious =
+    startDate && timeplotCommits[0].authorDate <= startDate;
+  const disableNext = !endDate;
 
-  renderLeftRevChildren() {
-    const { startDate, timeplotCommits } = this.props;
+  return (
+    <div style={style(outerStyle)}>
+      <RevSelector
+        style={style(revSelectorStyle)}
+        disablePrevious={disablePrevious}
+        disableNext={disableNext}
+        onNextRevClick={onLeftRevNext}
+        onPreviousRevClick={onLeftRevPrevious}
+      >
+        {renderLeftRevChildren()}
+      </RevSelector>
+      <RevSelector
+        style={style(revSelectorStyle)}
+        disablePrevious={disablePrevious}
+        disableNext={disableNext}
+        onNextRevClick={onRightRevNext}
+        onPreviousRevClick={onRightRevPrevious}
+      >
+        {renderRightRevChildren()}
+      </RevSelector>
+    </div>
+  );
+
+  function renderLeftRevChildren() {
     if (!timeplotCommits || timeplotCommits.length === 0) {
       return null;
     }
     // reminder: commits are in descending cron order
-    const startingCommit = this.getStartingCommit();
+    const startingCommit = getStartingCommit();
     if (!startingCommit) {
       return null;
     }
@@ -77,14 +87,13 @@ export class DifferenceViewerHeader extends Component<
         </div>
         <div style={style('flexRow')}>
           #{startingCommit.hash}
-          {!startDate && ' (Local HEAD)'}
+          {startingCommit.id === timeplotCommits[0].id && ' (Local HEAD)'}
         </div>
       </div>
     );
   }
 
-  renderRightRevChildren() {
-    const { endDate, filteredCommits } = this.props;
+  function renderRightRevChildren() {
     if (!filteredCommits || filteredCommits.length === 0) {
       return null;
     }
@@ -101,26 +110,19 @@ export class DifferenceViewerHeader extends Component<
         </div>
       </>
     ) : (
-      <span>Local Changes</span>
+      <span>Local Revision</span>
     );
   }
 
-  onLeftRevPrevious = () => {
-    this.setLeftRev(-1);
-  };
+  function onLeftRevPrevious() {
+    setLeftRev(-1);
+  }
 
-  onLeftRevNext = () => {
-    this.setLeftRev(1);
-  };
+  function onLeftRevNext() {
+    setLeftRev(1);
+  }
 
-  setLeftRev(relativeIndex) {
-    const {
-      dispatch,
-      startDate,
-      endDate,
-      filteredCommits,
-      timeplotCommits,
-    } = this.props;
+  function setLeftRev(relativeIndex) {
     if (!filteredCommits || filteredCommits.length === 0) {
       return;
     }
@@ -136,6 +138,8 @@ export class DifferenceViewerHeader extends Component<
     if (adjacentCommit) {
       setDates(
         dispatch,
+        selectedPath,
+        timeplotCommits,
         startDate,
         endDate,
         false,
@@ -144,22 +148,15 @@ export class DifferenceViewerHeader extends Component<
     }
   }
 
-  onRightRevPrevious = () => {
-    this.setRightRev(-1);
-  };
+  function onRightRevPrevious() {
+    setRightRev(-1);
+  }
 
-  onRightRevNext = () => {
-    this.setRightRev(1);
-  };
+  function onRightRevNext() {
+    setRightRev(1);
+  }
 
-  setRightRev(relativeIndex) {
-    const {
-      dispatch,
-      startDate,
-      endDate,
-      filteredCommits,
-      timeplotCommits,
-    } = this.props;
+  function setRightRev(relativeIndex) {
     if (!filteredCommits || filteredCommits.length === 0) {
       return;
     }
@@ -176,6 +173,8 @@ export class DifferenceViewerHeader extends Component<
     if (adjacentCommit) {
       setDates(
         dispatch,
+        selectedPath,
+        timeplotCommits,
         startDate,
         endDate,
         true,
@@ -184,13 +183,12 @@ export class DifferenceViewerHeader extends Component<
     }
   }
   // starting commit is the last effective commit that comes before the set start date
-  getStartingCommit() {
-    const { startDate, filteredCommits, timeplotCommits } = this.props;
+  function getStartingCommit() {
     if (!timeplotCommits || timeplotCommits.length === 0) {
       return null;
     }
-    if (!startDate || !filteredCommits || filteredCommits.length === 0) {
-      return timeplotCommits[0];
+    if (!filteredCommits || filteredCommits.length === 0) {
+      return timeplotCommits[timeplotCommits.length - 1];
     }
     // reminder: commits are in descending cron order
     const earliestFilteredCommit = filteredCommits[filteredCommits.length - 1];
@@ -201,6 +199,4 @@ export class DifferenceViewerHeader extends Component<
       Math.min(foundIndex + 1, filteredCommits.length - 1)
     ];
   }
-}
-
-export default connect(getDifferenceViewerHeaderState)(DifferenceViewerHeader);
+};

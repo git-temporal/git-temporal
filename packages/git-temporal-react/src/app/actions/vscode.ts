@@ -1,4 +1,4 @@
-import { receiveCommits } from 'app/actions/commits';
+import { receiveRawCommits } from 'app/actions/commits';
 import { receiveDiff } from 'app/actions/diff';
 import { debug } from '@git-temporal/logger';
 
@@ -26,10 +26,10 @@ export function handleVscodeMessages(dispatch) {
     switch (type) {
       case 'commitData':
         debug(`received commits ${data.commits.length} commits for ${path}`);
-        dispatch(receiveCommits(path, data));
+        dispatch(receiveRawCommits(path, data));
         break;
       case 'diffData':
-        debug(`received diff ${data}`);
+        debug(`received diff ${JSON.stringify(data, null, 2)}`);
         dispatch(receiveDiff(path, data));
         break;
     }

@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { style } from 'app/styles';
 import { debug } from '@git-temporal/logger';
 
 import { IModifiedFile } from 'app/interfaces';
-import { convertModifiedFilesToTrees } from 'app/selectors/files';
 
 import { DirectoryTree } from 'app/components/DirectoryTree';
+import { usePrevious } from 'app/utilities/hooks';
 
 export interface DirectoryDifferencesProps {
   modifiedFiles: IModifiedFile[];
+  leftTree;
+  rightTree;
   // only show commits that DON't have .status of this value
   style?: object | string;
   onFileClick: (fullPath: string) => void;
@@ -33,43 +35,43 @@ const outerStyle = {
 //   textAlign: 'center'
 // }
 
-export class DirectoryDifferences extends React.Component<
-  DirectoryDifferencesProps,
-  DirectoryDifferencesState
-> {
-  readonly state: DirectoryDifferencesState = { expandedNodes: [] };
+export const DirectoryDifferences: React.FC<DirectoryDifferencesProps> = (
+  props
+): React.ReactElement => {
+  const [expandedNodes, setExpandedNodes] = useState([]);
+  const prevModifiedFiles = usePrevious({ modifiedFiles: props.modifiedFiles });
 
-  componentDidUpdate(prevProps) {
-    if (this.didModifiedFilesChange(prevProps.modifiedFiles)) {
-      debug('componentDidUpdate modifiedFiles changed', prevProps, this.props);
-      this.setState({ expandedNodes: [] });
+  useEffect(() => {
+    if (didModifiedFilesChange(prevModifiedFiles)) {
+      debug(
+        'componentDidUpdate modifiedFiles changed',
+        prevModifiedFiles,
+        props
+      );
+      // setExpandedNodes([]);
     }
-  }
-  render() {
-    const { leftTree, rightTree } = convertModifiedFilesToTrees(
-      this.props
-    ) as any;
-    debug('DirectoryDifferences::render()', leftTree, rightTree);
-    return (
-      <div style={style(outerStyle, this.props.style)}>
-        <DirectoryTree
-          fileTree={leftTree}
-          expandedNodes={this.state.expandedNodes}
-          onExpandNode={this.onExpandNode}
-          onFileClick={this.onFileClick}
-        />
-        <DirectoryTree
-          fileTree={rightTree}
-          expandedNodes={this.state.expandedNodes}
-          onExpandNode={this.onExpandNode}
-          onFileClick={this.onFileClick}
-        />
-      </div>
-    );
-  }
+  });
+  const { leftTree, rightTree } = props;
+  debug('DirectoryDifferences::render()', leftTree, rightTree);
+  return (
+    <div style={style(outerStyle, props.style)}>
+      <DirectoryTree
+        fileTree={leftTree}
+        expandedNodes={expandedNodes}
+        onExpandNode={onExpandNode}
+        onFileClick={onFileClick}
+      />
+      <DirectoryTree
+        fileTree={rightTree}
+        expandedNodes={expandedNodes}
+        onExpandNode={onExpandNode}
+        onFileClick={onFileClick}
+      />
+    </div>
+  );
 
-  didModifiedFilesChange(prevModifiedFiles) {
-    const { modifiedFiles } = this.props;
+  function didModifiedFilesChange(prevModifiedFiles) {
+    const { modifiedFiles } = props;
     // debug('didModifiedFilesChange', modifiedFiles, prevModifiedFiles);
     if (!modifiedFiles || !prevModifiedFiles) {
       // debug('one or both null');
@@ -90,22 +92,21 @@ export class DirectoryDifferences extends React.Component<
     });
   }
 
-  onFileClick = fullPath => {
-    this.props.onFileClick(fullPath);
-  };
+  function onFileClick(fullPath) {
+    props.onFileClick(fullPath);
+  }
 
-  onExpandNode = fullPath => {
-    const currentIndex = this.state.expandedNodes.indexOf(fullPath);
-    let expandedNodes;
+  function onExpandNode(fullPath) {
+    const currentIndex = expandedNodes.indexOf(fullPath);
+    let newExpandedNodes;
     if (currentIndex === -1) {
-      expandedNodes = this.state.expandedNodes.slice(0);
-      expandedNodes.push(fullPath);
-      this.setState({ expandedNodes });
+      newExpandedNodes = expandedNodes.slice(0);
+      newExpandedNodes.push(fullPath);
     } else {
-      expandedNodes = this.state.expandedNodes
+      newExpandedNodes = expandedNodes
         .slice(0, currentIndex)
-        .concat(this.state.expandedNodes.slice(currentIndex + 1));
+        .concat(expandedNodes.slice(currentIndex + 1));
     }
-    this.setState({ expandedNodes });
-  };
-}
+    setExpandedNodes(newExpandedNodes);
+  }
+};

@@ -27,8 +27,8 @@ const searchAndResetStyle = {
 };
 
 const resetHighlightsLinkStyle = {
-  marginLeft: '@margins.large',
-  marginTop: '@margins.small',
+  marginLeft: '@margins.large+px',
+  marginTop: '@margins.small+px',
 };
 
 export const SidePanel: React.FC = (): React.ReactElement => {

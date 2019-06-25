@@ -39,7 +39,7 @@ let globalStyles = {
     background: '@colors.background',
   },
   page: {
-    padding: '@margins.large',
+    padding: '@margins.large+px',
     width: 'calc(100% - 40px)',
     height: 'calc(100% - 40px)',
     position: 'absolute',
@@ -47,9 +47,9 @@ let globalStyles = {
   },
   panel: {
     background: '@colors.background',
-    padding: '@margins.medium',
+    padding: '@margins.medium+px',
     borderRadius: 3,
-    marginRight: '@margins.medium',
+    marginRight: '@margins.medium+px',
   },
   altPanel: {
     _extends: 'panel',
@@ -72,20 +72,20 @@ let globalStyles = {
   },
   block: {
     display: 'block',
-    marginBottom: '@margins.medium',
+    marginBottom: '@margins.medium+px',
   },
   inline: {
     display: 'inline-block',
   },
   inlineBlock: {
     display: 'inline-block',
-    marginRight: '@margins.medium',
+    marginRight: '@margins.medium+px',
   },
   card: {
     _extends: 'panel',
     borderRadius: 7,
-    marginBottom: '@margins.medium',
-    marginRight: '@margins.medium',
+    marginBottom: '@margins.medium+px',
+    marginRight: '@margins.medium+px',
   },
   flexColumn: {
     display: 'flex',
@@ -121,13 +121,13 @@ let globalStyles = {
   },
   headerText: {
     _extends: ['normalText', 'boldText'],
-    marginBottom: '@margins.large',
-    marginRight: '@margins.large',
+    marginBottom: '@margins.large+px',
+    marginRight: '@margins.large+px',
   },
   h1Text: {
     _extends: 'headerText',
     fontSize: 28,
-    marginRight: '@margins.large',
+    marginRight: '@margins.large+px',
   },
   h2Text: {
     _extends: 'headerText',
@@ -140,15 +140,15 @@ let globalStyles = {
   h4Text: {
     _extends: 'headerText',
     fontSize: 12,
-    marginBottom: '@margins.medium',
-    marginRight: '@margins.medium',
+    marginBottom: '@margins.medium+px',
+    marginRight: '@margins.medium+px',
   },
   h5Text: {
     _extends: 'headerText',
     fontSize: 14,
     fontWeight: 'normal',
-    marginBottom: '@margins.medium',
-    marginRight: '@margins.medium',
+    marginBottom: '@margins.medium+px',
+    marginRight: '@margins.medium+px',
   },
   errorText: {
     _extends: 'largerText',
@@ -181,7 +181,7 @@ let globalStyles = {
   },
   menuDivider: {
     borderBottom: `2px solid @colors.altBackground`,
-    marginBottom: '@margins.medium',
+    marginBottom: '@margins.medium+px',
   },
 };
 
@@ -244,14 +244,13 @@ function interpolateStyleVars(styleObject) {
     if (!matches || matches.length <= 0) {
       continue;
     }
+    const regex = /\@([^\s\.]*)\.([^\s\+]*)\+?/;
     let newValue = value;
     for (const match of matches) {
-      const [_matchedValue, styleVarsGroup, styleVar] = match.match(
-        /\@([^\s\.]*)\.([^\s]*)/
-      );
+      const [_matchedValue, styleVarsGroup, styleVar] = match.match(regex);
       const interpolated = styleVars[styleVarsGroup][styleVar];
       if (interpolated) {
-        newValue = interpolated;
+        newValue = newValue.replace(regex, interpolated);
       }
     }
     styleObject[key] = newValue;
