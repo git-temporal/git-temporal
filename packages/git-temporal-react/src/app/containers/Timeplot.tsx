@@ -98,7 +98,7 @@ export class Timeplot extends React.Component<
     this.lastRerenderRequestedAt = Date.now();
     this.timeplotRef = React.createRef();
     this.debouncedOnMouseLeave = debounce(this.onMouseLeave, 100);
-    this.debouncedOnMouseMove = throttle(this.onMouseMove, 0);
+    this.debouncedOnMouseMove = throttle(this.onMouseMove, 100);
   }
 
   componentDidUpdate(prevProps, prevState) {

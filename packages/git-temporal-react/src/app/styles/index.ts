@@ -7,7 +7,7 @@
 // }
 // return (<MyComponent style={style(myStyle)}/>);
 //
-let styleVars = {
+export let styleVars = {
   colors: {
     added: 'green',
     altBackground: 'whitesmoke',
@@ -25,9 +25,9 @@ let styleVars = {
     text: '#333333',
   },
   margins: {
-    small: 5,
-    medium: 10,
-    large: 20,
+    small: 3,
+    medium: 7,
+    large: 15,
   },
 };
 
@@ -100,18 +100,18 @@ let globalStyles = {
     flexGrow: 1,
   },
   normalText: {
-    fontSize: 13,
+    fontSize: 12,
     lineHeight: 1.35,
     fontWeight: 'normal',
     color: '@colors.text',
   },
   largerText: {
     _extends: 'normalText',
-    fontSize: 16,
+    fontSize: 14,
   },
   smallerText: {
     _extends: 'normalText',
-    fontSize: 11,
+    fontSize: 9,
   },
   boldText: {
     fontWeight: 'bold',
@@ -126,7 +126,7 @@ let globalStyles = {
   },
   h1Text: {
     _extends: 'headerText',
-    fontSize: 28,
+    fontSize: 22,
     marginRight: '@margins.large+px',
   },
   h2Text: {

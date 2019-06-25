@@ -21,10 +21,12 @@ import { FileDifferences } from 'app/components/FileDifferences';
 const outerStyle = {
   _extends: ['borderedPanel', 'flexColumn', 'flexGrow'],
   position: 'relative',
+  overflow: 'visible',
 };
 
 const innerStyle = {
   _extends: ['flexColumn', 'flexGrow'],
+  overflow: 'visible',
 };
 
 export const DifferenceViewer: React.FC = (): React.ReactElement => {

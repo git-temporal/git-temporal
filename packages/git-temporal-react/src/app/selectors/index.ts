@@ -92,19 +92,6 @@ export const getFilesActionMenuState = createSelector(
   })
 );
 
-export const getFilesContainerState = createSelector(
-  getFilteredFilesForFilesContainer,
-  getIsFileSelected,
-  getFilesContainerSort,
-  getSearch,
-  (files, isFileSelected, filesContainerSort, search) => ({
-    files,
-    isFileSelected,
-    filesContainerSort,
-    search,
-  })
-);
-
 export const getTimeplotContainerState = createSelector(
   getSelectedPath,
   getHighlightedCommitIds,

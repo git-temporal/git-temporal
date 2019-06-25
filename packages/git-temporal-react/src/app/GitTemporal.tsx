@@ -19,7 +19,7 @@ import { SidePanel } from './containers/SidePanel';
 const transitionStyle = {
   _extends: 'flexColumn',
   flexGrow: 1,
-  overflow: 'hidden',
+  overflow: 'visible',
 };
 
 export class GitTemporal extends Component<
@@ -57,13 +57,15 @@ export class GitTemporal extends Component<
             >
               <div
                 style={style('flexRow', 'flexGrow', {
-                  overflow: 'hidden',
+                  overflow: 'visible',
+                  height: '100%',
                 })}
               >
                 <SidePanel />
                 <div
                   style={style('flexColumn', 'flexGrow', {
                     transition: `all .5 ease`,
+                    overflow: 'visible',
                   })}
                 >
                   <DifferenceViewer />

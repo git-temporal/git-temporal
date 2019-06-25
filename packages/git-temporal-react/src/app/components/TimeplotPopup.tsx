@@ -1,5 +1,5 @@
 import React from 'react';
-import { style } from 'app/styles';
+import { style, styleVars } from 'app/styles';
 
 import { ICommit } from 'app/interfaces';
 import { Popup } from 'app/components/Popup';
@@ -28,27 +28,24 @@ const defaultPopupStyle = {
   bottom: 180,
   width: TIMEPLOT_POPUP_WIDTH,
   right: 'initial',
-  border: 'solid 2px @colors.selectable',
+  border: 'solid 4px @colors.selectable',
+  padding: 0,
 };
 
 const headerStyle = {
   _extends: 'altPanel',
+  marginRight: 0,
   // compensate for padding of panel to move this to the top, left & right edges
-  marginRight: -10,
-  marginTop: -10,
-  marginLeft: -10,
 };
 const footerStyle = {
   _extends: ['altPanel', 'smallerText', 'flexColumn'],
+  marginRight: 0,
   // compensate for padding of panel to move this to the bottom, left & right edges
-  marginRight: -10,
-  marginBottom: -10,
-  marginLeft: -10,
 };
 
 const commitListStyle = {
   _extends: 'panel',
-  maxHeight: 400,
+  maxHeight: 300,
   minHeight: 50,
   overflow: 'scroll',
   marginRight: 0,

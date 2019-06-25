@@ -21,11 +21,9 @@ import { EpochDateTime } from 'app/components/EpochDateTime';
 const outerStyle = {
   _extends: 'flexRow',
   flexGrow: 0,
-  marginBottom: 10,
-  paddingBottom: 10,
-  marginTop: -10,
+  flexShrink: 0,
+  marginBottom: '@margins.small+px',
   borderBottom: '1px solid @colors.panelBorder',
-  maxHeight: 30,
 };
 
 const revSelectorStyle = {
@@ -104,10 +102,10 @@ export const DifferenceViewerHeader: React.FC = (): React.ReactElement => {
     }
     return endDate ? (
       <>
-        <div>#{latestCommit.hash}</div>
         <div>
           <EpochDateTime value={latestCommit.authorDate} />
         </div>
+        <div>#{latestCommit.hash}</div>
       </>
     ) : (
       <span>Local Revision</span>
