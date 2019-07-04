@@ -18,13 +18,13 @@ const containerStyle = {
 
 const backdropStyle = {
   position: 'absolute',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
   top: 0,
   left: 0,
   height: '100%',
   width: '100%',
-  textAlign: 'center',
-  verticalAlign: 'middle',
-  paddingTop: '10%',
   zIndex: '5',
   backgroundColor: 'white',
   opacity: 0.9,

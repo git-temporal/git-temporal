@@ -30,6 +30,8 @@ const defaultPopupStyle = {
   right: 'initial',
   border: 'solid 4px @colors.selectable',
   padding: 0,
+  // at least 9 is required to get above monaco mini diff map
+  zIndex: 10,
 };
 
 const headerStyle = {
@@ -98,9 +100,6 @@ export const TimeplotPopup = (props: TimeplotPopupProps): JSX.Element => {
         <div style={style(footerStyle)}>
           <div style={style('flexRow')}>
             <div>Click to select left revision</div>
-            <div style={{ flexGrow: 1, textAlign: 'right' }}>
-              Shift + Click to select right revision
-            </div>
           </div>
           <div style={style('flexRow', { marginTop: 5 })}>
             <div> Click twice to select a single commit</div>

@@ -135,15 +135,8 @@ export class Header extends Component<IHeaderContainerState & DispatchProps> {
   };
 
   onResetDatesClick = () => {
-    setDates(
-      this.props.dispatch,
-      this.props.selectedPath,
-      this.props.commits,
-      null,
-      null,
-      false,
-      null
-    );
+    const { dispatch, selectedPath, commits } = this.props;
+    setDates(dispatch, commits, selectedPath, null, null);
   };
 }
 

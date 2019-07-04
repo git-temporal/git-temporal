@@ -138,10 +138,8 @@ export const DifferenceViewerHeader: React.FC = (): React.ReactElement => {
         dispatch,
         selectedPath,
         timeplotCommits,
-        startDate,
-        endDate,
-        false,
-        adjacentCommit.authorDate * 1000
+        adjacentCommit.authorDate,
+        endDate
       );
     }
   }
@@ -174,8 +172,6 @@ export const DifferenceViewerHeader: React.FC = (): React.ReactElement => {
         selectedPath,
         timeplotCommits,
         startDate,
-        endDate,
-        true,
         adjacentCommit.authorDate * 1000
       );
     }

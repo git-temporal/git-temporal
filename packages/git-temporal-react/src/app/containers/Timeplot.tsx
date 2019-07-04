@@ -86,16 +86,18 @@ export class Timeplot extends React.Component<
   TimeplotLocalState
 > {
   readonly state: TimeplotLocalState = initialState;
-  private timeplotRef;
-  private debouncedOnMouseLeave;
-  private debouncedOnMouseMove;
+  private timeplotRef: any;
+  private debouncedOnMouseLeave: (args: any) => void;
+  private debouncedOnMouseMove: (args: any) => void;
+
+  // we don't want to necessarily rerender on changes to these
   private lastMouseMoveCoords: { pageX: number; pageY: number };
-  private lastMouseDownDate;
-  private lastRerenderRequestedAt;
+  private lastMouseDownDate: Date;
+  private lastRerenderRequestedAt: Date;
 
   constructor(props) {
     super(props);
-    this.lastRerenderRequestedAt = Date.now();
+    this.lastRerenderRequestedAt = Date.now() as any;
     this.timeplotRef = React.createRef();
     this.debouncedOnMouseLeave = debounce(this.onMouseLeave, 100);
     this.debouncedOnMouseMove = throttle(this.onMouseMove, 100);
@@ -111,14 +113,6 @@ export class Timeplot extends React.Component<
       prevProps.endDate !== this.props.endDate
     ) {
       this.addCustomZooms();
-    }
-    if (prevState.timeplotRenders !== this.state.timeplotRenders) {
-      const timeplot = this.timeplotRef.current;
-      if (timeplot && this.props.startDate) {
-        this.setState({
-          scrollLeft: timeplot.xScale(this.props.startDate * 1000) - 33,
-        });
-      }
     }
     if (this.lastRerenderRequestedAt < this.props.rerenderRequestedAt) {
       debug('forcing timeplot rerender');
@@ -251,19 +245,29 @@ export class Timeplot extends React.Component<
   };
 
   private onMouseDown = (evt, { startDate }) => {
+    debug('Timeplot: onMouseDown', evt.shiftKey, startDate);
     evt.preventDefault();
     this.lastMouseDownDate = startDate;
-    this.setDates(evt.shiftKey, startDate);
+    this.setDates(startDate, null);
   };
 
   private onMouseUp = (evt, { startDate }) => {
+    debug(
+      'Timeplot: onMouseUp',
+      evt.shiftKey,
+      startDate,
+      this.lastMouseDownDate
+    );
     evt.preventDefault();
-    if (
-      this.lastMouseDownDate &&
-      startDate.toString() !== this.lastMouseDownDate.toString()
-    ) {
-      this.setDates(true, startDate);
+    if (!this.lastMouseDownDate) {
+      return;
     }
+    if (startDate !== this.lastMouseDownDate) {
+      this.setDates(startDate, this.lastMouseDownDate);
+    } else {
+      this.setDates(startDate, null);
+    }
+    this.lastMouseDownDate = null;
   };
 
   private onMouseHoverMarker = evt => {
@@ -275,27 +279,20 @@ export class Timeplot extends React.Component<
 
   private onCommitSelected = (evt, commit) => {
     evt.stopPropagation();
+    const epochAuthorDate = commit.authorDate * 1000;
     // console.log('onCommitSelected', evt, commit, this.props.startDate);
     // TODO: test: you should be able to isolate a single commit (`+ 1` below)
     // if the user clicks the same commit twice we select just that commit
-    if (commit.authorDate === this.props.startDate) {
-      this.setDates(true, commit.authorDate * 1000 + 1);
+    if (epochAuthorDate === this.props.startDate) {
+      this.setDates(epochAuthorDate, epochAuthorDate + 1);
     } else {
-      this.setDates(evt.shiftKey, commit.authorDate * 1000);
+      this.setDates(epochAuthorDate, null);
     }
   };
 
-  private setDates(shiftKey, date) {
-    const { dispatch, startDate, endDate, commits, selectedPath } = this.props;
-    setDates(
-      dispatch,
-      selectedPath,
-      commits,
-      startDate,
-      endDate,
-      shiftKey,
-      date
-    );
+  private setDates(startDate, endDate) {
+    const { dispatch, commits, selectedPath } = this.props;
+    setDates(dispatch, commits, selectedPath, startDate, endDate);
   }
 
   private addCustomZooms() {
