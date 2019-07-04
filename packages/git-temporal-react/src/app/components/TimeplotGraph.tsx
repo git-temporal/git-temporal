@@ -1,5 +1,6 @@
 import React from 'react';
-import { style } from 'app/styles';
+import { debug } from '@git-temporal/logger';
+import { style, styleVars } from 'app/styles';
 import * as d3 from 'd3';
 require('d3-selection-multi');
 
@@ -198,9 +199,11 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
       .attr('width', element.clientWidth)
       .attr('height', element.clientHeight);
     this.calibrateScales();
-    this.renderAxis(this.svg);
     this.renderBlobs(this.svg);
+    this.renderAxis(this.svg);
     this.updateHighlightedCommits();
+
+    debug(`TimeplotGraph: rendered ${element.innerHTML}`);
   }
 
   private calibrateScales() {
@@ -235,22 +238,14 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
       .axisBottom()
       .scale(this.xScale)
       .ticks(element.scrollWidth / 100);
-    const yAxis = d3
-      .axisLeft()
-      .scale(this.yScale)
-      .ticks(0);
 
-    svg
+    const renderedXaxis = svg
       .append('g')
       .attr('class', 'axis')
       .attr('transform', `translate(0, ${h - PADDING})`)
       .call(xAxis);
-
-    svg
-      .append('g')
-      .attr('class', 'axis')
-      .attr('transform', `translate(${LEFT_PADDING - PADDING}, 0)`)
-      .call(yAxis);
+    renderedXaxis.selectAll('path,line').style('stroke', styleVars.colors.text);
+    renderedXaxis.selectAll('text').style('fill', styleVars.colors.text);
   }
 
   private renderBlobs(svg) {
