@@ -8,9 +8,9 @@ import { handleVscodeMessages } from 'app/actions/vscode';
 import { getGitTemporalContainerState } from 'app/selectors';
 import { style } from 'app/styles';
 
-import Header from 'app/containers/Header';
-import Timeplot from 'app/containers/Timeplot';
+import { Header } from 'app/containers/Header';
 import { DifferenceViewer } from 'app/containers/DifferenceViewer';
+import Timeplot from 'app/containers/Timeplot';
 
 import { SpinnerContainer } from 'app/components/SpinnerContainer';
 import { TransitionVisible } from 'app/components/TransitionVisible';

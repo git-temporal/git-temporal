@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+// @ts-ignore
+import { useSelector, useDispatch } from 'react-redux';
 
-import { DispatchProps, IHeaderContainerState } from 'app/interfaces';
 import { getHeaderContainerState } from 'app/selectors';
 import { style } from 'app/styles';
 import { selectPath } from 'app/actions';
@@ -46,51 +46,51 @@ const dateOptions = {
   timeZoneName: 'short',
 };
 
-export class Header extends Component<IHeaderContainerState & DispatchProps> {
-  render() {
-    const { startDate, endDate, isDefaultDates } = this.props;
-    const epochStyle = [dateStyle, isDefaultDates ? {} : dateSelectedStyle];
-    return (
-      <div style={style(outerStyle)}>
-        <div style={style(topRowStyle)}>
-          <div style={style(appNameStyle)}>Git Temporal </div>
-          <div style={style('flexGrow')} />
-          <div style={style('h5Text')}>
-            From{' '}
-            <ExplodeOnChange value={startDate}>
-              <EpochDateTime
-                value={startDate}
-                displayOptions={dateOptions}
-                style={style(epochStyle)}
-              />
-            </ExplodeOnChange>{' '}
-            to{' '}
-            <ExplodeOnChange value={endDate}>
-              <EpochDateTime
-                value={endDate}
-                displayOptions={dateOptions}
-                style={style(epochStyle)}
-              />
-            </ExplodeOnChange>
-            {!isDefaultDates && (
-              <span>
-                {'  '}(
-                <ResetLink onClick={this.onResetDatesClick}>Reset</ResetLink>)
-              </span>
-            )}
-          </div>
+export const Header: React.FC = (): React.ReactElement => {
+  const state = useSelector(getHeaderContainerState);
+  const dispatch = useDispatch();
+
+  const epochStyle = [dateStyle, state.isDefaultDates ? {} : dateSelectedStyle];
+  return (
+    <div style={style(outerStyle)}>
+      <div style={style(topRowStyle)}>
+        <div style={style(appNameStyle)}>Git Temporal </div>
+        <div style={style('flexGrow')} />
+        <div style={style('h5Text')}>
+          From{' '}
+          <ExplodeOnChange value={state.startDate}>
+            <EpochDateTime
+              value={state.startDate}
+              displayOptions={dateOptions}
+              style={style(epochStyle)}
+            />
+          </ExplodeOnChange>{' '}
+          to{' '}
+          <ExplodeOnChange value={state.endDate}>
+            <EpochDateTime
+              value={state.endDate}
+              displayOptions={dateOptions}
+              style={style(epochStyle)}
+            />
+          </ExplodeOnChange>
+          {!state.isDefaultDates && (
+            <span>
+              {'  '}(<ResetLink onClick={onResetDatesClick}>Reset</ResetLink>)
+            </span>
+          )}
         </div>
-        <div style={style(statsAndSearchStyle)}>
-          <div>
-            <div style={style('h4Text', { marginBottom: 10 })}>
-              {this.renderPathLinks()}
-            </div>
+      </div>
+      <div style={style(statsAndSearchStyle)}>
+        <div>
+          <div style={style('h4Text', { marginBottom: 10 })}>
+            {renderPathLinks()}
           </div>
         </div>
       </div>
-    );
-  }
-  renderLinkPart(part, index, fullPath, lastIndex) {
+    </div>
+  );
+
+  function renderLinkPart(part, index, fullPath, lastIndex) {
     const styles: any = [
       {
         margin: '0px 2px',
@@ -99,7 +99,7 @@ export class Header extends Component<IHeaderContainerState & DispatchProps> {
     let onClick = undefined;
     if (index !== lastIndex) {
       styles.push('link');
-      onClick = () => this.onLinkPartClick(fullPath);
+      onClick = () => onLinkPartClick(fullPath);
     }
     const sep = index === 0 ? '' : '/';
 
@@ -112,8 +112,8 @@ export class Header extends Component<IHeaderContainerState & DispatchProps> {
       </span>
     );
   }
-  renderPathLinks() {
-    const { selectedPath } = this.props;
+  function renderPathLinks() {
+    const { selectedPath } = state;
     let parts = ['(repo root)/'];
     if (selectedPath && selectedPath.trim().length > 0) {
       parts = parts.concat(selectedPath.split('/'));
@@ -126,18 +126,16 @@ export class Header extends Component<IHeaderContainerState & DispatchProps> {
         const sep = index === 1 ? '' : '/';
         fullPathSoFar += `${sep}${part}`;
       }
-      return this.renderLinkPart(part, index, fullPathSoFar, lastIndex);
+      return renderLinkPart(part, index, fullPathSoFar, lastIndex);
     });
   }
 
-  onLinkPartClick = fullPath => {
-    this.props.dispatch(selectPath(fullPath));
-  };
+  function onLinkPartClick(fullPath) {
+    dispatch(selectPath(fullPath));
+  }
 
-  onResetDatesClick = () => {
-    const { dispatch, selectedPath, commits } = this.props;
+  function onResetDatesClick() {
+    const { selectedPath, commits } = state;
     setDates(dispatch, commits, selectedPath, null, null);
-  };
-}
-
-export default connect(getHeaderContainerState)(Header);
+  }
+};

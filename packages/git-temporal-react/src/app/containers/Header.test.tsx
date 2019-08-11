@@ -12,27 +12,30 @@ describe('containers/Header', () => {
       // @ts-ignore
       selectPath.mockClear();
       mockDispatch = jest.fn();
-      wrapper = shallow(<Header dispatch={mockDispatch} selectedPath="" />);
+      wrapper = shallow(<Header />);
     });
 
     test('it should match snapshot (it should be showing App Name and repository:/)', () => {
       expect(wrapper).toMatchSnapshot();
     });
   });
-  describe('when rendered with a proper path', () => {
-    let wrapper;
-    let mockDispatch;
-    beforeAll(() => {
-      // @ts-ignore
-      selectPath.mockClear();
-      mockDispatch = jest.fn();
-      wrapper = shallow(
-        <Header dispatch={mockDispatch} selectedPath="some/path/to/File.txt" />
-      );
-    });
+  //
+  //  TBD
+  //
+  // describe('when rendered with a proper path', () => {
+  //   let wrapper;
+  //   let mockDispatch;
+  //   beforeAll(() => {
+  //     // @ts-ignore
+  //     selectPath.mockClear();
+  //     mockDispatch = jest.fn();
+  //     wrapper = shallow(
+  //       <Header />
+  //     );
+  //   });
 
-    test('it should match snapshot (it should have path links for all but last part of path)', () => {
-      expect(wrapper).toMatchSnapshot();
-    });
-  });
+  //   test('it should match snapshot (it should have path links for all but last part of path)', () => {
+  //     expect(wrapper).toMatchSnapshot();
+  //   });
+  // });
 });
