@@ -18,3 +18,5 @@ export const getIsFileSelected = state => state.isFileSelected;
 
 export const getDiff = state => state.diff;
 export const getIsDiffFetching = state => state.isDiffFetching;
+export const getDiffStartCommit = state => state.diffStartCommitId;
+export const getDiffEndCommit = state => state.diffEndCommitId;

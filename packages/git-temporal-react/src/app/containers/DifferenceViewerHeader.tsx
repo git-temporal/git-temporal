@@ -1,6 +1,6 @@
 import React from 'react';
 // @ts-ignore
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 
 import { style } from 'app/styles';
 
@@ -36,7 +36,7 @@ export const DifferenceViewerHeader: React.FC = (): React.ReactElement => {
   const startDate = useSelector(getStartDate);
   const endDate = useSelector(getEndDate);
   const timeplotCommits = useSelector(getCommitsForTimeplot);
-  const filteredCommits = useSelector(getFilteredCommits);
+  const filteredCommits = useSelector(getFilteredCommits, shallowEqual);
   const dispatch = useDispatch();
 
   if (!timeplotCommits || timeplotCommits.length <= 0) {
@@ -78,13 +78,22 @@ export const DifferenceViewerHeader: React.FC = (): React.ReactElement => {
     if (!startingCommit) {
       return null;
     }
+    const renderedStartDate =
+      startDate ||
+      (filteredCommits &&
+        filteredCommits.length > 0 &&
+        filteredCommits.slice(-1)[0].authorDate) ||
+      (timeplotCommits &&
+        timeplotCommits.length > 0 &&
+        timeplotCommits.slice(-1)[0].authorDate);
     return (
       <div style={style('flexColumn', { alignItems: 'center' })}>
         <div style={style('flexRow')}>
-          <EpochDateTime value={startingCommit.authorDate} />
+          <EpochDateTime value={renderedStartDate} />
         </div>
         <div style={style('flexRow')}>
-          #{startingCommit.hash}
+          (#
+          {startingCommit.hash})
           {startingCommit.id === timeplotCommits[0].id && ' (Local HEAD)'}
         </div>
       </div>
@@ -103,9 +112,12 @@ export const DifferenceViewerHeader: React.FC = (): React.ReactElement => {
     return endDate ? (
       <>
         <div>
-          <EpochDateTime value={latestCommit.authorDate} />
+          <EpochDateTime value={endDate} />
         </div>
-        <div>#{latestCommit.hash}</div>
+        <div>
+          (#
+          {latestCommit.hash})
+        </div>
       </>
     ) : (
       <span>Local Revision</span>
@@ -186,11 +198,11 @@ export const DifferenceViewerHeader: React.FC = (): React.ReactElement => {
     }
     // reminder: commits are in descending cron order
     const earliestFilteredCommit = filteredCommits[filteredCommits.length - 1];
+    // the point of this is to ensure that
     const foundIndex = timeplotCommits.findIndex(commit => {
       return commit.id === earliestFilteredCommit.id;
     });
-    return timeplotCommits[
-      Math.min(foundIndex + 1, filteredCommits.length - 1)
-    ];
+    // the commit just prior to the first filtered commit
+    return timeplotCommits[foundIndex + 1];
   }
 };

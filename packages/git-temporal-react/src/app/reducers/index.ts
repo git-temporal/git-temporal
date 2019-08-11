@@ -68,6 +68,24 @@ export const isDiffFetching = (state = false, action: any) => {
   }
 };
 
+export const diffStartCommit = (state = null, action: any) => {
+  switch (action.type) {
+    case ActionTypes.SET_DIFF_START_COMMIT:
+      return action.commitId;
+    default:
+      return state;
+  }
+};
+
+export const diffEndCommit = (state = null, action: any) => {
+  switch (action.type) {
+    case ActionTypes.SET_DIFF_END_COMMIT:
+      return action.commitId;
+    default:
+      return state;
+  }
+};
+
 export const rerenderRequestedAt = (state = null, action: any) => {
   switch (action.type) {
     case ActionTypes.REQUEST_RERENDER:

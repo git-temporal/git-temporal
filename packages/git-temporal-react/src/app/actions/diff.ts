@@ -16,6 +16,16 @@ export const receiveDiff = (path: string, diff: any) => ({
   type: ActionTypes.RECEIVE_DIFF,
 });
 
+export const setDiffStartCommit = (commitId: string) => ({
+  commitId,
+  type: ActionTypes.SET_DIFF_START_COMMIT,
+});
+
+export const setDiffEndCommit = (commitId: string) => ({
+  commitId,
+  type: ActionTypes.SET_DIFF_END_COMMIT,
+});
+
 export const fetchDiff = (
   path: string,
   commits: ICommit[],
