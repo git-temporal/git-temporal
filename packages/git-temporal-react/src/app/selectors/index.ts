@@ -72,12 +72,6 @@ export const getHeaderContainerState = createSelector(
   }
 );
 
-export const getSearchContainerState = createSelector(getSearch, search => {
-  return {
-    search,
-  };
-});
-
 export const getAuthorsActionMenuState = createSelector(
   getAuthorsContainerSort,
   authorsContainerSort => ({

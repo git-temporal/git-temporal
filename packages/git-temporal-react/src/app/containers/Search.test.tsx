@@ -12,7 +12,7 @@ describe('containers/Search', () => {
       // @ts-ignore
       actions.setSearch.mockClear();
       mockDispatch = jest.fn();
-      wrapper = shallow(<Search dispatch={mockDispatch} search="" />);
+      wrapper = shallow(<Search />);
     });
 
     test('it should match snapshot (should render search without popup)', () => {
@@ -25,7 +25,7 @@ describe('containers/Search', () => {
     let mockDispatch;
     beforeAll(() => {
       mockDispatch = jest.fn();
-      wrapper = shallow(<Search dispatch={mockDispatch} search="someone" />);
+      wrapper = shallow(<Search />);
     });
 
     beforeEach(() => {

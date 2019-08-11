@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
+// @ts-ignore
+import { useSelector, useDispatch } from 'react-redux';
 
-import { DispatchProps } from 'app/interfaces';
-import { getSearchContainerState } from 'app/selectors';
 import { style } from 'app/styles';
 import { setSearch } from 'app/actions';
 import { SearchInput } from 'app/components/SearchInput';
@@ -10,20 +9,7 @@ import { Popup } from 'app/components/Popup';
 import { Selectable } from 'app/components/Selectable';
 
 import { debounce } from 'app/utilities/debounce';
-
-interface SearchProps {
-  search?: string;
-}
-
-interface SearchLocalState {
-  searchHasFocus: boolean;
-  selectedSuggestion: string;
-}
-
-const initialState = {
-  searchHasFocus: false,
-  selectedSuggestion: 'all',
-};
+import { getSearch } from 'app/selectors/stateVars';
 
 const containerStyle = {
   width: 250,
@@ -44,52 +30,45 @@ const popupStyle = {
 
 const suggestedSearchPrefixes = ['author:', 'commit:', 'file:'];
 
-export class Search extends Component<
-  SearchProps & DispatchProps,
-  SearchLocalState
-> {
-  readonly state: SearchLocalState = initialState;
-  private debouncedOnBlur;
+// export class Search extends Component<
+//   SearchProps & DispatchProps,
+//   SearchLocalState
+// > {
+export const Search: React.FC = (): React.ReactElement => {
+  const [searchHasFocus, setSearchHasFocus] = useState(false);
+  const [selectedSuggestion, setSelectedSuggestion] = useState('all');
+  const search = useSelector(getSearch);
+  const dispatch = useDispatch();
 
-  constructor(props) {
-    super(props);
-    // we need to delay the closing of the popup on search input blur or
-    // else the menu items will not fire a click event
-    this.debouncedOnBlur = debounce(this.onSearchBlur, 200);
-  }
+  const debouncedOnBlur = debounce(onSearchBlur, 200);
 
-  render() {
-    const isPopupOpen =
-      this.state.searchHasFocus &&
-      this.props.search &&
-      this.props.search.trim().length > 0;
-    return (
-      <div style={style(containerStyle)}>
-        <SearchInput
-          value={this.props.search}
-          onChange={this.onSearch}
-          onClear={this.onClear}
-          onFocus={this.onSearchFocus}
-          onBlur={this.debouncedOnBlur}
-          onKeyDown={this.onKeyboard}
-          style={style(searchInputStyle)}
-          placeholder="search authors, files or commits"
-        />
-        <Popup isOpen={isPopupOpen} style={style(popupStyle)} noBackdrop>
-          {this.renderPopupSuggestions()}
-        </Popup>
-      </div>
-    );
-  }
+  const isPopupOpen = searchHasFocus && search && search.trim().length > 0;
+  return (
+    <div style={style(containerStyle)}>
+      <SearchInput
+        value={search}
+        onChange={onSearch}
+        onClear={onClear}
+        onFocus={onSearchFocus}
+        onBlur={debouncedOnBlur}
+        onKeyDown={onKeyboard}
+        style={style(searchInputStyle)}
+        placeholder="search authors, files or commits"
+      />
+      <Popup isOpen={isPopupOpen} style={style(popupStyle)} noBackdrop>
+        {renderPopupSuggestions()}
+      </Popup>
+    </div>
+  );
 
-  private renderPopupSuggestions(): JSX.Element[] {
-    const unPrefixedSearch = this.getUnprefixedSearch();
+  function renderPopupSuggestions(): JSX.Element[] {
+    const unPrefixedSearch = getUnprefixedSearch();
     const menuItems: JSX.Element[] = [
       <Selectable
         value="all"
         key="searchSuggestion_all"
-        onClick={this.onSuggestClick}
-        selected={this.state.selectedSuggestion === 'all'}
+        onClick={onSuggestClick}
+        selected={selectedSuggestion === 'all'}
       >
         <div>Search everywhere for '{unPrefixedSearch}'</div>
       </Selectable>,
@@ -101,8 +80,8 @@ export class Search extends Component<
           <Selectable
             key={`searchSuggestion_${index}`}
             value={prefix}
-            onClick={this.onSuggestClick}
-            selected={this.state.selectedSuggestion === prefix}
+            onClick={onSuggestClick}
+            selected={selectedSuggestion === prefix}
           >
             <div style={style('normalText')}>
               {prefix} {unPrefixedSearch}
@@ -113,40 +92,40 @@ export class Search extends Component<
     );
   }
 
-  private onSearch = value => {
-    this.props.dispatch(setSearch(value || ''));
-  };
-
-  private onClear = () => {
-    this.props.dispatch(setSearch(''));
-  };
-
-  private onSearchFocus = () => {
-    this.setState({ searchHasFocus: true });
-  };
-
-  private onSearchBlur = () => {
-    this.setState({ searchHasFocus: false });
-  };
-
-  private onSuggestClick = (_evt, value) => {
-    this.selectSuggestion(value);
-  };
-
-  private selectSuggestion(value) {
-    const newSearch =
-      value === 'all'
-        ? this.getUnprefixedSearch()
-        : `${value}${this.getUnprefixedSearch()}`;
-    this.props.dispatch(setSearch(newSearch));
-    this.setState({ selectedSuggestion: value });
+  function onSearch(value) {
+    dispatch(setSearch(value || ''));
   }
 
-  private onKeyboard = evt => {
+  function onClear() {
+    dispatch(setSearch(''));
+  }
+
+  function onSearchFocus() {
+    setSearchHasFocus(true);
+  }
+
+  function onSearchBlur() {
+    setSearchHasFocus(false);
+  }
+
+  function onSuggestClick(_evt, value) {
+    selectSuggestion(value);
+  }
+
+  function selectSuggestion(value) {
+    const newSearch =
+      value === 'all'
+        ? getUnprefixedSearch()
+        : `${value}${getUnprefixedSearch()}`;
+    dispatch(setSearch(newSearch));
+    setSelectedSuggestion(value);
+  }
+
+  function onKeyboard(evt) {
     const currentPrefixIndex =
-      this.state.selectedSuggestion === 'all'
+      selectedSuggestion === 'all'
         ? -1
-        : suggestedSearchPrefixes.indexOf(this.state.selectedSuggestion);
+        : suggestedSearchPrefixes.indexOf(selectedSuggestion);
 
     if (evt.key === 'ArrowDown') {
       evt.preventDefault();
@@ -154,7 +133,7 @@ export class Search extends Component<
         currentPrefixIndex < suggestedSearchPrefixes.length - 1
           ? suggestedSearchPrefixes[currentPrefixIndex + 1]
           : 'all';
-      this.setState({ selectedSuggestion: newSelection });
+      setSelectedSuggestion(newSelection);
     } else if (evt.key === 'ArrowUp') {
       evt.preventDefault();
       const newSelection =
@@ -163,21 +142,18 @@ export class Search extends Component<
           : currentPrefixIndex > 0
             ? suggestedSearchPrefixes[currentPrefixIndex - 1]
             : suggestedSearchPrefixes[suggestedSearchPrefixes.length - 1];
-      this.setState({ selectedSuggestion: newSelection });
+      setSelectedSuggestion(newSelection);
     } else if (evt.key === 'Enter') {
-      this.selectSuggestion(this.state.selectedSuggestion);
+      selectSuggestion(selectedSuggestion);
       return;
     }
-  };
+  }
 
-  private getUnprefixedSearch() {
-    const { search } = this.props;
+  function getUnprefixedSearch() {
     const matches = search && search.match(/^[^\:]*\:(.*)/);
     if (!matches || matches.length < 2) {
       return search;
     }
     return matches[1];
   }
-}
-
-export default connect(getSearchContainerState)(Search);
+};

@@ -10,7 +10,7 @@ import { Stats } from 'app/containers/Stats';
 import { Authors } from 'app/containers/Authors';
 import { Files } from 'app/containers/Files';
 import { Commits } from 'app/containers/Commits';
-import Search from 'app/containers/Search';
+import { Search } from 'app/containers/Search';
 
 import { CollapsibleSidePanel } from 'app/components/CollapsibleSidePanel';
 import { ResetLink } from 'app/components/ResetLink';
