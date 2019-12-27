@@ -1,4 +1,35 @@
+import { createSelector } from 'reselect';
+
 import { ICommit } from 'app/interfaces';
+import { getStartDate, getEndDate, getCommits } from 'app/selectors/stateVars';
+
+export const getDefaultedStartDate = createSelector(
+  getStartDate,
+  getCommits,
+  defaultStartDate
+);
+
+export function defaultStartDate(startDate, commits) {
+  return (
+    startDate ||
+    (commits && commits.length > 0 && commits[commits.length - 1].authorDate) ||
+    0
+  );
+}
+
+export const getDefaultedEndDate = createSelector(
+  getEndDate,
+  getCommits,
+  defaultEndDate
+);
+
+export function defaultEndDate(endDate, commits) {
+  return (
+    endDate ||
+    (commits && commits.length > 0 && commits[0].authorDate) || // @ts-ignore
+    Math.floor((new Date() as any) / 1000)
+  );
+}
 
 export const hasDates = (startDate, endDate) => {
   return startDate || endDate;
@@ -13,16 +44,10 @@ export const commitsMatchDates = (commit, startDate, endDate) => {
 };
 
 export function dateFilteredCommits(commits, startDate, endDate) {
+  if (!commits) {
+    return null;
+  }
   return commits.filter(commit => isWithinDates(commit, startDate, endDate));
-}
-
-function getDefaultedStartDate(startDate: number): number {
-  return startDate || 0;
-}
-
-function getDefaultedEndDate(endDate: number): number {
-  // @ts-ignore
-  return endDate || Math.floor(new Date() / 1000);
 }
 
 function isWithinDates(
@@ -30,10 +55,5 @@ function isWithinDates(
   startDate: number,
   endDate: number
 ): boolean {
-  const defaultedStartDate = getDefaultedStartDate(startDate);
-  const defaultedEndDate = getDefaultedEndDate(endDate);
-  return (
-    defaultedStartDate <= commit.authorDate &&
-    commit.authorDate <= defaultedEndDate
-  );
+  return startDate <= commit.authorDate && commit.authorDate <= endDate;
 }

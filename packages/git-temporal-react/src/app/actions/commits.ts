@@ -2,6 +2,7 @@ import { ActionTypes } from 'app/actions/ActionTypes';
 import { isVscode, vscode } from 'app/actions/vscode';
 import { debug } from '@git-temporal/logger';
 import { fetchDiff } from 'app/actions/diff';
+import { defaultStartDate, defaultEndDate } from 'app/selectors/dates';
 
 if (window) {
   window['GTDEBUG'] = 1;
@@ -21,8 +22,10 @@ export const receiveCommits = (path, json) => ({
 
 export const receiveRawCommits = (path, json) => (dispatch, getState) => {
   debug('ReceivedRawCommits', path, dispatch, getState);
-  const { startDate, endDate } = getState();
-  dispatch(fetchDiff(path, json.commits, startDate, endDate));
+  const { startDate, endDate, commits } = getState();
+  const diffStartDate = defaultStartDate(startDate, commits);
+  const diffEndDate = defaultEndDate(endDate, commits);
+  dispatch(fetchDiff(path, json.commits, diffStartDate, diffEndDate));
   dispatch(receiveCommits(path, json));
 };
 

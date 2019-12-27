@@ -13,6 +13,7 @@ export interface ResetLinkProps {
 const defaultContainerStyle = {
   _extends: ['smallerText', 'link', 'inlineBlock'],
   marginRight: 0,
+  marginLeft: '@margins.medium+px',
 };
 
 export const ResetLink = (props: ResetLinkProps): JSX.Element => {

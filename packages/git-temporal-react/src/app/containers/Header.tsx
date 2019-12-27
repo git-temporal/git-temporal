@@ -2,85 +2,89 @@ import React from 'react';
 // @ts-ignore
 import { useSelector, useDispatch } from 'react-redux';
 
-import { getHeaderContainerState } from 'app/selectors';
+import {
+  getFilteredCommits,
+  getAreCommitsFiltered,
+} from 'app/selectors/commits';
+import { getSelectedPath } from 'app/selectors/stateVars';
+import {
+  getDefaultedStartDate,
+  getDefaultedEndDate,
+} from 'app/selectors/dates';
+
 import { style } from 'app/styles';
 import { selectPath } from 'app/actions';
 import { setDates } from 'app/actions/setDates';
-import { EpochDateTime } from 'app/components/EpochDateTime';
-import { ExplodeOnChange } from 'app/components/ExplodeOnChange';
-
+import { Search } from 'app/containers/Search';
+import { ExplodingDateRange } from 'app/components/ExplodingDateRange';
 import { ResetLink } from 'app/components/ResetLink';
 
-const outerStyle = {
-  _extends: ['flexColumn'],
-  flexShrink: 0,
-};
-
-const appNameStyle = {
-  _extends: ['inlineBlock', 'h1Text'],
-  marginBottom: 10,
-};
-
-const topRowStyle = {
-  _extends: 'flexRow',
-};
-
-const statsAndSearchStyle = {
-  _extends: ['inlineBlock', 'flexColumn'],
-  marginBottom: 10,
-  flexGrow: 1,
-};
-
-const dateStyle = {
-  transition: 'all 2s ease -in -out',
-};
-
-const dateSelectedStyle = {
-  _extends: 'h2Text',
-  margin: '0px 5px',
-  color: '@colors.selected',
-};
-
-const dateOptions = {
-  month: 'long',
-  timeZoneName: 'short',
+const styles = {
+  outer: {
+    _extends: ['flexColumn'],
+    flexShrink: 0,
+  },
+  appName: {
+    _extends: ['inlineBlock', 'h1Text'],
+    marginBottom: 10,
+  },
+  dateRange: {
+    _extends: ['flexGrow', 'flexColumn'],
+    alignItems: 'center',
+    paddingTop: '@margins.small+px',
+    paddingLeft: '@margins.large+px',
+  },
+  topRow: {
+    _extends: 'flexRow',
+  },
+  date: {
+    transition: 'all 2s ease -in -out',
+  },
+  dateSelected: {
+    _extends: 'h2Text',
+    margin: '0px 5px',
+    color: '@colors.selected',
+  },
+  path: {
+    _extends: ['inlineBlock', 'flexColumn'],
+    marginBottom: 10,
+    flexGrow: 1,
+  },
+  searchAndReset: {
+    _extends: 'flexColumn',
+    alignItems: 'flex-end',
+    marginRight: '@margins.medium+px',
+  },
 };
 
 export const Header: React.FC = (): React.ReactElement => {
-  const state = useSelector(getHeaderContainerState);
+  const selectedPath = useSelector(getSelectedPath);
+  const commits = useSelector(getFilteredCommits);
+  const startDate = useSelector(getDefaultedStartDate);
+  const endDate = useSelector(getDefaultedEndDate);
+  const areCommitsFiltered = useSelector(getAreCommitsFiltered);
+
   const dispatch = useDispatch();
 
-  const epochStyle = [dateStyle, state.isDefaultDates ? {} : dateSelectedStyle];
   return (
-    <div style={style(outerStyle)}>
-      <div style={style(topRowStyle)}>
-        <div style={style(appNameStyle)}>Git Temporal </div>
-        <div style={style('flexGrow')} />
-        <div style={style('h5Text')}>
-          From{' '}
-          <ExplodeOnChange value={state.startDate}>
-            <EpochDateTime
-              value={state.startDate}
-              displayOptions={dateOptions}
-              style={style(epochStyle)}
-            />
-          </ExplodeOnChange>{' '}
-          to{' '}
-          <ExplodeOnChange value={state.endDate}>
-            <EpochDateTime
-              value={state.endDate}
-              displayOptions={dateOptions}
-              style={style(epochStyle)}
-            />
-          </ExplodeOnChange>
-          {!state.isDefaultDates && (
-            <span>
-              {'  '}(<ResetLink onClick={onResetDatesClick}>Reset</ResetLink>)
-            </span>
+    <div style={style(styles.outer)}>
+      <div style={style(styles.topRow)}>
+        <div style={style(styles.appName)}>Git Temporal </div>
+        <div style={style(styles.dateRange)}>
+          <ExplodingDateRange
+            {...{ startDate, endDate, isDefaultDates: !areCommitsFiltered }}
+          />
+        </div>
+        <div style={style(styles.searchAndReset)}>
+          <Search />
+          {areCommitsFiltered && (
+            <ResetLink onClick={onResetDatesClick}>
+              Reset Filters & Dates
+            </ResetLink>
           )}
         </div>
       </div>
-      <div style={style(statsAndSearchStyle)}>
+      <div style={style(styles.path)}>
         <div>
           <div style={style('h4Text', { marginBottom: 10 })}>
             {renderPathLinks()}
@@ -113,7 +117,6 @@ export const Header: React.FC = (): React.ReactElement => {
     );
   }
   function renderPathLinks() {
-    const { selectedPath } = state;
     let parts = ['(repo root)/'];
     if (selectedPath && selectedPath.trim().length > 0) {
       parts = parts.concat(selectedPath.split('/'));
@@ -135,7 +138,6 @@ export const Header: React.FC = (): React.ReactElement => {
   }
 
   function onResetDatesClick() {
-    const { selectedPath, commits } = state;
     setDates(dispatch, commits, selectedPath, null, null);
   }
 };

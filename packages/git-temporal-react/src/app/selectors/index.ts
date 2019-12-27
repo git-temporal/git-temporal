@@ -5,18 +5,14 @@ import {
   getHighlightedCommitIds,
   getIsFetching,
   getCommitsContainerSort,
-  getSearch,
   getAuthorsContainerSort,
   getFilesContainerSort,
   getStartDate,
   getEndDate,
-  getIsFileSelected,
   getRerenderRequestedAt,
 } from './stateVars';
 
 import { getAuthorsAndCommits } from './authors';
-import { getFilteredFilesForFilesContainer } from './files';
-
 import { getFilteredCommits, getCommitsForTimeplot } from './commits';
 
 // The methods exported from this module are intended to provide props for redux
@@ -38,38 +34,6 @@ export const getCommitsActionMenuState = createSelector(
   commitsContainerSort => ({
     commitsContainerSort,
   })
-);
-
-export const getHeaderContainerState = createSelector(
-  getFilteredCommits,
-  getSelectedPath,
-  getStartDate,
-  getEndDate,
-
-  (commits, selectedPath, startDate, endDate) => {
-    // psssst - commits are in descending time order
-    const defaultedStartDate =
-      startDate ||
-      (commits &&
-        commits.length > 0 &&
-        commits[commits.length - 1].authorDate) ||
-      0;
-    const defaultedEndDate =
-      endDate ||
-      (commits && commits.length > 0 && commits[0].authorDate) ||
-      // @ts-ignore
-      Math.floor(new Date() / 1000);
-
-    const isDefaultDates = startDate == null && endDate == null;
-
-    return {
-      commits,
-      selectedPath,
-      isDefaultDates,
-      startDate: defaultedStartDate,
-      endDate: defaultedEndDate,
-    };
-  }
 );
 
 export const getAuthorsActionMenuState = createSelector(

@@ -3,7 +3,6 @@ import { getDiff } from '@git-temporal/git-diff-scraper';
 import { log } from '@git-temporal/logger';
 
 export function serveDiff(req, res) {
-  console.log('what the fucking fuck');
   const requestPath = req.query.path || '.';
   const leftCommit = req.query.leftCommit || 'HEAD';
   const rightCommit = req.query.rightCommit || 'local';

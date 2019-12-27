@@ -11,21 +11,23 @@ import { Selectable } from 'app/components/Selectable';
 import { debounce } from 'app/utilities/debounce';
 import { getSearch } from 'app/selectors/stateVars';
 
-const containerStyle = {
-  width: 250,
-  overflow: 'visible',
-  position: 'relative',
-};
-
-const searchInputStyle = {
-  width: '100%',
-  borderRadius: 10,
-  marginLeft: 10,
-  marginTop: 0,
-};
-
-const popupStyle = {
-  marginRight: 0,
+const styles = {
+  container: {
+    alignSelf: 'flex-end',
+    marginBottom: '@margins.medium+px',
+    overflow: 'visible',
+    position: 'relative',
+    width: 280,
+  },
+  searchInput: {
+    borderRadius: 10,
+    marginLeft: 10,
+    marginTop: 0,
+    width: 'calc(100% - 22px)',
+  },
+  popup: {
+    marginRight: 0,
+  },
 };
 
 const suggestedSearchPrefixes = ['author:', 'commit:', 'file:'];
@@ -44,7 +46,7 @@ export const Search: React.FC = (): React.ReactElement => {
 
   const isPopupOpen = searchHasFocus && search && search.trim().length > 0;
   return (
-    <div style={style(containerStyle)}>
+    <div style={style(styles.container)}>
       <SearchInput
         value={search}
         onChange={onSearch}
@@ -52,10 +54,10 @@ export const Search: React.FC = (): React.ReactElement => {
         onFocus={onSearchFocus}
         onBlur={debouncedOnBlur}
         onKeyDown={onKeyboard}
-        style={style(searchInputStyle)}
+        style={style(styles.searchInput)}
         placeholder="search authors, files or commits"
       />
-      <Popup isOpen={isPopupOpen} style={style(popupStyle)} noBackdrop>
+      <Popup isOpen={isPopupOpen} style={style(styles.popup)} noBackdrop>
         {renderPopupSuggestions()}
       </Popup>
     </div>

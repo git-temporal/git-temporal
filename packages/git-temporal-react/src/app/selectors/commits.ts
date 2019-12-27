@@ -2,7 +2,12 @@ import { createSelector } from 'reselect';
 import { CommitsContainerSorts } from 'app/actions/ActionTypes';
 
 import { hasSearch, commitsMatchSearch } from './search';
-import { hasDates, commitsMatchDates } from './dates';
+import {
+  hasDates,
+  commitsMatchDates,
+  getDefaultedStartDate,
+  getDefaultedEndDate,
+} from './dates';
 
 import {
   getCommits,
@@ -11,6 +16,7 @@ import {
   getStartDate,
   getEndDate,
 } from './stateVars';
+import { endDate } from 'app/reducers';
 
 // returns commits for the current path filtered by selected authors
 // and time range
@@ -19,15 +25,24 @@ export const getFilteredCommits = createSelector(
   getSearch,
   getStartDate,
   getEndDate,
+  getDefaultedStartDate,
+  getDefaultedEndDate,
 
-  (commits, search, startDate, endDate) => {
+  (
+    commits,
+    search,
+    startDate,
+    endDate,
+    defaultedStartDate,
+    defaultedEndDate
+  ) => {
     const filteredCommits =
       !hasSearch(search) && !hasDates(startDate, endDate)
         ? commits.slice(0)
         : commits.filter(commit => {
             return (
               commitsMatchSearch(commit, search) &&
-              commitsMatchDates(commit, startDate, endDate)
+              commitsMatchDates(commit, defaultedStartDate, defaultedEndDate)
             );
           });
 
@@ -64,6 +79,16 @@ export const getFilteredSortedCommits = createSelector(
       }
       return 0;
     });
+  }
+);
+
+export const getAreCommitsFiltered = createSelector(
+  getStartDate,
+  getEndDate,
+  getSearch,
+
+  (startDate, endDate, search) => {
+    return startDate || endDate || (search != null && search.trim().length > 0);
   }
 );
 
