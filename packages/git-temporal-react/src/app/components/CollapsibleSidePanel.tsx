@@ -3,7 +3,7 @@ import { delay } from 'lodash';
 import { style as s } from 'app/styles';
 
 interface ComponentProps {
-  children: ReactElement[];
+  children: ReactElement | ReactElement[];
   style: object;
   onOpen?: () => void;
   onClose?: () => void;

@@ -21,7 +21,7 @@ import { FileDifferences } from 'app/components/FileDifferences';
 const outerStyle = {
   _extends: ['borderedPanel', 'flexColumn', 'flexGrow'],
   position: 'relative',
-  overflow: 'visible',
+  overflow: 'hidden',
 };
 
 const innerStyle = {

@@ -40,16 +40,6 @@ export const SidePanel: React.FC = (): React.ReactElement => {
       onOpen={didOpenSidePanel}
       onClose={didCloseSidePanel}
     >
-      <div style={style(searchAndResetStyle)}>
-        {highlightedCommitIds.length > 0 && (
-          <ResetLink
-            style={style(resetHighlightsLinkStyle)}
-            onClick={onResetHighlightedCommits}
-          >
-            Reset search, filters & highlights
-          </ResetLink>
-        )}
-      </div>
       <div style={{ flexGrow: 1, overflow: 'auto' }}>
         <Stats />
         <Authors />

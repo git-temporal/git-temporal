@@ -49,6 +49,11 @@ const initialState = {
 };
 
 const outerStyle = {
+  overflow: 'visible', // needed for popup
+  flex: '0 0 200px',
+};
+
+const graphContainerStyle = {
   _extends: ['borderedPanel', 'flexColumn'],
   flexGrow: 0,
   flexShrink: 0,
@@ -138,8 +143,8 @@ export class Timeplot extends React.Component<
     const lastCommitTime = commits[0].authorDate;
 
     return (
-      <div style={{ position: 'relative', overflow: 'visible' }}>
-        <div style={style(outerStyle)}>
+      <div style={style(outerStyle)}>
+        <div style={style(graphContainerStyle)}>
           <ZoomContainer
             onZoom={this.onZoom}
             onMouseLeave={this.debouncedOnMouseLeave}
