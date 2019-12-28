@@ -3,11 +3,16 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { debug } from '@git-temporal/logger';
 
-import { highlightCommits, selectPath } from 'app/actions';
+import {
+  highlightCommits,
+  selectPath,
+  setOpenSidePanelGroup,
+} from 'app/actions';
+import { CollapsibleSidePanelGroups } from 'app/actions/ActionTypes';
 import { getFilteredSortedCommits } from 'app/selectors/commits';
 import {
   getHighlightedCommitIds,
-  getCommitsContainerSort,
+  getOpenSidePanelGroup,
 } from 'app/selectors/stateVars';
 import { style } from 'app/styles';
 import { ExtendingList } from 'app/components/ExtendingList';
@@ -21,19 +26,33 @@ const scrollStyle = {
   marginBotton: '@margins.large+px',
 };
 
+const COLLAPSIBLE_GROUP = CollapsibleSidePanelGroups.COMMITS;
+
 export const Commits: React.FC = (): React.ReactElement => {
   const commits = useSelector(getFilteredSortedCommits);
   const highlightedCommitIds = useSelector(getHighlightedCommitIds);
+  const openGroup = useSelector(getOpenSidePanelGroup);
   const dispatch = useDispatch();
 
   const title = `${commits.length} Commits`;
+  const isOpen = openGroup === COLLAPSIBLE_GROUP;
 
   return (
-    <CollapsibleGroup title={title}>
+    <CollapsibleGroup
+      title={title}
+      isOpen={isOpen}
+      onOpenToggle={handleOpenGroupToggle}
+    >
       <CommitsActionMenu />
       <ExtendingList rowCount={commits.length} rowRenderer={renderRow} />
     </CollapsibleGroup>
   );
+
+  function handleOpenGroupToggle() {
+    if (!isOpen) {
+      dispatch(setOpenSidePanelGroup(COLLAPSIBLE_GROUP));
+    }
+  }
 
   function renderRow(index: number, key: string | number) {
     // debug('render row', row);

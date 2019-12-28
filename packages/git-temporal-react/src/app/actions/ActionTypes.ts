@@ -16,6 +16,7 @@ export enum ActionTypes {
   SET_FILES_CONTAINER_SORT = 'SET_FILES_CONTAINER_SORT',
   SET_START_DATE = 'SET_START_DATE',
   SET_END_DATE = 'SET_END_DATE',
+  SET_OPEN_SIDEPANEL_GROUP = 'SET_OPEN_SIDEPANEL_GROUP',
 
   REQUEST_RERENDER = 'REQUEST_RERENDER',
 }
@@ -35,4 +36,10 @@ export enum FilesContainerSorts {
   TIME = 'time',
   LINES = 'lines',
   COMMITS = 'commits',
+}
+
+export enum CollapsibleSidePanelGroups {
+  AUTHORS = 'authors',
+  COMMITS = 'commits',
+  FILES = 'files',
 }

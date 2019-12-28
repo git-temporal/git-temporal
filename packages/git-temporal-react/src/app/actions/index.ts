@@ -3,6 +3,7 @@ import {
   AuthorsContainerSorts,
   CommitsContainerSorts,
   FilesContainerSorts,
+  CollapsibleSidePanelGroups,
 } from './ActionTypes';
 
 import { fetchCommitsIfNeeded } from 'app/actions/commits';
@@ -43,6 +44,11 @@ export const setCommitsContainerSort = (sort: CommitsContainerSorts) => ({
 export const setFilesContainerSort = (sort: FilesContainerSorts) => ({
   sort,
   type: ActionTypes.SET_FILES_CONTAINER_SORT,
+});
+
+export const setOpenSidePanelGroup = (group: CollapsibleSidePanelGroups) => ({
+  group,
+  type: ActionTypes.SET_OPEN_SIDEPANEL_GROUP,
 });
 
 export const highlightCommits = commitIds => ({

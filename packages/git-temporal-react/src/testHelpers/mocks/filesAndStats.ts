@@ -1,9 +1,13 @@
-import { FilesContainerSorts } from 'app/actions/ActionTypes';
+import {
+  FilesContainerSorts,
+  CollapsibleSidePanelGroups,
+} from 'app/actions/ActionTypes';
 import fiveCommits from './fiveCommits';
 import tenCommits from './tenCommits';
 
 const filesAndStats = {
   isFileSelected: false,
+  openSidePanelGroup: CollapsibleSidePanelGroups.AUTHORS,
   filesContainerSort: FilesContainerSorts.TIME,
   files: [
     {

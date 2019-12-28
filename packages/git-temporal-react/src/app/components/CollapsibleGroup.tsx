@@ -5,8 +5,10 @@ import { CaretDownIcon } from './CaretDownIcon';
 
 interface ComponentProps {
   children: ReactElement[];
-  title: string;
+  isOpen: boolean;
+  onOpenToggle: () => void;
   style?: object;
+  title: string;
 }
 
 const panelStyle = {
@@ -37,14 +39,14 @@ export const CollapsibleGroup: React.FC<ComponentProps> = ({
   children,
   style,
   title,
+  isOpen,
+  onOpenToggle,
 }): React.ReactElement => {
-  const [isOpen, setIsOpen] = useState(false);
-
   const panelStyle = isOpen ? openPanelStyle : closedPanelStyle;
   return (
-    <div style={s(panelStyle, style)} onClick={didClickPanel}>
+    <div style={s(panelStyle, style)} onClick={onOpenToggle}>
       <div style={s('flexRow')}>
-        <div style={s(toggleIconStyle)} onClick={didToggle}>
+        <div style={s(toggleIconStyle)}>
           {isOpen ? <CaretDownIcon /> : <CaretRightIcon />}
         </div>
         <div style={s('h2Text')}>{title}</div>
@@ -52,12 +54,4 @@ export const CollapsibleGroup: React.FC<ComponentProps> = ({
       {isOpen && children}
     </div>
   );
-
-  function didClickPanel() {
-    !isOpen && didToggle();
-  }
-
-  function didToggle() {
-    setIsOpen(!isOpen);
-  }
 };

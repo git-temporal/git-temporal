@@ -4,9 +4,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { debug } from '@git-temporal/logger';
 
 import { style } from 'app/styles';
-import { highlightCommits } from 'app/actions';
+import { highlightCommits, setOpenSidePanelGroup } from 'app/actions';
+import { CollapsibleSidePanelGroups } from 'app/actions/ActionTypes';
 import { getAuthorsStats } from 'app/selectors/authors';
-import { getHighlightedCommitIds } from 'app/selectors/stateVars';
+import {
+  getHighlightedCommitIds,
+  getOpenSidePanelGroup,
+} from 'app/selectors/stateVars';
 
 import { CollapsibleGroup } from 'app/components/CollapsibleGroup';
 import { AuthorCard } from 'app/components/AuthorCard';
@@ -14,15 +18,23 @@ import { ExtendingList } from 'app/components/ExtendingList';
 
 import AuthorsActionMenu from 'app/containers/AuthorsActionMenu';
 
+const COLLAPSIBLE_GROUP = CollapsibleSidePanelGroups.AUTHORS;
+
 export const Authors: React.FC = (): React.ReactElement => {
   const highlightedCommitIds = useSelector(getHighlightedCommitIds);
   const authorStats = useSelector(getAuthorsStats);
+  const openGroup = useSelector(getOpenSidePanelGroup);
   const dispatch = useDispatch();
 
   const groupTitle = `${authorStats.authors.length} Authors`;
+  const isOpen = openGroup === COLLAPSIBLE_GROUP;
 
   return (
-    <CollapsibleGroup title={groupTitle}>
+    <CollapsibleGroup
+      title={groupTitle}
+      onOpenToggle={handleOpenGroupToggle}
+      isOpen={isOpen}
+    >
       <AuthorsActionMenu />
       <ExtendingList
         rowCount={authorStats.authors.length}
@@ -30,6 +42,12 @@ export const Authors: React.FC = (): React.ReactElement => {
       />
     </CollapsibleGroup>
   );
+
+  function handleOpenGroupToggle() {
+    if (!isOpen) {
+      dispatch(setOpenSidePanelGroup(COLLAPSIBLE_GROUP));
+    }
+  }
 
   function renderRow(index: number, key: string) {
     // debug('render row', row);

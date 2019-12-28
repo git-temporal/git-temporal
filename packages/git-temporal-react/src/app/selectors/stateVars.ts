@@ -16,6 +16,8 @@ export const getFilesContainerSort = state => state.filesContainerSort;
 
 export const getIsFileSelected = state => state.isFileSelected;
 
+export const getOpenSidePanelGroup = state => state.openSidePanelGroup;
+
 export const getDiff = state => state.diff;
 export const getIsDiffFetching = state => state.isDiffFetching;
 export const getDiffStartCommit = state => state.diffStartCommitId;

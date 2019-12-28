@@ -4,6 +4,7 @@ import {
   AuthorsContainerSorts,
   CommitsContainerSorts,
   FilesContainerSorts,
+  CollapsibleSidePanelGroups,
 } from 'app/actions/ActionTypes';
 
 // these little actions are more trouble to test and end up being brittle
@@ -160,6 +161,17 @@ export const isFileSelected = (state = false, action: any) => {
   return state;
 };
 
+export const openSidePanelGroup = (
+  state = CollapsibleSidePanelGroups.AUTHORS,
+  action: any
+) => {
+  switch (action.type) {
+    case ActionTypes.SET_OPEN_SIDEPANEL_GROUP:
+      return action.group;
+  }
+  return state;
+};
+
 const rootReducer = combineReducers({
   commits,
   selectedPath,
@@ -173,6 +185,7 @@ const rootReducer = combineReducers({
   startDate,
   endDate,
   isFileSelected,
+  openSidePanelGroup,
   diff,
   isDiffFetching,
 });
