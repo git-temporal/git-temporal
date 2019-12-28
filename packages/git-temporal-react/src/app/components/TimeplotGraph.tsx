@@ -135,10 +135,12 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
         onMouseUp={this.onMouseUp}
       >
         <div style={style('fill')} ref={this.timeplotGraphRef} />
-        {startDate && (
+        {startDate ? (
           <div style={style(startDateMarkerStyle, startDateStyle)} />
-        )}
-        {endDate && <div style={style(endDateMarkerStyle, endDateStyle)} />}
+        ) : null}
+        {endDate ? (
+          <div style={style(endDateMarkerStyle, endDateStyle)} />
+        ) : null}
       </div>
     );
   }
