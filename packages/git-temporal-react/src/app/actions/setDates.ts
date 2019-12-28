@@ -1,3 +1,4 @@
+import { selectedPath } from './../reducers/index';
 import { fetchDiff } from 'app/actions/diff';
 import { debug } from '@git-temporal/logger';
 
@@ -11,7 +12,6 @@ export const setDates = (startDate: number, endDate: number | Date | null) => (
   const epochStartDate = Math.floor(startDate / 1000);
   const epochEndDate = endDate && Math.floor((endDate as number) / 1000);
 
-  debug('actions: setDates', startDate, epochStartDate, endDate, epochEndDate);
   const [newStartDate, newEndDate] =
     epochStartDate === epochEndDate
       ? [epochStartDate, null]
@@ -19,13 +19,23 @@ export const setDates = (startDate: number, endDate: number | Date | null) => (
         ? [epochStartDate, epochEndDate]
         : [epochEndDate, epochStartDate];
 
+  debug(
+    'actions: setDates',
+    startDate,
+    endDate,
+    epochStartDate,
+    epochEndDate,
+    newStartDate,
+    newEndDate
+  );
+
   dispatch(setStartDate(newStartDate));
   dispatch(setEndDate(newEndDate));
 
-  const { path, commits } = getState();
+  const { selectedPath, commits } = getState();
   dispatch(
     fetchDiff(
-      path,
+      selectedPath,
       commits,
       defaultStartDate(newStartDate, commits),
       defaultEndDate(newEndDate, commits)
