@@ -92,6 +92,7 @@ export class Timeplot extends React.Component<
 > {
   readonly state: TimeplotLocalState = initialState;
   private timeplotRef: any;
+  private outerRef: any;
   private debouncedOnMouseLeave: (args: any) => void;
   private debouncedOnMouseMove: (args: any) => void;
 
@@ -104,6 +105,7 @@ export class Timeplot extends React.Component<
     super(props);
     this.lastRerenderRequestedAt = Date.now() as any;
     this.timeplotRef = React.createRef();
+    this.outerRef = React.createRef();
     this.debouncedOnMouseLeave = debounce(this.onMouseLeave, 100);
     this.debouncedOnMouseMove = throttle(this.onMouseMove, 100);
   }
@@ -131,19 +133,32 @@ export class Timeplot extends React.Component<
     if (!commits || commits.length === 0) {
       return null;
     }
+    const outerLeft =
+      (this.outerRef.current &&
+        this.outerRef.current.getBoundingClientRect().x) ||
+      0;
     const popupLeft =
       this.state.hoverMarkerLeft - this.state.scrollLeft <
       TIMEPLOT_POPUP_WIDTH + 20
-        ? this.state.hoverMarkerLeft - this.state.scrollLeft - 5
+        ? this.state.hoverMarkerLeft - this.state.scrollLeft + outerLeft - 10
         : this.state.hoverMarkerLeft -
           this.state.scrollLeft -
           TIMEPLOT_POPUP_WIDTH +
-          10;
+          outerLeft;
+    console.log(
+      'rendering timeplot',
+      popupLeft,
+      this.state.hoverMarkerLeft,
+      this.state.scrollLeft,
+      TIMEPLOT_POPUP_WIDTH,
+      outerLeft
+    );
+
     const firstCommitTime = commits[commits.length - 1].authorDate;
     const lastCommitTime = commits[0].authorDate;
 
     return (
-      <div style={style(outerStyle)}>
+      <div style={style(outerStyle)} ref={this.outerRef}>
         <div style={style(graphContainerStyle)}>
           <ZoomContainer
             onZoom={this.onZoom}
