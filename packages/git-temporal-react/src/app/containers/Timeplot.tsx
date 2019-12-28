@@ -8,6 +8,7 @@ import { ITimeplotState, ICommit, DispatchProps } from 'app/interfaces';
 
 import { getTimeplotContainerState } from 'app/selectors';
 import { setDates } from 'app/actions/setDates';
+import { selectSingleCommit } from 'app/actions/commits';
 
 import { debounce } from 'app/utilities/debounce';
 import { throttle } from 'app/utilities/throttle';
@@ -290,15 +291,14 @@ export class Timeplot extends React.Component<
     });
   };
 
-  private onCommitSelected = (evt, commit) => {
+  private onCommitSelected = (evt, commit, single) => {
     evt.stopPropagation();
-    const epochAuthorDate = commit.authorDate * 1000;
-    // console.log('onCommitSelected', evt, commit, this.props.startDate);
-    // TODO: test: you should be able to isolate a single commit (`+ 1` below)
-    // if the user clicks the same commit twice we select just that commit
-    if (epochAuthorDate === this.props.startDate) {
-      this.setDates(epochAuthorDate, epochAuthorDate + 1);
+    const { dispatch, commits } = this.props;
+    console.log('onCommitSelected', evt, commit, single, this.props.startDate);
+    if (single) {
+      dispatch(selectSingleCommit(commit, commits));
     } else {
+      const epochAuthorDate = commit.authorDate * 1000;
       this.setDates(epochAuthorDate, null);
     }
   };

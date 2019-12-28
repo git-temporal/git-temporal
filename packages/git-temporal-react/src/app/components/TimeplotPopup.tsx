@@ -14,7 +14,7 @@ export interface TimeplotPopupProps {
   left: number;
   isOpen: boolean;
   onClose: () => void;
-  onCommitSelected: (evt: object, commit: ICommit) => void;
+  onCommitSelected: (evt: object, commit: ICommit, single: boolean) => void;
   onMouseEnter?: (evt: object) => void;
   onMouseLeave?: (evt: object) => void;
   style?: string | object;
@@ -72,6 +72,15 @@ export const TimeplotPopup = (props: TimeplotPopupProps): JSX.Element => {
   }
   const commitsText =
     commits.length === 1 ? 'was one commit' : `were ${commits.length} commits`;
+
+  const handleClick = (evt, commit) => {
+    onCommitSelected(evt, commit, false);
+  };
+
+  const handleDoubleClick = (evt, commit) => {
+    onCommitSelected(evt, commit, true);
+  };
+
   return (
     <Popup
       style={style(defaultPopupStyle, popupStyle)}
@@ -91,7 +100,8 @@ export const TimeplotPopup = (props: TimeplotPopupProps): JSX.Element => {
             <CommitCard
               key={index}
               commit={commit}
-              onClick={onCommitSelected}
+              onClick={handleClick}
+              onDoubleClick={handleDoubleClick}
               hideCommitBody
               hideFiles
             />

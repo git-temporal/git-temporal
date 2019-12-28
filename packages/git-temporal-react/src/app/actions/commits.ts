@@ -1,3 +1,7 @@
+import { ICommit } from 'app/interfaces/index';
+import { Timeplot } from 'app/containers/Timeplot';
+import { setDates } from 'app/actions/setDates';
+import { startDate } from './../reducers/index';
 import { ActionTypes } from 'app/actions/ActionTypes';
 import { isVscode, vscode } from 'app/actions/vscode';
 import { debug } from '@git-temporal/logger';
@@ -58,5 +62,25 @@ const shouldFetchCommits = (state, path) => {
 export const fetchCommitsIfNeeded = path => (dispatch, getState) => {
   if (shouldFetchCommits(getState(), path)) {
     return dispatch(fetchCommits(path));
+  }
+};
+
+export const selectSingleCommit = (commit, timeplotCommits) => (
+  dispatch: any,
+  _getState: any
+) => {
+  const foundIndex = timeplotCommits.findIndex((c: ICommit) => {
+    return c.id === commit.id;
+  });
+  if (foundIndex >= 0) {
+    const adjacentCommit = timeplotCommits[foundIndex + 1];
+    if (adjacentCommit) {
+      dispatch(
+        setDates(
+          adjacentCommit.authorDate * 1000,
+          (commit.authorDate + 1) * 1000
+        )
+      );
+    }
   }
 };

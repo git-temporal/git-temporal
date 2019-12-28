@@ -6,6 +6,7 @@ export interface MenuItemProps {
   // The children are the menu content
   children: string | JSX.Element | JSX.Element[];
   onClick: (evt, value?) => void;
+  onDoubleClick?: (evt, value?) => void;
   value?: any;
   style?: string | object;
   disabled?: boolean;
@@ -34,11 +35,14 @@ const selectedContainerStyle = {
   _extends: [containerStyle, 'selected'],
 };
 
+const DOUBLE_CLICK_DELAY_MS = 500;
+
 export class Selectable extends React.Component<
   MenuItemProps & TestProps,
   MenuItemState
 > {
   readonly state: MenuItemState = initialState;
+  private lastClick: number;
 
   render() {
     const outerStyle = this.props.disabled
@@ -61,7 +65,13 @@ export class Selectable extends React.Component<
   }
 
   private onClick = evt => {
-    this.props.onClick(evt, this.props.value);
+    const now = Date.now();
+    if (this.lastClick && now - this.lastClick <= DOUBLE_CLICK_DELAY_MS) {
+      this.props.onDoubleClick(evt, this.props.value);
+    } else {
+      this.props.onClick(evt, this.props.value);
+    }
+    this.lastClick = now;
   };
 
   private onMouseOver = () => {

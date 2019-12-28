@@ -17,6 +17,7 @@ export interface CommitCardProps {
   hideFiles?: boolean;
   hideCommitBody?: boolean;
   onClick?: (evt, commit: ICommit, index: number) => void;
+  onDoubleClick?: (evt, commit: ICommit, index: number) => void;
   onFileClick?: (evt, fileName: string) => void;
   style?: string | object;
 }
@@ -51,13 +52,22 @@ const dateDisplayOptions = {
 };
 
 export const CommitCard = (props: CommitCardProps): JSX.Element => {
-  const { commit, isExpanded, isHighlighted, onFileClick } = props;
+  const {
+    commit,
+    isExpanded,
+    isHighlighted,
+    onFileClick,
+    onClick,
+    onDoubleClick,
+    index,
+  } = props;
   const outerOverrideStyle = isHighlighted ? 'selected' : {};
   return (
     <div style={style(defaultCardStyle, props.style, outerOverrideStyle)}>
       <Selectable
-        onClick={evt =>
-          props.onClick && props.onClick(evt, commit, props.index)
+        onClick={evt => onClick && onClick(evt, commit, index)}
+        onDoubleClick={evt =>
+          onDoubleClick && onDoubleClick(evt, commit, index)
         }
       >
         <div style={style(dateLineStyle)}>
