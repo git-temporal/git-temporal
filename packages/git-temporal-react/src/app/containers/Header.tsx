@@ -13,7 +13,7 @@ import {
 } from 'app/selectors/dates';
 
 import { style } from 'app/styles';
-import { selectPath } from 'app/actions';
+import { selectPath, setSearch } from 'app/actions';
 import { setDates } from 'app/actions/setDates';
 import { Search } from 'app/containers/Search';
 import { ExplodingDateRange } from 'app/components/ExplodingDateRange';
@@ -79,7 +79,7 @@ export const Header: React.FC = (): React.ReactElement => {
           <Search />
           {areCommitsFiltered && (
             <ResetLink onClick={onResetDatesClick}>
-              Reset Filters & Dates
+              Reset Search & Date Range
             </ResetLink>
           )}
         </div>
@@ -138,6 +138,7 @@ export const Header: React.FC = (): React.ReactElement => {
   }
 
   function onResetDatesClick() {
-    setDates(dispatch, commits, selectedPath, null, null);
+    setDates(dispatch, null, null);
+    dispatch(setSearch(null));
   }
 };

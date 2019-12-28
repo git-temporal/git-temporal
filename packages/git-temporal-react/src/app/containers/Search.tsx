@@ -41,10 +41,9 @@ export const Search: React.FC = (): React.ReactElement => {
   const [selectedSuggestion, setSelectedSuggestion] = useState('all');
   const search = useSelector(getSearch);
   const dispatch = useDispatch();
-
   const debouncedOnBlur = debounce(onSearchBlur, 200);
-
   const isPopupOpen = searchHasFocus && search && search.trim().length > 0;
+
   return (
     <div style={style(styles.container)}>
       <SearchInput

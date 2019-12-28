@@ -79,7 +79,7 @@ export class SearchInput extends React.Component<
         <input
           type="text"
           style={searchInputStyle}
-          value={this.state.value}
+          value={this.state.value || ''}
           placeholder={placeholder}
           onChange={this.onInputChange}
           onFocus={onFocus}

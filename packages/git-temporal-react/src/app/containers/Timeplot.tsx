@@ -303,8 +303,8 @@ export class Timeplot extends React.Component<
   };
 
   private setDates(startDate, endDate) {
-    const { dispatch, commits, selectedPath } = this.props;
-    setDates(dispatch, commits, selectedPath, startDate, endDate);
+    const { dispatch } = this.props;
+    setDates(dispatch, startDate, endDate);
   }
 
   private addCustomZooms() {

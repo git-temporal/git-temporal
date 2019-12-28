@@ -146,13 +146,7 @@ export const DifferenceViewerHeader: React.FC = (): React.ReactElement => {
       : 0;
     const adjacentCommit = timeplotCommits[foundIndex - relativeIndex];
     if (adjacentCommit) {
-      setDates(
-        dispatch,
-        selectedPath,
-        timeplotCommits,
-        adjacentCommit.authorDate,
-        endDate
-      );
+      setDates(dispatch, adjacentCommit.authorDate, endDate);
     }
   }
 
@@ -179,13 +173,7 @@ export const DifferenceViewerHeader: React.FC = (): React.ReactElement => {
     });
     const adjacentCommit = timeplotCommits[foundIndex - relativeIndex];
     if (adjacentCommit) {
-      setDates(
-        dispatch,
-        selectedPath,
-        timeplotCommits,
-        startDate,
-        adjacentCommit.authorDate * 1000
-      );
+      setDates(dispatch, startDate, adjacentCommit.authorDate * 1000);
     }
   }
   // starting commit is the last effective commit that comes before the set start date
