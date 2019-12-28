@@ -1,17 +1,17 @@
+import { fetchDiff } from 'app/actions/diff';
 import { debug } from '@git-temporal/logger';
 
 import { setStartDate, setEndDate } from 'app/actions';
-import { ICommit } from 'app/interfaces';
+import { defaultStartDate, defaultEndDate } from 'app/selectors/dates';
 
-export function setDates(
-  dispatch: (args: any) => void,
-  startDate: number,
-  endDate: number | Date | null
-) {
+export const setDates = (startDate: number, endDate: number | Date | null) => (
+  dispatch,
+  getState
+) => {
   const epochStartDate = Math.floor(startDate / 1000);
   const epochEndDate = endDate && Math.floor((endDate as number) / 1000);
 
-  debug('Timeplot: setDates', startDate, epochStartDate, endDate, epochEndDate);
+  debug('actions: setDates', startDate, epochStartDate, endDate, epochEndDate);
   const [newStartDate, newEndDate] =
     epochStartDate === epochEndDate
       ? [epochStartDate, null]
@@ -21,4 +21,14 @@ export function setDates(
 
   dispatch(setStartDate(newStartDate));
   dispatch(setEndDate(newEndDate));
-}
+
+  const { path, commits } = getState();
+  dispatch(
+    fetchDiff(
+      path,
+      commits,
+      defaultStartDate(newStartDate, commits),
+      defaultEndDate(newEndDate, commits)
+    )
+  );
+};

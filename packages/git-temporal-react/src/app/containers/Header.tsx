@@ -138,7 +138,7 @@ export const Header: React.FC = (): React.ReactElement => {
   }
 
   function onResetDatesClick() {
-    setDates(dispatch, null, null);
+    dispatch(setDates(null, null));
     dispatch(setSearch(null));
   }
 };
