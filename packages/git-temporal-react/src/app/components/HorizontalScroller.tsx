@@ -54,7 +54,7 @@ const touchArea = {
 
 const leftTouchStyle = {
   _extends: touchArea,
-  left: -20,
+  left: -10,
   // borderTop: '60px solid transparent',
   // borderBottom: '60px solid transparent',
   // borderRight: '20px solid rgba(96, 96, 96, .6)',
