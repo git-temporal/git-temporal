@@ -145,14 +145,6 @@ export class Timeplot extends React.Component<
           this.state.scrollLeft -
           TIMEPLOT_POPUP_WIDTH +
           outerLeft;
-    console.log(
-      'rendering timeplot',
-      popupLeft,
-      this.state.hoverMarkerLeft,
-      this.state.scrollLeft,
-      TIMEPLOT_POPUP_WIDTH,
-      outerLeft
-    );
 
     const firstCommitTime = commits[commits.length - 1].authorDate;
     const lastCommitTime = commits[0].authorDate;
