@@ -181,7 +181,8 @@ export class Timeplot extends React.Component<
           </ZoomContainer>
 
           <div style={style(statsStyle)}>
-            <CommaNumber value={this.props.commits.length} /> commits spanning{' '}
+            Total of <CommaNumber value={this.props.commits.length} /> commits
+            by <CommaNumber value={this.props.authors} /> authors spanning{' '}
             <EpochSpan
               firstEpochTime={firstCommitTime}
               secondEpochTime={lastCommitTime}

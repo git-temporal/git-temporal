@@ -13,7 +13,6 @@ const outerStyle = {
   marginBottom: '@margins.medium+px',
   paddingLeft: '@margins.medium+px',
   flexShrink: 0,
-  justifyContent: 'center',
 };
 
 export const Stats: React.FC = (): React.ReactElement => {
@@ -21,7 +20,7 @@ export const Stats: React.FC = (): React.ReactElement => {
 
   return (
     <div style={style(outerStyle)}>
-      <StackedLabel label="Active Time Span">
+      <StackedLabel label="Selected Time Span">
         <ExplodeOnChange value={minAuthorDate + maxAuthorDate}>
           <EpochSpan
             firstEpochTime={minAuthorDate}
