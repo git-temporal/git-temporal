@@ -34,6 +34,7 @@ interface TimeplotLocalState {
   popupEndDate?: Date;
   customZooms: ICustomZoom[];
   mouseInPopover: boolean;
+  zoom: number;
 }
 
 const initialState = {
@@ -45,6 +46,7 @@ const initialState = {
   popupCommits: [],
   popupStartDate: null,
   popupEndDate: null,
+  zoom: 100,
   customZooms: [],
   mouseInPopover: false,
 };
@@ -126,6 +128,9 @@ export class Timeplot extends React.Component<
       debug('forcing timeplot rerender');
       this.lastRerenderRequestedAt = this.props.rerenderRequestedAt;
       this.setState({ timeplotRenders: this.state.timeplotRenders + 1 });
+    }
+    if (prevState.zoom !== this.state.zoom) {
+      this.scrollToStartDate();
     }
   }
 
@@ -213,9 +218,10 @@ export class Timeplot extends React.Component<
     this.setState({ scrollLeft });
   };
 
-  private onZoom = () => {
+  private onZoom = newZoom => {
     this.setState({
       timeplotRenders: this.state.timeplotRenders + 1,
+      zoom: newZoom,
     });
   };
 
@@ -308,6 +314,17 @@ export class Timeplot extends React.Component<
     dispatch(setDates(startDate, endDate));
   }
 
+  private scrollToStartDate() {
+    const { startDate } = this.props;
+
+    if (this.state.zoom <= 100) {
+      this.setState({ scrollLeft: 0 });
+    } else if (startDate && this.timeplotRef.current) {
+      const { xScale } = this.timeplotRef.current;
+      this.setState({ scrollLeft: xScale(startDate * 1000) - 30 });
+    }
+  }
+
   private addCustomZooms() {
     const { startDate, endDate } = this.props;
     if (!startDate || !this.timeplotRef.current) {
@@ -318,7 +335,7 @@ export class Timeplot extends React.Component<
     const defaultedEndDate = endDate ? endDate * 1000 : new Date();
     const spanLeft = xScale(startDate * 1000);
     const spanRight = xScale(defaultedEndDate);
-    const span = spanRight - spanLeft + 6;
+    const span = spanRight - spanLeft + 15;
     if (span <= 0) {
       this.setState({ customZooms: [] });
       return;

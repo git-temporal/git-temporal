@@ -33,7 +33,6 @@ const outerStyle = {
   _extends: 'fill',
   overflowX: 'scroll',
   position: relative,
-  scrollBehavior: 'smooth',
 };
 
 const innerContainerStyle = {
