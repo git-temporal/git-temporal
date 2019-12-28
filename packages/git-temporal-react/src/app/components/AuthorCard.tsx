@@ -26,7 +26,6 @@ const menuItemStyle = {
   fontSize: 'initial',
   display: 'flex',
   padding: 10,
-  marginRight: -10,
   width: '100%',
 };
 

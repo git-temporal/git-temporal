@@ -40,7 +40,7 @@ export const SidePanel: React.FC = (): React.ReactElement => {
       onOpen={didOpenSidePanel}
       onClose={didCloseSidePanel}
     >
-      <div style={{ flexGrow: 1, overflow: 'auto' }}>
+      <div style={{ flexGrow: 1, overflow: 'hidden' }}>
         <Stats />
         <Authors />
         <Commits />

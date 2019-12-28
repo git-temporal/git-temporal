@@ -19,6 +19,18 @@ This project adheres to the [Contributor Covenant 1.2](http://contributor-covena
 
 ## Getting started
 
+Clone this repo:
+
+```
+git clone git@github.com:git-temporal/git-temporal.git
+```
+
+Install dependencies:
+
+```
+npm install
+```
+
 This monorepo uses Lerna.
 
 Bootstrapping links packages together in the tree so that you can make changes to multiple packages at a time and see the effect of all those without publishing to npm! From monorepo root:
@@ -57,6 +69,10 @@ To update any of the packages used by any of the git-temporal packages, check ou
 
 ```
 npx lernaupdate
+```
+
+```
+
 ```
 
 ```

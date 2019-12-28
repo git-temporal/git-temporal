@@ -47,9 +47,10 @@ let globalStyles = {
   },
   panel: {
     background: '@colors.background',
-    padding: '@margins.medium+px',
     borderRadius: 3,
+    color: '@colors.text',
     marginRight: '@margins.medium+px',
+    padding: '@margins.medium+px',
   },
   altPanel: {
     _extends: 'panel',

@@ -3,9 +3,6 @@
 
 - [Git Temporal](#git-temporal)
   - [Running the alpha proof of concept:](#running-the-alpha-proof-of-concept)
-    - [Clone the repo and install dependencies](#clone-the-repo-and-install-dependencies)
-    - [Start the log scraping service](#start-the-log-scraping-service)
-    - [Start the hot UI Server](#start-the-hot-ui-server)
 - [Updates](#updates)
   - [June 10, 2019](#june-10-2019)
   - [May 29, 2019](#may-29-2019)
@@ -18,29 +15,8 @@
 
 ## Running the alpha proof of concept:
 
-### Clone the repo and install dependencies
-
-```bash
-git clone https://github.com/git-temporal/git-temporal.git
-cd git-temporal
-npx lerna bootstrap
-```
-
-### Start the log scraping service
-
-```bash
-cd packages/api-node-express
-npm run start
-```
-
-### Start the hot UI Server
-
-_in a separate terminal from above:_
-
-```bash
-cd packages/git-temporal-react
-npm run start
-```
+See [CONTRIBUTING.md](https://github.com/git-temporal/git-temporal/blob/master/CONTRIBUTING.md) for instructions on running the development
+version of git-temporal.
 
 # Updates
 
