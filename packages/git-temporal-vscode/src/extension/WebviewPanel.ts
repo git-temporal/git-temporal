@@ -5,6 +5,7 @@ import { getDiff } from '@git-temporal/git-diff-scraper';
 import { debug } from '@git-temporal/logger';
 
 let activeTextEditor;
+let explorerFile;
 
 process.env.GTDEBUG = '1';
 
@@ -14,20 +15,23 @@ export class WebviewPanel {
   // TODO:  The git log data is cached in memory and we could
   //   	allow multiple windows and only start one API server to
   //    serve all of the webview panels for a single instance of
-  //    vscode?  The git-temporal api is currently only able to serve up a
-  //    single repo, so for each instance of vscode we start a new one.
+  //    vscode?
   public static currentPanel: WebviewPanel | undefined;
   public static viewType: 'git-temporal';
 
   private readonly _panel: vscode.WebviewPanel;
   private readonly _extensionPath: string;
+
   private _disposables: vscode.Disposable[] = [];
 
-  public static createOrShow(extensionPath: string) {
+  public static createOrShow(extensionPath: string, currentExplorerFile: any) {
     // If we already have a panel, show it.
     activeTextEditor = vscode.window.activeTextEditor;
+    explorerFile = currentExplorerFile;
+
     if (WebviewPanel.currentPanel) {
       WebviewPanel.currentPanel._panel.reveal();
+      WebviewPanel.currentPanel.update();
       return;
     }
     // Otherwise, create a new panel.
@@ -147,8 +151,11 @@ export class WebviewPanel {
     // And the uri we use to load this script in the webview
     const scriptUri = scriptPathOnDisk.with({ scheme: 'vscode-resource' });
     const nonce = getNonce();
-    const currentPath = activeTextEditor.document.fileName;
-    console.log('webviewPanel currentPath', currentPath);
+    const currentPath =
+      (explorerFile && explorerFile.fsPath) ||
+      activeTextEditor.document.fileName;
+    // const themeName: string | undefined = workspace.getConfiguration("workbench").get("colorTheme")
+    console.log('webviewPanel currentPath', [currentPath, explorerFile]);
     return `
       <!DOCTYPE html>
       <html lang="en">

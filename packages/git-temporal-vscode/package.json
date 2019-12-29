@@ -20,7 +20,15 @@
         "title": "Open Git Temporal",
         "category": "git-temporal"
       }
-    ]
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "gitTemporal.start",
+          "group": "2_workspace"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run build",

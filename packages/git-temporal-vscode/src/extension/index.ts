@@ -6,8 +6,9 @@ setPrefix('git-temporal-vscode');
 
 export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
-    vscode.commands.registerCommand('gitTemporal.start', () => {
-      WebviewPanel.createOrShow(context.extensionPath);
+    vscode.commands.registerCommand('gitTemporal.start', explorerFile => {
+      console.log('got start', explorerFile);
+      WebviewPanel.createOrShow(context.extensionPath, explorerFile);
     })
   );
 
