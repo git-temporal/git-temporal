@@ -49,7 +49,7 @@ const touchArea = {
   zIndex: 2,
   marginTop: 5,
   opacity: 0.5,
-  color: 'lightskyblue',
+  color: '@colors.selectable',
 };
 
 const leftTouchStyle = {

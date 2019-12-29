@@ -1,6 +1,6 @@
 import React from 'react';
 import { debug } from '@git-temporal/logger';
-import { style, styleVars } from 'app/styles';
+import { style, getStyleVar } from 'app/styles';
 import * as d3 from 'd3';
 require('d3-selection-multi');
 
@@ -38,7 +38,7 @@ const outerStyle = {
 };
 
 const blobStyle = {
-  fill: '#696969',
+  fill: '@colors.blobColor',
   opacity: 0.3,
 };
 
@@ -235,6 +235,7 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
   private renderAxis(svg) {
     const element = this.timeplotGraphRef.current;
     const h = element.clientHeight;
+    const textColor = getStyleVar('colors', 'text');
 
     const xAxis = d3
       .axisBottom()
@@ -246,8 +247,8 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
       .attr('class', 'axis')
       .attr('transform', `translate(0, ${h - PADDING})`)
       .call(xAxis);
-    renderedXaxis.selectAll('path,line').style('stroke', styleVars.colors.text);
-    renderedXaxis.selectAll('text').style('fill', styleVars.colors.text);
+    renderedXaxis.selectAll('path,line').style('stroke', textColor);
+    renderedXaxis.selectAll('text').style('fill', textColor);
   }
 
   private renderBlobs(svg) {

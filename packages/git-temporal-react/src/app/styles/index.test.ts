@@ -1,24 +1,4 @@
-import { style, replaceGlobalStyles } from 'app/styles';
-
-replaceGlobalStyles({
-  page: {
-    margin: 20,
-    backgroundColor: 'black',
-  },
-  panel: {
-    backgroundColor: 'white',
-    marginRight: 10,
-    marginBottom: 10,
-    padding: 100,
-  },
-  altPanel: {
-    _extends: 'panel',
-    backgroundColor: 'greyaf',
-  },
-  altPanelPage: {
-    _extends: ['altPanel', 'page'],
-  },
-});
+import { style } from 'app/styles';
 
 describe('app/styles', () => {
   describe('when calling style()', () => {

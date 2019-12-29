@@ -55,6 +55,12 @@ const styles = {
     alignItems: 'flex-end',
     marginRight: '@margins.medium+px',
   },
+  pathPart: {
+    margin: '0px 2px',
+  },
+  pathSeparator: {
+    color: '@colors.linkText',
+  },
 };
 
 export const Header: React.FC = (): React.ReactElement => {
@@ -95,22 +101,18 @@ export const Header: React.FC = (): React.ReactElement => {
   );
 
   function renderLinkPart(part, index, fullPath, lastIndex) {
-    const styles: any = [
-      {
-        margin: '0px 2px',
-      },
-    ];
+    const partStyles: any = [styles.pathPart];
     let onClick = undefined;
     if (index !== lastIndex) {
-      styles.push('link');
+      partStyles.push('link');
       onClick = () => onLinkPartClick(fullPath);
     }
     const sep = index === 0 ? '' : '/';
 
     return (
       <span style={{ wordBreak: 'break-all' }}>
-        {sep}
-        <span style={style(styles)} key={index} onClick={onClick}>
+        <span style={style(styles.pathSeparator)}>{sep}</span>
+        <span style={style(partStyles)} key={index} onClick={onClick}>
           {part}
         </span>
       </span>

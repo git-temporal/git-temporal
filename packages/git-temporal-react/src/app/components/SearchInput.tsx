@@ -29,6 +29,8 @@ const searchInputStyle = {
   border: 'none',
   fontSize: 14,
   margin: '0px 5px',
+  color: '@colors.inputForeground',
+  backgroundColor: '@colors.inputBackground',
 };
 const clearIconStyle = {
   _extends: ['smallerText'],
@@ -78,7 +80,7 @@ export class SearchInput extends React.Component<
         <SearchIcon height={16} width={16} style={style(searchIconStyle)} />
         <input
           type="text"
-          style={searchInputStyle}
+          style={style(searchInputStyle)}
           value={this.state.value || ''}
           placeholder={placeholder}
           onChange={this.onInputChange}

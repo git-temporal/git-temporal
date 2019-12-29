@@ -7,18 +7,24 @@
 // }
 // return (<MyComponent style={style(myStyle)}/>);
 //
-export let styleVars = {
+const styleVars = {
   colors: {
     added: 'green',
     altBackground: 'whitesmoke',
+    altForeground: '#333333',
     background: 'white',
     boxShadow: 'rgba(0, 0, 0, 0.2)',
+    blobColor: '#696969',
     deleted: 'red',
     disabledText: '#e0e0e0',
     error: 'red',
+    leftRevColor: 'red',
+    linkText: 'blue',
+    inputBackground: 'white',
+    inputForeground: '#333333',
+
     modified: 'orange',
     panelBorder: 'whitesmoke',
-    leftRevColor: 'red',
     rightRevColor: 'green',
     selectable: 'lightskyblue',
     selected: 'lightskyblue',
@@ -34,7 +40,7 @@ export let styleVars = {
 // NOTE: the colors above are used below as string values preceded with '@' so they
 //   can be intepolated at runtime and allow changes for theme-ing
 
-let globalStyles = {
+const globalStyles = {
   background: {
     background: '@colors.background',
   },
@@ -55,6 +61,7 @@ let globalStyles = {
   altPanel: {
     _extends: 'panel',
     background: '@colors.altBackground',
+    color: '@colors.altForeground',
   },
   borderedPanel: {
     _extends: 'panel',
@@ -172,7 +179,7 @@ let globalStyles = {
     background: '@colors.selected',
   },
   link: {
-    color: 'blue',
+    color: '@colors.linkText',
     cursor: 'pointer',
     textDecoration: 'underline',
   },
@@ -185,14 +192,6 @@ let globalStyles = {
     marginBottom: '@margins.medium+px',
   },
 };
-
-export function extendStyleVars(newStyleVars) {
-  styleVars = Object.assign(styleVars, newStyleVars);
-}
-
-export function replaceGlobalStyles(newGlobalStyles) {
-  globalStyles = newGlobalStyles;
-}
 
 export function style(...styles) {
   const styleOut = {};
@@ -213,6 +212,18 @@ export function style(...styles) {
     }
   }
   return interpolateStyleVars(styleOut);
+}
+
+export function getStyleVar(groupName, varName) {
+  // @ts-ignore
+  console.log('getStyleVars GT_STYLE_VARS', window && window.GT_STYLE_VARS);
+  // @ts-ignore
+  const globalOverrides = window && window.GT_STYLE_VARS;
+  const group =
+    (globalOverrides && globalOverrides[groupName]) || styleVars[groupName];
+
+  // group could be specified in globalOverrides but not include the var itself
+  return group[varName] || styleVars[groupName][varName];
 }
 
 function processExtends(styleObject) {
@@ -249,7 +260,7 @@ function interpolateStyleVars(styleObject) {
     let newValue = value;
     for (const match of matches) {
       const [_matchedValue, styleVarsGroup, styleVar] = match.match(regex);
-      const interpolated = styleVars[styleVarsGroup][styleVar];
+      const interpolated = getStyleVar(styleVarsGroup, styleVar);
       if (interpolated) {
         newValue = newValue.replace(regex, interpolated);
       }

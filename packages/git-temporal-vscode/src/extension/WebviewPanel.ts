@@ -155,7 +155,7 @@ export class WebviewPanel {
       (explorerFile && explorerFile.fsPath) ||
       activeTextEditor.document.fileName;
     // const themeName: string | undefined = workspace.getConfiguration("workbench").get("colorTheme")
-    console.log('webviewPanel currentPath', [currentPath, explorerFile]);
+    debug('webviewPanel currentPath', [currentPath, explorerFile]);
     return `
       <!DOCTYPE html>
       <html lang="en">
@@ -167,6 +167,11 @@ export class WebviewPanel {
       </head>
       <body>
         <div id="gitTemporal" data-current-path="${currentPath}">Loading...</div>
+        <script nonce=${nonce}>
+          window.GT_STYLE_VARS = {
+            colors: ${JSON.stringify(getColors())}
+          }
+        </script>
         <script nonce="${nonce}" src="${scriptUri}"></script>
       </body>
       </html>
@@ -182,4 +187,18 @@ function getNonce() {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   }
   return text;
+}
+
+function getColors() {
+  return {
+    altBackground: 'var(--vscode-sideBar-background)',
+    altForeground: 'var(--vscode-sideBar-foreground)',
+    background: 'var(--vscode-editor-background)',
+    blobColor: 'var(--vscode-editor-selectionForeground)',
+    linkText: 'var(--vscode-editorLink-activeForeground)',
+    inputBackground: 'var(--vscode-input-background)',
+    inputForeground: 'var(--vscode-input-foreground)',
+    text: 'var(--vscode-editor-foreground)',
+    z: 'var(--vscode-)',
+  };
 }

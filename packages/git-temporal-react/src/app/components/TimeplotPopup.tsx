@@ -1,5 +1,5 @@
 import React from 'react';
-import { style, styleVars } from 'app/styles';
+import { style } from 'app/styles';
 
 import { ICommit } from 'app/interfaces';
 import { Popup } from 'app/components/Popup';
