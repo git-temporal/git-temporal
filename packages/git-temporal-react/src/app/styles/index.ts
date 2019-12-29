@@ -12,7 +12,7 @@ const styleVars = {
     added: 'green',
     altBackground: 'whitesmoke',
     altForeground: '#333333',
-    background: 'white',
+    background: '#FEFEFE',
     boxShadow: 'rgba(0, 0, 0, 0.2)',
     blobColor: '#696969',
     deleted: 'red',
@@ -20,7 +20,7 @@ const styleVars = {
     error: 'red',
     leftRevColor: 'red',
     linkText: 'blue',
-    inputBackground: 'white',
+    inputBackground: '#FEFEFE',
     inputForeground: '#333333',
 
     modified: 'orange',

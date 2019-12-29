@@ -1,6 +1,6 @@
 import React from 'react';
 import { defer } from 'lodash';
-import { style } from 'app/styles';
+import { style, getStyleVar } from 'app/styles';
 import { editor } from 'monaco-editor';
 import { debug } from '@git-temporal/logger';
 
@@ -34,7 +34,7 @@ export class FileDifferences extends React.Component<FileDifferencesProps> {
 
   componentDidMount() {
     this.renderMonacoEditor();
-    // window && window.addEventListener('resize', this.renderMonacoEditor);
+    window && window.addEventListener('resize', this.renderMonacoEditor);
   }
 
   componentDidUpdate() {
@@ -64,10 +64,12 @@ export class FileDifferences extends React.Component<FileDifferencesProps> {
         el.offsetWidth
       } ${el.clientWidth}`
     );
-    debug(`renderMonacoEditor: ${JSON.stringify(this.props, null, 2)}`);
-
     const originalModel = editor.createModel(leftFileContents);
     const modifiedModel = editor.createModel(rightFileContents);
+
+    // @ts-ignore
+    editor.defineTheme('myTheme', this.getTheme());
+    editor.setTheme('myTheme');
 
     const diffEditor = editor.createDiffEditor(el);
     diffEditor.setModel({
@@ -79,5 +81,40 @@ export class FileDifferences extends React.Component<FileDifferencesProps> {
       followsCaret: true, // resets the navigator state when the user selects something in the editor
       ignoreCharChanges: true, // jump from line to line
     });
+  }
+
+  getTheme() {
+    const background = this.getColorValue('background');
+    const foreground = this.getColorValue('text');
+    const theme = {
+      base: 'vs',
+      inherit: true,
+      rules: [{ background, foreground }],
+      colors: {
+        'editor.foreground': foreground,
+        'editor.background': background,
+        // 'editor.lineHighlightBackground': '#0000FF20',
+        // 'editorLineNumber.foreground': '#008800',
+        // 'editor.selectionBackground': '#88000030',
+        // 'editor.inactiveSelectionBackground': '#88000015',
+      },
+    };
+    debug('FileDifferences.getTheme() returning ', theme);
+    return theme;
+  }
+
+  getColorValue(ourName: string): string {
+    const valueIn = getStyleVar('colors', ourName);
+
+    // interpolate css variable values to real color value for monaco
+    const matches = valueIn.match(/var\(([^\)]*)/);
+    if (matches) {
+      const varName = matches[1];
+      const value = getComputedStyle(document.documentElement).getPropertyValue(
+        varName
+      );
+      return value;
+    }
+    return valueIn;
   }
 }

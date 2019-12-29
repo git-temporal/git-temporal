@@ -21,8 +21,10 @@
   "homepage": "https://github.com/git-temporal/git-temporal/blob/master/packages/git-temporal-react/README.md",
   "scripts": {
     "build": "npm run build-vscode-webpack",
+    "build-watch": "npm run build-vscode-watch",
     "build-tsc": "NODE_ENV=production tsc -p ./tsconfig.build.json",
     "build-vscode-webpack": "NODE_ENV=production webpack --display-error-details --config config/webpack.config.vscode.js",
+    "build-vscode-watch": "NODE_ENV=production webpack --display-error-details --config config/webpack.config.vscode.js --watch",
     "clean": "rm -Rf dist lib coverage",
     "coverage": "open coverage/lcov-report/index.html",
     "reset": "rm -Rf node_modules && npm run clean",

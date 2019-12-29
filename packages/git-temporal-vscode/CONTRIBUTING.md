@@ -34,7 +34,7 @@ cd packages/git-temporal-react
 npm run build
 ```
 
-In a new terminall tab, build the vscode webview plugin and open vscode:
+In a new terminal tab, build the vscode webview plugin and open vscode:
 
 ```
 cd packages/git-temporal/vscode
@@ -52,9 +52,12 @@ In VSCode,
 
 As of right now there is no hot update capability when working on the vscode extension. Most of the UI lives in packages/git-temporal-react and you'll want to follow the instructions in the root CONTRIBUTING.md to run a hot server there for doing changes.
 
-When you want to see your changes in vscode,
+For a faster dev workflow,
 
-- run `npm run build` in packages/git-temporal-react
+- run once `npm run build-watch` in packages/git-temporal-react
+
+and then when you want to see your changes in vscode,
+
 - run `npm run build` in packages/git-temporal-vscode
 - reload VSCode development window (control+option+command+L)
 - close and reopen git-temporal in vscode (shift+command+P git-temporal)
