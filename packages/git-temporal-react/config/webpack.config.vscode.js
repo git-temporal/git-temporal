@@ -9,7 +9,7 @@ const { StatsWriterPlugin } = require('webpack-stats-plugin');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 const outputDir = path.resolve(__dirname, '../dist/');
-const libDir = path.resolve(__dirname, '../lib');
+const srcDir = path.resolve(__dirname, '../src');
 
 const devWebpack = require('./webpack.config.dev');
 const paths = require('./paths');
@@ -30,9 +30,9 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     // test directory isn't included in bundle but the linter config looks here for module resolution queues
-    modules: ['node_modules', libDir, paths.appNodeModules],
+    modules: ['node_modules', srcDir, paths.appNodeModules],
     alias: {
-      app: path.join(libDir, 'app'),
+      app: path.join(srcDir, 'app'),
     },
     // plugins: devWebpack.resolve.plugins,
   },
