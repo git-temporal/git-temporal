@@ -56,7 +56,11 @@ export class AuthorGravatarImage extends React.Component<
     return (
       <div style={outerStyle}>
         {notFound ? (
-          <AuthorPlaceholderImage holderForEmails={emails} />
+          <AuthorPlaceholderImage
+            holderForEmails={emails}
+            width={width}
+            height={height}
+          />
         ) : (
           <img
             data-for={emails[emailsIndex]}

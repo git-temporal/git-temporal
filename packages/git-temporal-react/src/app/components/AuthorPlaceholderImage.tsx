@@ -10,16 +10,23 @@ export interface AuthorPlaceholderImageProps {
 export const AuthorPlaceholderImage = (
   props: AuthorPlaceholderImageProps
 ): JSX.Element => {
-  const { width = 75, height = 75, holderForEmails = [] } = props;
+  const { width = 50, height = 50, holderForEmails = [] } = props;
+  let actualWidth = width;
+  let actualHeight = height;
 
-  /* tslint:disable */
+  // @ts-ignore
+  if (window.IS_VSCODE_WEBVIEW) {
+    // For what ever reason in vscode, a 50px IMG is
+    //  not the same as a 50px SVG and the SVG is bigger :/
+    actualHeight = height * 0.75;
+    actualWidth = width * 0.75;
+  }
   return (
-    // @ts-ignore
     <svg
       data-for={holderForEmails.join(', ')}
       version="1.1"
-      width={width}
-      height={height}
+      width={actualWidth}
+      height={actualHeight}
       viewBox="0 0 400 387.45387453874537"
       xmlns="http://www.w3.org/2000/svg"
     >
