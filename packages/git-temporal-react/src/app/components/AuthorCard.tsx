@@ -39,7 +39,7 @@ const authorNameStyle = {
 };
 
 const addedDeletedStyle = {
-  marginTop: 6,
+  float: 'none',
 };
 
 export const AuthorCard = (props: AuthorCardProps): JSX.Element => {
@@ -60,36 +60,34 @@ export const AuthorCard = (props: AuthorCardProps): JSX.Element => {
           >
             {author.authorName}
           </div>
-          <div>
-            <span style={style('smallerText')}>
+
+          <div style={style('smallerText')}>
+            <div>
+              {author.commits.length}
+              <span> commits spanning </span>
               <EpochSpan
-                firstEpochTime={author.lastCommitOn}
-                secondEpochTime={Date.now() / 1000}
+                firstEpochTime={author.firstCommitOn}
+                secondEpochTime={author.lastCommitOn}
               />
-              <span> ago</span>
-            </span>
+            </div>
+          </div>
+
+          <div style={style('smallerText')}>
+            <span>Last commit </span>
+            <EpochSpan
+              firstEpochTime={author.lastCommitOn}
+              secondEpochTime={Date.now() / 1000}
+            />
+            <span> ago</span>
+          </div>
+          <div style={style('smallerText')}>
             <AddedDeleted
               linesAdded={author.linesAdded}
               linesDeleted={author.linesDeleted}
               style={style(addedDeletedStyle)}
             />
+            <span> lines changed </span>
           </div>
-          <PercentBar
-            numerator={author.linesAdded + author.linesDeleted}
-            denominator={maxImpact}
-          />
-          <div style={style('smallerText')}>
-            {author.commits.length}
-            <span> commits spanning </span>
-            <EpochSpan
-              firstEpochTime={author.firstCommitOn}
-              secondEpochTime={author.lastCommitOn}
-            />
-          </div>
-          <PercentBar
-            numerator={author.commits.length}
-            denominator={maxCommits}
-          />
         </div>
       </Selectable>
     </div>

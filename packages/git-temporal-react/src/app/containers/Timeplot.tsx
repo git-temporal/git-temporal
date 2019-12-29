@@ -300,7 +300,6 @@ export class Timeplot extends React.Component<
   private onCommitSelected = (evt, commit, single) => {
     evt.stopPropagation();
     const { dispatch, commits } = this.props;
-    console.log('onCommitSelected', evt, commit, single, this.props.startDate);
     if (single) {
       dispatch(selectSingleCommit(commit, commits));
     } else {

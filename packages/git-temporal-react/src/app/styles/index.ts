@@ -119,7 +119,7 @@ const globalStyles = {
   },
   smallerText: {
     _extends: 'normalText',
-    fontSize: 9,
+    fontSize: 11,
   },
   boldText: {
     fontWeight: 'bold',
@@ -215,8 +215,6 @@ export function style(...styles) {
 }
 
 export function getStyleVar(groupName, varName) {
-  // @ts-ignore
-  console.log('getStyleVars GT_STYLE_VARS', window && window.GT_STYLE_VARS);
   // @ts-ignore
   const globalOverrides = window && window.GT_STYLE_VARS;
   const group =
