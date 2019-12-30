@@ -23,7 +23,7 @@ const openPanelStyle = {
 const closedPanelStyle = {
   _extends: ['flexColumn'],
   position: 'relative',
-  width: 30,
+  width: 20,
   transition: `all ${closeDelaySeconds}s ease`,
 };
 

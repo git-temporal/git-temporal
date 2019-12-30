@@ -40,6 +40,7 @@ const clearIconStyle = {
 };
 const searchIconStyle = {
   marginTop: 2,
+  fill: '@colors.text',
 };
 
 export class SearchInput extends React.Component<

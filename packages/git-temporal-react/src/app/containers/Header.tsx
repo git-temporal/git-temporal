@@ -40,11 +40,6 @@ const styles = {
   date: {
     transition: 'all 2s ease -in -out',
   },
-  dateSelected: {
-    _extends: 'h2Text',
-    margin: '0px 5px',
-    color: '@colors.selected',
-  },
   path: {
     _extends: ['inlineBlock', 'flexColumn'],
     marginBottom: 10,
@@ -56,10 +51,12 @@ const styles = {
     marginRight: '@margins.medium+px',
   },
   pathPart: {
+    extends: 'smallerText',
     margin: '0px 2px',
   },
   pathSeparator: {
     color: '@colors.linkText',
+    wordBreak: 'break-all ',
   },
 };
 
@@ -83,19 +80,21 @@ export const Header: React.FC = (): React.ReactElement => {
         </div>
         <div style={style(styles.searchAndReset)}>
           <Search />
-          {areCommitsFiltered && (
-            <ResetLink onClick={onResetDatesClick}>
-              Reset Search & Date Range
-            </ResetLink>
-          )}
         </div>
       </div>
-      <div style={style(styles.path)}>
-        <div>
-          <div style={style('h4Text', { marginBottom: 10 })}>
-            {renderPathLinks()}
+      <div style={style('flexRow')}>
+        <div style={style(styles.path)}>
+          <div>
+            <div style={style('h4Text', { marginBottom: 10 })}>
+              {renderPathLinks()}
+            </div>
           </div>
         </div>
+        {areCommitsFiltered && (
+          <ResetLink onClick={onResetDatesClick}>
+            Reset Search & Date Range
+          </ResetLink>
+        )}
       </div>
     </div>
   );
@@ -110,7 +109,7 @@ export const Header: React.FC = (): React.ReactElement => {
     const sep = index === 0 ? '' : '/';
 
     return (
-      <span style={{ wordBreak: 'break-all' }}>
+      <span>
         <span style={style(styles.pathSeparator)}>{sep}</span>
         <span style={style(partStyles)} key={index} onClick={onClick}>
           {part}

@@ -19,7 +19,7 @@ import { DirectoryDifferences } from 'app/components/DirectoryDifferences';
 import { FileDifferences } from 'app/components/FileDifferences';
 
 const outerStyle = {
-  _extends: ['borderedPanel', 'flexColumn', 'flexGrow'],
+  _extends: ['altPanel', 'flexColumn', 'flexGrow'],
   position: 'relative',
   overflow: 'hidden',
 };
@@ -27,6 +27,8 @@ const outerStyle = {
 const innerStyle = {
   _extends: ['flexColumn', 'flexGrow'],
   overflow: 'visible',
+  background: '@colors.background',
+  color: '@colors.text',
 };
 
 export const DifferenceViewer: React.FC = (): React.ReactElement => {

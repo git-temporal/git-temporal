@@ -15,8 +15,7 @@ const styles = {
     transition: 'all 2s ease -in -out',
   },
   dateSelected: {
-    _extends: 'h2Text',
-    margin: '0px 5px',
+    _extends: 'largerText',
     color: '@colors.selected',
   },
 };
@@ -35,7 +34,7 @@ export const ExplodingDateRange = (
   ];
 
   return (
-    <div style={style('h5Text')}>
+    <div>
       <ExplodeOnChange value={props.startDate}>
         <EpochDateTime
           value={props.startDate}

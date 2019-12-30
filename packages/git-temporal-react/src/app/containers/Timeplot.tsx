@@ -57,11 +57,11 @@ const outerStyle = {
 };
 
 const graphContainerStyle = {
-  _extends: ['borderedPanel', 'flexColumn'],
+  _extends: ['altPanel', 'flexColumn'],
   flexGrow: 0,
   flexShrink: 0,
   position: 'relative',
-  marginTop: 10,
+  marginTop: 5,
   minHeight: 100,
 };
 
@@ -69,10 +69,14 @@ const statsStyle = {
   _extends: 'normalText',
   width: '100%',
   textAlign: 'center',
+  paddingTop: '@margins.small+px',
+  paddingBottom: '@margins.small+px',
 };
 
 const timeplotStyle = {
   _extends: 'fill',
+  background: '@colors.background',
+  color: '@colors.text',
 };
 
 const markerStyle = {
@@ -146,7 +150,7 @@ export class Timeplot extends React.Component<
     const popupLeft =
       this.state.hoverMarkerLeft - this.state.scrollLeft <
       TIMEPLOT_POPUP_WIDTH + 20
-        ? this.state.hoverMarkerLeft - this.state.scrollLeft + outerLeft - 10
+        ? this.state.hoverMarkerLeft - this.state.scrollLeft + outerLeft - 20
         : this.state.hoverMarkerLeft -
           this.state.scrollLeft -
           TIMEPLOT_POPUP_WIDTH +

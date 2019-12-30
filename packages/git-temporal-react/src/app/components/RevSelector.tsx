@@ -15,28 +15,33 @@ export interface RevSelectorProps {
   disableNext?: boolean;
 }
 
-const ICON_SIZE = 24;
+const ICON_SIZE = 16;
 
 const defaultContainerStyle = {
-  _extends: ['flexRow', 'h3Text'],
-  marginRight: 20,
-  marginBottom: 10,
-  fontWeight: 'normal',
+  _extends: ['flexRow', 'normalText'],
+  alignSelf: 'baseline',
 };
 
 const iconStyle = {
   _extends: 'flexRow',
+  color: '@colors.altForeground',
+  marginBottom: '5px',
 };
 
 const labelStyle = {
   _extends: 'flexColumn',
-  flexGrow: 1,
+  flexGrow: 0,
   alignItems: 'center',
+};
+
+const grower = {
+  flexGrow: 1,
 };
 
 export const RevSelector = (props: RevSelectorProps): JSX.Element => {
   return (
     <div style={style(defaultContainerStyle, props.style)}>
+      <div style={style(grower)} />
       <Selectable style={style(iconStyle)} onClick={props.onPreviousRevClick}>
         <CaretLeftIcon height={ICON_SIZE} width={ICON_SIZE} />
       </Selectable>
@@ -44,6 +49,7 @@ export const RevSelector = (props: RevSelectorProps): JSX.Element => {
       <Selectable style={style(iconStyle)} onClick={props.onNextRevClick}>
         <CaretRightIcon height={ICON_SIZE} width={ICON_SIZE} />
       </Selectable>
+      <div style={style(grower)} />
     </div>
   );
 };

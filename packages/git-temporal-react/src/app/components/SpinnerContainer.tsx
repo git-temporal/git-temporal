@@ -26,7 +26,7 @@ const backdropStyle = {
   height: '100%',
   width: '100%',
   zIndex: '5',
-  backgroundColor: 'white',
+  backgroundColor: '@colors.background',
   opacity: 0.9,
 };
 

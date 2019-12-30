@@ -6,7 +6,7 @@ import { GitTemporalProps, DispatchProps, StateProps } from 'app/interfaces';
 import { selectPath } from 'app/actions';
 import { handleVscodeMessages } from 'app/actions/vscode';
 import { getGitTemporalContainerState } from 'app/selectors';
-import { style } from 'app/styles';
+import { style, getStyleVar } from 'app/styles';
 
 import { Header } from 'app/containers/Header';
 import { DifferenceViewer } from 'app/containers/DifferenceViewer';
@@ -15,6 +15,25 @@ import Timeplot from 'app/containers/Timeplot';
 import { SpinnerContainer } from 'app/components/SpinnerContainer';
 import { TransitionVisible } from 'app/components/TransitionVisible';
 import { SidePanel } from './containers/SidePanel';
+
+const pageStyle = () => {
+  const pageMarginTop = getStyleVar('margins', 'pageTop');
+  const pageMarginLeft = getStyleVar('margins', 'pageLeft');
+  const pageMarginBottom = getStyleVar('margins', 'pageBottom');
+  const pageMarginRight = getStyleVar('margins', 'pageRight');
+
+  return {
+    paddingTop: `${pageMarginTop}px`,
+    paddingLeft: `${pageMarginLeft}px`,
+    paddingBottom: `${pageMarginBottom}px`,
+    paddingRight: `${pageMarginRight}px`,
+
+    width: `calc(100% - ${pageMarginLeft + pageMarginRight}px)`,
+    height: `calc(100% - ${pageMarginTop + pageMarginBottom}px)`,
+    position: 'absolute',
+    backgroundColor: '@colors.background',
+  };
+};
 
 const transitionStyle = {
   _extends: 'flexColumn',
@@ -52,7 +71,7 @@ export class GitTemporal extends Component<
     debug('rendering GitTemporal');
 
     return (
-      <div style={style('page')}>
+      <div style={style(pageStyle())}>
         <SpinnerContainer isSpinning={isFetching}>
           <div style={style('flexColumn', mainContainerStyle)}>
             <Header />

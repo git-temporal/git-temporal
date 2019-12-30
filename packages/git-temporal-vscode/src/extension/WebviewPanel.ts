@@ -165,11 +165,16 @@ export class WebviewPanel {
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <title>Git Temporal</title>
       </head>
-      <body>
-        <div id="gitTemporal" data-current-path="${currentPath}">Loading...</div>
+      <body style="padding-top: 20px; padding-right: 20px; overflow: hidden">
+        <div
+          id="gitTemporal"
+          data-current-path="${currentPath}">
+          Loading...
+        </div>
         <script nonce=${nonce}>
           window.GT_STYLE_VARS = {
-            colors: ${JSON.stringify(getColors())}
+            colors: ${JSON.stringify(getColors())},
+            margins: ${JSON.stringify(getMargins())}
           }
         </script>
         <script nonce="${nonce}" src="${scriptUri}"></script>
@@ -200,5 +205,14 @@ function getColors() {
     inputForeground: 'var(--vscode-input-foreground)',
     text: 'var(--vscode-editor-foreground)',
     z: 'var(--vscode-)',
+  };
+}
+
+function getMargins() {
+  return {
+    pageTop: 5,
+    pageLeft: 0,
+    pageBottom: 10,
+    pageRight: 20,
   };
 }

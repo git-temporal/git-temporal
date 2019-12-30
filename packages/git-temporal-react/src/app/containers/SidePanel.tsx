@@ -12,7 +12,6 @@ import { Files } from 'app/containers/Files';
 import { Commits } from 'app/containers/Commits';
 
 import { CollapsibleSidePanel } from 'app/components/CollapsibleSidePanel';
-import { ResetLink } from 'app/components/ResetLink';
 
 const containerStyle = {
   _extends: ['altPanel'],

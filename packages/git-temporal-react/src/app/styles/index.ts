@@ -34,6 +34,10 @@ const styleVars = {
     small: 3,
     medium: 7,
     large: 15,
+    pageTop: 20,
+    pageLeft: 20,
+    pageBottom: 20,
+    pageRight: 20,
   },
 };
 
@@ -43,13 +47,6 @@ const styleVars = {
 const globalStyles = {
   background: {
     background: '@colors.background',
-  },
-  page: {
-    padding: '@margins.large+px',
-    width: 'calc(100% - 40px)',
-    height: 'calc(100% - 40px)',
-    position: 'absolute',
-    backgroundColor: '@colors.background',
   },
   panel: {
     background: '@colors.background',
@@ -221,7 +218,9 @@ export function getStyleVar(groupName, varName) {
     (globalOverrides && globalOverrides[groupName]) || styleVars[groupName];
 
   // group could be specified in globalOverrides but not include the var itself
-  return group[varName] || styleVars[groupName][varName];
+  return group.hasOwnProperty(varName)
+    ? group[varName]
+    : styleVars[groupName][varName];
 }
 
 function processExtends(styleObject) {

@@ -19,11 +19,11 @@ import { RevSelector } from 'app/components/RevSelector';
 import { EpochDateTime } from 'app/components/EpochDateTime';
 
 const outerStyle = {
-  _extends: 'flexRow',
+  _extends: ['flexRow'],
   flexGrow: 0,
   flexShrink: 0,
-  marginBottom: '@margins.small+px',
-  borderBottom: '1px solid @colors.panelBorder',
+  background: '@colors.altBackground',
+  color: '@colors.altForeground',
 };
 
 const revSelectorStyle = {
