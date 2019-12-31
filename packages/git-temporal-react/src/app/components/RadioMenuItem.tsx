@@ -14,6 +14,7 @@ export interface RadioMenuItemProps {
 }
 
 const toggleButtonStyle = {
+  _extends: 'selectable',
   display: 'inline-block',
   width: 15,
   height: 15,

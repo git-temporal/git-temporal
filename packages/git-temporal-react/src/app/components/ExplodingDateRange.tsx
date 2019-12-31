@@ -12,10 +12,10 @@ export interface ExplodingDateRangeProps {
 
 const styles = {
   date: {
+    _extends: 'largerText',
     transition: 'all 2s ease -in -out',
   },
   dateSelected: {
-    _extends: 'largerText',
     color: '@colors.selected',
   },
 };
@@ -34,7 +34,7 @@ export const ExplodingDateRange = (
   ];
 
   return (
-    <div>
+    <div style={style(epochStyle)}>
       <ExplodeOnChange value={props.startDate}>
         <EpochDateTime
           value={props.startDate}

@@ -25,17 +25,20 @@ const styles = {
     marginTop: 0,
     width: 'calc(100% - 22px)',
   },
+  searchInputPopupOpen: {
+    borderBottomRightRadius: 0,
+  },
   popup: {
+    border: 'solid 2px @colors.selectable',
+    borderRightWidth: '1px',
+    borderTop: 'none',
     marginRight: 0,
+    marginTop: '-2px',
   },
 };
 
 const suggestedSearchPrefixes = ['author:', 'commit:', 'file:'];
 
-// export class Search extends Component<
-//   SearchProps & DispatchProps,
-//   SearchLocalState
-// > {
 export const Search: React.FC = (): React.ReactElement => {
   const [searchHasFocus, setSearchHasFocus] = useState(false);
   const [selectedSuggestion, setSelectedSuggestion] = useState('all');
@@ -43,6 +46,9 @@ export const Search: React.FC = (): React.ReactElement => {
   const dispatch = useDispatch();
   const debouncedOnBlur = debounce(onSearchBlur, 200);
   const isPopupOpen = searchHasFocus && search && search.trim().length > 0;
+  const searchInputStyle = isPopupOpen
+    ? [styles.searchInput, styles.searchInputPopupOpen]
+    : styles.searchInput;
 
   return (
     <div style={style(styles.container)}>
@@ -53,7 +59,7 @@ export const Search: React.FC = (): React.ReactElement => {
         onFocus={onSearchFocus}
         onBlur={debouncedOnBlur}
         onKeyDown={onKeyboard}
-        style={style(styles.searchInput)}
+        style={style(searchInputStyle)}
         placeholder="search authors, files or commits"
       />
       <Popup isOpen={isPopupOpen} style={style(styles.popup)} noBackdrop>

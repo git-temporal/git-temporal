@@ -62,7 +62,6 @@ const styles = {
 
 export const Header: React.FC = (): React.ReactElement => {
   const selectedPath = useSelector(getSelectedPath);
-  const commits = useSelector(getFilteredCommits);
   const startDate = useSelector(getDefaultedStartDate);
   const endDate = useSelector(getDefaultedEndDate);
   const areCommitsFiltered = useSelector(getAreCommitsFiltered);

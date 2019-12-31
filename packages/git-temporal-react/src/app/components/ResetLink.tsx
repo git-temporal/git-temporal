@@ -12,7 +12,7 @@ export interface ResetLinkProps {
 
 const defaultContainerStyle = {
   _extends: ['smallerText', 'link', 'inlineBlock'],
-  marginRight: 0,
+  marginRight: '@margins.pageRight+px',
   marginLeft: '@margins.medium+px',
 };
 

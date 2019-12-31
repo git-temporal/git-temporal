@@ -13,8 +13,6 @@ export const ToggleButton = (props: ToggleButtonProps): JSX.Element => {
   const styles: any = [];
   if (props.isSelected) {
     styles.push('selected');
-  } else {
-    styles.push('selectable');
   }
   styles.push(props.style);
   return (

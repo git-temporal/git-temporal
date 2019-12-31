@@ -25,22 +25,31 @@ const buttonStyle = {
   padding: '0px 5px',
 };
 
+const buttonStyleMenuOpen = {
+  _extends: buttonStyle,
+  borderBottomRightRadius: '0px',
+  borderBottomLeftRadius: '0px',
+};
+
 const menuStyle = {
-  right: 0,
+  border: 'solid 2px @colors.selectable',
+  borderTopRightRadius: '0px',
   marginRight: 0,
   minWidth: 180,
+  right: '2px',
 };
 
 export const ActionMenu = (props: ActionMenuProps): JSX.Element => {
   {
     const { isMenuOpen, onMenuToggle } = props;
+    const adjButtonStyle = isMenuOpen ? buttonStyleMenuOpen : buttonStyle;
 
     return (
       <div style={style(props.style, containerStyle)}>
         <ToggleButton
           isSelected={isMenuOpen}
           onClick={onMenuToggle}
-          style={buttonStyle}
+          style={adjButtonStyle}
         >
           ...
         </ToggleButton>
