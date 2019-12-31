@@ -2,7 +2,15 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "bootstrap": "npx lerna bootstrap"
+    "bootstrap": "npx lerna bootstrap",
+    "build": "npm run build:commons && npm run build:logger && npm run build:diff-scraper && npm run build:log-scraper && npm run build:api-node-express && npm run build:git-temporal-react && npm run build:git-temporal-vscode",
+    "build:commons": "cd packages/commons && npm run build",
+    "build:logger": "cd packages/logger && npm run build",
+    "build:diff-scraper": "cd packages/git-diff-scraper && npm run build",
+    "build:log-scraper": "cd packages/git-log-scraper && npm run build",
+    "build:api-node-express": "cd packages/api-node-express && npm run build",
+    "build:git-temporal-react": "cd packages/git-temporal-react && npm run build",
+    "build:git-temporal-vscode": "cd packages/git-temporal-vscode && npm run build"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.7",

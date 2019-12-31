@@ -25,20 +25,13 @@ git clone git@github.com:git-temporal/git-temporal.git
 cd git-temporal
 npm install
 npx lerna bootstrap
-```
-
-In a new terminal tab, build react component for vscode:
-
-```
-cd packages/git-temporal-react
 npm run build
 ```
 
-In a new terminal tab, build the vscode webview plugin and open vscode:
+Open VSCode in the plugin directory
 
 ```
-cd packages/git-temporal/vscode
-npm run build
+cd packages/git-temporal-vscode
 code .
 ```
 

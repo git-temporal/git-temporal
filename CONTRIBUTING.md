@@ -5,6 +5,7 @@
   - [Getting started](#getting-started)
     - [Start the API service](#start-the-api-service)
     - [Start the React hot server](#start-the-react-hot-server)
+    - [Run the development version of VSCode plugin](#run-the-development-version-of-vscode-plugin)
   - [Updating External Dependencies](#updating-external-dependencies)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -39,6 +40,12 @@ Bootstrapping links packages together in the tree so that you can make changes t
 npx lerna bootstrap
 ```
 
+Build everything (from the monorepo root):
+
+```
+npm run build
+```
+
 See [lerna docs](https://github.com/lerna/lerna/blob/master/README.md) for more monorepo power user badassness.
 
 ### Start the API service
@@ -62,6 +69,10 @@ npm run start
 ```
 
 That's pretty much it. If everything went as expected you should be looking at a web browser with the git-temporal UI for the repository.
+
+### Run the development version of VSCode plugin
+
+See packages/git-temporal-vscode/CONTRIBUTING.md
 
 ## Updating External Dependencies
 
