@@ -1,7 +1,7 @@
 import child_process from 'child_process';
 import * as fs from 'fs';
-import { findGitRoot } from '@git-temporal/commons';
-import { log, setPrefix } from '@git-temporal/logger';
+import { findGitRoot, escapeForCli } from '@git-temporal/commons';
+import { debug, setPrefix } from '@git-temporal/logger';
 
 setPrefix('git-log-scraper');
 
@@ -31,28 +31,66 @@ export function getCommitHistory(fileName) {
   };
 }
 
+export function getCommitRange(fileName) {
+  const gitRoot = findGitRoot(fileName);
+  const logFlags = gitLogFlags({ follow: false });
+
+  debug('getCommitRange', { fileName, logFlags });
+
+  const allRevHashes = execGitCommand(
+    gitRoot,
+    `git rev-list HEAD -- ${fileName}`
+  )
+    .split('\n')
+    .filter(l => l.length > 0);
+
+  debug('allRevHashes', allRevHashes);
+
+  const firstCommitRaw = execGitCommand(
+    gitRoot,
+    `git log ${logFlags} -n1 ${allRevHashes[allRevHashes.length - 1]}`
+  );
+  const firstCommit = parseGitLogOutput(firstCommitRaw);
+
+  const lastCommitRaw = execGitCommand(
+    gitRoot,
+    `git log ${logFlags} -n 1 -- ${escapeForCli(fileName)}`
+  );
+  const lastCommit = parseGitLogOutput(lastCommitRaw);
+
+  return {
+    firstCommit,
+    lastCommit,
+    count: allRevHashes.length,
+  };
+}
+
 // Implementation
+
+function execGitCommand(gitRoot: string, cmd: string): string {
+  debug(`$ ${cmd}`);
+  return child_process
+    .execSync(cmd, { cwd: gitRoot, stdio: 'pipe' })
+    .toString();
+}
 
 function fetchFileHistory(fileName) {
   const gitRoot = findGitRoot(fileName);
+  const flags = gitLogFlags();
+  // use -- fileName and git log will work on deleted files and paths
+  return execGitCommand(
+    gitRoot,
+    `git log ${flags} -- ${escapeForCli(fileName)}`
+  );
+}
 
+function gitLogFlags(options = { follow: true }) {
   let format = '';
   for (const attr in parsedAttributes) {
     format += `${attr}:${parsedAttributes[attr]}`;
   }
-  const flags = ` --pretty=\"format:${format}\" --topo-order --date=local --numstat --follow`;
-
-  // use -- fileName and git log will work on deleted files and paths
-  const cmd = `git log${flags} -- ${escapeForCli(fileName)}`;
-  if (process.env.DEBUG === '1') {
-    log(`$ ${cmd}`);
-  }
-  return child_process
-    .execSync(cmd, {
-      cwd: gitRoot,
-      stdio: 'pipe',
-    })
-    .toString();
+  const follow = options.follow ? ' --follow' : '';
+  return `--pretty=\"format:${format}\" --topo-order --date=local --numstat ${follow}`;
 }
 
 function safelyParseInt(parseableNumber) {
@@ -110,7 +148,7 @@ function parseGitLogOutput(output) {
     }
     matches = line.match(/^([^\:]+):(.*)/);
     if (matches) {
-      let attr;
+      let attr: string;
       [, attr, parsedValue] = matches;
       if (attr === 'authorDate') {
         parsedValue = parseInt(parsedValue, 10);
@@ -143,18 +181,4 @@ function parseGitLogOutput(output) {
     addLogItem();
   }
   return logItems;
-}
-
-/*
-    See nodejs path.normalize().  This method extends path.normalize() to add:
-    - escape of space characters
-*/
-function escapeForCli(filepath) {
-  if (!filepath || filepath.trim().length === 0) {
-    return './';
-  }
-  return filepath.replace(
-    /([\s\(\)\-])/g,
-    `${process.platform === 'win32' ? '^' : '\\'}$1`
-  );
 }

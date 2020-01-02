@@ -203,7 +203,7 @@ function getColors() {
     linkText: 'var(--vscode-editorLink-activeForeground)',
     inputBackground: 'var(--vscode-input-background)',
     inputForeground: 'var(--vscode-input-foreground)',
-    text: 'var(--vscode-editor-foreground)',
+    text: 'var(--vscode-foreground)',
     z: 'var(--vscode-)',
   };
 }

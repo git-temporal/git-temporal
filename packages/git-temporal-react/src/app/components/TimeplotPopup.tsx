@@ -25,7 +25,7 @@ export const TIMEPLOT_POPUP_WIDTH = 350;
 const defaultPopupStyle = {
   _extends: 'normalText',
   position: 'absolute',
-  bottom: 180,
+  bottom: 130,
   width: TIMEPLOT_POPUP_WIDTH,
   right: 'initial',
   border: 'solid 4px @colors.selectable',

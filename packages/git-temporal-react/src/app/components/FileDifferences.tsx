@@ -93,6 +93,8 @@ export class FileDifferences extends React.Component<FileDifferencesProps> {
       colors: {
         'editor.foreground': foreground,
         'editor.background': background,
+        // don't show selection
+        'editorCursor.foreground': background,
         // 'editor.lineHighlightBackground': '#0000FF20',
         // 'editorLineNumber.foreground': '#008800',
         // 'editor.selectionBackground': '#88000030',

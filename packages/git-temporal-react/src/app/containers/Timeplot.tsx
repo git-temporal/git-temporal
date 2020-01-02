@@ -51,9 +51,11 @@ const initialState = {
   mouseInPopover: false,
 };
 
+const GRAPH_HEIGHT = 120;
+
 const outerStyle = {
   overflow: 'visible', // needed for popup
-  flex: '0 0 200px',
+  flex: `0 0 ${GRAPH_HEIGHT}px`,
 };
 
 const graphContainerStyle = {
@@ -62,7 +64,8 @@ const graphContainerStyle = {
   flexShrink: 0,
   position: 'relative',
   marginTop: 5,
-  minHeight: 100,
+  minHeight: GRAPH_HEIGHT,
+  overflow: 'hidden',
 };
 
 const statsStyle = {
@@ -71,6 +74,14 @@ const statsStyle = {
   textAlign: 'center',
   paddingTop: '@margins.small+px',
   paddingBottom: '@margins.small+px',
+  position: 'absolute',
+  top: '@margins.medium+px',
+};
+
+const zoomStyle = {
+  position: 'absolute',
+  top: '@margins.small+px',
+  zIndex: 1,
 };
 
 const timeplotStyle = {
@@ -81,7 +92,7 @@ const timeplotStyle = {
 
 const markerStyle = {
   position: 'absolute',
-  height: 130,
+  height: GRAPH_HEIGHT,
   width: 10,
   opacity: 0.5,
   zIndex: 1,
@@ -168,12 +179,14 @@ export class Timeplot extends React.Component<
             onScroll={this.onScroll}
             customZooms={this.state.customZooms}
             scrollLeft={this.state.scrollLeft}
+            style={style(zoomStyle)}
           >
             <TimeplotGraph
               forceRender={this.state.timeplotRenders}
               commits={this.props.commits}
               style={style(timeplotStyle)}
               ref={this.timeplotRef}
+              height={GRAPH_HEIGHT}
               highlightedCommitIds={this.props.highlightedCommitIds}
               startDate={startDate}
               endDate={endDate}

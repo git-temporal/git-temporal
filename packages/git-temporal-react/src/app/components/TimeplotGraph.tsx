@@ -23,6 +23,7 @@ export interface TimeplotGraphProps {
   // increment or change the value passed to force a rerender of the graph
   // for zoom or resize changes
   forceRender?: number;
+  height?: number;
   highlightedCommitIds?: string[];
   style?: string | object;
   onMouseEnter?: (evt, date?) => void;
@@ -35,6 +36,7 @@ export interface TimeplotGraphProps {
 const outerStyle = {
   _extends: 'fill',
   position: 'relative',
+  overflow: 'hidden',
 };
 
 const blobStyle = {
@@ -150,6 +152,13 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
     return element && element.scrollWidth;
   };
 
+  private getHeight(): number {
+    return (
+      (this.props.height && this.props.height) ||
+      this.timeplotGraphRef.current.clientHeight
+    );
+  }
+
   public scrollLeft = newScrollLeft => {
     const element = this.timeplotGraphRef.current;
     element.scrollLeft = newScrollLeft;
@@ -199,7 +208,7 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
       .select(element)
       .append('svg')
       .attr('width', element.clientWidth)
-      .attr('height', element.clientHeight);
+      .attr('height', this.getHeight());
     this.calibrateScales();
     this.renderBlobs(this.svg);
     this.renderAxis(this.svg);
@@ -212,7 +221,7 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
     const element = this.timeplotGraphRef.current;
     const { commits } = this.props;
     const w = element.clientWidth;
-    const h = element.clientHeight;
+    const h = this.getHeight();
     const maxImpact = d3.max(commits.map(d => d.linesAdded + d.linesDeleted));
     const minDate = getUTCDateOfCommit(commits[commits.length - 1]);
     const maxDate = getUTCDateOfCommit(commits[0]); // Date.now();
@@ -234,7 +243,7 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
 
   private renderAxis(svg) {
     const element = this.timeplotGraphRef.current;
-    const h = element.clientHeight;
+    const h = this.getHeight();
     const textColor = getStyleVar('colors', 'text');
 
     const xAxis = d3

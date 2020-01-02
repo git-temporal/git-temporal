@@ -17,6 +17,7 @@ export interface ZoomContainerProps {
   onMouseEnter?: (evt: object) => void;
   onMouseLeave?: (evt: object) => void;
   onScroll?: (scrollLeft: number) => void;
+  // applied to the selector only
   style?: string | object;
 }
 
@@ -63,7 +64,7 @@ export class ZoomContainer extends React.Component<
     };
     return (
       <div
-        style={style(this.props.style, outerStyle)}
+        style={style(outerStyle)}
         onMouseEnter={this.props.onMouseEnter}
         onMouseLeave={this.props.onMouseLeave}
       >
@@ -75,7 +76,7 @@ export class ZoomContainer extends React.Component<
             {this.props.children}
           </div>
         </HorizontalScroller>
-        <div style={style(zoomSelectorStyle)}>
+        <div style={style(zoomSelectorStyle, this.props.style)}>
           <label style={style('normalText')}>
             <select onChange={this.onZoomChange}>
               {this.renderZoomOptions()}

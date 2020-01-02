@@ -7,6 +7,8 @@
 // }
 // return (<MyComponent style={style(myStyle)}/>);
 //
+// These are used to map theme colors and other style tweaks in the various
+// editor plugins.
 const styleVars = {
   colors: {
     added: 'green',
