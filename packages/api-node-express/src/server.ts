@@ -3,7 +3,7 @@ import express from 'express';
 import morgan from 'morgan';
 import { debug, log, setPrefix } from '@git-temporal/logger';
 
-import { serveHistory } from './history';
+import { serveHistory, serveCommitRange } from './history';
 import { serveDiff } from './diff';
 import { findGitRoot } from '@git-temporal/commons';
 
@@ -22,6 +22,7 @@ app.use(morgan('combined'));
 
 app.get('/git-temporal/history', serveHistory);
 app.get('/git-temporal/diff', serveDiff);
+app.get('/git-temporal/commitRange', serveCommitRange);
 
 app.listen(port, () => log(`API server listening on port ${port}!`));
 
