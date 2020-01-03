@@ -10,6 +10,9 @@ import {
   getStartDate,
   getEndDate,
   getRerenderRequestedAt,
+  getEarliestStartDate,
+  getLatestStartDate,
+  getTotalCommits,
 } from './stateVars';
 
 import { getAuthorsAndCommits } from './authors';
@@ -58,6 +61,9 @@ export const getTimeplotContainerState = createSelector(
   getStartDate,
   getEndDate,
   getRerenderRequestedAt,
+  getEarliestStartDate,
+  getLatestStartDate,
+  getTotalCommits,
   (
     selectedPath,
     highlightedCommitIds,
@@ -65,7 +71,10 @@ export const getTimeplotContainerState = createSelector(
     authorsAndCommits,
     startDate,
     endDate,
-    rerenderRequestedAt
+    rerenderRequestedAt,
+    earliestStartDate,
+    latestStartDate,
+    totalCommits
   ) => ({
     selectedPath,
     highlightedCommitIds,
@@ -73,6 +82,10 @@ export const getTimeplotContainerState = createSelector(
     startDate,
     endDate,
     rerenderRequestedAt,
+    earliestStartDate,
+    latestStartDate,
+    totalCommits,
+
     authors: authorsAndCommits.length,
   })
 );

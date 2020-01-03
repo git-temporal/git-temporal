@@ -43,16 +43,11 @@ export const DirectoryDifferences: React.FC<DirectoryDifferencesProps> = (
 
   useEffect(() => {
     if (didModifiedFilesChange(prevModifiedFiles)) {
-      debug(
-        'componentDidUpdate modifiedFiles changed',
-        prevModifiedFiles,
-        props
-      );
+      debug('componentDidUpdate modifiedFiles changed');
       // setExpandedNodes([]);
     }
   });
   const { leftTree, rightTree } = props;
-  debug('DirectoryDifferences::render()', leftTree, rightTree);
   return (
     <div style={style(outerStyle, props.style)}>
       <DirectoryTree

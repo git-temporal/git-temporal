@@ -214,7 +214,7 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
     this.renderAxis(this.svg);
     this.updateHighlightedCommits();
 
-    debug(`TimeplotGraph: rendered ${element.innerHTML}`);
+    debug(`TimeplotGraph: rendered`);
   }
 
   private calibrateScales() {

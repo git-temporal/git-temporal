@@ -1,4 +1,3 @@
-import { selectedPath } from './../reducers/index';
 import { fetchDiff } from 'app/actions/diff';
 import { debug } from '@git-temporal/logger';
 

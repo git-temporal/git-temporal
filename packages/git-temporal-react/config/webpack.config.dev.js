@@ -277,4 +277,9 @@ module.exports = {
   performance: {
     hints: false,
   },
+
+  watchOptions: {
+    // rebuild when one of our monorepo packages changes
+    ignored: [/node_modules([\\]+|\/)+(?!@git-temporal)/],
+  },
 };

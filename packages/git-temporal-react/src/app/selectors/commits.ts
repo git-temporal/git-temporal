@@ -16,7 +16,6 @@ import {
   getStartDate,
   getEndDate,
 } from './stateVars';
-import { endDate } from 'app/reducers';
 
 // returns commits for the current path filtered by selected authors
 // and time range

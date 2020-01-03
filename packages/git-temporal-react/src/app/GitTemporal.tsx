@@ -75,28 +75,23 @@ export class GitTemporal extends Component<
         <SpinnerContainer isSpinning={isFetching}>
           <div style={style('flexColumn', mainContainerStyle)}>
             <Header />
-            <TransitionVisible
-              isVisible={!isFetching}
-              style={style(transitionStyle)}
+            <div
+              style={style('flexRow', 'flexGrow', {
+                overflow: 'visible',
+                height: '100%',
+              })}
             >
+              <SidePanel />
               <div
-                style={style('flexRow', 'flexGrow', {
-                  overflow: 'visible',
-                  height: '100%',
+                style={style('flexColumn', 'flexGrow', {
+                  transition: `all .5 ease`,
+                  overflow: 'hidden',
                 })}
               >
-                <SidePanel />
-                <div
-                  style={style('flexColumn', 'flexGrow', {
-                    transition: `all .5 ease`,
-                    overflow: 'hidden',
-                  })}
-                >
-                  <DifferenceViewer />
-                  <Timeplot />
-                </div>
+                <DifferenceViewer />
+                <Timeplot />
               </div>
-            </TransitionVisible>
+            </div>
           </div>
         </SpinnerContainer>
       </div>

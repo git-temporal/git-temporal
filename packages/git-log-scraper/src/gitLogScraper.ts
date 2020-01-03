@@ -49,9 +49,12 @@ export function getCommitRange(fileName: string) {
 
   debug('getCommitRange', { fileName, logFlags });
 
+  const cmdFileName = fileName === gitRoot ? '.' : fileName;
   const allRevHashes = execGitCommand(
     gitRoot,
-    `git rev-list --single-worktree --ignore-missing --topo-order --no-merges HEAD -- ${fileName}`
+    `git rev-list --single-worktree --ignore-missing --topo-order --no-merges HEAD -- ${escapeForCli(
+      cmdFileName
+    )}`
   )
     .split('\n')
     .filter(l => l.length > 0);
@@ -74,6 +77,7 @@ export function getCommitRange(fileName: string) {
     firstCommit,
     lastCommit,
     count: allRevHashes.length,
+    path: fileName,
   };
 }
 
@@ -82,7 +86,11 @@ export function getCommitRange(fileName: string) {
 function execGitCommand(gitRoot: string, cmd: string): string {
   debug(`$ ${cmd}`);
   return child_process
-    .execSync(cmd, { cwd: gitRoot, stdio: 'pipe' })
+    .execSync(cmd, {
+      cwd: gitRoot,
+      stdio: 'pipe',
+      maxBuffer: 10 * 1024 * 1024,
+    })
     .toString();
 }
 

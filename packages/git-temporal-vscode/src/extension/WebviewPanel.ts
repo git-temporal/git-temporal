@@ -1,8 +1,7 @@
 import * as path from 'path';
 import * as vscode from 'vscode';
-import { getCommitHistory } from '@git-temporal/git-log-scraper';
-import { getDiff } from '@git-temporal/git-diff-scraper';
 import { debug } from '@git-temporal/logger';
+import { dispatchMessage } from './dispatchMessage';
 
 let activeTextEditor;
 let explorerFile;
@@ -66,57 +65,20 @@ export class WebviewPanel {
     // Listen for when the panel is disposed
     // This happens when the user closes the panel or when the panel is
     // closed programmatically
-    this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
+    this._panel.onDidDispose(this.dispose, null, this._disposables);
 
     // Update the content based on view changes
-    this._panel.onDidChangeViewState(
-      () => {
-        if (this._panel.visible) {
-          this.update();
-        }
-      },
-      null,
-      this._disposables
-    );
+    this._panel.onDidChangeViewState(this.update, null, this._disposables);
 
     // Handle messages from the webview
     this._panel.webview.onDidReceiveMessage(
-      message => {
-        debug('got message', message);
-        switch (message.command) {
-          case 'alert':
-            vscode.window.showErrorMessage(message.text);
-            return;
-          case 'history':
-            const history = getCommitHistory(message.path);
-            debug('sending history', message.path, history);
-            this._panel.webview.postMessage({
-              type: 'commitData',
-              data: history,
-              path: message.path,
-            });
-            break;
-          case 'diff':
-            const diff = getDiff(
-              message.path,
-              message.leftCommit,
-              message.rightCommit
-            );
-            debug('sending diff', diff);
-            this._panel.webview.postMessage({
-              type: 'diffData',
-              data: diff,
-              path: message.path,
-            });
-            break;
-        }
-      },
+      this.dispatchMessage,
       null,
       this._disposables
     );
   }
 
-  public dispose() {
+  public dispose = () => {
     debug('disposing WebviewPanel.html');
 
     WebviewPanel.currentPanel = undefined;
@@ -130,13 +92,23 @@ export class WebviewPanel {
         x.dispose();
       }
     }
-  }
+  };
 
-  private update() {
+  private dispatchMessage = message => {
+    const resp = dispatchMessage(message);
+    if (resp) {
+      this._panel.webview.postMessage(resp);
+    }
+  };
+
+  private update = () => {
+    if (!this._panel.visible) {
+      return;
+    }
     debug('updating WebviewPanel.html');
     this._panel.title = 'Git Temporal';
     this._panel.webview.html = this.getHtmlForWebview();
-  }
+  };
 
   private getHtmlForWebview() {
     // Local path to index script run in the webview

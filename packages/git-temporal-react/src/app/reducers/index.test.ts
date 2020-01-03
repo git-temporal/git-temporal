@@ -1,4 +1,5 @@
-import * as reducers from 'app/reducers';
+import * as commitReducers from 'app/reducers/commits';
+import * as uiReducers from 'app/reducers/ui';
 import { ActionTypes } from 'app/actions/ActionTypes';
 
 // actions is globally mocked for all tests
@@ -10,7 +11,7 @@ describe('reducers', () => {
   describe('commits', () => {
     const expectedWithoutPath = [];
     test('returns default state without an action.type', () => {
-      expect(reducers.commits(expectedWithoutPath, {})).toEqual(
+      expect(commitReducers.commits(expectedWithoutPath, {})).toEqual(
         expectedWithoutPath
       );
     });
@@ -21,27 +22,19 @@ describe('reducers', () => {
   describe('when testing all-of-the-things', () => {
     const testsToRun = [
       {
-        reducer: reducers.selectedPath,
+        reducer: commitReducers.selectedPath,
         state: '',
         action: { selectedPath: '/some/path' },
       },
       {
-        reducer: reducers.highlightedCommitIds,
+        reducer: commitReducers.highlightedCommitIds,
         state: '',
         action: { commitIds: ['aphonyIdSTring'] },
       },
+      { reducer: commitReducers.commits, state: [], action: { commits: [] } },
+      { reducer: commitReducers.isFetching, state: false, action: {} },
       {
-        reducer: reducers.commits,
-        state: [],
-        action: { commits: [] },
-      },
-      {
-        reducer: reducers.isFetching,
-        state: false,
-        action: {},
-      },
-      {
-        reducer: reducers.rerenderRequestedAt,
+        reducer: uiReducers.rerenderRequestedAt,
         state: Date.now(),
         action: {},
       },

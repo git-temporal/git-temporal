@@ -17,6 +17,7 @@ const paths = require('./paths');
 module.exports = {
   name: 'git-temporal-react',
   entry: [
+    require.resolve('babel-polyfill'),
     require.resolve('./polyfills'),
     require.resolve('../index.vscode.js'),
   ],
@@ -37,6 +38,7 @@ module.exports = {
     // plugins: devWebpack.resolve.plugins,
   },
 
+  watchOptions: devWebpack.watchOptions,
   module: devWebpack.module,
 
   plugins: [
