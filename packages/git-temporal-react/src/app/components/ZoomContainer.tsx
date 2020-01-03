@@ -40,8 +40,7 @@ const scrollContainerStyle = {
 const zoomSelectorStyle = {
   position: 'absolute',
   right: 18,
-  bottom: -19,
-  backgroundColor: style('backgroundColor')['backgroundColor'],
+  background: 'transparent',
 };
 
 const availableZooms = [100, 200, 300, 500, 800, 1300];

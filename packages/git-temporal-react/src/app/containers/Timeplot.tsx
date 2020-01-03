@@ -165,13 +165,19 @@ export class Timeplot extends React.Component<
         this.outerRef.current.getBoundingClientRect().x) ||
       0;
     const popupLeft =
+      // WARNING must manually test changes to this in
+      // vsCode plugin - the popup is in a slightly
+      // shifted position from the web
       this.state.hoverMarkerLeft - this.state.scrollLeft <
       TIMEPLOT_POPUP_WIDTH + 20
-        ? this.state.hoverMarkerLeft - this.state.scrollLeft + outerLeft - 20
-        : this.state.hoverMarkerLeft -
+        ? // when popup is opening right of hover marker:
+          this.state.hoverMarkerLeft - this.state.scrollLeft + outerLeft - 20
+        : // when popup is opening to the left of the hover:
+          this.state.hoverMarkerLeft -
           this.state.scrollLeft -
           TIMEPLOT_POPUP_WIDTH +
-          outerLeft;
+          outerLeft +
+          20;
 
     return (
       <div style={style(outerStyle)} ref={this.outerRef}>
