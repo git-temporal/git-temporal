@@ -2,7 +2,10 @@ import { fetchDiff } from 'app/actions/diff';
 import { debug } from '@git-temporal/logger';
 
 import { setStartDate, setEndDate } from 'app/actions';
-import { defaultStartDate, defaultEndDate } from 'app/selectors/dates';
+import {
+  getDefaultedStartDate,
+  getDefaultedEndDate,
+} from 'app/selectors/dates';
 
 export const setDates = (startDate: number, endDate: number | Date | null) => (
   dispatch,
@@ -31,13 +34,13 @@ export const setDates = (startDate: number, endDate: number | Date | null) => (
   dispatch(setStartDate(newStartDate));
   dispatch(setEndDate(newEndDate));
 
-  const { selectedPath, commits } = getState();
+  const state = getState();
   dispatch(
     fetchDiff(
-      selectedPath,
-      commits,
-      defaultStartDate(newStartDate, commits),
-      defaultEndDate(newEndDate, commits)
+      state.selectedPath,
+      state.commits,
+      getDefaultedStartDate(state),
+      getDefaultedEndDate(state)
     )
   );
 };

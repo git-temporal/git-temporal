@@ -2,10 +2,7 @@ import React from 'react';
 // @ts-ignore
 import { useSelector, useDispatch } from 'react-redux';
 
-import {
-  getFilteredCommits,
-  getAreCommitsFiltered,
-} from 'app/selectors/commits';
+import { getAreCommitsFiltered } from 'app/selectors/commits';
 import { getSelectedPath } from 'app/selectors/stateVars';
 import {
   getDefaultedStartDate,

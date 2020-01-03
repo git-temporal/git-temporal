@@ -15,7 +15,7 @@ export interface FileDifferencesProps {
 const outerStyle = {
   position: 'relative',
   flexGrow: 1,
-  overflow: 'visible',
+  overflow: 'hidden',
 };
 
 const editorStyle = {
@@ -51,6 +51,9 @@ export class FileDifferences extends React.Component<FileDifferencesProps> {
 
   renderMonacoEditor() {
     const el = this.monacoEditorElRef.current;
+    if (!el) {
+      return null;
+    }
     el.innerHTML = '';
 
     const leftFileContents =

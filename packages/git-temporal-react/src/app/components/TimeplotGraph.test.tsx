@@ -18,6 +18,8 @@ describe('components/TimeplotGraph', () => {
           commits={fiveCommits}
           startDate={fiveCommits[3].authorDate + 1}
           endDate={fiveCommits[2].authorDate - 1}
+          earliestCommitDate={fiveCommits[0].authorDate}
+          latestCommitDate={fiveCommits.slice(-1)[0].authorDate}
         />
       );
       wrapper.instance().focus();
@@ -61,6 +63,8 @@ describe('components/TimeplotGraph', () => {
           commits={fiveCommits}
           startDate={fiveCommits[3].authorDate + 1}
           endDate={fiveCommits[2].authorDate - 1}
+          earliestCommitDate={fiveCommits[0].authorDate}
+          latestCommitDate={fiveCommits.slice(-1)[0].authorDate}
           onMouseEnter={onMouseEnterMock}
           onMouseLeave={onMouseLeaveMock}
           onMouseMove={onMouseMoveMock}

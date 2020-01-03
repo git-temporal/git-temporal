@@ -6,6 +6,8 @@ import { SpinnerImage } from 'app/components/SpinnerImage';
 export interface SpinnerContainerProps {
   isSpinning: boolean;
   children: string | JSX.Element | JSX.Element[];
+  spinnerImageSize?: number;
+  opaque?: boolean;
   style?: string | object;
 }
 
@@ -31,21 +33,30 @@ const backdropStyle = {
 };
 
 export const SpinnerContainer = (props: SpinnerContainerProps): JSX.Element => {
+  const { isSpinning, opaque, spinnerImageSize } = props;
   return (
     <div style={style(containerStyle, props.style)}>
-      {renderSpinner(props.isSpinning)}
-      {props.children}
+      {renderSpinner(isSpinning, opaque, spinnerImageSize)}
+      {!(isSpinning && opaque) && props.children}
     </div>
   );
 };
 
-const renderSpinner = (isSpinning: boolean) => {
+const renderSpinner = (
+  isSpinning: boolean,
+  opaque: boolean,
+  spinnerImageSize: number
+) => {
   if (!isSpinning) {
     return null;
   }
+  const s = backdropStyle;
+  if (opaque) {
+    s.opacity = 1;
+  }
   return (
     <div style={style(backdropStyle)}>
-      <SpinnerImage />
+      <SpinnerImage width={spinnerImageSize} height={spinnerImageSize} />
     </div>
   );
 };

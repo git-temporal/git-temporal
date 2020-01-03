@@ -1,4 +1,3 @@
-import { totalCommits } from './../reducers/commits';
 import { debug } from '@git-temporal/logger';
 
 import { ICommit } from 'app/interfaces/index';
@@ -6,7 +5,10 @@ import { setDates } from 'app/actions/setDates';
 import { ActionTypes } from 'app/actions/ActionTypes';
 import { isVscode, vscode } from 'app/actions/vscode';
 import { fetchDiff } from 'app/actions/diff';
-import { defaultStartDate, defaultEndDate } from 'app/selectors/dates';
+import {
+  getDefaultedStartDate,
+  getDefaultedEndDate,
+} from 'app/selectors/dates';
 
 const PAGE_SIZE = 500;
 
@@ -72,9 +74,9 @@ export const receiveCommits = (path, response) => (dispatch, getState) => {
   debug('actions/commits receiveCommits', response.skip);
   const { skip } = response;
   if (skip === 0) {
-    const { startDate, endDate, commits } = getState();
-    const diffStartDate = defaultStartDate(startDate, commits);
-    const diffEndDate = defaultEndDate(endDate, commits);
+    const state = getState();
+    const diffStartDate = getDefaultedStartDate(state);
+    const diffEndDate = getDefaultedEndDate(state);
     dispatch(fetchDiff(path, response.commits, diffStartDate, diffEndDate));
   }
 

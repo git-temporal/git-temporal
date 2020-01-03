@@ -1,17 +1,25 @@
 import { createSelector } from 'reselect';
 
 import { ICommit } from 'app/interfaces';
-import { getStartDate, getEndDate, getCommits } from 'app/selectors/stateVars';
+import {
+  getStartDate,
+  getEndDate,
+  getCommits,
+  getEarliestCommitDate,
+  getLatestCommitDate,
+} from 'app/selectors/stateVars';
 
 export const getDefaultedStartDate = createSelector(
   getStartDate,
+  getEarliestCommitDate,
   getCommits,
   defaultStartDate
 );
 
-export function defaultStartDate(startDate, commits) {
+export function defaultStartDate(startDate, earliestCommitDate, commits) {
   return (
     startDate ||
+    earliestCommitDate ||
     (commits && commits.length > 0 && commits[commits.length - 1].authorDate) ||
     0
   );
@@ -19,13 +27,15 @@ export function defaultStartDate(startDate, commits) {
 
 export const getDefaultedEndDate = createSelector(
   getEndDate,
+  getLatestCommitDate,
   getCommits,
   defaultEndDate
 );
 
-export function defaultEndDate(endDate, commits) {
+export function defaultEndDate(endDate, latestCommitDate, commits) {
   return (
     endDate ||
+    latestCommitDate ||
     (commits && commits.length > 0 && commits[0].authorDate) || // @ts-ignore
     Math.floor((new Date() as any) / 1000)
   );

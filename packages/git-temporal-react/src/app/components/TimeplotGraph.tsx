@@ -20,6 +20,11 @@ export interface TimeplotGraphProps {
   commits: ICommit[];
   startDate: number;
   endDate: number;
+
+  // used for the x scale range
+  earliestCommitDate: number;
+  latestCommitDate: number;
+
   // increment or change the value passed to force a rerender of the graph
   // for zoom or resize changes
   forceRender?: number;
@@ -219,12 +224,12 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
 
   private calibrateScales() {
     const element = this.timeplotGraphRef.current;
-    const { commits } = this.props;
+    const { earliestCommitDate, latestCommitDate, commits } = this.props;
     const w = element.clientWidth;
     const h = this.getHeight();
     const maxImpact = d3.max(commits.map(d => d.linesAdded + d.linesDeleted));
-    const minDate = getUTCDateOfCommit(commits[commits.length - 1]);
-    const maxDate = getUTCDateOfCommit(commits[0]); // Date.now();
+    const minDate = dateFromEpochDate(earliestCommitDate);
+    const maxDate = dateFromEpochDate(latestCommitDate);
 
     this.xScale = d3
       .scaleTime()

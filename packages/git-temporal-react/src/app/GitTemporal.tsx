@@ -12,8 +12,6 @@ import { Header } from 'app/containers/Header';
 import { DifferenceViewer } from 'app/containers/DifferenceViewer';
 import Timeplot from 'app/containers/Timeplot';
 
-import { SpinnerContainer } from 'app/components/SpinnerContainer';
-import { TransitionVisible } from 'app/components/TransitionVisible';
 import { SidePanel } from './containers/SidePanel';
 
 const pageStyle = () => {
@@ -43,7 +41,7 @@ const transitionStyle = {
 
 const mainContainerStyle = {
   height: '100%',
-  overflow: 'scroll',
+  overflow: 'hidden',
 };
 
 export class GitTemporal extends Component<
@@ -67,33 +65,30 @@ export class GitTemporal extends Component<
   }
 
   render() {
-    const { isFetching } = this.props;
     debug('rendering GitTemporal');
 
     return (
       <div style={style(pageStyle())}>
-        <SpinnerContainer isSpinning={isFetching}>
-          <div style={style('flexColumn', mainContainerStyle)}>
-            <Header />
+        <div style={style('flexColumn', mainContainerStyle)}>
+          <Header />
+          <div
+            style={style('flexRow', 'flexGrow', {
+              overflow: 'hidden',
+              height: '100%',
+            })}
+          >
+            <SidePanel />
             <div
-              style={style('flexRow', 'flexGrow', {
-                overflow: 'visible',
-                height: '100%',
+              style={style('flexColumn', 'flexGrow', {
+                transition: `all .5 ease`,
+                overflow: 'hidden',
               })}
             >
-              <SidePanel />
-              <div
-                style={style('flexColumn', 'flexGrow', {
-                  transition: `all .5 ease`,
-                  overflow: 'hidden',
-                })}
-              >
-                <DifferenceViewer />
-                <Timeplot />
-              </div>
+              <DifferenceViewer />
+              <Timeplot />
             </div>
           </div>
-        </SpinnerContainer>
+        </div>
       </div>
     );
   }

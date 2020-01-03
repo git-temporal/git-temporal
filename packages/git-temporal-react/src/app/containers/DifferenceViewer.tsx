@@ -26,7 +26,7 @@ const outerStyle = {
 
 const innerStyle = {
   _extends: ['flexColumn', 'flexGrow'],
-  overflow: 'visible',
+  overflow: 'hidden',
   background: '@colors.background',
   color: '@colors.text',
 };
@@ -45,6 +45,7 @@ export const DifferenceViewer: React.FC = (): React.ReactElement => {
       <SpinnerContainer
         isSpinning={isDiffFetching || !diff}
         style={style(innerStyle)}
+        opaque
       >
         <DifferenceViewerHeader />
         {diff && diff.isDirectory ? (

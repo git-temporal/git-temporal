@@ -1,8 +1,8 @@
 export const getSelectedPath = state => state.selectedPath;
 export const getCommits = state => state.commits;
 export const getIsFetching = state => state.isFetching;
-export const getEarliestStartDate = state => state.earliestStateDate;
-export const getLatestStartDate = state => state.latestStartDate;
+export const getEarliestCommitDate = state => state.earliestCommitDate;
+export const getLatestCommitDate = state => state.latestCommitDate;
 export const getTotalCommits = state => state.totalCommits;
 
 export const getRerenderRequestedAt = state => state.rerenderRequestedAt;

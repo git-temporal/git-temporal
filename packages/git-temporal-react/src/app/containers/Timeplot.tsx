@@ -16,6 +16,7 @@ import { ZoomContainer, ICustomZoom } from 'app/components/ZoomContainer';
 import { TimeplotGraph } from 'app/components/TimeplotGraph';
 import { EpochSpan } from 'app/components/EpochSpan';
 import { CommaNumber } from 'app/components/CommaNumber';
+import { SpinnerContainer } from 'app/components/SpinnerContainer';
 
 import {
   TimeplotPopup,
@@ -60,11 +61,10 @@ const outerStyle = {
 
 const graphContainerStyle = {
   _extends: ['altPanel', 'flexColumn'],
-  flexGrow: 0,
-  flexShrink: 0,
+  flex: `0 0 ${GRAPH_HEIGHT}px`,
+  minHeight: `${GRAPH_HEIGHT}px`,
   position: 'relative',
   marginTop: 5,
-  minHeight: GRAPH_HEIGHT,
   overflow: 'hidden',
 };
 
@@ -76,6 +76,7 @@ const statsStyle = {
   paddingBottom: '@margins.small+px',
   position: 'absolute',
   top: '@margins.medium+px',
+  textShadow: '2px 2px @colors.background',
 };
 
 const zoomStyle = {
@@ -150,10 +151,15 @@ export class Timeplot extends React.Component<
   }
 
   render() {
-    const { commits = [], startDate, endDate } = this.props;
-    if (!commits || commits.length === 0) {
-      return null;
-    }
+    const {
+      commits = [],
+      startDate,
+      endDate,
+      earliestCommitDate,
+      latestCommitDate,
+      highlightedCommitIds,
+    } = this.props;
+
     const outerLeft =
       (this.outerRef.current &&
         this.outerRef.current.getBoundingClientRect().x) ||
@@ -167,50 +173,54 @@ export class Timeplot extends React.Component<
           TIMEPLOT_POPUP_WIDTH +
           outerLeft;
 
-    const firstCommitTime = commits[commits.length - 1].authorDate;
-    const lastCommitTime = commits[0].authorDate;
-
     return (
       <div style={style(outerStyle)} ref={this.outerRef}>
         <div style={style(graphContainerStyle)}>
-          <ZoomContainer
-            onZoom={this.onZoom}
-            onMouseLeave={this.debouncedOnMouseLeave}
-            onScroll={this.onScroll}
-            customZooms={this.state.customZooms}
-            scrollLeft={this.state.scrollLeft}
-            style={style(zoomStyle)}
+          <SpinnerContainer
+            isSpinning={!commits || commits.length === 0}
+            spinnerImageSize={75}
           >
-            <TimeplotGraph
-              forceRender={this.state.timeplotRenders}
-              commits={this.props.commits}
-              style={style(timeplotStyle)}
-              ref={this.timeplotRef}
-              height={GRAPH_HEIGHT}
-              highlightedCommitIds={this.props.highlightedCommitIds}
-              startDate={startDate}
-              endDate={endDate}
-              onMouseMove={this.debouncedOnMouseMove}
-              onMouseDown={this.onMouseDown}
-              onMouseUp={this.onMouseUp}
-            />
-            <div
-              style={style(hoverMarkerStyle, {
-                left: this.state.hoverMarkerLeft,
-              })}
-              onMouseMove={this.onMouseHoverMarker}
-              onMouseEnter={this.onMouseHoverMarker}
-            />
-          </ZoomContainer>
+            <ZoomContainer
+              onZoom={this.onZoom}
+              onMouseLeave={this.debouncedOnMouseLeave}
+              onScroll={this.onScroll}
+              customZooms={this.state.customZooms}
+              scrollLeft={this.state.scrollLeft}
+              style={style(zoomStyle)}
+            >
+              <TimeplotGraph
+                forceRender={this.state.timeplotRenders}
+                commits={this.props.commits}
+                style={style(timeplotStyle)}
+                ref={this.timeplotRef}
+                height={GRAPH_HEIGHT}
+                highlightedCommitIds={highlightedCommitIds}
+                startDate={startDate}
+                endDate={endDate}
+                earliestCommitDate={earliestCommitDate}
+                latestCommitDate={latestCommitDate}
+                onMouseMove={this.debouncedOnMouseMove}
+                onMouseDown={this.onMouseDown}
+                onMouseUp={this.onMouseUp}
+              />
+              <div
+                style={style(hoverMarkerStyle, {
+                  left: this.state.hoverMarkerLeft,
+                })}
+                onMouseMove={this.onMouseHoverMarker}
+                onMouseEnter={this.onMouseHoverMarker}
+              />
+            </ZoomContainer>
 
-          <div style={style(statsStyle)}>
-            Total of <CommaNumber value={this.props.commits.length} /> commits
-            by <CommaNumber value={this.props.authors} /> authors spanning{' '}
-            <EpochSpan
-              firstEpochTime={firstCommitTime}
-              secondEpochTime={lastCommitTime}
-            />
-          </div>
+            <div style={style(statsStyle)}>
+              Total of <CommaNumber value={this.props.commits.length} /> commits
+              by <CommaNumber value={this.props.authors} /> authors spanning{' '}
+              <EpochSpan
+                firstEpochTime={earliestCommitDate}
+                secondEpochTime={latestCommitDate}
+              />
+            </div>
+          </SpinnerContainer>
         </div>
         <TimeplotPopup
           commits={this.state.popupCommits}

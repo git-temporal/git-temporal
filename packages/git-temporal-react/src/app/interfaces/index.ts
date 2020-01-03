@@ -1,3 +1,4 @@
+import { latestCommitDate } from './../reducers/commits';
 export type ModifiedFileStatuses = 'modified' | 'added' | 'deleted';
 
 export interface GitTemporalProps {
@@ -94,5 +95,7 @@ export interface ITimeplotState {
   authors: number;
   startDate: number;
   endDate: number;
+  earliestCommitDate: number;
+  latestCommitDate: number;
   rerenderRequestedAt: Date;
 }
