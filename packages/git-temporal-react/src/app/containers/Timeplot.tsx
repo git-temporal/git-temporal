@@ -79,6 +79,11 @@ const statsStyle = {
   textShadow: '2px 2px @colors.background',
 };
 
+const statsTextStyle = {
+  opacity: 0.8,
+  backgroundColor: '@colors.background',
+};
+
 const zoomStyle = {
   position: 'absolute',
   top: '@margins.small+px',
@@ -153,6 +158,7 @@ export class Timeplot extends React.Component<
   render() {
     const {
       commits = [],
+      isFetching,
       startDate,
       endDate,
       earliestCommitDate,
@@ -219,12 +225,15 @@ export class Timeplot extends React.Component<
             </ZoomContainer>
 
             <div style={style(statsStyle)}>
-              Total of <CommaNumber value={this.props.commits.length} /> commits
-              by <CommaNumber value={this.props.authors} /> authors spanning{' '}
-              <EpochSpan
-                firstEpochTime={earliestCommitDate}
-                secondEpochTime={latestCommitDate}
-              />
+              <span style={style(statsTextStyle)}>
+                {!isFetching ? 'Total of ' : 'Counting... '}
+                <CommaNumber value={this.props.commits.length} /> commits by{' '}
+                <CommaNumber value={this.props.authors} /> authors spanning{' '}
+                <EpochSpan
+                  firstEpochTime={earliestCommitDate}
+                  secondEpochTime={latestCommitDate}
+                />
+              </span>
             </div>
           </SpinnerContainer>
         </div>

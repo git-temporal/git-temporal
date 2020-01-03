@@ -93,6 +93,7 @@ export interface ITimeplotState {
   highlightedCommitIds: string[];
   commits: ICommit[];
   authors: number;
+  isFetching: boolean;
   startDate: number;
   endDate: number;
   earliestCommitDate: number;

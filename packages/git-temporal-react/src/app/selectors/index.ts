@@ -58,6 +58,7 @@ export const getTimeplotContainerState = createSelector(
   getHighlightedCommitIds,
   getCommitsForTimeplot, // not filtered by start and end dates
   getAuthorsAndCommits,
+  getIsFetching,
   getStartDate,
   getEndDate,
   getRerenderRequestedAt,
@@ -69,6 +70,7 @@ export const getTimeplotContainerState = createSelector(
     highlightedCommitIds,
     commits,
     authorsAndCommits,
+    isFetching,
     startDate,
     endDate,
     rerenderRequestedAt,
@@ -79,6 +81,7 @@ export const getTimeplotContainerState = createSelector(
     selectedPath,
     highlightedCommitIds,
     commits,
+    isFetching,
     startDate,
     endDate,
     rerenderRequestedAt,

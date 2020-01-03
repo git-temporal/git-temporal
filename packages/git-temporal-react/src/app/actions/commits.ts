@@ -10,7 +10,7 @@ import {
   getDefaultedEndDate,
 } from 'app/selectors/dates';
 
-const PAGE_SIZE = 500;
+const PAGE_SIZE = 1000;
 
 //
 //  These actions fetch commits in pages until all commits are received
@@ -83,7 +83,13 @@ export const receiveCommits = (path, response) => (dispatch, getState) => {
   const nextSkip = skip + PAGE_SIZE;
   const { totalCommits } = getState();
   if (nextSkip < totalCommits) {
-    dispatch(fetchPageOfCommits(path, nextSkip, PAGE_SIZE));
+    // if you ask `git log -skip 500 -max-count 500` and there are say 510
+    // commits, git will return the last 500 commits instead of the last 10
+    const pageSize =
+      nextSkip + PAGE_SIZE > totalCommits
+        ? totalCommits - nextSkip - 1
+        : PAGE_SIZE;
+    dispatch(fetchPageOfCommits(path, nextSkip, pageSize));
   } else {
     dispatch(receivedAllCommits(path));
   }

@@ -14,6 +14,7 @@ describe('components/Timeplot', () => {
           highlightedCommitIds={[fiveCommits[2].id]}
           commits={fiveCommits}
           authors={6}
+          isFetching={false}
           startDate={fiveCommits[3].authorDate}
           endDate={fiveCommits[2].authorDate}
           earliestCommitDate={fiveCommits[0].authorDate}

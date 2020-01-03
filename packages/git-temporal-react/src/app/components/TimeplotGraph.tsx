@@ -1,4 +1,5 @@
 import React from 'react';
+import { throttle } from 'lodash';
 import { debug } from '@git-temporal/logger';
 import { style, getStyleVar } from 'app/styles';
 import * as d3 from 'd3';
@@ -7,11 +8,7 @@ require('d3-selection-multi');
 import { ICommit } from 'app/interfaces';
 import { addMoveToFront } from 'app/utilities/d3';
 import { dateFromEpochDate } from 'app/utilities/dates';
-import {
-  getUTCDateOfCommit,
-  getHourOfCommit,
-  first20CommitsEqual,
-} from 'app/utilities/commits';
+import { getUTCDateOfCommit, getHourOfCommit } from 'app/utilities/commits';
 
 addMoveToFront(d3);
 
@@ -46,7 +43,7 @@ const outerStyle = {
 
 const blobStyle = {
   fill: '@colors.blobColor',
-  opacity: 0.3,
+  opacity: 0.2,
 };
 
 const highlightedBlobStyle = {
@@ -87,12 +84,17 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
   public xScale;
   public yScale;
   public rScale;
+  private updateTimeplotGraphThrottled;
 
   constructor(props) {
     super(props);
     this.timeplotGraphRef = React.createRef();
 
     this.renderTimeplotGraph = this.renderTimeplotGraph.bind(this);
+    this.updateTimeplotGraphThrottled = throttle(
+      this.updateTimeplotGraph,
+      1000
+    );
   }
 
   componentDidMount() {
@@ -102,14 +104,17 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
 
   componentDidUpdate(prevProps) {
     if (
-      prevProps.commits.length !== this.props.commits.length ||
       prevProps.forceRender !== this.props.forceRender ||
-      !first20CommitsEqual(prevProps.commits, this.props.commits)
+      prevProps.earliestCommitDate !== this.props.earliestCommitDate ||
+      prevProps.latestCommitDate !== this.props.latestCommitDate
     ) {
       this.renderTimeplotGraph();
       this.forceUpdate();
-    }
-    if (prevProps.highlightedCommitIds !== this.props.highlightedCommitIds) {
+    } else if (prevProps.commits.length !== this.props.commits.length) {
+      this.updateTimeplotGraphThrottled();
+    } else if (
+      prevProps.highlightedCommitIds !== this.props.highlightedCommitIds
+    ) {
       this.updateHighlightedCommits();
     }
   }
@@ -201,11 +206,6 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
 
   private renderTimeplotGraph() {
     const element = this.timeplotGraphRef.current;
-    if (this.props.commits.length <= 0) {
-      element.innerHtml =
-        "<div class='placeholder'>No commits, nothing to see here.</div>";
-      return;
-    }
     this.clearTimeplotGraph();
 
     // this.$element.width(this.zoom * 100 + '%');
@@ -215,11 +215,24 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
       .attr('width', element.clientWidth)
       .attr('height', this.getHeight());
     this.calibrateScales();
-    this.renderBlobs(this.svg);
-    this.renderAxis(this.svg);
+    this.renderAxis();
+
+    if (this.props.commits.length <= 0) {
+      element.innerHtml =
+        "<div class='placeholder'>No commits, nothing to see here.</div>";
+      return;
+    }
+
+    this.renderBlobs();
     this.updateHighlightedCommits();
 
     debug(`TimeplotGraph: rendered`);
+  }
+
+  private updateTimeplotGraph() {
+    this.calibrateScales();
+    this.renderBlobs();
+    this.updateHighlightedCommits();
   }
 
   private calibrateScales() {
@@ -238,15 +251,15 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
     this.yScale = d3
       .scaleLinear()
       .domain([0, 25])
-      .range([10, h - PADDING * 2]);
+      .range([10, h - PADDING * 2 - 20]);
     this.rScale = d3
       .scalePow(10)
       .domain([1, maxImpact > 10000 ? 10000 : maxImpact])
-      .range([3, 30])
+      .range([3, 40])
       .clamp(true);
   }
 
-  private renderAxis(svg) {
+  private renderAxis() {
     const element = this.timeplotGraphRef.current;
     const h = this.getHeight();
     const textColor = getStyleVar('colors', 'text');
@@ -256,7 +269,7 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
       .scale(this.xScale)
       .ticks(element.scrollWidth / 100);
 
-    const renderedXaxis = svg
+    const renderedXaxis = this.svg
       .append('g')
       .attr('class', 'axis')
       .attr('transform', `translate(0, ${h - PADDING})`)
@@ -265,19 +278,18 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
     renderedXaxis.selectAll('text').style('fill', textColor);
   }
 
-  private renderBlobs(svg) {
-    const { commits } = this.props;
-    return svg
+  private renderBlobs() {
+    return this.svg
       .selectAll('circle')
-      .data(commits)
+      .data(this.props.commits)
       .enter()
       .append('circle')
       .attr('data-id', d => d.id)
       .attr('cx', d => this.xScale(getUTCDateOfCommit(d)))
-      .attr('cy', d => this.yScale(getHourOfCommit(d)))
+      .attr('cy', d => this.yScale(getHourOfCommit(d) + 10))
       .styles(style(blobStyle))
       .transition()
-      .duration(500)
+      .duration(1000)
       .attr('r', d => this.rScale(d.linesAdded + d.linesDeleted));
   }
 

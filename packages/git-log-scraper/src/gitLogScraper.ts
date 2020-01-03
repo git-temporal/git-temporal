@@ -52,14 +52,12 @@ export function getCommitRange(fileName: string) {
   const cmdFileName = fileName === gitRoot ? '.' : fileName;
   const allRevHashes = execGitCommand(
     gitRoot,
-    `git rev-list --single-worktree --ignore-missing --topo-order --no-merges HEAD -- ${escapeForCli(
+    `git log --pretty="format:%H" --topo-order --date=local --follow -- ${escapeForCli(
       cmdFileName
     )}`
-  )
-    .split('\n')
-    .filter(l => l.length > 0);
+  ).split('\n');
 
-  debug('allRevHashes', allRevHashes);
+  // debug('allRevHashes', allRevHashes);
 
   const firstCommitRaw = execGitCommand(
     gitRoot,
