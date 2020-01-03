@@ -86,9 +86,7 @@ export const receiveCommits = (path, response) => (dispatch, getState) => {
     // if you ask `git log -skip 500 -max-count 500` and there are say 510
     // commits, git will return the last 500 commits instead of the last 10
     const pageSize =
-      nextSkip + PAGE_SIZE > totalCommits
-        ? totalCommits - nextSkip - 1
-        : PAGE_SIZE;
+      nextSkip + PAGE_SIZE > totalCommits ? totalCommits - nextSkip : PAGE_SIZE;
     dispatch(fetchPageOfCommits(path, nextSkip, pageSize));
   } else {
     dispatch(receivedAllCommits(path));

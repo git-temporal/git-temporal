@@ -13,6 +13,7 @@ describe('components/Timeplot', () => {
           selectedPath="some/path/to/nowhere"
           highlightedCommitIds={[fiveCommits[2].id]}
           commits={fiveCommits}
+          totalCommits={5}
           authors={6}
           isFetching={false}
           startDate={fiveCommits[3].authorDate}

@@ -164,6 +164,7 @@ export class Timeplot extends React.Component<
       earliestCommitDate,
       latestCommitDate,
       highlightedCommitIds,
+      totalCommits,
     } = this.props;
 
     const outerLeft =
@@ -226,9 +227,17 @@ export class Timeplot extends React.Component<
 
             <div style={style(statsStyle)}>
               <span style={style(statsTextStyle)}>
-                {!isFetching ? 'Total of ' : 'Counting... '}
-                <CommaNumber value={this.props.commits.length} /> commits by{' '}
-                <CommaNumber value={this.props.authors} /> authors spanning{' '}
+                {!isFetching ? 'Total of ' : 'Retrieving '}
+                <CommaNumber value={commits.length} />
+                {isFetching && (
+                  <span>
+                    {' '}
+                    of <CommaNumber value={totalCommits} />
+                  </span>
+                )}
+                <span> commits by </span>
+                <CommaNumber value={this.props.authors} />
+                <span> authors spanning </span>
                 <EpochSpan
                   firstEpochTime={earliestCommitDate}
                   secondEpochTime={latestCommitDate}

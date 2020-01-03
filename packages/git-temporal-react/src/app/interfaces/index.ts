@@ -99,4 +99,5 @@ export interface ITimeplotState {
   earliestCommitDate: number;
   latestCommitDate: number;
   rerenderRequestedAt: Date;
+  totalCommits: number;
 }

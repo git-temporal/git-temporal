@@ -52,7 +52,7 @@ export function getCommitRange(fileName: string) {
   const cmdFileName = fileName === gitRoot ? '.' : fileName;
   const allRevHashes = execGitCommand(
     gitRoot,
-    `git log --pretty="format:%H" --topo-order --date=local --follow -- ${escapeForCli(
+    `git log --pretty="format:%H" --topo-order --date=local -- ${escapeForCli(
       cmdFileName
     )}`
   ).split('\n');
@@ -110,7 +110,7 @@ function gitLogFlags(options = { follow: true }) {
   for (const attr in parsedAttributes) {
     format += `${attr}:${parsedAttributes[attr]}`;
   }
-  const follow = options.follow ? ' --follow' : '';
+  const follow = false && options.follow ? ' --follow' : '';
   return `--pretty=\"format:${format}\" --topo-order --date=local --numstat ${follow}`;
 }
 
