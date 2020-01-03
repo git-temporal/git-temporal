@@ -191,7 +191,7 @@ export class Timeplot extends React.Component<
         <div style={style(graphContainerStyle)}>
           <SpinnerContainer
             isSpinning={!commits || commits.length === 0}
-            spinnerImageSize={75}
+            spinnerImageSize={0}
           >
             <ZoomContainer
               onZoom={this.onZoom}

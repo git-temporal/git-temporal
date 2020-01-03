@@ -33,6 +33,12 @@ export const fetchCommitsIfNeeded = path => (dispatch, getState) => {
   }
 };
 
+const shouldFetchCommits = (state, path) => {
+  return (
+    !state.commits || state.commits.length <= 0 || state.selectedPath !== path
+  );
+};
+
 export const requestCommits = path => ({
   selectedPath: path,
   type: ActionTypes.REQUEST_COMMITS,
@@ -70,11 +76,16 @@ export const fetchPageOfCommits = (path, skip, maxCount) => async dispatch => {
 };
 
 export const receiveCommits = (path, response) => (dispatch, getState) => {
+  const state = getState();
+  if (!state.isFetching || path !== state.selectedPath) {
+    // the user probably navigated to a new file or dir while paging
+    return;
+  }
+
   dispatch(_receiveCommits(path, response));
   debug('actions/commits receiveCommits', response.skip);
   const { skip } = response;
   if (skip === 0) {
-    const state = getState();
     const diffStartDate = getDefaultedStartDate(state);
     const diffEndDate = getDefaultedEndDate(state);
     dispatch(fetchDiff(path, response.commits, diffStartDate, diffEndDate));
@@ -116,15 +127,6 @@ const _fetch = (command, params) => {
   const url = new URL(`http://localhost:11966/git-temporal/${command}`);
   url.search = new URLSearchParams(params).toString();
   return fetch(url.toString());
-};
-
-const shouldFetchCommits = (state, path) => {
-  if (state.isFetching) {
-    return false;
-  }
-  return (
-    !state.commits || state.commits.length <= 0 || state.selectedPath !== path
-  );
 };
 
 export const selectSingleCommit = (commit, timeplotCommits) => (
