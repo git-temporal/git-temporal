@@ -1,10 +1,11 @@
 import { fetchDiff } from 'app/actions/diff';
-import { debug } from '@git-temporal/logger';
+import { debug } from 'app/utilities/logger';
 
 import { setStartDate, setEndDate } from 'app/actions';
 import {
   getDefaultedStartDate,
   getDefaultedEndDate,
+  dateFilteredCommits,
 } from 'app/selectors/dates';
 
 export const setDates = (startDate: number, endDate: number | Date | null) => (
@@ -35,12 +36,17 @@ export const setDates = (startDate: number, endDate: number | Date | null) => (
   dispatch(setEndDate(newEndDate));
 
   const state = getState();
+  const commitsForDates = dateFilteredCommits(
+    state.commits,
+    newStartDate,
+    newEndDate
+  );
+
   dispatch(
     fetchDiff(
       state.selectedPath,
-      state.commits,
-      getDefaultedStartDate(state),
-      getDefaultedEndDate(state)
+      commitsForDates[commitsForDates.length - 1],
+      commitsForDates[0]
     )
   );
 };

@@ -2,6 +2,8 @@ import { ActionTypes } from 'app/actions/ActionTypes';
 
 export const startDate = (state = null, action: any) => {
   switch (action.type) {
+    case ActionTypes.REQUEST_COMMITS:
+      return null;
     case ActionTypes.SET_START_DATE:
       return action.startDate;
   }
@@ -10,6 +12,8 @@ export const startDate = (state = null, action: any) => {
 
 export const endDate = (state = null, action: any) => {
   switch (action.type) {
+    case ActionTypes.REQUEST_COMMITS:
+      return null;
     case ActionTypes.SET_END_DATE:
       return action.endDate;
   }

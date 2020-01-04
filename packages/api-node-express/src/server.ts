@@ -1,13 +1,12 @@
 // @ts-ignore
 import express from 'express';
 import morgan from 'morgan';
-import { debug, log, setPrefix } from '@git-temporal/logger';
+
+import { findGitRoot } from '@git-temporal/commons';
 
 import { serveHistory, serveCommitRange } from './history';
 import { serveDiff } from './diff';
-import { findGitRoot } from '@git-temporal/commons';
-
-setPrefix('@git-temporal/api-node-express');
+import { debug, log } from 'common/logger';
 
 const app = express();
 const port = process.env.GT_API_PORT || 11966;

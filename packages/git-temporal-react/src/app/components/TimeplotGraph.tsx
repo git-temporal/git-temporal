@@ -1,6 +1,6 @@
 import React from 'react';
 import { throttle } from 'lodash';
-import { debug } from '@git-temporal/logger';
+import { debug } from 'app/utilities/logger';
 import { style, getStyleVar } from 'app/styles';
 import * as d3 from 'd3';
 require('d3-selection-multi');

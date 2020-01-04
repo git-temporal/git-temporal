@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 // @ts-ignore
 import { useSelector, useDispatch } from 'react-redux';
-import { debug } from '@git-temporal/logger';
+import { debug } from 'app/utilities/logger';
 
 import {
   highlightCommits,

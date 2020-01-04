@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { style } from 'app/styles';
-import { debug } from '@git-temporal/logger';
+import { debug } from 'app/utilities/logger';
 
 import { IModifiedFile } from 'app/interfaces';
 

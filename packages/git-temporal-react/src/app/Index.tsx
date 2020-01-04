@@ -3,13 +3,10 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import reduxThunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-import { setPrefix } from '@git-temporal/logger';
 
 import reducers from './reducers';
 import { GitTemporalProps } from './interfaces';
 import GitTemporal from './GitTemporal';
-
-setPrefix('git-temporal-react');
 
 const middleware = [reduxThunk];
 if (process.env.NODE_ENV !== 'production') {

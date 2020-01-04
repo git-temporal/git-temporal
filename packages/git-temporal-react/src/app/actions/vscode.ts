@@ -1,6 +1,6 @@
 import { receiveCommits, receiveCommitRange } from 'app/actions/commits';
 import { receiveDiff } from 'app/actions/diff';
-import { debug } from '@git-temporal/logger';
+import { debug } from 'app/utilities/logger';
 
 // @ts-ignore
 export const isVscode = window && window.IS_VSCODE_WEBVIEW;

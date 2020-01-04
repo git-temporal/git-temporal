@@ -1,11 +1,15 @@
 import { ICommit } from 'app/interfaces';
-import { dateFilteredCommits } from 'app/selectors/dates';
 import { ActionTypes } from 'app/actions/ActionTypes';
 import { isVscode, vscode } from 'app/actions/vscode';
-import { debug } from '@git-temporal/logger';
-import { start } from 'repl';
+import { debug } from 'app/utilities/logger';
 
-const requestDiff = (path: string) => ({
+const requestDiff = (
+  path: string,
+  leftCommit: ICommit,
+  rightCommit: ICommit
+) => ({
+  leftCommit,
+  rightCommit,
   selectedPath: path,
   type: ActionTypes.REQUEST_DIFF,
 });
@@ -16,30 +20,13 @@ export const receiveDiff = (path: string, diff: any) => ({
   type: ActionTypes.RECEIVE_DIFF,
 });
 
-export const setDiffStartCommit = (commitId: string) => ({
-  commitId,
-  type: ActionTypes.SET_DIFF_START_COMMIT,
-});
-
-export const setDiffEndCommit = (commitId: string) => ({
-  commitId,
-  type: ActionTypes.SET_DIFF_END_COMMIT,
-});
-
 export const fetchDiff = (
   path: string,
-  commits: ICommit[],
-  startDate: number,
-  endDate: number
+  leftCommit?: ICommit,
+  rightCommit?: ICommit
 ) => (dispatch: any): void => {
-  dispatch(requestDiff(path));
-  const filteredCommits = dateFilteredCommits(commits, startDate, endDate);
-  if (!filteredCommits || filteredCommits.length === 0) {
-    return;
-  }
-  // commits are in descending order
-  const rightCommit = filteredCommits[0];
-  const leftCommit = filteredCommits.slice(-1)[0];
+  // set state vars first for isDiffFetching
+  dispatch(requestDiff(path, leftCommit, rightCommit));
 
   if (isVscode) {
     debug('sending diff request to vscode ', path, leftCommit, rightCommit);

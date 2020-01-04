@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // @ts-ignore
 import { useSelector, useDispatch } from 'react-redux';
-import { debug } from '@git-temporal/logger';
+import { debug } from 'app/utilities/logger';
 
 import { selectPath, setOpenSidePanelGroup } from 'app/actions';
 import { CollapsibleSidePanelGroups } from 'app/actions/ActionTypes';

@@ -1,6 +1,6 @@
 import { timeThis } from '../common/timeThis';
 import { getDiff } from '@git-temporal/git-diff-scraper';
-import { log } from '@git-temporal/logger';
+import { log } from 'common/logger';
 
 export function serveDiff(req, res) {
   const requestPath = req.query.path || '.';

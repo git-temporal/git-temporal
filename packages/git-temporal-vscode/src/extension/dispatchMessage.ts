@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { debug } from '@git-temporal/logger';
+import { debug } from '../utilities/logger';
 import {
   getCommitHistory,
   getCommitRange,

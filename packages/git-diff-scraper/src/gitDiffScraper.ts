@@ -1,12 +1,11 @@
-import child_process from 'child_process';
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
 
-import { escapeForCli, findGitRoot } from '@git-temporal/commons';
-import { debug, error, setPrefix } from '@git-temporal/logger';
+import { escapeForCli, execSync, findGitRoot } from '@git-temporal/commons';
+import { createProxies } from '@git-temporal/logger';
 
-setPrefix('git-diff-scraper');
+const { debug, error } = createProxies('git-diff-scraper');
 
 interface IFetchContents {
   contents: string;
@@ -67,16 +66,9 @@ function fetchContents(commitId, requestPath, gitRoot): IFetchContents {
 
 function fetchFromGit(commitId, requestPath, gitRoot): IFetchContents {
   // use -- fileName and git log will work on deleted files and paths
-  const cmd = `git show ${commitId}:${escapeForCli(requestPath)}`;
-  debug(`$ ${cmd}`);
-
+  const cmd = `show ${commitId}:${escapeForCli(requestPath)}`;
   try {
-    const rawContents = child_process
-      .execSync(cmd, {
-        cwd: gitRoot,
-        stdio: 'pipe',
-      })
-      .toString();
+    const rawContents = execGit(gitRoot, cmd).toString();
     const isDirectory = rawContents.match(/^tree /) !== null;
     return {
       isDirectory,
@@ -85,7 +77,7 @@ function fetchFromGit(commitId, requestPath, gitRoot): IFetchContents {
         : Buffer.from(rawContents).toString('base64'),
     };
   } catch (e) {
-    console.error(
+    error(
       'error executing git',
       process.cwd,
       e.status,
@@ -104,6 +96,7 @@ function fetchFromLocal(requestPath): IFetchContents {
     return { contents: null, isDirectory: false };
   }
   const isDirectory = fs.statSync(requestPath).isDirectory();
+  debug('fetchFromLocal', { isDirectory });
   const returnValue: IFetchContents = {
     isDirectory,
     contents: null,
@@ -127,12 +120,9 @@ function fetchDirectoryDiff(
   const extraOpts = '--stat=300 --compact-summary';
   let outputLines = [];
   try {
-    const outputBuffer = child_process.execSync(
-      `git diff ${extraOpts} ${leftPath} ${rightPath}`,
-      {
-        cwd: gitRoot,
-        stdio: 'pipe',
-      }
+    const outputBuffer = execGit(
+      gitRoot,
+      `diff ${extraOpts} ${leftPath} ${rightPath}`
     );
     outputLines = outputBuffer.toString().split(os.EOL);
   } catch (e) {
@@ -191,11 +181,15 @@ function normalizeRequestPath(
   }
 
   const relativeDir = parsedRequestPath.dir.slice(gitRoot.length + 1);
-  console.log(
+  debug(
     `normalizeRequestPath ${gitRoot},
       ${relativeDir},
       ${parsedRequestPath.dir},
       ${parsedRequestPath.base}`
   );
   return path.join(relativeDir, parsedRequestPath.base);
+}
+
+function execGit(gitRoot, gitCmd) {
+  return execSync(`git ${gitCmd}`, { cwd: gitRoot, logFn: debug });
 }

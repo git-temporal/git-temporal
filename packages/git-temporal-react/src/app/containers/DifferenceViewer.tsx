@@ -2,7 +2,7 @@ import React from 'react';
 // @ts-ignore
 import { useSelector, useDispatch } from 'react-redux';
 import * as path from 'path';
-import { debug } from '@git-temporal/logger';
+import { debug } from 'app/utilities/logger';
 import { style } from 'app/styles';
 import { selectPath } from 'app/actions';
 import {

@@ -2,7 +2,7 @@ import React from 'react';
 import { defer } from 'lodash';
 import { style, getStyleVar } from 'app/styles';
 import { editor } from 'monaco-editor';
-import { debug } from '@git-temporal/logger';
+import { debug } from 'app/utilities/logger';
 
 export interface FileDifferencesProps {
   rerenderRequestedAt: Date;

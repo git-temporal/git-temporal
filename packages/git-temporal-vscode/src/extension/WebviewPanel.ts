@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as vscode from 'vscode';
-import { debug } from '@git-temporal/logger';
+import { debug } from '../utilities/logger';
 import { dispatchMessage } from './dispatchMessage';
 
 let activeTextEditor;

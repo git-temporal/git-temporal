@@ -24,19 +24,23 @@ export const isDiffFetching = (state = false, action: any) => {
   }
 };
 
-export const diffStartCommit = (state = null, action: any) => {
+export const diffLeftCommit = (state = null, action: any) => {
   switch (action.type) {
-    case ActionTypes.SET_DIFF_START_COMMIT:
-      return action.commitId;
+    case ActionTypes.REQUEST_COMMITS:
+      return null;
+    case ActionTypes.REQUEST_DIFF:
+      return action.leftCommit || null;
     default:
       return state;
   }
 };
 
-export const diffEndCommit = (state = null, action: any) => {
+export const diffRightCommit = (state = null, action: any) => {
   switch (action.type) {
-    case ActionTypes.SET_DIFF_END_COMMIT:
-      return action.commitId;
+    case ActionTypes.REQUEST_COMMITS:
+      return null;
+    case ActionTypes.REQUEST_DIFF:
+      return action.rightCommit || null;
     default:
       return state;
   }

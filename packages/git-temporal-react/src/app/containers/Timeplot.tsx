@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { delay } from 'lodash';
-import { debug } from '@git-temporal/logger';
+import { debug } from 'app/utilities/logger';
 
 import { style } from 'app/styles';
 import { ITimeplotState, ICommit, DispatchProps } from 'app/interfaces';

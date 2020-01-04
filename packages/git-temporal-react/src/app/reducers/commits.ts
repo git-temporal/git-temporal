@@ -1,5 +1,16 @@
 import { ActionTypes } from 'app/actions/ActionTypes';
 
+export const selectedPath = (state = '', action: any) => {
+  switch (action.type) {
+    case ActionTypes.SELECT_PATH:
+    case ActionTypes.REQUEST_COMMITS:
+    case ActionTypes.RECEIVE_COMMITS:
+      return action.selectedPath;
+    default:
+      return state;
+  }
+};
+
 export const commits = (state = [], action: any) => {
   switch (action.type) {
     case ActionTypes.REQUEST_COMMITS:
@@ -70,15 +81,4 @@ export const isFileSelected = (state = false, action: any) => {
       return action.isFileSelected;
   }
   return state;
-};
-
-export const selectedPath = (state = '', action: any) => {
-  switch (action.type) {
-    case ActionTypes.SELECT_PATH:
-    case ActionTypes.REQUEST_COMMITS:
-    case ActionTypes.RECEIVE_COMMITS:
-      return action.selectedPath;
-    default:
-      return state;
-  }
 };

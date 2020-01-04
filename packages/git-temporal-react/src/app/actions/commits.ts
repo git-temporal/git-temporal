@@ -1,4 +1,4 @@
-import { debug } from '@git-temporal/logger';
+import { debug } from 'app/utilities/logger';
 
 import { ICommit } from 'app/interfaces/index';
 import { setDates } from 'app/actions/setDates';
@@ -86,9 +86,8 @@ export const receiveCommits = (path, response) => (dispatch, getState) => {
   debug('actions/commits receiveCommits', response.skip);
   const { skip } = response;
   if (skip === 0) {
-    const diffStartDate = getDefaultedStartDate(state);
-    const diffEndDate = getDefaultedEndDate(state);
-    dispatch(fetchDiff(path, response.commits, diffStartDate, diffEndDate));
+    // start with diff of local changes to file or dir
+    dispatch(fetchDiff(path, response.commits[0], null));
   }
 
   const nextSkip = skip + PAGE_SIZE;

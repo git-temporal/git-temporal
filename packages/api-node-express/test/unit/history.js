@@ -1,7 +1,7 @@
 /* eslint global-require: 0 */
 /* eslint no-console: 0 */
 /* eslint import/no-extraneous-dependencies: 0 */
-const { debug } = require('@git-temporal/logger');
+const { debug } = require('common/logger');
 
 const chai = require('chai');
 const chaiString = require('chai-string');

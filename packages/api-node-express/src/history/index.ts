@@ -1,5 +1,5 @@
 import { safelyParseInt } from '@git-temporal/commons';
-import { log } from '@git-temporal/logger';
+import { log } from 'common/logger';
 import {
   getCommitHistory,
   getCommitRange,

@@ -1,13 +1,13 @@
-import child_process from 'child_process';
 import * as fs from 'fs';
 import {
   findGitRoot,
   escapeForCli,
+  execSync,
   safelyParseInt,
 } from '@git-temporal/commons';
-import { debug, setPrefix } from '@git-temporal/logger';
+import { createProxies } from '@git-temporal/logger';
 
-setPrefix('git-log-scraper');
+const { debug } = createProxies('git-log-scraper');
 
 const parsedAttributes = {
   id: '%H%n',
@@ -50,24 +50,24 @@ export function getCommitRange(fileName: string) {
   debug('getCommitRange', { fileName, logFlags });
 
   const cmdFileName = fileName === gitRoot ? '.' : fileName;
-  const allRevHashes = execGitCommand(
+  const allRevHashes = execGit(
     gitRoot,
-    `git log --pretty="format:%H" --topo-order --date=local -- ${escapeForCli(
+    `log --pretty="format:%H" --topo-order --date=local -- ${escapeForCli(
       cmdFileName
     )}`
   ).split('\n');
 
   // debug('allRevHashes', allRevHashes);
 
-  const firstCommitRaw = execGitCommand(
+  const firstCommitRaw = execGit(
     gitRoot,
-    `git log ${logFlags} -n1 ${allRevHashes[allRevHashes.length - 1]}`
+    `log ${logFlags} -n1 ${allRevHashes[allRevHashes.length - 1]}`
   );
   const firstCommit = parseGitLogOutput(firstCommitRaw)[0];
 
-  const lastCommitRaw = execGitCommand(
+  const lastCommitRaw = execGit(
     gitRoot,
-    `git log ${logFlags} -n 1 -- ${escapeForCli(fileName)}`
+    `log ${logFlags} -n 1 -- ${escapeForCli(fileName)}`
   );
   const lastCommit = parseGitLogOutput(lastCommitRaw)[0];
 
@@ -81,17 +81,6 @@ export function getCommitRange(fileName: string) {
 
 // Implementation
 
-function execGitCommand(gitRoot: string, cmd: string): string {
-  debug(`$ ${cmd}`);
-  return child_process
-    .execSync(cmd, {
-      cwd: gitRoot,
-      stdio: 'pipe',
-      maxBuffer: 10 * 1024 * 1024,
-    })
-    .toString();
-}
-
 function fetchFileHistory(fileName: string, skip: number, maxCount: number) {
   const gitRoot = findGitRoot(fileName);
   const flags = gitLogFlags();
@@ -99,9 +88,9 @@ function fetchFileHistory(fileName: string, skip: number, maxCount: number) {
   const countFlag = maxCount ? ` -n ${maxCount}` : '';
 
   // use -- fileName and git log will work on deleted files and paths
-  return execGitCommand(
+  return execGit(
     gitRoot,
-    `git log ${flags}${skipFlag}${countFlag} -- ${escapeForCli(fileName)}`
+    `log ${flags}${skipFlag}${countFlag} -- ${escapeForCli(fileName)}`
   );
 }
 
@@ -112,6 +101,10 @@ function gitLogFlags(options = { follow: true }) {
   }
   const follow = false && options.follow ? ' --follow' : '';
   return `--pretty=\"format:${format}\" --topo-order --date=local --numstat ${follow}`;
+}
+
+function execGit(gitRoot, gitCmd) {
+  return execSync(`git ${gitCmd}`, { cwd: gitRoot, logFn: debug });
 }
 
 function parseGitLogOutput(output) {

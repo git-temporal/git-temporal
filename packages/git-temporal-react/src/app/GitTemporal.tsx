@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { debug } from '@git-temporal/logger';
+import { debug } from 'app/utilities/logger';
 
 import { GitTemporalProps, DispatchProps, StateProps } from 'app/interfaces';
 import { selectPath } from 'app/actions';

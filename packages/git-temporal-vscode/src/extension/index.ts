@@ -1,8 +1,6 @@
 import * as vscode from 'vscode';
 import { WebviewPanel } from './WebviewPanel';
-import { debug, setPrefix } from '@git-temporal/logger';
-
-setPrefix('git-temporal-vscode');
+import { debug } from '../utilities/logger';
 
 export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(

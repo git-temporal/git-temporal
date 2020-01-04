@@ -17,4 +17,4 @@ require('ts-node').register({
   project: tsConfigPath,
 });
 
-require('tsconfig-paths');
+require('tsconfig-paths/register');

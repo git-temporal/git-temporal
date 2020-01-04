@@ -5,8 +5,9 @@ import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { style } from 'app/styles';
 
 import {
-  getStartDate,
   getEndDate,
+  getDiffLeftCommit,
+  getDiffRightCommit,
   getSelectedPath,
 } from 'app/selectors/stateVars';
 import {
@@ -17,6 +18,7 @@ import { setDates } from 'app/actions/setDates';
 
 import { RevSelector } from 'app/components/RevSelector';
 import { EpochDateTime } from 'app/components/EpochDateTime';
+import { fetchDiff } from 'app/actions/diff';
 
 const outerStyle = {
   _extends: ['flexRow'],
@@ -33,18 +35,18 @@ const revSelectorStyle = {
 
 export const DifferenceViewerHeader: React.FC = (): React.ReactElement => {
   const selectedPath = useSelector(getSelectedPath);
-  const startDate = useSelector(getStartDate);
-  const endDate = useSelector(getEndDate);
+  const leftCommit = useSelector(getDiffLeftCommit);
+  const rightCommit = useSelector(getDiffRightCommit);
   const timeplotCommits = useSelector(getCommitsForTimeplot);
-  const filteredCommits = useSelector(getFilteredCommits, shallowEqual);
   const dispatch = useDispatch();
 
   if (!timeplotCommits || timeplotCommits.length <= 0) {
     return null;
   }
   const disablePrevious =
-    startDate && timeplotCommits[0].authorDate <= startDate;
-  const disableNext = !endDate;
+    !leftCommit ||
+    leftCommit.id === timeplotCommits[timeplotCommits.length - 1].id;
+  const disableNext = !rightCommit || rightCommit.id === timeplotCommits[0].id;
 
   return (
     <div style={style(outerStyle)}>
@@ -55,7 +57,7 @@ export const DifferenceViewerHeader: React.FC = (): React.ReactElement => {
         onNextRevClick={onLeftRevNext}
         onPreviousRevClick={onLeftRevPrevious}
       >
-        {renderLeftRevChildren()}
+        {renderRevChildren(leftCommit)}
       </RevSelector>
       <RevSelector
         style={style(revSelectorStyle)}
@@ -64,63 +66,32 @@ export const DifferenceViewerHeader: React.FC = (): React.ReactElement => {
         onNextRevClick={onRightRevNext}
         onPreviousRevClick={onRightRevPrevious}
       >
-        {renderRightRevChildren()}
+        {renderRevChildren(rightCommit)}
       </RevSelector>
     </div>
   );
 
-  function renderLeftRevChildren() {
+  function renderRevChildren(commit) {
     if (!timeplotCommits || timeplotCommits.length === 0) {
       return null;
     }
-    // reminder: commits are in descending cron order
-    const startingCommit = getStartingCommit();
-    if (!startingCommit) {
-      return null;
-    }
-    const renderedStartDate =
-      startDate ||
-      (filteredCommits &&
-        filteredCommits.length > 0 &&
-        filteredCommits.slice(-1)[0].authorDate) ||
-      (timeplotCommits &&
-        timeplotCommits.length > 0 &&
-        timeplotCommits.slice(-1)[0].authorDate);
     return (
       <div style={style('flexColumn', { alignItems: 'center' })}>
-        <div style={style('flexRow')}>
-          <EpochDateTime value={renderedStartDate} />
-        </div>
-        <div style={style('flexRow')}>
-          (#
-          {startingCommit.hash})
-          {startingCommit.id === timeplotCommits[0].id && ' (Local HEAD)'}
-        </div>
+        {commit ? (
+          <>
+            <div style={style('flexRow')}>
+              <EpochDateTime value={commit.authorDate} />
+            </div>
+            <div style={style('flexRow')}>
+              (#
+              {commit.hash})
+              {commit.id === timeplotCommits[0].id && ' (Local HEAD)'}
+            </div>
+          </>
+        ) : (
+          <div style={style('flexRow')}>Uncommitted Changes</div>
+        )}
       </div>
-    );
-  }
-
-  function renderRightRevChildren() {
-    if (!filteredCommits || filteredCommits.length === 0) {
-      return null;
-    }
-    // reminder: commits are in descending cron order
-    const latestCommit = filteredCommits[0];
-    if (!latestCommit) {
-      return null;
-    }
-    return endDate ? (
-      <>
-        <div>
-          <EpochDateTime value={endDate} />
-        </div>
-        <div>
-          (#
-          {latestCommit.hash})
-        </div>
-      </>
-    ) : (
-      <span>Local Revision</span>
     );
   }
 
@@ -133,21 +104,19 @@ export const DifferenceViewerHeader: React.FC = (): React.ReactElement => {
   }
 
   function setLeftRev(relativeIndex) {
-    if (!filteredCommits || filteredCommits.length === 0) {
+    if (!timeplotCommits || timeplotCommits.length === 0) {
       return;
     }
-    if (!startDate && relativeIndex > 0) {
-      return; // already at end
+    let newLeftCommit = timeplotCommits[0];
+    if (leftCommit) {
+      const foundIndex = timeplotCommits.findIndex(commit => {
+        return commit.id === leftCommit.id;
+      });
+      if (foundIndex !== -1) {
+        newLeftCommit = timeplotCommits[foundIndex + relativeIndex];
+      }
     }
-    const foundIndex = startDate
-      ? timeplotCommits.findIndex(commit => {
-          return commit.id === filteredCommits[filteredCommits.length - 1].id;
-        })
-      : 0;
-    const adjacentCommit = timeplotCommits[foundIndex - relativeIndex];
-    if (adjacentCommit) {
-      dispatch(setDates(adjacentCommit.authorDate, endDate));
-    }
+    dispatch(fetchDiff(selectedPath, newLeftCommit, rightCommit));
   }
 
   function onRightRevPrevious() {
@@ -159,38 +128,18 @@ export const DifferenceViewerHeader: React.FC = (): React.ReactElement => {
   }
 
   function setRightRev(relativeIndex) {
-    if (!filteredCommits || filteredCommits.length === 0) {
+    if (!timeplotCommits || timeplotCommits.length === 0) {
       return;
     }
-    if (!endDate && relativeIndex > 0) {
-      return; // already at end
+    let newRightCommit = null;
+    if (rightCommit) {
+      const foundIndex = timeplotCommits.findIndex(commit => {
+        return commit.id === leftCommit.id;
+      });
+      if (foundIndex !== -1) {
+        newRightCommit = timeplotCommits[foundIndex + relativeIndex];
+      }
     }
-    const latestFilteredCommit = endDate
-      ? filteredCommits[0]
-      : timeplotCommits[0];
-    const foundIndex = timeplotCommits.findIndex(commit => {
-      return commit.id === latestFilteredCommit.id;
-    });
-    const adjacentCommit = timeplotCommits[foundIndex - relativeIndex];
-    if (adjacentCommit) {
-      dispatch(setDates(startDate, adjacentCommit.authorDate * 1000));
-    }
-  }
-  // starting commit is the last effective commit that comes before the set start date
-  function getStartingCommit() {
-    if (!timeplotCommits || timeplotCommits.length === 0) {
-      return null;
-    }
-    if (!filteredCommits || filteredCommits.length === 0) {
-      return timeplotCommits[timeplotCommits.length - 1];
-    }
-    // reminder: commits are in descending cron order
-    const earliestFilteredCommit = filteredCommits[filteredCommits.length - 1];
-    // the point of this is to ensure that
-    const foundIndex = timeplotCommits.findIndex(commit => {
-      return commit.id === earliestFilteredCommit.id;
-    });
-    // the commit just prior to the first filtered commit
-    return timeplotCommits[foundIndex + 1];
+    dispatch(fetchDiff(selectedPath, leftCommit, newRightCommit));
   }
 };
