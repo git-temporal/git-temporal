@@ -5,6 +5,7 @@ import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { style } from 'app/styles';
 
 import {
+  getStartDate,
   getEndDate,
   getDiffLeftCommit,
   getDiffRightCommit,
@@ -28,6 +29,12 @@ const outerStyle = {
   color: '@colors.altForeground',
 };
 
+const revChildrenStyle = {
+  _extends: 'flexColumn',
+  alignItems: 'center',
+  minWidth: 160,
+};
+
 const revSelectorStyle = {
   flexGrow: 1,
   textAlign: 'center',
@@ -35,6 +42,8 @@ const revSelectorStyle = {
 
 export const DifferenceViewerHeader: React.FC = (): React.ReactElement => {
   const selectedPath = useSelector(getSelectedPath);
+  const startDate = useSelector(getStartDate);
+  const endDate = useSelector(getEndDate);
   const leftCommit = useSelector(getDiffLeftCommit);
   const rightCommit = useSelector(getDiffRightCommit);
   const timeplotCommits = useSelector(getCommitsForTimeplot);
@@ -70,7 +79,7 @@ export const DifferenceViewerHeader: React.FC = (): React.ReactElement => {
     const commit = which === 'left' && !_commit ? timeplotCommits[0] : _commit;
 
     return (
-      <div style={style('flexColumn', { alignItems: 'center' })}>
+      <div style={style(revChildrenStyle)}>
         {commit ? (
           <>
             <div style={style('flexRow')}>
@@ -105,10 +114,7 @@ export const DifferenceViewerHeader: React.FC = (): React.ReactElement => {
     if (!timeplotCommits || !commit) {
       return true;
     }
-    return (
-      commit === timeplotCommits[0] ||
-      (commit === leftCommit && rightCommit === leftCommit)
-    );
+    return commit === null;
   }
 
   function onLeftRevPrevious() {
@@ -123,16 +129,20 @@ export const DifferenceViewerHeader: React.FC = (): React.ReactElement => {
     if (!timeplotCommits || timeplotCommits.length === 0) {
       return;
     }
-    let newLeftCommit = timeplotCommits[0];
+    let newLeftCommit = null;
     if (leftCommit) {
       const foundIndex = timeplotCommits.findIndex(commit => {
         return commit.id === leftCommit.id;
       });
       if (foundIndex !== -1) {
-        newLeftCommit = timeplotCommits[foundIndex + relativeIndex];
+        newLeftCommit = timeplotCommits[foundIndex - relativeIndex];
       }
+    } else if (relativeIndex < 0) {
+      newLeftCommit = timeplotCommits[2];
     }
-    dispatch(fetchDiff(selectedPath, newLeftCommit, rightCommit));
+    if (newLeftCommit) {
+      dispatch(setDates((newLeftCommit.authorDate + 1) * 1000, endDate * 1000));
+    }
   }
 
   function onRightRevPrevious() {
@@ -150,12 +160,18 @@ export const DifferenceViewerHeader: React.FC = (): React.ReactElement => {
     let newRightCommit = null;
     if (rightCommit) {
       const foundIndex = timeplotCommits.findIndex(commit => {
-        return commit.id === leftCommit.id;
+        return commit.id === rightCommit.id;
       });
       if (foundIndex !== -1) {
-        newRightCommit = timeplotCommits[foundIndex + relativeIndex];
+        newRightCommit = timeplotCommits[foundIndex - relativeIndex];
       }
+    } else if (relativeIndex < 0) {
+      newRightCommit = timeplotCommits[0];
     }
-    dispatch(fetchDiff(selectedPath, leftCommit, newRightCommit));
+    if (newRightCommit) {
+      dispatch(
+        setDates(startDate * 1000, (newRightCommit.authorDate + 1) * 1000)
+      );
+    }
   }
 };

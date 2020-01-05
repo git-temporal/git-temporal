@@ -319,7 +319,10 @@ export class Timeplot extends React.Component<
     debug('Timeplot: onMouseDown', evt.shiftKey, startDate);
     evt.preventDefault();
     this.lastMouseDownDate = startDate;
-    this.setDates(startDate, this.props.endDate);
+    // set the startDate on down and clear the end date
+    // so the user gets instant feed back when starting
+    // click and drag select
+    this.setDates(startDate, null);
   };
 
   private onMouseUp = (evt, { startDate }) => {
@@ -333,10 +336,8 @@ export class Timeplot extends React.Component<
     if (!this.lastMouseDownDate) {
       return;
     }
-    if (startDate !== this.lastMouseDownDate) {
-      this.setDates(startDate, this.lastMouseDownDate);
-    } else {
-      this.setDates(startDate, this.props.endDate);
+    if (startDate.toUTCString() !== this.lastMouseDownDate.toUTCString()) {
+      this.setDates(this.lastMouseDownDate, startDate);
     }
     this.lastMouseDownDate = null;
   };

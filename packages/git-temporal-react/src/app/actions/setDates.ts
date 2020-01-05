@@ -5,38 +5,30 @@ import { setStartDate, setEndDate } from 'app/actions';
 import { dateFilteredCommits } from 'app/selectors/dates';
 import { commits } from 'app/reducers/commits';
 
-export const setDates = (startDate: number, endDate: number | Date) => (
+export const setDates = (_startDate: number, _endDate: number | Date) => (
   dispatch,
   getState
 ) => {
-  const epochStartDate = Math.floor(startDate / 1000);
+  const [startDate, endDate] =
+    _startDate === _endDate
+      ? [_startDate, _endDate + 1]
+      : !_endDate || _startDate < _endDate
+        ? [_startDate, _endDate]
+        : [_endDate, _startDate];
+
+  const epochStartDate = startDate && Math.floor((startDate as number) / 1000);
   const epochEndDate = endDate && Math.floor((endDate as number) / 1000);
 
-  const [newStartDate, newEndDate] =
-    epochStartDate === epochEndDate
-      ? [epochStartDate, null]
-      : !epochEndDate || epochStartDate < epochEndDate
-        ? [epochStartDate, epochEndDate]
-        : [epochEndDate, epochStartDate];
+  debug('actions: setDates', startDate, endDate, epochStartDate, epochEndDate);
 
-  debug(
-    'actions: setDates',
-    startDate,
-    endDate,
-    epochStartDate,
-    epochEndDate,
-    newStartDate,
-    newEndDate
-  );
-
-  dispatch(setStartDate(newStartDate));
-  dispatch(setEndDate(newEndDate));
+  dispatch(setStartDate(epochStartDate));
+  dispatch(setEndDate(epochEndDate));
 
   const { commits, selectedPath } = getState();
   const leftCommit =
-    (newStartDate && commits.find(c => c.authorDate < newStartDate)) || null;
+    (startDate && commits.find(c => c.authorDate < epochStartDate)) || null;
   const rightCommit =
-    (newEndDate && commits.find(c => c.authorDate < newEndDate)) || null;
+    (endDate && commits.find(c => c.authorDate < epochEndDate)) || null;
 
   dispatch(fetchDiff(selectedPath, leftCommit, rightCommit));
 };
