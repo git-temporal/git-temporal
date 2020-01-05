@@ -1,44 +1,50 @@
 import { createSelector } from 'reselect';
 import { AuthorsContainerSorts } from 'app/actions/ActionTypes';
 import { getAuthorsContainerSort } from './stateVars';
-import { getFilteredCommits } from './commits';
+import { getFilteredCommits, getCommitsForTimeplot } from './commits';
+
+export const getTimeplotAuthorsAndCommits = createSelector(
+  getCommitsForTimeplot,
+  getAuthorsContainerSort,
+  commitsByAuthors
+);
 
 export const getAuthorsAndCommits = createSelector(
   getFilteredCommits,
   getAuthorsContainerSort,
-  (commits, authorsContainerSort) => {
-    // TODO: dear prettier, this \/ looks like shit
-    const { commitsByAuthorName, authorsAndCommitsByEmail } = collateCommits(
-      commits
-    );
-    const authorsAndCommits = [];
-    const deduped = dedupeAuthorsAndCommits(
-      commitsByAuthorName,
-      authorsAndCommitsByEmail
-    );
-    for (const key in deduped) {
-      const authorAndCommits = commitsByAuthorName[key];
-      const { linesAdded, linesDeleted } = sumImpact(authorAndCommits.commits);
-      authorAndCommits.linesAdded = linesAdded;
-      authorAndCommits.linesDeleted = linesDeleted;
-      authorAndCommits.files = Object.keys(authorAndCommits.files);
-      authorsAndCommits.push(authorAndCommits);
-    }
-    return authorsAndCommits.sort((a, b) => {
-      switch (authorsContainerSort) {
-        case AuthorsContainerSorts.LINES:
-          return (
-            b.linesAdded + b.linesDeleted - (a.linesAdded + a.linesDeleted)
-          );
-        case AuthorsContainerSorts.COMMITS:
-          return b.commits.length - a.commits.length;
-        case AuthorsContainerSorts.TIME:
-          return b.lastCommitOn - a.lastCommitOn;
-      }
-      return 0;
-    });
-  }
+  commitsByAuthors
 );
+
+function commitsByAuthors(commits, authorsContainerSort) {
+  // TODO: dear prettier, this \/ looks like shit
+  const { commitsByAuthorName, authorsAndCommitsByEmail } = collateCommits(
+    commits
+  );
+  const authorsAndCommits = [];
+  const deduped = dedupeAuthorsAndCommits(
+    commitsByAuthorName,
+    authorsAndCommitsByEmail
+  );
+  for (const key in deduped) {
+    const authorAndCommits = commitsByAuthorName[key];
+    const { linesAdded, linesDeleted } = sumImpact(authorAndCommits.commits);
+    authorAndCommits.linesAdded = linesAdded;
+    authorAndCommits.linesDeleted = linesDeleted;
+    authorAndCommits.files = Object.keys(authorAndCommits.files);
+    authorsAndCommits.push(authorAndCommits);
+  }
+  return authorsAndCommits.sort((a, b) => {
+    switch (authorsContainerSort) {
+      case AuthorsContainerSorts.LINES:
+        return b.linesAdded + b.linesDeleted - (a.linesAdded + a.linesDeleted);
+      case AuthorsContainerSorts.COMMITS:
+        return b.commits.length - a.commits.length;
+      case AuthorsContainerSorts.TIME:
+        return b.lastCommitOn - a.lastCommitOn;
+    }
+    return 0;
+  });
+}
 
 export const getAuthorsStats = createSelector(
   getAuthorsAndCommits,

@@ -16,6 +16,7 @@ const styles = {
     transition: 'all 2s ease -in -out',
   },
   dateSelected: {
+    _extends: 'bigText',
     color: '@colors.selected',
   },
 };

@@ -15,7 +15,7 @@ import {
   getTotalCommits,
 } from './stateVars';
 
-import { getAuthorsAndCommits } from './authors';
+import { getTimeplotAuthorsAndCommits } from './authors';
 import { getFilteredCommits, getCommitsForTimeplot } from './commits';
 
 // The methods exported from this module are intended to provide props for redux
@@ -57,7 +57,7 @@ export const getTimeplotContainerState = createSelector(
   getSelectedPath,
   getHighlightedCommitIds,
   getCommitsForTimeplot, // not filtered by start and end dates
-  getAuthorsAndCommits,
+  getTimeplotAuthorsAndCommits,
   getIsFetching,
   getStartDate,
   getEndDate,

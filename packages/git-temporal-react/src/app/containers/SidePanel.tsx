@@ -1,15 +1,17 @@
 import React from 'react';
+import { style } from 'app/styles';
 // @ts-ignore
 import { useSelector, useDispatch } from 'react-redux';
 
-import { style } from 'app/styles';
 import { getHighlightedCommitIds } from 'app/selectors/stateVars';
-import { highlightCommits, requestRerender } from 'app/actions';
+import { highlightCommits, requestRerender, setSearch } from 'app/actions';
 
 import { Stats } from 'app/containers/Stats';
 import { Authors } from 'app/containers/Authors';
 import { Files } from 'app/containers/Files';
 import { Commits } from 'app/containers/Commits';
+import { Search } from 'app/containers/Search';
+import { ResetLink } from 'app/components/ResetLink';
 
 import { CollapsibleSidePanel } from 'app/components/CollapsibleSidePanel';
 
@@ -19,9 +21,13 @@ const containerStyle = {
 };
 
 const searchAndResetStyle = {
-  float: 'right',
   position: 'relative',
   minHeight: 60,
+};
+
+const resetStyle = {
+  position: 'absolute',
+  right: 5,
 };
 
 const resetHighlightsLinkStyle = {
@@ -41,6 +47,12 @@ export const SidePanel: React.FC = (): React.ReactElement => {
     >
       <div style={{ flexGrow: 1, overflow: 'hidden' }}>
         <Stats />
+        <div style={style(searchAndResetStyle)}>
+          <Search />
+          <ResetLink style={style(resetStyle)} onClick={onResetClick}>
+            Reset Search
+          </ResetLink>
+        </div>
         <Authors />
         <Commits />
         <Files />
@@ -48,8 +60,9 @@ export const SidePanel: React.FC = (): React.ReactElement => {
     </CollapsibleSidePanel>
   );
 
-  function onResetHighlightedCommits() {
+  function onResetClick() {
     dispatch(highlightCommits([]));
+    dispatch(setSearch(null));
   }
 
   function didOpenSidePanel() {

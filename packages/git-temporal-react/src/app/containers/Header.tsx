@@ -12,7 +12,6 @@ import {
 import { style } from 'app/styles';
 import { selectPath, setSearch } from 'app/actions';
 import { setDates } from 'app/actions/setDates';
-import { Search } from 'app/containers/Search';
 import { ExplodingDateRange } from 'app/components/ExplodingDateRange';
 import { ResetLink } from 'app/components/ResetLink';
 
@@ -27,9 +26,9 @@ const styles = {
   },
   dateRange: {
     _extends: ['flexGrow', 'flexColumn'],
-    alignItems: 'center',
+    alignItems: 'flex-end',
     paddingTop: '@margins.small+px',
-    paddingLeft: '@margins.large+px',
+    paddingRight: '@margins.large+px',
   },
   topRow: {
     _extends: 'flexRow',
@@ -42,10 +41,9 @@ const styles = {
     marginBottom: 10,
     flexGrow: 1,
   },
-  searchAndReset: {
-    _extends: 'flexColumn',
-    alignItems: 'flex-end',
-    marginRight: '@margins.medium+px',
+  resetLink: {
+    position: 'relative',
+    top: '-5px',
   },
   pathPart: {
     extends: 'smallerText',
@@ -74,9 +72,6 @@ export const Header: React.FC = (): React.ReactElement => {
             {...{ startDate, endDate, isDefaultDates: !areCommitsFiltered }}
           />
         </div>
-        <div style={style(styles.searchAndReset)}>
-          <Search />
-        </div>
       </div>
       <div style={style('flexRow')}>
         <div style={style(styles.path)}>
@@ -87,8 +82,11 @@ export const Header: React.FC = (): React.ReactElement => {
           </div>
         </div>
         {areCommitsFiltered && (
-          <ResetLink onClick={onResetDatesClick}>
-            Reset Search & Date Range
+          <ResetLink
+            style={style(styles.resetLink)}
+            onClick={onResetDatesClick}
+          >
+            Reset Date Range
           </ResetLink>
         )}
       </div>

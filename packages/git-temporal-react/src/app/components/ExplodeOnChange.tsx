@@ -35,7 +35,8 @@ export class ExplodeOnChange extends React.Component<
   }
 
   render() {
-    const { scale = 2.5 } = this.props;
+    // note 2.5 = way too in your face
+    const { scale = 1.8 } = this.props;
     const addStyle = this.state.isExploding
       ? { transform: `scale(${scale}, ${scale})` }
       : null;

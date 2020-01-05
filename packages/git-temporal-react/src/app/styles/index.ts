@@ -112,6 +112,10 @@ const globalStyles = {
     fontWeight: 'normal',
     color: '@colors.text',
   },
+  bigText: {
+    _extends: 'normalText',
+    fontSize: 18,
+  },
   largerText: {
     _extends: 'normalText',
     fontSize: 14,

@@ -111,12 +111,14 @@ function fetchFromLocal(relativePath, gitRoot): IFetchContents {
 }
 
 function fetchDirectoryDiff(
-  leftCommit,
-  rightCommit,
+  _leftCommit,
+  _rightCommit,
   requestPath,
   gitRoot
 ): IModifiedFile[] {
   const path = requestPath === '.' ? './' : requestPath;
+  const leftCommit = _leftCommit || 'HEAD';
+  const rightCommit = _rightCommit || 'local';
   const isDiffOnLocal = rightCommit === 'local';
   const leftPath = isDiffOnLocal ? leftCommit : `${leftCommit}:${path}`;
   const rightPath = isDiffOnLocal ? path : `${rightCommit}:${path}`;
@@ -130,7 +132,10 @@ function fetchDirectoryDiff(
     outputLines = outputBuffer.toString().split(os.EOL);
   } catch (e) {
     // TODO : test for specific error and only ignore doesn't exist in rev errors
-    error('Error retrieving git diff', e);
+    error(
+      'Error retrieving git diff',
+      (e.stderr && e.stderr.toString()) || e.toString()
+    );
   }
   return parseDirectoryDiff(outputLines);
 }
