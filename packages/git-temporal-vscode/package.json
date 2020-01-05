@@ -7,6 +7,13 @@
   "engines": {
     "vscode": "^1.25.0"
   },
+  "repository": "https://github.com/git-temporal/git-temporal",
+  "keywords": [
+    "git",
+    "git-time-machine",
+    "react",
+    "history"
+  ],
   "categories": [
     "Other"
   ],
@@ -38,8 +45,11 @@
     "watch": "tsc -w -p ./",
     "postinstall": "node ./node_modules/vscode/bin/install"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
-    "@git-temporal/git-temporal-react": "^0.1.0",
+    "@git-temporal/git-temporal-react": "0.2.2",
     "@git-temporal/git-log-scraper": "^0.3.0",
     "@git-temporal/git-diff-scraper": "^0.1.0",
     "@git-temporal/logger": "^0.1.0",

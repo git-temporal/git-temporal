@@ -1,7 +1,6 @@
 {
   "name": "@git-temporal/git-temporal-react",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.2.2",
   "main": "./index.js",
   "publishConfig": {
     "access": "public"
@@ -35,14 +34,13 @@
     "test-debug": "node --inspect-brk node_modules/.bin/jest --runInBand"
   },
   "dependencies": {
-    "babel-plugin-dynamic-import-node": "^2.2.0",
-    "babel-polyfill": "^6.26.0",
+    "babel-plugin-dynamic-import-node": "2.2.0",
+    "babel-polyfill": "6.26.0",
     "d3": "5.7.0",
     "d3-selection-multi": "1.0.1",
     "jsonschema": "1.2.4",
     "md5": "2.2.1",
     "monaco-editor": "0.15.6",
-    "monaco-editor-webpack-plugin": "^1.7.0",
     "react-redux": "7.1.0-alpha.4",
     "redux": "4.0.0",
     "redux-combine-actions": "0.1.2",
@@ -79,6 +77,7 @@
     "fs-extra": "3.0.1",
     "html-webpack-plugin": "2.29.0",
     "jest": "22.4.2",
+    "monaco-editor-webpack-plugin": "1.7.0",
     "node-fetch": "2.2.0",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",

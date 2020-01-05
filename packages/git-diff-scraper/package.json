@@ -27,6 +27,9 @@
     "test-debug": "cross-env mocha --inspect-brk --exit -r ../../babel-register.js --recursive --opts ./test/mocha.opts ./test/unit",
     "prepublishOnly": "npm run build"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "bugs": {
     "url": "https://github.com/git-temporal/git-temporal/issues"
   },
