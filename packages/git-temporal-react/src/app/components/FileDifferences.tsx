@@ -74,7 +74,7 @@ export class FileDifferences extends React.Component<FileDifferencesProps> {
     editor.defineTheme('myTheme', this.getTheme());
     editor.setTheme('myTheme');
 
-    const diffEditor = editor.createDiffEditor(el);
+    const diffEditor = editor.createDiffEditor(el, { readOnly: true });
     diffEditor.setModel({
       original: originalModel,
       modified: modifiedModel,
