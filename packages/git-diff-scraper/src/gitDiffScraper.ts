@@ -59,8 +59,9 @@ export function getDiff(
 // Implementation
 
 function fetchContents(commitId, requestPath, gitRoot): IFetchContents {
+  debug('fetchContents', { commitId, requestPath, gitRoot });
   return commitId === 'local'
-    ? fetchFromLocal(requestPath)
+    ? fetchFromLocal(requestPath, gitRoot)
     : fetchFromGit(commitId, requestPath === '.' ? './' : requestPath, gitRoot);
 }
 
@@ -91,12 +92,14 @@ function fetchFromGit(commitId, requestPath, gitRoot): IFetchContents {
   }
 }
 
-function fetchFromLocal(requestPath): IFetchContents {
+function fetchFromLocal(relativePath, gitRoot): IFetchContents {
+  const requestPath = path.join(gitRoot, relativePath);
+  debug('fetchFromLocal', { requestPath });
+
   if (!fs.existsSync(requestPath)) {
     return { contents: null, isDirectory: false };
   }
   const isDirectory = fs.statSync(requestPath).isDirectory();
-  debug('fetchFromLocal', { isDirectory });
   const returnValue: IFetchContents = {
     isDirectory,
     contents: null,

@@ -45,6 +45,8 @@ export const requestCommits = path => ({
 });
 
 const fetchCommits = path => async dispatch => {
+  dispatch(fetchDiff(path, null, null));
+
   const response = await _fetch('commitRange', { path });
   if (response) {
     const commitRange = await response.json();
@@ -84,13 +86,13 @@ export const receiveCommits = (path, response) => (dispatch, getState) => {
 
   dispatch(_receiveCommits(path, response));
   debug('actions/commits receiveCommits', response.skip);
-  const { skip } = response;
-  if (skip === 0) {
-    // start with diff of local changes to file or dir
-    dispatch(fetchDiff(path, response.commits[0], null));
+
+  if (state.isDiffDeferred) {
+    const { commits } = getState();
+    dispatch(fetchDiff(path, commits[1], commits[0]));
   }
 
-  const nextSkip = skip + PAGE_SIZE;
+  const nextSkip = response.skip + PAGE_SIZE;
   const { totalCommits } = getState();
   if (nextSkip < totalCommits) {
     // if you ask `git log -skip 500 -max-count 500` and there are say 510
@@ -128,22 +130,8 @@ const _fetch = (command, params) => {
   return fetch(url.toString());
 };
 
-export const selectSingleCommit = (commit, timeplotCommits) => (
-  dispatch: any,
-  _getState: any
-) => {
-  const foundIndex = timeplotCommits.findIndex((c: ICommit) => {
-    return c.id === commit.id;
-  });
-  if (foundIndex >= 0) {
-    const adjacentCommit = timeplotCommits[foundIndex + 1];
-    if (adjacentCommit) {
-      dispatch(
-        setDates(
-          adjacentCommit.authorDate * 1000,
-          (commit.authorDate + 1) * 1000
-        )
-      );
-    }
-  }
+export const selectSingleCommit = commit => (dispatch: any, _getState: any) => {
+  dispatch(
+    setDates((commit.authorDate - 1) * 1000, (commit.authorDate + 1) * 1000)
+  );
 };

@@ -65,5 +65,7 @@ function isWithinDates(
   startDate: number,
   endDate: number
 ): boolean {
-  return startDate <= commit.authorDate && commit.authorDate <= endDate;
+  return (
+    startDate <= commit.authorDate && (!endDate || commit.authorDate <= endDate)
+  );
 }

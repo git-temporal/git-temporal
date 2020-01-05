@@ -2,13 +2,10 @@ import { fetchDiff } from 'app/actions/diff';
 import { debug } from 'app/utilities/logger';
 
 import { setStartDate, setEndDate } from 'app/actions';
-import {
-  getDefaultedStartDate,
-  getDefaultedEndDate,
-  dateFilteredCommits,
-} from 'app/selectors/dates';
+import { dateFilteredCommits } from 'app/selectors/dates';
+import { commits } from 'app/reducers/commits';
 
-export const setDates = (startDate: number, endDate: number | Date | null) => (
+export const setDates = (startDate: number, endDate: number | Date) => (
   dispatch,
   getState
 ) => {
@@ -35,18 +32,11 @@ export const setDates = (startDate: number, endDate: number | Date | null) => (
   dispatch(setStartDate(newStartDate));
   dispatch(setEndDate(newEndDate));
 
-  const state = getState();
-  const commitsForDates = dateFilteredCommits(
-    state.commits,
-    newStartDate,
-    newEndDate
-  );
+  const { commits, selectedPath } = getState();
+  const leftCommit =
+    (newStartDate && commits.find(c => c.authorDate < newStartDate)) || null;
+  const rightCommit =
+    (newEndDate && commits.find(c => c.authorDate < newEndDate)) || null;
 
-  dispatch(
-    fetchDiff(
-      state.selectedPath,
-      commitsForDates[commitsForDates.length - 1],
-      commitsForDates[0]
-    )
-  );
+  dispatch(fetchDiff(selectedPath, leftCommit, rightCommit));
 };

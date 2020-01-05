@@ -23,5 +23,6 @@ export const getOpenSidePanelGroup = state => state.openSidePanelGroup;
 
 export const getDiff = state => state.diff;
 export const getIsDiffFetching = state => state.isDiffFetching;
+export const getIsDiffDeferred = state => state.isDiffDeferred;
 export const getDiffLeftCommit = state => state.diffLeftCommit;
 export const getDiffRightCommit = state => state.diffRightCommit;

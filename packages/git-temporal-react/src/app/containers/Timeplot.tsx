@@ -319,7 +319,7 @@ export class Timeplot extends React.Component<
     debug('Timeplot: onMouseDown', evt.shiftKey, startDate);
     evt.preventDefault();
     this.lastMouseDownDate = startDate;
-    this.setDates(startDate, null);
+    this.setDates(startDate, this.props.endDate);
   };
 
   private onMouseUp = (evt, { startDate }) => {
@@ -336,7 +336,7 @@ export class Timeplot extends React.Component<
     if (startDate !== this.lastMouseDownDate) {
       this.setDates(startDate, this.lastMouseDownDate);
     } else {
-      this.setDates(startDate, null);
+      this.setDates(startDate, this.props.endDate);
     }
     this.lastMouseDownDate = null;
   };
@@ -352,10 +352,10 @@ export class Timeplot extends React.Component<
     evt.stopPropagation();
     const { dispatch, commits } = this.props;
     if (single) {
-      dispatch(selectSingleCommit(commit, commits));
+      dispatch(selectSingleCommit(commit));
     } else {
       const epochAuthorDate = commit.authorDate * 1000;
-      this.setDates(epochAuthorDate, null);
+      this.setDates(epochAuthorDate, this.props.endDate);
     }
   };
 

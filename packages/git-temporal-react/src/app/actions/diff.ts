@@ -14,17 +14,55 @@ const requestDiff = (
   type: ActionTypes.REQUEST_DIFF,
 });
 
-export const receiveDiff = (path: string, diff: any) => ({
+const requestDeferredDiff = (path: string) => ({
+  selectedPath: path,
+  type: ActionTypes.REQUEST_DEFERRED_DIFF,
+});
+
+const _receiveDiff = (path: string, diff: any) => ({
   diff,
   selectedPath: path,
   type: ActionTypes.RECEIVE_DIFF,
 });
 
+export const receiveDiff = (path: string, diff: any) => (
+  dispatch: any,
+  getState: any
+) => {
+  // We fetch the diff initially with left and right commit
+  // of null which returns the diff of uncommited changes.
+  // If there are are no uncommited changes, show the changes
+  // made by the last commit.
+  const { diffLeftCommit, diffRightCommit, isFetching, commits } = getState();
+  const areDefaults = !diffLeftCommit && !diffRightCommit;
+  const isUnchangedFile =
+    !diff.isDirectory &&
+    ((!diff.leftFileContents && !diff.rightFileContents) ||
+      diff.leftFileContents === diff.rightFileContents);
+  const isUnchangedDirectory =
+    diff.isDirectory &&
+    (!diff.modifiedFiles || diff.modifiedFiles.length === 0);
+  const areCommits = commits && commits.length > 1;
+  if (areDefaults && (isUnchangedFile || isUnchangedDirectory)) {
+    if (commits && commits.length > 1) {
+      dispatch(fetchDiff(path, commits[1], commits[0]));
+    } else if (isFetching) {
+      // this will cause the next receive commits to call a fetchDiff
+      // with the two most recent commits
+      dispatch(requestDeferredDiff(path));
+    } else {
+      dispatch(_receiveDiff(path, diff));
+    }
+  } else {
+    dispatch(_receiveDiff(path, diff));
+  }
+};
+
 export const fetchDiff = (
   path: string,
   leftCommit?: ICommit,
   rightCommit?: ICommit
-) => (dispatch: any): void => {
+) => (dispatch: any, getState: any): void => {
   // set state vars first for isDiffFetching
   dispatch(requestDiff(path, leftCommit, rightCommit));
 
@@ -33,8 +71,8 @@ export const fetchDiff = (
     // see actions/vscode.ts for response handling that comes as a window event
     vscode.postMessage({
       path,
-      leftCommit: leftCommit.id,
-      rightCommit: rightCommit.id,
+      leftCommit: (leftCommit && leftCommit.id) || null,
+      rightCommit: (rightCommit && rightCommit.id) || null,
       command: 'diff',
     });
   } else {
