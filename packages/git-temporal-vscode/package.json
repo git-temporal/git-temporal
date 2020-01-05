@@ -1,7 +1,8 @@
 {
-  "name": "@git-temporal/git-temporal-vscode",
+  "name": "git-temporal-vscode",
   "description": "Git Temporal - all about time and time travel",
-  "version": "0.0.1",
+  "icon": "images/gticon.png",
+  "version": "0.1.0",
   "publisher": "littlebee",
   "engines": {
     "vscode": "^1.25.0"
@@ -17,7 +18,7 @@
     "commands": [
       {
         "command": "gitTemporal.start",
-        "title": "Open Git Temporal",
+        "title": "Open in Git Temporal",
         "category": "git-temporal"
       }
     ],
@@ -43,8 +44,7 @@
     "@git-temporal/git-diff-scraper": "^0.1.0",
     "@git-temporal/logger": "^0.1.0",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "vscode": "^1.1.18"
+    "react-dom": "^16.8.6"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.7",
@@ -79,6 +79,7 @@
     "tslint-config-prettier": "^1.18.0",
     "tslint-react": "^4.0.0",
     "typescript": "^2.9.2",
-    "underscore": "^1.9.1"
+    "underscore": "^1.9.1",
+    "vscode": "^1.1.18"
   }
 }
