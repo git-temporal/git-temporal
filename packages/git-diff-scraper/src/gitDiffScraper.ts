@@ -32,12 +32,12 @@ export function getDiff(
   debug('getDiff', requestPath, _leftCommit, _rightCommit);
   const { contents: leftFileContents, isDirectory } = fetchContents(
     _leftCommit,
-    normalizedRequestPath,
+    requestPath,
     gitRoot
   );
   const { contents: rightFileContents } = fetchContents(
     _rightCommit,
-    normalizedRequestPath,
+    requestPath,
     gitRoot
   );
 
@@ -61,39 +61,34 @@ export function getDiff(
 function fetchContents(commitId, requestPath, gitRoot): IFetchContents {
   debug('fetchContents', { commitId, requestPath, gitRoot });
   return commitId === 'local'
-    ? fetchFromLocal(requestPath, gitRoot)
+    ? fetchFromLocal(requestPath)
     : fetchFromGit(commitId, requestPath === '.' ? './' : requestPath, gitRoot);
 }
 
 function fetchFromGit(commitId, requestPath, gitRoot): IFetchContents {
   // use -- fileName and git log will work on deleted files and paths
-  const cmd = `show ${commitId}:${escapeForCli(requestPath)}`;
-  try {
-    const rawContents = execGit(gitRoot, cmd).toString();
-    const isDirectory = rawContents.match(/^tree /) !== null;
-    return {
-      isDirectory,
-      contents: isDirectory
-        ? null
-        : Buffer.from(rawContents).toString('base64'),
-    };
-  } catch (e) {
-    error(
-      'error executing git',
-      process.cwd,
-      e.status,
-      Buffer.from(e.stderr).toString('base64')
-    );
-    return {
-      isDirectory: false,
-      contents: null,
-      error: e.status,
-    };
-  }
+  const directory = path.dirname(requestPath);
+  const baseFileName = path.basename(requestPath);
+  // Use caution when changing these and be sure to test on Windows.  The
+  // `git show` command works a little differently.
+  //
+  // For example,  `git show HEAD:somepath/somefile.js` from git root will
+  // work on OSX but not windows. The only solution I found to work on both
+  // windows and OSX is to cwd to the directory and do `git show HEAD:./somefile.js`
+  // Also, only on Windows, using `./somefile.js` when the file is in the git root and
+  // cwd is git root fails. Also note that the path.sep isn't used below because
+  // backslash like, `.\somefile.js`, doesn't work on windows git  : /
+  const pathPrefix = directory === gitRoot ? '' : `./`;
+  const cmd = `show ${commitId}:${pathPrefix}${escapeForCli(baseFileName)}`;
+  const rawContents = execGit(directory, cmd);
+  const isDirectory = rawContents.match(/^tree /) !== null;
+  return {
+    isDirectory,
+    contents: isDirectory ? null : Buffer.from(rawContents).toString('base64'),
+  };
 }
 
-function fetchFromLocal(relativePath, gitRoot): IFetchContents {
-  const requestPath = path.join(gitRoot, relativePath);
+function fetchFromLocal(requestPath): IFetchContents {
   debug('fetchFromLocal', { requestPath });
 
   if (!fs.existsSync(requestPath)) {

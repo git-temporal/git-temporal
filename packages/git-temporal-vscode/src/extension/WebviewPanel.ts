@@ -171,7 +171,7 @@ function getColors() {
     altBackground: 'var(--vscode-sideBar-background)',
     altForeground: 'var(--vscode-sideBar-foreground)',
     background: 'var(--vscode-editor-background)',
-    blobColor: 'var(--vscode-editor-selectionForeground)',
+    blobColor: 'var(--vscode-foreground)',
     linkText: 'var(--vscode-editorLink-activeForeground)',
     inputBackground: 'var(--vscode-input-background)',
     inputForeground: 'var(--vscode-input-foreground)',
