@@ -4,6 +4,7 @@
 - [Git Temporal](#git-temporal)
   - [Running the alpha proof of concept:](#running-the-alpha-proof-of-concept)
 - [Updates](#updates)
+  - [January 5, 2020](#january-5-2020)
   - [June 10, 2019](#june-10-2019)
   - [May 29, 2019](#may-29-2019)
   - [May 11, 2019](#may-11-2019)
@@ -19,6 +20,43 @@ See [CONTRIBUTING.md](https://github.com/git-temporal/git-temporal/blob/master/C
 version of git-temporal.
 
 # Updates
+
+## January 5, 2020
+
+Greetings fellow time travelers and happy new year! I have some exciting news to share, but first, check out this sick icon.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/git-temporal/git-temporal/master/packages/git-temporal-vscode/images/gticon.png" alt="GitTemporal Logo" />
+</p>
+
+But wait, there's more. I am narrowing in on a near future date for the release of the the VSCode version of git-time-machine, er, I mean git-temporal. :) I Should have named it Git Tempo; too late?
+
+Check out this dandy demo:
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/git-temporal/git-temporal/master/packages/git-temporal-vscode/images/gtdemo.gif" alt="GitTemporal Demo" />
+</p>
+
+And... for a limited time only, you can play with it yourself or.... :)
+
+- download the .vsix file:
+  https://www.icloud.com/iclouddrive/0NGbQ088hz8nzlzvSyBGeZOOw#git-temporal-vscode-0.1.0
+- in vscode command pallette (command+shift+p), type `vsix`
+- select "Extensions: Install from VSIX..."
+- locate and select downloaded file from open dialog
+
+This is an early beta. There are still some known issues that I'm working through and I promise I will publish to VSCode Marketplace before January is concluded.
+
+Known issues:
+
+- directory differencing isn't really working on Windows. Results don't match Mac.
+- can't diff deleted files (Windows & Mac)
+- can't diff renamed files (Windows & Mac)
+- need to webpack bundle vscode extension
+
+...but all and all, it is at least as useful as it's predecessor.
+
+Enjoy, and have a new year filled with joy, -bee
 
 ## June 10, 2019
 
