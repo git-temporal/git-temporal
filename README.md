@@ -2,6 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [Git Temporal](#git-temporal)
+  - [Download latest beta preview](#download-latest-beta-preview)
   - [Running the developer environment](#running-the-developer-environment)
 - [Updates](#updates)
   - [January 5, 2020](#january-5-2020)
@@ -13,6 +14,10 @@
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 # Git Temporal
+
+## Download latest beta preview
+
+https://www.icloud.com/iclouddrive/0UH58xw-bu8Vvo9yNLx7PCY9Q#git-temporal-vscode-0.1
 
 ## Running the developer environment
 
