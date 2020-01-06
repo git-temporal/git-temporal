@@ -19,6 +19,8 @@
 
 https://www.icloud.com/iclouddrive/0UH58xw-bu8Vvo9yNLx7PCY9Q#git-temporal-vscode-0.1
 
+Use "Extensions: Install from VSIX..." from vscode command pallette to install.
+
 ## Running the developer environment
 
 See [CONTRIBUTING.md](https://github.com/git-temporal/git-temporal/blob/master/CONTRIBUTING.md) for instructions on running the development
