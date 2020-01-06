@@ -2,7 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [Git Temporal](#git-temporal)
-  - [Running the alpha proof of concept:](#running-the-alpha-proof-of-concept)
+  - [Running the developer environment](#running-the-developer-environment)
 - [Updates](#updates)
   - [January 5, 2020](#january-5-2020)
   - [June 10, 2019](#june-10-2019)
@@ -14,7 +14,7 @@
 
 # Git Temporal
 
-## Running the alpha proof of concept:
+## Running the developer environment
 
 See [CONTRIBUTING.md](https://github.com/git-temporal/git-temporal/blob/master/CONTRIBUTING.md) for instructions on running the development
 version of git-temporal.
@@ -40,7 +40,8 @@ Check out this dandy demo:
 And... for a limited time only, you can play with it yourself or.... :)
 
 - download the .vsix file:
-  https://www.icloud.com/iclouddrive/0NGbQ088hz8nzlzvSyBGeZOOw#git-temporal-vscode-0.1.0
+  https://www.icloud.com/iclouddrive/0UH58xw-bu8Vvo9yNLx7PCY9Q#git-temporal-vscode-0.1
+
 - in vscode command pallette (command+shift+p), type `vsix`
 - select "Extensions: Install from VSIX..."
 - locate and select downloaded file from open dialog
