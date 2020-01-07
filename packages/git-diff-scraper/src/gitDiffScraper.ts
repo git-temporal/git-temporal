@@ -1,5 +1,4 @@
 import fs from 'fs';
-import os from 'os';
 import path from 'path';
 
 import { escapeForCli, execSync, findGitRoot } from '@git-temporal/commons';
@@ -124,7 +123,8 @@ function fetchDirectoryDiff(
       gitRoot,
       `diff ${extraOpts} ${leftPath} ${rightPath}`
     );
-    outputLines = outputBuffer.toString().split(os.EOL);
+    // note below that windows git the output is comes through with \n
+    outputLines = outputBuffer.toString().split('\n');
   } catch (e) {
     // TODO : test for specific error and only ignore doesn't exist in rev errors
     error(
@@ -140,12 +140,15 @@ function parseDirectoryDiff(outputLines): IModifiedFile[] {
 
   for (const line of outputLines) {
     let matches = line.match(/(.*)\((gone|new)\).*\|\s*(\d*)/);
+    debug('matching line 1', { line, matches });
+
     if (matches) {
       const [fileName, newOrGone, delta] = matches.slice(1);
       const status = newOrGone === 'new' ? 'added' : 'deleted';
       modifiedFiles.push(makeFile(fileName, delta, status));
     } else {
       matches = line.match(/^([^|]*)\|\s*(\d*)/);
+      debug('matching line 2', { line, matches });
       if (matches) {
         const [fileName, delta] = matches.slice(1);
         modifiedFiles.push(makeFile(fileName, delta));
