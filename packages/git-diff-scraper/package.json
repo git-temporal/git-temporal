@@ -22,7 +22,7 @@
     "url": "git+https://github.com/git-temporal/git-temporal.git"
   },
   "scripts": {
-    "build": "NODE_ENV=production tsc",
+    "build": "cross-env NODE_ENV=production tsc",
     "test": "cross-env mocha --exit -r ../../babel-register.js --recursive --opts ./test/mocha.opts ./test/unit",
     "test-debug": "cross-env mocha --inspect-brk --exit -r ../../babel-register.js --recursive --opts ./test/mocha.opts ./test/unit",
     "prepublishOnly": "npm run build"

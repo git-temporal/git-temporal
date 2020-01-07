@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const config = {
   target: 'node', // vscode extensions run in a Node.js-context 📖 -> https://webpack.js.org/configuration/node/
@@ -32,6 +33,15 @@ const config = {
       },
     ],
   },
+  plugins: [
+    new CopyPlugin([
+      {
+        from:
+          'node_modules/@git-temporal/git-temporal-react/dist/git-temporal-react.vscode.js',
+        to: 'dist',
+      },
+    ]),
+  ],
 };
 
 module.exports = config;

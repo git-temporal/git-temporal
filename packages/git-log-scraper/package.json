@@ -4,7 +4,7 @@
   "description": "Scrapes commit data from the git cli for a file or directory in a repository and returns an array of Javascript objects representing commits with files and lines added and deleted.",
   "main": "lib/gitLogScraper.js",
   "scripts": {
-    "build": "NODE_ENV=production tsc",
+    "build": "cross-env NODE_ENV=production tsc",
     "test": "cross-env mocha --exit -r ../../babel-register.js --recursive --opts ./test/mocha.opts ./test/unit",
     "test-debug": "cross-env mocha --inspect-brk --exit -r ../../babel-register.js --recursive --opts ./test/mocha.opts ./test/unit",
     "test-update-snapshots": "test/updateSnapshots.js",

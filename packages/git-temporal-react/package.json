@@ -21,9 +21,9 @@
   "scripts": {
     "build": "npm run build-vscode-webpack",
     "build-watch": "npm run build-vscode-watch",
-    "build-tsc": "NODE_ENV=production tsc -p ./tsconfig.build.json",
-    "build-vscode-webpack": "NODE_ENV=production webpack --display-error-details --config config/webpack.config.vscode.js",
-    "build-vscode-watch": "NODE_ENV=production webpack --display-error-details --config config/webpack.config.vscode.js --watch",
+    "build-tsc": "cross-env NODE_ENV=production tsc -p ./tsconfig.build.json",
+    "build-vscode-webpack": "cross-env NODE_ENV=production webpack --display-error-details --config config/webpack.config.vscode.js",
+    "build-vscode-watch": "cross-env NODE_ENV=production webpack --display-error-details --config config/webpack.config.vscode.js --watch",
     "clean": "rm -Rf dist lib coverage",
     "coverage": "open coverage/lcov-report/index.html",
     "reset": "rm -Rf node_modules && npm run clean",
@@ -34,6 +34,7 @@
     "test-debug": "node --inspect-brk node_modules/.bin/jest --runInBand"
   },
   "dependencies": {
+    "@git-temporal/logger": "0.1.0",
     "babel-plugin-dynamic-import-node": "2.2.0",
     "babel-polyfill": "6.26.0",
     "d3": "5.7.0",
