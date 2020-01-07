@@ -145,7 +145,7 @@ function parseDirectoryDiff(outputLines): IModifiedFile[] {
       const status = newOrGone === 'new' ? 'added' : 'deleted';
       modifiedFiles.push(makeFile(fileName, delta, status));
     } else {
-      matches = line.match(/^([^\|]*)\|\s*(\d*)/);
+      matches = line.match(/^([^|]*)\|\s*(\d*)/);
       if (matches) {
         const [fileName, delta] = matches.slice(1);
         modifiedFiles.push(makeFile(fileName, delta));

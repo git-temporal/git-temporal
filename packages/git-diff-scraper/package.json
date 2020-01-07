@@ -1,6 +1,6 @@
 {
   "name": "@git-temporal/git-diff-scraper",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Scrapes git and returns a diff json containing 2 specified versions of a file",
   "keywords": [
     "git",
