@@ -6,8 +6,8 @@
 *.ipr
 *.iml
 *.iws
+*.vsix
 .idea/
-.vscode/
 lerna-debug.log
 
 # Build directory
