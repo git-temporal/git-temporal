@@ -2,8 +2,9 @@ import React from 'react';
 // @ts-ignore
 import { useSelector, useDispatch } from 'react-redux';
 
+import { debug } from 'app/utilities/logger';
 import { getAreCommitsFiltered } from 'app/selectors/commits';
-import { getSelectedPath } from 'app/selectors/stateVars';
+import { getSelectedPath, getGitRoot } from 'app/selectors/stateVars';
 import {
   getDefaultedStartDate,
   getDefaultedEndDate,
@@ -60,6 +61,7 @@ export const Header: React.FC = (): React.ReactElement => {
   const startDate = useSelector(getDefaultedStartDate);
   const endDate = useSelector(getDefaultedEndDate);
   const areCommitsFiltered = useSelector(getAreCommitsFiltered);
+  const gitRoot = useSelector(getGitRoot);
 
   const dispatch = useDispatch();
 
@@ -100,7 +102,7 @@ export const Header: React.FC = (): React.ReactElement => {
       partStyles.push('link');
       onClick = () => onLinkPartClick(fullPath);
     }
-    const sep = index === 0 ? '' : '/';
+    const sep = index > 1 ? '/' : index > 0 ? ' : ' : '';
 
     return (
       <span>
@@ -112,17 +114,24 @@ export const Header: React.FC = (): React.ReactElement => {
     );
   }
   function renderPathLinks() {
-    let parts = ['(repo root)/'];
+    let parts = ['(repository root)'];
+    console.log('renderPathLinks');
+    debug('renderPathLinks', { selectedPath, gitRoot });
     if (selectedPath && selectedPath.trim().length > 0) {
-      parts = parts.concat(selectedPath.split('/'));
+      // in vscode it sends us the full path so trim off repo root
+      const relativePath =
+        gitRoot && selectedPath.startsWith(gitRoot)
+          ? selectedPath.slice(gitRoot.length + 1)
+          : selectedPath;
+      parts = parts.concat(relativePath.trim().split(/[/\\]/));
     }
+
     const lastIndex = parts.length - 1;
-    let fullPathSoFar = '';
+    let fullPathSoFar = gitRoot || '';
     return parts.map((part, index) => {
-      // > 1 means don't add 'repository:'
+      // > 0 means don't add 'repository:'
       if (index > 0) {
-        const sep = index === 1 ? '' : '/';
-        fullPathSoFar += `${sep}${part}`;
+        fullPathSoFar += fullPathSoFar.length > 0 ? `/${part}` : part;
       }
       return renderLinkPart(part, index, fullPathSoFar, lastIndex);
     });

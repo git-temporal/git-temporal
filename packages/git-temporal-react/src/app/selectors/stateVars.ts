@@ -4,6 +4,9 @@ export const getIsFetching = state => state.isFetching;
 export const getEarliestCommitDate = state => state.earliestCommitDate;
 export const getLatestCommitDate = state => state.latestCommitDate;
 export const getTotalCommits = state => state.totalCommits;
+export const getHasUncommittedChanges = state => state.hasUncommittedChanges;
+export const getExistsLocally = state => state.existsLocally;
+export const getGitRoot = state => state.gitRoot;
 
 export const getRerenderRequestedAt = state => state.rerenderRequestedAt;
 

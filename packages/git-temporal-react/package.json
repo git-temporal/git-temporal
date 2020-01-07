@@ -1,6 +1,6 @@
 {
   "name": "@git-temporal/git-temporal-react",
-  "version": "0.2.2",
+  "version": "0.2.11",
   "main": "./index.js",
   "publishConfig": {
     "access": "public"

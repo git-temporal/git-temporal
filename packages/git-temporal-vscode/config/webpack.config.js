@@ -38,7 +38,7 @@ const config = {
       {
         from:
           'node_modules/@git-temporal/git-temporal-react/dist/git-temporal-react.vscode.js',
-        to: 'dist',
+        to: './',
       },
     ]),
   ],

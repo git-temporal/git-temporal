@@ -75,6 +75,36 @@ export const latestCommitDate = (state = 0, action: any) => {
   }
 };
 
+export const hasUncommittedChanges = (state = null, action: any) => {
+  switch (action.type) {
+    case ActionTypes.REQUEST_COMMITS:
+      return null;
+    case ActionTypes.RECEIVE_COMMIT_RANGE:
+      return action.commitRange.hasUncommittedChanges;
+  }
+  return state;
+};
+
+export const existsLocally = (state = null, action: any) => {
+  switch (action.type) {
+    case ActionTypes.REQUEST_COMMITS:
+      return null;
+    case ActionTypes.RECEIVE_COMMIT_RANGE:
+      return action.commitRange.existsLocally;
+  }
+  return state;
+};
+
+export const gitRoot = (state = null, action: any) => {
+  switch (action.type) {
+    case ActionTypes.REQUEST_COMMITS:
+      return null;
+    case ActionTypes.RECEIVE_COMMIT_RANGE:
+      return action.commitRange.gitRoot;
+  }
+  return state;
+};
+
 export const isFileSelected = (state = false, action: any) => {
   switch (action.type) {
     case ActionTypes.RECEIVE_COMMITS:

@@ -5,10 +5,6 @@ import { setDates } from 'app/actions/setDates';
 import { ActionTypes } from 'app/actions/ActionTypes';
 import { isVscode, vscode } from 'app/actions/vscode';
 import { fetchDiff } from 'app/actions/diff';
-import {
-  getDefaultedStartDate,
-  getDefaultedEndDate,
-} from 'app/selectors/dates';
 
 const PAGE_SIZE = 1000;
 

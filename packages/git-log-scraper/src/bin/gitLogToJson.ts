@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { getCommitHistory } from './gitLogScraper';
+import { getCommitHistory } from '../gitLogScraper';
 import { safelyParseInt } from '@git-temporal/commons';
 
 const HELP = `

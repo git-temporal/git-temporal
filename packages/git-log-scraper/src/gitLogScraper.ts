@@ -70,16 +70,25 @@ export function getCommitRange(fileName: string) {
     `log ${logFlags} -n 1 -- ${escapeForCli(fileName)}`
   );
   const lastCommit = parseGitLogOutput(lastCommitRaw)[0];
-
+  const existsLocally = fs.existsSync(fileName);
+  const hasChanges = existsLocally && hasUncommitedChanges(gitRoot, fileName);
   return {
+    gitRoot,
     firstCommit,
     lastCommit,
+    existsLocally,
     count: allRevHashes.length,
     path: fileName,
+    hasUncommittedChanges: hasChanges,
   };
 }
 
 // Implementation
+
+function hasUncommitedChanges(gitroot: string, fileName: string) {
+  const statusRaw = execGit(gitroot, `status ${fileName}`);
+  return statusRaw.match(/(new\sfile|modified|deleted)\:/i) !== null;
+}
 
 function fetchFileHistory(fileName: string, skip: number, maxCount: number) {
   const gitRoot = findGitRoot(fileName);

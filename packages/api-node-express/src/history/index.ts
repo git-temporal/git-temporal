@@ -30,11 +30,10 @@ export function serveCommitRange(req, res) {
 
   log(`getting commitRange for ${requestPath}`);
   const { time, result } = timeThis(getCommitRange, requestPath);
-  log(
-    `${result.count} commits
-     from ${result.firstCommit.authorDate}
-     to ${result.lastCommit.authorDate}
-     in ${time}ms`
-  );
+  log(`${result.count} commits
+     from ${(result.firstCommit && result.firstCommit.authorDate) ||
+       'undefined'}
+     to ${(result.lastCommit && result.lastCommit.authorDate) || 'undefined'}
+     in ${time}ms`);
   res.send(result);
 }

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { getCommitRange } from './gitLogScraper';
+import { getCommitRange } from '../gitLogScraper';
 
 const HELP = `
 Dumps git commit range for a file or directory.

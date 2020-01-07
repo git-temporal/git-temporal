@@ -66,8 +66,13 @@ function fetchContents(commitId, requestPath, gitRoot): IFetchContents {
 
 function fetchFromGit(commitId, requestPath, gitRoot): IFetchContents {
   // use -- fileName and git log will work on deleted files and paths
-  const directory = path.dirname(requestPath);
-  const baseFileName = path.basename(requestPath);
+  const [directory, baseFileName] =
+    requestPath === gitRoot ||
+    requestPath === '' ||
+    requestPath.match(/^\.[\\/]?$/)
+      ? [gitRoot, '']
+      : [path.dirname(requestPath), path.basename(requestPath)];
+  debug('fetchFromGit', { requestPath, gitRoot, directory, baseFileName });
   // Use caution when changing these and be sure to test on Windows.  The
   // `git show` command works a little differently.
   //
@@ -140,15 +145,13 @@ function parseDirectoryDiff(outputLines): IModifiedFile[] {
 
   for (const line of outputLines) {
     let matches = line.match(/(.*)\((gone|new)\).*\|\s*(\d*)/);
-    debug('matching line 1', { line, matches });
-
+    debug('parsing dir diff line', { line, matches });
     if (matches) {
       const [fileName, newOrGone, delta] = matches.slice(1);
       const status = newOrGone === 'new' ? 'added' : 'deleted';
       modifiedFiles.push(makeFile(fileName, delta, status));
     } else {
       matches = line.match(/^([^|]*)\|\s*(\d*)/);
-      debug('matching line 2', { line, matches });
       if (matches) {
         const [fileName, delta] = matches.slice(1);
         modifiedFiles.push(makeFile(fileName, delta));
