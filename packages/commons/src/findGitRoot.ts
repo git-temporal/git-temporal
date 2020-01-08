@@ -6,6 +6,19 @@ const osRoot =
   os.platform() === 'win32' ? process.cwd().split(path.sep)[0] : '/';
 
 export function findGitRoot(startingPath?: string): string | null {
+  const parentPath = findInParents(startingPath);
+  if (parentPath) {
+    return parentPath;
+  }
+  if (startingPath) {
+    // if we didn't find it in the specified root, return git
+    // root if in parents of current working directory
+    return findInParents(null);
+  }
+  return null;
+}
+
+function findInParents(startingPath?: string): string | null {
   let currentPath =
     (startingPath && path.resolve(startingPath)) || process.cwd();
   try {

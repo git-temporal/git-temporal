@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/git-temporal/git-temporal/blob/master/packages/git-log-scraper/README.md",
   "dependencies": {
-    "@git-temporal/commons": "0.1.0",
+    "@git-temporal/commons": "^0.1.2",
     "@git-temporal/logger": "0.1.0"
   },
   "devDependencies": {

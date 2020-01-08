@@ -41,6 +41,7 @@ const styles = {
     _extends: ['inlineBlock', 'flexColumn'],
     marginBottom: 10,
     flexGrow: 1,
+    minHeight: 30,
   },
   resetLink: {
     position: 'relative',
@@ -114,15 +115,18 @@ export const Header: React.FC = (): React.ReactElement => {
     );
   }
   function renderPathLinks() {
+    debug('renderPathLinks', { selectedPath, gitRoot });
+    if (!gitRoot || gitRoot.length === 0) {
+      return null;
+    }
     let parts = ['(repository root)'];
     console.log('renderPathLinks');
     debug('renderPathLinks', { selectedPath, gitRoot });
     if (selectedPath && selectedPath.trim().length > 0) {
       // in vscode it sends us the full path so trim off repo root
-      const relativePath =
-        gitRoot && selectedPath.startsWith(gitRoot)
-          ? selectedPath.slice(gitRoot.length + 1)
-          : selectedPath;
+      const relativePath = selectedPath.startsWith(gitRoot)
+        ? selectedPath.slice(gitRoot.length + 1)
+        : selectedPath;
       parts = parts.concat(relativePath.trim().split(/[/\\]/));
     }
 

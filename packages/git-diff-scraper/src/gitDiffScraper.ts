@@ -73,19 +73,31 @@ function fetchFromGit(commitId, requestPath, gitRoot): IFetchContents {
       ? [gitRoot, '']
       : [path.dirname(requestPath), path.basename(requestPath)];
   debug('fetchFromGit', { requestPath, gitRoot, directory, baseFileName });
+  const normalizedRequestPath = normalizeRequestPath(gitRoot, requestPath);
   // Use caution when changing these and be sure to test on Windows.  The
   // `git show` command works a little differently.
   //
   // For example,  `git show HEAD:somepath/somefile.js` from git root will
-  // work on OSX but not windows. The only solution I found to work on both
-  // windows and OSX is to cwd to the directory and do `git show HEAD:./somefile.js`
-  // Also, only on Windows, using `./somefile.js` when the file is in the git root and
-  // cwd is git root fails. Also note that the path.sep isn't used below because
-  // backslash like, `.\somefile.js`, doesn't work on windows git  : /
-  const pathPrefix = directory === gitRoot ? '' : `./`;
-  const cmd = `show ${commitId}:${pathPrefix}${escapeForCli(baseFileName)}`;
-  const rawContents = execGit(directory, cmd);
+  // work on OSX but not windows.
+  //
+  const cmd = `show ${commitId}:./${escapeForCli(normalizedRequestPath)}`;
+
+  let rawContents: string;
+  try {
+    rawContents = execGit(gitRoot, cmd);
+  } catch (e) {
+    debug('fetchFromGit', { error });
+    return {
+      isDirectory: false,
+      contents: null,
+    };
+  }
+
   const isDirectory = rawContents.match(/^tree /) !== null;
+  if (isDirectory) {
+    debug('fetchFromGit', { isDirectory, rawContents });
+  }
+
   return {
     isDirectory,
     contents: isDirectory ? null : Buffer.from(rawContents).toString('base64'),
@@ -119,7 +131,7 @@ function fetchDirectoryDiff(
   const leftCommit = _leftCommit || 'HEAD';
   const rightCommit = _rightCommit || 'local';
   const isDiffOnLocal = rightCommit === 'local';
-  const leftPath = isDiffOnLocal ? leftCommit : `${leftCommit}:${path}`;
+  const leftPath = `${leftCommit}:${path}`;
   const rightPath = isDiffOnLocal ? path : `${rightCommit}:${path}`;
   const extraOpts = '--stat=300 --compact-summary';
   let outputLines = [];
@@ -141,11 +153,11 @@ function fetchDirectoryDiff(
 }
 
 function parseDirectoryDiff(outputLines): IModifiedFile[] {
+  debug('parseDirectoryDiff', outputLines);
   const modifiedFiles = [];
-
   for (const line of outputLines) {
     let matches = line.match(/(.*)\((gone|new)\).*\|\s*(\d*)/);
-    debug('parsing dir diff line', { line, matches });
+    // debug('parsing dir diff line', { line, matches });
     if (matches) {
       const [fileName, newOrGone, delta] = matches.slice(1);
       const status = newOrGone === 'new' ? 'added' : 'deleted';

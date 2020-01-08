@@ -47,7 +47,7 @@ export function getCommitRange(fileName: string) {
   const gitRoot = findGitRoot(fileName);
   const logFlags = gitLogFlags({ follow: false });
 
-  debug('getCommitRange', { fileName, logFlags });
+  debug('getCommitRange', { fileName, gitRoot, logFlags });
 
   const cmdFileName = fileName === gitRoot ? '.' : fileName;
   const allRevHashes = execGit(
