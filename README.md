@@ -2,7 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [Git Temporal](#git-temporal)
-  - [Download latest beta preview](#download-latest-beta-preview)
+  - [Download latest vscode beta preview](#download-latest-vscode-beta-preview)
   - [Running the developer environment](#running-the-developer-environment)
 - [Updates](#updates)
   - [January 9, 2020](#january-9-2020)
@@ -16,9 +16,9 @@
 
 # Git Temporal
 
-## Download latest beta preview
+## Download latest vscode beta preview
 
-https://www.icloud.com/iclouddrive/0UH58xw-bu8Vvo9yNLx7PCY9Q#git-temporal-vscode-0.1
+https://www.icloud.com/iclouddrive/0aX-NVXLRy-TPHQ5qJ1I7bspw#git-temporal-vscode-0.4
 
 Use "Extensions: Install from VSIX..." from vscode command pallette to install.
 
