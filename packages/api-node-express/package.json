@@ -1,5 +1,6 @@
 {
   "name": "@git-temporal/api-node-express",
+  "private": true,
   "version": "0.1.0",
   "description": "This is an api to return git log information in JSON.",
   "main": "index.js",
