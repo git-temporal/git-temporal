@@ -1,6 +1,6 @@
 {
   "name": "@git-temporal/git-temporal-react",
-  "version": "0.2.11",
+  "version": "0.4.0",
   "main": "./index.js",
   "publishConfig": {
     "access": "public"
@@ -34,7 +34,7 @@
     "test-debug": "node --inspect-brk node_modules/.bin/jest --runInBand"
   },
   "dependencies": {
-    "@git-temporal/logger": "0.1.0",
+    "@git-temporal/logger": "^0.4.0",
     "babel-plugin-dynamic-import-node": "2.2.0",
     "babel-polyfill": "6.26.0",
     "d3": "5.7.0",

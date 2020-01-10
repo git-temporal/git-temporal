@@ -1,6 +1,6 @@
 {
   "name": "@git-temporal/git-log-scraper",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "Scrapes commit data from the git cli for a file or directory in a repository and returns an array of Javascript objects representing commits with files and lines added and deleted.",
   "main": "lib/gitLogScraper.js",
   "scripts": {
@@ -32,8 +32,8 @@
   },
   "homepage": "https://github.com/git-temporal/git-temporal/blob/master/packages/git-log-scraper/README.md",
   "dependencies": {
-    "@git-temporal/commons": "^0.1.2",
-    "@git-temporal/logger": "0.1.0"
+    "@git-temporal/commons": "^0.4.0",
+    "@git-temporal/logger": "^0.4.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.7",

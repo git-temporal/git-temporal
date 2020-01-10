@@ -2,7 +2,7 @@
   "name": "git-temporal-vscode",
   "description": "Git Temporal - all about time and time travel",
   "icon": "images/gticon.png",
-  "version": "0.1.9",
+  "version": "0.4.0",
   "publisher": "littlebee",
   "engines": {
     "vscode": "^1.25.0"
@@ -49,10 +49,10 @@
     "access": "public"
   },
   "dependencies": {
-    "@git-temporal/git-temporal-react": "0.2.11",
-    "@git-temporal/git-log-scraper": "0.3.2",
-    "@git-temporal/git-diff-scraper": "0.1.9",
-    "@git-temporal/logger": "0.1.0",
+    "@git-temporal/git-diff-scraper": "^0.4.0",
+    "@git-temporal/git-log-scraper": "^0.4.0",
+    "@git-temporal/git-temporal-react": "^0.4.0",
+    "@git-temporal/logger": "^0.4.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },

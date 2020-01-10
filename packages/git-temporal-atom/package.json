@@ -1,7 +1,7 @@
 {
   "name": "@git-temporal/git-temporal-atom",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.4.0",
   "description": "git-temporal for Atom (http://atom.io)",
   "main": "index.js",
   "scripts": {
