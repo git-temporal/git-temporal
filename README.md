@@ -5,6 +5,7 @@
   - [Download latest beta preview](#download-latest-beta-preview)
   - [Running the developer environment](#running-the-developer-environment)
 - [Updates](#updates)
+  - [January 9, 2020](#january-9-2020)
   - [January 5, 2020](#january-5-2020)
   - [June 10, 2019](#june-10-2019)
   - [May 29, 2019](#may-29-2019)
@@ -27,6 +28,12 @@ See [CONTRIBUTING.md](https://github.com/git-temporal/git-temporal/blob/master/C
 version of git-temporal.
 
 # Updates
+
+## January 9, 2020
+
+Directory differences and deleted files work!
+
+Also working on getting the repository in order and setting up the PR process and pipeline. Hopeful that lerna-changelog will be able to help manage the change log :fingerscrossed:
 
 ## January 5, 2020
 
