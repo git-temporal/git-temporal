@@ -61,7 +61,8 @@ export class DirectoryTree extends React.Component<DirectoryTreeProps> {
       const childNode = treeNode[nodeName];
       const isExpanded =
         this.props.expandedNodes.includes(childNode.fullPath) ||
-        Object.keys(childNode.nodes).length <= 1;
+        Object.keys(childNode.nodes).length <= 1 ||
+        Object.keys(treeNode).length <= 1;
 
       renderedTreeNodes.push(
         this.isFile(childNode)

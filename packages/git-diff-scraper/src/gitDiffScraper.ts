@@ -131,8 +131,8 @@ function fetchDirectoryDiff(
   const leftCommit = _leftCommit || 'HEAD';
   const rightCommit = _rightCommit || 'local';
   const isDiffOnLocal = rightCommit === 'local';
-  const leftPath = `${leftCommit}:${path}`;
-  const rightPath = isDiffOnLocal ? path : `${rightCommit}:${path}`;
+  const leftPath = leftCommit;
+  const rightPath = isDiffOnLocal ? path : `${rightCommit} ${path}`;
   const extraOpts = '--stat=300 --compact-summary';
   let outputLines = [];
   try {
