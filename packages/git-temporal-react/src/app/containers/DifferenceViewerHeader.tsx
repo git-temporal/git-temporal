@@ -10,6 +10,7 @@ import {
   getDiffLeftCommit,
   getDiffRightCommit,
   getSelectedPath,
+  getHasUncommittedChanges,
 } from 'app/selectors/stateVars';
 import {
   getCommitsForTimeplot,
@@ -47,6 +48,7 @@ export const DifferenceViewerHeader: React.FC = (): React.ReactElement => {
   const leftCommit = useSelector(getDiffLeftCommit);
   const rightCommit = useSelector(getDiffRightCommit);
   const timeplotCommits = useSelector(getCommitsForTimeplot);
+  const hasUncommittedChanges = useSelector(getHasUncommittedChanges);
   const dispatch = useDispatch();
 
   return (
@@ -76,7 +78,12 @@ export const DifferenceViewerHeader: React.FC = (): React.ReactElement => {
     if (!timeplotCommits || timeplotCommits.length === 0) {
       return null;
     }
-    const commit = which === 'left' && !_commit ? timeplotCommits[0] : _commit;
+    const commit =
+      which === 'left' && !_commit
+        ? timeplotCommits[0]
+        : which === 'right' && !_commit && !hasUncommittedChanges
+          ? timeplotCommits[0]
+          : _commit;
 
     return (
       <div style={style(revChildrenStyle)}>
