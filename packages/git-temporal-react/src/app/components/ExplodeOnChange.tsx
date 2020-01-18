@@ -4,6 +4,7 @@ import { style } from 'app/styles';
 export interface ExplodeOnChangeProps {
   value: any;
   children: string | JSX.Element | JSX.Element[];
+  initialExplosion?: boolean;
   scale?: number;
   style?: object | string;
 }
@@ -17,6 +18,10 @@ const outerStyle = {
   transition: 'all 1s ease',
 };
 
+// note 2.5 = way too in your face
+const DEFAULT_SCALE = 1.8;
+const HANG_TIME = 900;
+
 export class ExplodeOnChange extends React.Component<
   ExplodeOnChangeProps,
   ExplodeOnChangeState
@@ -25,18 +30,23 @@ export class ExplodeOnChange extends React.Component<
     isExploding: false,
   };
 
+  componentDidMount() {
+    // let rendering settle or it looks glitchy
+    if (this.props.initialExplosion) {
+      setTimeout(() => {
+        this.explode();
+      }, 100);
+    }
+  }
+
   componentDidUpdate(newProps) {
     if (newProps.value !== this.props.value) {
-      this.setState({ isExploding: true });
-      setTimeout(() => {
-        this.setState({ isExploding: false });
-      }, 1300);
+      this.explode();
     }
   }
 
   render() {
-    // note 2.5 = way too in your face
-    const { scale = 1.8 } = this.props;
+    const { scale = DEFAULT_SCALE } = this.props;
     const addStyle = this.state.isExploding
       ? { transform: `scale(${scale}, ${scale})` }
       : null;
@@ -45,5 +55,12 @@ export class ExplodeOnChange extends React.Component<
         {this.props.children}
       </div>
     );
+  }
+
+  private explode() {
+    this.setState({ isExploding: true });
+    setTimeout(() => {
+      this.setState({ isExploding: false });
+    }, HANG_TIME);
   }
 }

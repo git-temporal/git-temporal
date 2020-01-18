@@ -3,7 +3,10 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { debug } from 'app/utilities/logger';
-import { getAreCommitsFiltered } from 'app/selectors/commits';
+import {
+  getAreCommitsFiltered,
+  getFilteredCommits,
+} from 'app/selectors/commits';
 import { getSelectedPath, getGitRoot } from 'app/selectors/stateVars';
 import {
   getDefaultedStartDate,
@@ -15,6 +18,8 @@ import { selectPath, setSearch } from 'app/actions';
 import { setDates } from 'app/actions/setDates';
 import { ExplodingDateRange } from 'app/components/ExplodingDateRange';
 import { ResetLink } from 'app/components/ResetLink';
+import { ExplodeOnChange } from 'app/components/ExplodeOnChange';
+import { EpochDateTime } from 'app/components/EpochDateTime';
 
 const styles = {
   outer: {
@@ -25,6 +30,13 @@ const styles = {
     _extends: ['inlineBlock', 'h1Text'],
     marginBottom: 10,
   },
+  date: {
+    _extends: 'largerText',
+  },
+  dateSelected: {
+    _extends: 'bigText',
+    color: '@colors.selected',
+  },
   dateRange: {
     _extends: ['flexGrow', 'flexColumn'],
     alignItems: 'flex-end',
@@ -33,9 +45,6 @@ const styles = {
   },
   topRow: {
     _extends: 'flexRow',
-  },
-  date: {
-    transition: 'all 2s ease -in -out',
   },
   path: {
     _extends: ['inlineBlock', 'flexColumn'],
@@ -62,18 +71,45 @@ export const Header: React.FC = (): React.ReactElement => {
   const startDate = useSelector(getDefaultedStartDate);
   const endDate = useSelector(getDefaultedEndDate);
   const areCommitsFiltered = useSelector(getAreCommitsFiltered);
+  const filteredCommits = useSelector(getFilteredCommits);
   const gitRoot = useSelector(getGitRoot);
 
   const dispatch = useDispatch();
+
+  const dateStyle = style([
+    styles.date,
+    areCommitsFiltered && styles.dateSelected,
+  ]);
+  const singleCommit =
+    areCommitsFiltered && filteredCommits.length === 1 && filteredCommits[0];
 
   return (
     <div style={style(styles.outer)}>
       <div style={style(styles.topRow)}>
         <div style={style(styles.appName)}>Git Temporal </div>
         <div style={style(styles.dateRange)}>
-          <ExplodingDateRange
-            {...{ startDate, endDate, isDefaultDates: !areCommitsFiltered }}
-          />
+          {filteredCommits.length === 0 ? (
+            <div />
+          ) : singleCommit ? (
+            <ExplodeOnChange
+              value={singleCommit.authorDate}
+              style={dateStyle}
+              initialExplosion
+            >
+              Single commit (#
+              {singleCommit.hash}) on{' '}
+              <EpochDateTime
+                value={singleCommit.authorDate}
+                style={dateStyle}
+              />
+            </ExplodeOnChange>
+          ) : (
+            <ExplodingDateRange
+              startDate={startDate}
+              endDate={endDate}
+              style={dateStyle}
+            />
+          )}
         </div>
       </div>
       <div style={style('flexRow')}>
@@ -120,7 +156,6 @@ export const Header: React.FC = (): React.ReactElement => {
       return null;
     }
     let parts = ['(repository root)'];
-    console.log('renderPathLinks');
     debug('renderPathLinks', { selectedPath, gitRoot });
     if (selectedPath && selectedPath.trim().length > 0) {
       // in vscode it sends us the full path so trim off repo root
