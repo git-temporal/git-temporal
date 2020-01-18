@@ -3,7 +3,7 @@
   "displayName": "Git Temporal",
   "description": "Git Temporal - all about time and time travel",
   "icon": "images/gticon.png",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "publisher": "bee",
   "galleryBanner": {
     "color": "#1b2b34",
@@ -54,10 +54,10 @@
     "access": "public"
   },
   "dependencies": {
-    "@git-temporal/git-diff-scraper": "^0.5.0",
-    "@git-temporal/git-log-scraper": "^0.5.0",
-    "@git-temporal/git-temporal-react": "^0.5.0",
-    "@git-temporal/logger": "^0.5.0",
+    "@git-temporal/git-diff-scraper": "^0.5.1",
+    "@git-temporal/git-log-scraper": "^0.5.1",
+    "@git-temporal/git-temporal-react": "^0.5.1",
+    "@git-temporal/logger": "^0.5.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },

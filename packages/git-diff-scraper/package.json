@@ -1,6 +1,6 @@
 {
   "name": "@git-temporal/git-diff-scraper",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Scrapes git and returns a diff json containing 2 specified versions of a file",
   "keywords": [
     "git",
@@ -34,8 +34,8 @@
     "url": "https://github.com/git-temporal/git-temporal/issues"
   },
   "dependencies": {
-    "@git-temporal/commons": "^0.5.0",
-    "@git-temporal/logger": "^0.5.0"
+    "@git-temporal/commons": "^0.5.1",
+    "@git-temporal/logger": "^0.5.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.7",
