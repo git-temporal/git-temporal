@@ -110,6 +110,9 @@ export const TimeplotPopup = (props: TimeplotPopupProps): JSX.Element => {
         <div style={style(footerStyle)}>
           <div style={style('flexRow')}>
             <div>Click to select left revision</div>
+            <div style={{ flexGrow: 1, textAlign: 'right' }}>
+              Shift+click to select range
+            </div>{' '}
           </div>
           <div style={style('flexRow', { marginTop: 5 })}>
             <div> Click twice to select a single commit</div>

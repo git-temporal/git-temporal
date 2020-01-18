@@ -319,10 +319,10 @@ export class Timeplot extends React.Component<
     debug('Timeplot: onMouseDown', evt.shiftKey, startDate);
     evt.preventDefault();
     this.lastMouseDownDate = startDate;
-    // set the startDate on down and clear the end date
-    // so the user gets instant feed back when starting
-    // click and drag select
-    this.setDates(startDate, null);
+    const endDate = this.getEndDateForEvent(evt);
+    // set the startDate on down  so the user gets instant feedback
+    // when starting click and drag select
+    this.setDates(startDate, endDate);
   };
 
   private onMouseUp = (evt, { startDate }) => {
@@ -356,7 +356,10 @@ export class Timeplot extends React.Component<
       dispatch(selectSingleCommit(commit));
     } else {
       const epochAuthorDate = commit.authorDate * 1000;
-      this.setDates(epochAuthorDate, this.props.endDate);
+      const endDate = this.getEndDateForEvent(evt);
+      // setDates() will sort the dates ensuring actual endDate set in store
+      //   is greater than startDate
+      this.setDates(epochAuthorDate, endDate);
     }
   };
 
@@ -400,6 +403,14 @@ export class Timeplot extends React.Component<
         },
       ],
     });
+  }
+
+  private getEndDateForEvent(evt) {
+    return evt.shiftKey && this.props.endDate
+      ? this.props.endDate * 1000
+      : evt.shiftKey && this.props.startDate
+        ? this.props.startDate * 1000
+        : null;
   }
 }
 
