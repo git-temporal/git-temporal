@@ -25,7 +25,7 @@
     "build:api-node-express": "cd packages/api-node-express && npm run build",
     "build:git-temporal-react": "cd packages/git-temporal-react && npm run build",
     "build:git-temporal-vscode": "cd packages/git-temporal-vscode && npm run build",
-    "changelog": "cross-env GITHUB_AUTH=fa28707d6be0cc429194e7f634c8da7102638148 npx lerna-changelog",
+    "changelog": "cross-env GITHUB_AUTH=cc9ad3e8d9eb61e2801d74300f02583d5d2d1c9d npx lerna-changelog",
     "publish": "npm run publish:logger && npm run publish:commons && npm run publish:git-diff-scraper && npm run publish:git-log-scraper && npm run publish:git-temporal-react",
     "publish:commons": "cd packages/commons && npm publish",
     "publish:logger": "cd packages/logger && npm publish",
