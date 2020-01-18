@@ -1,9 +1,14 @@
 {
-  "name": "Git Temporal",
+  "name": "git-temporal-vscode",
+  "displayName": "Git Temporal",
   "description": "Git Temporal - all about time and time travel",
   "icon": "images/gticon.png",
   "version": "0.4.0",
   "publisher": "bee",
+  "galleryBanner": {
+    "color": "#1b2b34",
+    "theme": "dark"
+  },
   "engines": {
     "vscode": "^1.25.0"
   },
