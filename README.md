@@ -2,9 +2,10 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [Git Temporal](#git-temporal)
-  - [Download latest vscode beta preview](#download-latest-vscode-beta-preview)
+  - [Install VS Code extension from Visual Studio Marketplace](#install-vs-code-extension-from-visual-studio-marketplace)
   - [Running the developer environment](#running-the-developer-environment)
 - [Updates](#updates)
+  - [January 19, 2020](#january-19-2020)
   - [January 9, 2020](#january-9-2020)
   - [January 5, 2020](#january-5-2020)
   - [June 10, 2019](#june-10-2019)
@@ -16,11 +17,9 @@
 
 # Git Temporal
 
-## Download latest vscode beta preview
+## Install VS Code extension from Visual Studio Marketplace
 
-https://www.icloud.com/iclouddrive/0aX-NVXLRy-TPHQ5qJ1I7bspw#git-temporal-vscode-0.4
-
-Use "Extensions: Install from VSIX..." from vscode command pallette to install.
+https://marketplace.visualstudio.com/items?itemName=bee.git-temporal-vscode&ssr=false
 
 ## Running the developer environment
 
@@ -28,6 +27,18 @@ See [CONTRIBUTING.md](https://github.com/git-temporal/git-temporal/blob/master/C
 version of git-temporal.
 
 # Updates
+
+## January 19, 2020
+
+Now available in [Visual Studio Market Place](https://marketplace.visualstudio.com/items?itemName=bee.git-temporal-vscode&ssr=false)
+
+🍾🎉🎊🥳
+
+Slowly turning on the customer spigot through annoucements and trying to find any issues before it becomes a firehose 🤫🙂
+
+I should have a good idea of the issues effecting customers and be setting the official v1.0 milestone soon.
+
+Report any issues here: https://github.com/git-temporal/git-temporal/issues. +1s are always welcome on any issue already reported.
 
 ## January 9, 2020
 

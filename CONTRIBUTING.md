@@ -7,7 +7,7 @@
     - [Start the React hot server](#start-the-react-hot-server)
     - [Run the development version of VSCode plugin](#run-the-development-version-of-vscode-plugin)
   - [Updating External Dependencies](#updating-external-dependencies)
-  - [publishing everything](#publishing-everything)
+  - [Publishing Everything](#publishing-everything)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -25,6 +25,7 @@ Clone this repo:
 
 ```
 git clone git@github.com:git-temporal/git-temporal.git
+cd git-temporal
 ```
 
 Install dependencies:
@@ -73,7 +74,21 @@ That's pretty much it. If everything went as expected you should be looking at a
 
 ### Run the development version of VSCode plugin
 
-See packages/git-temporal-vscode/CONTRIBUTING.md
+- From monorepo root, run
+
+```
+code .
+```
+
+Or load the monorepo root dir as a project in VSCode through their UI.
+
+- From the extensions tab in VSCode, remove Git Temporal extension if you installed it from the marketplace. Reload it it says.
+
+- Press F5 to start the extension dev server
+
+- From the explorer window, right click a file or directory and select
+
+See https://github.com/git-temporal/git-temporal/blob/master/packages/git-temporal-vscode/CONTRIBUTING.md for more information about building and debugging the vscode extension.
 
 ## Updating External Dependencies
 
@@ -83,66 +98,41 @@ To update any of the packages used by any of the git-temporal packages, check ou
 npx lernaupdate
 ```
 
-## publishing everything
+## Publishing Everything
 
-Run lerna publish. It might give errors that can be ignored.
+From the mono repo root directory:
 
-```
+```bash
+# Run lerna publish to update versions. It might give errors that can be ignored.
 lerna publish
-```
-
-Check the diff to make sure it updated versions in all the package.json files:
-
-```
+# Check the diff to make sure it updated versions in all the package.json files:
 git diff
-```
-
-Commit version changes
-
-```
+# Commit version changes
 git commit -am 'version bump'
-```
-
-Update change log
-
-```
+# Update change log
 npm run changelog
-```
-
-View diff (adjust CHANGELOG.md manually if needed):
-
-```
+# View diff (adjust CHANGELOG.md manually if needed):
 git diff
-```
-
-Commit changelog
-
-```
-git commit -am 'update changelog`
-```
-
-Tag version (use new version number below):
-
-```
+# Commit changelog
+git commit -am 'update changelog'
+# Tag version (use new version number below):
 git tag v0.0.0
-```
-
-Push changes and tags
-
-```
+# Push changes and tags
 git push origin master
 git push origin master --tags
-```
-
-Publish NPM packages and VSCode extension:
-
-```
+# Publish NPM packages and VSCode extension:
 npm run publish
 npm run publish:vscode
 ```
 
-You might get an error(s) during publishing of vscode about npm versions not found for our packages. NPM sometimes lags behind. Wait a couple of minutes and try publishing just the vscode extension again:
+You might get errors during publishing of vscode about npm versions not found for our packages. NPM sometimes lags behind. Wait a couple of minutes and try publishing just the vscode extension again:
 
 ```
 npm run publish:vscode
+```
+
+Publishing will replace the soft links in node_modules to the internal packages with hard downloads for packaging. When you are ready to go back to hacking, run lerna bootstrap from the mono repo root,
+
+```
+npm run bootstrap
 ```
