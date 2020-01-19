@@ -7,6 +7,7 @@
     - [Start the React hot server](#start-the-react-hot-server)
     - [Run the development version of VSCode plugin](#run-the-development-version-of-vscode-plugin)
   - [Updating External Dependencies](#updating-external-dependencies)
+  - [publishing everything](#publishing-everything)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -82,10 +83,66 @@ To update any of the packages used by any of the git-temporal packages, check ou
 npx lernaupdate
 ```
 
-```
+## publishing everything
+
+Run lerna publish. It might give errors that can be ignored.
 
 ```
-
+lerna publish
 ```
 
+Check the diff to make sure it updated versions in all the package.json files:
+
+```
+git diff
+```
+
+Commit version changes
+
+```
+git commit -am 'version bump'
+```
+
+Update change log
+
+```
+npm run changelog
+```
+
+View diff (adjust CHANGELOG.md manually if needed):
+
+```
+git diff
+```
+
+Commit changelog
+
+```
+git commit -am 'update changelog`
+```
+
+Tag version (use new version number below):
+
+```
+git tag v0.0.0
+```
+
+Push changes and tags
+
+```
+git push origin master
+git push origin master --tags
+```
+
+Publish NPM packages and VSCode extension:
+
+```
+npm run publish
+npm run publish:vscode
+```
+
+You might get an error(s) during publishing of vscode about npm versions not found for our packages. NPM sometimes lags behind. Wait a couple of minutes and try publishing just the vscode extension again:
+
+```
+npm run publish:vscode
 ```

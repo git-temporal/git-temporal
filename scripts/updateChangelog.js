@@ -10,17 +10,21 @@ const newVersionText = commons.execSync(
 );
 
 const currentChangeLogText = fs.readFileSync('CHANGELOG.md').toString();
-const versionTagRegex = new RegExp(`(.*)(## v${lernaConfig.version}.*)?(##.*)`);
+const versionTagRegex = new RegExp(
+  `(.*)(## ${lernaConfig.version}.*)(<br>## .*)`
+);
 const matches = currentChangeLogText
   .replace(/\n/g, '<br>')
   .match(versionTagRegex);
 
-const preText = matches[1].replace(/<br>/g, '\n');
-const matchText = matches[2];
-const postText = matches[3].replace(/<br>/g, '\n');
+let newChangelogText;
 
-const newChangelogText = matchText
-  ? `${preText}${newVersionText}\n${postText}`
-  : `${newVersionText}\n${preText}${postText}`;
+if (matches) {
+  const preText = matches[1].replace(/<br>/g, '\n');
+  const postText = matches[3].replace(/<br>/g, '\n');
+  newChangelogText = `#${preText}${newVersionText}\n${postText}`;
+} else {
+  newChangelogText = `${newVersionText}\n${currentChangeLogText}`;
+}
 
 fs.writeFileSync('CHANGELOG.md', newChangelogText);

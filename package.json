@@ -32,6 +32,7 @@
     "publish:git-diff-scraper": "cd packages/git-diff-scraper && npm publish",
     "publish:git-log-scraper": "cd packages/git-log-scraper && npm publish",
     "publish:git-temporal-react": "cd packages/git-temporal-react && npm publish",
+    "publish:vscode": "cd packages/git-temporal-vscode && npm install && vsce publish",
     "version": "npx lerna version"
   },
   "devDependencies": {

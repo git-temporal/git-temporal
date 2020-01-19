@@ -1,4 +1,4 @@
-## 0.5.1 (2020-01-18)
+## 0.5.1 (2020-01-19)
 
 #### :rocket: Enhancement
 
@@ -8,7 +8,7 @@
 
 - Bee Wilkerson ([@littlebee](https://github.com/littlebee))
 
-## v0.5.0 (2020-01-18)
+## 0.5.0 (2020-01-18)
 
 #### :rocket: Enhancement
 
@@ -38,9 +38,8 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [v0.5.0 (2020-01-18)](#v050-2020-01-18)
-  - [:rocket: Enhancement](#rocket-enhancement)
-  - [:bug: Bug Fix](#bug-bug-fix)
-  - [Committers: 1](#committers-1)
+- [](#)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+##
