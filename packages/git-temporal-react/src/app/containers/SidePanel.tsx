@@ -1,6 +1,5 @@
 import React from 'react';
 import { style } from 'app/styles';
-// @ts-ignore
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getHighlightedCommitIds } from 'app/selectors/stateVars';

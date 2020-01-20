@@ -10,6 +10,8 @@
 .vscode/
 lerna-debug.log
 
+package-lock.json
+
 # Build directory
 **/lib/
 **/dist/

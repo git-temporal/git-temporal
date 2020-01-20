@@ -17,6 +17,6 @@
   "author": "Bee Wilkerson",
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "^7.7.7"
+    "@babel/cli": "7.7.7"
   }
 }
