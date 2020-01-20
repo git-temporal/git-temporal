@@ -73,14 +73,17 @@ export class ExtendingList extends React.Component<
       this.rowsRendered++
     ) {
       rows.push(
-        <div style={style(itemStyle)}>
+        <div style={style(itemStyle)} key={this.rowsRendered}>
           {this.props.rowRenderer(this.rowsRendered, `row${this.rowsRendered}`)}
         </div>
       );
     }
     if (this.rowsRendered < this.props.rowCount) {
       rows.push(
-        <div style={{ flexShrink: 0, textAlign: 'center', padding: 10 }}>
+        <div
+          style={{ flexShrink: 0, textAlign: 'center', padding: 10 }}
+          key={this.rowsRendered + 1}
+        >
           <SpinnerImage height={40} width={40} />
         </div>
       );

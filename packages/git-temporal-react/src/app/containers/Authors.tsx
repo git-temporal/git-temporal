@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { debug } from 'app/utilities/logger';
 
-import { style } from 'app/styles';
 import { highlightCommits, setOpenSidePanelGroup } from 'app/actions';
 import { CollapsibleSidePanelGroups } from 'app/actions/ActionTypes';
 import { getAuthorsStats } from 'app/selectors/authors';
@@ -64,7 +63,6 @@ export const Authors: React.FC = (): React.ReactElement => {
       <AuthorCard
         key={key}
         index={index}
-        style={style}
         author={author}
         totalLinesAdded={authorStats.totalLinesAdded}
         totalLinesDeleted={authorStats.totalLinesDeleted}

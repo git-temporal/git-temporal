@@ -22,7 +22,7 @@ export class AuthorGravatarImage extends React.Component<
     emailsIndex: 0,
   };
 
-  componentWillReceiveProps(newProps) {
+  componentDidUpdate(newProps) {
     newProps.emails.forEach((email, index) => {
       if (email !== this.props.emails[index]) {
         this.setState({ emailsIndex: 0 });

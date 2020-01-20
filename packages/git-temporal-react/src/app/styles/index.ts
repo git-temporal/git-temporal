@@ -208,6 +208,7 @@ export function style(...styles) {
       Object.assign(styleOut, processExtends(specifiedStyle));
     } else {
       if (!globalStyles.hasOwnProperty(specifiedStyle)) {
+        debugger;
         console.warn(`git-temporal: unknown style requested ${specifiedStyle}`);
       } else {
         Object.assign(styleOut, processExtends(globalStyles[specifiedStyle]));

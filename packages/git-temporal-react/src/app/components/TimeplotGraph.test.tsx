@@ -40,7 +40,6 @@ describe('components/TimeplotGraph', () => {
     });
 
     test('and then changing one of the ten commits, it should rerender', () => {
-      debugger;
       // have to deep copy the array to avoid changing prev commits too
       const newCommits = tenCommits.map(commit => Object.assign({}, commit));
       newCommits[4].id = 'testId';
