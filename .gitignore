@@ -10,6 +10,9 @@
 .idea/
 lerna-debug.log
 
+# bye Felicia
+package-lock.json
+
 # Build directory
 **/lib/
 **/dist/

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// @ts-ignore
 import { useSelector, useDispatch } from 'react-redux';
 
 import { style } from 'app/styles';
