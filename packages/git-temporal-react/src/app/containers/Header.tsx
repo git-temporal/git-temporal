@@ -1,5 +1,4 @@
 import React from 'react';
-// @ts-ignore
 import { useSelector, useDispatch } from 'react-redux';
 
 import { debug } from 'app/utilities/logger';
