@@ -15,7 +15,6 @@ exports[`components/AuthorCard when rendered with required props it should match
       Object {
         "display": "flex",
         "fontSize": "initial",
-        "marginRight": -10,
         "padding": 10,
         "width": "100%",
       }
@@ -48,39 +47,6 @@ exports[`components/AuthorCard when rendered with required props it should match
       >
         Zaphod Beeblebrox
       </div>
-      <div>
-        <span
-          style={
-            Object {
-              "color": "#333333",
-              "fontSize": 11,
-              "fontWeight": "normal",
-              "lineHeight": 1.35,
-            }
-          }
-        >
-          <EpochSpan
-            firstEpochTime={132344555}
-            secondEpochTime={1539563458}
-          />
-          <span>
-             ago
-          </span>
-        </span>
-        <AddedDeleted
-          linesAdded={100}
-          linesDeleted={30}
-          style={
-            Object {
-              "marginTop": 6,
-            }
-          }
-        />
-      </div>
-      <PercentBar
-        denominator={260}
-        numerator={130}
-      />
       <div
         style={
           Object {
@@ -91,19 +57,61 @@ exports[`components/AuthorCard when rendered with required props it should match
           }
         }
       >
-        5
+        <div>
+          5
+          <span>
+             commits spanning 
+          </span>
+          <EpochSpan
+            firstEpochTime={132344525}
+            secondEpochTime={132344555}
+          />
+        </div>
+      </div>
+      <div
+        style={
+          Object {
+            "color": "#333333",
+            "fontSize": 11,
+            "fontWeight": "normal",
+            "lineHeight": 1.35,
+          }
+        }
+      >
         <span>
-           commits spanning 
+          Last commit 
         </span>
         <EpochSpan
-          firstEpochTime={132344525}
-          secondEpochTime={132344555}
+          firstEpochTime={132344555}
+          secondEpochTime={1539563458}
         />
+        <span>
+           ago
+        </span>
       </div>
-      <PercentBar
-        denominator={140}
-        numerator={5}
-      />
+      <div
+        style={
+          Object {
+            "color": "#333333",
+            "fontSize": 11,
+            "fontWeight": "normal",
+            "lineHeight": 1.35,
+          }
+        }
+      >
+        <AddedDeleted
+          linesAdded={100}
+          linesDeleted={30}
+          style={
+            Object {
+              "float": "none",
+            }
+          }
+        />
+        <span>
+           lines changed 
+        </span>
+      </div>
     </div>
   </Selectable>
 </div>

@@ -11,6 +11,7 @@ exports[`components/RadioMenuItem when rendered with isSelected=false it should 
       onClick={[MockFunction]}
       style={
         Object {
+          "_extends": "selectable",
           "borderRadius": 7,
           "display": "inline-block",
           "height": 15,
@@ -35,6 +36,7 @@ exports[`components/RadioMenuItem when rendered with isSelected=true it should m
       onClick={[MockFunction]}
       style={
         Object {
+          "_extends": "selectable",
           "borderRadius": 7,
           "display": "inline-block",
           "height": 15,

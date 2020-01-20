@@ -11,7 +11,8 @@ exports[`components/ResetLink when rendered with required props it should match 
       "fontSize": 11,
       "fontWeight": "normal",
       "lineHeight": 1.35,
-      "marginRight": 0,
+      "marginLeft": "7px",
+      "marginRight": "20px",
       "textDecoration": "underline",
     }
   }

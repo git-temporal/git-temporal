@@ -21,7 +21,6 @@ exports[`components/HorizontalScroller when rendered with 100% width div it shou
           "height": "100%",
           "overflowX": "scroll",
           "position": [Function],
-          "scrollBehavior": "smooth",
           "width": "100%",
         }
       }
@@ -72,7 +71,6 @@ exports[`components/HorizontalScroller when rendered with 200% width div and the
           "height": "100%",
           "overflowX": "scroll",
           "position": [Function],
-          "scrollBehavior": "smooth",
           "width": "100%",
         }
       }
@@ -122,7 +120,6 @@ exports[`components/HorizontalScroller when rendered with 200% width div it shou
           "height": "100%",
           "overflowX": "scroll",
           "position": [Function],
-          "scrollBehavior": "smooth",
           "width": "100%",
         }
       }

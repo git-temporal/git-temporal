@@ -15,11 +15,15 @@ exports[`components/ActionMenu when rendered with text child it should match sna
     onClick={[MockFunction]}
     style={
       Object {
-        "_extends": "h2Text",
-        "height": 29,
-        "margin": 0,
-        "padding": "0px 5px",
-        "width": 14,
+        "_extends": Object {
+          "_extends": "h2Text",
+          "height": 29,
+          "margin": 0,
+          "padding": "0px 5px",
+          "width": 14,
+        },
+        "borderBottomLeftRadius": "0px",
+        "borderBottomRightRadius": "0px",
       }
     }
   >
@@ -30,9 +34,11 @@ exports[`components/ActionMenu when rendered with text child it should match sna
     onClose={[MockFunction]}
     style={
       Object {
+        "border": "solid 2px @colors.selectable",
+        "borderTopRightRadius": "0px",
         "marginRight": 0,
         "minWidth": 180,
-        "right": 0,
+        "right": "2px",
       }
     }
   >

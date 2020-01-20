@@ -7,7 +7,7 @@ exports[`containers/CommitsActionMenu when rendered with basic props it should m
   style={
     Object {
       "color": "#333333",
-      "fontSize": 13,
+      "fontSize": 12,
       "fontWeight": "normal",
       "lineHeight": 1.35,
       "position": "absolute",
@@ -22,8 +22,8 @@ exports[`containers/CommitsActionMenu when rendered with basic props it should m
         "fontSize": 14,
         "fontWeight": "normal",
         "lineHeight": 1.35,
-        "marginBottom": 10,
-        "marginRight": 10,
+        "marginBottom": "7px",
+        "marginRight": "7px",
       }
     }
   >

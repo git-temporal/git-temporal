@@ -24,15 +24,18 @@ exports[`components/Popup when rendered with isOpen=true) it should match snapsh
     }
   />
   <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     style={
       Object {
-        "background": "white",
+        "background": "#FEFEFE",
         "borderRadius": 3,
-        "boxShadow": "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2)",
+        "boxShadow": "0 4px 8px 0 rgba(0, 0, 0, 0.2) 0 6px 20px 0 rgba(0, 0, 0, 0.2)",
+        "color": "#333333",
         "display": "block",
         "marginRight": 0,
         "minWidth": 180,
-        "padding": 10,
+        "padding": "7px",
         "position": "absolute",
         "right": 0,
         "zIndex": 4,

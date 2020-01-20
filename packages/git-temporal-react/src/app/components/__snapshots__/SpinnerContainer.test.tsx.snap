@@ -29,15 +29,15 @@ exports[`components/SpinnerContainer when rendered with isSelected=true it shoul
   <div
     style={
       Object {
-        "backgroundColor": "white",
+        "alignItems": "center",
+        "backgroundColor": "#FEFEFE",
+        "display": "flex",
         "height": "100%",
+        "justifyContent": "center",
         "left": 0,
         "opacity": 0.9,
-        "paddingTop": "10%",
         "position": "absolute",
-        "textAlign": "center",
         "top": 0,
-        "verticalAlign": "middle",
         "width": "100%",
         "zIndex": "5",
       }

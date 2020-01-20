@@ -9,11 +9,9 @@ exports[`components/Selectable when rendered with required props it should match
     Object {
       "border": "1px solid transparent",
       "color": "#333333",
-      "display": "block",
-      "fontSize": 13,
+      "fontSize": 12,
       "fontWeight": "normal",
       "lineHeight": 1.35,
-      "marginBottom": 10,
       "padding": 5,
     }
   }

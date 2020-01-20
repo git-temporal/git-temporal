@@ -4,11 +4,11 @@ exports[`components/CommitCard when rendered with required props it should match
 <div
   style={
     Object {
-      "background": "white",
-      "borderBottom": "1px solid whitesmoke",
+      "background": "#FEFEFE",
       "borderRadius": 7,
+      "color": "#333333",
       "display": "block",
-      "marginBottom": 0,
+      "marginBottom": "7px",
       "marginRight": 0,
       "padding": 0,
     }
@@ -16,6 +16,7 @@ exports[`components/CommitCard when rendered with required props it should match
 >
   <Selectable
     onClick={[Function]}
+    onDoubleClick={[Function]}
   >
     <div
       style={
@@ -26,7 +27,7 @@ exports[`components/CommitCard when rendered with required props it should match
           "fontSize": 11,
           "fontWeight": "normal",
           "lineHeight": 1.35,
-          "marginBottom": 10,
+          "marginBottom": "7px",
         }
       }
     >
@@ -59,10 +60,10 @@ exports[`components/CommitCard when rendered with required props it should match
         Object {
           "color": "#333333",
           "display": "block",
-          "fontSize": 16,
+          "fontSize": 14,
           "fontWeight": "normal",
           "lineHeight": 1.35,
-          "marginBottom": 10,
+          "marginBottom": "7px",
           "marginLeft": 5,
         }
       }
@@ -99,10 +100,10 @@ exports[`components/CommitCard when rendered with required props it should match
         Object {
           "color": "#333333",
           "display": "block",
-          "fontSize": 13,
+          "fontSize": 12,
           "fontWeight": "normal",
           "lineHeight": 1.35,
-          "marginBottom": 10,
+          "marginBottom": "7px",
           "marginLeft": 5,
         }
       }

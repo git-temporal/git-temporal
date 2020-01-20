@@ -33,8 +33,7 @@ exports[`components/ZoomContainer when rendered it should match snapshot 1`] = `
   <div
     style={
       Object {
-        "backgroundColor": undefined,
-        "bottom": -19,
+        "background": "transparent",
         "position": "absolute",
         "right": 18,
       }
@@ -44,7 +43,7 @@ exports[`components/ZoomContainer when rendered it should match snapshot 1`] = `
       style={
         Object {
           "color": "#333333",
-          "fontSize": 13,
+          "fontSize": 12,
           "fontWeight": "normal",
           "lineHeight": 1.35,
         }

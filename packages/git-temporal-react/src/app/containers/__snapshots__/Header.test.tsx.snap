@@ -1,5 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`containers/Header when rendered with a proper path it should match snapshot (it should have path links for all but last part of path) 1`] = `undefined`;
-
 exports[`containers/Header when rendered without props it should match snapshot (it should be showing App Name and repository:/) 1`] = `undefined`;
