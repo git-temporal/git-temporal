@@ -14,7 +14,6 @@
     "url": "https://github.com/git-temporal/git-temporal/issues"
   },
   "homepage": "https://github.com/git-temporal/git-temporal",
-
   "scripts": {
     "bootstrap": "npx lerna bootstrap",
     "build": "npm run build:logger && npm run build:commons && npm run build:diff-scraper && npm run build:log-scraper && npm run build:api-node-express && npm run build:git-temporal-react && npm run build:git-temporal-vscode",
