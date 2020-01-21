@@ -80,7 +80,7 @@ export class ZoomContainer extends React.Component<
         </HorizontalScroller>
         <div style={style(zoomSelectorStyle, this.props.style)}>
           <label style={style('normalText')}>
-            <select onChange={this.onZoomChange}>
+            <select onChange={this.onZoomChange} value={this.state.zoom}>
               {this.renderZoomOptions()}
             </select>
           </label>
@@ -96,9 +96,8 @@ export class ZoomContainer extends React.Component<
       label: `${zoom}% zoom`,
     }));
     return customZooms.concat(standardZooms).map(({ value, label }, index) => {
-      const selected = value === this.state.zoom;
       return (
-        <option key={index} value={value} selected={selected}>
+        <option key={index} value={value}>
           {label}
         </option>
       );

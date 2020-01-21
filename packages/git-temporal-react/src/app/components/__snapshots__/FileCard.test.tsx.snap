@@ -4,12 +4,13 @@ exports[`components/FileCard when rendered with required props it should match s
 <div
   style={
     Object {
-      "background": "white",
+      "background": "#FEFEFE",
       "borderRadius": 7,
+      "color": "#333333",
       "display": "block",
-      "marginBottom": 10,
-      "marginRight": 10,
-      "padding": 10,
+      "marginBottom": "7px",
+      "marginRight": "7px",
+      "padding": "7px",
     }
   }
 >
@@ -20,7 +21,7 @@ exports[`components/FileCard when rendered with required props it should match s
       Object {
         "color": "#333333",
         "display": "block",
-        "fontSize": 16,
+        "fontSize": 14,
         "fontWeight": "normal",
         "lineHeight": 1.35,
       }
@@ -35,23 +36,26 @@ exports[`components/FileCard when rendered with required props it should match s
     style={
       Object {
         "color": "#333333",
-        "fontSize": 13,
+        "fontSize": 12,
         "fontWeight": "normal",
         "lineHeight": 1.35,
       }
     }
   >
-    <span>
+    <div>
       10
        commits by 
       9
-       authors spanning
+       authors
+    </div>
+    <div>
+      spanning
        
-    </span>
-    <EpochSpan
-      firstEpochTime={1427579814}
-      secondEpochTime={1493211770}
-    />
+      <EpochSpan
+        firstEpochTime={1427579814}
+        secondEpochTime={1493211770}
+      />
+    </div>
   </div>
 </div>
 `;

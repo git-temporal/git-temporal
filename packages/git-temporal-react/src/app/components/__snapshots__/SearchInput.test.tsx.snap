@@ -4,17 +4,17 @@ exports[`components/SearchInput when rendered with value it should match snapsho
 <div
   style={
     Object {
-      "background": "white",
+      "background": "#FEFEFE",
       "border": "1px solid lightskyblue",
       "borderRadius": 3,
       "color": "#333333",
       "cursor": "pointer",
       "display": "flex",
       "flexDirection": "row",
-      "fontSize": 13,
+      "fontSize": 12,
       "fontWeight": "normal",
       "lineHeight": 1.35,
-      "marginRight": 10,
+      "marginRight": "7px",
       "padding": 5,
       "position": "relative",
       "userSelect": "none",
@@ -25,6 +25,7 @@ exports[`components/SearchInput when rendered with value it should match snapsho
     height={16}
     style={
       Object {
+        "fill": "#333333",
         "marginTop": 2,
       }
     }
@@ -34,7 +35,9 @@ exports[`components/SearchInput when rendered with value it should match snapsho
     onChange={[Function]}
     style={
       Object {
+        "backgroundColor": "#FEFEFE",
         "border": "none",
+        "color": "#333333",
         "flexGrow": 1,
         "fontSize": 14,
         "margin": "0px 5px",

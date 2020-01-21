@@ -1,300 +1,716 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`containers/Authors when rendered mock authors and stats it should match snapshot 1`] = `
-<div
-  style={
-    Object {
-      "background": "whitesmoke",
-      "borderRadius": 3,
-      "display": "flex",
-      "flexDirection": "column",
-      "marginRight": 10,
-      "maxWidth": 320,
-      "minWidth": 320,
-      "padding": 10,
-      "position": "relative",
-    }
-  }
->
-  <Connect(AuthorsActionMenu) />
+exports[`containers/Authors when rendered mock authors and stats should match snapshot 1`] = `
+<div>
   <div
-    style={
-      Object {
-        "color": "#333333",
-        "display": "block",
-        "flexGrow": 0,
-        "fontSize": 18,
-        "fontWeight": "bold",
-        "lineHeight": 1.35,
-        "marginBottom": 20,
-        "marginRight": 20,
-      }
-    }
+    style="display: flex; flex-direction: column; flex-grow: 0; flex-shrink: 0; position: relative; margin-bottom: 15px; transition: all .25s ease;"
   >
-    <span
-      data-testId="header"
+    <div
+      style="display: flex; flex-direction: row;"
     >
-      Authors by 
-      lines
-    </span>
-  </div>
-  <div
-    style={
-      Object {
-        "display": "flex",
-        "flexGrow": 1,
-      }
-    }
-  >
-    <AutoSizer
-      disableHeight={false}
-      disableWidth={false}
-      onResize={[Function]}
-      style={Object {}}
+      <div
+        style="cursor: pointer;"
+      >
+        <svg
+          height="16"
+          role="img"
+          viewBox="0 0 320 512"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+      <div
+        style="font-size: 18px; line-height: 1.35; font-weight: bold; color: rgb(51, 51, 51); margin-bottom: 15px; margin-right: 15px;"
+      >
+        7 Authors
+      </div>
+    </div>
+    <div
+      style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); position: absolute; right: 10px; overflow: visible; height: 16px; width: 28px;"
     >
-      <Component />
-    </AutoSizer>
-  </div>
-</div>
-`;
-
-exports[`containers/Authors when rendered with authors and stats  calling renderList() should render the list 1`] = `
-<List
-  authorsContainerSort="lines"
-  autoHeight={false}
-  estimatedRowSize={30}
-  height={100}
-  highlightedCommitIds={Array []}
-  noRowsRenderer={[Function]}
-  onRowsRendered={[Function]}
-  onScroll={[Function]}
-  overscanIndicesGetter={[Function]}
-  overscanRowCount={10}
-  rowCount={5}
-  rowHeight={120}
-  rowRenderer={[Function]}
-  scrollToAlignment="auto"
-  scrollToIndex={-1}
-  style={Object {}}
-  width={100}
-/>
-`;
-
-exports[`containers/Authors when rendered with authors and stats  calling renderRow() should render a row 1`] = `
-<Unknown
-  author={
-    Object {
-      "authorEmails": Array [
-        "dan.abramov@gmail.com",
-        "gaearon@fb.com",
-      ],
-      "authorName": "Dan Abramov",
-      "commits": Array [
-        Object {
-          "authorDate": 1537541919,
-          "authorName": "Bee Wilkerson",
-          "body": "",
-          "files": Array [
-            Object {
-              "linesAdded": 2,
-              "linesDeleted": 649,
-              "name": "README.md",
-            },
-          ],
-          "hash": "c698a0f01d",
-          "id": "c698a0f01de1fa682443510920a2dafc2440d6c8",
-          "linesAdded": 2,
-          "linesDeleted": 649,
-          "message": "Explain why this fork exists in README.md",
-          "relativeDate": "2 days ago",
-        },
-        Object {
-          "authorDate": 1537272890,
-          "authorName": "Tobias Nießen",
-          "body": "Calling setAuthTag multiple times can result in hard to detect bugssince to the user, it is unclear which invocation actually affectedOpenSSL.PR-URL: https://github.com/nodejs/node/pull/22931Reviewed-By: Anna Henningsen <anna@addaleax.net>Reviewed-By: James M Snell <jasnell@gmail.com>Reviewed-By: Ujjwal Sharma <usharma1998@gmail.com>",
-          "files": Array [
-            Object {
-              "linesAdded": 1,
-              "linesDeleted": 1,
-              "name": "doc/api/crypto.md",
-            },
-            Object {
-              "linesAdded": 2,
-              "linesDeleted": 5,
-              "name": "src/node_crypto.cc",
-            },
-            Object {
-              "linesAdded": 26,
-              "linesDeleted": 0,
-              "name": "test/parallel/test-crypto-authenticated.js",
-            },
-          ],
-          "hash": "058c5b81cd",
-          "id": "058c5b81cdbabe8989a194ba5d388f4c230f4af6",
-          "linesAdded": 29,
-          "linesDeleted": 6,
-          "message": "crypto: do not allow multiple calls to setAuthTag",
-          "relativeDate": "2 days ago",
-        },
-        Object {
-          "authorDate": 1526296167,
-          "authorName": "Daniel Bevenius",
-          "body": "This commit adds a --completion-bash option to node which can besourced to provide bash code completion for node options.Usage:$ node --completion-bash  > node_bash_completion$ source node_bash_completion$ node --[tab]PR-URL: https://github.com/nodejs/node/pull/20713Reviewed-By: Anna Henningsen <anna@addaleax.net>Reviewed-By: James M Snell <jasnell@gmail.com>Reviewed-By: Denys Otrishko <shishugi@gmail.com>",
-          "files": Array [
-            Object {
-              "linesAdded": 11,
-              "linesDeleted": 0,
-              "name": "doc/api/cli.md",
-            },
-            Object {
-              "linesAdded": 3,
-              "linesDeleted": 0,
-              "name": "doc/node.1",
-            },
-            Object {
-              "linesAdded": 25,
-              "linesDeleted": 0,
-              "name": "lib/internal/bash_completion.js",
-            },
-            Object {
-              "linesAdded": 7,
-              "linesDeleted": 1,
-              "name": "lib/internal/bootstrap/node.js",
-            },
-            Object {
-              "linesAdded": 1,
-              "linesDeleted": 0,
-              "name": "node.gyp",
-            },
-            Object {
-              "linesAdded": 3,
-              "linesDeleted": 0,
-              "name": "src/node_options.cc",
-            },
-            Object {
-              "linesAdded": 1,
-              "linesDeleted": 0,
-              "name": "src/node_options.h",
-            },
-          ],
-          "hash": "56493bf1eb",
-          "id": "56493bf1ebfab3ec102fe017f30fa4f81ba6a256",
-          "linesAdded": 51,
-          "linesDeleted": 1,
-          "message": "tools: add bash completion for node",
-          "relativeDate": "2 days ago",
-        },
-        Object {
-          "authorDate": 1537212012,
-          "authorName": "Michaël Zasso",
-          "body": "Replace references to the outdated \`update-v8\` tool to its replacementin \`node-core-utils\`PR-URL: https://github.com/nodejs/node/pull/22913Reviewed-By: Richard Lau <riclau@uk.ibm.com>Reviewed-By: Colin Ihrig <cjihrig@gmail.com>Reviewed-By: Weijia Wang <starkwang@126.com>Reviewed-By: Sakthipriyan Vairamani <thechargingvolcano@gmail.com>Reviewed-By: Joyee Cheung <joyeec9h3@gmail.com>Reviewed-By: Luigi Pinca <luigipinca@gmail.com>Reviewed-By: James M Snell <jasnell@gmail.com>",
-          "files": Array [
-            Object {
-              "linesAdded": 8,
-              "linesDeleted": 8,
-              "name": "doc/guides/maintaining-V8.md",
-            },
-          ],
-          "hash": "408e8ce22c",
-          "id": "408e8ce22ce7436e88a9977b4dc99fc3c431fc67",
-          "linesAdded": 8,
-          "linesDeleted": 8,
-          "message": "doc: update maintaining V8 guide",
-          "relativeDate": "3 days ago",
-        },
-        Object {
-          "authorDate": 1537269982,
-          "authorName": "Ruben Bridgewater",
-          "body": "Currently the documentation is not specific how fast-tracking shouldbe applied. This specifies exactly how things should be done to preventconfusion.PR-URL: https://github.com/nodejs/node/pull/22929Reviewed-By: Denys Otrishko <shishugi@gmail.com>Reviewed-By: Anna Henningsen <anna@addaleax.net>Reviewed-By: Tobias Nießen <tniessen@tnie.de>Reviewed-By: Vse Mozhet Byt <vsemozhetbyt@gmail.com>Reviewed-By: John-David Dalton <john.david.dalton@gmail.com>Reviewed-By: Matteo Collina <matteo.collina@gmail.com>Reviewed-By: Luigi Pinca <luigipinca@gmail.com>Reviewed-By: Michaël Zasso <targos@protonmail.com>Reviewed-By: Weijia Wang <starkwang@126.com>Reviewed-By: Richard Lau <riclau@uk.ibm.com>Reviewed-By: Matheus Marchini <mat@mmarchini.me>Reviewed-By: Sakthipriyan Vairamani <thechargingvolcano@gmail.com>Reviewed-By: Yuta Hiroto <hello@hiroppy.me>Reviewed-By: Rich Trott <rtrott@gmail.com>Reviewed-By: Trivikram Kamat <trivikr.dev@gmail.com>Reviewed-By: George Adams <george.adams@uk.ibm.com>",
-          "files": Array [
-            Object {
-              "linesAdded": 6,
-              "linesDeleted": 3,
-              "name": "COLLABORATOR_GUIDE.md",
-            },
-          ],
-          "hash": "54af9738b9",
-          "id": "54af9738b9fad1c1e46ea9170037146324cd152e",
-          "linesAdded": 6,
-          "linesDeleted": 3,
-          "message": "doc: specify fast-tracking",
-          "relativeDate": "3 days ago",
-        },
-      ],
-      "linesAdded": 129276,
-      "linesDeleted": 104642,
-    }
-  }
-  index={0}
-  isHighlighted={false}
-  maxCommits={919}
-  maxImpact={233918}
-  onClick={[Function]}
-  style={
-    Object {
-      "width": "calc(100% - 20px)",
-    }
-  }
-  totalCommits={3211}
-  totalLinesAdded={442190}
-  totalLinesDeleted={388007}
-/>
-`;
-
-exports[`containers/Authors when rendered with authors and stats  it should match snapshot 1`] = `
-<div
-  style={
-    Object {
-      "background": "whitesmoke",
-      "borderRadius": 3,
-      "display": "flex",
-      "flexDirection": "column",
-      "marginRight": 10,
-      "maxWidth": 320,
-      "minWidth": 320,
-      "padding": 10,
-      "position": "relative",
-    }
-  }
->
-  <Connect(AuthorsActionMenu) />
-  <div
-    style={
-      Object {
-        "color": "#333333",
-        "display": "block",
-        "flexGrow": 0,
-        "fontSize": 18,
-        "fontWeight": "bold",
-        "lineHeight": 1.35,
-        "marginBottom": 20,
-        "marginRight": 20,
-      }
-    }
-  >
-    <span
-      data-testId="header"
+      <div
+        style="font-size: 18px; line-height: 1.35; font-weight: bold; color: rgb(51, 51, 51); height: 29px; width: 14px; margin: 0px; padding: 0px 5px;"
+      >
+        ...
+      </div>
+      <div
+        style="overflow: visible;"
+      >
+        <div
+          style="opacity: 0; position: fixed; top: 0px; left: 0px; height: 100%; width: 100%; z-index: 3; display: none;"
+        />
+        <div
+          style="background: rgb(254, 254, 254); border-radius: 3px; color: rgb(51, 51, 51); margin-right: 0px; padding: 7px; position: absolute; z-index: 4; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) 0 6px 20px 0 rgba(0, 0, 0, 0.2); right: 2px; min-width: 180px; border: 2px solid lightskyblue; border-top-right-radius: 0px; display: none;"
+        >
+          <div
+            style="font-size: 14px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); margin-bottom: 7px; margin-right: 7px;"
+          >
+            Sort by
+          </div>
+          <div
+            data-testid="sortTime"
+            style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent;"
+          >
+            <div>
+              <div
+                style="border: 1px solid lightskyblue; border-radius: 7px; cursor: pointer; user-select: none; background: lightskyblue; display: inline-block; width: 15px; height: 15px; margin-right: 10px;"
+              >
+                 
+              </div>
+              by time
+            </div>
+          </div>
+          <div
+            data-testid="sortCommits"
+            style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent;"
+          >
+            <div>
+              <div
+                style="border: 1px solid lightskyblue; border-radius: 7px; cursor: pointer; user-select: none; display: inline-block; width: 15px; height: 15px; margin-right: 10px;"
+              >
+                 
+              </div>
+              by number of commits
+            </div>
+          </div>
+          <div
+            data-testid="sortLines"
+            style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent;"
+          >
+            <div>
+              <div
+                style="border: 1px solid lightskyblue; border-radius: 7px; cursor: pointer; user-select: none; display: inline-block; width: 15px; height: 15px; margin-right: 10px;"
+              >
+                 
+              </div>
+              by lines changed
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      style="display: flex; flex-direction: column; overflow: auto;"
     >
-      Authors by 
-      lines
-    </span>
-  </div>
-  <div
-    style={
-      Object {
-        "display": "flex",
-        "flexGrow": 1,
-      }
-    }
-  >
-    <AutoSizer
-      disableHeight={false}
-      disableWidth={false}
-      onResize={[Function]}
-      style={Object {}}
-    >
-      <Component />
-    </AutoSizer>
+      <div
+        style="display: flex; flex-direction: column;"
+      >
+        <div
+          style="flex-shrink: 0;"
+        >
+          <div
+            style="display: flex; flex-direction: row;"
+          >
+            <div
+              style="font-size: initial; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
+            >
+              <div
+                style="width: 75px; height: 75px; display: inline-block;"
+              >
+                <img
+                  data-for="tomvalorsa@gmail.com"
+                  src="https://www.gravatar.com/avatar/a6122aededdb147b8cde7b02a318d1e0?s=75&d=404"
+                  style="width: 75px; max-height: 75px;"
+                />
+              </div>
+              <div
+                style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;"
+              >
+                <div
+                  style="margin-bottom: 5px;"
+                  title="tomvalorsa@gmail.com"
+                >
+                  Tom Valorsa
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <div>
+                    1
+                    <span>
+                       commits spanning 
+                    </span>
+                    <span>
+                      0 seconds
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span>
+                    Last commit 
+                  </span>
+                  <span>
+                    1 year
+                  </span>
+                  <span>
+                     ago
+                  </span>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span
+                    style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); float: none;"
+                  >
+                    <span
+                      style="color: green;"
+                    >
+                      +
+                      <span>
+                        11
+                      </span>
+                    </span>
+                    <span>
+                       / 
+                    </span>
+                    <span
+                      style="color: red;"
+                    >
+                      -
+                      <span>
+                        9
+                      </span>
+                    </span>
+                  </span>
+                  <span>
+                     lines changed 
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          style="flex-shrink: 0;"
+        >
+          <div
+            style="display: flex; flex-direction: row;"
+          >
+            <div
+              style="font-size: initial; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
+            >
+              <div
+                style="width: 75px; height: 75px; display: inline-block;"
+              >
+                <img
+                  data-for="alex@heyimalex.com"
+                  src="https://www.gravatar.com/avatar/0a27a80f0a9800a2fc5935ecf7071eca?s=75&d=404"
+                  style="width: 75px; max-height: 75px;"
+                />
+              </div>
+              <div
+                style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;"
+              >
+                <div
+                  style="margin-bottom: 5px;"
+                  title="alex@heyimalex.com"
+                >
+                  Alex Guerra
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <div>
+                    1
+                    <span>
+                       commits spanning 
+                    </span>
+                    <span>
+                      0 seconds
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span>
+                    Last commit 
+                  </span>
+                  <span>
+                    1 year
+                  </span>
+                  <span>
+                     ago
+                  </span>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span
+                    style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); float: none;"
+                  >
+                    <span
+                      style="color: green;"
+                    >
+                      +
+                      <span>
+                        0
+                      </span>
+                    </span>
+                    <span>
+                       / 
+                    </span>
+                    <span
+                      style="color: red;"
+                    >
+                      -
+                      <span>
+                        0
+                      </span>
+                    </span>
+                  </span>
+                  <span>
+                     lines changed 
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          style="flex-shrink: 0;"
+        >
+          <div
+            style="display: flex; flex-direction: row;"
+          >
+            <div
+              style="font-size: initial; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
+            >
+              <div
+                style="width: 75px; height: 75px; display: inline-block;"
+              >
+                <img
+                  data-for="ianschmitz@gmail.com"
+                  src="https://www.gravatar.com/avatar/6cbab1469a4744ec0234785658aab248?s=75&d=404"
+                  style="width: 75px; max-height: 75px;"
+                />
+              </div>
+              <div
+                style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;"
+              >
+                <div
+                  style="margin-bottom: 5px;"
+                  title="ianschmitz@gmail.com"
+                >
+                  Ian Schmitz
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <div>
+                    2
+                    <span>
+                       commits spanning 
+                    </span>
+                    <span>
+                      2 weeks
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span>
+                    Last commit 
+                  </span>
+                  <span>
+                    1 year
+                  </span>
+                  <span>
+                     ago
+                  </span>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span
+                    style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); float: none;"
+                  >
+                    <span
+                      style="color: green;"
+                    >
+                      +
+                      <span>
+                        3
+                      </span>
+                    </span>
+                    <span>
+                       / 
+                    </span>
+                    <span
+                      style="color: red;"
+                    >
+                      -
+                      <span>
+                        3
+                      </span>
+                    </span>
+                  </span>
+                  <span>
+                     lines changed 
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          style="flex-shrink: 0;"
+        >
+          <div
+            style="display: flex; flex-direction: row;"
+          >
+            <div
+              style="font-size: initial; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
+            >
+              <div
+                style="width: 75px; height: 75px; display: inline-block;"
+              >
+                <img
+                  data-for="ben.blank+github@gmail.com"
+                  src="https://www.gravatar.com/avatar/7cb70d792de30cefb12c71899c5f8be6?s=75&d=404"
+                  style="width: 75px; max-height: 75px;"
+                />
+              </div>
+              <div
+                style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;"
+              >
+                <div
+                  style="margin-bottom: 5px;"
+                  title="ben.blank+github@gmail.com"
+                >
+                  Ben Blank
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <div>
+                    1
+                    <span>
+                       commits spanning 
+                    </span>
+                    <span>
+                      0 seconds
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span>
+                    Last commit 
+                  </span>
+                  <span>
+                    1 year
+                  </span>
+                  <span>
+                     ago
+                  </span>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span
+                    style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); float: none;"
+                  >
+                    <span
+                      style="color: green;"
+                    >
+                      +
+                      <span>
+                        1
+                      </span>
+                    </span>
+                    <span>
+                       / 
+                    </span>
+                    <span
+                      style="color: red;"
+                    >
+                      -
+                      <span>
+                        1
+                      </span>
+                    </span>
+                  </span>
+                  <span>
+                     lines changed 
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          style="flex-shrink: 0;"
+        >
+          <div
+            style="display: flex; flex-direction: row;"
+          >
+            <div
+              style="font-size: initial; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
+            >
+              <div
+                style="width: 75px; height: 75px; display: inline-block;"
+              >
+                <img
+                  data-for="22164266+suprj@users.noreply.github.com"
+                  src="https://www.gravatar.com/avatar/2c9d320ecb7c6c74955c3df6cb1ba96f?s=75&d=404"
+                  style="width: 75px; max-height: 75px;"
+                />
+              </div>
+              <div
+                style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;"
+              >
+                <div
+                  style="margin-bottom: 5px;"
+                  title="22164266+suprj@users.noreply.github.com"
+                >
+                  RJ Morgan
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <div>
+                    1
+                    <span>
+                       commits spanning 
+                    </span>
+                    <span>
+                      0 seconds
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span>
+                    Last commit 
+                  </span>
+                  <span>
+                    1 year
+                  </span>
+                  <span>
+                     ago
+                  </span>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span
+                    style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); float: none;"
+                  >
+                    <span
+                      style="color: green;"
+                    >
+                      +
+                      <span>
+                        7
+                      </span>
+                    </span>
+                    <span>
+                       / 
+                    </span>
+                    <span
+                      style="color: red;"
+                    >
+                      -
+                      <span>
+                        2
+                      </span>
+                    </span>
+                  </span>
+                  <span>
+                     lines changed 
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          style="flex-shrink: 0;"
+        >
+          <div
+            style="display: flex; flex-direction: row;"
+          >
+            <div
+              style="font-size: initial; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
+            >
+              <div
+                style="width: 75px; height: 75px; display: inline-block;"
+              >
+                <img
+                  data-for="me+github@kentcdodds.com"
+                  src="https://www.gravatar.com/avatar/c552c633f05083de5e0f9ec94db1412a?s=75&d=404"
+                  style="width: 75px; max-height: 75px;"
+                />
+              </div>
+              <div
+                style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;"
+              >
+                <div
+                  style="margin-bottom: 5px;"
+                  title="me+github@kentcdodds.com"
+                >
+                  Kent C. Dodds
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <div>
+                    1
+                    <span>
+                       commits spanning 
+                    </span>
+                    <span>
+                      0 seconds
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span>
+                    Last commit 
+                  </span>
+                  <span>
+                    1 year
+                  </span>
+                  <span>
+                     ago
+                  </span>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span
+                    style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); float: none;"
+                  >
+                    <span
+                      style="color: green;"
+                    >
+                      +
+                      <span>
+                        13
+                      </span>
+                    </span>
+                    <span>
+                       / 
+                    </span>
+                    <span
+                      style="color: red;"
+                    >
+                      -
+                      <span>
+                        5
+                      </span>
+                    </span>
+                  </span>
+                  <span>
+                     lines changed 
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          style="flex-shrink: 0;"
+        >
+          <div
+            style="display: flex; flex-direction: row;"
+          >
+            <div
+              style="font-size: initial; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
+            >
+              <div
+                style="width: 75px; height: 75px; display: inline-block;"
+              >
+                <img
+                  data-for="mrmckeb@users.noreply.github.com"
+                  src="https://www.gravatar.com/avatar/09c69d2eee6b019f14f79d81af920f65?s=75&d=404"
+                  style="width: 75px; max-height: 75px;"
+                />
+              </div>
+              <div
+                style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;"
+              >
+                <div
+                  style="margin-bottom: 5px;"
+                  title="mrmckeb@users.noreply.github.com"
+                >
+                  Brody McKee
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <div>
+                    1
+                    <span>
+                       commits spanning 
+                    </span>
+                    <span>
+                      0 seconds
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span>
+                    Last commit 
+                  </span>
+                  <span>
+                    1 year
+                  </span>
+                  <span>
+                     ago
+                  </span>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span
+                    style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); float: none;"
+                  >
+                    <span
+                      style="color: green;"
+                    >
+                      +
+                      <span>
+                        439
+                      </span>
+                    </span>
+                    <span>
+                       / 
+                    </span>
+                    <span
+                      style="color: red;"
+                    >
+                      -
+                      <span>
+                        0
+                      </span>
+                    </span>
+                  </span>
+                  <span>
+                     lines changed 
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 `;

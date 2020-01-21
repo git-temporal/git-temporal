@@ -141,9 +141,13 @@ export const Header: React.FC = (): React.ReactElement => {
     const sep = index > 1 ? '/' : index > 0 ? ' : ' : '';
 
     return (
-      <span>
+      <span key={index}>
         <span style={style(styles.pathSeparator)}>{sep}</span>
-        <span style={style(partStyles)} key={index} onClick={onClick}>
+        <span
+          style={style(partStyles)}
+          onClick={onClick}
+          data-testid="pathPath"
+        >
           {part}
         </span>
       </span>

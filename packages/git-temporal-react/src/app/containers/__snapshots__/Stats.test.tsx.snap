@@ -1,232 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`containers/Stats when calling mapStateToProps() it should respond with props 1`] = `
-Object {
-  "authors": 1,
-  "commits": 5,
-  "files": 13,
-  "isFileSelected": undefined,
-  "linesAdded": 96,
-  "linesDeleted": 667,
-  "maxAuthorDate": 1537541919,
-  "minAuthorDate": 1526296167,
-}
-`;
-
-exports[`containers/Stats when rendered and a directory is selected it should match snapshot (it should be showing Commits selected) 1`] = `
-<div
-  style={
-    Object {
-      "background": "white",
-      "borderRadius": 3,
-      "display": "flex",
-      "flexDirection": "row",
-      "flexShrink": 0,
-      "marginBottom": -10,
-      "marginRight": 10,
-      "padding": 10,
-      "paddingBottom": 0,
-    }
-  }
->
-  <Component
-    label="Authors"
-  >
-    <ExplodeOnChange
-      value={5}
+exports[`containers/Stats when rendered with mock redux store should match snapshot 1`] = `
+<body>
+  <div>
+    <div
+      style="display: flex; flex-direction: row; margin-bottom: 7px; padding-left: 7px; flex-shrink: 0;"
     >
-      <CommaNumber
-        value={5}
-      />
-    </ExplodeOnChange>
-  </Component>
-  <Component
-    label="Active Time Span"
-  >
-    <ExplodeOnChange
-      value={3075354221}
-    >
-      <EpochSpan
-        firstEpochTime={1536691136}
-        secondEpochTime={1538663085}
-      />
-    </ExplodeOnChange>
-  </Component>
-  <Component
-    label="Last Commit"
-  >
-    <div>
-      <ExplodeOnChange
-        value={1538663085}
+      <div
+        style="flex-grow: 0; margin-right: 20px; margin-bottom: 10px;"
       >
-        <EpochSpan
-          firstEpochTime={1538663085}
-          secondEpochTime={1539563458}
-        />
-        <span>
-           ago
-        </span>
-      </ExplodeOnChange>
-    </div>
-  </Component>
-  <Component
-    label="Lines Added"
-  >
-    <ExplodeOnChange
-      value={700}
-    >
-      <CommaNumber
-        value={700}
-      />
-    </ExplodeOnChange>
-  </Component>
-  <Component
-    label="Lines Deleted"
-  >
-    <ExplodeOnChange
-      value={300}
-    >
-      <CommaNumber
-        value={300}
-      />
-    </ExplodeOnChange>
-  </Component>
-  <Component
-    isSelected={false}
-    label="Commits"
-    onLabelClick={[Function]}
-    title="Click to view Commits"
-  >
-    <ExplodeOnChange
-      value={52}
-    >
-      <CommaNumber
-        value={52}
-      />
-    </ExplodeOnChange>
-  </Component>
-  <Component
-    isSelected={true}
-    label="Files"
-    onLabelClick={[Function]}
-    title="Click to view Files"
-  >
-    <ExplodeOnChange
-      value={110}
-    >
-      <CommaNumber
-        value={110}
-      />
-    </ExplodeOnChange>
-  </Component>
-</div>
-`;
-
-exports[`containers/Stats when rendered test props it should match snapshot (it should be showing empty indicator) 1`] = `
-<div
-  style={
-    Object {
-      "background": "white",
-      "borderRadius": 3,
-      "display": "flex",
-      "flexDirection": "row",
-      "flexShrink": 0,
-      "marginBottom": -10,
-      "marginRight": 10,
-      "padding": 10,
-      "paddingBottom": 0,
-    }
-  }
->
-  <Component
-    label="Authors"
-  >
-    <ExplodeOnChange
-      value={5}
-    >
-      <CommaNumber
-        value={5}
-      />
-    </ExplodeOnChange>
-  </Component>
-  <Component
-    label="Active Time Span"
-  >
-    <ExplodeOnChange
-      value={3075354221}
-    >
-      <EpochSpan
-        firstEpochTime={1536691136}
-        secondEpochTime={1538663085}
-      />
-    </ExplodeOnChange>
-  </Component>
-  <Component
-    label="Last Commit"
-  >
-    <div>
-      <ExplodeOnChange
-        value={1538663085}
+        <div
+          style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+        >
+          Selected Time Span
+        </div>
+        <div>
+          <div
+            style="display: inline-block; transition: all 1s ease;"
+          >
+            <span>
+              3 months
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        style="flex-grow: 0; margin-right: 20px; margin-bottom: 10px;"
       >
-        <EpochSpan
-          firstEpochTime={1538663085}
-          secondEpochTime={1539563458}
-        />
-        <span>
-           ago
-        </span>
-      </ExplodeOnChange>
+        <div
+          style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+        >
+          Last Commit
+        </div>
+        <div>
+          <div>
+            <div
+              style="display: inline-block; transition: all 1s ease;"
+            >
+              <span>
+                1 year
+              </span>
+              <span>
+                 ago
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </Component>
-  <Component
-    label="Lines Added"
-  >
-    <ExplodeOnChange
-      value={700}
-    >
-      <CommaNumber
-        value={700}
-      />
-    </ExplodeOnChange>
-  </Component>
-  <Component
-    label="Lines Deleted"
-  >
-    <ExplodeOnChange
-      value={300}
-    >
-      <CommaNumber
-        value={300}
-      />
-    </ExplodeOnChange>
-  </Component>
-  <Component
-    isSelected={true}
-    label="Commits"
-    onLabelClick={[Function]}
-    title="Click to view Commits"
-  >
-    <ExplodeOnChange
-      value={52}
-    >
-      <CommaNumber
-        value={52}
-      />
-    </ExplodeOnChange>
-  </Component>
-  <Component
-    isSelected={false}
-    label="Files"
-    onLabelClick={[Function]}
-    title="Click to view Files"
-  >
-    <ExplodeOnChange
-      value={110}
-    >
-      <CommaNumber
-        value={110}
-      />
-    </ExplodeOnChange>
-  </Component>
-</div>
+  </div>
+</body>
 `;

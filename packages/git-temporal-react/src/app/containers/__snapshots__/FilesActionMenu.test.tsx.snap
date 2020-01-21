@@ -1,54 +1,72 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`containers/FilesActionMenu when rendered with basic props it should match snapshot 1`] = `
-<ActionMenu
-  isMenuOpen={false}
-  onMenuToggle={[Function]}
-  style={
-    Object {
-      "color": "#333333",
-      "fontSize": 13,
-      "fontWeight": "normal",
-      "lineHeight": 1.35,
-      "position": "absolute",
-      "right": 10,
-    }
-  }
->
-  <div
-    style={
-      Object {
-        "color": "#333333",
-        "fontSize": 14,
-        "fontWeight": "normal",
-        "lineHeight": 1.35,
-        "marginBottom": 10,
-        "marginRight": 10,
-      }
-    }
-  >
-    Sort by
+exports[`containers/FilesActionMenu when rendered with mock redux store it should match snapshot 1`] = `
+<body>
+  <div>
+    <div
+      style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); position: absolute; right: 10px; overflow: visible; height: 16px; width: 28px;"
+    >
+      <div
+        style="font-size: 18px; line-height: 1.35; font-weight: bold; color: rgb(51, 51, 51); height: 29px; width: 14px; margin: 0px; padding: 0px 5px;"
+      >
+        ...
+      </div>
+      <div
+        style="overflow: visible;"
+      >
+        <div
+          style="opacity: 0; position: fixed; top: 0px; left: 0px; height: 100%; width: 100%; z-index: 3; display: none;"
+        />
+        <div
+          style="background: rgb(254, 254, 254); border-radius: 3px; color: rgb(51, 51, 51); margin-right: 0px; padding: 7px; position: absolute; z-index: 4; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) 0 6px 20px 0 rgba(0, 0, 0, 0.2); right: 2px; min-width: 180px; border: 2px solid lightskyblue; border-top-right-radius: 0px; display: none;"
+        >
+          <div
+            style="font-size: 14px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); margin-bottom: 7px; margin-right: 7px;"
+          >
+            Sort by
+          </div>
+          <div
+            data-testid="sortTime"
+            style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent;"
+          >
+            <div>
+              <div
+                style="border: 1px solid lightskyblue; border-radius: 7px; cursor: pointer; user-select: none; background: lightskyblue; display: inline-block; width: 15px; height: 15px; margin-right: 10px;"
+              >
+                 
+              </div>
+              by time
+            </div>
+          </div>
+          <div
+            data-testid="sortCommits"
+            style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent;"
+          >
+            <div>
+              <div
+                style="border: 1px solid lightskyblue; border-radius: 7px; cursor: pointer; user-select: none; display: inline-block; width: 15px; height: 15px; margin-right: 10px;"
+              >
+                 
+              </div>
+              by number of commits
+            </div>
+          </div>
+          <div
+            data-testid="sortLines"
+            style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent;"
+          >
+            <div>
+              <div
+                style="border: 1px solid lightskyblue; border-radius: 7px; cursor: pointer; user-select: none; display: inline-block; width: 15px; height: 15px; margin-right: 10px;"
+              >
+                 
+              </div>
+              by lines changed
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <RadioMenuItem
-    isSelected={true}
-    onClick={[Function]}
-    testId="sortTime"
-  >
-    by time
-  </RadioMenuItem>
-  <RadioMenuItem
-    isSelected={false}
-    onClick={[Function]}
-    testId="sortCommits"
-  >
-    by number of commits
-  </RadioMenuItem>
-  <RadioMenuItem
-    isSelected={false}
-    onClick={[Function]}
-    testId="sortLines"
-  >
-    by lines changed
-  </RadioMenuItem>
-</ActionMenu>
+</body>
 `;

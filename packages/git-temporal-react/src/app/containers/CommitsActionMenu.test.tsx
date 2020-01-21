@@ -1,39 +1,21 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import * as actions from 'app/actions';
-import { CommitsContainerSorts } from 'app/actions/ActionTypes';
+import CommitsActionMenu from './CommitsActionMenu';
 
-import { CommitsActionMenu } from './CommitsActionMenu';
-
-const basicProps = {
-  commitsContainerSort: CommitsContainerSorts.TIME,
-};
+import { fireEvent } from '@testing-library/react';
+import { mountConnected } from 'testHelpers';
 
 describe('containers/CommitsActionMenu', () => {
-  describe('when rendered with basic props', () => {
-    let wrapper;
-    let mockDispatch;
-    beforeAll(() => {
-      mockDispatch = jest.fn();
-      wrapper = shallow(
-        <CommitsActionMenu dispatch={mockDispatch} {...basicProps} />
-      );
-    });
-
+  describe('when rendered with mock redux store', () => {
     test('it should match snapshot', () => {
-      expect(wrapper).toMatchSnapshot();
+      const { wrapper } = mountConnected(<CommitsActionMenu />);
+      expect(wrapper.baseElement).toMatchSnapshot();
     });
 
     describe('...and then clicking menu items', () => {
       const menusToTest = [
-        {
-          testId: 'sortTime',
-          actionFn: actions.setCommitsContainerSort,
-        },
-        {
-          testId: 'sortLines',
-          actionFn: actions.setCommitsContainerSort,
-        },
+        { testId: 'sortTime', actionFn: actions.setCommitsContainerSort },
+        { testId: 'sortLines', actionFn: actions.setCommitsContainerSort },
       ];
       beforeEach(() => {
         jest.clearAllMocks();
@@ -42,9 +24,10 @@ describe('containers/CommitsActionMenu', () => {
         test(`it should call actions in response to ${
           menuTest.testId
         } item clicks`, () => {
-          wrapper.find({ testId: menuTest.testId }).simulate('click');
-          expect(menuTest.actionFn).toHaveBeenCalledTimes(1);
-          expect(mockDispatch).toHaveBeenCalledTimes(1);
+          const { wrapper, store } = mountConnected(<CommitsActionMenu />);
+          const menuItem = wrapper.getByTestId(menuTest.testId);
+          fireEvent.click(menuItem);
+          expect(store.dispatch).toHaveBeenCalledTimes(1);
         });
       }
     });

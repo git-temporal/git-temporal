@@ -7,300 +7,304 @@ exports[`components/TimeplotPopup when rendered with all of the things it should
   onClose={[MockFunction]}
   style={
     Object {
-      "border": "solid 2px lightskyblue",
-      "bottom": 200,
+      "border": "solid 4px lightskyblue",
+      "bottom": 130,
       "color": "#333333",
-      "fontSize": 13,
+      "fontSize": 12,
       "fontWeight": "normal",
       "left": 0,
       "lineHeight": 1.35,
-      "position": "fixed",
+      "padding": 0,
+      "position": "absolute",
       "right": "initial",
       "width": 350,
+      "zIndex": 10,
     }
   }
 >
-  <div>
-    <div
-      style={
-        Object {
-          "background": "whitesmoke",
-          "borderRadius": 3,
-          "marginLeft": -10,
-          "marginRight": -10,
-          "marginTop": -10,
-          "padding": 10,
-        }
+  <div
+    style={
+      Object {
+        "background": "whitesmoke",
+        "borderRadius": 3,
+        "color": "#333333",
+        "marginRight": 0,
+        "padding": "7px",
       }
-    >
-      <div
-        style={
-          Object {
-            "color": "#333333",
-            "fontSize": 16,
-            "fontWeight": "normal",
-            "lineHeight": 1.35,
-          }
-        }
-      >
-        There 
-        were 5 commits
-         between
-      </div>
-      <DateTime
-        value={2018-09-17T19:20:13.000Z}
-      />
-       and 
-      <DateTime
-        value={2018-05-14T11:09:26.000Z}
-      />
-    </div>
+    }
+  >
     <div
       style={
         Object {
-          "background": "white",
-          "borderRadius": 3,
-          "marginRight": 0,
-          "maxHeight": 400,
-          "minHeight": 50,
-          "overflow": "scroll",
-          "padding": 10,
-        }
-      }
-    >
-      <CommitCard
-        commit={
-          Object {
-            "authorDate": 1537541919,
-            "authorName": "Bee Wilkerson",
-            "body": "",
-            "files": Array [
-              Object {
-                "linesAdded": 2,
-                "linesDeleted": 649,
-                "name": "README.md",
-              },
-            ],
-            "hash": "c698a0f01d",
-            "id": "c698a0f01de1fa682443510920a2dafc2440d6c8",
-            "linesAdded": 2,
-            "linesDeleted": 649,
-            "message": "Explain why this fork exists in README.md",
-            "relativeDate": "2 days ago",
-          }
-        }
-        hideCommitBody={true}
-        hideFiles={true}
-        key="0"
-        onClick={[MockFunction]}
-      />
-      <CommitCard
-        commit={
-          Object {
-            "authorDate": 1537272890,
-            "authorName": "Tobias Nießen",
-            "body": "Calling setAuthTag multiple times can result in hard to detect bugssince to the user, it is unclear which invocation actually affectedOpenSSL.PR-URL: https://github.com/nodejs/node/pull/22931Reviewed-By: Anna Henningsen <anna@addaleax.net>Reviewed-By: James M Snell <jasnell@gmail.com>Reviewed-By: Ujjwal Sharma <usharma1998@gmail.com>",
-            "files": Array [
-              Object {
-                "linesAdded": 1,
-                "linesDeleted": 1,
-                "name": "doc/api/crypto.md",
-              },
-              Object {
-                "linesAdded": 2,
-                "linesDeleted": 5,
-                "name": "src/node_crypto.cc",
-              },
-              Object {
-                "linesAdded": 26,
-                "linesDeleted": 0,
-                "name": "test/parallel/test-crypto-authenticated.js",
-              },
-            ],
-            "hash": "058c5b81cd",
-            "id": "058c5b81cdbabe8989a194ba5d388f4c230f4af6",
-            "linesAdded": 29,
-            "linesDeleted": 6,
-            "message": "crypto: do not allow multiple calls to setAuthTag",
-            "relativeDate": "2 days ago",
-          }
-        }
-        hideCommitBody={true}
-        hideFiles={true}
-        key="1"
-        onClick={[MockFunction]}
-      />
-      <CommitCard
-        commit={
-          Object {
-            "authorDate": 1526296167,
-            "authorName": "Daniel Bevenius",
-            "body": "This commit adds a --completion-bash option to node which can besourced to provide bash code completion for node options.Usage:$ node --completion-bash  > node_bash_completion$ source node_bash_completion$ node --[tab]PR-URL: https://github.com/nodejs/node/pull/20713Reviewed-By: Anna Henningsen <anna@addaleax.net>Reviewed-By: James M Snell <jasnell@gmail.com>Reviewed-By: Denys Otrishko <shishugi@gmail.com>",
-            "files": Array [
-              Object {
-                "linesAdded": 11,
-                "linesDeleted": 0,
-                "name": "doc/api/cli.md",
-              },
-              Object {
-                "linesAdded": 3,
-                "linesDeleted": 0,
-                "name": "doc/node.1",
-              },
-              Object {
-                "linesAdded": 25,
-                "linesDeleted": 0,
-                "name": "lib/internal/bash_completion.js",
-              },
-              Object {
-                "linesAdded": 7,
-                "linesDeleted": 1,
-                "name": "lib/internal/bootstrap/node.js",
-              },
-              Object {
-                "linesAdded": 1,
-                "linesDeleted": 0,
-                "name": "node.gyp",
-              },
-              Object {
-                "linesAdded": 3,
-                "linesDeleted": 0,
-                "name": "src/node_options.cc",
-              },
-              Object {
-                "linesAdded": 1,
-                "linesDeleted": 0,
-                "name": "src/node_options.h",
-              },
-            ],
-            "hash": "56493bf1eb",
-            "id": "56493bf1ebfab3ec102fe017f30fa4f81ba6a256",
-            "linesAdded": 51,
-            "linesDeleted": 1,
-            "message": "tools: add bash completion for node",
-            "relativeDate": "2 days ago",
-          }
-        }
-        hideCommitBody={true}
-        hideFiles={true}
-        key="2"
-        onClick={[MockFunction]}
-      />
-      <CommitCard
-        commit={
-          Object {
-            "authorDate": 1537212012,
-            "authorName": "Michaël Zasso",
-            "body": "Replace references to the outdated \`update-v8\` tool to its replacementin \`node-core-utils\`PR-URL: https://github.com/nodejs/node/pull/22913Reviewed-By: Richard Lau <riclau@uk.ibm.com>Reviewed-By: Colin Ihrig <cjihrig@gmail.com>Reviewed-By: Weijia Wang <starkwang@126.com>Reviewed-By: Sakthipriyan Vairamani <thechargingvolcano@gmail.com>Reviewed-By: Joyee Cheung <joyeec9h3@gmail.com>Reviewed-By: Luigi Pinca <luigipinca@gmail.com>Reviewed-By: James M Snell <jasnell@gmail.com>",
-            "files": Array [
-              Object {
-                "linesAdded": 8,
-                "linesDeleted": 8,
-                "name": "doc/guides/maintaining-V8.md",
-              },
-            ],
-            "hash": "408e8ce22c",
-            "id": "408e8ce22ce7436e88a9977b4dc99fc3c431fc67",
-            "linesAdded": 8,
-            "linesDeleted": 8,
-            "message": "doc: update maintaining V8 guide",
-            "relativeDate": "3 days ago",
-          }
-        }
-        hideCommitBody={true}
-        hideFiles={true}
-        key="3"
-        onClick={[MockFunction]}
-      />
-      <CommitCard
-        commit={
-          Object {
-            "authorDate": 1537269982,
-            "authorName": "Ruben Bridgewater",
-            "body": "Currently the documentation is not specific how fast-tracking shouldbe applied. This specifies exactly how things should be done to preventconfusion.PR-URL: https://github.com/nodejs/node/pull/22929Reviewed-By: Denys Otrishko <shishugi@gmail.com>Reviewed-By: Anna Henningsen <anna@addaleax.net>Reviewed-By: Tobias Nießen <tniessen@tnie.de>Reviewed-By: Vse Mozhet Byt <vsemozhetbyt@gmail.com>Reviewed-By: John-David Dalton <john.david.dalton@gmail.com>Reviewed-By: Matteo Collina <matteo.collina@gmail.com>Reviewed-By: Luigi Pinca <luigipinca@gmail.com>Reviewed-By: Michaël Zasso <targos@protonmail.com>Reviewed-By: Weijia Wang <starkwang@126.com>Reviewed-By: Richard Lau <riclau@uk.ibm.com>Reviewed-By: Matheus Marchini <mat@mmarchini.me>Reviewed-By: Sakthipriyan Vairamani <thechargingvolcano@gmail.com>Reviewed-By: Yuta Hiroto <hello@hiroppy.me>Reviewed-By: Rich Trott <rtrott@gmail.com>Reviewed-By: Trivikram Kamat <trivikr.dev@gmail.com>Reviewed-By: George Adams <george.adams@uk.ibm.com>",
-            "files": Array [
-              Object {
-                "linesAdded": 6,
-                "linesDeleted": 3,
-                "name": "COLLABORATOR_GUIDE.md",
-              },
-            ],
-            "hash": "54af9738b9",
-            "id": "54af9738b9fad1c1e46ea9170037146324cd152e",
-            "linesAdded": 6,
-            "linesDeleted": 3,
-            "message": "doc: specify fast-tracking",
-            "relativeDate": "3 days ago",
-          }
-        }
-        hideCommitBody={true}
-        hideFiles={true}
-        key="4"
-        onClick={[MockFunction]}
-      />
-    </div>
-    <div
-      style={
-        Object {
-          "background": "whitesmoke",
-          "borderRadius": 3,
           "color": "#333333",
-          "display": "flex",
-          "flexDirection": "column",
-          "fontSize": 11,
+          "fontSize": 14,
           "fontWeight": "normal",
           "lineHeight": 1.35,
-          "marginBottom": -10,
-          "marginLeft": -10,
-          "marginRight": -10,
-          "padding": 10,
         }
       }
     >
-      <div
-        style={
-          Object {
-            "display": "flex",
-            "flexDirection": "row",
-          }
-        }
-      >
-        <div>
-          Click to select left revision
-        </div>
-        <div
-          style={
+      There 
+      were 5 commits
+       between
+    </div>
+    <DateTime
+      value={2018-09-17T19:20:13.000Z}
+    />
+     and 
+    <DateTime
+      value={2018-05-14T11:09:26.000Z}
+    />
+  </div>
+  <div
+    style={
+      Object {
+        "background": "#FEFEFE",
+        "borderRadius": 3,
+        "color": "#333333",
+        "marginRight": 0,
+        "maxHeight": 300,
+        "minHeight": 50,
+        "overflow": "scroll",
+        "padding": "7px",
+      }
+    }
+  >
+    <CommitCard
+      commit={
+        Object {
+          "authorDate": 1537541919,
+          "authorName": "Bee Wilkerson",
+          "body": "",
+          "files": Array [
             Object {
-              "flexGrow": 1,
-              "textAlign": "right",
-            }
-          }
-        >
-          Shift + Click to select right revision
-        </div>
+              "linesAdded": 2,
+              "linesDeleted": 649,
+              "name": "README.md",
+            },
+          ],
+          "hash": "c698a0f01d",
+          "id": "c698a0f01de1fa682443510920a2dafc2440d6c8",
+          "linesAdded": 2,
+          "linesDeleted": 649,
+          "message": "Explain why this fork exists in README.md",
+          "relativeDate": "2 days ago",
+        }
+      }
+      hideCommitBody={true}
+      hideFiles={true}
+      key="0"
+      onClick={[Function]}
+      onDoubleClick={[Function]}
+    />
+    <CommitCard
+      commit={
+        Object {
+          "authorDate": 1537272890,
+          "authorName": "Tobias Nießen",
+          "body": "Calling setAuthTag multiple times can result in hard to detect bugssince to the user, it is unclear which invocation actually affectedOpenSSL.PR-URL: https://github.com/nodejs/node/pull/22931Reviewed-By: Anna Henningsen <anna@addaleax.net>Reviewed-By: James M Snell <jasnell@gmail.com>Reviewed-By: Ujjwal Sharma <usharma1998@gmail.com>",
+          "files": Array [
+            Object {
+              "linesAdded": 1,
+              "linesDeleted": 1,
+              "name": "doc/api/crypto.md",
+            },
+            Object {
+              "linesAdded": 2,
+              "linesDeleted": 5,
+              "name": "src/node_crypto.cc",
+            },
+            Object {
+              "linesAdded": 26,
+              "linesDeleted": 0,
+              "name": "test/parallel/test-crypto-authenticated.js",
+            },
+          ],
+          "hash": "058c5b81cd",
+          "id": "058c5b81cdbabe8989a194ba5d388f4c230f4af6",
+          "linesAdded": 29,
+          "linesDeleted": 6,
+          "message": "crypto: do not allow multiple calls to setAuthTag",
+          "relativeDate": "2 days ago",
+        }
+      }
+      hideCommitBody={true}
+      hideFiles={true}
+      key="1"
+      onClick={[Function]}
+      onDoubleClick={[Function]}
+    />
+    <CommitCard
+      commit={
+        Object {
+          "authorDate": 1526296167,
+          "authorName": "Daniel Bevenius",
+          "body": "This commit adds a --completion-bash option to node which can besourced to provide bash code completion for node options.Usage:$ node --completion-bash  > node_bash_completion$ source node_bash_completion$ node --[tab]PR-URL: https://github.com/nodejs/node/pull/20713Reviewed-By: Anna Henningsen <anna@addaleax.net>Reviewed-By: James M Snell <jasnell@gmail.com>Reviewed-By: Denys Otrishko <shishugi@gmail.com>",
+          "files": Array [
+            Object {
+              "linesAdded": 11,
+              "linesDeleted": 0,
+              "name": "doc/api/cli.md",
+            },
+            Object {
+              "linesAdded": 3,
+              "linesDeleted": 0,
+              "name": "doc/node.1",
+            },
+            Object {
+              "linesAdded": 25,
+              "linesDeleted": 0,
+              "name": "lib/internal/bash_completion.js",
+            },
+            Object {
+              "linesAdded": 7,
+              "linesDeleted": 1,
+              "name": "lib/internal/bootstrap/node.js",
+            },
+            Object {
+              "linesAdded": 1,
+              "linesDeleted": 0,
+              "name": "node.gyp",
+            },
+            Object {
+              "linesAdded": 3,
+              "linesDeleted": 0,
+              "name": "src/node_options.cc",
+            },
+            Object {
+              "linesAdded": 1,
+              "linesDeleted": 0,
+              "name": "src/node_options.h",
+            },
+          ],
+          "hash": "56493bf1eb",
+          "id": "56493bf1ebfab3ec102fe017f30fa4f81ba6a256",
+          "linesAdded": 51,
+          "linesDeleted": 1,
+          "message": "tools: add bash completion for node",
+          "relativeDate": "2 days ago",
+        }
+      }
+      hideCommitBody={true}
+      hideFiles={true}
+      key="2"
+      onClick={[Function]}
+      onDoubleClick={[Function]}
+    />
+    <CommitCard
+      commit={
+        Object {
+          "authorDate": 1537212012,
+          "authorName": "Michaël Zasso",
+          "body": "Replace references to the outdated \`update-v8\` tool to its replacementin \`node-core-utils\`PR-URL: https://github.com/nodejs/node/pull/22913Reviewed-By: Richard Lau <riclau@uk.ibm.com>Reviewed-By: Colin Ihrig <cjihrig@gmail.com>Reviewed-By: Weijia Wang <starkwang@126.com>Reviewed-By: Sakthipriyan Vairamani <thechargingvolcano@gmail.com>Reviewed-By: Joyee Cheung <joyeec9h3@gmail.com>Reviewed-By: Luigi Pinca <luigipinca@gmail.com>Reviewed-By: James M Snell <jasnell@gmail.com>",
+          "files": Array [
+            Object {
+              "linesAdded": 8,
+              "linesDeleted": 8,
+              "name": "doc/guides/maintaining-V8.md",
+            },
+          ],
+          "hash": "408e8ce22c",
+          "id": "408e8ce22ce7436e88a9977b4dc99fc3c431fc67",
+          "linesAdded": 8,
+          "linesDeleted": 8,
+          "message": "doc: update maintaining V8 guide",
+          "relativeDate": "3 days ago",
+        }
+      }
+      hideCommitBody={true}
+      hideFiles={true}
+      key="3"
+      onClick={[Function]}
+      onDoubleClick={[Function]}
+    />
+    <CommitCard
+      commit={
+        Object {
+          "authorDate": 1537269982,
+          "authorName": "Ruben Bridgewater",
+          "body": "Currently the documentation is not specific how fast-tracking shouldbe applied. This specifies exactly how things should be done to preventconfusion.PR-URL: https://github.com/nodejs/node/pull/22929Reviewed-By: Denys Otrishko <shishugi@gmail.com>Reviewed-By: Anna Henningsen <anna@addaleax.net>Reviewed-By: Tobias Nießen <tniessen@tnie.de>Reviewed-By: Vse Mozhet Byt <vsemozhetbyt@gmail.com>Reviewed-By: John-David Dalton <john.david.dalton@gmail.com>Reviewed-By: Matteo Collina <matteo.collina@gmail.com>Reviewed-By: Luigi Pinca <luigipinca@gmail.com>Reviewed-By: Michaël Zasso <targos@protonmail.com>Reviewed-By: Weijia Wang <starkwang@126.com>Reviewed-By: Richard Lau <riclau@uk.ibm.com>Reviewed-By: Matheus Marchini <mat@mmarchini.me>Reviewed-By: Sakthipriyan Vairamani <thechargingvolcano@gmail.com>Reviewed-By: Yuta Hiroto <hello@hiroppy.me>Reviewed-By: Rich Trott <rtrott@gmail.com>Reviewed-By: Trivikram Kamat <trivikr.dev@gmail.com>Reviewed-By: George Adams <george.adams@uk.ibm.com>",
+          "files": Array [
+            Object {
+              "linesAdded": 6,
+              "linesDeleted": 3,
+              "name": "COLLABORATOR_GUIDE.md",
+            },
+          ],
+          "hash": "54af9738b9",
+          "id": "54af9738b9fad1c1e46ea9170037146324cd152e",
+          "linesAdded": 6,
+          "linesDeleted": 3,
+          "message": "doc: specify fast-tracking",
+          "relativeDate": "3 days ago",
+        }
+      }
+      hideCommitBody={true}
+      hideFiles={true}
+      key="4"
+      onClick={[Function]}
+      onDoubleClick={[Function]}
+    />
+  </div>
+  <div
+    style={
+      Object {
+        "background": "whitesmoke",
+        "borderRadius": 3,
+        "color": "#333333",
+        "display": "flex",
+        "flexDirection": "column",
+        "fontSize": 11,
+        "fontWeight": "normal",
+        "lineHeight": 1.35,
+        "marginRight": 0,
+        "padding": "7px",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "flexDirection": "row",
+        }
+      }
+    >
+      <div>
+        Click to select left revision
       </div>
       <div
         style={
           Object {
-            "display": "flex",
-            "flexDirection": "row",
-            "marginTop": 5,
+            "flexGrow": 1,
+            "textAlign": "right",
           }
         }
       >
-        <div>
-           Click twice to select a single commit
-        </div>
-        <div
-          style={
-            Object {
-              "flexGrow": 1,
-              "textAlign": "right",
-            }
+        Shift+click to select range
+      </div>
+       
+    </div>
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "flexDirection": "row",
+          "marginTop": 5,
+        }
+      }
+    >
+      <div>
+         Click twice to select a single commit
+      </div>
+      <div
+        style={
+          Object {
+            "flexGrow": 1,
+            "textAlign": "right",
           }
-        >
-          ...or click and drag below
-        </div>
+        }
+      >
+        ...or click and drag below
       </div>
     </div>
   </div>

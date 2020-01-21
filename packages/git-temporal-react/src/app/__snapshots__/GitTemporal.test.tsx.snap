@@ -4,52 +4,56 @@ exports[`app/GitTemporal when changing path prop it should match snapshot (shoul
 <div
   style={
     Object {
+      "backgroundColor": "#FEFEFE",
       "height": "calc(100% - 40px)",
-      "padding": 20,
+      "paddingBottom": "20px",
+      "paddingLeft": "20px",
+      "paddingRight": "20px",
+      "paddingTop": "20px",
       "position": "absolute",
       "width": "calc(100% - 40px)",
     }
   }
 >
-  <Component
-    isSpinning={false}
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "column",
+        "height": "100%",
+        "overflow": "hidden",
+      }
+    }
   >
+    <Component />
     <div
       style={
         Object {
           "display": "flex",
-          "flexDirection": "column",
+          "flexDirection": "row",
+          "flexGrow": 1,
           "height": "100%",
+          "overflow": "hidden",
         }
       }
     >
-      <Connect(Header) />
+      <Component />
       <div
         style={
           Object {
             "display": "flex",
             "flexDirection": "column",
             "flexGrow": 1,
+            "overflow": "hidden",
+            "transition": "all .5 ease",
           }
         }
       >
-        <Connect(Stats) />
-        <div
-          style={
-            Object {
-              "display": "flex",
-              "flexDirection": "row",
-              "flexGrow": 1,
-            }
-          }
-        >
-          <Connect(Authors) />
-          <Connect(Commits) />
-        </div>
+        <Component />
         <Connect(Timeplot) />
       </div>
     </div>
-  </Component>
+  </div>
 </div>
 `;
 
@@ -57,28 +61,56 @@ exports[`app/GitTemporal when rendered with commits and isFetching it should mat
 <div
   style={
     Object {
+      "backgroundColor": "#FEFEFE",
       "height": "calc(100% - 40px)",
-      "padding": 20,
+      "paddingBottom": "20px",
+      "paddingLeft": "20px",
+      "paddingRight": "20px",
+      "paddingTop": "20px",
       "position": "absolute",
       "width": "calc(100% - 40px)",
     }
   }
 >
-  <Component
-    isSpinning={true}
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "column",
+        "height": "100%",
+        "overflow": "hidden",
+      }
+    }
   >
+    <Component />
     <div
       style={
         Object {
           "display": "flex",
-          "flexDirection": "column",
+          "flexDirection": "row",
+          "flexGrow": 1,
           "height": "100%",
+          "overflow": "hidden",
         }
       }
     >
-      <Connect(Header) />
+      <Component />
+      <div
+        style={
+          Object {
+            "display": "flex",
+            "flexDirection": "column",
+            "flexGrow": 1,
+            "overflow": "hidden",
+            "transition": "all .5 ease",
+          }
+        }
+      >
+        <Component />
+        <Connect(Timeplot) />
+      </div>
     </div>
-  </Component>
+  </div>
 </div>
 `;
 
@@ -86,52 +118,56 @@ exports[`app/GitTemporal when rendered with commits and not fetching it should m
 <div
   style={
     Object {
+      "backgroundColor": "#FEFEFE",
       "height": "calc(100% - 40px)",
-      "padding": 20,
+      "paddingBottom": "20px",
+      "paddingLeft": "20px",
+      "paddingRight": "20px",
+      "paddingTop": "20px",
       "position": "absolute",
       "width": "calc(100% - 40px)",
     }
   }
 >
-  <Component
-    isSpinning={false}
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "column",
+        "height": "100%",
+        "overflow": "hidden",
+      }
+    }
   >
+    <Component />
     <div
       style={
         Object {
           "display": "flex",
-          "flexDirection": "column",
+          "flexDirection": "row",
+          "flexGrow": 1,
           "height": "100%",
+          "overflow": "hidden",
         }
       }
     >
-      <Connect(Header) />
+      <Component />
       <div
         style={
           Object {
             "display": "flex",
             "flexDirection": "column",
             "flexGrow": 1,
+            "overflow": "hidden",
+            "transition": "all .5 ease",
           }
         }
       >
-        <Connect(Stats) />
-        <div
-          style={
-            Object {
-              "display": "flex",
-              "flexDirection": "row",
-              "flexGrow": 1,
-            }
-          }
-        >
-          <Connect(Authors) />
-          <Connect(Commits) />
-        </div>
+        <Component />
         <Connect(Timeplot) />
       </div>
     </div>
-  </Component>
+  </div>
 </div>
 `;
 
@@ -139,28 +175,55 @@ exports[`app/GitTemporal when rendered without props it should match snapshot (i
 <div
   style={
     Object {
+      "backgroundColor": "#FEFEFE",
       "height": "calc(100% - 40px)",
-      "padding": 20,
+      "paddingBottom": "20px",
+      "paddingLeft": "20px",
+      "paddingRight": "20px",
+      "paddingTop": "20px",
       "position": "absolute",
       "width": "calc(100% - 40px)",
     }
   }
 >
-  <Component>
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "column",
+        "height": "100%",
+        "overflow": "hidden",
+      }
+    }
+  >
+    <Component />
     <div
       style={
         Object {
           "display": "flex",
-          "flexDirection": "column",
+          "flexDirection": "row",
+          "flexGrow": 1,
           "height": "100%",
+          "overflow": "hidden",
         }
       }
     >
-      <Connect(Header) />
-      <h2>
-        Empty.
-      </h2>
+      <Component />
+      <div
+        style={
+          Object {
+            "display": "flex",
+            "flexDirection": "column",
+            "flexGrow": 1,
+            "overflow": "hidden",
+            "transition": "all .5 ease",
+          }
+        }
+      >
+        <Component />
+        <Connect(Timeplot) />
+      </div>
     </div>
-  </Component>
+  </div>
 </div>
 `;

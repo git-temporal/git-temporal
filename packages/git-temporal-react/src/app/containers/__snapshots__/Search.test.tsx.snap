@@ -1,342 +1,98 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`containers/Search when rendered with search text and then on focus, it should show popup 1`] = `
-<div
-  style={
-    Object {
-      "overflow": "visible",
-      "position": "relative",
-      "width": 250,
-    }
-  }
->
-  <SearchInput
-    onBlur={[Function]}
-    onChange={[Function]}
-    onClear={[Function]}
-    onFocus={[Function]}
-    onKeyDown={[Function]}
-    placeholder="search authors, files or commits"
-    style={
-      Object {
-        "borderRadius": 10,
-        "marginLeft": 10,
-        "marginTop": 0,
-        "width": "100%",
-      }
-    }
-    value="someone"
-  />
-  <Popup
-    isOpen={true}
-    noBackdrop={true}
-    style={
-      Object {
-        "marginRight": 0,
-      }
-    }
-  >
-    <Selectable
-      key="searchSuggestion_all"
-      onClick={[Function]}
-      selected={true}
-      value="all"
-    >
-      <div>
-        Search everywhere for '
-        someone
-        '
-      </div>
-    </Selectable>
-    <Selectable
-      key="searchSuggestion_0"
-      onClick={[Function]}
-      selected={false}
-      value="author:"
+exports[`containers/Search when rendered with mock redux store should match snapshot 1`] = `
+<body>
+  <div>
+    <div
+      style="align-self: flex-end; margin-bottom: 7px; overflow: visible; position: relative; width: 280px;"
     >
       <div
-        style={
-          Object {
-            "color": "#333333",
-            "fontSize": 13,
-            "fontWeight": "normal",
-            "lineHeight": 1.35,
-          }
-        }
+        style="display: flex; flex-direction: row; background: rgb(254, 254, 254); border-radius: 10px; color: rgb(51, 51, 51); margin-right: 7px; padding: 5px; border: 1px solid lightskyblue; font-size: 12px; line-height: 1.35; font-weight: normal; cursor: pointer; user-select: none; position: relative; margin-left: 10px; margin-top: 0px;"
       >
-        author:
-         
-        someone
+        <svg
+          data-testid="searchIcon"
+          enable-background="new 0 0 512 512"
+          height="16"
+          style="margin-top: 2px; fill: #333333;"
+          version="1.1"
+          viewBox="0 0 512 512"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g>
+            <g>
+              <path
+                d="M338.752,99.482c-65.965-65.974-173.306-65.974-239.277,0c-65.967,65.964-65.967,173.305,0,239.269    c63.708,63.712,165.99,65.879,232.342,6.544l13.413,13.413c-3.34,8.56-1.59,18.623,5.311,25.528l70.782,70.782    c9.305,9.31,24.397,9.305,33.696,0c9.31-9.299,9.31-24.387,0-33.696l-70.777-70.772c-6.905-6.899-16.988-8.65-25.533-5.311    l-13.413-13.423C404.636,265.465,402.463,163.188,338.752,99.482z M119.698,318.539c-54.819-54.819-54.819-144.015,0-198.834    c54.819-54.83,144.017-54.819,198.836,0s54.819,144.02,0,198.839S174.517,373.358,119.698,318.539z"
+              />
+              <path
+                d="M153.1,151.877c23.944-23.95,51.774-41.331,81.037-52.169c-33.153-1.886-68.66,11.014-95.909,38.253    c-27.624,27.626-40.488,63.746-38.142,97.302C110.841,205.137,128.511,176.46,153.1,151.877z"
+              />
+            </g>
+          </g>
+        </svg>
+        <input
+          placeholder="search authors, files or commits"
+          style="flex-grow: 1; font-size: 14px; margin: 0px 5px; color: rgb(51, 51, 51); background-color: rgb(254, 254, 254);"
+          type="text"
+          value=""
+        />
+        <div
+          style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding-top: 3px; flex-grow: 0; cursor: pointer;"
+        >
+          X
+        </div>
       </div>
-    </Selectable>
-    <Selectable
-      key="searchSuggestion_1"
-      onClick={[Function]}
-      selected={false}
-      value="commit:"
-    >
       <div
-        style={
-          Object {
-            "color": "#333333",
-            "fontSize": 13,
-            "fontWeight": "normal",
-            "lineHeight": 1.35,
-          }
-        }
+        style="overflow: visible;"
       >
-        commit:
-         
-        someone
+        <div
+          style="background: rgb(254, 254, 254); border-radius: 3px; color: rgb(51, 51, 51); margin-right: 0px; padding: 7px; position: absolute; z-index: 4; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) 0 6px 20px 0 rgba(0, 0, 0, 0.2); right: 0px; min-width: 180px; border: 2px solid lightskyblue; border-right-width: 1px; margin-top: -2px; display: none;"
+        >
+          <div
+            style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid lightskyblue; border-radius: 3px; cursor: pointer; user-select: none; background: lightskyblue;"
+          >
+            <div>
+              Search everywhere for '
+              
+              '
+            </div>
+          </div>
+          <div
+            style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent;"
+          >
+            <div
+              style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+            >
+              author:
+               
+              
+            </div>
+          </div>
+          <div
+            style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent;"
+          >
+            <div
+              style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+            >
+              commit:
+               
+              
+            </div>
+          </div>
+          <div
+            style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent;"
+          >
+            <div
+              style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+            >
+              file:
+               
+              
+            </div>
+          </div>
+        </div>
       </div>
-    </Selectable>
-    <Selectable
-      key="searchSuggestion_2"
-      onClick={[Function]}
-      selected={false}
-      value="file:"
-    >
-      <div
-        style={
-          Object {
-            "color": "#333333",
-            "fontSize": 13,
-            "fontWeight": "normal",
-            "lineHeight": 1.35,
-          }
-        }
-      >
-        file:
-         
-        someone
-      </div>
-    </Selectable>
-  </Popup>
-</div>
-`;
-
-exports[`containers/Search when rendered with search text it should match snapshot (it should have rendered search, but NOT the popup 1`] = `
-<div
-  style={
-    Object {
-      "overflow": "visible",
-      "position": "relative",
-      "width": 250,
-    }
-  }
->
-  <SearchInput
-    onBlur={[Function]}
-    onChange={[Function]}
-    onClear={[Function]}
-    onFocus={[Function]}
-    onKeyDown={[Function]}
-    placeholder="search authors, files or commits"
-    style={
-      Object {
-        "borderRadius": 10,
-        "marginLeft": 10,
-        "marginTop": 0,
-        "width": "100%",
-      }
-    }
-    value="someone"
-  />
-  <Popup
-    isOpen={false}
-    noBackdrop={true}
-    style={
-      Object {
-        "marginRight": 0,
-      }
-    }
-  >
-    <Selectable
-      key="searchSuggestion_all"
-      onClick={[Function]}
-      selected={true}
-      value="all"
-    >
-      <div>
-        Search everywhere for '
-        someone
-        '
-      </div>
-    </Selectable>
-    <Selectable
-      key="searchSuggestion_0"
-      onClick={[Function]}
-      selected={false}
-      value="author:"
-    >
-      <div
-        style={
-          Object {
-            "color": "#333333",
-            "fontSize": 13,
-            "fontWeight": "normal",
-            "lineHeight": 1.35,
-          }
-        }
-      >
-        author:
-         
-        someone
-      </div>
-    </Selectable>
-    <Selectable
-      key="searchSuggestion_1"
-      onClick={[Function]}
-      selected={false}
-      value="commit:"
-    >
-      <div
-        style={
-          Object {
-            "color": "#333333",
-            "fontSize": 13,
-            "fontWeight": "normal",
-            "lineHeight": 1.35,
-          }
-        }
-      >
-        commit:
-         
-        someone
-      </div>
-    </Selectable>
-    <Selectable
-      key="searchSuggestion_2"
-      onClick={[Function]}
-      selected={false}
-      value="file:"
-    >
-      <div
-        style={
-          Object {
-            "color": "#333333",
-            "fontSize": 13,
-            "fontWeight": "normal",
-            "lineHeight": 1.35,
-          }
-        }
-      >
-        file:
-         
-        someone
-      </div>
-    </Selectable>
-  </Popup>
-</div>
-`;
-
-exports[`containers/Search when rendered without props it should match snapshot (should render search without popup) 1`] = `
-<div
-  style={
-    Object {
-      "overflow": "visible",
-      "position": "relative",
-      "width": 250,
-    }
-  }
->
-  <SearchInput
-    onBlur={[Function]}
-    onChange={[Function]}
-    onClear={[Function]}
-    onFocus={[Function]}
-    onKeyDown={[Function]}
-    placeholder="search authors, files or commits"
-    style={
-      Object {
-        "borderRadius": 10,
-        "marginLeft": 10,
-        "marginTop": 0,
-        "width": "100%",
-      }
-    }
-    value=""
-  />
-  <Popup
-    isOpen={false}
-    noBackdrop={true}
-    style={
-      Object {
-        "marginRight": 0,
-      }
-    }
-  >
-    <Selectable
-      key="searchSuggestion_all"
-      onClick={[Function]}
-      selected={true}
-      value="all"
-    >
-      <div>
-        Search everywhere for '
-        '
-      </div>
-    </Selectable>
-    <Selectable
-      key="searchSuggestion_0"
-      onClick={[Function]}
-      selected={false}
-      value="author:"
-    >
-      <div
-        style={
-          Object {
-            "color": "#333333",
-            "fontSize": 13,
-            "fontWeight": "normal",
-            "lineHeight": 1.35,
-          }
-        }
-      >
-        author:
-         
-      </div>
-    </Selectable>
-    <Selectable
-      key="searchSuggestion_1"
-      onClick={[Function]}
-      selected={false}
-      value="commit:"
-    >
-      <div
-        style={
-          Object {
-            "color": "#333333",
-            "fontSize": 13,
-            "fontWeight": "normal",
-            "lineHeight": 1.35,
-          }
-        }
-      >
-        commit:
-         
-      </div>
-    </Selectable>
-    <Selectable
-      key="searchSuggestion_2"
-      onClick={[Function]}
-      selected={false}
-      value="file:"
-    >
-      <div
-        style={
-          Object {
-            "color": "#333333",
-            "fontSize": 13,
-            "fontWeight": "normal",
-            "lineHeight": 1.35,
-          }
-        }
-      >
-        file:
-         
-      </div>
-    </Selectable>
-  </Popup>
-</div>
+    </div>
+  </div>
+</body>
 `;

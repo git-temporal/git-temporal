@@ -35,11 +35,13 @@ exports[`components/AuthorGravatarImage when rendered with a single email and th
   }
 >
   <AuthorPlaceholderImage
+    height={75}
     holderForEmails={
       Array [
         "someone.else@wherever.com",
       ]
     }
+    width={75}
   />
 </div>
 `;

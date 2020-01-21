@@ -1,20 +1,20 @@
 import React from 'react';
 import { mountConnected } from 'testHelpers';
 
-import Timeplot from './Timeplot';
+import { DifferenceViewerHeader } from './DifferenceViewerHeader';
 
-describe('containers/Timeplot', () => {
+describe('containers/DifferenceViewerHeader', () => {
   describe('when rendered with mock redux store', () => {
     it('should match snapshot', () => {
-      debugger;
-      const { wrapper } = mountConnected(<Timeplot />);
+      const { wrapper } = mountConnected(<DifferenceViewerHeader />);
       expect(wrapper.baseElement).toMatchSnapshot();
     });
     it('should render all of the things', async () => {
-      const { wrapper } = mountConnected(<Timeplot />);
+      const { wrapper } = mountConnected(<DifferenceViewerHeader />);
 
       // from redux mock store data, we should see....
-      wrapper.getByTestId('timeplotGraph');
+      wrapper.getByText('Jan 12, 2020, 4 AM');
+      wrapper.getByText('(#94932bed) (Local HEAD)');
     });
   });
 });

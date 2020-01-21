@@ -58,6 +58,7 @@ export class Selectable extends React.Component<
         onClick={this.onClick}
         onMouseOver={this.onMouseOver}
         onMouseLeave={this.onMouseLeave}
+        data-testid={this.props.testId}
       >
         {this.props.children}
       </div>

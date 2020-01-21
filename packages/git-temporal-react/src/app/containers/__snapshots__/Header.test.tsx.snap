@@ -1,5 +1,100 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`containers/Header when rendered with a proper path it should match snapshot (it should have path links for all but last part of path) 1`] = `undefined`;
-
-exports[`containers/Header when rendered without props it should match snapshot (it should be showing App Name and repository:/) 1`] = `undefined`;
+exports[`containers/Header when rendered with mock redux store should match snapshot 1`] = `
+<body>
+  <div>
+    <div
+      style="display: flex; flex-direction: column; flex-shrink: 0;"
+    >
+      <div
+        style="display: flex; flex-direction: row;"
+      >
+        <div
+          style="display: inline-block; margin-right: 15px; font-size: 22px; line-height: 1.35; font-weight: bold; color: rgb(51, 51, 51); margin-bottom: 10px;"
+        >
+          Git Temporal 
+        </div>
+        <div
+          style="display: flex; flex-grow: 1; flex-direction: column; align-items: flex-end; padding-top: 3px; padding-right: 15px;"
+        >
+          <div
+            style="font-size: 14px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+          >
+            <div
+              style="display: inline-block; transition: all 1s ease;"
+            >
+              <span
+                style="font-size: 14px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+              >
+                October 24, 2019, 3 PM PDT
+              </span>
+            </div>
+             to
+             
+            <div
+              style="display: inline-block; transition: all 1s ease;"
+            >
+              <span
+                style="font-size: 14px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+              >
+                January 12, 2020, 4 AM PST
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        style="display: flex; flex-direction: row;"
+      >
+        <div
+          style="display: flex; margin-right: 7px; flex-direction: column; margin-bottom: 10px; flex-grow: 1; min-height: 30px;"
+        >
+          <div>
+            <div
+              style="font-size: 12px; line-height: 1.35; font-weight: bold; color: rgb(51, 51, 51); margin-bottom: 10px; margin-right: 7px;"
+            >
+              <span>
+                <span
+                  style="color: blue; word-break: break-all;"
+                />
+                <span
+                  data-testid="pathPath"
+                  style="margin: 0px 2px; color: blue; cursor: pointer; text-decoration: underline;"
+                >
+                  (repository root)
+                </span>
+              </span>
+              <span>
+                <span
+                  style="color: blue; word-break: break-all;"
+                >
+                   : 
+                </span>
+                <span
+                  data-testid="pathPath"
+                  style="margin: 0px 2px; color: blue; cursor: pointer; text-decoration: underline;"
+                >
+                  packages
+                </span>
+              </span>
+              <span>
+                <span
+                  style="color: blue; word-break: break-all;"
+                >
+                  /
+                </span>
+                <span
+                  data-testid="pathPath"
+                  style="margin: 0px 2px;"
+                >
+                  cra-template-typescript
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;

@@ -3,14 +3,7 @@
 exports[`components/ToggleButton when rendered with isSelected=false it should match snapshot (should have rendered as selectable) 1`] = `
 <div
   onClick={[MockFunction]}
-  style={
-    Object {
-      "border": "1px solid lightskyblue",
-      "borderRadius": 3,
-      "cursor": "pointer",
-      "userSelect": "none",
-    }
-  }
+  style={Object {}}
 >
   ...
 </div>

@@ -10,6 +10,7 @@ export interface RadioMenuItemProps {
   isSelected: boolean;
   onClick: (evt) => void;
   style?: string | object;
+  testId?: string;
   disabled?: boolean;
 }
 
@@ -31,6 +32,7 @@ export class RadioMenuItem extends React.Component<
         style={style(this.props.style)}
         onClick={this.props.onClick}
         disabled={this.props.disabled}
+        testId={this.props.testId}
       >
         <div>
           <ToggleButton

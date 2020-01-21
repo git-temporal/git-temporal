@@ -3,8 +3,6 @@ import { shallow } from 'enzyme';
 import { selectPath } from 'app/actions';
 import fiveCommits from 'testHelpers/mocks/fiveCommits';
 
-// debugger;
-
 import { GitTemporal } from './GitTemporal';
 
 describe('app/GitTemporal', () => {

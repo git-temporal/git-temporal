@@ -4,13 +4,14 @@ exports[`components/StackedLabelHeader when rendered with required props it shou
 <StackedLabel
   label="This is the Label"
   labelStyle={
-    Array [
-      Object {
-        "_extends": "h3Text",
-        "marginBottom": 5,
-      },
-      undefined,
-    ]
+    Object {
+      "color": "#333333",
+      "fontSize": 14,
+      "fontWeight": "bold",
+      "lineHeight": 1.35,
+      "marginBottom": 5,
+      "marginRight": "15px",
+    }
   }
 >
   <div
@@ -20,8 +21,8 @@ exports[`components/StackedLabelHeader when rendered with required props it shou
         "fontSize": 18,
         "fontWeight": "bold",
         "lineHeight": 1.35,
-        "marginBottom": 20,
-        "marginRight": 20,
+        "marginBottom": "15px",
+        "marginRight": "15px",
       }
     }
   >

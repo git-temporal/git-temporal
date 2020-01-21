@@ -18,7 +18,8 @@ export const SearchIcon = (props: SearchIconProps): JSX.Element => {
       width={width}
       height={height}
       viewBox="0 0 512 512"
-      enable-background="new 0 0 512 512"
+      enableBackground="new 0 0 512 512"
+      data-testid="searchIcon"
     >
       <g>
         <g>

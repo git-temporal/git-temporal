@@ -106,11 +106,11 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
     if (
       prevProps.forceRender !== this.props.forceRender ||
       prevProps.earliestCommitDate !== this.props.earliestCommitDate ||
-      prevProps.latestCommitDate !== this.props.latestCommitDate
+      prevProps.latestCommitDate !== this.props.latestCommitDate ||
+      JSON.stringify(prevProps.commits) !== JSON.stringify(this.props.commits)
     ) {
       this.renderTimeplotGraph();
       this.forceUpdate();
-    } else if (prevProps.commits.length !== this.props.commits.length) {
       this.updateTimeplotGraphThrottled();
     } else if (
       prevProps.highlightedCommitIds !== this.props.highlightedCommitIds
@@ -145,6 +145,7 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
         onMouseMove={this.onMouseMove}
         onMouseDown={this.onMouseDown}
         onMouseUp={this.onMouseUp}
+        data-testid="timeplotGraph"
       >
         <div style={style('fill')} ref={this.timeplotGraphRef} />
         {startDate ? (

@@ -16,7 +16,11 @@ exports[`components/StackedLabel when rendered with required props and then sett
       Object {
         "border": "1px solid lightskyblue",
         "borderRadius": 3,
+        "color": "#333333",
         "cursor": "pointer",
+        "fontSize": 11,
+        "fontWeight": "normal",
+        "lineHeight": 1.35,
         "userSelect": "none",
       }
     }
@@ -40,7 +44,14 @@ exports[`components/StackedLabel when rendered with required props and then sett
   }
 >
   <div
-    style={Object {}}
+    style={
+      Object {
+        "color": "#333333",
+        "fontSize": 11,
+        "fontWeight": "normal",
+        "lineHeight": 1.35,
+      }
+    }
   >
     This is the Label
   </div>
@@ -61,7 +72,14 @@ exports[`components/StackedLabel when rendered with required props it should mat
   }
 >
   <div
-    style={Object {}}
+    style={
+      Object {
+        "color": "#333333",
+        "fontSize": 11,
+        "fontWeight": "normal",
+        "lineHeight": 1.35,
+      }
+    }
   >
     This is the Label
   </div>

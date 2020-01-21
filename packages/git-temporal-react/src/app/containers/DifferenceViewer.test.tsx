@@ -1,20 +1,19 @@
 import React from 'react';
 import { mountConnected } from 'testHelpers';
 
-import Timeplot from './Timeplot';
+import { DifferenceViewer } from './DifferenceViewer';
 
-describe('containers/Timeplot', () => {
+describe('containers/DifferenceViewer', () => {
   describe('when rendered with mock redux store', () => {
     it('should match snapshot', () => {
-      debugger;
-      const { wrapper } = mountConnected(<Timeplot />);
+      const { wrapper } = mountConnected(<DifferenceViewer />);
       expect(wrapper.baseElement).toMatchSnapshot();
     });
     it('should render all of the things', async () => {
-      const { wrapper } = mountConnected(<Timeplot />);
+      const { wrapper } = mountConnected(<DifferenceViewer />);
 
       // from redux mock store data, we should see....
-      wrapper.getByTestId('timeplotGraph');
+      wrapper.getAllByText('cra-template-typescript');
     });
   });
 });

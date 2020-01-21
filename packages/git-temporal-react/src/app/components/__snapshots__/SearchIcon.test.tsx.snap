@@ -2,7 +2,8 @@
 
 exports[`components/SearchIcon when rendered it should match snapshot 1`] = `
 <svg
-  enable-background="new 0 0 512 512"
+  data-testid="searchIcon"
+  enableBackground="new 0 0 512 512"
   height={16}
   style={Object {}}
   version="1.1"

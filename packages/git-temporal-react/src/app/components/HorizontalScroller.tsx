@@ -1,6 +1,5 @@
 import React from 'react';
 import { style } from 'app/styles';
-import { relative } from 'path';
 import { debounce } from 'app/utilities/debounce';
 
 import { CaretRightIcon } from 'app/components/CaretRightIcon';
@@ -32,7 +31,7 @@ const farOuterStyle = {
 const outerStyle = {
   _extends: 'fill',
   overflowX: 'scroll',
-  position: relative,
+  position: 'relative',
 };
 
 const innerContainerStyle = {
