@@ -1,0 +1,391 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/DifferenceViewer when rendered with mock redux store should match snapshot 1`] = `
+<body>
+  <div>
+    <div
+      style="background: whitesmoke; border-radius: 3px; color: rgb(51, 51, 51); margin-right: 7px; padding: 7px; display: flex; flex-direction: column; flex-grow: 1; position: relative; overflow: hidden;"
+    >
+      <div
+        style="display: flex; height: 100%; width: 100%; position: relative; flex-direction: column; flex-grow: 1; overflow: hidden; background: rgb(254, 254, 254); color: rgb(51, 51, 51);"
+      >
+        <div
+          style="display: flex; flex-direction: row; flex-grow: 0; flex-shrink: 0; background: whitesmoke; color: rgb(51, 51, 51);"
+        >
+          <div
+            style="display: flex; flex-direction: row; font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); align-self: baseline; flex-grow: 1; text-align: center;"
+          >
+            <div
+              style="flex-grow: 1;"
+            />
+            <div
+              style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent; display: flex; flex-direction: row; margin-bottom: 5px;"
+            >
+              <svg
+                height="16"
+                role="img"
+                viewBox="0 0 192 512"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M192 127.338v257.324c0 17.818-21.543 26.741-34.142 14.142L29.196 270.142c-7.81-7.81-7.81-20.474 0-28.284l128.662-128.662c12.599-12.6 34.142-3.676 34.142 14.142z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+            <div
+              style="display: flex; flex-direction: column; flex-grow: 0; align-items: center;"
+            >
+              <div
+                style="display: flex; flex-direction: column; align-items: center; min-width: 160px;"
+              >
+                <div
+                  style="display: flex; flex-direction: row;"
+                >
+                  <span>
+                    Dec 30, 2019, 11 AM
+                  </span>
+                </div>
+                <div
+                  style="display: flex; flex-direction: row;"
+                >
+                  (#
+                  c03bb366
+                  )
+                </div>
+              </div>
+            </div>
+            <div
+              style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent; display: flex; flex-direction: row; margin-bottom: 5px;"
+            >
+              <svg
+                height="16"
+                role="img"
+                viewBox="0 0 192 512"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+            <div
+              style="flex-grow: 1;"
+            />
+          </div>
+          <div
+            style="display: flex; flex-direction: row; font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); align-self: baseline; flex-grow: 1; text-align: center;"
+          >
+            <div
+              style="flex-grow: 1;"
+            />
+            <div
+              style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent; display: flex; flex-direction: row; margin-bottom: 5px;"
+            >
+              <svg
+                height="16"
+                role="img"
+                viewBox="0 0 192 512"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M192 127.338v257.324c0 17.818-21.543 26.741-34.142 14.142L29.196 270.142c-7.81-7.81-7.81-20.474 0-28.284l128.662-128.662c12.599-12.6 34.142-3.676 34.142 14.142z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+            <div
+              style="display: flex; flex-direction: column; flex-grow: 0; align-items: center;"
+            >
+              <div
+                style="display: flex; flex-direction: column; align-items: center; min-width: 160px;"
+              >
+                <div
+                  style="display: flex; flex-direction: row;"
+                >
+                  <span>
+                    Jan 12, 2020, 4 AM
+                  </span>
+                </div>
+                <div
+                  style="display: flex; flex-direction: row;"
+                >
+                  (#
+                  94932bed
+                  )
+                   (Local HEAD)
+                </div>
+              </div>
+            </div>
+            <div
+              style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent; display: flex; flex-direction: row; margin-bottom: 5px;"
+            >
+              <svg
+                height="16"
+                role="img"
+                viewBox="0 0 192 512"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+            <div
+              style="flex-grow: 1;"
+            />
+          </div>
+        </div>
+        <div
+          style="display: flex; flex-direction: row; transition: all 1s ease; overflow: scroll;"
+        >
+          <div
+            data-testid="directoryTree"
+            style="transition: all 1s ease; flex-grow: 1;"
+          >
+            <div
+              style="display: block; margin-left: 20px;"
+            >
+              <div
+                data-testid="directoryTreeNode"
+                style="font-size: 12px; line-height: 1.35; font-weight: normal; color: orange; margin-left: 10px;"
+              >
+                <svg
+                  height="14"
+                  role="img"
+                  viewBox="0 0 320 512"
+                  width="14"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                    fill="currentColor"
+                  />
+                </svg>
+                    
+                <span
+                  style="color: orange;"
+                  title="click to filter"
+                >
+                  packages
+                </span>
+                    
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); float: right;"
+                >
+                  <span>
+                    20
+                  </span>
+                  𝚫
+                </div>
+              </div>
+              <div
+                style="display: block; margin-left: 20px;"
+              >
+                <div
+                  data-testid="directoryTreeNode"
+                  style="font-size: 12px; line-height: 1.35; font-weight: normal; color: orange; margin-left: 10px;"
+                >
+                  <svg
+                    height="14"
+                    role="img"
+                    viewBox="0 0 320 512"
+                    width="14"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                      
+                  <span
+                    style="color: orange;"
+                    title="click to filter"
+                  >
+                    cra-template-typescript
+                  </span>
+                      
+                  <div
+                    style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); float: right;"
+                  >
+                    <span>
+                      20
+                    </span>
+                    𝚫
+                  </div>
+                </div>
+                <div
+                  style="display: block; margin-left: 20px;"
+                >
+                  <div
+                    data-testid="directoryTreeNode"
+                    style="font-size: 12px; line-height: 1.35; font-weight: normal; color: orange; margin-left: 10px;"
+                  >
+                    <svg
+                      height="14"
+                      role="img"
+                      viewBox="0 0 320 512"
+                      width="14"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M288 248v28c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-28c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12zm-12 72H108c-6.6 0-12 5.4-12 12v28c0 6.6 5.4 12 12 12h168c6.6 0 12-5.4 12-12v-28c0-6.6-5.4-12-12-12zm108-188.1V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V48C0 21.5 21.5 0 48 0h204.1C264.8 0 277 5.1 286 14.1L369.9 98c9 8.9 14.1 21.2 14.1 33.9zm-128-80V128h76.1L256 51.9zM336 464V176H232c-13.3 0-24-10.7-24-24V48H48v416h288z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                        
+                    <span
+                      style="font-size: 12px; line-height: 1.35; font-weight: normal; color: orange; text-decoration: underline; cursor: pointer;"
+                      title="click to filter"
+                    >
+                      template.json
+                    </span>
+                        
+                    <div
+                      style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); float: right;"
+                    >
+                      <span>
+                        20
+                      </span>
+                      𝚫
+                    </div>
+                  </div>
+                  <div
+                    style="display: block; margin-left: 20px;"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            data-testid="directoryTree"
+            style="transition: all 1s ease; flex-grow: 1;"
+          >
+            <div
+              style="display: block; margin-left: 20px;"
+            >
+              <div
+                data-testid="directoryTreeNode"
+                style="font-size: 12px; line-height: 1.35; font-weight: normal; color: orange; margin-left: 10px;"
+              >
+                <svg
+                  height="14"
+                  role="img"
+                  viewBox="0 0 320 512"
+                  width="14"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                    fill="currentColor"
+                  />
+                </svg>
+                    
+                <span
+                  style="color: orange;"
+                  title="click to filter"
+                >
+                  packages
+                </span>
+                    
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); float: right;"
+                >
+                  <span>
+                    20
+                  </span>
+                  𝚫
+                </div>
+              </div>
+              <div
+                style="display: block; margin-left: 20px;"
+              >
+                <div
+                  data-testid="directoryTreeNode"
+                  style="font-size: 12px; line-height: 1.35; font-weight: normal; color: orange; margin-left: 10px;"
+                >
+                  <svg
+                    height="14"
+                    role="img"
+                    viewBox="0 0 320 512"
+                    width="14"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                      
+                  <span
+                    style="color: orange;"
+                    title="click to filter"
+                  >
+                    cra-template-typescript
+                  </span>
+                      
+                  <div
+                    style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); float: right;"
+                  >
+                    <span>
+                      20
+                    </span>
+                    𝚫
+                  </div>
+                </div>
+                <div
+                  style="display: block; margin-left: 20px;"
+                >
+                  <div
+                    data-testid="directoryTreeNode"
+                    style="font-size: 12px; line-height: 1.35; font-weight: normal; color: orange; margin-left: 10px;"
+                  >
+                    <svg
+                      height="14"
+                      role="img"
+                      viewBox="0 0 320 512"
+                      width="14"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M288 248v28c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-28c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12zm-12 72H108c-6.6 0-12 5.4-12 12v28c0 6.6 5.4 12 12 12h168c6.6 0 12-5.4 12-12v-28c0-6.6-5.4-12-12-12zm108-188.1V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V48C0 21.5 21.5 0 48 0h204.1C264.8 0 277 5.1 286 14.1L369.9 98c9 8.9 14.1 21.2 14.1 33.9zm-128-80V128h76.1L256 51.9zM336 464V176H232c-13.3 0-24-10.7-24-24V48H48v416h288z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                        
+                    <span
+                      style="font-size: 12px; line-height: 1.35; font-weight: normal; color: orange; text-decoration: underline; cursor: pointer;"
+                      title="click to filter"
+                    >
+                      template.json
+                    </span>
+                        
+                    <div
+                      style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); float: right;"
+                    >
+                      <span>
+                        20
+                      </span>
+                      𝚫
+                    </div>
+                  </div>
+                  <div
+                    style="display: block; margin-left: 20px;"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;

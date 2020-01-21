@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/DifferenceViewerHeader when rendered with mock redux store should match snapshot 1`] = `
+<body>
+  <div>
+    <div
+      style="display: flex; flex-direction: row; flex-grow: 0; flex-shrink: 0; background: whitesmoke; color: rgb(51, 51, 51);"
+    >
+      <div
+        style="display: flex; flex-direction: row; font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); align-self: baseline; flex-grow: 1; text-align: center;"
+      >
+        <div
+          style="flex-grow: 1;"
+        />
+        <div
+          style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent; display: flex; flex-direction: row; margin-bottom: 5px;"
+        >
+          <svg
+            height="16"
+            role="img"
+            viewBox="0 0 192 512"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M192 127.338v257.324c0 17.818-21.543 26.741-34.142 14.142L29.196 270.142c-7.81-7.81-7.81-20.474 0-28.284l128.662-128.662c12.599-12.6 34.142-3.676 34.142 14.142z"
+              fill="currentColor"
+            />
+          </svg>
+        </div>
+        <div
+          style="display: flex; flex-direction: column; flex-grow: 0; align-items: center;"
+        >
+          <div
+            style="display: flex; flex-direction: column; align-items: center; min-width: 160px;"
+          >
+            <div
+              style="display: flex; flex-direction: row;"
+            >
+              <span>
+                Dec 30, 2019, 11 AM
+              </span>
+            </div>
+            <div
+              style="display: flex; flex-direction: row;"
+            >
+              (#
+              c03bb366
+              )
+            </div>
+          </div>
+        </div>
+        <div
+          style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent; display: flex; flex-direction: row; margin-bottom: 5px;"
+        >
+          <svg
+            height="16"
+            role="img"
+            viewBox="0 0 192 512"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"
+              fill="currentColor"
+            />
+          </svg>
+        </div>
+        <div
+          style="flex-grow: 1;"
+        />
+      </div>
+      <div
+        style="display: flex; flex-direction: row; font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); align-self: baseline; flex-grow: 1; text-align: center;"
+      >
+        <div
+          style="flex-grow: 1;"
+        />
+        <div
+          style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent; display: flex; flex-direction: row; margin-bottom: 5px;"
+        >
+          <svg
+            height="16"
+            role="img"
+            viewBox="0 0 192 512"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M192 127.338v257.324c0 17.818-21.543 26.741-34.142 14.142L29.196 270.142c-7.81-7.81-7.81-20.474 0-28.284l128.662-128.662c12.599-12.6 34.142-3.676 34.142 14.142z"
+              fill="currentColor"
+            />
+          </svg>
+        </div>
+        <div
+          style="display: flex; flex-direction: column; flex-grow: 0; align-items: center;"
+        >
+          <div
+            style="display: flex; flex-direction: column; align-items: center; min-width: 160px;"
+          >
+            <div
+              style="display: flex; flex-direction: row;"
+            >
+              <span>
+                Jan 12, 2020, 4 AM
+              </span>
+            </div>
+            <div
+              style="display: flex; flex-direction: row;"
+            >
+              (#
+              94932bed
+              )
+               (Local HEAD)
+            </div>
+          </div>
+        </div>
+        <div
+          style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent; display: flex; flex-direction: row; margin-bottom: 5px;"
+        >
+          <svg
+            height="16"
+            role="img"
+            viewBox="0 0 192 512"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"
+              fill="currentColor"
+            />
+          </svg>
+        </div>
+        <div
+          style="flex-grow: 1;"
+        />
+      </div>
+    </div>
+  </div>
+</body>
+`;

@@ -1,0 +1,716 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/Authors when rendered mock authors and stats should match snapshot 1`] = `
+<div>
+  <div
+    style="display: flex; flex-direction: column; flex-grow: 0; flex-shrink: 0; position: relative; margin-bottom: 15px; transition: all .25s ease;"
+  >
+    <div
+      style="display: flex; flex-direction: row;"
+    >
+      <div
+        style="cursor: pointer;"
+      >
+        <svg
+          height="16"
+          role="img"
+          viewBox="0 0 320 512"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+      <div
+        style="font-size: 18px; line-height: 1.35; font-weight: bold; color: rgb(51, 51, 51); margin-bottom: 15px; margin-right: 15px;"
+      >
+        7 Authors
+      </div>
+    </div>
+    <div
+      style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); position: absolute; right: 10px; overflow: visible; height: 16px; width: 28px;"
+    >
+      <div
+        style="font-size: 18px; line-height: 1.35; font-weight: bold; color: rgb(51, 51, 51); height: 29px; width: 14px; margin: 0px; padding: 0px 5px;"
+      >
+        ...
+      </div>
+      <div
+        style="overflow: visible;"
+      >
+        <div
+          style="opacity: 0; position: fixed; top: 0px; left: 0px; height: 100%; width: 100%; z-index: 3; display: none;"
+        />
+        <div
+          style="background: rgb(254, 254, 254); border-radius: 3px; color: rgb(51, 51, 51); margin-right: 0px; padding: 7px; position: absolute; z-index: 4; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) 0 6px 20px 0 rgba(0, 0, 0, 0.2); right: 2px; min-width: 180px; border: 2px solid lightskyblue; border-top-right-radius: 0px; display: none;"
+        >
+          <div
+            style="font-size: 14px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); margin-bottom: 7px; margin-right: 7px;"
+          >
+            Sort by
+          </div>
+          <div
+            data-testid="sortTime"
+            style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent;"
+          >
+            <div>
+              <div
+                style="border: 1px solid lightskyblue; border-radius: 7px; cursor: pointer; user-select: none; background: lightskyblue; display: inline-block; width: 15px; height: 15px; margin-right: 10px;"
+              >
+                 
+              </div>
+              by time
+            </div>
+          </div>
+          <div
+            data-testid="sortCommits"
+            style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent;"
+          >
+            <div>
+              <div
+                style="border: 1px solid lightskyblue; border-radius: 7px; cursor: pointer; user-select: none; display: inline-block; width: 15px; height: 15px; margin-right: 10px;"
+              >
+                 
+              </div>
+              by number of commits
+            </div>
+          </div>
+          <div
+            data-testid="sortLines"
+            style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent;"
+          >
+            <div>
+              <div
+                style="border: 1px solid lightskyblue; border-radius: 7px; cursor: pointer; user-select: none; display: inline-block; width: 15px; height: 15px; margin-right: 10px;"
+              >
+                 
+              </div>
+              by lines changed
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      style="display: flex; flex-direction: column; overflow: auto;"
+    >
+      <div
+        style="display: flex; flex-direction: column;"
+      >
+        <div
+          style="flex-shrink: 0;"
+        >
+          <div
+            style="display: flex; flex-direction: row;"
+          >
+            <div
+              style="font-size: initial; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
+            >
+              <div
+                style="width: 75px; height: 75px; display: inline-block;"
+              >
+                <img
+                  data-for="tomvalorsa@gmail.com"
+                  src="https://www.gravatar.com/avatar/a6122aededdb147b8cde7b02a318d1e0?s=75&d=404"
+                  style="width: 75px; max-height: 75px;"
+                />
+              </div>
+              <div
+                style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;"
+              >
+                <div
+                  style="margin-bottom: 5px;"
+                  title="tomvalorsa@gmail.com"
+                >
+                  Tom Valorsa
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <div>
+                    1
+                    <span>
+                       commits spanning 
+                    </span>
+                    <span>
+                      0 seconds
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span>
+                    Last commit 
+                  </span>
+                  <span>
+                    1 year
+                  </span>
+                  <span>
+                     ago
+                  </span>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span
+                    style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); float: none;"
+                  >
+                    <span
+                      style="color: green;"
+                    >
+                      +
+                      <span>
+                        11
+                      </span>
+                    </span>
+                    <span>
+                       / 
+                    </span>
+                    <span
+                      style="color: red;"
+                    >
+                      -
+                      <span>
+                        9
+                      </span>
+                    </span>
+                  </span>
+                  <span>
+                     lines changed 
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          style="flex-shrink: 0;"
+        >
+          <div
+            style="display: flex; flex-direction: row;"
+          >
+            <div
+              style="font-size: initial; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
+            >
+              <div
+                style="width: 75px; height: 75px; display: inline-block;"
+              >
+                <img
+                  data-for="alex@heyimalex.com"
+                  src="https://www.gravatar.com/avatar/0a27a80f0a9800a2fc5935ecf7071eca?s=75&d=404"
+                  style="width: 75px; max-height: 75px;"
+                />
+              </div>
+              <div
+                style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;"
+              >
+                <div
+                  style="margin-bottom: 5px;"
+                  title="alex@heyimalex.com"
+                >
+                  Alex Guerra
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <div>
+                    1
+                    <span>
+                       commits spanning 
+                    </span>
+                    <span>
+                      0 seconds
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span>
+                    Last commit 
+                  </span>
+                  <span>
+                    1 year
+                  </span>
+                  <span>
+                     ago
+                  </span>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span
+                    style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); float: none;"
+                  >
+                    <span
+                      style="color: green;"
+                    >
+                      +
+                      <span>
+                        0
+                      </span>
+                    </span>
+                    <span>
+                       / 
+                    </span>
+                    <span
+                      style="color: red;"
+                    >
+                      -
+                      <span>
+                        0
+                      </span>
+                    </span>
+                  </span>
+                  <span>
+                     lines changed 
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          style="flex-shrink: 0;"
+        >
+          <div
+            style="display: flex; flex-direction: row;"
+          >
+            <div
+              style="font-size: initial; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
+            >
+              <div
+                style="width: 75px; height: 75px; display: inline-block;"
+              >
+                <img
+                  data-for="ianschmitz@gmail.com"
+                  src="https://www.gravatar.com/avatar/6cbab1469a4744ec0234785658aab248?s=75&d=404"
+                  style="width: 75px; max-height: 75px;"
+                />
+              </div>
+              <div
+                style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;"
+              >
+                <div
+                  style="margin-bottom: 5px;"
+                  title="ianschmitz@gmail.com"
+                >
+                  Ian Schmitz
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <div>
+                    2
+                    <span>
+                       commits spanning 
+                    </span>
+                    <span>
+                      2 weeks
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span>
+                    Last commit 
+                  </span>
+                  <span>
+                    1 year
+                  </span>
+                  <span>
+                     ago
+                  </span>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span
+                    style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); float: none;"
+                  >
+                    <span
+                      style="color: green;"
+                    >
+                      +
+                      <span>
+                        3
+                      </span>
+                    </span>
+                    <span>
+                       / 
+                    </span>
+                    <span
+                      style="color: red;"
+                    >
+                      -
+                      <span>
+                        3
+                      </span>
+                    </span>
+                  </span>
+                  <span>
+                     lines changed 
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          style="flex-shrink: 0;"
+        >
+          <div
+            style="display: flex; flex-direction: row;"
+          >
+            <div
+              style="font-size: initial; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
+            >
+              <div
+                style="width: 75px; height: 75px; display: inline-block;"
+              >
+                <img
+                  data-for="ben.blank+github@gmail.com"
+                  src="https://www.gravatar.com/avatar/7cb70d792de30cefb12c71899c5f8be6?s=75&d=404"
+                  style="width: 75px; max-height: 75px;"
+                />
+              </div>
+              <div
+                style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;"
+              >
+                <div
+                  style="margin-bottom: 5px;"
+                  title="ben.blank+github@gmail.com"
+                >
+                  Ben Blank
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <div>
+                    1
+                    <span>
+                       commits spanning 
+                    </span>
+                    <span>
+                      0 seconds
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span>
+                    Last commit 
+                  </span>
+                  <span>
+                    1 year
+                  </span>
+                  <span>
+                     ago
+                  </span>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span
+                    style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); float: none;"
+                  >
+                    <span
+                      style="color: green;"
+                    >
+                      +
+                      <span>
+                        1
+                      </span>
+                    </span>
+                    <span>
+                       / 
+                    </span>
+                    <span
+                      style="color: red;"
+                    >
+                      -
+                      <span>
+                        1
+                      </span>
+                    </span>
+                  </span>
+                  <span>
+                     lines changed 
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          style="flex-shrink: 0;"
+        >
+          <div
+            style="display: flex; flex-direction: row;"
+          >
+            <div
+              style="font-size: initial; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
+            >
+              <div
+                style="width: 75px; height: 75px; display: inline-block;"
+              >
+                <img
+                  data-for="22164266+suprj@users.noreply.github.com"
+                  src="https://www.gravatar.com/avatar/2c9d320ecb7c6c74955c3df6cb1ba96f?s=75&d=404"
+                  style="width: 75px; max-height: 75px;"
+                />
+              </div>
+              <div
+                style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;"
+              >
+                <div
+                  style="margin-bottom: 5px;"
+                  title="22164266+suprj@users.noreply.github.com"
+                >
+                  RJ Morgan
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <div>
+                    1
+                    <span>
+                       commits spanning 
+                    </span>
+                    <span>
+                      0 seconds
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span>
+                    Last commit 
+                  </span>
+                  <span>
+                    1 year
+                  </span>
+                  <span>
+                     ago
+                  </span>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span
+                    style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); float: none;"
+                  >
+                    <span
+                      style="color: green;"
+                    >
+                      +
+                      <span>
+                        7
+                      </span>
+                    </span>
+                    <span>
+                       / 
+                    </span>
+                    <span
+                      style="color: red;"
+                    >
+                      -
+                      <span>
+                        2
+                      </span>
+                    </span>
+                  </span>
+                  <span>
+                     lines changed 
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          style="flex-shrink: 0;"
+        >
+          <div
+            style="display: flex; flex-direction: row;"
+          >
+            <div
+              style="font-size: initial; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
+            >
+              <div
+                style="width: 75px; height: 75px; display: inline-block;"
+              >
+                <img
+                  data-for="me+github@kentcdodds.com"
+                  src="https://www.gravatar.com/avatar/c552c633f05083de5e0f9ec94db1412a?s=75&d=404"
+                  style="width: 75px; max-height: 75px;"
+                />
+              </div>
+              <div
+                style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;"
+              >
+                <div
+                  style="margin-bottom: 5px;"
+                  title="me+github@kentcdodds.com"
+                >
+                  Kent C. Dodds
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <div>
+                    1
+                    <span>
+                       commits spanning 
+                    </span>
+                    <span>
+                      0 seconds
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span>
+                    Last commit 
+                  </span>
+                  <span>
+                    1 year
+                  </span>
+                  <span>
+                     ago
+                  </span>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span
+                    style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); float: none;"
+                  >
+                    <span
+                      style="color: green;"
+                    >
+                      +
+                      <span>
+                        13
+                      </span>
+                    </span>
+                    <span>
+                       / 
+                    </span>
+                    <span
+                      style="color: red;"
+                    >
+                      -
+                      <span>
+                        5
+                      </span>
+                    </span>
+                  </span>
+                  <span>
+                     lines changed 
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          style="flex-shrink: 0;"
+        >
+          <div
+            style="display: flex; flex-direction: row;"
+          >
+            <div
+              style="font-size: initial; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
+            >
+              <div
+                style="width: 75px; height: 75px; display: inline-block;"
+              >
+                <img
+                  data-for="mrmckeb@users.noreply.github.com"
+                  src="https://www.gravatar.com/avatar/09c69d2eee6b019f14f79d81af920f65?s=75&d=404"
+                  style="width: 75px; max-height: 75px;"
+                />
+              </div>
+              <div
+                style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;"
+              >
+                <div
+                  style="margin-bottom: 5px;"
+                  title="mrmckeb@users.noreply.github.com"
+                >
+                  Brody McKee
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <div>
+                    1
+                    <span>
+                       commits spanning 
+                    </span>
+                    <span>
+                      0 seconds
+                    </span>
+                  </div>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span>
+                    Last commit 
+                  </span>
+                  <span>
+                    1 year
+                  </span>
+                  <span>
+                     ago
+                  </span>
+                </div>
+                <div
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                >
+                  <span
+                    style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); float: none;"
+                  >
+                    <span
+                      style="color: green;"
+                    >
+                      +
+                      <span>
+                        439
+                      </span>
+                    </span>
+                    <span>
+                       / 
+                    </span>
+                    <span
+                      style="color: red;"
+                    >
+                      -
+                      <span>
+                        0
+                      </span>
+                    </span>
+                  </span>
+                  <span>
+                     lines changed 
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
