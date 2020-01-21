@@ -12,6 +12,7 @@ module.exports = {
 
   moduleNameMapper: {
     'app/(.*)$': '<rootDir>/src/app/$1',
+    'monaco-editor': '<rootDir>/src/testHelpers/mocks/monacoEditor.ts'
   },
 
   setupFiles: ['./config/jest.setup.js', './config/polyfills.js'],
@@ -27,7 +28,6 @@ module.exports = {
   transformIgnorePatterns: [
     '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|ts|tsx)$',
   ],
-
   verbose: true,
 
   globals: {

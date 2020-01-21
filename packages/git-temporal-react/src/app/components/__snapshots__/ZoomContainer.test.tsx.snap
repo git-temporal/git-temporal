@@ -51,45 +51,40 @@ exports[`components/ZoomContainer when rendered it should match snapshot 1`] = `
     >
       <select
         onChange={[Function]}
+        value={100}
       >
         <option
           key="0"
-          selected={true}
           value={100}
         >
           100% zoom
         </option>
         <option
           key="1"
-          selected={false}
           value={200}
         >
           200% zoom
         </option>
         <option
           key="2"
-          selected={false}
           value={300}
         >
           300% zoom
         </option>
         <option
           key="3"
-          selected={false}
           value={500}
         >
           500% zoom
         </option>
         <option
           key="4"
-          selected={false}
           value={800}
         >
           800% zoom
         </option>
         <option
           key="5"
-          selected={false}
           value={1300}
         >
           1300% zoom

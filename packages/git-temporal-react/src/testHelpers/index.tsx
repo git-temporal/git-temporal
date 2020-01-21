@@ -20,6 +20,7 @@ export function mockReduxStore(initialStore = {}) {
 
 export function mountConnected(children, initialStore = {}) {
   const store = mockReduxStore(initialStore);
+  jest.spyOn(store, 'dispatch');
 
   const wrapper = render(<Provider store={store}>{children}</Provider>);
   return { store, wrapper };

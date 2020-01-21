@@ -49,14 +49,18 @@ const deltaStyle = {
 export class DirectoryTree extends React.Component<DirectoryTreeProps> {
   render() {
     return (
-      <div style={style(outerStyle, this.props.style)}>
+      <div
+        style={style(outerStyle, this.props.style)}
+        data-testid="directoryTree"
+      >
         {this.renderTree(this.props.fileTree)}
       </div>
     );
   }
 
-  renderTree(treeNode) {
+  renderTree(treeNode, key = 0) {
     let renderedTreeNodes = [];
+    const index = 0;
     for (const nodeName in treeNode) {
       const childNode = treeNode[nodeName];
       const isExpanded =
@@ -66,41 +70,56 @@ export class DirectoryTree extends React.Component<DirectoryTreeProps> {
 
       renderedTreeNodes.push(
         this.isFile(childNode)
-          ? this.renderFileTreeNode(childNode, nodeName)
-          : this.renderDirectoryTreeNode(childNode, nodeName, isExpanded)
+          ? this.renderFileTreeNode(childNode, nodeName, key + index)
+          : this.renderDirectoryTreeNode(
+              childNode,
+              nodeName,
+              isExpanded,
+              key + index
+            )
       );
       if (isExpanded) {
         renderedTreeNodes = renderedTreeNodes.concat(
-          this.renderTree(childNode.nodes)
+          this.renderTree(childNode.nodes, key + index)
         );
       }
     }
-    return <div style={directoryNodeStyle}>{renderedTreeNodes}</div>;
+    return (
+      <div style={directoryNodeStyle} key={key + index + 1}>
+        {renderedTreeNodes}
+      </div>
+    );
   }
 
-  renderFileTreeNode(childNode, nodeName) {
-    return this.renderTreeNode(childNode, nodeName, FileIcon, () => {
+  renderFileTreeNode(childNode, nodeName, key) {
+    return this.renderTreeNode(childNode, nodeName, FileIcon, key, () => {
       this.props.onFileClick(childNode.fullPath);
     });
   }
 
-  renderDirectoryTreeNode(childNode, nodeName, isExpanded) {
+  renderDirectoryTreeNode(childNode, nodeName, isExpanded, key) {
     return this.renderTreeNode(
       childNode,
       nodeName,
       isExpanded ? CaretDownIcon : CaretRightIcon,
+      key,
       () => {
         this.props.onExpandNode(childNode.fullPath);
       }
     );
   }
 
-  renderTreeNode(childNode, nodeName, Icon, onClick) {
+  renderTreeNode(childNode, nodeName, Icon, key, onClick) {
     const nodeStyle = Object.assign({}, treeNodeStyle) as any;
     nodeStyle.color = `@colors.${childNode.status}`;
     const nameStyle = this.isFile(childNode) ? fileNameStyle : {};
     return (
-      <div style={style(nodeStyle)} onClick={onClick} key={childNode.index}>
+      <div
+        key={key}
+        style={style(nodeStyle)}
+        onClick={onClick}
+        data-testid="directoryTreeNode"
+      >
         <Icon height={14} width={14} />
         {'    '}
         <span

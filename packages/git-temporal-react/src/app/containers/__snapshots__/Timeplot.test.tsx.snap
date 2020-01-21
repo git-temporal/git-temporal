@@ -1,644 +1,186 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/Timeplot when rendered it should match snapshot (it should have rendered a block element for each line with <br><br>") 1`] = `
-<Timeplot
-  authors={6}
-  commits={
-    Array [
-      Object {
-        "authorDate": 1537541919,
-        "authorName": "Bee Wilkerson",
-        "body": "",
-        "files": Array [
-          Object {
-            "linesAdded": 2,
-            "linesDeleted": 649,
-            "name": "README.md",
-          },
-        ],
-        "hash": "c698a0f01d",
-        "id": "c698a0f01de1fa682443510920a2dafc2440d6c8",
-        "linesAdded": 2,
-        "linesDeleted": 649,
-        "message": "Explain why this fork exists in README.md",
-        "relativeDate": "2 days ago",
-      },
-      Object {
-        "authorDate": 1537272890,
-        "authorName": "Tobias Nießen",
-        "body": "Calling setAuthTag multiple times can result in hard to detect bugssince to the user, it is unclear which invocation actually affectedOpenSSL.PR-URL: https://github.com/nodejs/node/pull/22931Reviewed-By: Anna Henningsen <anna@addaleax.net>Reviewed-By: James M Snell <jasnell@gmail.com>Reviewed-By: Ujjwal Sharma <usharma1998@gmail.com>",
-        "files": Array [
-          Object {
-            "linesAdded": 1,
-            "linesDeleted": 1,
-            "name": "doc/api/crypto.md",
-          },
-          Object {
-            "linesAdded": 2,
-            "linesDeleted": 5,
-            "name": "src/node_crypto.cc",
-          },
-          Object {
-            "linesAdded": 26,
-            "linesDeleted": 0,
-            "name": "test/parallel/test-crypto-authenticated.js",
-          },
-        ],
-        "hash": "058c5b81cd",
-        "id": "058c5b81cdbabe8989a194ba5d388f4c230f4af6",
-        "linesAdded": 29,
-        "linesDeleted": 6,
-        "message": "crypto: do not allow multiple calls to setAuthTag",
-        "relativeDate": "2 days ago",
-      },
-      Object {
-        "authorDate": 1526296167,
-        "authorName": "Daniel Bevenius",
-        "body": "This commit adds a --completion-bash option to node which can besourced to provide bash code completion for node options.Usage:$ node --completion-bash  > node_bash_completion$ source node_bash_completion$ node --[tab]PR-URL: https://github.com/nodejs/node/pull/20713Reviewed-By: Anna Henningsen <anna@addaleax.net>Reviewed-By: James M Snell <jasnell@gmail.com>Reviewed-By: Denys Otrishko <shishugi@gmail.com>",
-        "files": Array [
-          Object {
-            "linesAdded": 11,
-            "linesDeleted": 0,
-            "name": "doc/api/cli.md",
-          },
-          Object {
-            "linesAdded": 3,
-            "linesDeleted": 0,
-            "name": "doc/node.1",
-          },
-          Object {
-            "linesAdded": 25,
-            "linesDeleted": 0,
-            "name": "lib/internal/bash_completion.js",
-          },
-          Object {
-            "linesAdded": 7,
-            "linesDeleted": 1,
-            "name": "lib/internal/bootstrap/node.js",
-          },
-          Object {
-            "linesAdded": 1,
-            "linesDeleted": 0,
-            "name": "node.gyp",
-          },
-          Object {
-            "linesAdded": 3,
-            "linesDeleted": 0,
-            "name": "src/node_options.cc",
-          },
-          Object {
-            "linesAdded": 1,
-            "linesDeleted": 0,
-            "name": "src/node_options.h",
-          },
-        ],
-        "hash": "56493bf1eb",
-        "id": "56493bf1ebfab3ec102fe017f30fa4f81ba6a256",
-        "linesAdded": 51,
-        "linesDeleted": 1,
-        "message": "tools: add bash completion for node",
-        "relativeDate": "2 days ago",
-      },
-      Object {
-        "authorDate": 1537212012,
-        "authorName": "Michaël Zasso",
-        "body": "Replace references to the outdated \`update-v8\` tool to its replacementin \`node-core-utils\`PR-URL: https://github.com/nodejs/node/pull/22913Reviewed-By: Richard Lau <riclau@uk.ibm.com>Reviewed-By: Colin Ihrig <cjihrig@gmail.com>Reviewed-By: Weijia Wang <starkwang@126.com>Reviewed-By: Sakthipriyan Vairamani <thechargingvolcano@gmail.com>Reviewed-By: Joyee Cheung <joyeec9h3@gmail.com>Reviewed-By: Luigi Pinca <luigipinca@gmail.com>Reviewed-By: James M Snell <jasnell@gmail.com>",
-        "files": Array [
-          Object {
-            "linesAdded": 8,
-            "linesDeleted": 8,
-            "name": "doc/guides/maintaining-V8.md",
-          },
-        ],
-        "hash": "408e8ce22c",
-        "id": "408e8ce22ce7436e88a9977b4dc99fc3c431fc67",
-        "linesAdded": 8,
-        "linesDeleted": 8,
-        "message": "doc: update maintaining V8 guide",
-        "relativeDate": "3 days ago",
-      },
-      Object {
-        "authorDate": 1537269982,
-        "authorName": "Ruben Bridgewater",
-        "body": "Currently the documentation is not specific how fast-tracking shouldbe applied. This specifies exactly how things should be done to preventconfusion.PR-URL: https://github.com/nodejs/node/pull/22929Reviewed-By: Denys Otrishko <shishugi@gmail.com>Reviewed-By: Anna Henningsen <anna@addaleax.net>Reviewed-By: Tobias Nießen <tniessen@tnie.de>Reviewed-By: Vse Mozhet Byt <vsemozhetbyt@gmail.com>Reviewed-By: John-David Dalton <john.david.dalton@gmail.com>Reviewed-By: Matteo Collina <matteo.collina@gmail.com>Reviewed-By: Luigi Pinca <luigipinca@gmail.com>Reviewed-By: Michaël Zasso <targos@protonmail.com>Reviewed-By: Weijia Wang <starkwang@126.com>Reviewed-By: Richard Lau <riclau@uk.ibm.com>Reviewed-By: Matheus Marchini <mat@mmarchini.me>Reviewed-By: Sakthipriyan Vairamani <thechargingvolcano@gmail.com>Reviewed-By: Yuta Hiroto <hello@hiroppy.me>Reviewed-By: Rich Trott <rtrott@gmail.com>Reviewed-By: Trivikram Kamat <trivikr.dev@gmail.com>Reviewed-By: George Adams <george.adams@uk.ibm.com>",
-        "files": Array [
-          Object {
-            "linesAdded": 6,
-            "linesDeleted": 3,
-            "name": "COLLABORATOR_GUIDE.md",
-          },
-        ],
-        "hash": "54af9738b9",
-        "id": "54af9738b9fad1c1e46ea9170037146324cd152e",
-        "linesAdded": 6,
-        "linesDeleted": 3,
-        "message": "doc: specify fast-tracking",
-        "relativeDate": "3 days ago",
-      },
-    ]
-  }
-  dispatch={[MockFunction]}
-  earliestCommitDate={1537541919}
-  endDate={1526296167}
-  highlightedCommitIds={
-    Array [
-      "56493bf1ebfab3ec102fe017f30fa4f81ba6a256",
-    ]
-  }
-  isFetching={false}
-  latestCommitDate={1537269982}
-  rerenderRequestedAt={null}
-  selectedPath="some/path/to/nowhere"
-  startDate={1537212012}
-  totalCommits={5}
->
-  <div
-    style={
-      Object {
-        "flex": "0 0 120px",
-        "overflow": "visible",
-      }
-    }
-  >
+exports[`containers/Timeplot when rendered with mock redux store should match snapshot 1`] = `
+<body>
+  <div>
     <div
-      style={
-        Object {
-          "background": "whitesmoke",
-          "borderRadius": 3,
-          "color": "#333333",
-          "display": "flex",
-          "flex": "0 0 120px",
-          "flexDirection": "column",
-          "marginRight": "7px",
-          "marginTop": 5,
-          "minHeight": "120px",
-          "overflow": "hidden",
-          "padding": "7px",
-          "position": "relative",
-        }
-      }
+      style="overflow: visible; flex: 0 0 120px;"
     >
-      <Component
-        isSpinning={false}
-        spinnerImageSize={0}
+      <div
+        style="background: whitesmoke; border-radius: 3px; color: rgb(51, 51, 51); margin-right: 7px; padding: 7px; display: flex; flex-direction: column; flex: 0 0 120px; min-height: 120px; position: relative; margin-top: 5px; overflow: hidden;"
       >
         <div
-          style={
-            Object {
-              "display": "block",
-              "height": "100%",
-              "position": "relative",
-              "width": "100%",
-            }
-          }
+          style="display: block; height: 100%; width: 100%; position: relative;"
         >
-          <ZoomContainer
-            customZooms={Array []}
-            onMouseLeave={[Function]}
-            onScroll={[Function]}
-            onZoom={[Function]}
-            scrollLeft={0}
-            style={
-              Object {
-                "position": "absolute",
-                "top": "3px",
-                "zIndex": 1,
-              }
-            }
+          <div
+            style="position: relative; height: 100%; width: 100%;"
           >
             <div
-              onMouseLeave={[Function]}
-              style={
-                Object {
-                  "height": "100%",
-                  "position": "relative",
-                  "width": "100%",
-                }
-              }
+              style="display: flex; width: 100%; position: relative;"
             >
-              <HorizontalScroller
-                onScroll={[Function]}
-                scrollLeft={0}
+              <div
+                data-testid="outerContainer"
+                style="position: relative; height: 100%; width: 100%; overflow-x: scroll;"
               >
                 <div
-                  style={
-                    Object {
-                      "display": "flex",
-                      "position": "relative",
-                      "width": "100%",
-                    }
-                  }
+                  data-testid="innerContainer"
+                  style="position: relative; display: block;"
                 >
                   <div
-                    data-testid="outerContainer"
-                    onScroll={[Function]}
-                    style={
-                      Object {
-                        "height": "100%",
-                        "overflowX": "scroll",
-                        "position": [Function],
-                        "width": "100%",
-                      }
-                    }
+                    style="height: 100%; width: 100%;"
                   >
                     <div
-                      data-testid="innerContainer"
-                      style={
-                        Object {
-                          "display": "block",
-                          "position": "relative",
-                        }
-                      }
+                      data-testid="timeplotGraph"
+                      style="position: relative; height: 100%; width: 100%; overflow: hidden; background: rgb(254, 254, 254); color: rgb(51, 51, 51);"
                     >
                       <div
-                        style={
-                          Object {
-                            "height": "100%",
-                            "width": "100%",
-                          }
-                        }
+                        style="position: relative; height: 100%; width: 100%;"
                       >
-                        <TimeplotGraph
-                          commits={
-                            Array [
-                              Object {
-                                "authorDate": 1537541919,
-                                "authorName": "Bee Wilkerson",
-                                "body": "",
-                                "files": Array [
-                                  Object {
-                                    "linesAdded": 2,
-                                    "linesDeleted": 649,
-                                    "name": "README.md",
-                                  },
-                                ],
-                                "hash": "c698a0f01d",
-                                "id": "c698a0f01de1fa682443510920a2dafc2440d6c8",
-                                "linesAdded": 2,
-                                "linesDeleted": 649,
-                                "message": "Explain why this fork exists in README.md",
-                                "relativeDate": "2 days ago",
-                              },
-                              Object {
-                                "authorDate": 1537272890,
-                                "authorName": "Tobias Nießen",
-                                "body": "Calling setAuthTag multiple times can result in hard to detect bugssince to the user, it is unclear which invocation actually affectedOpenSSL.PR-URL: https://github.com/nodejs/node/pull/22931Reviewed-By: Anna Henningsen <anna@addaleax.net>Reviewed-By: James M Snell <jasnell@gmail.com>Reviewed-By: Ujjwal Sharma <usharma1998@gmail.com>",
-                                "files": Array [
-                                  Object {
-                                    "linesAdded": 1,
-                                    "linesDeleted": 1,
-                                    "name": "doc/api/crypto.md",
-                                  },
-                                  Object {
-                                    "linesAdded": 2,
-                                    "linesDeleted": 5,
-                                    "name": "src/node_crypto.cc",
-                                  },
-                                  Object {
-                                    "linesAdded": 26,
-                                    "linesDeleted": 0,
-                                    "name": "test/parallel/test-crypto-authenticated.js",
-                                  },
-                                ],
-                                "hash": "058c5b81cd",
-                                "id": "058c5b81cdbabe8989a194ba5d388f4c230f4af6",
-                                "linesAdded": 29,
-                                "linesDeleted": 6,
-                                "message": "crypto: do not allow multiple calls to setAuthTag",
-                                "relativeDate": "2 days ago",
-                              },
-                              Object {
-                                "authorDate": 1526296167,
-                                "authorName": "Daniel Bevenius",
-                                "body": "This commit adds a --completion-bash option to node which can besourced to provide bash code completion for node options.Usage:$ node --completion-bash  > node_bash_completion$ source node_bash_completion$ node --[tab]PR-URL: https://github.com/nodejs/node/pull/20713Reviewed-By: Anna Henningsen <anna@addaleax.net>Reviewed-By: James M Snell <jasnell@gmail.com>Reviewed-By: Denys Otrishko <shishugi@gmail.com>",
-                                "files": Array [
-                                  Object {
-                                    "linesAdded": 11,
-                                    "linesDeleted": 0,
-                                    "name": "doc/api/cli.md",
-                                  },
-                                  Object {
-                                    "linesAdded": 3,
-                                    "linesDeleted": 0,
-                                    "name": "doc/node.1",
-                                  },
-                                  Object {
-                                    "linesAdded": 25,
-                                    "linesDeleted": 0,
-                                    "name": "lib/internal/bash_completion.js",
-                                  },
-                                  Object {
-                                    "linesAdded": 7,
-                                    "linesDeleted": 1,
-                                    "name": "lib/internal/bootstrap/node.js",
-                                  },
-                                  Object {
-                                    "linesAdded": 1,
-                                    "linesDeleted": 0,
-                                    "name": "node.gyp",
-                                  },
-                                  Object {
-                                    "linesAdded": 3,
-                                    "linesDeleted": 0,
-                                    "name": "src/node_options.cc",
-                                  },
-                                  Object {
-                                    "linesAdded": 1,
-                                    "linesDeleted": 0,
-                                    "name": "src/node_options.h",
-                                  },
-                                ],
-                                "hash": "56493bf1eb",
-                                "id": "56493bf1ebfab3ec102fe017f30fa4f81ba6a256",
-                                "linesAdded": 51,
-                                "linesDeleted": 1,
-                                "message": "tools: add bash completion for node",
-                                "relativeDate": "2 days ago",
-                              },
-                              Object {
-                                "authorDate": 1537212012,
-                                "authorName": "Michaël Zasso",
-                                "body": "Replace references to the outdated \`update-v8\` tool to its replacementin \`node-core-utils\`PR-URL: https://github.com/nodejs/node/pull/22913Reviewed-By: Richard Lau <riclau@uk.ibm.com>Reviewed-By: Colin Ihrig <cjihrig@gmail.com>Reviewed-By: Weijia Wang <starkwang@126.com>Reviewed-By: Sakthipriyan Vairamani <thechargingvolcano@gmail.com>Reviewed-By: Joyee Cheung <joyeec9h3@gmail.com>Reviewed-By: Luigi Pinca <luigipinca@gmail.com>Reviewed-By: James M Snell <jasnell@gmail.com>",
-                                "files": Array [
-                                  Object {
-                                    "linesAdded": 8,
-                                    "linesDeleted": 8,
-                                    "name": "doc/guides/maintaining-V8.md",
-                                  },
-                                ],
-                                "hash": "408e8ce22c",
-                                "id": "408e8ce22ce7436e88a9977b4dc99fc3c431fc67",
-                                "linesAdded": 8,
-                                "linesDeleted": 8,
-                                "message": "doc: update maintaining V8 guide",
-                                "relativeDate": "3 days ago",
-                              },
-                              Object {
-                                "authorDate": 1537269982,
-                                "authorName": "Ruben Bridgewater",
-                                "body": "Currently the documentation is not specific how fast-tracking shouldbe applied. This specifies exactly how things should be done to preventconfusion.PR-URL: https://github.com/nodejs/node/pull/22929Reviewed-By: Denys Otrishko <shishugi@gmail.com>Reviewed-By: Anna Henningsen <anna@addaleax.net>Reviewed-By: Tobias Nießen <tniessen@tnie.de>Reviewed-By: Vse Mozhet Byt <vsemozhetbyt@gmail.com>Reviewed-By: John-David Dalton <john.david.dalton@gmail.com>Reviewed-By: Matteo Collina <matteo.collina@gmail.com>Reviewed-By: Luigi Pinca <luigipinca@gmail.com>Reviewed-By: Michaël Zasso <targos@protonmail.com>Reviewed-By: Weijia Wang <starkwang@126.com>Reviewed-By: Richard Lau <riclau@uk.ibm.com>Reviewed-By: Matheus Marchini <mat@mmarchini.me>Reviewed-By: Sakthipriyan Vairamani <thechargingvolcano@gmail.com>Reviewed-By: Yuta Hiroto <hello@hiroppy.me>Reviewed-By: Rich Trott <rtrott@gmail.com>Reviewed-By: Trivikram Kamat <trivikr.dev@gmail.com>Reviewed-By: George Adams <george.adams@uk.ibm.com>",
-                                "files": Array [
-                                  Object {
-                                    "linesAdded": 6,
-                                    "linesDeleted": 3,
-                                    "name": "COLLABORATOR_GUIDE.md",
-                                  },
-                                ],
-                                "hash": "54af9738b9",
-                                "id": "54af9738b9fad1c1e46ea9170037146324cd152e",
-                                "linesAdded": 6,
-                                "linesDeleted": 3,
-                                "message": "doc: specify fast-tracking",
-                                "relativeDate": "3 days ago",
-                              },
-                            ]
-                          }
-                          earliestCommitDate={1537541919}
-                          endDate={1526296167}
-                          forceRender={0}
-                          height={120}
-                          highlightedCommitIds={
-                            Array [
-                              "56493bf1ebfab3ec102fe017f30fa4f81ba6a256",
-                            ]
-                          }
-                          latestCommitDate={1537269982}
-                          onMouseDown={[Function]}
-                          onMouseMove={[Function]}
-                          onMouseUp={[Function]}
-                          startDate={1537212012}
-                          style={
-                            Object {
-                              "background": "#FEFEFE",
-                              "color": "#333333",
-                              "height": "100%",
-                              "position": "relative",
-                              "width": "100%",
-                            }
-                          }
+                        <svg
+                          height="120"
+                          width="0"
                         >
-                          <div
-                            onMouseDown={[Function]}
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            onMouseMove={[Function]}
-                            onMouseUp={[Function]}
-                            style={
-                              Object {
-                                "background": "#FEFEFE",
-                                "color": "#333333",
-                                "height": "100%",
-                                "overflow": "hidden",
-                                "position": "relative",
-                                "width": "100%",
-                              }
-                            }
+                          <g
+                            class="axis"
+                            fill="none"
+                            font-family="sans-serif"
+                            font-size="10"
+                            text-anchor="middle"
+                            transform="translate(0, 100)"
                           >
-                            <div
-                              style={
-                                Object {
-                                  "height": "100%",
-                                  "position": "relative",
-                                  "width": "100%",
-                                }
-                              }
+                            <path
+                              class="domain"
+                              d="M20.5,6V0.5H-19.5V6"
+                              stroke="currentColor"
+                              style="stroke: #333333;"
                             />
-                            <div
-                              style={
-                                Object {
-                                  "backgroundColor": "red",
-                                  "height": 130,
-                                  "opacity": 0.5,
-                                  "position": "absolute",
-                                  "top": 0,
-                                  "width": 3,
-                                  "zIndex": 1,
-                                }
-                              }
-                            />
-                            <div
-                              style={
-                                Object {
-                                  "backgroundColor": "green",
-                                  "height": 130,
-                                  "opacity": 0.5,
-                                  "position": "absolute",
-                                  "top": 0,
-                                  "width": 3,
-                                  "zIndex": 1,
-                                }
-                              }
-                            />
-                          </div>
-                        </TimeplotGraph>
-                        <div
-                          onMouseEnter={[Function]}
-                          onMouseMove={[Function]}
-                          style={
-                            Object {
-                              "backgroundColor": "lightskyblue",
-                              "height": 120,
-                              "left": -40,
-                              "opacity": 0.5,
-                              "position": "absolute",
-                              "top": 0,
-                              "width": 10,
-                              "zIndex": 1,
-                            }
-                          }
-                        />
+                          </g>
+                          <circle
+                            cx="-20"
+                            cy="38"
+                            data-id="94932bedc09976aeac43615d95906aa2dcfefa1f"
+                            style="fill: #696969; opacity: 0.2;"
+                          />
+                          <circle
+                            cx="-13.627132231902591"
+                            cy="52"
+                            data-id="c03bb366e0e901b33acd9783db3003cb49eddf80"
+                            style="fill: #696969; opacity: 0.2;"
+                          />
+                          <circle
+                            cx="4.386196753652295"
+                            cy="60"
+                            data-id="1a66971f9e2f255d6278ade61e70517faf5839db"
+                            style="fill: #696969; opacity: 0.2;"
+                          />
+                          <circle
+                            cx="4.635503644658122"
+                            cy="36"
+                            data-id="5d24a5e88f67ad303e2169795f080009241f9f86"
+                            style="fill: #696969; opacity: 0.2;"
+                          />
+                          <circle
+                            cx="12.363685655618129"
+                            cy="66"
+                            data-id="211694a8a22a4c4b954e729e0d7eb946cf0f8d60"
+                            style="fill: #696969; opacity: 0.2;"
+                          />
+                          <circle
+                            cx="13.419230076697955"
+                            cy="62.00000000000001"
+                            data-id="8a1ee2f7a531d83cb76cc882d1e346c5cdd55f56"
+                            style="fill: #696969; opacity: 0.2;"
+                          />
+                          <circle
+                            cx="17.500973741415585"
+                            cy="57.99999999999999"
+                            data-id="2de57fe15a69a84fadb08ce549599c7de5a9d3b2"
+                            style="fill: #696969; opacity: 0.2;"
+                          />
+                          <circle
+                            cx="20"
+                            cy="60"
+                            data-id="4c0c81953d090dbf122e126f2b6b8c803d4a0569"
+                            style="fill: #696969; opacity: 0.2;"
+                          />
+                        </svg>
                       </div>
                     </div>
+                    <div
+                      style="position: absolute; height: 120px; width: 10px; opacity: 0.5; z-index: 1; top: 0px; background-color: lightskyblue; left: -40px;"
+                    />
                   </div>
                 </div>
-              </HorizontalScroller>
-              <div
-                style={
-                  Object {
-                    "background": "transparent",
-                    "position": "absolute",
-                    "right": 18,
-                    "top": "3px",
-                    "zIndex": 1,
-                  }
-                }
-              >
-                <label
-                  style={
-                    Object {
-                      "color": "#333333",
-                      "fontSize": 12,
-                      "fontWeight": "normal",
-                      "lineHeight": 1.35,
-                    }
-                  }
-                >
-                  <select
-                    onChange={[Function]}
-                  >
-                    <option
-                      key="0"
-                      selected={true}
-                      value={100}
-                    >
-                      100% zoom
-                    </option>
-                    <option
-                      key="1"
-                      selected={false}
-                      value={200}
-                    >
-                      200% zoom
-                    </option>
-                    <option
-                      key="2"
-                      selected={false}
-                      value={300}
-                    >
-                      300% zoom
-                    </option>
-                    <option
-                      key="3"
-                      selected={false}
-                      value={500}
-                    >
-                      500% zoom
-                    </option>
-                    <option
-                      key="4"
-                      selected={false}
-                      value={800}
-                    >
-                      800% zoom
-                    </option>
-                    <option
-                      key="5"
-                      selected={false}
-                      value={1300}
-                    >
-                      1300% zoom
-                    </option>
-                  </select>
-                </label>
               </div>
             </div>
-          </ZoomContainer>
+            <div
+              style="position: absolute; right: 18px; background: transparent; top: 3px; z-index: 1;"
+            >
+              <label
+                style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+              >
+                <select>
+                  <option
+                    value="100"
+                  >
+                    100% zoom
+                  </option>
+                  <option
+                    value="200"
+                  >
+                    200% zoom
+                  </option>
+                  <option
+                    value="300"
+                  >
+                    300% zoom
+                  </option>
+                  <option
+                    value="500"
+                  >
+                    500% zoom
+                  </option>
+                  <option
+                    value="800"
+                  >
+                    800% zoom
+                  </option>
+                  <option
+                    value="1300"
+                  >
+                    1300% zoom
+                  </option>
+                </select>
+              </label>
+            </div>
+          </div>
           <div
-            style={
-              Object {
-                "color": "#333333",
-                "fontSize": 12,
-                "fontWeight": "normal",
-                "lineHeight": 1.35,
-                "paddingBottom": "3px",
-                "paddingTop": "3px",
-                "position": "absolute",
-                "textAlign": "center",
-                "textShadow": "2px 2px #FEFEFE",
-                "top": "7px",
-                "width": "100%",
-              }
-            }
+            style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); width: 100%; text-align: center; padding-top: 3px; padding-bottom: 3px; position: absolute; top: 7px; text-shadow: 2px 2px #FEFEFE;"
           >
             <span
-              style={
-                Object {
-                  "backgroundColor": "#FEFEFE",
-                  "opacity": 0.8,
-                }
-              }
+              style="opacity: 0.8; background-color: rgb(254, 254, 254);"
             >
               Total of 
-              <CommaNumber
-                value={5}
-              >
-                <span
-                  style={Object {}}
-                >
-                  5
-                </span>
-              </CommaNumber>
+              <span>
+                8
+              </span>
               <span>
                  commits by 
               </span>
-              <CommaNumber
-                value={6}
-              >
-                <span
-                  style={Object {}}
-                >
-                  6
-                </span>
-              </CommaNumber>
+              <span>
+                7
+              </span>
               <span>
                  authors spanning 
               </span>
-              <EpochSpan
-                firstEpochTime={1537541919}
-                secondEpochTime={1537269982}
-              >
-                <span
-                  style={Object {}}
-                >
-                  3 days
-                </span>
-              </EpochSpan>
+              <span>
+                3 months
+              </span>
             </span>
           </div>
         </div>
-      </Component>
+      </div>
     </div>
-    <Component
-      commits={Array []}
-      endDate={null}
-      isOpen={false}
-      left={-60}
-      onClose={[Function]}
-      onCommitSelected={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      startDate={null}
-    />
   </div>
-</Timeplot>
+</body>
 `;

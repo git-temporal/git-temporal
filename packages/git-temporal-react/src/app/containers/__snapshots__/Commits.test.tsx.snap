@@ -1,62 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`containers/Commits when rendered without props and then changing commits should render new list 1`] = `
-<div
-  style={
-    Object {
-      "background": "white",
-      "border": "1px solid whitesmoke",
-      "borderRadius": 3,
-      "display": "flex",
-      "flexDirection": "column",
-      "marginRight": 10,
-      "maxWidth": 400,
-      "minWidth": 400,
-      "padding": 10,
-      "position": "relative",
-    }
-  }
->
-  <Connect(CommitsActionMenu) />
+exports[`containers/Commits when rendered mock commits and stats should match snapshot 1`] = `
+<div>
   <div
-    style={
-      Object {
-        "color": "#333333",
-        "display": "block",
-        "flexGrow": 0,
-        "fontSize": 18,
-        "fontWeight": "bold",
-        "lineHeight": 1.35,
-        "marginBottom": 20,
-        "marginRight": 30,
-        "position": "relative",
-      }
-    }
+    style="display: flex; flex-direction: column; flex-grow: 0; flex-shrink: 0; position: relative; height: 30px; transition: all .5s ease;"
   >
-    <span
-      data-testId="header"
+    <div
+      style="display: flex; flex-direction: row;"
     >
-      Commits by 
-      time
-    </span>
-  </div>
-  <div
-    style={
-      Object {
-        "flexGrow": 1,
-      }
-    }
-  >
-    <AutoSizer
-      disableHeight={false}
-      disableWidth={false}
-      onResize={[Function]}
-      style={Object {}}
-    >
-      <Component />
-    </AutoSizer>
+      <div
+        style="cursor: pointer;"
+      >
+        <svg
+          height="16"
+          role="img"
+          viewBox="0 0 192 512"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+      <div
+        style="font-size: 18px; line-height: 1.35; font-weight: bold; color: rgb(51, 51, 51); margin-bottom: 15px; margin-right: 15px;"
+      >
+        8 Commits
+      </div>
+    </div>
   </div>
 </div>
 `;
-
-exports[`containers/Commits when rendered without props it should match snapshot (it should be showing empty indicator) 1`] = `undefined`;

@@ -1,27 +1,15 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import * as actions from 'app/actions';
-import { FilesContainerSorts } from 'app/actions/ActionTypes';
+import FilesActionMenu from './FilesActionMenu';
 
-import { FilesActionMenu } from './FilesActionMenu';
-
-const basicProps = {
-  filesContainerSort: FilesContainerSorts.TIME,
-};
+import { fireEvent } from '@testing-library/react';
+import { mountConnected } from 'testHelpers';
 
 describe('containers/FilesActionMenu', () => {
-  describe('when rendered with basic props', () => {
-    let wrapper;
-    let mockDispatch;
-    beforeAll(() => {
-      mockDispatch = jest.fn();
-      wrapper = shallow(
-        <FilesActionMenu dispatch={mockDispatch} {...basicProps} />
-      );
-    });
-
+  describe('when rendered with mock redux store', () => {
     test('it should match snapshot', () => {
-      expect(wrapper).toMatchSnapshot();
+      const { wrapper } = mountConnected(<FilesActionMenu />);
+      expect(wrapper.baseElement).toMatchSnapshot();
     });
 
     describe('...and then clicking menu items', () => {
@@ -46,9 +34,10 @@ describe('containers/FilesActionMenu', () => {
         test(`it should call actions in response to ${
           menuTest.testId
         } item clicks`, () => {
-          wrapper.find({ testId: menuTest.testId }).simulate('click');
-          expect(menuTest.actionFn).toHaveBeenCalledTimes(1);
-          expect(mockDispatch).toHaveBeenCalledTimes(1);
+          const { wrapper, store } = mountConnected(<FilesActionMenu />);
+          const menuItem = wrapper.getByTestId(menuTest.testId);
+          fireEvent.click(menuItem);
+          expect(store.dispatch).toHaveBeenCalledTimes(1);
         });
       }
     });

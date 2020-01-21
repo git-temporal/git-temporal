@@ -145,6 +145,7 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
         onMouseMove={this.onMouseMove}
         onMouseDown={this.onMouseDown}
         onMouseUp={this.onMouseUp}
+        data-testid="timeplotGraph"
       >
         <div style={style('fill')} ref={this.timeplotGraphRef} />
         {startDate ? (

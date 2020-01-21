@@ -1,3 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`containers/Files when rendered without props it should match snapshot (it should be showing files) 1`] = `undefined`;
+exports[`containers/Files when rendered mock files and stats should match snapshot 1`] = `
+<div>
+  <div
+    style="display: flex; flex-direction: column; flex-grow: 0; flex-shrink: 0; position: relative; height: 30px; transition: all .5s ease;"
+  >
+    <div
+      style="display: flex; flex-direction: row;"
+    >
+      <div
+        style="cursor: pointer;"
+      >
+        <svg
+          height="16"
+          role="img"
+          viewBox="0 0 192 512"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+      <div
+        style="font-size: 18px; line-height: 1.35; font-weight: bold; color: rgb(51, 51, 51); margin-bottom: 15px; margin-right: 15px;"
+      >
+        19 Files
+      </div>
+    </div>
+  </div>
+</div>
+`;

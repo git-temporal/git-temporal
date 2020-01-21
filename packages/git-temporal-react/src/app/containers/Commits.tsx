@@ -19,12 +19,6 @@ import { CommitCard } from 'app/components/CommitCard';
 import CommitsActionMenu from './CommitsActionMenu';
 import { CollapsibleGroup } from 'app/components/CollapsibleGroup';
 
-const scrollStyle = {
-  flexGrow: 1,
-  overflow: 'auto',
-  marginBotton: '@margins.large+px',
-};
-
 const COLLAPSIBLE_GROUP = CollapsibleSidePanelGroups.COMMITS;
 
 export const Commits: React.FC = (): React.ReactElement => {
