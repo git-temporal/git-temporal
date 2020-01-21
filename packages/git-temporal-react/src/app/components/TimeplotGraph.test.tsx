@@ -20,6 +20,7 @@ describe('components/TimeplotGraph', () => {
           endDate={fiveCommits[2].authorDate - 1}
           earliestCommitDate={fiveCommits[0].authorDate}
           latestCommitDate={fiveCommits.slice(-1)[0].authorDate}
+          highlightedCommitIds={[]}
         />
       );
       wrapper.instance().focus();
