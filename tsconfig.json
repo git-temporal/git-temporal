@@ -21,9 +21,7 @@
     "resolveJsonModule": true,
     "sourceMap": false,
     "suppressImplicitAnyIndexErrors": true,
-    "target": "es6",
-    "typeRoots": ["**/node_modules/@types", "src/types"],
-    "types": ["node"]
+    "target": "es6"
   },
   "exclude": ["node_modules"],
   "include": ["**/*.ts"]
