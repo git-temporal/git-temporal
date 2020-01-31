@@ -5,15 +5,14 @@ const { debug } = require('common/logger');
 
 const chai = require('chai');
 const chaiString = require('chai-string');
-const fetch = require('node-fetch');
+
 const _ = require('underscore');
 const firstTenExpectedCommits = require('../data/first10CommitsHere.json');
 
-const { expect } = chai;
 chai.use(chaiString);
 
 // This will start the API server on a port not in use by the dev server
-const testPort = 11967;
+const testPort = '11967';
 process.env.GT_API_PORT = testPort;
 require('../../src/server');
 
@@ -29,7 +28,7 @@ function expectCommitsEql(
 ) {
   const commitAComp = _.omit(commitA, omissions);
   const commitBComp = _.omit(commitB, omissions);
-  expect(commitAComp).to.eql(commitBComp);
+  expect(commitAComp).toEqual(commitBComp);
 }
 
 describe('git-temporal/history API', async () => {
@@ -37,7 +36,7 @@ describe('git-temporal/history API', async () => {
   let directoryCommits;
   let fileCommits;
 
-  before(async () => {
+  beforeAll(async () => {
     const fetchResult = await fetch(historyUrl);
     allCommits = await fetchResult.json();
     debug(
@@ -47,18 +46,18 @@ describe('git-temporal/history API', async () => {
     // console.log('first commit', allCommits.commits[0]);
     // console.log('last commit', allCommits.commits.slice(-1));
   });
-  before(async () => {
+  beforeAll(async () => {
     const fetchResult = await fetch(`${historyUrl}?path=${testPath}`);
     directoryCommits = await fetchResult.json();
   });
-  before(async () => {
+  beforeAll(async () => {
     const fetchResult = await fetch(`${historyUrl}?path=${testPathFile}`);
     fileCommits = await fetchResult.json();
   });
 
   describe('when fetched for whole git-temporal repo', () => {
     it('should have over 30 commits', () => {
-      expect(allCommits.commits.length).to.be.above(30);
+      expect(allCommits.commits.length).toBeGreaterThan(30);
     });
     it('should be in descending order and match first 10 known commits', () => {
       const lastTenCommits = allCommits.commits.slice(
@@ -74,7 +73,7 @@ describe('git-temporal/history API', async () => {
 
   describe('when fetched for a specific directory', () => {
     it('should have fewer commits for a directory than whole repository', () => {
-      expect(directoryCommits.commits.length).to.be.below(
+      expect(directoryCommits.commits.length).toBeLessThan(
         allCommits.commits.length
       );
     });
@@ -84,7 +83,7 @@ describe('git-temporal/history API', async () => {
           continue;
         }
         for (const file of commit.files) {
-          expect(file.name).to.startWith(testPath);
+          expect(file.name.startsWith(testPath)).toBeTruthy();
         }
       }
     });
@@ -92,41 +91,41 @@ describe('git-temporal/history API', async () => {
 
   describe('when fetched for a specific file', () => {
     it('should have fewer commits for a file than the directory it is in', () => {
-      expect(fileCommits.commits.length).to.be.below(
+      expect(fileCommits.commits.length).toBeLessThan(
         directoryCommits.commits.length
       );
     });
     it(`should only have files for ${testPathFile}`, () => {
       for (const commit of fileCommits.commits) {
-        expect(commit.files.length).to.equal(1);
-        expect(commit.files[0].name).to.equal(testPathFile);
+        expect(commit.files.length).toEqual(1);
+        expect(commit.files[0].name).toEqual(testPathFile);
       }
     });
   });
 
   describe('when fetched for a specific range', () => {
     let rangeOfCommits;
-    before(async () => {
+    beforeAll(async () => {
       const fetchResult = await fetch(`${historyUrl}?skip=5&maxCount=10`);
       rangeOfCommits = await fetchResult.json();
     });
     it('should have exactly 10 commits', () => {
-      expect(rangeOfCommits.commits.length).to.be.equal(10);
+      expect(rangeOfCommits.commits.length).toEqual(10);
     });
     it('the first commit returned should be allcommits[5]', () => {
-      expect(rangeOfCommits.commits[0]).to.eql(allCommits.commits[5]);
+      expect(rangeOfCommits.commits[0]).toEqual(allCommits.commits[5]);
     });
   });
 
   describe('when commit range is fetched', () => {
     let commitRange;
-    before(async () => {
+    beforeAll(async () => {
       const fetchResult = await fetch(`${rangeUrl}?path=.`);
       commitRange = await fetchResult.json();
       debug('commitRange', commitRange);
     });
     it('should jive with all all commits', () => {
-      expect(commitRange.count).to.equal(allCommits.commits.length);
+      expect(commitRange.count).toEqual(allCommits.commits.length);
 
       // remember: allCommits are in reverse temporal order
       expectCommitsEql(commitRange.lastCommit, allCommits.commits[0]);

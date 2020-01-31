@@ -148,6 +148,8 @@ function expectSumLinesAddedAndDeletedToMatchFiles(history) {
 }
 
 function expectFirstNToMatchSnapshot(history, n) {
-  const first190 = _.omit(history.commits.slice(0, n), ['relativeDate']);
+  const first190 = history.commits
+    .slice(0, n)
+    .map(obj => _.omit(obj, ['relativeDate']));
   expect(first190).toMatchSnapshot();
 }

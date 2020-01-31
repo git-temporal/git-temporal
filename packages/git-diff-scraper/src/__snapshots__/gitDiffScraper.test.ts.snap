@@ -2,13 +2,288 @@
 
 exports[`git-diff-scraper should return directory differences for two commits 1`] = `
 Object {
-  "isDirectory": false,
-  "leftCommit": "
-",
+  "isDirectory": true,
+  "leftCommit": "a5044680e29943c4f7fadb24c5abac649168c2ee",
   "leftFileContents": null,
-  "modifiedFiles": false,
+  "modifiedFiles": Array [
+    Object {
+      "delta": 21,
+      "path": "packages/api-node-express/.babelrc.js",
+      "status": "added",
+    },
+    Object {
+      "delta": 9,
+      "path": "packages/api-node-express/.eslintignore",
+      "status": "added",
+    },
+    Object {
+      "delta": 35,
+      "path": "packages/api-node-express/.eslintrc.js",
+      "status": "added",
+    },
+    Object {
+      "delta": 9,
+      "path": "packages/api-node-express/.prettierignore",
+      "status": "added",
+    },
+    Object {
+      "delta": 4,
+      "path": "packages/api-node-express/.prettierrc.js",
+      "status": "added",
+    },
+    Object {
+      "delta": 15,
+      "path": "packages/api-node-express/babel-register.js",
+      "status": "added",
+    },
+    Object {
+      "delta": 11,
+      "path": "packages/api-node-express/lint-staged.config.js",
+      "status": "added",
+    },
+    Object {
+      "delta": 8119,
+      "path": "packages/api-node-express/package-lock.json",
+      "status": "added",
+    },
+    Object {
+      "delta": 60,
+      "path": "packages/api-node-express/package.json",
+      "status": "added",
+    },
+    Object {
+      "delta": 0,
+      "path": "packages/api-node-express/server.js",
+      "status": "added",
+    },
+    Object {
+      "delta": 29,
+      "path": "packages/api-node-express/tsconfig.json",
+      "status": "added",
+    },
+    Object {
+      "delta": 38,
+      "path": "packages/api-node-express/tslint.json",
+      "status": "added",
+    },
+    Object {
+      "delta": 32,
+      "path": "packages/git-log-scraper/.babelrc.js",
+      "status": "added",
+    },
+    Object {
+      "delta": 7,
+      "path": "packages/git-log-scraper/.eslintignore",
+      "status": "added",
+    },
+    Object {
+      "delta": 35,
+      "path": "packages/git-log-scraper/.eslintrc.js",
+      "status": "added",
+    },
+    Object {
+      "delta": 30,
+      "path": "packages/git-log-scraper/.gitignore",
+      "status": "added",
+    },
+    Object {
+      "delta": 7,
+      "path": "packages/git-log-scraper/.prettierignore",
+      "status": "added",
+    },
+    Object {
+      "delta": 4,
+      "path": "packages/git-log-scraper/.prettierrc.js",
+      "status": "added",
+    },
+    Object {
+      "delta": 15,
+      "path": "packages/git-log-scraper/babel-register.js",
+      "status": "added",
+    },
+    Object {
+      "delta": 8,
+      "path": "packages/git-log-scraper/lint-staged.config.js",
+      "status": "added",
+    },
+    Object {
+      "delta": 7276,
+      "path": "packages/git-log-scraper/package-lock.json",
+      "status": "added",
+    },
+    Object {
+      "delta": 67,
+      "path": "packages/git-log-scraper/package.json",
+      "status": "added",
+    },
+    Object {
+      "delta": 134,
+      "path": "packages/git-log-scraper/src/gitLogScraper.ts",
+      "status": "added",
+    },
+    Object {
+      "delta": 25,
+      "path": "packages/git-log-scraper/src/gitLogToJson.ts",
+      "status": "added",
+    },
+    Object {
+      "delta": 22,
+      "path": "packages/git-log-scraper/test/mocha-reporters-config.json",
+      "status": "added",
+    },
+    Object {
+      "delta": 6,
+      "path": "packages/git-log-scraper/test/mocha.opts",
+      "status": "added",
+    },
+    Object {
+      "delta": 33,
+      "path": "packages/git-log-scraper/test/pullTestRepos.js (new +x)",
+      "status": "modified",
+    },
+    Object {
+      "delta": 786141,
+      "path": "packages/git-log-scraper/test/snapshots/atom.snapshot.json",
+      "status": "added",
+    },
+    Object {
+      "delta": 1732085,
+      "path": "packages/git-log-scraper/test/snapshots/node.snapshot.json",
+      "status": "added",
+    },
+    Object {
+      "delta": 269764,
+      "path": "packages/git-log-scraper/test/snapshots/react.snapshot.json",
+      "status": "added",
+    },
+    Object {
+      "delta": 1385088,
+      "path": "packages/git-log-scraper/test/snapshots/vscode.snapshot.json",
+      "status": "added",
+    },
+    Object {
+      "delta": 33,
+      "path": "packages/git-log-scraper/test/updateSnapshots.js (new +x)",
+      "status": "modified",
+    },
+    Object {
+      "delta": 30,
+      "path": "packages/git-log-scraper/tsconfig.json",
+      "status": "added",
+    },
+    Object {
+      "delta": 35,
+      "path": "packages/git-log-scraper/tslint.json",
+      "status": "added",
+    },
+    Object {
+      "delta": 21,
+      "path": "packages/git-temporal/.gitignore",
+      "status": "added",
+    },
+    Object {
+      "delta": 3,
+      "path": "packages/git-temporal/images.d.ts",
+      "status": "added",
+    },
+    Object {
+      "delta": 11817,
+      "path": "packages/git-temporal/package-lock.json",
+      "status": "added",
+    },
+    Object {
+      "delta": 30,
+      "path": "packages/git-temporal/package.json",
+      "status": "modified",
+    },
+    Object {
+      "delta": NaN,
+      "path": "packages/git-temporal/public/favicon.ico",
+      "status": "added",
+    },
+    Object {
+      "delta": 40,
+      "path": "packages/git-temporal/public/index.html",
+      "status": "added",
+    },
+    Object {
+      "delta": 15,
+      "path": "packages/git-temporal/public/manifest.json",
+      "status": "added",
+    },
+    Object {
+      "delta": 2448,
+      "path": "packages/git-temporal/README.md",
+      "status": "added",
+    },
+    Object {
+      "delta": 28,
+      "path": "packages/git-temporal/src/App.css",
+      "status": "added",
+    },
+    Object {
+      "delta": 9,
+      "path": "packages/git-temporal/src/App.test.tsx",
+      "status": "added",
+    },
+    Object {
+      "delta": 22,
+      "path": "packages/git-temporal/src/App.tsx",
+      "status": "added",
+    },
+    Object {
+      "delta": 5,
+      "path": "packages/git-temporal/src/index.css",
+      "status": "added",
+    },
+    Object {
+      "delta": 11,
+      "path": "packages/git-temporal/src/index.tsx",
+      "status": "added",
+    },
+    Object {
+      "delta": 7,
+      "path": "packages/git-temporal/src/logo.svg",
+      "status": "added",
+    },
+    Object {
+      "delta": 123,
+      "path": "packages/git-temporal/src/registerServiceWorker.ts",
+      "status": "added",
+    },
+    Object {
+      "delta": 30,
+      "path": "packages/git-temporal/tsconfig.json",
+      "status": "added",
+    },
+    Object {
+      "delta": 3,
+      "path": "packages/git-temporal/tsconfig.prod.json",
+      "status": "added",
+    },
+    Object {
+      "delta": 6,
+      "path": "packages/git-temporal/tsconfig.test.json",
+      "status": "added",
+    },
+    Object {
+      "delta": 10,
+      "path": "packages/git-temporal/tslint.json",
+      "status": "added",
+    },
+    Object {
+      "delta": 7410,
+      "path": "packages/git-temporal/yarn.lock",
+      "status": "added",
+    },
+    Object {
+      "delta": NaN,
+      "path": "UI Mock.studio",
+      "status": "added",
+    },
+  ],
   "path": "/Users/Bee/projects/git-temporal",
-  "rightCommit": "e287030d6d449367b8b765cf2b030a53c679f4d1",
+  "rightCommit": "83e91b29e911a91d9444f491404580ce6f620516",
   "rightFileContents": null,
 }
 `;
@@ -16,12 +291,11 @@ Object {
 exports[`git-diff-scraper should return file differences for two commits 1`] = `
 Object {
   "isDirectory": false,
-  "leftCommit": "
-",
-  "leftFileContents": null,
+  "leftCommit": "436507498d664233607df31801b73dde7b7b3641",
+  "leftFileContents": "ewogICJuYW1lIjogInJvb3QiLAogICJwcml2YXRlIjogdHJ1ZSwKICAiZGV2RGVwZW5kZW5jaWVzIjogewogICAgIkBiYWJlbC9jbGkiOiAiXjcuMS4wIiwKICAgICJAYmFiZWwvY29yZSI6ICJeNy4xLjAiLAogICAgIkBiYWJlbC9wbHVnaW4tcHJvcG9zYWwtY2xhc3MtcHJvcGVydGllcyI6ICJeNy4xLjAiLAogICAgIkBiYWJlbC9wbHVnaW4tcHJvcG9zYWwtZG8tZXhwcmVzc2lvbnMiOiAiXjcuMC4wIiwKICAgICJAYmFiZWwvcGx1Z2luLXByb3Bvc2FsLWV4cG9ydC1kZWZhdWx0LWZyb20iOiAiXjcuMC4wIiwKICAgICJAYmFiZWwvcGx1Z2luLXByb3Bvc2FsLWxvZ2ljYWwtYXNzaWdubWVudC1vcGVyYXRvcnMiOiAiXjcuMC4wIiwKICAgICJAYmFiZWwvcGx1Z2luLXByb3Bvc2FsLW51bGxpc2gtY29hbGVzY2luZy1vcGVyYXRvciI6ICJeNy4wLjAiLAogICAgIkBiYWJlbC9wbHVnaW4tcHJvcG9zYWwtb2JqZWN0LXJlc3Qtc3ByZWFkIjogIl43LjAuMCIsCiAgICAiQGJhYmVsL3BsdWdpbi1wcm9wb3NhbC1vcHRpb25hbC1jaGFpbmluZyI6ICJeNy4wLjAiLAogICAgIkBiYWJlbC9wbHVnaW4tcHJvcG9zYWwtcGlwZWxpbmUtb3BlcmF0b3IiOiAiXjcuMC4wIiwKICAgICJAYmFiZWwvcGx1Z2luLXRyYW5zZm9ybS1tb2R1bGVzLWNvbW1vbmpzIjogIl43LjEuMCIsCiAgICAiQGJhYmVsL3ByZXNldC1lbnYiOiAiXjcuMS4wIiwKICAgICJAYmFiZWwvcHJlc2V0LXR5cGVzY3JpcHQiOiAiXjcuMS4wIiwKICAgICJAYmFiZWwvcmVnaXN0ZXIiOiAiXjcuMC4wIiwKICAgICJAdHlwZXMvbm9kZSI6ICJeMTAuMTAuMyIsCiAgICAiYmFiZWwtZXNsaW50IjogIl45LjAuMCIsCiAgICAiYmFiZWwtamVzdCI6ICJeMjMuNi4wIiwKICAgICJiYWJlbC1sb2FkZXIiOiAiXjguMC4yIiwKICAgICJiYWJlbC1wbHVnaW4tbW9kdWxlLXJlc29sdmVyIjogIl4zLjEuMSIsCiAgICAiYnVtYmxlLXV0aWwiOiAiXjAuNC4xIiwKICAgICJjaGFpIjogIl40LjEuMiIsCiAgICAiY3Jvc3MtZW52IjogIl41LjIuMCIsCiAgICAiZG9jdG9jIjogIl4xLjMuMSIsCiAgICAiZXNsaW50IjogIl41LjYuMCIsCiAgICAiZXNsaW50LWNvbmZpZy1haXJibmIiOiAiXjE3LjEuMCIsCiAgICAiZXNsaW50LWNvbmZpZy1wcmV0dGllciI6ICJeMy4xLjAiLAogICAgImVzbGludC1wbHVnaW4taW1wb3J0IjogIl4yLjE0LjAiLAogICAgImh1c2t5IjogIl4xLjAuMC1yYy4xNSIsCiAgICAibGVybmEiOiAiXjMuMy4wIiwKICAgICJsaW50LXN0YWdlZCI6ICJeNy4zLjAiLAogICAgIm1vY2hhIjogIl41LjIuMCIsCiAgICAicHJldHRpZXIiOiAiXjEuMTQuMyIsCiAgICAicmVnZW5lcmF0b3ItcnVudGltZSI6ICJeMC4xMi4xIiwKICAgICJ0cy1ub2RlIjogIl43LjAuMSIsCiAgICAidHNjb25maWctcGF0aHMiOiAiXjMuNi4wIiwKICAgICJ0c2xpbnQiOiAiXjUuMTEuMCIsCiAgICAidHNsaW50LWNvbmZpZy1haXJibmIiOiAiXjUuMTEuMCIsCiAgICAidHNsaW50LWNvbmZpZy1wcmV0dGllciI6ICJeMS4xNS4wIiwKICAgICJ0eXBlc2NyaXB0IjogIl4zLjAuMyIsCiAgICAidW5kZXJzY29yZSI6ICJeMS45LjEiCiAgfQp9Cg==",
   "modifiedFiles": false,
   "path": "/Users/Bee/projects/git-temporal/package.json",
-  "rightCommit": "fd631c8c8af0c8265959f5243a98f8ded239601f",
-  "rightFileContents": "ewogICJuYW1lIjogInJvb3QiLAogICJwcml2YXRlIjogdHJ1ZSwKICAiZGV2RGVwZW5kZW5jaWVzIjogewogICAgIkBiYWJlbC9jbGkiOiAiXjcuMS4wIiwKICAgICJAYmFiZWwvY29yZSI6ICJeNy4xLjAiLAogICAgIkBiYWJlbC9wbHVnaW4tcHJvcG9zYWwtY2xhc3MtcHJvcGVydGllcyI6ICJeNy4xLjAiLAogICAgIkBiYWJlbC9wbHVnaW4tcHJvcG9zYWwtZG8tZXhwcmVzc2lvbnMiOiAiXjcuMC4wIiwKICAgICJAYmFiZWwvcGx1Z2luLXByb3Bvc2FsLWV4cG9ydC1kZWZhdWx0LWZyb20iOiAiXjcuMC4wIiwKICAgICJAYmFiZWwvcGx1Z2luLXByb3Bvc2FsLWxvZ2ljYWwtYXNzaWdubWVudC1vcGVyYXRvcnMiOiAiXjcuMC4wIiwKICAgICJAYmFiZWwvcGx1Z2luLXByb3Bvc2FsLW51bGxpc2gtY29hbGVzY2luZy1vcGVyYXRvciI6ICJeNy4wLjAiLAogICAgIkBiYWJlbC9wbHVnaW4tcHJvcG9zYWwtb2JqZWN0LXJlc3Qtc3ByZWFkIjogIl43LjAuMCIsCiAgICAiQGJhYmVsL3BsdWdpbi1wcm9wb3NhbC1vcHRpb25hbC1jaGFpbmluZyI6ICJeNy4wLjAiLAogICAgIkBiYWJlbC9wbHVnaW4tcHJvcG9zYWwtcGlwZWxpbmUtb3BlcmF0b3IiOiAiXjcuMC4wIiwKICAgICJAYmFiZWwvcGx1Z2luLXRyYW5zZm9ybS1tb2R1bGVzLWNvbW1vbmpzIjogIl43LjEuMCIsCiAgICAiQGJhYmVsL3ByZXNldC1lbnYiOiAiXjcuMS4wIiwKICAgICJAYmFiZWwvcHJlc2V0LXR5cGVzY3JpcHQiOiAiXjcuMS4wIiwKICAgICJAYmFiZWwvcmVnaXN0ZXIiOiAiXjcuMC4wIiwKICAgICJAdHlwZXMvbm9kZSI6ICJeMTAuMTAuMyIsCiAgICAiYmFiZWwtY29yZSI6ICJeNi4yNi4zIiwKICAgICJiYWJlbC1lc2xpbnQiOiAiXjkuMC4wIiwKICAgICJiYWJlbC1qZXN0IjogIl4yMy42LjAiLAogICAgImJhYmVsLXBsdWdpbi1tb2R1bGUtcmVzb2x2ZXIiOiAiXjMuMS4xIiwKICAgICJidW1ibGUtdXRpbCI6ICJeMC40LjEiLAogICAgImNoYWkiOiAiXjQuMS4yIiwKICAgICJjcm9zcy1lbnYiOiAiXjUuMi4wIiwKICAgICJkb2N0b2MiOiAiXjEuMy4xIiwKICAgICJlc2xpbnQiOiAiXjUuNi4wIiwKICAgICJlc2xpbnQtY29uZmlnLWFpcmJuYiI6ICJeMTcuMS4wIiwKICAgICJlc2xpbnQtY29uZmlnLXByZXR0aWVyIjogIl4zLjEuMCIsCiAgICAiZXNsaW50LWltcG9ydC1yZXNvbHZlci1iYWJlbC1tb2R1bGUiOiAiXjQuMC4wIiwKICAgICJlc2xpbnQtcGx1Z2luLWltcG9ydCI6ICJeMi4xNC4wIiwKICAgICJlc2xpbnQtcGx1Z2luLWpzeC1hMTF5IjogIl42LjEuMSIsCiAgICAiZXNsaW50LXBsdWdpbi1yZWFjdCI6ICJeNy4xMS4xIiwKICAgICJodXNreSI6ICJeMS4wLjAtcmMuMTUiLAogICAgImxlcm5hIjogIl4zLjMuMCIsCiAgICAibGludC1zdGFnZWQiOiAiXjcuMy4wIiwKICAgICJtb2NoYSI6ICJeNS4yLjAiLAogICAgInByZXR0aWVyIjogIl4xLjE0LjMiLAogICAgInJlZ2VuZXJhdG9yLXJ1bnRpbWUiOiAiXjAuMTIuMSIsCiAgICAidHMtbm9kZSI6ICJeNy4wLjEiLAogICAgInRzY29uZmlnLXBhdGhzIjogIl4zLjYuMCIsCiAgICAidHNsaW50IjogIl41LjExLjAiLAogICAgInRzbGludC1jb25maWctYWlyYm5iIjogIl41LjExLjAiLAogICAgInRzbGludC1jb25maWctcHJldHRpZXIiOiAiXjEuMTUuMCIsCiAgICAidHlwZXNjcmlwdCI6ICJeMy4wLjMiLAogICAgInVuZGVyc2NvcmUiOiAiXjEuOS4xIgogIH0KfQo=",
+  "rightCommit": "24bd6db8e3bf7052b2f1cf004b8d2af4f393cbaf",
+  "rightFileContents": "ewogICJuYW1lIjogInJvb3QiLAogICJwcml2YXRlIjogdHJ1ZSwKICAiZGV2RGVwZW5kZW5jaWVzIjogewogICAgIkBiYWJlbC9jbGkiOiAiXjcuMS4wIiwKICAgICJAYmFiZWwvY29yZSI6ICJeNy4xLjAiLAogICAgIkBiYWJlbC9wbHVnaW4tcHJvcG9zYWwtY2xhc3MtcHJvcGVydGllcyI6ICJeNy4xLjAiLAogICAgIkBiYWJlbC9wbHVnaW4tcHJvcG9zYWwtZG8tZXhwcmVzc2lvbnMiOiAiXjcuMC4wIiwKICAgICJAYmFiZWwvcGx1Z2luLXByb3Bvc2FsLWV4cG9ydC1kZWZhdWx0LWZyb20iOiAiXjcuMC4wIiwKICAgICJAYmFiZWwvcGx1Z2luLXByb3Bvc2FsLWV4cG9ydC1uYW1lc3BhY2UtZnJvbSI6ICJeNy4wLjAiLAogICAgIkBiYWJlbC9wbHVnaW4tcHJvcG9zYWwtZnVuY3Rpb24tYmluZCI6ICJeNy4wLjAiLAogICAgIkBiYWJlbC9wbHVnaW4tcHJvcG9zYWwtZnVuY3Rpb24tc2VudCI6ICJeNy4xLjAiLAogICAgIkBiYWJlbC9wbHVnaW4tcHJvcG9zYWwtanNvbi1zdHJpbmdzIjogIl43LjAuMCIsCiAgICAiQGJhYmVsL3BsdWdpbi1wcm9wb3NhbC1sb2dpY2FsLWFzc2lnbm1lbnQtb3BlcmF0b3JzIjogIl43LjAuMCIsCiAgICAiQGJhYmVsL3BsdWdpbi1wcm9wb3NhbC1udWxsaXNoLWNvYWxlc2Npbmctb3BlcmF0b3IiOiAiXjcuMC4wIiwKICAgICJAYmFiZWwvcGx1Z2luLXByb3Bvc2FsLW9iamVjdC1yZXN0LXNwcmVhZCI6ICJeNy4wLjAiLAogICAgIkBiYWJlbC9wbHVnaW4tcHJvcG9zYWwtb3B0aW9uYWwtY2hhaW5pbmciOiAiXjcuMC4wIiwKICAgICJAYmFiZWwvcGx1Z2luLXByb3Bvc2FsLXBpcGVsaW5lLW9wZXJhdG9yIjogIl43LjAuMCIsCiAgICAiQGJhYmVsL3BsdWdpbi1zeW50YXgtZHluYW1pYy1pbXBvcnQiOiAiXjcuMC4wIiwKICAgICJAYmFiZWwvcGx1Z2luLXRyYW5zZm9ybS1tb2R1bGVzLWNvbW1vbmpzIjogIl43LjEuMCIsCiAgICAiQGJhYmVsL3ByZXNldC1lbnYiOiAiXjcuMS4wIiwKICAgICJAYmFiZWwvcHJlc2V0LXN0YWdlLTAiOiAiXjcuMC4wIiwKICAgICJAYmFiZWwvcHJlc2V0LXR5cGVzY3JpcHQiOiAiXjcuMS4wIiwKICAgICJAYmFiZWwvcmVnaXN0ZXIiOiAiXjcuMC4wIiwKICAgICJAdHlwZXMvbm9kZSI6ICJeMTAuMTAuMyIsCiAgICAiYmFiZWwtY29yZSI6ICJeNi4yNi4zIiwKICAgICJiYWJlbC1lc2xpbnQiOiAiXjkuMC4wIiwKICAgICJiYWJlbC1qZXN0IjogIl4yMy42LjAiLAogICAgImJhYmVsLXBsdWdpbi1tb2R1bGUtcmVzb2x2ZXIiOiAiXjMuMS4xIiwKICAgICJiYWJlbC1wbHVnaW4tdHJhbnNmb3JtLW1vZHVsZXMiOiAiXjAuMS4xIiwKICAgICJidW1ibGUtdXRpbCI6ICJeMC40LjEiLAogICAgImNoYWkiOiAiXjQuMS4yIiwKICAgICJjcm9zcy1lbnYiOiAiXjUuMi4wIiwKICAgICJkb2N0b2MiOiAiXjEuMy4xIiwKICAgICJlc2xpbnQiOiAiXjUuNi4wIiwKICAgICJlc2xpbnQtY29uZmlnLWFpcmJuYiI6ICJeMTcuMS4wIiwKICAgICJlc2xpbnQtY29uZmlnLXByZXR0aWVyIjogIl4zLjEuMCIsCiAgICAiZXNsaW50LWltcG9ydC1yZXNvbHZlci1iYWJlbC1tb2R1bGUiOiAiXjQuMC4wIiwKICAgICJlc2xpbnQtcGx1Z2luLWltcG9ydCI6ICJeMi4xNC4wIiwKICAgICJlc2xpbnQtcGx1Z2luLWpzeC1hMTF5IjogIl42LjEuMSIsCiAgICAiZXNsaW50LXBsdWdpbi1yZWFjdCI6ICJeNy4xMS4xIiwKICAgICJodXNreSI6ICJeMS4wLjAtcmMuMTUiLAogICAgImxlcm5hIjogIl4zLjMuMCIsCiAgICAibGludC1zdGFnZWQiOiAiXjcuMy4wIiwKICAgICJtb2NoYSI6ICJeNS4yLjAiLAogICAgInByZXR0aWVyIjogIl4xLjE0LjMiLAogICAgInJlZ2VuZXJhdG9yLXJ1bnRpbWUiOiAiXjAuMTIuMSIsCiAgICAidHMtbm9kZSI6ICJeNy4wLjEiLAogICAgInRzY29uZmlnLXBhdGhzIjogIl4zLjYuMCIsCiAgICAidHNsaW50IjogIl41LjExLjAiLAogICAgInRzbGludC1jb25maWctYWlyYm5iIjogIl41LjExLjAiLAogICAgInRzbGludC1jb25maWctcHJldHRpZXIiOiAiXjEuMTUuMCIsCiAgICAidHNsaW50LXJlYWN0IjogIl4zLjYuMCIsCiAgICAidHlwZXNjcmlwdCI6ICJeMy4wLjMiLAogICAgInVuZGVyc2NvcmUiOiAiXjEuOS4xIgogIH0sCiAgImRlcGVuZGVuY2llcyI6IHt9Cn0K",
 }
 `;

@@ -2,6 +2,7 @@ import * as path from 'path';
 
 import { getDiff } from './gitDiffScraper';
 import { findGitRoot, execSync } from '@git-temporal/commons';
+import { debug } from '@git-temporal/logger';
 
 const gitRoot = findGitRoot('.');
 const testFile = path.join(gitRoot, 'package.json');
@@ -10,8 +11,8 @@ const testFile = path.join(gitRoot, 'package.json');
 const firstRootCommitHashes = getFirstCommitHashes(gitRoot);
 const firstFileCommitHashes = getFirstCommitHashes(testFile);
 
-console.log('firstRootCommitHashes', firstRootCommitHashes);
-console.log('firstFileCommitHashes', firstFileCommitHashes);
+debug('firstRootCommitHashes', firstRootCommitHashes);
+debug('firstFileCommitHashes', firstFileCommitHashes);
 
 describe('git-diff-scraper', () => {
   it('should return a directory when path is a directory', () => {
@@ -65,7 +66,7 @@ function getFirstCommitHashes(dir) {
   return execSync(
     `git log --pretty="format:%H" --topo-order --date=local ${dir}`
   )
-    .split(/(\n|\r\n)/)
+    .split('\n')
     .slice(-10)
     .reverse();
 }
