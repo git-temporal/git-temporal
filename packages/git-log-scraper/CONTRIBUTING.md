@@ -5,6 +5,7 @@
   - [Getting started](#getting-started)
   - [Debugging](#debugging)
   - [Tests](#tests)
+    - [Exhaustive tests](#exhaustive-tests)
     - [Debugging tests](#debugging-tests)
   - [More Information](#more-information)
 
@@ -47,10 +48,6 @@ npm run debug
 
 ## Tests
 
-The tests for for git-log-scraper use a snapshot or last known good strategy against a set of repos. The repositories tested have all been forked and marked read only under the git-temporal organization on GitHub.
-
-Essentially, we a test that several very popular repositories, that have been frozen in time, match every commit minus the `relativeDate` attribute.
-
 To run the tests:
 
 ```bash
@@ -63,13 +60,17 @@ To update the snapshots, if for example you changed something that you know will
 npm run test-update-snapshots
 ```
 
-Testing is fun! No, really, it's not too bad. We use Mocha + Chai + a few chai addons to make the job easy. Here are some pertinent links:
+Testing is fun! No, really, it's not too bad. We use [Jest](https://jestjs.io/docs/en/using-matchers)
 
-[Mocha.js test framework](http://visionmedia.github.io/mocha)
-_for `describe, it, before, after`_
+#### Exhaustive tests
 
-[Chai Assertion Library](http://chaijs.com)
-_for `should, expect, assert`. Note we are using the BDD style_
+The tests for for git-log-scraper use a snapshot or last known good strategy against a set of repos. The repositories tested have all been forked and marked read only under the git-temporal organization on GitHub.
+
+Essentially, we a test that several very popular repositories, that have been frozen in time, match every commit minus the `relativeDate` attribute. It takes a really long time.
+
+```
+npm run test-exhaustive
+```
 
 #### Debugging tests
 
@@ -79,11 +80,7 @@ Add a `debugger` statement in the code where you wish to first pause and then ru
 npm run test-debug
 ```
 
-In Chrome, browse to `chrome://inspect/#devices` and look for a "Target" like `...mocha/bin/_mocha file:///...`. Click the inspect link beneath the Target.
-
-The Chrome debugger should come up and you should be paused in `_mocha`. Click the "resume" button or press F8 in the debugger and your next stop should be the debugger statement you added in the test.
-
-Don't forget to remove the `debugger` statement you added. The linter will not allow any changes to be committed with stray `debugger` statements.
+In Chrome, browse to `chrome://inspect/#devices`
 
 ## More Information
 
