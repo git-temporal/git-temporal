@@ -1,4 +1,0 @@
---slow 12000
---timeout 120000
---no-exit
---reporter-options overwrite=false,saveJson=true

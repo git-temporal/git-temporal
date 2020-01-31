@@ -4,7 +4,6 @@
 const fs = require('fs');
 const path = require('path');
 const _ = require('underscore');
-const { expect } = require('chai');
 
 const { getCommitHistory } = require(`../../src/gitLogScraper`);
 
@@ -41,7 +40,7 @@ function testRepos() {
     const snapshotData = JSON.parse(fs.readFileSync(fullSnapshotPath));
 
     it(`${dir} getCommitHistory data should have same number of commits as snapshot data`, () => {
-      expect(commitHistory.length).to.equal(snapshotData.length);
+      expect(commitHistory.length).toEqual(snapshotData.length);
     });
 
     it(`${dir} commit history should match snapshot exactly`, () => {
@@ -54,12 +53,12 @@ function testRepos() {
           snapshotData[index],
           ignoredCommitAttributes
         );
-        expect(testCommit).to.eql(snapshotCommit);
+        expect(testCommit).toEqual(snapshotCommit);
       }
     });
   }
 }
 
-describe('static test repos', async () => {
+describe('static test repos', () => {
   testRepos();
 });
