@@ -1,4 +1,6 @@
 import * as fs from 'fs';
+import * as path from 'path';
+
 import {
   findGitRoot,
   escapeForCli,
@@ -20,9 +22,14 @@ const parsedAttributes = {
   body: '%b',
 };
 
+export interface IGetCommitHistoryOptions {
+  skip?: number;
+  maxCount?: number;
+}
+
 export function getCommitHistory(
   path: string,
-  options = { skip: 0, maxCount: 0 }
+  options: IGetCommitHistoryOptions = { skip: 0, maxCount: 0 }
 ) {
   const { skip, maxCount } = options;
   const rawLog = fetchFileHistory(path, skip, maxCount);
@@ -70,7 +77,10 @@ export function getCommitRange(fileName: string) {
     `log ${logFlags} -n 1 -- ${escapeForCli(fileName)}`
   );
   const lastCommit = parseGitLogOutput(lastCommitRaw)[0];
-  const existsLocally = fs.existsSync(fileName);
+  const absoluteFileName = fileName.startsWith(gitRoot)
+    ? fileName
+    : path.resolve(gitRoot, fileName);
+  const existsLocally = fs.existsSync(absoluteFileName);
   const hasChanges = existsLocally && hasUncommitedChanges(gitRoot, fileName);
   return {
     gitRoot,

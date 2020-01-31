@@ -69,6 +69,7 @@
     "eslint-plugin-jsx-a11y": "6.1.1",
     "eslint-plugin-react": "7.11.1",
     "jest": "25.1.0",
+    "lodash": "4.17.15",
     "prettier": "1.14.3",
     "regenerator-runtime": "0.12.1",
     "ts-jest": "22.0.1",
