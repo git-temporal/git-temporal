@@ -18,13 +18,9 @@ npm install --save-dev @babel/cli \
 @babel/register \
 @types/node \
 babel-eslint \
-babel-plugin-istanbul \
 babel-plugin-module-resolver \
 bumble-util \
-chai \
 cross-env \
-mocha \
-nyc \
 prettier \
 regenerator-runtime \
 ts-node \
