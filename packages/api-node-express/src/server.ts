@@ -23,7 +23,9 @@ app.get('/git-temporal/history', serveHistory);
 app.get('/git-temporal/diff', serveDiff);
 app.get('/git-temporal/commitRange', serveCommitRange);
 
-app.listen(port, () => log(`API server listening on port ${port}!`));
+const server = app.listen(port, () =>
+  log(`API server listening on port ${port}!`)
+);
 
 function standardHeaders(_req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -33,3 +35,5 @@ function standardHeaders(_req, res, next) {
   );
   next();
 }
+
+export default server;
