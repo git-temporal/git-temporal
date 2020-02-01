@@ -1,7 +1,7 @@
 /* eslint-disable */
 var react = require('react');
 var reactDom = require('react-dom');
-var GTR = require('app/index');
+var GTR = require('app/Index');
 
 const element = document.getElementById('gitTemporal');
 const currentPath = element.getAttribute('data-current-path');
