@@ -34,7 +34,7 @@
     "publish:git-log-scraper": "cd packages/git-log-scraper && npm publish",
     "publish:git-temporal-react": "cd packages/git-temporal-react && npm publish",
     "publish:vscode": "cd packages/git-temporal-vscode && npm install && vsce publish",
-    "test": "npx jest packages/git-log-scraper/src",
+    "test": "npx jest",
     "version": "npx lerna version"
   },
   "devDependencies": {

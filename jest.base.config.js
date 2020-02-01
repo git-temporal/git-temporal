@@ -19,8 +19,12 @@ module.exports = {
   setupFiles: [path.join(__dirname, 'config', 'jest.setup.js')],
   // setupFiles: ['./config/jest.setup.js', './config/polyfills.js'],
   // snapshotSerializers: ['enzyme-to-json/serializer'],
-
-  testPathIgnorePatterns: ['/test/repos'],
+  testPathIgnorePatterns: [
+    '/test/repos/',
+    '/test/exhaustive/',
+    '/lib/',
+    '/node_modules',
+  ],
   testRegex: '.*(test|spec)\\.(tsx|ts|js|jsx)$',
   testURL: 'http://localhost',
 
@@ -37,7 +41,7 @@ module.exports = {
   globals: {
     'ts-jest': {
       enableTsDiagnostics: false,
-      tsConfigFile: '../../tsconfig.json',
+      tsConfigFile: 'tsconfig.json',
     },
   },
 };
