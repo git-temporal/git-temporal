@@ -22,6 +22,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      # TODO: date times in snapshots are flawed.  As soon as the first contributor
+      #       from another timezone updates snapshots - boom fail
+      # need to set the timezone so tests with datetimes match snapshots
       - run: timedatectl
       - run: sudo timedatectl set-timezone America/Los_Angeles
       - run: npm install
