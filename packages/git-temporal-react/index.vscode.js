@@ -8,7 +8,7 @@ const currentPath = element.getAttribute('data-current-path');
 window.IS_VSCODE_WEBVIEW = 1;
 window.GTDEBUG = 1;
 
-var GTR = require('./src/app/index');
+var GTR = require('./src/app/index.tsx');
 
 console.log(
   `Attempting to render,

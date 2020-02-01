@@ -25,6 +25,8 @@
     "build:git-temporal-react": "cd packages/git-temporal-react && npm run build",
     "build:git-temporal-vscode": "cd packages/git-temporal-vscode && npm run build",
     "changelog": "cross-env node scripts/updateChangelog.js",
+    "clean": "npm run clean:node_modules",
+    "clean:node_modules": "npx lerna exec -- rm -Rf node_modules && rm -Rf node_modules/",
     "publish": "npm run publish:logger && npm run publish:commons && npm run publish:git-diff-scraper && npm run publish:git-log-scraper && npm run publish:git-temporal-react",
     "publish:commons": "cd packages/commons && npm publish",
     "publish:logger": "cd packages/logger && npm publish",
