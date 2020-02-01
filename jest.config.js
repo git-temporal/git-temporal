@@ -12,6 +12,7 @@ module.exports = Object.assign({}, baseConfig, {
   projects: [
       '<rootDir>/packages/git-log-scraper/jest.config.js',
       '<rootDir>/packages/git-diff-scraper/jest.config.js',
+      '<rootDir>/packages/git-temporal-react/jest.config.js',
   ],
 
   setupFiles: ['./config/jest.setup.js'],
