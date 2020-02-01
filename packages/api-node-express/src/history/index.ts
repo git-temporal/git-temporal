@@ -1,11 +1,11 @@
 import { safelyParseInt } from '@git-temporal/commons';
-import { log } from 'common/logger';
 import {
   getCommitHistory,
   getCommitRange,
 } from '@git-temporal/git-log-scraper';
 
-import { timeThis } from '../common/timeThis';
+import { log } from 'common/logger';
+import { timeThis } from 'common/timeThis';
 
 export function serveHistory(req, res) {
   const requestPath = req.query.path || '.';

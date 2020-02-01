@@ -1,0 +1,35 @@
+name: Node.js CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.0.0
+        with:
+          # Whether to execute `git clean -ffdx && git reset --hard HEAD` before fetching
+          clean: false
+          # Number of commits to fetch. 0 indicates all history.
+          fetch-depth: 0
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      # TODO: date times in snapshots are flawed.  As soon as the first contributor
+      #       from another timezone updates snapshots - boom fail
+      # need to set the timezone so tests with datetimes match snapshots
+      - run: timedatectl
+      - run: sudo timedatectl set-timezone America/Los_Angeles
+      - run: npm install
+      - run: npx lerna bootstrap
+      - run: npm run build --if-present
+      - run: npm run test:coverage
+        env:
+          CI: true

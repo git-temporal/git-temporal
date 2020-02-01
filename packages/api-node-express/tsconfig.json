@@ -2,7 +2,8 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "./lib",
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "types": ["node", "jest", "express"]
   },
-  "include": ["src/**/*.*"]
+  "include": ["src/**/*"]
 }

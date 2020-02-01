@@ -23,7 +23,6 @@ export interface AuthorCardProps {
 }
 
 const menuItemStyle = {
-  fontSize: 'initial',
   display: 'flex',
   padding: 10,
   width: '100%',

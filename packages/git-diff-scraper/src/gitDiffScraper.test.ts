@@ -1,4 +1,5 @@
 import * as path from 'path';
+import * as _ from 'underscore';
 
 import { getDiff } from './gitDiffScraper';
 import { findGitRoot, execSync } from '@git-temporal/commons';
@@ -38,7 +39,7 @@ describe('git-diff-scraper', () => {
       firstRootCommitHashes[1],
       firstRootCommitHashes[8]
     );
-    expect(diff).toMatchSnapshot();
+    expectDiffToMatchSnapshot(diff);
     expect(diff.isDirectory).toEqual(true);
     expect(diff.leftFileContents).toBeFalsy();
     expect(diff.leftFileContents).toBeFalsy();
@@ -52,7 +53,7 @@ describe('git-diff-scraper', () => {
       firstFileCommitHashes[1],
       firstFileCommitHashes[8]
     );
-    expect(diff).toMatchSnapshot();
+    expectDiffToMatchSnapshot(diff);
     expect(diff.isDirectory).toEqual(false);
     expect(diff.leftFileContents).toBeTruthy();
     expect(diff.leftFileContents).toBeTruthy();
@@ -61,6 +62,12 @@ describe('git-diff-scraper', () => {
 
   // it('should match snapshot from directory diff ');
 });
+
+function expectDiffToMatchSnapshot(diff) {
+  // path is absolute and will differ from machine to machine
+  const comparableDiff = _.omit(diff, ['path']);
+  expect(comparableDiff).toMatchSnapshot();
+}
 
 function getFirstCommitHashes(dir) {
   return execSync(

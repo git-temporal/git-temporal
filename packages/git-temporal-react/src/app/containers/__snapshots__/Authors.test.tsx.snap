@@ -107,7 +107,7 @@ exports[`containers/Authors when rendered mock authors and stats should match sn
             style="display: flex; flex-direction: row;"
           >
             <div
-              style="font-size: initial; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
+              style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
             >
               <div
                 style="width: 75px; height: 75px; display: inline-block;"
@@ -194,7 +194,7 @@ exports[`containers/Authors when rendered mock authors and stats should match sn
             style="display: flex; flex-direction: row;"
           >
             <div
-              style="font-size: initial; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
+              style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
             >
               <div
                 style="width: 75px; height: 75px; display: inline-block;"
@@ -281,7 +281,7 @@ exports[`containers/Authors when rendered mock authors and stats should match sn
             style="display: flex; flex-direction: row;"
           >
             <div
-              style="font-size: initial; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
+              style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
             >
               <div
                 style="width: 75px; height: 75px; display: inline-block;"
@@ -368,7 +368,7 @@ exports[`containers/Authors when rendered mock authors and stats should match sn
             style="display: flex; flex-direction: row;"
           >
             <div
-              style="font-size: initial; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
+              style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
             >
               <div
                 style="width: 75px; height: 75px; display: inline-block;"
@@ -455,7 +455,7 @@ exports[`containers/Authors when rendered mock authors and stats should match sn
             style="display: flex; flex-direction: row;"
           >
             <div
-              style="font-size: initial; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
+              style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
             >
               <div
                 style="width: 75px; height: 75px; display: inline-block;"
@@ -542,7 +542,7 @@ exports[`containers/Authors when rendered mock authors and stats should match sn
             style="display: flex; flex-direction: row;"
           >
             <div
-              style="font-size: initial; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
+              style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
             >
               <div
                 style="width: 75px; height: 75px; display: inline-block;"
@@ -629,7 +629,7 @@ exports[`containers/Authors when rendered mock authors and stats should match sn
             style="display: flex; flex-direction: row;"
           >
             <div
-              style="font-size: initial; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
+              style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 10px; border: 1px solid transparent; display: flex; width: 100%;"
             >
               <div
                 style="width: 75px; height: 75px; display: inline-block;"

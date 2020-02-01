@@ -14,7 +14,6 @@ exports[`components/AuthorCard when rendered with required props it should match
     style={
       Object {
         "display": "flex",
-        "fontSize": "initial",
         "padding": 10,
         "width": "100%",
       }

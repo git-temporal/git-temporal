@@ -23,6 +23,6 @@
     "suppressImplicitAnyIndexErrors": true,
     "target": "es6"
   },
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "**/*.test.*"],
   "include": ["**/*.ts"]
 }
