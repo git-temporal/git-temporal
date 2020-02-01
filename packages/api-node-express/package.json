@@ -1,7 +1,7 @@
 {
   "name": "@git-temporal/api-node-express",
   "private": true,
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "This is an api to return git log information in JSON.",
   "main": "index.js",
   "scripts": {
@@ -36,10 +36,10 @@
   },
   "homepage": "https://github.com/git-temporal/git-temporal#readme",
   "dependencies": {
-    "@git-temporal/commons": "0.5.1",
-    "@git-temporal/git-diff-scraper": "0.5.1",
-    "@git-temporal/git-log-scraper": "0.5.1",
-    "@git-temporal/logger": "0.5.1",
+    "@git-temporal/commons": "^0.5.2",
+    "@git-temporal/git-diff-scraper": "^0.5.2",
+    "@git-temporal/git-log-scraper": "^0.5.2",
+    "@git-temporal/logger": "^0.5.2",
     "express": "4.16.3",
     "morgan": "1.9.1"
   },
