@@ -6,6 +6,7 @@
     - [Start the API service](#start-the-api-service)
     - [Start the React hot server](#start-the-react-hot-server)
     - [Run the development version of VSCode plugin](#run-the-development-version-of-vscode-plugin)
+  - [Tests and testing](#tests-and-testing)
   - [Updating External Dependencies](#updating-external-dependencies)
   - [Publishing Everything](#publishing-everything)
 
@@ -74,6 +75,8 @@ That's pretty much it. If everything went as expected you should be looking at a
 
 ### Run the development version of VSCode plugin
 
+Debugging from VSCode development env is difficult at best. You will mostly want to do your developing using the [React hot Server](#start-the-react-hot-server)
+
 - From monorepo root, run
 
 ```
@@ -89,6 +92,16 @@ Or load the monorepo root dir as a project in VSCode through their UI.
 - From the explorer window, right click a file or directory and select
 
 See https://github.com/git-temporal/git-temporal/blob/master/packages/git-temporal-vscode/CONTRIBUTING.md for more information about building and debugging the vscode extension.
+
+## Tests and testing
+
+git-temporal uses [Jest](https://jestjs.io/) exclusively for automated testing.
+
+Tests can be run from the individual package directories or from the monorepo root directory. The monorepo root tests run on pull request by the CI service. From the root, run the important package tests,
+
+```
+npm run test
+```
 
 ## Updating External Dependencies
 
