@@ -35,6 +35,7 @@
     "publish:git-temporal-react": "cd packages/git-temporal-react && npm publish",
     "publish:vscode": "cd packages/git-temporal-vscode && npm install && vsce publish",
     "test": "npx jest",
+    "test:coverage": "npx jest --coverage",
     "version": "npx lerna version"
   },
   "devDependencies": {
