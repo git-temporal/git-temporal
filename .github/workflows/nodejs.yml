@@ -17,7 +17,7 @@ jobs:
           # Whether to execute `git clean -ffdx && git reset --hard HEAD` before fetching
           clean: false
           # Number of commits to fetch. 0 indicates all history.
-          fetch-depth: 100
+          fetch-depth: 0
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
