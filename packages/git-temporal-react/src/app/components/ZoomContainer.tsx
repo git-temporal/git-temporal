@@ -55,7 +55,12 @@ export class ZoomContainer extends React.Component<
     if (prevState.zoom !== this.state.zoom && this.props.onZoom) {
       this.props.onZoom(this.state.zoom);
     }
-    if (prevProps.customZooms !== this.props.customZooms) {
+    // if we are set to a custom zoom and custom zooms changed...
+    if (
+      !availableZooms.includes(this.state.zoom) &&
+      JSON.stringify(prevProps.customZooms) !==
+        JSON.stringify(this.props.customZooms)
+    ) {
       this.setState({ zoom: initialState.zoom });
     }
   }
