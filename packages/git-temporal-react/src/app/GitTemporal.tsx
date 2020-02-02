@@ -57,9 +57,9 @@ export class GitTemporal extends Component<
     debug('unmounting GitTemporal');
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.path !== this.props.path) {
-      const { dispatch, path } = nextProps;
+  componentDidUpdate(prevProps) {
+    const { dispatch, path } = this.props;
+    if (prevProps.path !== path) {
       dispatch(selectPath(path));
     }
   }
