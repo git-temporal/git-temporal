@@ -1,13 +1,14 @@
 /* eslint-disable */
 var react = require('react');
 var reactDom = require('react-dom');
-var GTR = require('app/Index');
 
 const element = document.getElementById('gitTemporal');
 const currentPath = element.getAttribute('data-current-path');
 
 window.IS_VSCODE_WEBVIEW = 1;
 window.GTDEBUG = 1;
+
+var GTR = require('app/Index');
 
 console.log(
   `Attempting to render,
