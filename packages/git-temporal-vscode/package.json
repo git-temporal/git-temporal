@@ -3,14 +3,14 @@
   "displayName": "Git Temporal",
   "description": "Git Temporal - all about time and time travel",
   "icon": "images/gticon.png",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "publisher": "bee",
   "galleryBanner": {
     "color": "#1b2b34",
     "theme": "dark"
   },
   "engines": {
-    "vscode": "1.25.0"
+    "vscode": "^1.25.0"
   },
   "repository": "https://github.com/git-temporal/git-temporal",
   "keywords": [
@@ -54,10 +54,10 @@
     "access": "public"
   },
   "dependencies": {
-    "@git-temporal/git-diff-scraper": "0.5.1",
-    "@git-temporal/git-log-scraper": "0.5.1",
-    "@git-temporal/git-temporal-react": "0.5.1",
-    "@git-temporal/logger": "0.5.1",
+    "@git-temporal/git-diff-scraper": "^0.5.2",
+    "@git-temporal/git-log-scraper": "^0.5.2",
+    "@git-temporal/git-temporal-react": "^0.5.2",
+    "@git-temporal/logger": "^0.5.2",
     "react": "16.12.0",
     "react-dom": "16.12.0"
   },

@@ -1,3 +1,20 @@
+## 0.5.2 (2020-02-01)
+
+This is an internal version bump with automated testing enhancements only.
+
+**NOTE**: no update published to the VSCode extension for this version bump.
+
+#### :rocket: Enhancement
+
+- `git-diff-scraper`, `git-log-scraper`, `git-temporal-react`
+  - [#33](https://github.com/git-temporal/git-temporal/pull/33) Convert git-log-scraper and git-diff-scraper to Jest ([@littlebee](https://github.com/littlebee))
+- `git-temporal-react`
+  - [#29](https://github.com/git-temporal/git-temporal/pull/29) Fix unit tests in git-temporal-react ([@littlebee](https://github.com/littlebee))
+
+#### Committers: 1
+
+- Bee Wilkerson ([@littlebee](https://github.com/littlebee))
+
 ## 0.5.1 (2020-01-19)
 
 #### :rocket: Enhancement
