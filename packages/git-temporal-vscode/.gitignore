@@ -1,0 +1,36 @@
+# OS Files
+*.swp
+*~
+._*
+.DS_Store
+*.ipr
+*.iml
+*.iws
+*.vsix
+.idea/
+lerna-debug.log
+
+# bye Felicia
+package-lock.json
+
+# Build directory
+**/lib/
+**/dist/
+**/out/
+**/coverage/
+**/test/repos
+
+# Node modules
+node_modules
+
+# NPM
+npm-debug.log
+
+# TypeScript
+.tscache
+tscommand-*
+
+# test output
+mochawesome-report/
+.vscode-test/
+

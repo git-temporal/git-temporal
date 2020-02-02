@@ -11,6 +11,22 @@
       "runtimeExecutable": "${execPath}",
       "args": ["--extensionDevelopmentPath=${workspaceFolder}"],
       "outFiles": ["${workspaceFolder}/out/**/*.js"]
+    },
+    {
+      "name": "Test",
+      //"outputCapture": "std",
+      "type": "extensionHost",
+      "request": "launch",
+      "runtimeExecutable": "${execPath}",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}",
+        "--extensionTestsPath=${workspaceFolder}/test/jest-test-runner"
+      ],
+      "stopOnEntry": false,
+      "sourceMaps": true,
+      "smartStep": true,
+      "skipFiles": ["<node_internals>/**/*.js"],
+      "outFiles": ["${workspaceFolder}/out/**/*.js"]
     }
   ]
 }

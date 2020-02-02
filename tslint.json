@@ -31,6 +31,8 @@
     "expect": true,
     "HTMLElement": true,
     "it": true,
+    "jest": true,
+    "suite": true,
     "test": true,
     "window": true
   }
