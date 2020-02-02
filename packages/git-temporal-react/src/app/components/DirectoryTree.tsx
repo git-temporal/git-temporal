@@ -60,8 +60,9 @@ export class DirectoryTree extends React.Component<DirectoryTreeProps> {
 
   renderTree(treeNode, key = 0) {
     let renderedTreeNodes = [];
-    const index = 0;
+    let index = 0;
     for (const nodeName in treeNode) {
+      index += 1;
       const childNode = treeNode[nodeName];
       const isExpanded =
         this.props.expandedNodes.includes(childNode.fullPath) ||

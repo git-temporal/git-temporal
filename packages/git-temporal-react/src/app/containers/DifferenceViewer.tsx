@@ -67,8 +67,7 @@ export const DifferenceViewer: React.FC = (): React.ReactElement => {
     </div>
   );
 
-  function onFileClick(relativePath) {
-    const fullPath = path.join(selectedPath, relativePath);
+  function onFileClick(fullPath) {
     dispatch(selectPath(fullPath));
   }
 };
