@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`containers/Commits when rendered mock commits and stats should match snapshot 1`] = `
+exports[`containers/Commits when rendered for directory should match snapshot 1`] = `
 <div>
   <div
     style="display: flex; flex-direction: column; flex-grow: 0; flex-shrink: 0; position: relative; height: 30px; transition: all .5s ease;"
