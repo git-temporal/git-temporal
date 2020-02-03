@@ -9,7 +9,6 @@ exports[`components/TimeplotPopup when rendered with all of the things it should
     Object {
       "border": "solid 4px lightskyblue",
       "bottom": 130,
-      "color": "#333333",
       "fontSize": 12,
       "fontWeight": "normal",
       "left": 0,
@@ -36,7 +35,6 @@ exports[`components/TimeplotPopup when rendered with all of the things it should
     <div
       style={
         Object {
-          "color": "#333333",
           "fontSize": 14,
           "fontWeight": "normal",
           "lineHeight": 1.35,

@@ -42,7 +42,6 @@ exports[`components/ZoomContainer when rendered it should match snapshot 1`] = `
     <label
       style={
         Object {
-          "color": "#333333",
           "fontSize": 12,
           "fontWeight": "normal",
           "lineHeight": 1.35,

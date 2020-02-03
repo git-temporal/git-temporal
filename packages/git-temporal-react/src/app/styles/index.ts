@@ -30,6 +30,7 @@ const styleVars = {
     rightRevColor: 'green',
     selectable: 'lightskyblue',
     selected: 'lightskyblue',
+    selectedText: '#001883',
     text: '#333333',
   },
   margins: {
@@ -110,7 +111,6 @@ const globalStyles = {
     fontSize: 12,
     lineHeight: 1.35,
     fontWeight: 'normal',
-    color: '@colors.text',
   },
   bigText: {
     _extends: 'normalText',
@@ -180,6 +180,7 @@ const globalStyles = {
   selected: {
     _extends: 'selectable',
     background: '@colors.selected',
+    color: '@colors.selectedText',
   },
   link: {
     color: '@colors.linkText',

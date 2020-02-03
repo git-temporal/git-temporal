@@ -17,6 +17,7 @@ exports[`components/ToggleButton when rendered with isSelected=true it should ma
       "background": "lightskyblue",
       "border": "1px solid lightskyblue",
       "borderRadius": 3,
+      "color": "#001883",
       "cursor": "pointer",
       "userSelect": "none",
     }

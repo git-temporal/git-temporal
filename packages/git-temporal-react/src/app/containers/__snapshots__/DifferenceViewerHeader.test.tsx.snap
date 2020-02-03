@@ -7,13 +7,13 @@ exports[`containers/DifferenceViewerHeader when rendered with mock redux store s
       style="display: flex; flex-direction: row; flex-grow: 0; flex-shrink: 0; background: whitesmoke; color: rgb(51, 51, 51);"
     >
       <div
-        style="display: flex; flex-direction: row; font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); align-self: baseline; flex-grow: 1; text-align: center;"
+        style="display: flex; flex-direction: row; font-size: 12px; line-height: 1.35; font-weight: normal; align-self: baseline; flex-grow: 1; text-align: center;"
       >
         <div
           style="flex-grow: 1;"
         />
         <div
-          style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent; display: flex; flex-direction: row; margin-bottom: 5px;"
+          style="font-size: 12px; line-height: 1.35; font-weight: normal; padding: 5px; border: 1px solid transparent; display: flex; flex-direction: row; color: rgb(51, 51, 51); margin-bottom: 5px;"
         >
           <svg
             height="16"
@@ -51,7 +51,7 @@ exports[`containers/DifferenceViewerHeader when rendered with mock redux store s
           </div>
         </div>
         <div
-          style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent; display: flex; flex-direction: row; margin-bottom: 5px;"
+          style="font-size: 12px; line-height: 1.35; font-weight: normal; padding: 5px; border: 1px solid transparent; display: flex; flex-direction: row; color: rgb(51, 51, 51); margin-bottom: 5px;"
         >
           <svg
             height="16"
@@ -71,13 +71,13 @@ exports[`containers/DifferenceViewerHeader when rendered with mock redux store s
         />
       </div>
       <div
-        style="display: flex; flex-direction: row; font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); align-self: baseline; flex-grow: 1; text-align: center;"
+        style="display: flex; flex-direction: row; font-size: 12px; line-height: 1.35; font-weight: normal; align-self: baseline; flex-grow: 1; text-align: center;"
       >
         <div
           style="flex-grow: 1;"
         />
         <div
-          style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent; display: flex; flex-direction: row; margin-bottom: 5px;"
+          style="font-size: 12px; line-height: 1.35; font-weight: normal; padding: 5px; border: 1px solid transparent; display: flex; flex-direction: row; color: rgb(51, 51, 51); margin-bottom: 5px;"
         >
           <svg
             height="16"
@@ -116,7 +116,7 @@ exports[`containers/DifferenceViewerHeader when rendered with mock redux store s
           </div>
         </div>
         <div
-          style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent; display: flex; flex-direction: row; margin-bottom: 5px;"
+          style="font-size: 12px; line-height: 1.35; font-weight: normal; padding: 5px; border: 1px solid transparent; display: flex; flex-direction: row; color: rgb(51, 51, 51); margin-bottom: 5px;"
         >
           <svg
             height="16"

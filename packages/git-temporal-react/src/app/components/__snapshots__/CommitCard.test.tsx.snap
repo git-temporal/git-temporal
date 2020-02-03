@@ -21,7 +21,6 @@ exports[`components/CommitCard when rendered with required props it should match
     <div
       style={
         Object {
-          "color": "#333333",
           "display": "flex",
           "flexDirection": "row",
           "fontSize": 11,
@@ -58,7 +57,6 @@ exports[`components/CommitCard when rendered with required props it should match
     <div
       style={
         Object {
-          "color": "#333333",
           "display": "block",
           "fontSize": 14,
           "fontWeight": "normal",
@@ -98,7 +96,6 @@ exports[`components/CommitCard when rendered with required props it should match
     <div
       style={
         Object {
-          "color": "#333333",
           "display": "block",
           "fontSize": 12,
           "fontWeight": "normal",
