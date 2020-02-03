@@ -5,7 +5,6 @@ exports[`components/StackedLabelHeader when rendered with required props it shou
   label="This is the Label"
   labelStyle={
     Object {
-      "color": "#333333",
       "fontSize": 14,
       "fontWeight": "bold",
       "lineHeight": 1.35,
@@ -17,7 +16,6 @@ exports[`components/StackedLabelHeader when rendered with required props it shou
   <div
     style={
       Object {
-        "color": "#333333",
         "fontSize": 18,
         "fontWeight": "bold",
         "lineHeight": 1.35,

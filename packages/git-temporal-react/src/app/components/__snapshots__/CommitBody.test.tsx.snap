@@ -5,7 +5,6 @@ exports[`components/CommitBody when rendered with text containing <br>s it shoul
   style={
     Object {
       "boxShadow": "rgba(245, 245, 245, 0.5) 0px -34px 11px -18px inset",
-      "color": "#333333",
       "display": "block",
       "fontSize": 12,
       "fontWeight": "normal",

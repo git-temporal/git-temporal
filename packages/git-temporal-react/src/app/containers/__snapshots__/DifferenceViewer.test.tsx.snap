@@ -13,13 +13,13 @@ exports[`containers/DifferenceViewer when rendered with mock redux store should 
           style="display: flex; flex-direction: row; flex-grow: 0; flex-shrink: 0; background: whitesmoke; color: rgb(51, 51, 51);"
         >
           <div
-            style="display: flex; flex-direction: row; font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); align-self: baseline; flex-grow: 1; text-align: center;"
+            style="display: flex; flex-direction: row; font-size: 12px; line-height: 1.35; font-weight: normal; align-self: baseline; flex-grow: 1; text-align: center;"
           >
             <div
               style="flex-grow: 1;"
             />
             <div
-              style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent; display: flex; flex-direction: row; margin-bottom: 5px;"
+              style="font-size: 12px; line-height: 1.35; font-weight: normal; padding: 5px; border: 1px solid transparent; display: flex; flex-direction: row; color: rgb(51, 51, 51); margin-bottom: 5px;"
             >
               <svg
                 height="16"
@@ -57,7 +57,7 @@ exports[`containers/DifferenceViewer when rendered with mock redux store should 
               </div>
             </div>
             <div
-              style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent; display: flex; flex-direction: row; margin-bottom: 5px;"
+              style="font-size: 12px; line-height: 1.35; font-weight: normal; padding: 5px; border: 1px solid transparent; display: flex; flex-direction: row; color: rgb(51, 51, 51); margin-bottom: 5px;"
             >
               <svg
                 height="16"
@@ -77,13 +77,13 @@ exports[`containers/DifferenceViewer when rendered with mock redux store should 
             />
           </div>
           <div
-            style="display: flex; flex-direction: row; font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); align-self: baseline; flex-grow: 1; text-align: center;"
+            style="display: flex; flex-direction: row; font-size: 12px; line-height: 1.35; font-weight: normal; align-self: baseline; flex-grow: 1; text-align: center;"
           >
             <div
               style="flex-grow: 1;"
             />
             <div
-              style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent; display: flex; flex-direction: row; margin-bottom: 5px;"
+              style="font-size: 12px; line-height: 1.35; font-weight: normal; padding: 5px; border: 1px solid transparent; display: flex; flex-direction: row; color: rgb(51, 51, 51); margin-bottom: 5px;"
             >
               <svg
                 height="16"
@@ -122,7 +122,7 @@ exports[`containers/DifferenceViewer when rendered with mock redux store should 
               </div>
             </div>
             <div
-              style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent; display: flex; flex-direction: row; margin-bottom: 5px;"
+              style="font-size: 12px; line-height: 1.35; font-weight: normal; padding: 5px; border: 1px solid transparent; display: flex; flex-direction: row; color: rgb(51, 51, 51); margin-bottom: 5px;"
             >
               <svg
                 height="16"
@@ -154,7 +154,7 @@ exports[`containers/DifferenceViewer when rendered with mock redux store should 
             >
               <div
                 data-testid="directoryTreeNode"
-                style="font-size: 12px; line-height: 1.35; font-weight: normal; color: orange; margin-left: 10px;"
+                style="font-size: 12px; line-height: 1.35; font-weight: normal; margin-left: 10px; color: orange;"
               >
                 <svg
                   height="14"
@@ -177,7 +177,7 @@ exports[`containers/DifferenceViewer when rendered with mock redux store should 
                 </span>
                     
                 <div
-                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); float: right;"
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; float: right;"
                 >
                   <span>
                     20
@@ -190,7 +190,7 @@ exports[`containers/DifferenceViewer when rendered with mock redux store should 
               >
                 <div
                   data-testid="directoryTreeNode"
-                  style="font-size: 12px; line-height: 1.35; font-weight: normal; color: orange; margin-left: 10px;"
+                  style="font-size: 12px; line-height: 1.35; font-weight: normal; margin-left: 10px; color: orange;"
                 >
                   <svg
                     height="14"
@@ -213,7 +213,7 @@ exports[`containers/DifferenceViewer when rendered with mock redux store should 
                   </span>
                       
                   <div
-                    style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); float: right;"
+                    style="font-size: 11px; line-height: 1.35; font-weight: normal; float: right;"
                   >
                     <span>
                       20
@@ -226,7 +226,7 @@ exports[`containers/DifferenceViewer when rendered with mock redux store should 
                 >
                   <div
                     data-testid="directoryTreeNode"
-                    style="font-size: 12px; line-height: 1.35; font-weight: normal; color: orange; margin-left: 10px;"
+                    style="font-size: 12px; line-height: 1.35; font-weight: normal; margin-left: 10px; color: orange;"
                   >
                     <svg
                       height="14"
@@ -242,14 +242,14 @@ exports[`containers/DifferenceViewer when rendered with mock redux store should 
                     </svg>
                         
                     <span
-                      style="font-size: 12px; line-height: 1.35; font-weight: normal; color: orange; text-decoration: underline; cursor: pointer;"
+                      style="font-size: 12px; line-height: 1.35; font-weight: normal; text-decoration: underline; cursor: pointer; color: orange;"
                       title="click to filter"
                     >
                       template.json
                     </span>
                         
                     <div
-                      style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); float: right;"
+                      style="font-size: 11px; line-height: 1.35; font-weight: normal; float: right;"
                     >
                       <span>
                         20
@@ -273,7 +273,7 @@ exports[`containers/DifferenceViewer when rendered with mock redux store should 
             >
               <div
                 data-testid="directoryTreeNode"
-                style="font-size: 12px; line-height: 1.35; font-weight: normal; color: orange; margin-left: 10px;"
+                style="font-size: 12px; line-height: 1.35; font-weight: normal; margin-left: 10px; color: orange;"
               >
                 <svg
                   height="14"
@@ -296,7 +296,7 @@ exports[`containers/DifferenceViewer when rendered with mock redux store should 
                 </span>
                     
                 <div
-                  style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); float: right;"
+                  style="font-size: 11px; line-height: 1.35; font-weight: normal; float: right;"
                 >
                   <span>
                     20
@@ -309,7 +309,7 @@ exports[`containers/DifferenceViewer when rendered with mock redux store should 
               >
                 <div
                   data-testid="directoryTreeNode"
-                  style="font-size: 12px; line-height: 1.35; font-weight: normal; color: orange; margin-left: 10px;"
+                  style="font-size: 12px; line-height: 1.35; font-weight: normal; margin-left: 10px; color: orange;"
                 >
                   <svg
                     height="14"
@@ -332,7 +332,7 @@ exports[`containers/DifferenceViewer when rendered with mock redux store should 
                   </span>
                       
                   <div
-                    style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); float: right;"
+                    style="font-size: 11px; line-height: 1.35; font-weight: normal; float: right;"
                   >
                     <span>
                       20
@@ -345,7 +345,7 @@ exports[`containers/DifferenceViewer when rendered with mock redux store should 
                 >
                   <div
                     data-testid="directoryTreeNode"
-                    style="font-size: 12px; line-height: 1.35; font-weight: normal; color: orange; margin-left: 10px;"
+                    style="font-size: 12px; line-height: 1.35; font-weight: normal; margin-left: 10px; color: orange;"
                   >
                     <svg
                       height="14"
@@ -361,14 +361,14 @@ exports[`containers/DifferenceViewer when rendered with mock redux store should 
                     </svg>
                         
                     <span
-                      style="font-size: 12px; line-height: 1.35; font-weight: normal; color: orange; text-decoration: underline; cursor: pointer;"
+                      style="font-size: 12px; line-height: 1.35; font-weight: normal; text-decoration: underline; cursor: pointer; color: orange;"
                       title="click to filter"
                     >
                       template.json
                     </span>
                         
                     <div
-                      style="font-size: 11px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); float: right;"
+                      style="font-size: 11px; line-height: 1.35; font-weight: normal; float: right;"
                     >
                       <span>
                         20

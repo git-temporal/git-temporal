@@ -4,7 +4,6 @@ exports[`components/AddedDeleted when rendered epoch time 1539369263 (Fri, 12 Oc
 <span
   style={
     Object {
-      "color": "#333333",
       "float": "right",
       "fontSize": 11,
       "fontWeight": "normal",

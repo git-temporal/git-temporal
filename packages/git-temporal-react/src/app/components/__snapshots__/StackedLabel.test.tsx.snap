@@ -16,7 +16,6 @@ exports[`components/StackedLabel when rendered with required props and then sett
       Object {
         "border": "1px solid lightskyblue",
         "borderRadius": 3,
-        "color": "#333333",
         "cursor": "pointer",
         "fontSize": 11,
         "fontWeight": "normal",
@@ -46,7 +45,6 @@ exports[`components/StackedLabel when rendered with required props and then sett
   <div
     style={
       Object {
-        "color": "#333333",
         "fontSize": 11,
         "fontWeight": "normal",
         "lineHeight": 1.35,
@@ -74,7 +72,6 @@ exports[`components/StackedLabel when rendered with required props it should mat
   <div
     style={
       Object {
-        "color": "#333333",
         "fontSize": 11,
         "fontWeight": "normal",
         "lineHeight": 1.35,

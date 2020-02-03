@@ -19,7 +19,6 @@ exports[`components/FileCard when rendered with required props it should match s
     maxCharacters={47}
     style={
       Object {
-        "color": "#333333",
         "display": "block",
         "fontSize": 14,
         "fontWeight": "normal",
@@ -35,7 +34,6 @@ exports[`components/FileCard when rendered with required props it should match s
   <div
     style={
       Object {
-        "color": "#333333",
         "fontSize": 12,
         "fontWeight": "normal",
         "lineHeight": 1.35,
