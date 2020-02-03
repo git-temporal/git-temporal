@@ -50,7 +50,6 @@ exports[`components/CommitCardFiles when rendered with files and expanded=true i
       maxCharacters={58}
       style={
         Object {
-          "color": "#333333",
           "fontSize": 11,
           "fontWeight": "normal",
           "lineHeight": 1.35,
@@ -75,7 +74,6 @@ exports[`components/CommitCardFiles when rendered with files and expanded=true i
       maxCharacters={58}
       style={
         Object {
-          "color": "#333333",
           "fontSize": 11,
           "fontWeight": "normal",
           "lineHeight": 1.35,
@@ -100,7 +98,6 @@ exports[`components/CommitCardFiles when rendered with files and expanded=true i
       maxCharacters={58}
       style={
         Object {
-          "color": "#333333",
           "fontSize": 11,
           "fontWeight": "normal",
           "lineHeight": 1.35,

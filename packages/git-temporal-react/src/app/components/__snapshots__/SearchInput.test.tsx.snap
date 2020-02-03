@@ -50,7 +50,6 @@ exports[`components/SearchInput when rendered with value it should match snapsho
     onClick={[MockFunction]}
     style={
       Object {
-        "color": "#333333",
         "cursor": "pointer",
         "flexGrow": 0,
         "fontSize": 11,

@@ -4,10 +4,10 @@ exports[`containers/AuthorsActionMenu when rendered with mock redux store it sho
 <body>
   <div>
     <div
-      style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); position: absolute; right: 10px; overflow: visible; height: 16px; width: 28px;"
+      style="font-size: 12px; line-height: 1.35; font-weight: normal; position: absolute; right: 10px; overflow: visible; height: 16px; width: 28px;"
     >
       <div
-        style="font-size: 18px; line-height: 1.35; font-weight: bold; color: rgb(51, 51, 51); height: 29px; width: 14px; margin: 0px; padding: 0px 5px;"
+        style="font-size: 18px; line-height: 1.35; font-weight: bold; height: 29px; width: 14px; margin: 0px; padding: 0px 5px;"
       >
         ...
       </div>
@@ -21,17 +21,17 @@ exports[`containers/AuthorsActionMenu when rendered with mock redux store it sho
           style="background: rgb(254, 254, 254); border-radius: 3px; color: rgb(51, 51, 51); margin-right: 0px; padding: 7px; position: absolute; z-index: 4; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) 0 6px 20px 0 rgba(0, 0, 0, 0.2); right: 2px; min-width: 180px; border: 2px solid lightskyblue; border-top-right-radius: 0px; display: none;"
         >
           <div
-            style="font-size: 14px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); margin-bottom: 7px; margin-right: 7px;"
+            style="font-size: 14px; line-height: 1.35; font-weight: normal; margin-bottom: 7px; margin-right: 7px;"
           >
             Sort by
           </div>
           <div
             data-testid="sortTime"
-            style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent;"
+            style="font-size: 12px; line-height: 1.35; font-weight: normal; padding: 5px; border: 1px solid transparent;"
           >
             <div>
               <div
-                style="border: 1px solid lightskyblue; border-radius: 7px; cursor: pointer; user-select: none; background: lightskyblue; display: inline-block; width: 15px; height: 15px; margin-right: 10px;"
+                style="border: 1px solid lightskyblue; border-radius: 7px; cursor: pointer; user-select: none; background: lightskyblue; color: rgb(0, 24, 131); display: inline-block; width: 15px; height: 15px; margin-right: 10px;"
               >
                  
               </div>
@@ -40,7 +40,7 @@ exports[`containers/AuthorsActionMenu when rendered with mock redux store it sho
           </div>
           <div
             data-testid="sortCommits"
-            style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent;"
+            style="font-size: 12px; line-height: 1.35; font-weight: normal; padding: 5px; border: 1px solid transparent;"
           >
             <div>
               <div
@@ -53,7 +53,7 @@ exports[`containers/AuthorsActionMenu when rendered with mock redux store it sho
           </div>
           <div
             data-testid="sortLines"
-            style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); padding: 5px; border: 1px solid transparent;"
+            style="font-size: 12px; line-height: 1.35; font-weight: normal; padding: 5px; border: 1px solid transparent;"
           >
             <div>
               <div

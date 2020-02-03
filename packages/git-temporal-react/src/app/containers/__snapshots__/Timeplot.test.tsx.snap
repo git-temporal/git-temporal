@@ -117,7 +117,7 @@ exports[`containers/Timeplot when rendered with mock redux store should match sn
               style="position: absolute; right: 18px; background: transparent; top: 3px; z-index: 1;"
             >
               <label
-                style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51);"
+                style="font-size: 12px; line-height: 1.35; font-weight: normal;"
               >
                 <select>
                   <option
@@ -155,7 +155,7 @@ exports[`containers/Timeplot when rendered with mock redux store should match sn
             </div>
           </div>
           <div
-            style="font-size: 12px; line-height: 1.35; font-weight: normal; color: rgb(51, 51, 51); width: 100%; text-align: center; padding-top: 3px; padding-bottom: 3px; position: absolute; top: 7px; text-shadow: 2px 2px #FEFEFE;"
+            style="font-size: 12px; line-height: 1.35; font-weight: normal; width: 100%; text-align: center; padding-top: 3px; padding-bottom: 3px; position: absolute; top: 7px; text-shadow: 2px 2px #FEFEFE;"
           >
             <span
               style="opacity: 0.8; background-color: rgb(254, 254, 254);"
