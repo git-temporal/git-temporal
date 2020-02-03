@@ -11,6 +11,7 @@ export interface MenuItemProps {
   style?: string | object;
   disabled?: boolean;
   selected?: boolean;
+  testId?: string;
 }
 const initialState = {
   isHovering: false,

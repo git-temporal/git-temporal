@@ -13,7 +13,6 @@ import {
   getOpenSidePanelGroup,
   getIsFileSelected,
 } from 'app/selectors/stateVars';
-import { style } from 'app/styles';
 import { ExtendingList } from 'app/components/ExtendingList';
 import { CommitCard } from 'app/components/CommitCard';
 import CommitsActionMenu from './CommitsActionMenu';

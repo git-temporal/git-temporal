@@ -65,6 +65,7 @@ export const CommitCard = (props: CommitCardProps): JSX.Element => {
   return (
     <div style={style(defaultCardStyle, props.style, outerOverrideStyle)}>
       <Selectable
+        testId="commit-card"
         onClick={evt => onClick && onClick(evt, commit, index)}
         onDoubleClick={evt =>
           onDoubleClick && onDoubleClick(evt, commit, index)

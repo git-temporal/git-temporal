@@ -270,7 +270,7 @@ export const ReduxStoreMock = {
       index: 7,
     },
   ],
-  highlightedCommitIds: '',
+  highlightedCommitIds: [],
   isFetching: false,
   totalCommits: 8,
   earliestCommitDate: 1571955461,
