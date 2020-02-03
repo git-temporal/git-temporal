@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { debug } from 'app/utilities/logger';
 
 import {
   highlightCommits,
@@ -12,6 +11,7 @@ import { getFilteredSortedCommits } from 'app/selectors/commits';
 import {
   getHighlightedCommitIds,
   getOpenSidePanelGroup,
+  getIsFileSelected,
 } from 'app/selectors/stateVars';
 import { style } from 'app/styles';
 import { ExtendingList } from 'app/components/ExtendingList';
@@ -25,6 +25,7 @@ export const Commits: React.FC = (): React.ReactElement => {
   const commits = useSelector(getFilteredSortedCommits);
   const highlightedCommitIds = useSelector(getHighlightedCommitIds);
   const openGroup = useSelector(getOpenSidePanelGroup);
+  const isFileSelected = useSelector(getIsFileSelected);
   const dispatch = useDispatch();
 
   const title = `${commits.length} Commits`;
@@ -66,7 +67,7 @@ export const Commits: React.FC = (): React.ReactElement => {
           isExpanded={isExpanded}
           onClick={onCommitCardClick}
           onFileClick={onFileClick}
-          hideFiles={false}
+          hideFiles={isFileSelected}
         />
       </div>
     );
