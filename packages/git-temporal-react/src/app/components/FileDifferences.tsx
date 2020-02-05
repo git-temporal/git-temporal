@@ -1,10 +1,11 @@
 import React from 'react';
-import { defer } from 'lodash';
+import { defer, debounce } from 'lodash';
 import { style, getStyleVar } from 'app/styles';
 import { editor } from 'monaco-editor';
 import { debug } from 'app/utilities/logger';
 
 export interface FileDifferencesProps {
+  selectedPath: string;
   rerenderRequestedAt: Date;
   leftFileContents: string;
   rightFileContents: string;
@@ -25,20 +26,28 @@ const editorStyle = {
 
 export class FileDifferences extends React.Component<FileDifferencesProps> {
   private monacoEditorElRef = React.createRef<HTMLDivElement>();
-  private navigator: any;
+  // private navigator: any;
+  private scrollTop: number = 0;
+  private debouncedHandleScroll: any;
 
   constructor(props: FileDifferencesProps) {
     super(props);
     this.renderMonacoEditor = this.renderMonacoEditor.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
+    this.debouncedHandleScroll = debounce(this.handleScroll, 400);
   }
 
   componentDidMount() {
+    this.scrollTop = 0;
     this.renderMonacoEditor();
     window && window.addEventListener('resize', this.renderMonacoEditor);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     defer(() => this.renderMonacoEditor());
+    if (prevProps.selectedPath !== this.props.selectedPath) {
+      this.scrollTop = 0;
+    }
   }
 
   render() {
@@ -74,16 +83,27 @@ export class FileDifferences extends React.Component<FileDifferencesProps> {
     editor.defineTheme('myTheme', this.getTheme());
     editor.setTheme('myTheme');
 
-    const diffEditor = editor.createDiffEditor(el, { readOnly: true });
+    const diffEditor = editor.createDiffEditor(el, {
+      readOnly: true,
+    });
     diffEditor.setModel({
       original: originalModel,
       modified: modifiedModel,
     });
 
-    this.navigator = editor.createDiffNavigator(diffEditor, {
-      followsCaret: true, // resets the navigator state when the user selects something in the editor
-      ignoreCharChanges: true, // jump from line to line
-    });
+    // this.navigator = editor.createDiffNavigator(diffEditor, {
+    //   // resets the navigator state when the user selects something in the editor
+    //   followsCaret: false,
+    //   ignoreCharChanges: true, // jump from line to line
+    // });
+
+    const innerEditor = diffEditor.getOriginalEditor();
+    innerEditor.setScrollTop(this.scrollTop);
+    innerEditor.onDidScrollChange(this.handleScroll);
+  }
+
+  handleScroll(evt: any) {
+    this.scrollTop = evt.scrollTop;
   }
 
   getTheme() {
@@ -95,15 +115,14 @@ export class FileDifferences extends React.Component<FileDifferencesProps> {
       rules: [{ background, foreground }],
       colors: {
         'editor.foreground': foreground,
-        'editor.background': background,
-        // don't show selection
+        'editor.background': background, // don't show selection
         'editorCursor.foreground': background,
-        // 'editor.lineHighlightBackground': '#0000FF20',
-        // 'editorLineNumber.foreground': '#008800',
-        // 'editor.selectionBackground': '#88000030',
-        // 'editor.inactiveSelectionBackground': '#88000015',
       },
     };
+    // 'editor.lineHighlightBackground': '#0000FF20',
+    // 'editorLineNumber.foreground': '#008800',
+    // 'editor.selectionBackground': '#88000030',
+    // 'editor.inactiveSelectionBackground': '#88000015',
     debug('FileDifferences.getTheme() returning ', theme);
     return theme;
   }

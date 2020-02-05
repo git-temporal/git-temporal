@@ -44,7 +44,6 @@ export const DifferenceViewer: React.FC = (): React.ReactElement => {
       <SpinnerContainer
         isSpinning={isDiffFetching || !diff}
         style={style(innerStyle)}
-        opaque
       >
         <DifferenceViewerHeader />
         {diff && diff.isDirectory ? (
@@ -57,6 +56,7 @@ export const DifferenceViewer: React.FC = (): React.ReactElement => {
         ) : (
           diff && (
             <FileDifferences
+              selectedPath={selectedPath}
               leftFileContents={diff.leftFileContents}
               rightFileContents={diff.rightFileContents}
               rerenderRequestedAt={rerenderRequestedAt}
