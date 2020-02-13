@@ -34,7 +34,7 @@ export class WebviewPanel {
       return;
     }
     // Otherwise, create a new panel.
-    debug('createOrShow extensionPath', extensionPath);
+    debug('createOrShow', { extensionPath, currentExplorerFile });
     const panel = vscode.window.createWebviewPanel(
       WebviewPanel.viewType,
       'Git Temporal',
@@ -126,8 +126,16 @@ export class WebviewPanel {
     const currentPath =
       (explorerFile && explorerFile.fsPath) ||
       activeTextEditor.document.fileName;
+    const initialLineNumber = explorerFile
+      ? 0
+      : activeTextEditor.visibleRanges[0].start.line;
+
     // const themeName: string | undefined = workspace.getConfiguration("workbench").get("colorTheme")
-    debug('webviewPanel currentPath', [currentPath, explorerFile]);
+    debug('webviewPanel currentPath', [
+      currentPath,
+      explorerFile,
+      initialLineNumber,
+    ]);
     return `
       <!DOCTYPE html>
       <html lang="en">
@@ -140,7 +148,8 @@ export class WebviewPanel {
       <body style="padding-top: 20px; padding-right: 20px; overflow: hidden">
         <div
           id="gitTemporal"
-          data-current-path="${currentPath}">
+          data-current-path="${currentPath}"
+          data-initial-line-number="${initialLineNumber}">
           Loading...
         </div>
         <script nonce=${nonce}>

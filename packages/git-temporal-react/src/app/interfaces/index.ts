@@ -4,6 +4,7 @@ export type ModifiedFileStatuses = 'modified' | 'added' | 'deleted';
 export interface GitTemporalProps {
   // If not provided, the whole repository is assumed
   path?: string;
+  initialLineNumber?: number;
   serviceBaseUrl?: string;
 }
 

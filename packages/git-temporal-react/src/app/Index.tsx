@@ -33,10 +33,18 @@ export default class GitTemporalIndex extends React.Component<
   GitTemporalProps
 > {
   render() {
-    const { path = '', serviceBaseUrl = '/git-temporal' } = this.props;
+    const {
+      path = '',
+      serviceBaseUrl = '/git-temporal',
+      initialLineNumber = 0,
+    } = this.props;
     return (
       <Provider store={store}>
-        <GitTemporal path={path} serviceBaseUrl={serviceBaseUrl} />
+        <GitTemporal
+          path={path}
+          serviceBaseUrl={serviceBaseUrl}
+          initialLineNumber={initialLineNumber}
+        />
       </Provider>
     );
   }
