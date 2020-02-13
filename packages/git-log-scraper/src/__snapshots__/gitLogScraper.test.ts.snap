@@ -6193,11 +6193,9 @@ Object {
   ],
   "hash": "f0fa780",
   "id": "f0fa78088b740cb37576d589be97231369fa76f6",
-  "index": 0,
   "linesAdded": 10230,
   "linesDeleted": 0,
   "message": "git-temporal-react: use create-react-app to create initial ts using --scripts-version=react-scripts-ts",
-  "relativeDate": "1 year, 4 months ago",
 }
 `;
 
@@ -6306,11 +6304,9 @@ Object {
   ],
   "hash": "f0fa780",
   "id": "f0fa78088b740cb37576d589be97231369fa76f6",
-  "index": 0,
   "linesAdded": 10230,
   "linesDeleted": 0,
   "message": "git-temporal-react: use create-react-app to create initial ts using --scripts-version=react-scripts-ts",
-  "relativeDate": "1 year, 4 months ago",
 }
 `;
 
@@ -6344,11 +6340,9 @@ Object {
   ],
   "hash": "a504468",
   "id": "a5044680e29943c4f7fadb24c5abac649168c2ee",
-  "index": 0,
   "linesAdded": 61,
   "linesDeleted": 0,
   "message": "initial packages",
-  "relativeDate": "1 year, 5 months ago",
 }
 `;
 
@@ -6382,10 +6376,8 @@ Object {
   ],
   "hash": "a504468",
   "id": "a5044680e29943c4f7fadb24c5abac649168c2ee",
-  "index": 0,
   "linesAdded": 61,
   "linesDeleted": 0,
   "message": "initial packages",
-  "relativeDate": "1 year, 5 months ago",
 }
 `;
