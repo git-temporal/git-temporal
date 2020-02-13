@@ -186,6 +186,8 @@ export class Timeplot extends React.Component<
           outerLeft +
           20;
 
+    const popupCommitIds = this.state.popupCommits.map(c => c.id);
+
     return (
       <div style={style(outerStyle)} ref={this.outerRef}>
         <div style={style(graphContainerStyle)}>
@@ -208,6 +210,7 @@ export class Timeplot extends React.Component<
                 ref={this.timeplotRef}
                 height={GRAPH_HEIGHT}
                 highlightedCommitIds={highlightedCommitIds}
+                popupCommitIds={popupCommitIds}
                 startDate={startDate}
                 endDate={endDate}
                 earliestCommitDate={earliestCommitDate}

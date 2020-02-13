@@ -27,6 +27,7 @@ export interface TimeplotGraphProps {
   forceRender?: number;
   height?: number;
   highlightedCommitIds?: string[];
+  popupCommitIds?: string[];
   style?: string | object;
   onMouseEnter?: (evt, date?) => void;
   onMouseLeave?: (evt, date?) => void;
@@ -49,6 +50,11 @@ const blobStyle = {
 const highlightedBlobStyle = {
   fill: '@colors.selected',
   opacity: 0.5,
+};
+
+const popupCommitBlobStyle = {
+  fill: '@colors.altSelected',
+  opacity: 0.8,
 };
 
 const markerStyle = {
@@ -112,10 +118,13 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
       this.renderTimeplotGraph();
       this.forceUpdate();
       this.updateTimeplotGraphThrottled();
-    } else if (
-      prevProps.highlightedCommitIds !== this.props.highlightedCommitIds
-    ) {
+      return;
+    }
+    if (prevProps.highlightedCommitIds !== this.props.highlightedCommitIds) {
       this.updateHighlightedCommits();
+    }
+    if (prevProps.popupCommitIds !== this.props.popupCommitIds) {
+      this.updatePopupCommits();
     }
   }
 
@@ -196,6 +205,20 @@ export class TimeplotGraph extends React.Component<TimeplotGraphProps> {
       .transition()
       .duration(800)
       .attr('r', d => this.rScale(d.linesAdded + d.linesDeleted || 0));
+  }
+
+  private updatePopupCommits() {
+    const explosionFactor = this.props.highlightedCommitIds.length < 5 ? 25 : 5;
+    this.svg
+      .selectAll('circle[data-popup-commit="true"]')
+      .styles(style(blobStyle))
+      .attr('data-popup-commit', false);
+    this.svg
+      .selectAll(`circle`)
+      .filter(d => this.props.popupCommitIds.includes(d.id))
+      .moveToFront()
+      .styles(style(popupCommitBlobStyle))
+      .attr('data-popup-commit', true);
   }
 
   private clearTimeplotGraph() {

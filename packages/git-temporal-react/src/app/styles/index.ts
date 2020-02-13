@@ -30,6 +30,7 @@ const styleVars = {
     rightRevColor: 'green',
     selectable: 'lightskyblue',
     selected: 'lightskyblue',
+    altSelected: '#faaf87', // compliment of lightskyblue
     selectedText: '#001883',
     text: '#333333',
   },
