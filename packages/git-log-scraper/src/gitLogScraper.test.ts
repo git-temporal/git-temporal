@@ -112,7 +112,7 @@ function testRangeIntegrity(range, numberOfCommits, path) {
   expect(range.count).toBeGreaterThan(numberOfCommits);
   expect(range.path).toEqual(path);
   expect(range.existsLocally).toEqual(true);
-  expect(range.firstCommit).toMatchSnapshot();
+  expect(comparableCommit(range.firstCommit)).toMatchSnapshot();
 }
 
 function expectAtLeastNCommits(history, n) {
@@ -150,6 +150,10 @@ function expectSumLinesAddedAndDeletedToMatchFiles(history) {
 function expectFirstNToMatchSnapshot(history, n) {
   const first190 = history.commits
     .slice(n * -1)
-    .map(obj => _.omit(obj, ['relativeDate', 'index']));
+    .map(commit => comparableCommit(commit));
   expect(first190).toMatchSnapshot();
+}
+
+function comparableCommit(commit) {
+  return _.omit(commit, ['relativeDate', 'index']);
 }

@@ -30,7 +30,13 @@ const innerStyle = {
   color: '@colors.text',
 };
 
-export const DifferenceViewer: React.FC = (): React.ReactElement => {
+interface ComponentProps {
+  initialLineNumber?: number;
+}
+
+export const DifferenceViewer: React.FC<ComponentProps> = ({
+  initialLineNumber,
+}): React.ReactElement => {
   const selectedPath = useSelector(getSelectedPath);
   const diff = useSelector(getDiff);
   const isDiffFetching = useSelector(getIsDiffFetching);
@@ -44,7 +50,6 @@ export const DifferenceViewer: React.FC = (): React.ReactElement => {
       <SpinnerContainer
         isSpinning={isDiffFetching || !diff}
         style={style(innerStyle)}
-        opaque
       >
         <DifferenceViewerHeader />
         {diff && diff.isDirectory ? (
@@ -57,6 +62,8 @@ export const DifferenceViewer: React.FC = (): React.ReactElement => {
         ) : (
           diff && (
             <FileDifferences
+              selectedPath={selectedPath}
+              initialLineNumber={initialLineNumber}
               leftFileContents={diff.leftFileContents}
               rightFileContents={diff.rightFileContents}
               rerenderRequestedAt={rerenderRequestedAt}

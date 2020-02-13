@@ -68,7 +68,11 @@ export class Selectable extends React.Component<
 
   private onClick = evt => {
     const now = Date.now();
-    if (this.lastClick && now - this.lastClick <= DOUBLE_CLICK_DELAY_MS) {
+    if (
+      this.lastClick &&
+      now - this.lastClick <= DOUBLE_CLICK_DELAY_MS &&
+      this.props.onDoubleClick
+    ) {
       this.props.onDoubleClick(evt, this.props.value);
     } else {
       this.props.onClick(evt, this.props.value);

@@ -84,7 +84,9 @@ export class GitTemporal extends Component<
                 overflow: 'hidden',
               })}
             >
-              <DifferenceViewer />
+              <DifferenceViewer
+                initialLineNumber={this.props.initialLineNumber}
+              />
               <Timeplot />
             </div>
           </div>
