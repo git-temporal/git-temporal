@@ -1,7 +1,7 @@
 {
   "name": "@git-temporal/desktop",
   "private": true,
-  "version": "0.5.2",
+  "version": "1.0.0",
   "description": "A desktop application build on Electron for interactive data visualizations of git commit history.",
   "main": "index.js",
   "scripts": {
