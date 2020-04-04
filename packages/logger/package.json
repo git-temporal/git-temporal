@@ -1,6 +1,6 @@
 {
   "name": "@git-temporal/logger",
-  "version": "0.5.2",
+  "version": "1.0.0",
   "description": "simple console logger with prefix and stuff",
   "author": "Bee <beewilkerson@invisionapp.com>",
   "homepage": "https://github.com/git-temporal/git-temporal#readme",

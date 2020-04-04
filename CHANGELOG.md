@@ -1,3 +1,23 @@
+## 1.0.0 (2020-02-14)
+
+#### :rocket: Enhancement
+
+- `git-log-scraper`, `git-temporal-react`, `git-temporal-vscode`
+  - [#50](https://github.com/git-temporal/git-temporal/pull/50) Closes [#21](https://github.com/git-temporal/git-temporal/issues/21) - maintain scroll position ([@littlebee](https://github.com/littlebee))
+- `git-temporal-react`
+  - [#49](https://github.com/git-temporal/git-temporal/pull/49) Closes [#41](https://github.com/git-temporal/git-temporal/issues/41) - do not show files on commit card if file selected ([@littlebee](https://github.com/littlebee))
+
+#### :bug: Bug Fix
+
+- `git-temporal-react`
+  - [#48](https://github.com/git-temporal/git-temporal/pull/48) Closes [#42](https://github.com/git-temporal/git-temporal/issues/42) - selected card in side panel hard to read ([@littlebee](https://github.com/littlebee))
+  - [#46](https://github.com/git-temporal/git-temporal/pull/46) fixes several bugs (#44 & #32) and console warnings ([@littlebee](https://github.com/littlebee))
+  - [#45](https://github.com/git-temporal/git-temporal/pull/45) Closes [#27](https://github.com/git-temporal/git-temporal/issues/27) - clicking in timeplot when zoomed should not reset zoom ([@littlebee](https://github.com/littlebee))
+
+#### Committers: 1
+
+- Bee Wilkerson ([@littlebee](https://github.com/littlebee))
+
 ## 0.5.2 (2020-02-01)
 
 This is an internal version bump with automated testing enhancements only.
