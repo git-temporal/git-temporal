@@ -65,7 +65,7 @@
     "bumble-util": "0.4.1",
     "cross-env": "5.2.0",
     "jest": "25.1.0",
-    "node-fetch": "2.2.0",
+    "node-fetch": "2.6.1",
     "regenerator-runtime": "0.12.1",
     "ts-jest": "22.0.1",
     "ts-node": "7.0.1",
